@@ -12,18 +12,15 @@ const featuredProjects = projects.filter((p) => p.featured);
   <HeroSection />
 
   <!-- Client Logos -->
-  <section class="py-16 border-t border-b border-dark-100 dark:border-dark-800">
+  <section class="py-14 border-t border-b border-dark-100 dark:border-dark-800">
     <div class="container-custom">
-      <p class="text-xs font-mono uppercase tracking-widest text-dark-400 dark:text-dark-500 text-center mb-10">
-        Empresas con las que he trabajado
-      </p>
-      <div class="flex flex-wrap items-center justify-center gap-10 md:gap-16">
+      <div class="flex flex-wrap items-center justify-center gap-12 md:gap-20">
         {clientLogos.map((client) => (
           <div class="group relative">
             <img
               src={client.logo}
               alt={client.name}
-              class="h-8 md:h-10 w-auto object-contain opacity-40 dark:opacity-30 grayscale hover:opacity-100 hover:grayscale-0 dark:hover:opacity-90 transition-all duration-500 dark:invert"
+              class="h-10 md:h-14 w-auto object-contain opacity-40 dark:opacity-30 grayscale hover:opacity-100 hover:grayscale-0 dark:hover:opacity-90 transition-all duration-500 dark:invert"
               loading="lazy"
             />
           </div>
