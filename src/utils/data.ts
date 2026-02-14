@@ -20,7 +20,7 @@ export const navLinks = [
   { label: 'Sobre mí', href: '/about' },
   { label: 'Proyectos', href: '/projects' },
   { label: 'Servicios', href: '/services' },
-  { label: 'Lab', href: '/lab' },
+
   { label: 'Blog', href: '/blog' },
   { label: 'Contacto', href: '/contact' },
 ];
@@ -55,52 +55,6 @@ export const services = [
     title: 'Consultoría UX',
     description: 'Auditorías heurísticas, research y estrategia de diseño para mejorar productos existentes.',
     icon: 'search',
-  },
-];
-
-export const skills = [
-  { name: 'Figma', category: 'design' },
-  { name: 'Sketch', category: 'design' },
-  { name: 'Adobe Creative Suite', category: 'design' },
-  { name: 'Framer', category: 'design' },
-  { name: 'Principle', category: 'design' },
-  { name: 'Design Thinking', category: 'methodology' },
-  { name: 'Design Sprint', category: 'methodology' },
-  { name: 'Lean UX', category: 'methodology' },
-  { name: 'Agile / Scrum', category: 'methodology' },
-  { name: 'User Research', category: 'methodology' },
-  { name: 'HTML/CSS', category: 'dev' },
-  { name: 'JavaScript', category: 'dev' },
-  { name: 'React', category: 'dev' },
-  { name: 'Astro', category: 'dev' },
-  { name: 'Tailwind CSS', category: 'dev' },
-  { name: 'Git', category: 'dev' },
-  { name: 'Storybook', category: 'tools' },
-  { name: 'Zeroheight', category: 'tools' },
-  { name: 'Notion', category: 'tools' },
-  { name: 'Jira', category: 'tools' },
-  { name: 'Miro', category: 'tools' },
-  { name: 'Zeplin', category: 'tools' },
-];
-
-export const testimonials = [
-  {
-    name: 'Laura Martínez',
-    role: 'Product Manager, Fintech Startup',
-    text: 'Ramon transformó completamente nuestra plataforma. Su enfoque en design systems nos permitió escalar el producto de forma consistente y eficiente.',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face',
-  },
-  {
-    name: 'Carlos Fernández',
-    role: 'CTO, Health Tech',
-    text: 'Su capacidad para entender problemas complejos y traducirlos en interfaces intuitivas es excepcional. Un profesional de primer nivel.',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
-  },
-  {
-    name: 'Ana García',
-    role: 'Head of Design, Banking',
-    text: 'La implementación del design system que creó Ramon redujo nuestro tiempo de desarrollo en un 40%. Su trabajo es meticuloso y estratégico.',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
   },
 ];
 
@@ -335,33 +289,3 @@ export const blogPosts = [
   },
 ];
 
-export const labExperiments = [
-  {
-    slug: 'generative-patterns',
-    title: 'Generative Patterns',
-    description: 'Exploración de patrones generativos con CSS y JavaScript. Arte computacional aplicado a interfaces.',
-    cover: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=400&fit=crop',
-    tags: ['CSS', 'Generative', 'Art'],
-  },
-  {
-    slug: 'micro-interactions',
-    title: 'Micro-Interactions Library',
-    description: 'Colección de micro-interacciones reutilizables para mejorar la experiencia de usuario.',
-    cover: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop',
-    tags: ['Animation', 'UX', 'CSS'],
-  },
-  {
-    slug: 'dark-mode-patterns',
-    title: 'Dark Mode Patterns',
-    description: 'Estudio de patrones y mejores prácticas para implementar modo oscuro en productos digitales.',
-    cover: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop',
-    tags: ['Dark Mode', 'UI', 'Research'],
-  },
-  {
-    slug: 'typography-experiments',
-    title: 'Typography Experiments',
-    description: 'Exploraciones tipográficas con variable fonts y animaciones para web moderna.',
-    cover: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop',
-    tags: ['Typography', 'Variable Fonts', 'CSS'],
-  },
-];

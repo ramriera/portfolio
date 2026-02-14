@@ -70,7 +70,11 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-500 to-primary-400 bg-clip-text text-transparent;
+  }
+
+  .dark .gradient-text {
+    @apply from-primary-400 to-primary-300;
   }
 
   .dashed-border {
