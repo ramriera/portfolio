@@ -1,0 +1,130 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { skills, siteConfig } from '@/utils/data';
+
+const timeline = [
+  { year: '2024', role: 'Senior UX/UI Designer', company: 'Doctori.com', description: 'Liderando Design Ops y el Design System para la plataforma de salud digital.' },
+  { year: '2022', role: 'UX/UI Designer', company: 'Iberia', description: 'Rediseño de la experiencia digital de vuelo y sistemas de check-in.' },
+  { year: '2021', role: 'Design System Lead', company: 'Banco Sabadell', description: 'Creación e implementación del design system corporativo.' },
+  { year: '2020', role: 'UX Designer', company: 'iSalud Corporate', description: 'Rediseño del comparador de seguros y optimización de conversión.' },
+  { year: '2018', role: 'UI Designer', company: 'Leemons', description: 'Diseño de interfaces para plataforma educativa innovadora.' },
+  { year: '2016', role: 'Junior Designer', company: 'Freelance', description: 'Inicio de carrera profesional con proyectos de branding y web design.' },
+];
+
+const values = [
+  { title: 'Usuario primero', description: 'Cada decisión de diseño parte de una necesidad real del usuario. La empatía es la base de todo.' },
+  { title: 'Simplicidad', description: 'Lo simple es siempre más difícil. Elimino lo innecesario para que lo esencial brille.' },
+  { title: 'Consistencia', description: 'Los sistemas de diseño no son solo componentes — son el lenguaje común de un equipo.' },
+  { title: 'Colaboración', description: 'El mejor diseño nace de la colaboración multidisciplinar. Diseño con, no para.' },
+];
+---
+
+<BaseLayout
+  title="Sobre mí — Ramon Riera"
+  description="Conoce a Ramon Riera, Senior UX/UI Designer especializado en Design Systems y Product Design."
+>
+  <!-- Hero -->
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="max-w-4xl">
+        <div data-reveal class="flex items-center gap-3 mb-8">
+          <div class="h-px w-12 bg-primary-500"></div>
+          <span class="text-sm font-mono font-medium text-primary-500 uppercase tracking-widest">Sobre mí</span>
+        </div>
+        <h1 data-reveal data-delay="100" class="heading-xl mb-8">
+          Diseñador, pensador,
+          <span class="gradient-text">creador</span>
+        </h1>
+        <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl">
+          Con más de 8 años de experiencia, he dedicado mi carrera a crear productos digitales que combinan estética, usabilidad y estrategia de negocio.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo + Bio -->
+  <section class="pb-20">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-16">
+        <!-- Photo -->
+        <div data-reveal="left" class="lg:col-span-2">
+          <div class="sticky top-28">
+            <div class="rounded-2xl overflow-hidden dashed-border mb-6">
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=750&fit=crop&crop=face"
+                alt="Ramon Riera"
+                class="w-full aspect-[4/5] object-cover"
+              />
+            </div>
+
+            <!-- Social links -->
+            <div class="flex items-center gap-4">
+              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 dark:hover:bg-primary-500/10 hover:border-primary-500 transition-all duration-300">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href={siteConfig.social.medium} target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 dark:hover:bg-primary-500/10 hover:border-primary-500 transition-all duration-300">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+              </a>
+              <a href={siteConfig.social.dribbble} target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 dark:hover:bg-primary-500/10 hover:border-primary-500 transition-all duration-300">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.375 0 0 5.375 0 12s5.375 12 12 12 12-5.375 12-12S18.625 0 12 0zm7.938 5.563a10.18 10.18 0 012.312 6.375c-.338-.063-3.725-.75-7.125-.325a16.28 16.28 0 00-.45-1.075c-.15-.35-.313-.7-.488-1.05 3.75-1.525 5.45-3.713 5.75-4.113v.188zM12 1.75c2.625 0 5.025 1.013 6.813 2.663-.25.35-1.763 2.4-5.375 3.75A68.345 68.345 0 0010 2C10.638 1.85 11.3 1.75 12 1.75zM8.113 2.625a52.27 52.27 0 013.45 7.5c-4.35 1.163-8.188 1.138-8.6 1.138A10.305 10.305 0 018.112 2.625zM1.75 12v-.313c.4.013 5 .075 9.65-1.325.263.525.525 1.063.763 1.6l-.35.088c-4.875 1.575-7.463 5.875-7.788 6.413A10.196 10.196 0 011.75 12zm3.538 7.95c.213-.363 2.163-4.163 7.413-6.088a43.08 43.08 0 012 7.175A10.206 10.206 0 0112 22.25a10.22 10.22 0 01-6.713-2.3zm8.575 1.625a46.54 46.54 0 00-1.875-6.813c3.125-.5 5.875.325 6.225.425a10.244 10.244 0 01-4.35 6.388z"/></svg>
+              </a>
+              <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 dark:hover:bg-primary-500/10 hover:border-primary-500 transition-all duration-300">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bio content -->
+        <div class="lg:col-span-3 space-y-12">
+          <div data-reveal>
+            <h2 class="heading-md mb-6">Mi historia</h2>
+            <div class="space-y-4 text-body">
+              <p>
+                Empecé mi carrera como diseñador gráfico, pero rápidamente descubrí que mi verdadera pasión estaba en la intersección entre diseño y tecnología. El mundo digital me fascinó por su capacidad de crear experiencias que impactan a millones de personas.
+              </p>
+              <p>
+                A lo largo de estos años he tenido el privilegio de trabajar con empresas como Banco Sabadell, Iberia, y Doctori, donde he podido aplicar mi experiencia en Design Systems, Product Design y Design Operations para transformar productos digitales complejos en experiencias intuitivas.
+              </p>
+              <p>
+                Mi enfoque combina metodologías como Design Thinking, Lean UX y Agile, siempre con el usuario en el centro. Creo firmemente que el diseño no es solo cómo se ve algo, sino cómo funciona, cómo se siente y qué problema resuelve.
+              </p>
+              <p>
+                Cuando no estoy diseñando, probablemente estoy explorando nuevas herramientas, leyendo sobre psicología cognitiva o experimentando con código creativo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Values -->
+          <div data-reveal>
+            <h2 class="heading-md mb-6">Mis valores</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {values.map((value) => (
+                <div class="p-6 rounded-xl dashed-border">
+                  <h3 class="font-bold text-lg mb-2">{value.title}</h3>
+                  <p class="text-body-sm">{value.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Timeline -->
+          <div data-reveal>
+            <h2 class="heading-md mb-8">Trayectoria</h2>
+            <div class="space-y-0">
+              {timeline.map((item, i) => (
+                <div class="relative pl-8 pb-8 border-l-2 border-dark-200 dark:border-dark-700 last:pb-0 last:border-l-transparent group">
+                  <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-dark-950 border-2 border-primary-500 group-hover:bg-primary-500 transition-colors duration-300"></div>
+                  <span class="text-xs font-mono text-primary-500 font-semibold">{item.year}</span>
+                  <h3 class="font-bold text-lg mt-1">{item.role}</h3>
+                  <p class="text-sm font-medium text-dark-400 dark:text-dark-500 mb-2">{item.company}</p>
+                  <p class="text-body-sm">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

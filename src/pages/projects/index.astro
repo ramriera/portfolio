@@ -1,0 +1,99 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { projects } from '@/utils/data';
+
+const categories = ['Todos', ...new Set(projects.map((p) => p.category))];
+---
+
+<BaseLayout
+  title="Proyectos — Ramon Riera"
+  description="Portfolio de proyectos de UX/UI Design, Design Systems y Product Design."
+>
+  <!-- Hero -->
+  <section class="section-padding pb-12">
+    <div class="container-custom">
+      <div class="max-w-4xl">
+        <div data-reveal class="flex items-center gap-3 mb-8">
+          <div class="h-px w-12 bg-primary-500"></div>
+          <span class="text-sm font-mono font-medium text-primary-500 uppercase tracking-widest">Proyectos</span>
+        </div>
+        <h1 data-reveal data-delay="100" class="heading-xl mb-8">
+          Trabajo <span class="gradient-text">seleccionado</span>
+        </h1>
+        <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl">
+          Una selección de proyectos que representan mi enfoque en diseño de experiencia de usuario, sistemas de diseño y producto digital.
+        </p>
+      </div>
+
+      <!-- Filters -->
+      <div data-reveal data-delay="300" class="flex flex-wrap gap-2 mt-12" id="project-filters">
+        {categories.map((cat) => (
+          <button
+            class:list={[
+              'filter-btn px-5 py-2 text-sm font-medium rounded-full transition-all duration-300',
+              cat === 'Todos'
+                ? 'bg-dark-900 dark:bg-dark-100 text-white dark:text-dark-900'
+                : 'bg-dark-100 dark:bg-dark-800 text-dark-600 dark:text-dark-400 hover:bg-dark-200 dark:hover:bg-dark-700',
+            ]}
+            data-filter={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects grid -->
+  <section class="pb-32">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
+        {projects.map((project, i) => (
+          <div
+            data-reveal
+            data-delay={String(i * 100)}
+            data-category={project.category}
+            class="project-item"
+          >
+            <ProjectCard {...project} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectItems = document.querySelectorAll('.project-item');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      // Update active button
+      filterBtns.forEach((b) => {
+        b.classList.remove('bg-dark-900', 'dark:bg-dark-100', 'text-white', 'dark:text-dark-900');
+        b.classList.add('bg-dark-100', 'dark:bg-dark-800', 'text-dark-600', 'dark:text-dark-400');
+      });
+      btn.classList.remove('bg-dark-100', 'dark:bg-dark-800', 'text-dark-600', 'dark:text-dark-400');
+      btn.classList.add('bg-dark-900', 'dark:bg-dark-100', 'text-white', 'dark:text-dark-900');
+
+      // Filter projects
+      projectItems.forEach((item) => {
+        const category = item.getAttribute('data-category');
+        if (filter === 'Todos' || category === filter) {
+          (item as HTMLElement).style.display = '';
+          (item as HTMLElement).style.opacity = '0';
+          setTimeout(() => {
+            (item as HTMLElement).style.opacity = '1';
+            (item as HTMLElement).style.transition = 'opacity 0.3s ease';
+          }, 50);
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

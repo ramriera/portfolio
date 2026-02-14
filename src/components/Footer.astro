@@ -1,0 +1,91 @@
+---
+import { siteConfig, navLinks } from '@/utils/data';
+---
+
+<footer class="border-t border-dark-100 dark:border-dark-800 bg-dark-50/50 dark:bg-dark-900/50">
+  <div class="container-custom section-padding">
+    <!-- Main footer grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      <!-- Brand column -->
+      <div class="lg:col-span-2">
+        <a href="/" class="inline-flex items-center gap-3 group mb-6">
+          <div class="w-10 h-10 rounded-lg bg-primary-500 flex items-center justify-center text-white font-bold text-lg transition-transform duration-300 group-hover:scale-110">
+            R
+          </div>
+          <span class="font-bold text-xl tracking-tight">
+            Ramon Riera<span class="text-primary-500">.</span>
+          </span>
+        </a>
+        <p class="text-body max-w-md mb-6">
+          Senior UX/UI Designer especializado en Design Systems, Product Design y Design Operations.
+          Creando experiencias digitales que importan.
+        </p>
+        <a href={`mailto:${siteConfig.email}`} class="link-underline text-lg font-semibold text-dark-900 dark:text-dark-100">
+          {siteConfig.email}
+        </a>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h4 class="font-bold text-sm uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-4">
+          Navegación
+        </h4>
+        <nav class="flex flex-col gap-3">
+          {navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-dark-600 dark:text-dark-400 hover:text-primary-500 transition-colors duration-300 text-sm"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Social & Legal -->
+      <div>
+        <h4 class="font-bold text-sm uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-4">
+          Connect
+        </h4>
+        <nav class="flex flex-col gap-3 mb-8">
+          <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="text-dark-600 dark:text-dark-400 hover:text-primary-500 transition-colors duration-300 text-sm">
+            LinkedIn
+          </a>
+          <a href={siteConfig.social.medium} target="_blank" rel="noopener noreferrer" class="text-dark-600 dark:text-dark-400 hover:text-primary-500 transition-colors duration-300 text-sm">
+            Medium
+          </a>
+          <a href={siteConfig.social.dribbble} target="_blank" rel="noopener noreferrer" class="text-dark-600 dark:text-dark-400 hover:text-primary-500 transition-colors duration-300 text-sm">
+            Dribbble
+          </a>
+          <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" class="text-dark-600 dark:text-dark-400 hover:text-primary-500 transition-colors duration-300 text-sm">
+            GitHub
+          </a>
+        </nav>
+
+        <h4 class="font-bold text-sm uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-4">
+          Legal
+        </h4>
+        <nav class="flex flex-col gap-3">
+          <a href="/legal/privacy" class="text-dark-600 dark:text-dark-400 hover:text-primary-500 transition-colors duration-300 text-sm">
+            Privacidad
+          </a>
+          <a href="/legal/cookies" class="text-dark-600 dark:text-dark-400 hover:text-primary-500 transition-colors duration-300 text-sm">
+            Cookies
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-16 pt-8 border-t border-dark-200 dark:border-dark-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-dark-400 dark:text-dark-500">
+        &copy; {new Date().getFullYear()} Ramon Riera. Todos los derechos reservados.
+      </p>
+      <p class="text-sm text-dark-400 dark:text-dark-500">
+        Diseñado y desarrollado con
+        <span class="text-primary-500">&hearts;</span>
+        usando Astro + Tailwind
+      </p>
+    </div>
+  </div>
+</footer>
