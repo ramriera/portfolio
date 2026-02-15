@@ -22,7 +22,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
 ---
 
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="scroll-smooth dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -66,14 +66,9 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <Footer />
 
     <script is:inline>
-      // Theme initialization — runs before paint (default: light)
-      (function() {
-        const stored = localStorage.getItem('theme');
-        if (stored === 'dark') {
-          document.documentElement.classList.add('dark');
-          document.body.classList.add('dark');
-        }
-      })();
+      // Always dark mode
+      document.documentElement.classList.add('dark');
+      document.body.classList.add('dark');
     </script>
 
     <script>

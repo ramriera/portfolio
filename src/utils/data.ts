@@ -20,22 +20,11 @@ export const siteConfig = {
   },
 };
 
-export const clientLogos = [
-  { name: 'Banco Sabadell', logo: 'https://ramonriera.design/wp-content/uploads/2025/01/logo-sabadell.png' },
-  { name: 'Iberia', logo: 'https://ramonriera.design/wp-content/uploads/2025/01/logo-iberia.png' },
-  { name: 'Leemons', logo: 'https://ramonriera.design/wp-content/uploads/2025/01/logo-leemons.png' },
-  { name: 'Doctori', logo: 'https://ramonriera.design/wp-content/uploads/2025/01/logo-doctori.png' },
-  { name: 'iSalud Corporate', logo: 'https://ramonriera.design/wp-content/uploads/2025/04/logo-isalud-corporate.png' },
-  { name: 'Ready2', logo: 'https://ramonriera.design/wp-content/uploads/2025/04/logo-ready2.png' },
-];
-
 export const navLinks = [
   { label: 'Inicio', href: '/' },
   { label: 'Sobre mí', href: '/about' },
   { label: 'Proyectos', href: '/projects' },
   { label: 'Servicios', href: '/services' },
-
-  { label: 'Blog', href: '/blog' },
   { label: 'Contacto', href: '/contact' },
 ];
 

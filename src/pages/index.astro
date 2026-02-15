@@ -2,7 +2,8 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroSection from '@/components/HeroSection.astro';
 import AboutSection from '@/components/AboutSection.astro';
-import { projects, clientLogos, siteConfig } from '@/utils/data';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { projects, siteConfig } from '@/utils/data';
 
 const featuredProjects = projects.filter((p) => p.featured);
 ---
@@ -11,31 +12,13 @@ const featuredProjects = projects.filter((p) => p.featured);
   <!-- Hero -->
   <HeroSection />
 
-  <!-- Client Logos -->
-  <section class="py-20 md:py-28">
-    <div class="container-custom">
-      <div class="flex flex-wrap items-center justify-center gap-14 md:gap-24">
-        {clientLogos.map((client) => (
-          <div class="group relative">
-            <img
-              src={client.logo}
-              alt={client.name}
-              class="h-14 md:h-20 w-auto object-contain opacity-30 dark:opacity-25 grayscale hover:opacity-100 hover:grayscale-0 dark:hover:opacity-90 transition-all duration-500 dark:invert"
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- About -->
   <AboutSection />
 
-  <!-- Featured Projects — Horizontal Scroll -->
-  <section class="section-padding overflow-hidden">
-    <!-- Header -->
+  <!-- Featured Projects — Vertical Grid -->
+  <section class="section-padding">
     <div class="container-custom">
+      <!-- Header -->
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 mb-16">
         <div>
           <div data-reveal class="mb-6">
@@ -45,109 +28,25 @@ const featuredProjects = projects.filter((p) => p.featured);
             Trabajo <span class="text-primary-500">destacado</span>
           </h2>
         </div>
-        <div class="flex items-center gap-3">
-          <!-- Carousel nav buttons -->
-          <button
-            id="carousel-prev"
-            class="w-10 h-10 rounded-full border border-dark-200 dark:border-dark-700 flex items-center justify-center text-dark-400 hover:border-dark-400 hover:text-dark-600 dark:hover:text-dark-200 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
-            aria-label="Anterior"
-          >
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            id="carousel-next"
-            class="w-10 h-10 rounded-full border border-dark-200 dark:border-dark-700 flex items-center justify-center text-dark-400 hover:border-dark-400 hover:text-dark-600 dark:hover:text-dark-200 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
-            aria-label="Siguiente"
-          >
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-          <a
-            href="/projects"
-            class="btn-outline text-sm ml-2"
-          >
-            Ver todos
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Carousel -->
-    <div
-      id="projects-carousel"
-      class="flex gap-8 overflow-x-auto scroll-smooth pl-6 sm:pl-8 lg:pl-12 pr-6 pb-4 snap-x snap-mandatory hide-scrollbar"
-      style="scrollbar-width: none;"
-    >
-      {featuredProjects.map((project) => (
         <a
-          href={`/projects/${project.slug}`}
-          class="project-carousel-card group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[550px] lg:w-[620px] rounded-2xl overflow-hidden bg-white dark:bg-dark-800 transition-all duration-500 ease-out-expo hover:shadow-xl hover:shadow-dark-900/8 dark:hover:shadow-dark-100/5 snap-start"
+          href="/projects"
+          class="btn-outline text-sm"
+          data-reveal
         >
-          <!-- Image -->
-          <div class="relative overflow-hidden aspect-[16/9]">
-            <img
-              src={project.cover}
-              alt={project.title}
-              class="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.03]"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-dark-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-            <!-- Category badge -->
-            <div class="absolute top-4 left-4">
-              <span class="px-3 py-1.5 text-xs font-semibold rounded-full bg-white/90 dark:bg-dark-900/90 backdrop-blur-sm text-dark-900 dark:text-dark-100">
-                {project.category}
-              </span>
-            </div>
-
-            <!-- Year -->
-            <div class="absolute top-4 right-4">
-              <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/90 dark:bg-dark-900/90 backdrop-blur-sm text-dark-500 dark:text-dark-400">
-                {project.year}
-              </span>
-            </div>
-
-            <!-- Arrow on hover -->
-            <div class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out-expo">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </div>
-          </div>
-
-          <!-- Content -->
-          <div class="p-7">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="text-xs font-medium text-primary-500 uppercase tracking-wider">{project.client}</span>
-            </div>
-            <h3 class="text-xl sm:text-2xl font-bold tracking-tight mb-4 group-hover:text-primary-500 transition-colors duration-300">
-              {project.title}
-            </h3>
-            <p class="text-sm sm:text-base text-dark-500 dark:text-dark-400 leading-relaxed line-clamp-2 mb-5">
-              {project.description}
-            </p>
-            <div class="flex flex-wrap gap-2">
-              {project.tags.slice(0, 3).map((tag) => (
-                <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-dark-100 dark:bg-dark-800 text-dark-600 dark:text-dark-300">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+          Ver todos
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
         </a>
-      ))}
-    </div>
+      </div>
 
-    <!-- Scroll progress indicator -->
-    <div class="container-custom mt-10">
-      <div class="h-0.5 bg-dark-100 dark:bg-dark-800 rounded-full overflow-hidden">
-        <div id="carousel-progress" class="h-full bg-primary-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {featuredProjects.map((project, i) => (
+          <div data-reveal data-delay={String(i * 100)}>
+            <ProjectCard {...project} />
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -183,59 +82,3 @@ const featuredProjects = projects.filter((p) => p.featured);
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-</style>
-
-<script>
-  const carousel = document.getElementById('projects-carousel');
-  const prevBtn = document.getElementById('carousel-prev');
-  const nextBtn = document.getElementById('carousel-next');
-  const progress = document.getElementById('carousel-progress');
-
-  function getScrollAmount() {
-    const card = carousel?.querySelector('.project-carousel-card') as HTMLElement;
-    if (!card) return 600;
-    return card.offsetWidth + 32; // card width + gap
-  }
-
-  function updateProgress() {
-    if (!carousel || !progress) return;
-    const scrollLeft = carousel.scrollLeft;
-    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-    const pct = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
-    progress.style.width = `${Math.max(5, pct)}%`;
-  }
-
-  function updateButtons() {
-    if (!carousel || !prevBtn || !nextBtn) return;
-    const atStart = carousel.scrollLeft <= 10;
-    const atEnd = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10;
-    prevBtn.toggleAttribute('disabled', atStart);
-    nextBtn.toggleAttribute('disabled', atEnd);
-  }
-
-  prevBtn?.addEventListener('click', () => {
-    carousel?.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-  });
-
-  nextBtn?.addEventListener('click', () => {
-    carousel?.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-  });
-
-  carousel?.addEventListener('scroll', () => {
-    updateProgress();
-    updateButtons();
-  }, { passive: true });
-
-  // Initial state
-  updateButtons();
-  updateProgress();
-</script>
