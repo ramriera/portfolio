@@ -12,13 +12,12 @@ import { blogPosts } from '@/utils/data';
   <section class="section-padding pb-12">
     <div class="container-custom">
       <div class="max-w-4xl">
-        <div data-reveal class="flex items-center gap-3 mb-8">
-          <div class="h-px w-12 bg-primary-500"></div>
-          <span class="text-sm font-mono font-medium text-primary-500 uppercase tracking-widest">Blog</span>
+        <div data-reveal class="mb-8">
+          <span class="text-sm font-medium text-primary-500 tracking-wide">Blog</span>
         </div>
         <h1 data-reveal data-delay="100" class="heading-xl mb-8">
           Pensamientos y
-          <span class="gradient-text">aprendizajes</span>
+          <span class="text-primary-500">aprendizajes</span>
         </h1>
         <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl">
           Reflexiones sobre diseño, metodologías, herramientas y lecciones aprendidas en el camino.
@@ -35,7 +34,7 @@ import { blogPosts } from '@/utils/data';
           <article
             data-reveal
             data-delay={String(i * 100)}
-            class="group rounded-2xl overflow-hidden dashed-border bg-white dark:bg-dark-900 card-hover"
+            class="group rounded-2xl overflow-hidden dashed-border bg-white dark:bg-dark-800 card-hover"
           >
             <div class="relative overflow-hidden aspect-[16/9]">
               <img

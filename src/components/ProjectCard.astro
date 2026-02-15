@@ -17,7 +17,7 @@ const { slug, title, client, year, category, tags, description, cover, featured 
 <a
   href={`/projects/${slug}`}
   class:list={[
-    'project-card group block rounded-2xl overflow-hidden dashed-border card-hover bg-white dark:bg-dark-900',
+    'project-card group block rounded-2xl overflow-hidden dashed-border card-hover bg-white dark:bg-dark-800',
     featured ? 'lg:col-span-2' : '',
   ]}
 >
@@ -40,7 +40,7 @@ const { slug, title, client, year, category, tags, description, cover, featured 
 
     <!-- Year badge -->
     <div class="absolute top-4 right-4">
-      <span class="px-3 py-1.5 text-xs font-mono font-medium rounded-full bg-white/90 dark:bg-dark-900/90 backdrop-blur-sm text-dark-600 dark:text-dark-400">
+      <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/90 dark:bg-dark-900/90 backdrop-blur-sm text-dark-500 dark:text-dark-400">
         {year}
       </span>
     </div>

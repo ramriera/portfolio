@@ -14,12 +14,11 @@ const categories = ['Todos', ...new Set(projects.map((p) => p.category))];
   <section class="section-padding pb-12">
     <div class="container-custom">
       <div class="max-w-4xl">
-        <div data-reveal class="flex items-center gap-3 mb-8">
-          <div class="h-px w-12 bg-primary-500"></div>
-          <span class="text-sm font-mono font-medium text-primary-500 uppercase tracking-widest">Proyectos</span>
+        <div data-reveal class="mb-8">
+          <span class="text-sm font-medium text-primary-500 tracking-wide">Proyectos</span>
         </div>
         <h1 data-reveal data-delay="100" class="heading-xl mb-8">
-          Trabajo <span class="gradient-text">seleccionado</span>
+          Trabajo <span class="text-primary-500">seleccionado</span>
         </h1>
         <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl">
           Una selección de proyectos que representan mi enfoque en diseño de experiencia de usuario, sistemas de diseño y producto digital.

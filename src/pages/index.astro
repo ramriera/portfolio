@@ -38,28 +38,27 @@ const featuredProjects = projects.filter((p) => p.featured);
     <div class="container-custom">
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 mb-16">
         <div>
-          <div data-reveal class="flex items-center gap-3 mb-6">
-            <div class="h-px w-12 bg-primary-500"></div>
-            <span class="text-sm font-mono font-medium text-primary-500 uppercase tracking-widest">Proyectos</span>
+          <div data-reveal class="mb-6">
+            <span class="text-sm font-medium text-primary-500 tracking-wide">Proyectos</span>
           </div>
           <h2 data-reveal data-delay="100" class="heading-lg">
-            Trabajo <span class="gradient-text">destacado</span>
+            Trabajo <span class="text-primary-500">destacado</span>
           </h2>
         </div>
         <div class="flex items-center gap-3">
           <!-- Carousel nav buttons -->
           <button
             id="carousel-prev"
-            class="w-11 h-11 rounded-full border-2 border-dark-200 dark:border-dark-700 flex items-center justify-center text-dark-400 hover:border-primary-500 hover:text-primary-500 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
+            class="w-10 h-10 rounded-full border border-dark-200 dark:border-dark-700 flex items-center justify-center text-dark-400 hover:border-dark-400 hover:text-dark-600 dark:hover:text-dark-200 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="Anterior"
           >
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             id="carousel-next"
-            class="w-11 h-11 rounded-full border-2 border-dark-200 dark:border-dark-700 flex items-center justify-center text-dark-400 hover:border-primary-500 hover:text-primary-500 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
+            class="w-10 h-10 rounded-full border border-dark-200 dark:border-dark-700 flex items-center justify-center text-dark-400 hover:border-dark-400 hover:text-dark-600 dark:hover:text-dark-200 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="Siguiente"
           >
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -88,7 +87,7 @@ const featuredProjects = projects.filter((p) => p.featured);
       {featuredProjects.map((project) => (
         <a
           href={`/projects/${project.slug}`}
-          class="project-carousel-card group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[550px] lg:w-[620px] rounded-2xl overflow-hidden bg-white dark:bg-dark-900 transition-all duration-500 ease-out-expo hover:shadow-2xl hover:shadow-dark-900/8 dark:hover:shadow-dark-100/5 snap-start"
+          class="project-carousel-card group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[550px] lg:w-[620px] rounded-2xl overflow-hidden bg-white dark:bg-dark-800 transition-all duration-500 ease-out-expo hover:shadow-xl hover:shadow-dark-900/8 dark:hover:shadow-dark-100/5 snap-start"
         >
           <!-- Image -->
           <div class="relative overflow-hidden aspect-[16/9]">
@@ -109,7 +108,7 @@ const featuredProjects = projects.filter((p) => p.featured);
 
             <!-- Year -->
             <div class="absolute top-4 right-4">
-              <span class="px-3 py-1.5 text-xs font-mono font-medium rounded-full bg-white/90 dark:bg-dark-900/90 backdrop-blur-sm text-dark-600 dark:text-dark-400">
+              <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/90 dark:bg-dark-900/90 backdrop-blur-sm text-dark-500 dark:text-dark-400">
                 {project.year}
               </span>
             </div>
@@ -158,27 +157,24 @@ const featuredProjects = projects.filter((p) => p.featured);
     <div class="container-custom">
       <div class="relative rounded-3xl bg-dark-900 dark:bg-dark-800 p-14 md:p-24 overflow-hidden">
         <!-- Background decorations -->
-        <div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-primary-500/10 blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-primary-500/10 blur-3xl"></div>
+        <div class="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary-500/[0.07] blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-primary-500/[0.07] blur-3xl"></div>
 
         <div class="relative z-10 text-center max-w-3xl mx-auto">
           <h2 data-reveal class="heading-lg text-white mb-8">
             ¿Tienes un proyecto en mente?
           </h2>
-          <p data-reveal data-delay="100" class="text-lg text-dark-300 mb-12">
+          <p data-reveal data-delay="100" class="text-lg text-dark-400 mb-12 leading-relaxed">
             Me encantaría escuchar tu idea. Hablemos sobre cómo puedo ayudarte a crear algo extraordinario.
           </p>
           <div data-reveal data-delay="200" class="flex flex-wrap items-center justify-center gap-4">
-            <a href="/contact" class="btn-primary text-base bg-primary-500 hover:bg-primary-400">
+            <a href="/contact" class="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-dark-900 font-medium rounded-full transition-all duration-300 hover:bg-dark-100 hover:shadow-lg text-base">
               Empecemos a hablar
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
-            <a href={`mailto:${siteConfig.email}`} class="inline-flex items-center gap-2 px-6 py-3 text-dark-300 hover:text-white font-semibold transition-colors duration-300">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
+            <a href={`mailto:${siteConfig.email}`} class="inline-flex items-center gap-2 px-7 py-3.5 text-dark-400 hover:text-white font-medium rounded-full border border-dark-700 hover:border-dark-500 transition-all duration-300">
               {siteConfig.email}
             </a>
           </div>

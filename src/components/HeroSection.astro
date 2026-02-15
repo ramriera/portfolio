@@ -5,16 +5,15 @@ import { siteConfig } from '@/utils/data';
 <section class="relative min-h-[95vh] flex items-center overflow-hidden">
   <!-- Background decoration -->
   <div class="absolute inset-0 -z-10">
-    <div class="absolute top-1/4 -right-32 w-96 h-96 rounded-full bg-primary-500/5 blur-3xl"></div>
-    <div class="absolute bottom-1/4 -left-32 w-96 h-96 rounded-full bg-primary-500/5 blur-3xl"></div>
+    <div class="absolute top-1/4 -right-32 w-[500px] h-[500px] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
+    <div class="absolute bottom-1/4 -left-32 w-[500px] h-[500px] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
   </div>
 
   <div class="container-custom w-full">
-    <div class="max-w-5xl">
+    <div class="max-w-4xl">
       <!-- Greeting line -->
       <div data-reveal data-delay="0" class="flex items-center gap-3 mb-10">
-        <div class="h-px w-12 bg-primary-500"></div>
-        <span class="text-sm font-mono font-medium text-primary-500 uppercase tracking-widest">
+        <span class="text-sm font-medium text-primary-500 tracking-wide">
           Senior UX/UI Designer
         </span>
       </div>
@@ -24,26 +23,20 @@ import { siteConfig } from '@/utils/data';
         Diseño experiencias
         <br />
         digitales que
-        <br />
-        <span class="relative inline-block">
-          <span class="gradient-text">importan</span>
-          <svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
-            <path d="M2 10C50 4 100 2 150 6C200 10 250 4 298 8" stroke="#0052FF" stroke-width="3" stroke-linecap="round" class="animate-[dash_1.5s_ease-out_forwards]" style="stroke-dasharray: 300; stroke-dashoffset: 300; animation: dash 1.5s 0.8s ease-out forwards;" />
-          </svg>
-        </span>
+        <span class="text-primary-500">importan</span>
       </h1>
 
       <!-- Subtitle -->
-      <p data-reveal data-delay="200" class="text-body text-xl max-w-2xl mb-14">
+      <p data-reveal data-delay="200" class="text-body text-xl max-w-2xl mb-14 leading-relaxed">
         Especializado en Design Systems, Product Design y Design Operations.
         Transformando ideas complejas en interfaces intuitivas y elegantes.
       </p>
 
       <!-- CTA buttons -->
-      <div data-reveal data-delay="300" class="flex flex-wrap items-center gap-5">
+      <div data-reveal data-delay="300" class="flex flex-wrap items-center gap-4">
         <a href="/projects" class="btn-primary text-base">
           Ver proyectos
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
@@ -51,40 +44,24 @@ import { siteConfig } from '@/utils/data';
           Hablemos
         </a>
       </div>
-
-      <!-- Scroll indicator -->
-      <div data-reveal data-delay="600" class="mt-20 flex items-center gap-3 text-dark-400 dark:text-dark-500">
-        <div class="w-5 h-8 rounded-full border-2 border-dark-300 dark:border-dark-600 flex items-start justify-center p-1">
-          <div class="w-1 h-2 rounded-full bg-dark-400 dark:bg-dark-500 animate-bounce"></div>
-        </div>
-        <span class="text-xs font-mono uppercase tracking-wider">Scroll</span>
-      </div>
     </div>
 
     <!-- Stats on the side -->
-    <div data-reveal="right" data-delay="400" class="hidden xl:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col gap-8">
+    <div data-reveal="right" data-delay="400" class="hidden xl:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col gap-10">
       <div class="text-center">
-        <div class="text-4xl font-bold text-dark-900 dark:text-dark-100">8+</div>
-        <div class="text-xs font-mono text-dark-400 dark:text-dark-500 uppercase tracking-wider mt-1">Años exp.</div>
+        <div class="text-3xl font-semibold text-dark-900 dark:text-dark-100">8+</div>
+        <div class="text-xs text-dark-400 dark:text-dark-500 tracking-wide mt-1">Años exp.</div>
       </div>
-      <div class="w-px h-8 bg-dark-200 dark:bg-dark-700 mx-auto"></div>
+      <div class="w-6 h-px bg-dark-200 dark:bg-dark-700 mx-auto"></div>
       <div class="text-center">
-        <div class="text-4xl font-bold text-dark-900 dark:text-dark-100">50+</div>
-        <div class="text-xs font-mono text-dark-400 dark:text-dark-500 uppercase tracking-wider mt-1">Proyectos</div>
+        <div class="text-3xl font-semibold text-dark-900 dark:text-dark-100">50+</div>
+        <div class="text-xs text-dark-400 dark:text-dark-500 tracking-wide mt-1">Proyectos</div>
       </div>
-      <div class="w-px h-8 bg-dark-200 dark:bg-dark-700 mx-auto"></div>
+      <div class="w-6 h-px bg-dark-200 dark:bg-dark-700 mx-auto"></div>
       <div class="text-center">
-        <div class="text-4xl font-bold text-dark-900 dark:text-dark-100">15+</div>
-        <div class="text-xs font-mono text-dark-400 dark:text-dark-500 uppercase tracking-wider mt-1">Clientes</div>
+        <div class="text-3xl font-semibold text-dark-900 dark:text-dark-100">15+</div>
+        <div class="text-xs text-dark-400 dark:text-dark-500 tracking-wide mt-1">Clientes</div>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  @keyframes dash {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-</style>
