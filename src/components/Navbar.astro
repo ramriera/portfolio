@@ -10,22 +10,11 @@ const currentPath = Astro.url.pathname;
 >
   <div class="container-custom">
     <nav class="flex items-center justify-between h-20">
-      <!-- Logo container with crossfade -->
-      <a href="/" class="logo-container relative z-10 flex items-center h-10">
-        <!-- Full wordmark logo (visible at top) -->
-        <img
-          id="logo-full"
-          src="/images/logo-ramon-riera.svg"
-          alt="Ramon Riera"
-          class="h-6 sm:h-7 w-auto logo-element"
-        />
-        <!-- Compact RR icon (visible on scroll) -->
-        <img
-          id="logo-icon"
-          src="/images/logo-rr.svg"
-          alt="RR"
-          class="h-8 w-auto absolute left-0 top-1/2 logo-element logo-icon-hidden"
-        />
+      <!-- Logo: Caveat text that contracts from "Ramon Riera" → "RR" -->
+      <a href="/" id="logo" class="logo relative z-10 flex items-center">
+        <span class="logo-text">
+          <span class="logo-letter">R</span><span class="logo-collapse">amon</span><span class="logo-collapse logo-space">&nbsp;</span><span class="logo-letter">R</span><span class="logo-collapse">iera</span>
+        </span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -107,51 +96,48 @@ const currentPath = Astro.url.pathname;
 <div class="h-20"></div>
 
 <style>
-  .logo-container {
+  .logo-text {
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: white;
+    display: inline-flex;
+    white-space: nowrap;
+  }
+
+  .logo-letter {
+    display: inline-block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .logo-collapse {
+    display: inline-block;
+    max-width: 10em;
+    opacity: 1;
     overflow: hidden;
-  }
-
-  .logo-element {
     transition:
-      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    vertical-align: bottom;
   }
 
-  /* Full logo: default visible state */
-  #logo-full {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  /* Full logo: scrolled = slides down and out */
-  #logo-full.scrolled {
-    transform: translateY(110%);
+  /* Contracted state */
+  .logo.contracted .logo-collapse {
+    max-width: 0;
     opacity: 0;
-  }
-
-  /* Icon: default hidden state (below, invisible) */
-  .logo-icon-hidden {
-    transform: translateY(110%);
-    opacity: 0;
-  }
-
-  /* Icon: scrolled = slides up into view */
-  #logo-icon.scrolled {
-    transform: translateY(-50%);
-    opacity: 1;
   }
 </style>
 
 <script>
   const navbar = document.getElementById('navbar');
-  const logoFull = document.getElementById('logo-full');
-  const logoIcon = document.getElementById('logo-icon');
+  const logo = document.getElementById('logo');
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburger = document.getElementById('hamburger');
   let isMenuOpen = false;
   let lastScroll = 0;
-  let isScrolled = false;
+  let isContracted = false;
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.scrollY;
@@ -172,15 +158,13 @@ const currentPath = Astro.url.pathname;
       }
     }
 
-    // Logo crossfade: full wordmark ↔ RR icon
-    if (currentScroll > 80 && !isScrolled) {
-      isScrolled = true;
-      logoFull?.classList.add('scrolled');
-      logoIcon?.classList.add('scrolled');
-    } else if (currentScroll <= 80 && isScrolled) {
-      isScrolled = false;
-      logoFull?.classList.remove('scrolled');
-      logoIcon?.classList.remove('scrolled');
+    // Logo contraction: "Ramon Riera" → "RR"
+    if (currentScroll > 80 && !isContracted) {
+      isContracted = true;
+      logo?.classList.add('contracted');
+    } else if (currentScroll <= 80 && isContracted) {
+      isContracted = false;
+      logo?.classList.remove('contracted');
     }
 
     lastScroll = currentScroll;
