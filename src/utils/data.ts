@@ -60,6 +60,22 @@ export const services = [
   },
 ];
 
+export interface CaseSection {
+  label: string;
+  title: string;
+  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid';
+  content?: string;
+  bullets?: string[];
+  images?: string[];
+}
+
+export interface ProjectMeta {
+  role: string;
+  duration: string;
+  tools: string[];
+  skills: string[];
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -78,6 +94,8 @@ export interface Project {
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
+  projectMeta?: ProjectMeta;
+  caseSections?: CaseSection[];
 }
 
 export const projects: Project[] = [
@@ -183,28 +201,148 @@ export const projects: Project[] = [
   },
   {
     slug: 'movefast-startup-platform',
-    title: 'MoveFast Startup Platform',
+    title: 'MoveFast',
     client: 'MoveFast',
-    year: '2022',
+    year: '2021',
     category: 'UX/UI Design',
-    tags: ['UX/UI', 'Startup', 'SaaS', 'Product Design'],
-    description: 'Diseño de plataforma SaaS para aceleración de startups, optimizando procesos de mentoría y tracking de progreso.',
-    longDescription: 'Diseño integral de la plataforma MoveFast, una herramienta SaaS orientada a la aceleración de startups. El proyecto abarcó desde el dashboard de métricas hasta los flujos de mentoría, reporting y gestión de portfolio de inversores.',
-    challenge: 'Múltiples stakeholders con necesidades diferentes (startups, mentores, inversores) requerían vistas y flujos especializados dentro de una misma plataforma coherente.',
-    solution: 'Diseñé un sistema de dashboards adaptables por rol con componentes compartidos. User research extensivo con los tres perfiles para validar flujos y prioridades.',
+    tags: ['UX/UI', 'UX Research', 'Interaction Design', 'Design System'],
+    description: 'Definición de la experiencia de usuario para una aplicación móvil de un fabricante internacional de coches eléctricos que quiere entrar en el mercado español.',
+    longDescription: 'MoveFast es una solución que busca mejorar la calidad de vida de las personas a través de la movilidad eléctrica. El proyecto se centra en diseñar la experiencia de usuario de una app móvil para un fabricante internacional de coches eléctricos que quiere entrar en el mercado español, ofreciendo un servicio innovador de cambio de baterías bajo demanda y puntos de intercambio dinámicos.',
+    challenge: 'Tres barreras principales dificultan la adopción del vehículo eléctrico en España: la baja autonomía de los vehículos (muchos por debajo de los 300 km), la insuficiente red de puntos de recarga, y los tiempos de carga extendidos (más de 45 minutos de media).',
+    solution: 'Se proponen dos conceptos innovadores entregados a través de una app móvil: un servicio de cambio de batería bajo demanda (10 cambios gratuitos anuales, 59€ el cambio adicional) y puntos dinámicos de intercambio de baterías modulares en ubicaciones estratégicas de la ciudad (cambian semanalmente con posibilidad de reserva anticipada).',
     results: [
-      'Reducción del 40% en tiempo de onboarding',
-      'Adopción del 85% entre mentores activos',
-      'NPS de 72 en primeros 3 meses',
-      'Plataforma adoptada por 3 aceleradoras',
+      'UX completa definida en 2 semanas (45 horas)',
+      'Prototipo interactivo funcional en Figma',
+      'Design system con componentes y variantes',
+      'Dos flujos principales validados con wireframes',
     ],
-    stack: ['Figma', 'Storybook', 'React', 'Tailwind CSS', 'Notion'],
-    cover: 'https://ramonriera.design/wp-content/uploads/2025/01/movefast-header-1120x630.png',
+    stack: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
+    cover: 'https://ramonriera.design/wp-content/uploads/2025/01/movefast-header.png',
     gallery: [
-      'https://ramonriera.design/wp-content/uploads/2025/01/movefast-header-1120x630.png',
+      'https://ramonriera.design/wp-content/uploads/2025/01/movefast-header.png',
     ],
     liveUrl: '#',
     featured: true,
+    projectMeta: {
+      role: 'UX/UI Designer (Research, Visual Design, Interaction Design)',
+      duration: '2 semanas (45 horas)',
+      tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
+      skills: ['Desk research', 'Research questions', 'Idea prioritization', 'Benchmarking', 'Surveys', 'User persona', 'Empathy mapping', 'Journey mapping', 'Wireframes', 'Prototyping', 'Interaction design', 'Design system', 'Variants', 'Components'],
+    },
+    caseSections: [
+      {
+        label: 'Contexto',
+        title: 'Planteamiento del caso',
+        layout: 'center',
+        content: 'Un fabricante internacional de coches eléctricos quiere entrar en el mercado español. Se han identificado tres barreras principales que dificultan la adopción del vehículo eléctrico en España:',
+        bullets: [
+          'Baja autonomía de los vehículos: muchos se quedan por debajo de los 300 km',
+          'Insuficiente red de puntos de recarga en todo el territorio',
+          'Tiempos de carga extendidos: más de 45 minutos de media para una carga completa',
+        ],
+      },
+      {
+        label: 'Propuesta',
+        title: 'Solución propuesta',
+        layout: 'center',
+        content: 'Para abordar estas barreras, se proponen dos conceptos innovadores entregados a través de una aplicación móvil:',
+        bullets: [
+          'Servicio de cambio de batería bajo demanda: 10 cambios gratuitos anuales, 59€ el cambio adicional. Un operario acude a tu ubicación.',
+          'Puntos dinámicos de intercambio de baterías: estaciones modulares en ubicaciones estratégicas de la ciudad que cambian semanalmente, con posibilidad de reserva anticipada.',
+        ],
+      },
+      {
+        label: 'Descubrimiento',
+        title: 'Desk Research — Tipos de vehículos',
+        layout: 'left-right',
+        content: 'BEV (Battery Electric Vehicle): 100% eléctrico, cero emisiones, motor alimentado por batería, requiere carga de red.\n\nPHEV (Plug-in Hybrid Electric Vehicle): Sistema de doble motor (combustión + eléctrico), máximo 130 km/h solo con eléctrico, ~40 km de autonomía eléctrica, capacidad de carga externa.',
+        images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-electric-passenger-cars-registrations-spain.png'],
+      },
+      {
+        label: 'Investigación',
+        title: 'Contexto del mercado español',
+        layout: 'image-grid',
+        content: 'España se sitúa a la cola entre las naciones europeas en adopción del vehículo eléctrico. La tendencia de crecimiento es visible pero no se acelera lo suficiente. Las principales barreras de compra son: escasez de puntos de carga, precio del vehículo y autonomía limitada.',
+        images: [
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-flota-vehiculos-electricos.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-evolucion-esp.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-recharging-points-spain.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/mf-estaciones-de-carga-en-europa-min.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-flota-coches-europa-2020.png',
+        ],
+      },
+      {
+        label: 'Análisis',
+        title: 'Benchmarking',
+        layout: 'left-right',
+        content: 'Se analizaron las aplicaciones competidoras del mercado. Las funcionalidades comunes incluyen mapas interactivos con ubicaciones de estaciones de carga, filtros de voltaje, y funcionalidad de guardar favoritos. Sin embargo, ninguna dispone del servicio de cambio de baterías ni de un punto para poder cambiar la batería. La mayoría de aplicaciones priorizan los mapas interactivos pero presentan pobre usabilidad y diseño estético.',
+        images: [
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-benchmarking-apps.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-benchmarking.png',
+        ],
+      },
+      {
+        label: 'Definición',
+        title: 'User Persona — Oriol Vallmajor',
+        layout: 'full-image',
+        content: 'Oriol es arquitecto con ingresos por encima de la media. Su objetivo principal es viajar por España con su familia en un vehículo eléctrico. Busca transporte sostenible y fiable. Representa el perfil demográfico de clase media-alta que puede permitirse un vehículo eléctrico.',
+        images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-user-persona.png'],
+      },
+      {
+        label: 'Empatía',
+        title: 'Mapa de empatía',
+        layout: 'full-image',
+        content: 'Se identificaron los puntos de dolor principales del usuario: ansiedad por la autonomía, falta de infraestructura de carga, y la necesidad de planificar rutas con antelación. Los objetivos del usuario se centran en realizar viajes familiares largos de forma fiable.',
+        images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-mapa-empatia.png'],
+      },
+      {
+        label: 'Journey',
+        title: 'Customer Journey Map',
+        layout: 'full-image',
+        content: 'Se documentaron los puntos de contacto revelando la fricción existente: desde la planificación inicial de la ruta hasta la completación de la carga. Los picos de frustración se identificaron en relación con la escasez de la red de carga, amplificados por el déficit de infraestructura en el contexto español.',
+        images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-costumer-journey.png'],
+      },
+      {
+        label: 'Solución',
+        title: 'Prototipo interactivo',
+        layout: 'center',
+        content: 'Se desarrolló un prototipo interactivo en Figma con el flujo completo del usuario desde la pantalla de inicio hasta el proceso completo de reserva. El prototipo incluye animaciones de transición y estados de interacción.',
+      },
+      {
+        label: 'Pantallas',
+        title: 'Diseño de interfaces',
+        layout: 'screens-grid',
+        content: 'La aplicación incluye splash screen animado, onboarding de 4 pantallas explicando las funcionalidades, pantalla principal con mapa interactivo, sistema de filtros, favoritos, reserva de puntos de intercambio, solicitud de cambio de batería a domicilio, y perfil con información del vehículo y opciones de pago.',
+        images: [
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-spinner-2.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-spinner-1.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-inicial-1.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-inicial-2.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-inicial-3.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-inicial-4.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-mapa.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-menu.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-filtros.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-talleres.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-favoritos.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-escoger.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-reserva.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-aceptado.png',
+        ],
+      },
+      {
+        label: 'Conclusiones',
+        title: 'Conclusiones y futuribles',
+        layout: 'center',
+        content: 'Se entregó con éxito la UX de la aplicación móvil abordando las dos soluciones propuestas: servicio de batería bajo demanda y reserva de puntos de intercambio dinámicos. El diseño incorpora funcionalidades estándar del sector (integración de pagos, estado de ocupación) al tiempo que introduce un modelo de servicio innovador ausente en la competencia.',
+        bullets: [
+          'Desarrollo de pantallas adicionales: perfil, pagos, gestión de favoritos',
+          'Testing con usuarios para determinar la jerarquía óptima de funcionalidades',
+          'Adaptación a aplicación web responsive',
+          'Mejoras de accesibilidad en las interfaces existentes',
+        ],
+      },
+    ],
   },
   {
     slug: 'solotemazos-music-platform',
