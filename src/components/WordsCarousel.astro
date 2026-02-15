@@ -1,0 +1,148 @@
+---
+interface Props {
+  words: string[];
+  interval?: number;
+}
+
+const { words, interval = 3000 } = Astro.props;
+---
+
+<span
+  class="words-carousel-wrapper inline-block relative align-bottom"
+  data-words={JSON.stringify(words)}
+  data-interval={interval}
+>
+  {words.map((word, i) => (
+    <span
+      class:list={[
+        'words-carousel-word inline-block relative',
+        i === 0 ? 'active' : '',
+      ]}
+      data-index={i}
+    >
+      <span class="word-text">{word}</span>
+      <!-- Hand-drawn underline -->
+      <svg
+        class="word-underline absolute -bottom-1 left-0 w-full"
+        viewBox="0 0 200 12"
+        preserveAspectRatio="none"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2 8.5C30 3.5 60 2 100 5.5C140 9 170 4.5 198 7"
+          stroke="currentColor"
+          stroke-width="3.5"
+          stroke-linecap="round"
+          class="underline-path"
+        />
+      </svg>
+    </span>
+  ))}
+</span>
+
+<style>
+  .words-carousel-wrapper {
+    min-width: var(--carousel-width, auto);
+    transition: min-width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .words-carousel-word {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+
+  .words-carousel-word:first-child {
+    position: relative;
+  }
+
+  .words-carousel-word.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+  }
+
+  .words-carousel-word.exiting {
+    opacity: 0;
+    transform: translateY(-20px);
+    position: absolute;
+  }
+
+  /* Underline animation */
+  .word-underline {
+    height: 10px;
+    color: var(--color-primary-500, #D97757);
+    overflow: visible;
+  }
+
+  .underline-path {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+  }
+
+  .words-carousel-word.active .underline-path {
+    stroke-dashoffset: 0;
+  }
+
+  .words-carousel-word.exiting .underline-path {
+    stroke-dashoffset: 300;
+    transition: stroke-dashoffset 0.3s ease-in;
+  }
+</style>
+
+<script>
+  function initCarousels() {
+    document.querySelectorAll('.words-carousel-wrapper').forEach((wrapper) => {
+      const el = wrapper as HTMLElement;
+      const words = JSON.parse(el.dataset.words || '[]') as string[];
+      const interval = parseInt(el.dataset.interval || '3000', 10);
+      const wordEls = el.querySelectorAll('.words-carousel-word');
+      let current = 0;
+
+      // Measure widths and set initial
+      function updateWidth() {
+        const activeEl = wordEls[current] as HTMLElement;
+        if (activeEl) {
+          el.style.setProperty('--carousel-width', `${activeEl.scrollWidth}px`);
+        }
+      }
+
+      updateWidth();
+
+      setInterval(() => {
+        const prev = current;
+        current = (current + 1) % words.length;
+
+        // Exit previous
+        wordEls[prev].classList.remove('active');
+        wordEls[prev].classList.add('exiting');
+
+        // Enter next
+        wordEls[current].classList.add('active');
+        wordEls[current].classList.remove('exiting');
+
+        // Update width smoothly
+        updateWidth();
+
+        // Clean up exiting class after animation
+        setTimeout(() => {
+          wordEls[prev].classList.remove('exiting');
+        }, 500);
+      }, interval);
+    });
+  }
+
+  // Run on load and on Astro page transitions
+  initCarousels();
+  document.addEventListener('astro:page-load', initCarousels);
+</script>
