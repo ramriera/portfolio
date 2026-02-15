@@ -197,10 +197,10 @@ const currentPath = Astro.url.pathname;
     }
 
     // Logo contraction: "Ramon Riera" → "RR"
-    if (currentScroll > 80 && !isContracted) {
+    if (currentScroll > 200 && !isContracted) {
       isContracted = true;
       logo?.classList.add('contracted');
-    } else if (currentScroll <= 80 && isContracted) {
+    } else if (currentScroll <= 200 && isContracted) {
       isContracted = false;
       logo?.classList.remove('contracted');
     }
