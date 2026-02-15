@@ -66,10 +66,10 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <Footer />
 
     <script is:inline>
-      // Theme initialization — runs before paint
+      // Theme initialization — runs before paint (default: light)
       (function() {
         const stored = localStorage.getItem('theme');
-        if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (stored === 'dark') {
           document.documentElement.classList.add('dark');
           document.body.classList.add('dark');
         }

@@ -12,15 +12,15 @@ const featuredProjects = projects.filter((p) => p.featured);
   <HeroSection />
 
   <!-- Client Logos -->
-  <section class="py-14 border-t border-b border-dark-100 dark:border-dark-800">
+  <section class="py-20 md:py-28">
     <div class="container-custom">
-      <div class="flex flex-wrap items-center justify-center gap-12 md:gap-20">
+      <div class="flex flex-wrap items-center justify-center gap-14 md:gap-24">
         {clientLogos.map((client) => (
           <div class="group relative">
             <img
               src={client.logo}
               alt={client.name}
-              class="h-10 md:h-14 w-auto object-contain opacity-40 dark:opacity-30 grayscale hover:opacity-100 hover:grayscale-0 dark:hover:opacity-90 transition-all duration-500 dark:invert"
+              class="h-14 md:h-20 w-auto object-contain opacity-30 dark:opacity-25 grayscale hover:opacity-100 hover:grayscale-0 dark:hover:opacity-90 transition-all duration-500 dark:invert"
               loading="lazy"
             />
           </div>
@@ -33,10 +33,10 @@ const featuredProjects = projects.filter((p) => p.featured);
   <AboutSection />
 
   <!-- Featured Projects — Horizontal Scroll -->
-  <section class="section-padding border-t border-dark-100 dark:border-dark-800 bg-dark-50/50 dark:bg-dark-900/50 overflow-hidden">
+  <section class="section-padding overflow-hidden">
     <!-- Header -->
     <div class="container-custom">
-      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-12">
+      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 mb-16">
         <div>
           <div data-reveal class="flex items-center gap-3 mb-6">
             <div class="h-px w-12 bg-primary-500"></div>
@@ -82,13 +82,13 @@ const featuredProjects = projects.filter((p) => p.featured);
     <!-- Carousel -->
     <div
       id="projects-carousel"
-      class="flex gap-6 overflow-x-auto scroll-smooth pl-6 sm:pl-8 lg:pl-12 pr-6 pb-4 snap-x snap-mandatory hide-scrollbar"
+      class="flex gap-8 overflow-x-auto scroll-smooth pl-6 sm:pl-8 lg:pl-12 pr-6 pb-4 snap-x snap-mandatory hide-scrollbar"
       style="scrollbar-width: none;"
     >
       {featuredProjects.map((project) => (
         <a
           href={`/projects/${project.slug}`}
-          class="project-carousel-card group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[550px] lg:w-[600px] rounded-2xl overflow-hidden border border-dashed border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-900 transition-all duration-500 ease-out-expo hover:border-primary-400 dark:hover:border-primary-500 hover:shadow-xl hover:shadow-primary-500/5 snap-start"
+          class="project-carousel-card group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[550px] lg:w-[620px] rounded-2xl overflow-hidden bg-white dark:bg-dark-900 transition-all duration-500 ease-out-expo hover:shadow-2xl hover:shadow-dark-900/8 dark:hover:shadow-dark-100/5 snap-start"
         >
           <!-- Image -->
           <div class="relative overflow-hidden aspect-[16/9]">
@@ -123,14 +123,14 @@ const featuredProjects = projects.filter((p) => p.featured);
           </div>
 
           <!-- Content -->
-          <div class="p-6">
-            <div class="flex items-center gap-2 mb-2">
+          <div class="p-7">
+            <div class="flex items-center gap-2 mb-3">
               <span class="text-xs font-medium text-primary-500 uppercase tracking-wider">{project.client}</span>
             </div>
-            <h3 class="text-xl sm:text-2xl font-bold tracking-tight mb-3 group-hover:text-primary-500 transition-colors duration-300">
+            <h3 class="text-xl sm:text-2xl font-bold tracking-tight mb-4 group-hover:text-primary-500 transition-colors duration-300">
               {project.title}
             </h3>
-            <p class="text-sm sm:text-base text-dark-500 dark:text-dark-400 leading-relaxed line-clamp-2 mb-4">
+            <p class="text-sm sm:text-base text-dark-500 dark:text-dark-400 leading-relaxed line-clamp-2 mb-5">
               {project.description}
             </p>
             <div class="flex flex-wrap gap-2">
@@ -146,7 +146,7 @@ const featuredProjects = projects.filter((p) => p.featured);
     </div>
 
     <!-- Scroll progress indicator -->
-    <div class="container-custom mt-8">
+    <div class="container-custom mt-10">
       <div class="h-0.5 bg-dark-100 dark:bg-dark-800 rounded-full overflow-hidden">
         <div id="carousel-progress" class="h-full bg-primary-500 rounded-full transition-all duration-300" style="width: 0%"></div>
       </div>
@@ -154,18 +154,18 @@ const featuredProjects = projects.filter((p) => p.featured);
   </section>
 
   <!-- CTA Contact -->
-  <section class="section-padding border-t border-dark-100 dark:border-dark-800">
+  <section class="section-padding">
     <div class="container-custom">
-      <div class="relative rounded-3xl bg-dark-900 dark:bg-dark-800 p-12 md:p-20 overflow-hidden">
+      <div class="relative rounded-3xl bg-dark-900 dark:bg-dark-800 p-14 md:p-24 overflow-hidden">
         <!-- Background decorations -->
         <div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-primary-500/10 blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-primary-500/10 blur-3xl"></div>
 
         <div class="relative z-10 text-center max-w-3xl mx-auto">
-          <h2 data-reveal class="heading-lg text-white mb-6">
+          <h2 data-reveal class="heading-lg text-white mb-8">
             ¿Tienes un proyecto en mente?
           </h2>
-          <p data-reveal data-delay="100" class="text-lg text-dark-300 mb-10">
+          <p data-reveal data-delay="100" class="text-lg text-dark-300 mb-12">
             Me encantaría escuchar tu idea. Hablemos sobre cómo puedo ayudarte a crear algo extraordinario.
           </p>
           <div data-reveal data-delay="200" class="flex flex-wrap items-center justify-center gap-4">
@@ -207,7 +207,7 @@ const featuredProjects = projects.filter((p) => p.featured);
   function getScrollAmount() {
     const card = carousel?.querySelector('.project-carousel-card') as HTMLElement;
     if (!card) return 600;
-    return card.offsetWidth + 24; // card width + gap
+    return card.offsetWidth + 32; // card width + gap
   }
 
   function updateProgress() {
