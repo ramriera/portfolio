@@ -32,7 +32,7 @@ const categories = ['Todos', ...new Set(projects.map((p) => p.category))];
             class:list={[
               'filter-btn px-5 py-2 text-sm font-medium rounded-full transition-all duration-300',
               cat === 'Todos'
-                ? 'bg-dark-900 dark:bg-dark-100 text-white dark:text-dark-900'
+                ? 'bg-primary-500 text-white'
                 : 'bg-dark-100 dark:bg-dark-800 text-dark-600 dark:text-dark-400 hover:bg-dark-200 dark:hover:bg-dark-700',
             ]}
             data-filter={cat}
@@ -73,11 +73,11 @@ const categories = ['Todos', ...new Set(projects.map((p) => p.category))];
 
       // Update active button
       filterBtns.forEach((b) => {
-        b.classList.remove('bg-dark-900', 'dark:bg-dark-100', 'text-white', 'dark:text-dark-900');
+        b.classList.remove('bg-primary-500', 'text-white');
         b.classList.add('bg-dark-100', 'dark:bg-dark-800', 'text-dark-600', 'dark:text-dark-400');
       });
       btn.classList.remove('bg-dark-100', 'dark:bg-dark-800', 'text-dark-600', 'dark:text-dark-400');
-      btn.classList.add('bg-dark-900', 'dark:bg-dark-100', 'text-white', 'dark:text-dark-900');
+      btn.classList.add('bg-primary-500', 'text-white');
 
       // Filter projects
       projectItems.forEach((item) => {

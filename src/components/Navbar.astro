@@ -187,13 +187,6 @@ const currentPath = Astro.url.pathname;
       } else {
         navbar.classList.remove('bg-dark-950/80', 'backdrop-blur-xl');
       }
-
-      // Hide/show on scroll direction
-      if (currentScroll > lastScroll && currentScroll > 200 && !isMenuOpen) {
-        navbar.style.transform = 'translateY(-100%)';
-      } else {
-        navbar.style.transform = 'translateY(0)';
-      }
     }
 
     // Logo contraction: "Ramon Riera" → "RR"
