@@ -26,17 +26,10 @@ const { slug, title, client, year, category, tags, description, cover, featured 
     <img
       src={cover}
       alt={title}
-      class="project-card-image w-full h-full object-cover"
+      class="project-card-image w-full h-full object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105"
       loading="lazy"
     />
     <div class="absolute inset-0 bg-gradient-to-t from-dark-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-    <!-- Category badge -->
-    <div class="absolute top-4 left-4">
-      <span class="px-3 py-1.5 text-xs font-semibold rounded-full bg-white/90 dark:bg-dark-900/90 backdrop-blur-sm text-dark-900 dark:text-dark-100">
-        {category}
-      </span>
-    </div>
 
     <!-- Year badge -->
     <div class="absolute top-4 right-4">
