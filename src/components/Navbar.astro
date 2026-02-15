@@ -11,12 +11,19 @@ const currentPath = Astro.url.pathname;
   <div class="container-custom">
     <nav class="flex items-center justify-between h-20">
       <!-- Logo -->
-      <a href="/" class="relative z-10 group flex items-center gap-3">
+      <a href="/" class="relative z-10 group flex items-center gap-2.5 overflow-hidden">
         <img
           src="https://ramonriera.design/wp-content/uploads/2024/12/logo-blanco-64x64-2.svg"
           alt="Ramon Riera"
-          class="h-9 w-auto transition-transform duration-300 group-hover:scale-110"
+          class="h-9 w-auto transition-transform duration-300 group-hover:scale-110 flex-shrink-0"
         />
+        <span
+          id="logo-text"
+          class="text-lg font-semibold text-dark-100 tracking-tight whitespace-nowrap transition-all duration-500 ease-out-expo overflow-hidden"
+          style="max-width: 160px; opacity: 1;"
+        >
+          RamonRiera
+        </span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -99,11 +106,13 @@ const currentPath = Astro.url.pathname;
 
 <script>
   const navbar = document.getElementById('navbar');
+  const logoText = document.getElementById('logo-text');
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburger = document.getElementById('hamburger');
   let isMenuOpen = false;
   let lastScroll = 0;
+  let isCollapsed = false;
 
   // Scroll behavior
   window.addEventListener('scroll', () => {
@@ -121,6 +130,20 @@ const currentPath = Astro.url.pathname;
         navbar.style.transform = 'translateY(0)';
       }
     }
+
+    // Logo text collapse/expand
+    if (logoText) {
+      if (currentScroll > 80 && !isCollapsed) {
+        isCollapsed = true;
+        logoText.style.maxWidth = '0px';
+        logoText.style.opacity = '0';
+      } else if (currentScroll <= 80 && isCollapsed) {
+        isCollapsed = false;
+        logoText.style.maxWidth = '160px';
+        logoText.style.opacity = '1';
+      }
+    }
+
     lastScroll = currentScroll;
   }, { passive: true });
 

@@ -48,22 +48,67 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
       </div>
     </div>
 
-    <!-- Stats on the side -->
-    <div data-reveal="right" data-delay="400" class="hidden xl:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col gap-10">
+    <!-- Stats — horizontal on mobile, vertical on xl side -->
+    <div data-reveal data-delay="400" class="flex justify-start gap-8 mt-16 xl:mt-0 xl:absolute xl:right-12 xl:top-1/2 xl:-translate-y-1/2 xl:flex-col xl:gap-10" data-reveal-dir="right-xl">
       <div class="text-center">
-        <div class="text-3xl font-semibold text-dark-900 dark:text-dark-100">8+</div>
+        <div class="text-3xl font-semibold text-dark-900 dark:text-dark-100">
+          <span class="count-up" data-target="8">0</span>+
+        </div>
         <div class="text-xs text-dark-400 dark:text-dark-500 tracking-wide mt-1">Años exp.</div>
       </div>
-      <div class="w-6 h-px bg-dark-200 dark:bg-dark-700 mx-auto"></div>
+      <div class="hidden xl:block w-6 h-px bg-dark-200 dark:bg-dark-700 mx-auto"></div>
+      <div class="w-px h-8 bg-dark-200 dark:bg-dark-700 my-auto xl:hidden"></div>
       <div class="text-center">
-        <div class="text-3xl font-semibold text-dark-900 dark:text-dark-100">50+</div>
+        <div class="text-3xl font-semibold text-dark-900 dark:text-dark-100">
+          <span class="count-up" data-target="50">0</span>+
+        </div>
         <div class="text-xs text-dark-400 dark:text-dark-500 tracking-wide mt-1">Proyectos</div>
       </div>
-      <div class="w-6 h-px bg-dark-200 dark:bg-dark-700 mx-auto"></div>
+      <div class="hidden xl:block w-6 h-px bg-dark-200 dark:bg-dark-700 mx-auto"></div>
+      <div class="w-px h-8 bg-dark-200 dark:bg-dark-700 my-auto xl:hidden"></div>
       <div class="text-center">
-        <div class="text-3xl font-semibold text-dark-900 dark:text-dark-100">15+</div>
+        <div class="text-3xl font-semibold text-dark-900 dark:text-dark-100">
+          <span class="count-up" data-target="15">0</span>+
+        </div>
         <div class="text-xs text-dark-400 dark:text-dark-500 tracking-wide mt-1">Clientes</div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  function initCountUp() {
+    const counters = document.querySelectorAll('.count-up');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+
+        const target = parseInt(el.dataset.target || '0', 10);
+        const duration = 1800;
+        const start = performance.now();
+
+        function update(now: number) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // ease-out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = String(Math.round(target * eased));
+          if (progress < 1) requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach((c) => observer.observe(c));
+  }
+
+  initCountUp();
+  document.addEventListener('astro:page-load', initCountUp);
+</script>
