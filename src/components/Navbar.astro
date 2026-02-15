@@ -10,32 +10,21 @@ const currentPath = Astro.url.pathname;
 >
   <div class="container-custom">
     <nav class="flex items-center justify-between h-20">
-      <!-- Logo -->
-      <a href="/" class="relative z-10 group flex items-center h-10 overflow-hidden">
-        <!-- Full wordmark: visible at top -->
-        <svg
+      <!-- Logo container with crossfade -->
+      <a href="/" class="logo-container relative z-10 flex items-center h-10">
+        <!-- Full wordmark logo (visible at top) -->
+        <img
           id="logo-full"
-          class="h-7 w-auto transition-all duration-500 ease-out-expo"
-          viewBox="0 0 520 50"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <!-- R mark (matching existing logo style) -->
-          <rect x="0" y="0" width="50" height="50" rx="12" fill="currentColor" class="text-primary-500" />
-          <text x="13" y="36" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="white">R</text>
-
-          <!-- "Ramon Riera" text -->
-          <text x="64" y="35" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="currentColor" class="text-dark-100" letter-spacing="-0.5">
-            Ramon Riera
-          </text>
-        </svg>
-
-        <!-- Small icon: visible on scroll -->
+          src="/images/logo-ramon-riera.svg"
+          alt="Ramon Riera"
+          class="h-6 sm:h-7 w-auto logo-element"
+        />
+        <!-- Compact RR icon (visible on scroll) -->
         <img
           id="logo-icon"
-          src="https://ramonriera.design/wp-content/uploads/2024/12/logo-blanco-64x64-2.svg"
-          alt="Ramon Riera"
-          class="h-9 w-auto absolute left-0 top-1/2 transition-all duration-500 ease-out-expo translate-y-full opacity-0"
+          src="/images/logo-rr.svg"
+          alt="RR"
+          class="h-8 w-auto absolute left-0 top-1/2 logo-element logo-icon-hidden"
         />
       </a>
 
@@ -117,6 +106,42 @@ const currentPath = Astro.url.pathname;
 <!-- Spacer for fixed navbar -->
 <div class="h-20"></div>
 
+<style>
+  .logo-container {
+    overflow: hidden;
+  }
+
+  .logo-element {
+    transition:
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Full logo: default visible state */
+  #logo-full {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Full logo: scrolled = slides down and out */
+  #logo-full.scrolled {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+
+  /* Icon: default hidden state (below, invisible) */
+  .logo-icon-hidden {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+
+  /* Icon: scrolled = slides up into view */
+  #logo-icon.scrolled {
+    transform: translateY(-50%);
+    opacity: 1;
+  }
+</style>
+
 <script>
   const navbar = document.getElementById('navbar');
   const logoFull = document.getElementById('logo-full');
@@ -128,9 +153,10 @@ const currentPath = Astro.url.pathname;
   let lastScroll = 0;
   let isScrolled = false;
 
-  // Scroll behavior
   window.addEventListener('scroll', () => {
     const currentScroll = window.scrollY;
+
+    // Navbar background
     if (navbar) {
       if (currentScroll > 50) {
         navbar.classList.add('bg-dark-950/80', 'backdrop-blur-xl');
@@ -138,6 +164,7 @@ const currentPath = Astro.url.pathname;
         navbar.classList.remove('bg-dark-950/80', 'backdrop-blur-xl');
       }
 
+      // Hide/show on scroll direction
       if (currentScroll > lastScroll && currentScroll > 200 && !isMenuOpen) {
         navbar.style.transform = 'translateY(-100%)';
       } else {
@@ -145,27 +172,15 @@ const currentPath = Astro.url.pathname;
       }
     }
 
-    // Logo swap: full wordmark → icon
+    // Logo crossfade: full wordmark ↔ RR icon
     if (currentScroll > 80 && !isScrolled) {
       isScrolled = true;
-      if (logoFull) {
-        logoFull.style.transform = 'translateY(100%)';
-        logoFull.style.opacity = '0';
-      }
-      if (logoIcon) {
-        logoIcon.style.transform = 'translateY(-50%)';
-        logoIcon.style.opacity = '1';
-      }
+      logoFull?.classList.add('scrolled');
+      logoIcon?.classList.add('scrolled');
     } else if (currentScroll <= 80 && isScrolled) {
       isScrolled = false;
-      if (logoFull) {
-        logoFull.style.transform = 'translateY(0)';
-        logoFull.style.opacity = '1';
-      }
-      if (logoIcon) {
-        logoIcon.style.transform = 'translateY(100%)';
-        logoIcon.style.opacity = '0';
-      }
+      logoFull?.classList.remove('scrolled');
+      logoIcon?.classList.remove('scrolled');
     }
 
     lastScroll = currentScroll;
