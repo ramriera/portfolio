@@ -119,8 +119,8 @@ const currentPath = Astro.url.pathname;
     background: rgba(255, 255, 255, 0.25);
     flex-shrink: 0;
     transition:
-      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-      width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .logo-role {
@@ -139,15 +139,15 @@ const currentPath = Astro.url.pathname;
     overflow: hidden;
     vertical-align: bottom;
     transition:
-      max-width 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      max-width 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* Staggered delays for organic feel */
+  /* Staggered delays — expanding */
   .logo-collapse.c1 { transition-delay: 0s; }
-  .logo-collapse.c2 { transition-delay: 0.03s; }
-  .logo-collapse.c3 { transition-delay: 0.06s; }
-  .logo-collapse.c4 { transition-delay: 0.02s; }
+  .logo-collapse.c2 { transition-delay: 0.06s; }
+  .logo-collapse.c3 { transition-delay: 0.12s; }
+  .logo-collapse.c4 { transition-delay: 0.05s; }
 
   /* Contracted state */
   .logo.contracted .logo-collapse {
@@ -155,8 +155,9 @@ const currentPath = Astro.url.pathname;
     opacity: 0;
   }
 
-  .logo.contracted .logo-collapse.c1 { transition-delay: 0.06s; }
-  .logo.contracted .logo-collapse.c2 { transition-delay: 0.03s; }
+  /* Staggered delays — contracting (reverse order) */
+  .logo.contracted .logo-collapse.c1 { transition-delay: 0.12s; }
+  .logo.contracted .logo-collapse.c2 { transition-delay: 0.06s; }
   .logo.contracted .logo-collapse.c3 { transition-delay: 0s; }
   .logo.contracted .logo-collapse.c4 { transition-delay: 0s; }
 

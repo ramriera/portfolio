@@ -21,7 +21,7 @@ const { slug, title, client, year, category, tags, description, cover, featured 
     featured ? 'lg:col-span-2' : '',
   ]}
 >
-  <div class="relative aspect-[16/10]">
+  <div class="relative aspect-[3/2]">
     <img
       src={cover}
       alt={title}
@@ -37,7 +37,7 @@ const { slug, title, client, year, category, tags, description, cover, featured 
 
     <!-- Year badge -->
     <div class="absolute top-4 right-4">
-      <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/15 backdrop-blur-sm text-white/80">
+      <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/15 backdrop-blur-sm text-white/80 transition-colors duration-300 group-hover:bg-primary-500/20 group-hover:text-primary-400">
         {year}
       </span>
     </div>

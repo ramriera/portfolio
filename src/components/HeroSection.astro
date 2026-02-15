@@ -2,7 +2,7 @@
 import { siteConfig } from '@/utils/data';
 import WordsCarousel from './WordsCarousel.astro';
 
-const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brillan'];
+const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brillan', 'impactan', 'perduran'];
 ---
 
 <section class="relative min-h-[95vh] flex items-center overflow-hidden">
@@ -25,7 +25,7 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
       <h1 data-reveal data-delay="100" class="heading-xl mb-10">
         Diseño experiencias<br />
         <span class="whitespace-nowrap">digitales que
-        <span class="text-primary-500"><WordsCarousel words={rotatingWords} interval={3000} /></span></span>
+        <span class="text-primary-500"><WordsCarousel words={rotatingWords} interval={1000} /></span></span>
       </h1>
 
       <!-- Subtitle -->
