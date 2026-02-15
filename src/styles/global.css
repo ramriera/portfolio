@@ -66,7 +66,7 @@
   }
 
   .card-hover {
-    @apply transition-all duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lg hover:shadow-dark-900/5 dark:hover:shadow-dark-100/5;
+    @apply transition-all duration-500 ease-out-expo hover:-translate-y-1;
   }
 
   .gradient-text {

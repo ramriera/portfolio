@@ -17,12 +17,12 @@ const { slug, title, client, year, category, tags, description, cover, featured 
 <a
   href={`/projects/${slug}`}
   class:list={[
-    'project-card group relative block rounded-2xl overflow-hidden card-hover',
+    'project-card group relative block rounded-2xl overflow-hidden',
     featured ? 'lg:col-span-2' : '',
   ]}
 >
   <!-- Full-size image background -->
-  <div class="relative aspect-[16/12]">
+  <div class="relative aspect-[3/4] sm:aspect-[4/5]">
     <img
       src={cover}
       alt={title}
@@ -45,34 +45,64 @@ const { slug, title, client, year, category, tags, description, cover, featured 
 
     <!-- Bottom content — always visible: title + tags -->
     <div class="absolute bottom-0 left-0 right-0 p-6">
-      <!-- Extra info — only on hover -->
-      <div class="overflow-hidden transition-all duration-500 ease-out-expo max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100">
+      <!-- Title — always visible -->
+      <h3 class="text-xl sm:text-2xl font-medium tracking-tight text-white mb-1 group-hover:text-primary-400 transition-colors duration-300">
+        {title}
+      </h3>
+
+      <!-- Extra info — slides down from under the title on hover -->
+      <div class="card-extra-info">
         <span class="text-xs font-medium text-primary-400 uppercase tracking-wider">{client}</span>
-        <p class="text-sm text-dark-300 line-clamp-2 mt-2 mb-4">
+        <p class="text-sm text-dark-300 line-clamp-2 mt-1">
           {description}
         </p>
       </div>
 
-      <!-- Title — always visible -->
-      <h3 class="text-xl sm:text-2xl font-medium tracking-tight text-white mb-3 group-hover:text-primary-400 transition-colors duration-300">
-        {title}
-      </h3>
+      <!-- Spacer between extra info and tags -->
+      <div class="h-3"></div>
 
-      <!-- Tags — always visible -->
+      <!-- Tags — always visible, change to accent on hover -->
       <div class="flex flex-wrap gap-2">
         {tags.slice(0, 3).map((tag) => (
-          <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-white/10 backdrop-blur-sm text-white/80">
+          <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-white/10 backdrop-blur-sm text-white/80 transition-colors duration-300 group-hover:bg-primary-500/20 group-hover:text-primary-400">
             {tag}
           </span>
         ))}
       </div>
     </div>
 
-    <!-- Arrow indicator — hover only -->
-    <div class="absolute top-4 left-4 w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white transform -translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out-expo">
+    <!-- Arrow indicator — hover only, bottom right -->
+    <div class="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out-expo">
       <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
       </svg>
     </div>
   </div>
 </a>
+
+<style>
+  .card-extra-info {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-8px);
+    transition:
+      max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.05s,
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .group:hover .card-extra-info {
+    max-height: 8rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .project-card {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+  }
+</style>
