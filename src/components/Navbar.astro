@@ -11,19 +11,32 @@ const currentPath = Astro.url.pathname;
   <div class="container-custom">
     <nav class="flex items-center justify-between h-20">
       <!-- Logo -->
-      <a href="/" class="relative z-10 group flex items-center gap-2.5 overflow-hidden">
+      <a href="/" class="relative z-10 group flex items-center h-10 overflow-hidden">
+        <!-- Full wordmark: visible at top -->
+        <svg
+          id="logo-full"
+          class="h-7 w-auto transition-all duration-500 ease-out-expo"
+          viewBox="0 0 520 50"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- R mark (matching existing logo style) -->
+          <rect x="0" y="0" width="50" height="50" rx="12" fill="currentColor" class="text-primary-500" />
+          <text x="13" y="36" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="white">R</text>
+
+          <!-- "Ramon Riera" text -->
+          <text x="64" y="35" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="currentColor" class="text-dark-100" letter-spacing="-0.5">
+            Ramon Riera
+          </text>
+        </svg>
+
+        <!-- Small icon: visible on scroll -->
         <img
+          id="logo-icon"
           src="https://ramonriera.design/wp-content/uploads/2024/12/logo-blanco-64x64-2.svg"
           alt="Ramon Riera"
-          class="h-9 w-auto transition-transform duration-300 group-hover:scale-110 flex-shrink-0"
+          class="h-9 w-auto absolute left-0 top-1/2 transition-all duration-500 ease-out-expo translate-y-full opacity-0"
         />
-        <span
-          id="logo-text"
-          class="text-lg font-semibold text-dark-100 tracking-tight whitespace-nowrap transition-all duration-500 ease-out-expo overflow-hidden"
-          style="max-width: 160px; opacity: 1;"
-        >
-          RamonRiera
-        </span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -47,10 +60,10 @@ const currentPath = Astro.url.pathname;
       <div class="flex items-center gap-3">
         <a
           href="mailto:ramriera28@gmail.com"
-          class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-dark-100 text-dark-900 text-sm font-medium rounded-full transition-all duration-300 hover:bg-dark-200 hover:shadow-md hover:shadow-dark-900/10"
+          class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-dark-100 text-dark-900 text-sm font-medium rounded-full transition-all duration-300 hover:bg-dark-200 hover:shadow-md hover:shadow-dark-900/10 group/btn"
         >
           Hablemos
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
@@ -106,13 +119,14 @@ const currentPath = Astro.url.pathname;
 
 <script>
   const navbar = document.getElementById('navbar');
-  const logoText = document.getElementById('logo-text');
+  const logoFull = document.getElementById('logo-full');
+  const logoIcon = document.getElementById('logo-icon');
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburger = document.getElementById('hamburger');
   let isMenuOpen = false;
   let lastScroll = 0;
-  let isCollapsed = false;
+  let isScrolled = false;
 
   // Scroll behavior
   window.addEventListener('scroll', () => {
@@ -131,16 +145,26 @@ const currentPath = Astro.url.pathname;
       }
     }
 
-    // Logo text collapse/expand
-    if (logoText) {
-      if (currentScroll > 80 && !isCollapsed) {
-        isCollapsed = true;
-        logoText.style.maxWidth = '0px';
-        logoText.style.opacity = '0';
-      } else if (currentScroll <= 80 && isCollapsed) {
-        isCollapsed = false;
-        logoText.style.maxWidth = '160px';
-        logoText.style.opacity = '1';
+    // Logo swap: full wordmark → icon
+    if (currentScroll > 80 && !isScrolled) {
+      isScrolled = true;
+      if (logoFull) {
+        logoFull.style.transform = 'translateY(100%)';
+        logoFull.style.opacity = '0';
+      }
+      if (logoIcon) {
+        logoIcon.style.transform = 'translateY(-50%)';
+        logoIcon.style.opacity = '1';
+      }
+    } else if (currentScroll <= 80 && isScrolled) {
+      isScrolled = false;
+      if (logoFull) {
+        logoFull.style.transform = 'translateY(0)';
+        logoFull.style.opacity = '1';
+      }
+      if (logoIcon) {
+        logoIcon.style.transform = 'translateY(100%)';
+        logoIcon.style.opacity = '0';
       }
     }
 

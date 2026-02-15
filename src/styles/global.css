@@ -34,7 +34,7 @@
   }
 
   .section-padding {
-    @apply py-24 md:py-36 lg:py-44;
+    @apply py-16 md:py-24 lg:py-32;
   }
 
   .heading-xl {
@@ -83,6 +83,16 @@
 
   .btn-primary {
     @apply inline-flex items-center gap-2 px-7 py-3.5 bg-dark-900 dark:bg-dark-100 text-white dark:text-dark-900 font-medium rounded-full transition-all duration-300 hover:bg-dark-800 dark:hover:bg-dark-200 hover:shadow-lg hover:shadow-dark-900/15 active:scale-[0.98];
+  }
+
+  .btn-primary svg,
+  .btn-outline svg {
+    @apply transition-transform duration-300;
+  }
+
+  .btn-primary:hover svg,
+  .btn-outline:hover svg {
+    @apply translate-x-1;
   }
 
   .btn-outline {
