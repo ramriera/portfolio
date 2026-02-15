@@ -10,11 +10,13 @@ const currentPath = Astro.url.pathname;
 >
   <div class="container-custom">
     <nav class="flex items-center justify-between h-20">
-      <!-- Logo: Caveat text that contracts from "Ramon Riera" → "RR" -->
-      <a href="/" id="logo" class="logo relative z-10 flex items-center">
-        <span class="logo-text">
-          <span class="logo-letter">R</span><span class="logo-collapse">amon</span><span class="logo-collapse logo-space">&nbsp;</span><span class="logo-letter">R</span><span class="logo-collapse">iera</span>
+      <!-- Logo: contracts from "Ramon Riera · UX Engineer" → "RR" -->
+      <a href="/" id="logo" class="logo relative z-10 flex items-center gap-3">
+        <span class="logo-name">
+          <span class="logo-letter">R</span><span class="logo-collapse c1">amon</span><span class="logo-collapse c2">&nbsp;</span><span class="logo-letter">R</span><span class="logo-collapse c3">iera</span>
         </span>
+        <span class="logo-divider"></span>
+        <span class="logo-role logo-collapse c4">UX Engineer</span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -96,36 +98,71 @@ const currentPath = Astro.url.pathname;
 <div class="h-20"></div>
 
 <style>
-  .logo-text {
-    font-family: 'Caveat', cursive;
+  .logo-name {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
     font-weight: 600;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     line-height: 1;
     color: white;
     display: inline-flex;
     white-space: nowrap;
+    letter-spacing: -0.03em;
   }
 
   .logo-letter {
     display: inline-block;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .logo-divider {
+    width: 1px;
+    height: 1.1rem;
+    background: rgba(255, 255, 255, 0.25);
+    flex-shrink: 0;
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .logo-role {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
   }
 
   .logo-collapse {
     display: inline-block;
-    max-width: 10em;
+    max-width: 12em;
     opacity: 1;
     overflow: hidden;
-    transition:
-      max-width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     vertical-align: bottom;
+    transition:
+      max-width 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
+
+  /* Staggered delays for organic feel */
+  .logo-collapse.c1 { transition-delay: 0s; }
+  .logo-collapse.c2 { transition-delay: 0.03s; }
+  .logo-collapse.c3 { transition-delay: 0.06s; }
+  .logo-collapse.c4 { transition-delay: 0.02s; }
 
   /* Contracted state */
   .logo.contracted .logo-collapse {
     max-width: 0;
     opacity: 0;
+  }
+
+  .logo.contracted .logo-collapse.c1 { transition-delay: 0.06s; }
+  .logo.contracted .logo-collapse.c2 { transition-delay: 0.03s; }
+  .logo.contracted .logo-collapse.c3 { transition-delay: 0s; }
+  .logo.contracted .logo-collapse.c4 { transition-delay: 0s; }
+
+  .logo.contracted .logo-divider {
+    opacity: 0;
+    width: 0;
   }
 </style>
 
