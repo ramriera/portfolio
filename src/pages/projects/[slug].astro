@@ -26,25 +26,14 @@ const meta = project.projectMeta;
   <!-- Hero -->
   <section class="section-padding pb-12">
     <div class="container-custom">
-      <div data-reveal class="flex items-center gap-2 text-sm text-dark-400 dark:text-dark-500 mb-8">
-        <a href="/" class="hover:text-primary-500 transition-colors">Inicio</a>
-        <span>/</span>
-        <a href="/projects" class="hover:text-primary-500 transition-colors">Proyectos</a>
-        <span>/</span>
-        <span class="text-dark-700 dark:text-dark-300">{project.title}</span>
-      </div>
-
       <div class="max-w-4xl">
-        <div data-reveal data-delay="100" class="flex items-center gap-3 mb-6">
-          <span class="text-sm font-medium text-primary-500 tracking-wide">{project.client} — {project.year}</span>
-        </div>
-        <h1 data-reveal data-delay="200" class="heading-xl mb-6">
+        <h1 data-reveal class="heading-xl mb-6">
           {project.title}
         </h1>
-        <p data-reveal data-delay="300" class="text-body text-xl mb-8">
+        <p data-reveal data-delay="100" class="text-body text-xl mb-8">
           {project.description}
         </p>
-        <div data-reveal data-delay="400" class="flex flex-wrap gap-2">
+        <div data-reveal data-delay="200" class="flex flex-wrap gap-2">
           {project.tags.map((tag: string) => (
             <Tag label={tag} variant="primary" size="md" />
           ))}
@@ -167,10 +156,17 @@ const meta = project.projectMeta;
           )}
 
           {hasCaseStudy && (
-            <div data-reveal>
-              <h2 class="heading-md mb-6">Sobre el proyecto</h2>
-              <p class="text-body text-lg">{project.longDescription}</p>
-            </div>
+            <>
+              <div data-reveal>
+                <h2 class="heading-md mb-6">Sobre el proyecto</h2>
+                <p class="text-body text-lg mb-6">{project.longDescription}</p>
+                <p class="text-body text-lg">{project.challenge}</p>
+              </div>
+              <div data-reveal>
+                <h2 class="heading-md mb-6">Solución propuesta</h2>
+                <p class="text-body text-lg">{project.solution}</p>
+              </div>
+            </>
           )}
         </div>
       </div>

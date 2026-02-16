@@ -231,27 +231,6 @@ export const projects: Project[] = [
     },
     caseSections: [
       {
-        label: 'Contexto',
-        title: 'Planteamiento del caso',
-        layout: 'center',
-        content: 'Un fabricante internacional de coches eléctricos quiere entrar en el mercado español. Se han identificado tres barreras principales que dificultan la adopción del vehículo eléctrico en España:',
-        bullets: [
-          'Baja autonomía de los vehículos: muchos se quedan por debajo de los 300 km',
-          'Insuficiente red de puntos de recarga en todo el territorio',
-          'Tiempos de carga extendidos: más de 45 minutos de media para una carga completa',
-        ],
-      },
-      {
-        label: 'Propuesta',
-        title: 'Solución propuesta',
-        layout: 'center',
-        content: 'Para abordar estas barreras, se proponen dos conceptos innovadores entregados a través de una aplicación móvil:',
-        bullets: [
-          'Servicio de cambio de batería bajo demanda: 10 cambios gratuitos anuales, 59€ el cambio adicional. Un operario acude a tu ubicación.',
-          'Puntos dinámicos de intercambio de baterías: estaciones modulares en ubicaciones estratégicas de la ciudad que cambian semanalmente, con posibilidad de reserva anticipada.',
-        ],
-      },
-      {
         label: 'Descubrimiento',
         title: 'Desk Research — Tipos de vehículos',
         layout: 'left-right',
