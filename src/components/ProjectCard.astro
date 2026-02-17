@@ -38,20 +38,31 @@ const { slug, title, client, year, category, tags, description, cover, featured 
 
     <!-- Bottom content -->
     <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-      <!-- Title -->
-      <h3 class="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-2">
+      <!-- Title — always visible -->
+      <h3 class="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-1">
         {title}
       </h3>
 
-      <!-- Description -->
-      <p class="card-description text-sm leading-relaxed mb-4 line-clamp-2">
-        {description}
-      </p>
+      <!-- Description — hidden, reveals on hover -->
+      <div class="card-desc-reveal">
+        <p class="card-description text-sm leading-relaxed line-clamp-2">
+          {description}
+        </p>
+      </div>
 
-      <!-- Tags -->
+      <!-- Spacer -->
+      <div class="h-3"></div>
+
+      <!-- Tags — first always visible, rest reveal on hover -->
       <div class="flex flex-wrap items-center gap-2">
-        {tags.slice(0, 4).map((tag) => (
-          <span class="card-tag">
+        {tags.slice(0, 4).map((tag, i) => (
+          <span
+            class:list={[
+              'card-tag',
+              i > 0 ? 'card-tag-hidden' : '',
+            ]}
+            style={i > 0 ? `transition-delay: ${i * 60}ms` : ''}
+          >
             {tag}
           </span>
         ))}
@@ -111,16 +122,28 @@ const { slug, title, client, year, category, tags, description, cover, featured 
     filter: saturate(1.25) brightness(1.1);
   }
 
-  /* Description text */
+  /* Description — slides down on hover */
+  .card-desc-reveal {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-4px);
+    transition:
+      max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s,
+      opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.08s,
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+  }
+
+  .project-card:hover .card-desc-reveal {
+    max-height: 5rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .card-description {
     color: #F8FAFC;
     line-height: 1.6;
     opacity: 0.85;
-    transition: opacity 0.3s ease;
-  }
-
-  .project-card:hover .card-description {
-    opacity: 1;
   }
 
   /* Tags */
@@ -145,5 +168,30 @@ const { slug, title, client, year, category, tags, description, cover, featured 
     background: rgba(255, 255, 255, 0.2);
     color: rgba(255, 255, 255, 0.95);
     border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Hidden tags — slide in on hover */
+  .card-tag-hidden {
+    max-width: 0;
+    opacity: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: -0.5rem;
+    border-width: 0;
+    transition:
+      max-width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      margin 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      border-width 0.3s ease;
+  }
+
+  .project-card:hover .card-tag-hidden {
+    max-width: 12rem;
+    opacity: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-left: 0;
+    border-width: 1px;
   }
 </style>
