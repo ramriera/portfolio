@@ -187,6 +187,81 @@ main {
   animation: pageTransition 0.5s ease-out;
 }
 
+/* Animated section icons */
+.section-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(217, 119, 87, 0.08);
+  color: var(--color-dark-600, #6b6a68);
+}
+
+.dark .section-icon {
+  background: rgba(217, 119, 87, 0.1);
+  color: var(--color-dark-400, #9e9d9b);
+}
+
+.section-icon-svg .icon-path {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-icon-svg .icon-accent-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+}
+
+[data-reveal].revealed .section-icon-svg .icon-path {
+  stroke-dashoffset: 0;
+}
+
+[data-reveal].revealed .section-icon-svg .icon-accent-path {
+  stroke-dashoffset: 0;
+}
+
+/* CTA card-style social links */
+.cta-card {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.875rem 1.125rem;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cta-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(217, 119, 87, 0.3);
+  transform: translateY(-2px);
+}
+
+.cta-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #9e9d9b;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.cta-card:hover .cta-card-icon {
+  background: rgba(217, 119, 87, 0.15);
+  color: #D97757;
+}
+
 /* Image reveal on project cards */
 .project-card-image {
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
