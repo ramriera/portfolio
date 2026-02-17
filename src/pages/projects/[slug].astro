@@ -42,14 +42,14 @@ const meta = project.projectMeta;
     </div>
   </section>
 
-  <!-- Hero Image with Parallax -->
+  <!-- Hero Image -->
   <section class="pb-20">
     <div class="container-custom">
-      <div data-reveal class="rounded-2xl overflow-hidden parallax-container">
+      <div data-reveal class="rounded-2xl overflow-hidden dashed-border">
         <img
           src={project.cover}
           alt={project.title}
-          class="parallax-img w-full h-full object-cover"
+          class="w-full h-auto object-cover"
           loading="eager"
         />
       </div>
@@ -207,7 +207,7 @@ const meta = project.projectMeta;
             <div class="space-y-4">
               {section.images?.map((img: string) => (
                 <div data-reveal class="rounded-2xl overflow-hidden bg-dark-100 dark:bg-dark-800">
-                  <img src={img} alt={section.title} class="w-full h-auto object-cover" loading="lazy" />
+                  <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
                 </div>
               ))}
             </div>
@@ -234,7 +234,7 @@ const meta = project.projectMeta;
             <div class="space-y-4">
               {section.images?.map((img: string) => (
                 <div data-reveal class="rounded-2xl overflow-hidden bg-dark-100 dark:bg-dark-800">
-                  <img src={img} alt={section.title} class="w-full h-auto object-cover" loading="lazy" />
+                  <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
                 </div>
               ))}
             </div>
@@ -253,7 +253,7 @@ const meta = project.projectMeta;
             </div>
             {section.images?.map((img: string) => (
               <div data-reveal class="rounded-2xl overflow-hidden bg-dark-100 dark:bg-dark-800">
-                <img src={img} alt={section.title} class="w-full h-auto object-cover" loading="lazy" />
+                <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
               </div>
             ))}
           </div>
@@ -272,7 +272,7 @@ const meta = project.projectMeta;
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {section.images?.map((img: string, i: number) => (
                 <div data-reveal data-delay={String(i * 80)} class="rounded-2xl overflow-hidden bg-dark-100 dark:bg-dark-800">
-                  <img src={img} alt={`${section.title} ${i + 1}`} class="w-full h-auto object-cover" loading="lazy" />
+                  <img src={img} alt={`${section.title} ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
                 </div>
               ))}
             </div>
@@ -292,10 +292,33 @@ const meta = project.projectMeta;
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {section.images?.map((img: string, i: number) => (
                 <div data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden bg-dark-100 dark:bg-dark-800 shadow-lg shadow-dark-900/10">
-                  <img src={img} alt={`Pantalla ${i + 1}`} class="w-full h-auto object-cover" loading="lazy" />
+                  <img src={img} alt={`Pantalla ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
                 </div>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Figma embed */}
+        {section.layout === 'figma-embed' && (
+          <div>
+            <div class="max-w-3xl mx-auto mb-10">
+              <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>
+              <h2 data-reveal data-delay="100" class="heading-md mt-4 mb-6">{section.title}</h2>
+              {section.content && (
+                <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed">{section.content}</p>
+              )}
+            </div>
+            {section.figmaUrl && (
+              <div data-reveal class="rounded-2xl overflow-hidden dashed-border aspect-[9/16] sm:aspect-[3/4] md:aspect-[4/3] max-w-4xl mx-auto">
+                <iframe
+                  src={section.figmaUrl}
+                  class="w-full h-full border-0"
+                  allowfullscreen
+                  loading="lazy"
+                />
+              </div>
+            )}
           </div>
         )}
 
@@ -362,45 +385,54 @@ const meta = project.projectMeta;
       </div>
     </div>
   </section>
+
+  <!-- Lightbox overlay -->
+  <div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 backdrop-blur-sm cursor-zoom-out" role="dialog" aria-modal="true">
+    <button id="lightbox-close" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10" aria-label="Cerrar">
+      <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <img id="lightbox-img" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" alt="" />
+  </div>
 </BaseLayout>
 
-<style>
-  .parallax-container {
-    height: 65vh;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .parallax-img {
-    position: absolute;
-    top: -15%;
-    left: 0;
-    width: 100%;
-    height: 130%;
-    object-fit: cover;
-    will-change: transform;
-  }
-</style>
-
 <script>
-  function initParallax() {
-    const container = document.querySelector('.parallax-container');
-    const img = document.querySelector('.parallax-img') as HTMLElement | null;
-    if (!container || !img) return;
+  function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement | null;
+    const closeBtn = document.getElementById('lightbox-close');
+    if (!lightbox || !lightboxImg) return;
 
-    function onScroll() {
-      const rect = container!.getBoundingClientRect();
-      const windowH = window.innerHeight;
-      if (rect.bottom < 0 || rect.top > windowH) return;
-      const progress = (windowH - rect.top) / (windowH + rect.height);
-      const translate = progress * 15;
-      img!.style.transform = `translateY(-${translate}%)`;
+    document.querySelectorAll('.lightbox-trigger').forEach((img) => {
+      img.addEventListener('click', () => {
+        const src = (img as HTMLImageElement).src;
+        const alt = (img as HTMLImageElement).alt;
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function close() {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      document.body.style.overflow = '';
+      lightboxImg.src = '';
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) close();
+    });
+    closeBtn?.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) close();
+    });
   }
 
-  initParallax();
-  document.addEventListener('astro:page-load', initParallax);
+  initLightbox();
+  document.addEventListener('astro:page-load', initLightbox);
 </script>
+
