@@ -21,19 +21,26 @@
         <div data-reveal data-delay="0" class="mb-6 flex items-center gap-3">
           <span class="section-icon">
             <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
-              <!-- Person head -->
-              <circle cx="18" cy="12" r="5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-path" />
-              <!-- Shoulders -->
-              <path d="M7 30C7 30 8 21 18 21C28 21 29 30 29 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-path" />
-              <!-- Hand-drawn accent line -->
-              <path d="M4 33C10 31 26 31 32 33" stroke="var(--color-primary-500, #D97757)" stroke-width="2.5" stroke-linecap="round" class="icon-accent-path" />
+              <g class="icon-king-anim">
+                <!-- Cross top -->
+                <line x1="18" y1="3" x2="18" y2="8" class="icon-stroke icon-draw" />
+                <line x1="15.5" y1="5.5" x2="20.5" y2="5.5" class="icon-stroke icon-draw" />
+                <!-- Crown curves -->
+                <path d="M10.5 14C10.5 14 12 9 14 10.5C16 12 18 8 18 8C18 8 20 12 22 10.5C24 9 25.5 14 25.5 14" class="icon-stroke icon-draw" />
+                <!-- Body -->
+                <path d="M10.5 14L9 27H27L25.5 14" class="icon-stroke icon-draw" />
+                <!-- Belt detail -->
+                <path d="M10 21.5H26" class="icon-accent icon-draw-delay" />
+                <!-- Base -->
+                <path d="M7.5 27C7.5 27 8 31 18 31C28 31 28.5 27 28.5 27" class="icon-accent icon-draw-delay" />
+              </g>
             </svg>
           </span>
         </div>
 
         <h2 data-reveal data-delay="100" class="heading-lg mb-6">
           Diseñador con visión
-          <span class="relative inline-block text-primary-500 pb-2">estratégica<svg class="absolute -bottom-1 left-0 w-full" style="height:10px;color:var(--color-primary-500,#D97757);overflow:visible" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8.5C30 3.5 60 2 100 5.5C140 9 170 4.5 198 7" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" /></svg></span>
+          <span class="relative inline-block text-primary-500"><span>estratégica</span><svg class="hand-underline absolute -bottom-1 left-0 w-full" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8.5C30 3.5 60 2 100 5.5C140 9 170 4.5 198 7" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" /></svg></span>
         </h2>
 
         <div data-reveal data-delay="200" class="space-y-5 text-body mb-10">

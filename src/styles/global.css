@@ -187,7 +187,14 @@ main {
   animation: pageTransition 0.5s ease-out;
 }
 
-/* Animated section icons */
+/* Hand-drawn underline (reusable, matches WordsCarousel) */
+.hand-underline {
+  height: 10px;
+  color: var(--color-primary-500, #D97757);
+  overflow: visible;
+}
+
+/* Animated section icons — Lottie-style */
 .section-icon {
   display: inline-flex;
   align-items: center;
@@ -196,31 +203,86 @@ main {
   height: 44px;
   border-radius: 12px;
   background: rgba(217, 119, 87, 0.08);
-  color: var(--color-dark-600, #6b6a68);
 }
 
 .dark .section-icon {
   background: rgba(217, 119, 87, 0.1);
-  color: var(--color-dark-400, #9e9d9b);
 }
 
-.section-icon-svg .icon-path {
+.section-icon-svg {
+  overflow: visible;
+}
+
+.section-icon-svg .icon-stroke {
+  fill: none;
+  stroke: var(--color-dark-600, #6b6a68);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dark .section-icon-svg .icon-stroke {
+  stroke: var(--color-dark-400, #9e9d9b);
+}
+
+.section-icon-svg .icon-accent {
+  fill: none;
+  stroke: var(--color-primary-500, #D97757);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* King icon — gentle rocking */
+@keyframes kingRock {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(3deg) translateY(-1px); }
+  75% { transform: rotate(-3deg) translateY(-1px); }
+}
+
+.icon-king-anim {
+  animation: kingRock 4s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* Star icon — pulse + rotate */
+@keyframes starPulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.08) rotate(8deg); opacity: 0.9; }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.icon-star-anim {
+  animation: starPulse 3.5s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+.icon-sparkle-1 { animation: sparkle 2.5s ease-in-out 0s infinite; }
+.icon-sparkle-2 { animation: sparkle 2.5s ease-in-out 0.8s infinite; }
+.icon-sparkle-3 { animation: sparkle 2.5s ease-in-out 1.6s infinite; }
+
+/* Draw-in on scroll reveal */
+.section-icon-svg .icon-draw {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-icon-svg .icon-draw-delay {
   stroke-dasharray: 200;
   stroke-dashoffset: 200;
-  transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
 }
 
-.section-icon-svg .icon-accent-path {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
-}
-
-[data-reveal].revealed .section-icon-svg .icon-path {
+[data-reveal].revealed .section-icon-svg .icon-draw {
   stroke-dashoffset: 0;
 }
 
-[data-reveal].revealed .section-icon-svg .icon-accent-path {
+[data-reveal].revealed .section-icon-svg .icon-draw-delay {
   stroke-dashoffset: 0;
 }
 

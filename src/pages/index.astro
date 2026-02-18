@@ -24,15 +24,21 @@ const featuredProjects = projects.filter((p) => p.featured);
           <div data-reveal class="mb-6 flex items-center gap-3">
             <span class="section-icon">
               <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
-                <!-- Folder shape -->
-                <path d="M4 10C4 8.5 5 7 7 7H14L17 11H29C31 11 32 12.5 32 14V28C32 29.5 31 31 29 31H7C5 31 4 29.5 4 28V10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-path" />
-                <!-- Star inside -->
-                <path d="M18 17L19.5 21H23L20 23.5L21 27L18 25L15 27L16 23.5L13 21H16.5L18 17Z" stroke="var(--color-primary-500, #D97757)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-accent-path" />
+                <g class="icon-star-anim">
+                  <!-- 5-point star -->
+                  <path d="M18 5L21.1 14.1H30.7L23 19.9L25.5 29L18 23.8L10.5 29L13 19.9L5.3 14.1H14.9L18 5Z" class="icon-stroke icon-draw" />
+                  <!-- Inner accent lines -->
+                  <path d="M18 11L19.5 16H24L20.5 18.8L21.8 23L18 20.2L14.2 23L15.5 18.8L12 16H16.5L18 11Z" class="icon-accent icon-draw-delay" />
+                </g>
+                <!-- Sparkle dots -->
+                <circle cx="31" cy="8" r="1.2" class="icon-accent icon-sparkle-1" />
+                <circle cx="6" cy="10" r="1" class="icon-accent icon-sparkle-2" />
+                <circle cx="29" cy="28" r="0.8" class="icon-accent icon-sparkle-3" />
               </svg>
             </span>
           </div>
           <h2 data-reveal data-delay="100" class="heading-lg">
-            Trabajo <span class="relative inline-block text-primary-500 pb-2">destacado<svg class="absolute -bottom-1 left-0 w-full" style="height:10px;color:var(--color-primary-500,#D97757);overflow:visible" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8.5C30 3.5 60 2 100 5.5C140 9 170 4.5 198 7" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" /></svg></span>
+            Trabajo <span class="relative inline-block text-primary-500"><span>destacado</span><svg class="hand-underline absolute -bottom-1 left-0 w-full" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8.5C30 3.5 60 2 100 5.5C140 9 170 4.5 198 7" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" /></svg></span>
           </h2>
         </div>
         <a
