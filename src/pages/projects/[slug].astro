@@ -42,16 +42,18 @@ const meta = project.projectMeta;
     </div>
   </section>
 
-  <!-- Hero Image -->
+  <!-- Hero Image — parallax zoom -->
   <section class="pb-20">
     <div class="container-custom">
       <div data-reveal class="rounded-2xl overflow-hidden dashed-border">
-        <img
-          src={project.cover}
-          alt={project.title}
-          class="w-full h-auto object-cover"
-          loading="eager"
-        />
+        <div class="parallax-cover-wrapper">
+          <img
+            src={project.cover}
+            alt={project.title}
+            class="parallax-cover-img w-full h-auto object-cover"
+            loading="eager"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -206,7 +208,7 @@ const meta = project.projectMeta;
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div class="space-y-4">
               {section.images?.map((img: string) => (
-                <div data-reveal class="rounded-2xl overflow-hidden bg-dark-100 dark:bg-dark-800">
+                <div data-reveal class="rounded-2xl overflow-hidden">
                   <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
                 </div>
               ))}
@@ -233,7 +235,7 @@ const meta = project.projectMeta;
             </div>
             <div class="space-y-4">
               {section.images?.map((img: string) => (
-                <div data-reveal class="rounded-2xl overflow-hidden bg-dark-100 dark:bg-dark-800">
+                <div data-reveal class="rounded-2xl overflow-hidden">
                   <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
                 </div>
               ))}
@@ -252,7 +254,7 @@ const meta = project.projectMeta;
               )}
             </div>
             {section.images?.map((img: string) => (
-              <div data-reveal class="rounded-2xl overflow-hidden bg-dark-100 dark:bg-dark-800">
+              <div data-reveal class="rounded-2xl overflow-hidden">
                 <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
               </div>
             ))}
@@ -271,7 +273,7 @@ const meta = project.projectMeta;
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {section.images?.map((img: string, i: number) => (
-                <div data-reveal data-delay={String(i * 80)} class="rounded-2xl overflow-hidden bg-dark-100 dark:bg-dark-800">
+                <div data-reveal data-delay={String(i * 80)} class="rounded-2xl overflow-hidden">
                   <img src={img} alt={`${section.title} ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
                 </div>
               ))}
@@ -291,7 +293,7 @@ const meta = project.projectMeta;
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {section.images?.map((img: string, i: number) => (
-                <div data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden bg-dark-100 dark:bg-dark-800 shadow-lg shadow-dark-900/10">
+                <div data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden shadow-lg shadow-dark-900/10">
                   <img src={img} alt={`Pantalla ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
                 </div>
               ))}
@@ -434,5 +436,30 @@ const meta = project.projectMeta;
 
   initLightbox();
   document.addEventListener('astro:page-load', initLightbox);
+</script>
+
+<script>
+  function initParallaxCover() {
+    const img = document.querySelector('.parallax-cover-img') as HTMLElement | null;
+    if (!img) return;
+
+    const wrapper = img.closest('.parallax-cover-wrapper') as HTMLElement | null;
+    if (!wrapper) return;
+
+    function onScroll() {
+      const rect = wrapper!.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      // progress: 0 when element enters viewport bottom, 1 when it leaves top
+      const progress = Math.min(Math.max((viewH - rect.top) / (viewH + rect.height), 0), 1);
+      const scale = 1 + progress * 0.15; // zoom from 1x to 1.15x
+      img!.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  initParallaxCover();
+  document.addEventListener('astro:page-load', initParallaxCover);
 </script>
 
