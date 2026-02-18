@@ -262,28 +262,25 @@ main {
   transform-origin: center center;
 }
 
-/* Star icon — sparkle burst */
-@keyframes starSpin {
-  0%, 100% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(15deg) scale(1.06); }
-  50% { transform: rotate(0deg) scale(0.96); }
-  75% { transform: rotate(-15deg) scale(1.06); }
+/* Diamond icon — gentle float + rotate */
+@keyframes diamondFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-2px) rotate(2deg); }
+  60% { transform: translateY(1px) rotate(-1.5deg); }
 }
 
-@keyframes rayPulse {
-  0%, 100% { opacity: 0.4; transform: scaleY(0.7); }
-  50% { opacity: 1; transform: scaleY(1); }
+@keyframes diamondSparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
-.icon-star-spin {
-  animation: starSpin 4s ease-in-out infinite;
+.icon-diamond-float {
+  animation: diamondFloat 4.5s ease-in-out infinite;
   transform-origin: center center;
 }
 
-.icon-ray-1 { animation: rayPulse 3s ease-in-out 0s infinite; transform-origin: center center; }
-.icon-ray-2 { animation: rayPulse 3s ease-in-out 0.5s infinite; transform-origin: center center; }
-.icon-ray-3 { animation: rayPulse 3s ease-in-out 1s infinite; transform-origin: center center; }
-.icon-ray-4 { animation: rayPulse 3s ease-in-out 1.5s infinite; transform-origin: center center; }
+.icon-diamond-sparkle-1 { animation: diamondSparkle 3s ease-in-out 0s infinite; }
+.icon-diamond-sparkle-2 { animation: diamondSparkle 3s ease-in-out 1.5s infinite; }
 
 /* Draw-in on scroll reveal */
 .section-icon-svg .icon-draw {

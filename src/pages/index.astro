@@ -24,17 +24,19 @@ const featuredProjects = projects.filter((p) => p.featured);
           <div data-reveal class="mb-6 flex items-center gap-3">
             <span class="section-icon">
               <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
-                <g class="icon-star-spin">
-                  <!-- 4-point starburst -->
-                  <path d="M22 4L24.5 17.5L38 14L26.5 22L38 30L24.5 26.5L22 40L19.5 26.5L6 30L17.5 22L6 14L19.5 17.5L22 4Z" class="icon-stroke icon-draw" />
-                  <!-- Inner diamond -->
-                  <path d="M22 14L26 22L22 30L18 22L22 14Z" class="icon-accent icon-draw-delay" />
+                <g class="icon-diamond-float">
+                  <!-- Diamond outer -->
+                  <path d="M22 4L38 20L22 40L6 20L22 4Z" class="icon-stroke icon-draw" />
+                  <!-- Crown facets -->
+                  <path d="M10 20H34" class="icon-stroke icon-draw" />
+                  <path d="M22 4L16 20" class="icon-stroke icon-draw" />
+                  <path d="M22 4L28 20" class="icon-stroke icon-draw" />
+                  <!-- Inner shine -->
+                  <path d="M16 20L22 40L28 20" class="icon-accent icon-draw-delay" />
                 </g>
-                <!-- Radiating rays -->
-                <line x1="22" y1="1" x2="22" y2="5" class="icon-accent icon-ray-1" />
-                <line x1="22" y1="39" x2="22" y2="43" class="icon-accent icon-ray-2" />
-                <line x1="1" y1="22" x2="5" y2="22" class="icon-accent icon-ray-3" />
-                <line x1="39" y1="22" x2="43" y2="22" class="icon-accent icon-ray-4" />
+                <!-- Sparkle accents -->
+                <circle cx="8" cy="10" r="1" class="icon-accent icon-diamond-sparkle-1" />
+                <circle cx="36" cy="12" r="1.2" class="icon-accent icon-diamond-sparkle-2" />
               </svg>
             </span>
           </div>
