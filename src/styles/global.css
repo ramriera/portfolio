@@ -199,9 +199,9 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
   background: rgba(217, 119, 87, 0.08);
 }
 
@@ -233,37 +233,57 @@ main {
   stroke-linejoin: round;
 }
 
-/* King icon — gentle rocking */
-@keyframes kingRock {
-  0%, 100% { transform: rotate(0deg) translateY(0); }
-  25% { transform: rotate(3deg) translateY(-1px); }
-  75% { transform: rotate(-3deg) translateY(-1px); }
+.section-icon-svg .icon-accent-fill {
+  fill: var(--color-primary-500, #D97757);
+  stroke: none;
 }
 
-.icon-king-anim {
-  animation: kingRock 4s ease-in-out infinite;
-  transform-origin: center bottom;
+/* Eye icon — pupil looks around */
+@keyframes eyeLook {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  15% { transform: translateX(2px) translateY(-0.5px); }
+  30% { transform: translateX(2px) translateY(0.5px); }
+  50% { transform: translateX(-2px) translateY(-0.5px); }
+  70% { transform: translateX(-1px) translateY(1px); }
+  85% { transform: translateX(0.5px) translateY(-0.5px); }
 }
 
-/* Star icon — pulse + rotate */
-@keyframes starPulse {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-  50% { transform: scale(1.08) rotate(8deg); opacity: 0.9; }
+@keyframes eyeBlink {
+  0%, 42%, 48%, 100% { transform: scaleY(1); }
+  45% { transform: scaleY(0.1); }
 }
 
-@keyframes sparkle {
-  0%, 100% { opacity: 0.3; transform: scale(0.6); }
-  50% { opacity: 1; transform: scale(1); }
+.icon-eye-pupil {
+  animation: eyeLook 5s ease-in-out infinite;
 }
 
-.icon-star-anim {
-  animation: starPulse 3.5s ease-in-out infinite;
+.icon-eye-blink {
+  animation: eyeBlink 4s ease-in-out infinite;
   transform-origin: center center;
 }
 
-.icon-sparkle-1 { animation: sparkle 2.5s ease-in-out 0s infinite; }
-.icon-sparkle-2 { animation: sparkle 2.5s ease-in-out 0.8s infinite; }
-.icon-sparkle-3 { animation: sparkle 2.5s ease-in-out 1.6s infinite; }
+/* Star icon — sparkle burst */
+@keyframes starSpin {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(15deg) scale(1.06); }
+  50% { transform: rotate(0deg) scale(0.96); }
+  75% { transform: rotate(-15deg) scale(1.06); }
+}
+
+@keyframes rayPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(0.7); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+.icon-star-spin {
+  animation: starSpin 4s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+.icon-ray-1 { animation: rayPulse 3s ease-in-out 0s infinite; transform-origin: center center; }
+.icon-ray-2 { animation: rayPulse 3s ease-in-out 0.5s infinite; transform-origin: center center; }
+.icon-ray-3 { animation: rayPulse 3s ease-in-out 1s infinite; transform-origin: center center; }
+.icon-ray-4 { animation: rayPulse 3s ease-in-out 1.5s infinite; transform-origin: center center; }
 
 /* Draw-in on scroll reveal */
 .section-icon-svg .icon-draw {
