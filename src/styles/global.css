@@ -262,25 +262,25 @@ main {
   transform-origin: center center;
 }
 
-/* Diamond icon — pulse + sparkle */
-@keyframes diamondPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
+/* Rocket icon — hover / launch */
+@keyframes rocketHover {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 
-@keyframes diamondSparkle {
-  0%, 100% { opacity: 0; transform: scale(0.4); }
-  40% { opacity: 1; transform: scale(1.3); }
-  70% { opacity: 0.6; transform: scale(1); }
+@keyframes flamePulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.6) translateY(0); }
+  50% { opacity: 1; transform: scale(1.2) translateY(2px); }
 }
 
-.icon-diamond-float {
-  animation: diamondPulse 3s ease-in-out infinite;
+.icon-rocket-launch {
+  animation: rocketHover 2.5s ease-in-out infinite;
   transform-origin: center center;
 }
 
-.icon-diamond-sparkle-1 { animation: diamondSparkle 2.5s ease-in-out 0s infinite; }
-.icon-diamond-sparkle-2 { animation: diamondSparkle 2.5s ease-in-out 1.2s infinite; }
+.icon-flame-1 { animation: flamePulse 0.8s ease-in-out 0s infinite; }
+.icon-flame-2 { animation: flamePulse 0.8s ease-in-out 0.25s infinite; }
+.icon-flame-3 { animation: flamePulse 0.8s ease-in-out 0.5s infinite; }
 
 /* Draw-in on scroll reveal */
 .section-icon-svg .icon-draw {
