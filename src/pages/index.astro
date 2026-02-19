@@ -23,7 +23,22 @@ const featuredProjects = projects.filter((p) => p.featured);
         <div>
           <div data-reveal class="mb-6 flex items-center gap-3">
             <span class="section-icon">
-              <dotlottie-player src="https://assets-v2.lottiefiles.com/a/834497ce-1153-11ee-b824-1ba07f441aa0/dcylC89kIj.lottie" background="transparent" speed="1" style="width:44px;height:44px" loop autoplay></dotlottie-player>
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+                <g class="icon-rocket-launch">
+                  <!-- Rocket body -->
+                  <path d="M22 6C22 6 14 14 14 26L18 30L22 32L26 30L30 26C30 14 22 6 22 6Z" class="icon-stroke icon-draw" />
+                  <!-- Window -->
+                  <circle cx="22" cy="18" r="3" class="icon-accent icon-draw-delay" />
+                  <!-- Left fin -->
+                  <path d="M14 26L10 32L18 30" class="icon-stroke icon-draw" />
+                  <!-- Right fin -->
+                  <path d="M30 26L34 32L26 30" class="icon-stroke icon-draw" />
+                </g>
+                <!-- Flame particles -->
+                <circle cx="20" cy="36" r="1.2" class="icon-accent icon-flame-1" />
+                <circle cx="24" cy="37" r="1" class="icon-accent icon-flame-2" />
+                <circle cx="22" cy="39" r="0.8" class="icon-accent icon-flame-3" />
+              </svg>
             </span>
           </div>
           <h2 data-reveal data-delay="100" class="heading-lg">

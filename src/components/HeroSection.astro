@@ -1,5 +1,4 @@
 ---
-import { siteConfig } from '@/utils/data';
 import WordsCarousel from './WordsCarousel.astro';
 
 const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brillan', 'impactan', 'perduran'];
@@ -17,7 +16,25 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
       <!-- Greeting line -->
       <div data-reveal data-delay="0" class="mb-10">
         <div class="w-14 h-14 mb-4">
-          <dotlottie-player src="https://assets-v2.lottiefiles.com/a/a15ba660-116e-11ee-9ea1-8b325695519d/SgRsHllSRT.lottie" background="transparent" speed="1" style="width:56px;height:56px" loop autoplay></dotlottie-player>
+          <span class="section-icon">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+              <g class="icon-hand-wave">
+                <!-- Palm -->
+                <path d="M22 38C14 38 10 32 10 26V18" class="icon-stroke icon-draw" />
+                <!-- Fingers -->
+                <path d="M14 22V12C14 10.5 15 9 17 9C19 9 20 10.5 20 12V20" class="icon-stroke icon-draw" />
+                <path d="M20 20V8C20 6.5 21 5 23 5C25 5 26 6.5 26 8V20" class="icon-accent icon-draw-delay" />
+                <path d="M26 20V10C26 8.5 27 7 29 7C31 7 32 8.5 32 10V20" class="icon-stroke icon-draw" />
+                <path d="M32 20V14C32 12.5 33 11 35 11C37 11 37 12.5 37 14V26C37 33 32 38 26 38" class="icon-stroke icon-draw" />
+                <!-- Thumb -->
+                <path d="M14 22C14 22 10 20 9 18C8 16 9 14 11 14C13 14 14 16 14 18" class="icon-accent icon-draw-delay" />
+              </g>
+              <!-- Motion lines -->
+              <line x1="6" y1="8" x2="4" y2="6" class="icon-accent icon-wave-line-1" />
+              <line x1="4" y1="12" x2="1" y2="12" class="icon-accent icon-wave-line-2" />
+              <line x1="6" y1="16" x2="4" y2="18" class="icon-accent icon-wave-line-3" />
+            </svg>
+          </span>
         </div>
         <span class="text-2xl md:text-3xl font-medium text-dark-900 dark:text-dark-100 tracking-wide">
           Soy <span class="text-primary-500">Ramon Riera</span>

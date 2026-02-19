@@ -262,6 +262,32 @@ main {
   transform-origin: center center;
 }
 
+/* Hand icon — wave */
+@keyframes handWave {
+  0%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(16deg); }
+  20% { transform: rotate(-6deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+}
+
+@keyframes waveLinePulse {
+  0%, 100% { opacity: 0; transform: translateX(0); }
+  40% { opacity: 1; transform: translateX(-2px); }
+  70% { opacity: 0.5; transform: translateX(0); }
+}
+
+.icon-hand-wave {
+  animation: handWave 2.5s ease-in-out infinite;
+  transform-origin: 20px 30px;
+}
+
+.icon-wave-line-1 { animation: waveLinePulse 2.5s ease-in-out 0.1s infinite; }
+.icon-wave-line-2 { animation: waveLinePulse 2.5s ease-in-out 0.25s infinite; }
+.icon-wave-line-3 { animation: waveLinePulse 2.5s ease-in-out 0.4s infinite; }
+
 /* Rocket icon — hover / launch */
 @keyframes rocketHover {
   0%, 100% { transform: translateY(0); }
