@@ -306,23 +306,26 @@ main {
 .icon-flame-2 { animation: flamePulse 0.8s ease-in-out 0.25s infinite; }
 .icon-flame-3 { animation: flamePulse 0.8s ease-in-out 0.5s infinite; }
 
-/* Ruler / set-square icon — gentle tilt */
-@keyframes rulerTilt {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(3deg); }
+/* Ruler / set-square icon — breathing pulse */
+@keyframes rulerPulse {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.06) rotate(-2deg); }
+  50% { transform: scale(1) rotate(0deg); }
+  75% { transform: scale(1.06) rotate(2deg); }
 }
 
-@keyframes pencilBob {
-  0%, 100% { opacity: 0.5; transform: translate(0, 0); }
-  50% { opacity: 1; transform: translate(1px, -1px); }
+@keyframes pencilDraw {
+  0%, 100% { opacity: 0.4; transform: translate(0, 0) rotate(0deg); }
+  30% { opacity: 1; transform: translate(-2px, 2px) rotate(-8deg); }
+  60% { opacity: 1; transform: translate(2px, -1px) rotate(4deg); }
 }
 
 .icon-ruler-idle {
-  animation: rulerTilt 4s ease-in-out infinite;
-  transform-origin: 6px 38px;
+  animation: rulerPulse 3s ease-in-out infinite;
+  transform-origin: center center;
 }
 
-.icon-ruler-pencil { animation: pencilBob 3s ease-in-out infinite; }
+.icon-ruler-pencil { animation: pencilDraw 3.5s ease-in-out infinite; }
 
 /* Draw-in on scroll reveal */
 .section-icon-svg .icon-draw {

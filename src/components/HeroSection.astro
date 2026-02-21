@@ -4,7 +4,7 @@ import WordsCarousel from './WordsCarousel.astro';
 const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brillan', 'impactan', 'perduran'];
 ---
 
-<section class="relative min-h-[95vh] flex items-center overflow-hidden">
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
   <!-- Background decoration -->
   <div class="absolute inset-0 -z-10">
     <div class="absolute top-1/4 -right-32 w-[500px] h-[500px] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
@@ -21,17 +21,17 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
               <g class="icon-hand-wave">
                 <!-- Wrist to palm -->
                 <path d="M18 38C12 36 9 30 9 25L9 22" class="icon-stroke icon-draw" />
-                <!-- Index finger -->
-                <path d="M15 22V10C15 8 16.5 6 19 6C21.5 6 22 8 22 10V21" class="icon-stroke icon-draw" />
+                <!-- Index finger (accent) -->
+                <path d="M15 22V10C15 8 16.5 6 19 6C21.5 6 22 8 22 10V21" class="icon-accent icon-draw-delay" />
                 <!-- Middle finger -->
-                <path d="M22 21V7C22 5 23.5 3 26 3C28.5 3 29 5 29 7V21" class="icon-accent icon-draw-delay" />
+                <path d="M22 21V7C22 5 23.5 3 26 3C28.5 3 29 5 29 7V21" class="icon-stroke icon-draw" />
                 <!-- Ring finger -->
                 <path d="M29 21V10C29 8 30.5 6 33 6C35.5 6 36 8 36 10V24C36 32 30 38 24 38" class="icon-stroke icon-draw" />
                 <!-- Thumb -->
-                <path d="M15 22C13 21 10 19 9 17C8 15 9.5 13 12 13C14 13 15 15 15 17" class="icon-accent icon-draw-delay" />
+                <path d="M15 22C13 21 10 19 9 17C8 15 9.5 13 12 13C14 13 15 15 15 17" class="icon-stroke icon-draw" />
               </g>
-              <!-- Sparkle -->
-              <circle cx="40" cy="8" r="1.5" class="icon-accent icon-wave-line-1" />
+              <!-- Sparkle near index finger tip -->
+              <circle cx="18" cy="3" r="1.2" class="icon-accent icon-wave-line-1" />
               <path d="M5 10L3 8M3 12L1 12M5 14L3 16" class="icon-accent icon-wave-line-2" />
             </svg>
           </span>
