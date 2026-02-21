@@ -27,13 +27,28 @@ const meta = project.projectMeta;
   <section class="section-padding pb-12">
     <div class="container-custom">
       <div class="max-w-4xl">
-        <h1 data-reveal class="heading-xl mb-6">
+        <div data-reveal class="mb-6">
+          <span class="section-icon">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+              <g class="icon-rocket-launch">
+                <path d="M22 6C22 6 14 14 14 26L18 30L22 32L26 30L30 26C30 14 22 6 22 6Z" class="icon-stroke icon-draw" />
+                <circle cx="22" cy="18" r="3" class="icon-accent icon-draw-delay" />
+                <path d="M14 26L10 32L18 30" class="icon-stroke icon-draw" />
+                <path d="M30 26L34 32L26 30" class="icon-stroke icon-draw" />
+              </g>
+              <circle cx="20" cy="36" r="1.2" class="icon-accent icon-flame-1" />
+              <circle cx="24" cy="37" r="1" class="icon-accent icon-flame-2" />
+              <circle cx="22" cy="39" r="0.8" class="icon-accent icon-flame-3" />
+            </svg>
+          </span>
+        </div>
+        <h1 data-reveal data-delay="100" class="heading-xl mb-6">
           {project.title}
         </h1>
-        <p data-reveal data-delay="100" class="text-body text-xl mb-8">
+        <p data-reveal data-delay="200" class="text-body text-xl mb-8">
           {project.description}
         </p>
-        <div data-reveal data-delay="200" class="flex flex-wrap gap-2">
+        <div data-reveal data-delay="300" class="flex flex-wrap gap-2">
           {project.tags.map((tag: string) => (
             <Tag label={tag} variant="primary" size="md" />
           ))}
@@ -103,65 +118,58 @@ const meta = project.projectMeta;
         </div>
 
         {meta && (
-          <>
-            <!-- Rol -->
-            <div class="flex items-start gap-4 p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
-              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 dark:bg-dark-700/80 flex items-center justify-center">
-                <svg class="w-5 h-5 text-dark-500 dark:text-dark-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
-              </div>
-              <div>
-                <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-1">Rol</h4>
-                <p class="font-semibold text-sm">{meta.role}</p>
-              </div>
+          <!-- Duración -->
+          <div class="flex items-start gap-4 p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 dark:bg-dark-700/80 flex items-center justify-center">
+              <svg class="w-5 h-5 text-dark-500 dark:text-dark-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
             </div>
-
-            <!-- Duración -->
-            <div class="flex items-start gap-4 p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
-              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 dark:bg-dark-700/80 flex items-center justify-center">
-                <svg class="w-5 h-5 text-dark-500 dark:text-dark-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-1">Duración</h4>
-                <p class="font-semibold text-sm">{meta.duration}</p>
-              </div>
+            <div>
+              <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-1">Duración</h4>
+              <p class="font-semibold text-sm">{meta.duration}</p>
             </div>
-          </>
+          </div>
         )}
       </div>
 
-      <!-- Tools & Skills tags -->
+      <!-- Skills -->
       {meta && (
-        <div data-reveal data-delay="100" class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
-            <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-3">Herramientas</h4>
-            <div class="flex flex-wrap gap-2">
-              {meta.tools.map((tool: string) => (
-                <Tag label={tool} />
-              ))}
+        <div data-reveal data-delay="100" class="mt-4">
+          <div class="flex items-start gap-4 p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 dark:bg-dark-700/80 flex items-center justify-center">
+              <svg class="w-5 h-5 text-dark-500 dark:text-dark-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+              </svg>
             </div>
-          </div>
-          <div class="p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
-            <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-3">Skills</h4>
-            <div class="flex flex-wrap gap-2">
-              {meta.skills.map((skill: string) => (
-                <Tag label={skill} />
-              ))}
+            <div>
+              <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-2">Skills</h4>
+              <div class="flex flex-wrap gap-2">
+                {meta.skills.map((skill: string) => (
+                  <Tag label={skill} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
       )}
 
       {!meta && (
-        <div data-reveal data-delay="100" class="mt-6 p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
-          <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-3">Stack</h4>
-          <div class="flex flex-wrap gap-2">
-            {project.stack.map((tool: string) => (
-              <Tag label={tool} />
-            ))}
+        <div data-reveal data-delay="100" class="mt-4">
+          <div class="flex items-start gap-4 p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 dark:bg-dark-700/80 flex items-center justify-center">
+              <svg class="w-5 h-5 text-dark-500 dark:text-dark-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-2">Stack</h4>
+              <div class="flex flex-wrap gap-2">
+                {project.stack.map((tool: string) => (
+                  <Tag label={tool} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       )}

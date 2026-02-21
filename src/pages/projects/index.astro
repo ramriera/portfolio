@@ -65,13 +65,29 @@ const categories = ['Todos', ...new Set(projects.map((p) => p.category))];
   <!-- CTA -->
   <section class="section-padding">
     <div class="container-custom text-center max-w-3xl mx-auto">
-      <h2 data-reveal class="heading-lg mb-6">
-        ¿Tienes un proyecto en mente?
+      <div data-reveal class="mb-6 flex justify-center">
+        <span class="section-icon">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+            <g class="icon-ruler-idle">
+              <path d="M6 38L6 8L36 38H6Z" class="icon-stroke icon-draw" />
+              <path d="M12 38L12 20L24 38" class="icon-accent icon-draw-delay" />
+              <line x1="6" y1="14" x2="10" y2="14" class="icon-stroke icon-draw" />
+              <line x1="6" y1="20" x2="9" y2="20" class="icon-stroke icon-draw" />
+              <line x1="6" y1="26" x2="10" y2="26" class="icon-stroke icon-draw" />
+              <line x1="6" y1="32" x2="9" y2="32" class="icon-stroke icon-draw" />
+            </g>
+            <line x1="34" y1="4" x2="38" y2="8" class="icon-accent icon-ruler-pencil" />
+            <circle cx="36" cy="6" r="1" class="icon-accent icon-ruler-pencil" />
+          </svg>
+        </span>
+      </div>
+      <h2 data-reveal data-delay="100" class="heading-lg mb-6">
+        ¿Tienes un <span class="text-primary-500">proyecto</span> en mente?
       </h2>
-      <p data-reveal data-delay="100" class="text-body text-lg mb-10">
+      <p data-reveal data-delay="200" class="text-body text-lg mb-10">
         Me encantaría escuchar tu idea. Hablemos sobre cómo puedo ayudarte a crear algo extraordinario.
       </p>
-      <div data-reveal data-delay="200">
+      <div data-reveal data-delay="300">
         <a href="mailto:ramriera28@gmail.com" class="btn-primary text-base">
           Contactar
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

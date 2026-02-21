@@ -264,29 +264,27 @@ main {
 
 /* Hand icon — wave */
 @keyframes handWave {
-  0%, 100% { transform: rotate(0deg); }
-  10% { transform: rotate(16deg); }
-  20% { transform: rotate(-6deg); }
-  30% { transform: rotate(14deg); }
+  0%, 70%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(18deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(16deg); }
   40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
+  50% { transform: rotate(12deg); }
   60% { transform: rotate(0deg); }
 }
 
-@keyframes waveLinePulse {
-  0%, 100% { opacity: 0; transform: translateX(0); }
-  40% { opacity: 1; transform: translateX(-2px); }
-  70% { opacity: 0.5; transform: translateX(0); }
+@keyframes sparkleFloat {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
 
 .icon-hand-wave {
-  animation: handWave 2.5s ease-in-out infinite;
-  transform-origin: 20px 30px;
+  animation: handWave 3s ease-in-out infinite;
+  transform-origin: 18px 32px;
 }
 
-.icon-wave-line-1 { animation: waveLinePulse 2.5s ease-in-out 0.1s infinite; }
-.icon-wave-line-2 { animation: waveLinePulse 2.5s ease-in-out 0.25s infinite; }
-.icon-wave-line-3 { animation: waveLinePulse 2.5s ease-in-out 0.4s infinite; }
+.icon-wave-line-1 { animation: sparkleFloat 3s ease-in-out 0.2s infinite; }
+.icon-wave-line-2 { animation: sparkleFloat 3s ease-in-out 1s infinite; }
 
 /* Rocket icon — hover / launch */
 @keyframes rocketHover {
@@ -307,6 +305,24 @@ main {
 .icon-flame-1 { animation: flamePulse 0.8s ease-in-out 0s infinite; }
 .icon-flame-2 { animation: flamePulse 0.8s ease-in-out 0.25s infinite; }
 .icon-flame-3 { animation: flamePulse 0.8s ease-in-out 0.5s infinite; }
+
+/* Ruler / set-square icon — gentle tilt */
+@keyframes rulerTilt {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes pencilBob {
+  0%, 100% { opacity: 0.5; transform: translate(0, 0); }
+  50% { opacity: 1; transform: translate(1px, -1px); }
+}
+
+.icon-ruler-idle {
+  animation: rulerTilt 4s ease-in-out infinite;
+  transform-origin: 6px 38px;
+}
+
+.icon-ruler-pencil { animation: pencilBob 3s ease-in-out infinite; }
 
 /* Draw-in on scroll reveal */
 .section-icon-svg .icon-draw {
