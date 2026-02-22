@@ -240,6 +240,13 @@ const meta = project.projectMeta;
               {section.content?.split('\n\n').map((paragraph: string) => (
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-4">{paragraph}</p>
               ))}
+              {section.highlight && (
+                <blockquote data-reveal data-delay="300" class="mt-6 pl-5 border-l-4 border-primary-500 bg-primary-500/5 dark:bg-primary-500/10 rounded-r-xl py-4 pr-5">
+                  <p class="text-base font-semibold text-dark-800 dark:text-dark-100 leading-relaxed">
+                    <span class="text-primary-500 font-bold">Insight Clave:</span> {section.highlight}
+                  </p>
+                </blockquote>
+              )}
             </div>
           </div>
         )}
@@ -292,12 +299,18 @@ const meta = project.projectMeta;
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed">{section.content}</p>
               )}
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {section.images?.map((img: string, i: number) => (
-                <div data-reveal data-delay={String(i * 80)} class="rounded-2xl overflow-hidden">
-                  <img src={img} alt={`${section.title} ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
-                </div>
-              ))}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 md:gap-6">
+              {section.images?.map((img: string, i: number) => {
+                const total = section.images!.length;
+                const remainder = total % 3;
+                const isTopRow = remainder === 2 ? i < 2 : (remainder === 1 ? i < 1 : false);
+                const spanClass = isTopRow ? 'lg:col-span-3' : 'lg:col-span-2';
+                return (
+                  <div data-reveal data-delay={String(i * 80)} class={`rounded-2xl overflow-hidden ${spanClass}`}>
+                    <img src={img} alt={`${section.title} ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
@@ -330,6 +343,19 @@ const meta = project.projectMeta;
               <h2 data-reveal data-delay="100" class="heading-md mt-4 mb-6">{section.title}</h2>
               {section.content && (
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed">{section.content}</p>
+              )}
+              {section.figmaUrl && (
+                <div data-reveal data-delay="300" class="mt-6">
+                  <a
+                    href={section.figmaUrl.replace('embed.figma.com/proto', 'www.figma.com/proto')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-primary-500 text-white font-semibold text-sm hover:bg-primary-600 transition-colors"
+                  >
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 24c2.2 0 4-1.8 4-4v-4H8c-2.2 0-4 1.8-4 4s1.8 4 4 4zm0-20C5.8 4 4 5.8 4 8s1.8 4 4 4h4V4H8zm0-4C5.8 0 4 1.8 4 4s1.8 4 4 4h4V0H8zm8 0h-4v8h4c2.2 0 4-1.8 4-4s-1.8-4-4-4zm0 12c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z"/></svg>
+                    Ver prototipo interactivo en Figma
+                  </a>
+                </div>
               )}
             </div>
             {section.figmaUrl && (

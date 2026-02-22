@@ -66,6 +66,7 @@ export interface CaseSection {
   layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed';
   figmaUrl?: string;
   content?: string;
+  highlight?: string;
   bullets?: string[];
   images?: string[];
 }
@@ -132,14 +133,14 @@ export const projects: Project[] = [
     },
     caseSections: [
       {
-        label: 'Descubrimiento',
+        label: '01. Descubrimiento',
         title: '¿Por qué no despega el coche eléctrico en España?',
         layout: 'left-right',
         content: 'El primer paso fue entender el contexto real del mercado. Existen dos tipos principales de vehículos eléctricos: el BEV (100% eléctrico, cero emisiones, motor alimentado por batería recargable) y el PHEV (híbrido enchufable con doble motor combustión + eléctrico, hasta 130 km/h en modo eléctrico con ~40 km de autonomía).\n\nEspaña se sitúa a la cola de Europa en matriculaciones de vehículos eléctricos. Los datos son claros: la cuota de mercado es mínima frente a países como Noruega, Países Bajos o Alemania. La infraestructura de recarga crece, pero no al ritmo necesario para generar confianza en el consumidor.',
         images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-electric-passenger-cars-registrations-spain.png'],
       },
       {
-        label: 'Investigación',
+        label: '02. Investigación y Análisis',
         title: 'Los datos del mercado español',
         layout: 'image-grid',
         content: 'Según un estudio de coches.net, los españoles conocen las ventajas del coche eléctrico — reducción de contaminación, ahorro en combustible, menor ruido, acceso sin restricciones a centros urbanos y beneficios fiscales — pero estas no superan las barreras de compra. Las tres razones principales por las que el coche eléctrico no termina de despegar son: escasos puntos de carga en autopistas y ciudades, precio elevado respecto al vehículo convencional, y autonomía limitada que genera "ansiedad de rango" en viajes largos.',
@@ -152,51 +153,52 @@ export const projects: Project[] = [
         ],
       },
       {
-        label: 'Análisis',
+        label: '02. Investigación y Análisis',
         title: 'Benchmarking — El hueco que nadie cubre',
         layout: 'left-right',
-        content: 'Analicé las principales aplicaciones del sector de recarga eléctrica disponibles en el mercado. Todas compartían funcionalidades similares: mapas interactivos con ubicación de estaciones de carga, filtros por voltaje y tipo de conector, favoritos, perfiles de usuario y pasarelas de pago integradas.\n\nEl hallazgo clave fue que ninguna de las aplicaciones analizadas ofrecía un servicio de cambio de baterías ni un sistema de puntos de intercambio. Todas se limitaban a mapear puntos de carga existentes. Además, la mayoría presentaban una usabilidad pobre y un diseño visual poco cuidado — solo Iberdrola destacaba visualmente, pero sufría de rendimiento lento y funcionalidad limitada. Este vacío en el mercado justifica directamente nuestra propuesta de valor.',
+        content: 'Analicé las principales aplicaciones del sector de recarga eléctrica disponibles en el mercado. Todas compartían funcionalidades similares: mapas interactivos con ubicación de estaciones de carga, filtros por voltaje y tipo de conector, favoritos, perfiles de usuario y pasarelas de pago integradas.\n\nLa mayoría presentaban una usabilidad pobre y un diseño visual poco cuidado — solo Iberdrola destacaba visualmente, pero sufría de rendimiento lento y funcionalidad limitada. Este vacío en el mercado justifica directamente nuestra propuesta de valor.',
+        highlight: 'Ninguna de las aplicaciones analizadas ofrecía un servicio de cambio de baterías. MoveFast cubre un vacío crítico en el mercado.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/01/movefast-benchmarking-apps.png',
           'https://ramonriera.design/wp-content/uploads/2025/01/movefast-benchmarking.png',
         ],
       },
       {
-        label: 'Definición',
+        label: '03. Definición y Empatía',
         title: 'User Persona — Oriol Vallmajor',
         layout: 'full-image',
         content: 'Para dar forma a la experiencia, creé a Oriol Vallmajor: arquitecto, con ingresos por encima de la media, familiarizado con la tecnología y preocupado por la sostenibilidad. Oriol quiere viajar por España con su familia en un vehículo eléctrico. Es un early adopter dispuesto a invertir en movilidad sostenible, pero la ansiedad por la autonomía y la falta de infraestructura le generan inseguridad real.\n\nSu dolor principal no es técnico — es emocional: la incertidumbre de quedarse sin batería en medio de un viaje familiar. Necesita sentir que tiene el control y que siempre hay una solución cerca.',
         images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-user-persona.png'],
       },
       {
-        label: 'Empatía',
+        label: '03. Definición y Empatía',
         title: 'Mapa de empatía',
         layout: 'full-image',
         content: 'A través del mapa de empatía exploré la personalidad, necesidades, deseos y preocupaciones de Oriol. ¿Qué piensa cuando planifica un viaje largo? ¿Qué siente al ver que el punto de carga más cercano está a 80 km? ¿Qué oye de su entorno sobre los coches eléctricos? Los insights revelaron que la barrera principal no es racional sino emocional: la "range anxiety" — el miedo a quedarse tirado — es el factor que más frena la decisión de compra.',
         images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-mapa-empatia.png'],
       },
       {
-        label: 'Journey',
+        label: '03. Definición y Empatía',
         title: 'Customer Journey Map',
         layout: 'full-image',
         content: 'El journey map documentó la experiencia completa de Oriol: desde el momento en que decide comprar un coche eléctrico, pasando por la planificación de su primer viaje largo, hasta el momento crítico en que necesita recargar en ruta. Los picos de frustración se concentran en tres puntos: descubrir que no hay puntos de carga en su ruta habitual, llegar a un punto de carga y encontrarlo ocupado, y la espera de más de 45 minutos durante la recarga. Estos puntos de dolor definen las oportunidades de diseño.',
         images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-costumer-journey.png'],
       },
       {
-        label: 'Arquitectura',
+        label: '04. Ideación y Arquitectura',
         title: 'Flujos de usuario y Wireframes',
         layout: 'center',
         content: 'Se diseñaron dos flujos principales en Whimsical:\n\n1. Cambio de batería a domicilio: El usuario abre la app → selecciona "Cambio a domicilio" → confirma ubicación → elige franja horaria → personal de MoveFast acude con batería cargada → se realiza el intercambio en minutos.\n\n2. Reserva en punto de intercambio dinámico: El usuario consulta el mapa → localiza el punto de intercambio más cercano (que cambia de ubicación semanalmente) → reserva fecha y hora → acude al punto → un operador realiza el cambio.\n\nAdemás de estos flujos principales, se añadieron funcionalidades complementarias no contempladas en el brief inicial: sistema de favoritos, filtros avanzados y notificaciones de nuevas ubicaciones. Los wireframes de las tres pantallas clave (mapa principal, detalle de punto de intercambio y selección de fecha/hora) validaron la estructura de información antes del diseño visual.',
       },
       {
-        label: 'Solución',
+        label: '05. Diseño Visual y Prototipado',
         title: 'Prototipo interactivo',
         layout: 'figma-embed',
         content: 'Se desarrolló un prototipo interactivo en Figma con el flujo completo del usuario, desde la pantalla de inicio hasta el proceso completo de reserva. El prototipo incluye animaciones de transición entre pantallas y estados de interacción para simular la experiencia real.',
         figmaUrl: 'https://embed.figma.com/proto/ZU6SwljVsA0g9iAHhZ9oDj/Global-Helping?page-id=0%3A1&node-id=340-25451&p=f&viewport=249%2C246%2C0.06&t=ghMETNDpnq6X6hrN-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=340%3A23253&embed-host=share',
       },
       {
-        label: 'Pantallas',
+        label: '05. Diseño Visual y Prototipado',
         title: 'Diseño de interfaces',
         layout: 'screens-grid',
         content: 'Splash screen con animación de entrada del vehículo. Onboarding de 4 pantallas: puntos de carga actualizados, estado de ocupación en tiempo real, puntos de cambio de batería cercanos, y sistema de reserva. Mapa interactivo principal con puntos de carga, talleres de intercambio y opción de solicitar cambio a domicilio. Menú lateral con acceso a vehículos, baterías, pagos y notificaciones. Filtros avanzados por tipo de punto y disponibilidad. Vista de detalle de taller con horarios y disponibilidad. Gestión de favoritos. Flujo completo de reserva con selección de ubicación, fecha, hora y confirmación.',
@@ -218,8 +220,8 @@ export const projects: Project[] = [
         ],
       },
       {
-        label: 'Próximos pasos',
-        title: 'Futuribles',
+        label: '06. Conclusión',
+        title: 'Aprendizajes y Próximos Pasos',
         layout: 'center',
         content: 'Se entregó con éxito la UX completa de la aplicación móvil en 2 semanas, abordando las dos soluciones propuestas: servicio de cambio de batería bajo demanda y puntos de intercambio dinámicos. El diseño incorpora funcionalidades estándar del sector (mapa de puntos de carga, pasarela de pagos, estado de ocupación) al tiempo que introduce un modelo de servicio innovador que ningún competidor ofrece.',
         bullets: [
