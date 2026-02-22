@@ -272,7 +272,7 @@ export const projects: Project[] = [
       {
         label: '01. Descubrimiento',
         title: 'Research Questions y Brainstorming',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'El punto de partida fue un brainstorming amplio para mapear las problemáticas globales y detectar oportunidades de diseño. A partir de ahí, se formularon Research Questions divididas en tres categorías de actores: Usuarios (comportamiento y necesidades de personas solidarias), Productos/Servicios (qué oferta existe y qué falta) e Instituciones (rol y capacidades de ONGs y asociaciones).\n\nEstas preguntas guiaron toda la fase de investigación, evitando sesgos y asegurando que las decisiones de diseño se basaran en datos reales, no en suposiciones.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/01/gh-brainstorming.png',
