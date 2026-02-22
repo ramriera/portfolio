@@ -197,14 +197,17 @@ const meta = project.projectMeta;
   </section>
 
   <!-- Case Study Sections -->
-  {hasCaseStudy && project.caseSections!.map((section: CaseSection, idx: number) => (
-    <section class="pb-24">
+  {hasCaseStudy && project.caseSections!.map((section: CaseSection, idx: number) => {
+    const prevLabel = idx > 0 ? project.caseSections![idx - 1].label : '';
+    const showLabel = section.label !== prevLabel;
+    return (
+    <section class={showLabel && idx > 0 ? 'pt-8 pb-24' : 'pb-24'}>
       <div class="container-custom">
 
         {/* Center layout */}
         {section.layout === 'center' && (
           <div class="max-w-3xl mx-auto">
-            <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>
+            {showLabel && <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>}
             <h2 data-reveal data-delay="100" class="heading-md mt-4 mb-6">{section.title}</h2>
             {section.content && (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed">{section.content}</p>
@@ -235,7 +238,7 @@ const meta = project.projectMeta;
               ))}
             </div>
             <div>
-              <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>
+              {showLabel && <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>}
               <h2 data-reveal data-delay="100" class="heading-md mt-4 mb-6">{section.title}</h2>
               {section.content?.split('\n\n').map((paragraph: string) => (
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-4">{paragraph}</p>
@@ -255,7 +258,7 @@ const meta = project.projectMeta;
         {section.layout === 'right-left' && (
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div>
-              <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>
+              {showLabel && <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>}
               <h2 data-reveal data-delay="100" class="heading-md mt-4 mb-6">{section.title}</h2>
               {section.content?.split('\n\n').map((paragraph: string) => (
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-4">{paragraph}</p>
@@ -275,7 +278,7 @@ const meta = project.projectMeta;
         {section.layout === 'full-image' && (
           <div>
             <div class="max-w-3xl mx-auto mb-10">
-              <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>
+              {showLabel && <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>}
               <h2 data-reveal data-delay="100" class="heading-md mt-4 mb-6">{section.title}</h2>
               {section.content && (
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed">{section.content}</p>
@@ -293,7 +296,7 @@ const meta = project.projectMeta;
         {section.layout === 'image-grid' && (
           <div>
             <div class="max-w-3xl mx-auto mb-10">
-              <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>
+              {showLabel && <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>}
               <h2 data-reveal data-delay="100" class="heading-md mt-4 mb-6">{section.title}</h2>
               {section.content && (
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed">{section.content}</p>
@@ -319,7 +322,7 @@ const meta = project.projectMeta;
         {section.layout === 'screens-grid' && (
           <div>
             <div class="max-w-3xl mx-auto mb-10">
-              <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>
+              {showLabel && <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>}
               <h2 data-reveal data-delay="100" class="heading-md mt-4 mb-6">{section.title}</h2>
               {section.content && (
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed">{section.content}</p>
@@ -339,23 +342,10 @@ const meta = project.projectMeta;
         {section.layout === 'figma-embed' && (
           <div>
             <div class="max-w-3xl mx-auto mb-10">
-              <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>
+              {showLabel && <span data-reveal class="text-sm font-medium text-primary-500 tracking-wide">{section.label}</span>}
               <h2 data-reveal data-delay="100" class="heading-md mt-4 mb-6">{section.title}</h2>
               {section.content && (
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed">{section.content}</p>
-              )}
-              {section.figmaUrl && (
-                <div data-reveal data-delay="300" class="mt-6">
-                  <a
-                    href={section.figmaUrl.replace('embed.figma.com/proto', 'www.figma.com/proto')}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-primary-500 text-white font-semibold text-sm hover:bg-primary-600 transition-colors"
-                  >
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 24c2.2 0 4-1.8 4-4v-4H8c-2.2 0-4 1.8-4 4s1.8 4 4 4zm0-20C5.8 4 4 5.8 4 8s1.8 4 4 4h4V4H8zm0-4C5.8 0 4 1.8 4 4s1.8 4 4 4h4V0H8zm8 0h-4v8h4c2.2 0 4-1.8 4-4s-1.8-4-4-4zm0 12c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z"/></svg>
-                    Ver prototipo interactivo en Figma
-                  </a>
-                </div>
               )}
             </div>
             {section.figmaUrl && (
@@ -373,7 +363,8 @@ const meta = project.projectMeta;
 
       </div>
     </section>
-  ))}
+    );
+  })}
 
   <!-- Resultados -->
   <section class="pb-24">
