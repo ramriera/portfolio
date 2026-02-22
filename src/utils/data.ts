@@ -63,8 +63,9 @@ export const services = [
 export interface CaseSection {
   label: string;
   title: string;
-  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed';
+  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed';
   figmaUrl?: string;
+  embeds?: string[];
   content?: string;
   highlight?: string;
   bullets?: string[];
@@ -187,8 +188,19 @@ export const projects: Project[] = [
       {
         label: '04. Ideación y Arquitectura',
         title: 'Flujos de usuario y Wireframes',
-        layout: 'center',
-        content: 'Se diseñaron dos flujos principales en Whimsical:\n\n1. Cambio de batería a domicilio: El usuario abre la app → selecciona "Cambio a domicilio" → confirma ubicación → elige franja horaria → personal de MoveFast acude con batería cargada → se realiza el intercambio en minutos.\n\n2. Reserva en punto de intercambio dinámico: El usuario consulta el mapa → localiza el punto de intercambio más cercano (que cambia de ubicación semanalmente) → reserva fecha y hora → acude al punto → un operador realiza el cambio.\n\nAdemás de estos flujos principales, se añadieron funcionalidades complementarias no contempladas en el brief inicial: sistema de favoritos, filtros avanzados y notificaciones de nuevas ubicaciones. Los wireframes de las tres pantallas clave (mapa principal, detalle de punto de intercambio y selección de fecha/hora) validaron la estructura de información antes del diseño visual.',
+        layout: 'whimsical-embed',
+        content: 'Se diseñaron dos flujos principales en Whimsical:\n\n1. Cambio de batería a domicilio: El usuario abre la app → selecciona "Cambio a domicilio" → confirma ubicación → elige franja horaria → personal de MoveFast acude con batería cargada → se realiza el intercambio en minutos.\n\n2. Reserva en punto de intercambio dinámico: El usuario consulta el mapa → localiza el punto de intercambio más cercano (que cambia de ubicación semanalmente) → reserva fecha y hora → acude al punto → un operador realiza el cambio.\n\nAdemás de estos flujos principales, se añadieron funcionalidades complementarias no contempladas en el brief inicial: sistema de favoritos, filtros avanzados y notificaciones de nuevas ubicaciones.',
+        embeds: [
+          'https://whimsical.com/embed/CdxiEyLfhbfFUfhdi1XRcH',
+          'https://whimsical.com/embed/TDfQTWmva6ALGvJdkPEE5o',
+        ],
+      },
+      {
+        label: '05. Diseño Visual y Prototipado',
+        title: 'Prototipo interactivo',
+        layout: 'figma-embed',
+        content: 'Se desarrolló un prototipo interactivo en Figma con el flujo completo del usuario, desde la pantalla de inicio hasta el proceso completo de reserva. El prototipo incluye animaciones de transición entre pantallas y estados de interacción para simular la experiencia real.',
+        figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FfAzRuKJicjcwgMw2u1sYiO%3Fcontent-scaling%3Dfixed%26kind%3Dproto%26node-id%3D531-71%26page-id%3D503%253A268%26scaling%3Dscale-down%26starting-point-node-id%3D582%253A4968',
       },
       {
         label: '05. Diseño Visual y Prototipado',
