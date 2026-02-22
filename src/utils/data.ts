@@ -130,7 +130,7 @@ export const projects: Project[] = [
       role: 'UX/UI Designer (Research, Visual Design, Interaction Design)',
       duration: '2 semanas (45 horas)',
       tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
-      skills: ['Desk research', 'Research questions', 'Idea prioritization', 'Benchmarking', 'Surveys', 'User persona', 'Empathy mapping', 'Journey mapping', 'Wireframes', 'Prototyping', 'Interaction design', 'Design system', 'Variants', 'Components'],
+      skills: ['UX Research', 'Benchmarking', 'User Persona', 'Journey Mapping', 'Prototyping', 'Design System'],
     },
     caseSections: [
       {
@@ -266,7 +266,7 @@ export const projects: Project[] = [
       role: 'UX/UI Designer (Research, Visual Design, Interaction Design)',
       duration: '2 semanas (45 horas)',
       tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
-      skills: ['Desk research', 'Research questions', 'Idea prioritization', 'Benchmarking', 'Surveys', 'User persona', 'Empathy mapping', 'Journey mapping', 'Wireframes', 'Prototyping', 'Interaction design', 'Design system', 'Variants', 'Components'],
+      skills: ['Design Thinking', 'Surveys', 'User Persona', 'Journey Mapping', 'Design Tokens', 'Prototyping'],
     },
     caseSections: [
       {
@@ -409,7 +409,7 @@ export const projects: Project[] = [
       role: 'UX Consultant',
       duration: '5 horas',
       tools: ['Figma', 'Chrome'],
-      skills: ['Análisis heurístico', 'Pensamiento crítico', 'Comunicación UX', 'Usabilidad', 'Accesibilidad', 'Arquitectura de la información', 'UX Research', 'Documentación de procesos', 'Benchmarking'],
+      skills: ['Análisis Heurístico', 'Usabilidad', 'Accesibilidad', 'UX Research', 'Comunicación UX', 'Benchmarking'],
     },
     caseSections: [
       {
@@ -431,7 +431,7 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H1 — Visibilidad del estado del sistema',
-        layout: 'image-grid',
+        layout: 'right-left',
         content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante feedback apropiado y en un tiempo razonable.\n\nEn Imaginbank se detectaron carencias significativas: la app no proporcionaba feedback visual suficiente al realizar acciones críticas como transferencias o pagos. El usuario no siempre sabía si una operación estaba en proceso, se había completado o había fallado — generando incertidumbre y desconfianza en momentos donde la claridad es esencial.',
         highlight: 'La falta de feedback en acciones financieras críticas compromete la confianza del usuario en los momentos donde más la necesita.',
         images: [
@@ -442,7 +442,7 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H4 — Consistencia y estándares',
-        layout: 'image-grid',
+        layout: 'right-left',
         content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEl análisis reveló inconsistencias en la nomenclatura de funciones: las mismas acciones recibían nombres diferentes según la sección de la app. La iconografía no seguía un lenguaje visual coherente y algunos patrones de interacción variaban entre pantallas similares. Para un público joven acostumbrado a apps de consumo ultra-consistentes (Instagram, Spotify, Revolut), estas fricciones son especialmente evidentes.',
         highlight: 'La nomenclatura inconsistente entre secciones genera confusión cognitiva — el usuario tiene que "reaprender" la interfaz en cada pantalla.',
         images: [
@@ -453,7 +453,7 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H3 — Control y libertad del usuario',
-        layout: 'image-grid',
+        layout: 'right-left',
         content: 'Los usuarios necesitan una "salida de emergencia" clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nLa navegación de Imaginbank presentaba una rigidez notable: la falta de flexibilidad impedía al usuario deshacer acciones, volver atrás de forma intuitiva o acceder a opciones secundarias sin recorrer múltiples pantallas. Las opciones secundarias quedaban enterradas en submenús, obligando al usuario a memorizar dónde encontrar funcionalidades que deberían estar accesibles contextualmente.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-7.png',
@@ -463,7 +463,7 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H5 / H9 — Prevención de errores y recuperación',
-        layout: 'image-grid',
+        layout: 'right-left',
         content: 'Un diseño cuidadoso que prevenga errores es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en lenguaje claro y ofrecer una solución constructiva.\n\nEn Imaginbank, los mensajes de error eran genéricos y no orientaban al usuario hacia la solución. En operaciones financieras — donde un error puede tener consecuencias económicas reales — la app no ofrecía confirmaciones claras, pasos de verificación ni mecanismos de "undo" que son estándar en neobancos competidores.',
         highlight: 'Los mensajes de error genéricos en operaciones financieras no solo frustran — erosionan activamente la confianza en la plataforma.',
         images: [
@@ -474,7 +474,7 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H8 — Diseño estético y minimalista',
-        layout: 'image-grid',
+        layout: 'right-left',
         content: 'Cada unidad extra de información compite con las unidades relevantes y disminuye su visibilidad relativa.\n\nAunque la estética general de Imaginbank era limpia y cuidaba la presentación de información financiera, se detectaron áreas donde la jerarquía visual era confusa y elementos decorativos competían con la información funcional. La priorización visual de las acciones más frecuentes del usuario joven no era óptima — funcionalidades como Bizum o transferencias rápidas no tenían la prominencia que su frecuencia de uso justifica.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-11.png',
