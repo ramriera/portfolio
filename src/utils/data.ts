@@ -156,7 +156,7 @@ export const projects: Project[] = [
       {
         label: '02. Investigación y Análisis',
         title: 'Benchmarking — El hueco que nadie cubre',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'Analicé las principales aplicaciones del sector de recarga eléctrica disponibles en el mercado. Todas compartían funcionalidades similares: mapas interactivos con ubicación de estaciones de carga, filtros por voltaje y tipo de conector, favoritos, perfiles de usuario y pasarelas de pago integradas.\n\nLa mayoría presentaban una usabilidad pobre y un diseño visual poco cuidado — solo Iberdrola destacaba visualmente, pero sufría de rendimiento lento y funcionalidad limitada. Este vacío en el mercado justifica directamente nuestra propuesta de valor.',
         highlight: 'Ninguna de las aplicaciones analizadas ofrecía un servicio de cambio de baterías. MoveFast cubre un vacío crítico en el mercado.',
         images: [
@@ -282,7 +282,7 @@ export const projects: Project[] = [
       {
         label: '01. Descubrimiento',
         title: 'Cuestionarios — El pivote del proyecto',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'Se diseñaron dos cuestionarios en Google Forms, dirigidos a personas con diferentes grados de experiencia en solidaridad y voluntariado. Se recogieron 48 respuestas que revelaron un insight que cambió la dirección del proyecto.\n\nEl enfoque inicial era amplio: "¿Cómo ayudar a países subdesarrollados?" Pero los datos mostraron que el problema real estaba más cerca: las ONGs locales no tienen la capacidad de comunicación ni los recursos de las grandes organizaciones internacionales. El proyecto pivotó hacia darles visibilidad y herramientas.',
         highlight: 'Tras encuestar a 48 personas, el proyecto pivotó: el problema no era la falta de solidaridad, sino la falta de visibilidad de las ONGs locales frente a las internacionales.',
         images: [
@@ -293,7 +293,7 @@ export const projects: Project[] = [
       {
         label: '02. Definición',
         title: 'User Persona y Mapa de empatía',
-        layout: 'full-image',
+        layout: 'image-grid',
         content: 'Con los datos de los cuestionarios, se construyó un User Persona que representa al usuario objetivo: una persona solidaria, con voluntad de ayudar pero frustrada por la falta de plataformas que le faciliten el proceso. El mapa de empatía profundizó en su personalidad, necesidades, deseos y miedos — revelando que la barrera principal no es la falta de interés, sino la falta de confianza y transparencia en las plataformas existentes.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/01/gh-user-persona.png',
@@ -318,7 +318,7 @@ export const projects: Project[] = [
       {
         label: '04. Desarrollo',
         title: 'Foundations y Design Tokens',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'Se definió un sistema de foundations que incluye color, tipografía, iconografía, grid, espaciado, fotografía, animación y formato. La base del sistema son los Design Tokens: variables de diseño reutilizables que garantizan consistencia visual en toda la plataforma.\n\nLas ventajas de trabajar con tokens: mantenimiento más fácil de la consistencia, facilita la toma de decisiones, promueve la escalabilidad, permite la propagación automática de cambios y optimiza recursos del equipo de diseño y desarrollo.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/01/gh-foundations.png',
@@ -421,7 +421,7 @@ export const projects: Project[] = [
       {
         label: '01. Contexto',
         title: 'Objetivo y metodología',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'El objetivo fue realizar una evaluación experta (heuristic evaluation) de la app de Imaginbank utilizando las 10 Heurísticas de Jakob Nielsen como marco de análisis.\n\nNo se trataba de rediseñar, sino de diagnosticar: examinar cada flujo clave de la aplicación, documentar los problemas de usabilidad con capturas anotadas y proponer recomendaciones priorizadas por severidad e impacto. Se prestó especial atención a la visibilidad del estado del sistema, la consistencia, el control del usuario y la prevención de errores.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-1.png',
@@ -431,7 +431,7 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H1 — Visibilidad del estado del sistema',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante feedback apropiado y en un tiempo razonable.\n\nEn Imaginbank se detectaron carencias significativas: la app no proporcionaba feedback visual suficiente al realizar acciones críticas como transferencias o pagos. El usuario no siempre sabía si una operación estaba en proceso, se había completado o había fallado — generando incertidumbre y desconfianza en momentos donde la claridad es esencial.',
         highlight: 'La falta de feedback en acciones financieras críticas compromete la confianza del usuario en los momentos donde más la necesita.',
         images: [
@@ -442,7 +442,7 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H4 — Consistencia y estándares',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEl análisis reveló inconsistencias en la nomenclatura de funciones: las mismas acciones recibían nombres diferentes según la sección de la app. La iconografía no seguía un lenguaje visual coherente y algunos patrones de interacción variaban entre pantallas similares. Para un público joven acostumbrado a apps de consumo ultra-consistentes (Instagram, Spotify, Revolut), estas fricciones son especialmente evidentes.',
         highlight: 'La nomenclatura inconsistente entre secciones genera confusión cognitiva — el usuario tiene que "reaprender" la interfaz en cada pantalla.',
         images: [
@@ -453,7 +453,7 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H3 — Control y libertad del usuario',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'Los usuarios necesitan una "salida de emergencia" clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nLa navegación de Imaginbank presentaba una rigidez notable: la falta de flexibilidad impedía al usuario deshacer acciones, volver atrás de forma intuitiva o acceder a opciones secundarias sin recorrer múltiples pantallas. Las opciones secundarias quedaban enterradas en submenús, obligando al usuario a memorizar dónde encontrar funcionalidades que deberían estar accesibles contextualmente.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-7.png',
@@ -463,7 +463,7 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H5 / H9 — Prevención de errores y recuperación',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'Un diseño cuidadoso que prevenga errores es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en lenguaje claro y ofrecer una solución constructiva.\n\nEn Imaginbank, los mensajes de error eran genéricos y no orientaban al usuario hacia la solución. En operaciones financieras — donde un error puede tener consecuencias económicas reales — la app no ofrecía confirmaciones claras, pasos de verificación ni mecanismos de "undo" que son estándar en neobancos competidores.',
         highlight: 'Los mensajes de error genéricos en operaciones financieras no solo frustran — erosionan activamente la confianza en la plataforma.',
         images: [
@@ -474,7 +474,7 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H8 — Diseño estético y minimalista',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'Cada unidad extra de información compite con las unidades relevantes y disminuye su visibilidad relativa.\n\nAunque la estética general de Imaginbank era limpia y cuidaba la presentación de información financiera, se detectaron áreas donde la jerarquía visual era confusa y elementos decorativos competían con la información funcional. La priorización visual de las acciones más frecuentes del usuario joven no era óptima — funcionalidades como Bizum o transferencias rápidas no tenían la prominencia que su frecuencia de uso justifica.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-11.png',
@@ -484,7 +484,7 @@ export const projects: Project[] = [
       {
         label: '03. Definición y Empatía',
         title: 'El usuario joven — perfil y frustraciones',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'El target de Imaginbank es claro: jóvenes de 18-30 años, nativos digitales, usuarios intensivos de apps de consumo que esperan la misma calidad de experiencia en su app bancaria.\n\nSu frustración nace de una interfaz que no habla su lenguaje: nomenclatura bancaria tradicional en lugar de términos directos, flujos que requieren demasiados pasos para acciones simples, y una experiencia que se siente como "la app del banco de mis padres" en lugar de una herramienta financiera moderna. La brecha entre expectativas (definidas por Revolut, N26) y realidad (Imaginbank) es lo que genera abandono.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-13.png',
