@@ -203,7 +203,7 @@ const meta = project.projectMeta;
     const prevLabel = idx > 0 ? project.caseSections![idx - 1].label : '';
     const showLabel = section.label !== prevLabel;
     return (
-    <section class={showLabel && idx > 0 ? 'pt-8 pb-24' : 'pb-24'}>
+    <section class={showLabel && idx > 0 ? 'pt-24 pb-24' : 'pb-24'}>
       <div class="container-custom">
 
         {/* Center layout */}
@@ -300,6 +300,9 @@ const meta = project.projectMeta;
                 <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
               </div>
             ))}
+            {section.caption && (
+              <p data-reveal class="text-sm text-zinc-500 dark:text-zinc-400 text-center mt-3">{section.caption}</p>
+            )}
           </div>
         )}
 
@@ -325,6 +328,9 @@ const meta = project.projectMeta;
                 </div>
               ))}
             </div>
+            {section.caption && (
+              <p data-reveal class="text-sm text-zinc-500 dark:text-zinc-400 text-center mt-3">{section.caption}</p>
+            )}
           </div>
         )}
 
@@ -343,6 +349,9 @@ const meta = project.projectMeta;
                 </div>
               ))}
             </div>
+            {section.caption && (
+              <p data-reveal class="text-sm text-zinc-500 dark:text-zinc-400 text-center mt-3">{section.caption}</p>
+            )}
           </div>
         )}
 
@@ -412,7 +421,7 @@ const meta = project.projectMeta;
                 <svg class="w-6 h-6 text-primary-400 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span class="text-white font-medium">{result}</span>
+                <span class="text-white text-lg font-medium leading-snug">{result}</span>
               </div>
             ))}
           </div>
