@@ -216,14 +216,14 @@ const meta = project.projectMeta;
     const numberPart = section.label.split('. ')[0];
     const phaseName = section.label.substring(section.label.indexOf('. ') + 2);
     return (
-    <section class={showLabel && idx > 0 ? 'pt-24 md:pt-32 pb-20' : 'pb-20'}>
+    <section class={showLabel && idx > 0 ? 'pt-28 md:pt-36 pb-20' : 'pb-20'}>
       <div class="container-custom">
         <div class="max-w-4xl mx-auto">
 
           {/* Phase header: number above title */}
           {showLabel && (
-            <div class="mb-10">
-              <span data-reveal class="text-sm font-mono tracking-widest text-dark-400 dark:text-dark-500 uppercase">{numberPart}</span>
+            <div class="mb-12">
+              <span data-reveal class="text-base font-medium tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">{numberPart}</span>
               <h2 data-reveal class="heading-lg mt-3">{phaseName}</h2>
             </div>
           )}
@@ -258,8 +258,8 @@ const meta = project.projectMeta;
                 <p data-reveal data-delay="200" class="max-w-[70ch] text-body text-lg leading-relaxed mb-4">{paragraph}</p>
               ))}
               {section.highlight && (
-                <blockquote data-reveal data-delay="300" class="mt-6 mb-10 pl-5 border-l-4 border-primary-500 bg-primary-500/5 dark:bg-primary-500/10 rounded-r-xl py-4 pr-5">
-                  <p class="text-base font-semibold text-dark-800 dark:text-dark-100 leading-relaxed">
+                <blockquote data-reveal data-delay="300" class="mt-8 mb-12 pl-6 border-l-4 border-primary-500 bg-primary-500/5 dark:bg-primary-500/10 rounded-r-xl py-5 pr-6">
+                  <p class="text-lg font-semibold text-dark-800 dark:text-dark-100 leading-relaxed">
                     <span class="text-primary-500 font-bold">Insight Clave:</span> {section.highlight}
                   </p>
                 </blockquote>
