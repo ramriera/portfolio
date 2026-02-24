@@ -216,15 +216,15 @@ const meta = project.projectMeta;
     const numberPart = section.label.split('. ')[0];
     const phaseName = section.label.substring(section.label.indexOf('. ') + 2);
     return (
-    <section class={showLabel && idx > 0 ? 'pt-16 pb-24' : 'pb-24'}>
+    <section class={showLabel && idx > 0 ? 'pt-24 md:pt-32 pb-20' : 'pb-20'}>
       <div class="container-custom">
         <div class="max-w-4xl mx-auto">
 
           {/* Phase header: number above title */}
           {showLabel && (
-            <div class="mb-8">
-              <span data-reveal class="text-xs font-mono tracking-widest text-primary-500/60 uppercase">{numberPart}</span>
-              <h2 data-reveal class="heading-lg mt-2">{phaseName}</h2>
+            <div class="mb-10">
+              <span data-reveal class="text-sm font-mono tracking-widest text-dark-400 dark:text-dark-500 uppercase">{numberPart}</span>
+              <h2 data-reveal class="heading-lg mt-3">{phaseName}</h2>
             </div>
           )}
 
