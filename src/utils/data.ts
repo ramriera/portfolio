@@ -70,7 +70,6 @@ export interface CaseSection {
   highlight?: string;
   bullets?: string[];
   images?: string[];
-  caption?: string;
 }
 
 export interface ProjectMeta {
@@ -224,7 +223,6 @@ export const projects: Project[] = [
           'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-reserva.png',
           'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-aceptado.png',
         ],
-        caption: 'Flujo principal de reserva y selección de batería',
       },
       {
         label: '06. Conclusión',
@@ -291,7 +289,6 @@ export const projects: Project[] = [
           'https://ramonriera.design/wp-content/uploads/2025/01/gh-cuestionarios-2.png',
           'https://ramonriera.design/wp-content/uploads/2025/01/gh-cuestionarios-1.png',
         ],
-        caption: 'Resultado de la encuesta sobre hábitos de donación — 48 respuestas recogidas',
       },
       {
         label: '02. Definición',
