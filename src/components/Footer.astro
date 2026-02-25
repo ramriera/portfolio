@@ -1,8 +1,22 @@
 ---
+import { projects } from '@/utils/data';
 ---
 
-<footer class="mt-8">
-  <div class="container-custom py-8">
+<footer class="mt-8 border-t border-dark-200/50 dark:border-dark-800/50">
+  <div class="container-custom py-12">
+    <!-- Project links -->
+    <div class="mb-8">
+      <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-4">Proyectos</h4>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        {projects.map((p) => (
+          <a href={`/projects/${p.slug}`} class="text-sm text-dark-500 dark:text-dark-400 hover:text-dark-900 dark:hover:text-dark-100 transition-colors">
+            {p.title}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Copyright -->
     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-sm text-dark-400 dark:text-dark-500">
         &copy; {new Date().getFullYear()} Ramon Riera. Todos los derechos reservados.

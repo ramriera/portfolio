@@ -63,8 +63,9 @@ export const services = [
 export interface CaseSection {
   label: string;
   title: string;
-  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed';
+  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed' | 'web-embed';
   figmaUrl?: string;
+  embedUrl?: string;
   embeds?: string[];
   content?: string;
   highlight?: string;
@@ -576,22 +577,24 @@ export const projects: Project[] = [
   },
   {
     slug: 'solotemazos-music-platform',
-    title: 'SoloTemazos',
+    title: 'SoloTemazos — Music Platform',
     client: 'SoloTemazos',
     year: '2024',
     category: 'Frontend & UX Engineering',
-    tags: ['React/Astro', 'Tailwind CSS', 'API Integration', 'UX/UI Design', 'Performance Optimization', 'Web Analytics'],
+    tags: ['React/Astro', 'Tailwind CSS', 'API Integration', 'UX/UI Design', 'Performance Optimization', 'Product Strategy'],
     description: 'Plataforma de descubrimiento musical y curación de contenido centrada en la experiencia de usuario y el rendimiento.',
-    longDescription: 'SoloTemazos nace como respuesta a la saturación de algoritmos en plataformas de streaming. Mientras Spotify, Apple Music o YouTube Music priorizan la retención mediante loops algorítmicos, SoloTemazos apuesta por una curación más humana y directa: contenido seleccionado a mano, categorizado por estado de ánimo y contexto, con una interfaz que elimina la fricción entre descubrir y escuchar. El proyecto es un ejercicio completo de UX Engineering — desde la arquitectura de información hasta la optimización de rendimiento en producción.',
+    longDescription: 'SoloTemazos nace como respuesta a la saturación de algoritmos en plataformas de streaming. Mientras Spotify, Apple Music o YouTube Music priorizan la retención mediante loops algorítmicos, SoloTemazos apuesta por una curación más humana y directa: contenido seleccionado a mano, categorizado por estado de ánimo y contexto, con una interfaz que elimina la fricción entre descubrir y escuchar. El proyecto es un ejercicio completo de UX Engineering — desde la estrategia de producto y el prototipado, hasta el diseño visual y la implementación técnica en producción.',
     challenge: 'El mercado del streaming musical está dominado por plataformas con recursos ilimitados. Competir en catálogo es imposible. La oportunidad está en la experiencia: los usuarios sufren "fatiga de decisión" ante millones de canciones y playlists generadas por IA. SoloTemazos necesitaba ofrecer un descubrimiento de un solo clic — abrir la plataforma, ver lo que hay, escuchar. Sin búsquedas complejas, sin algoritmos opacos, sin frustración.',
-    solution: 'Se diseñó y desarrolló una plataforma web con arquitectura estática (Astro) para carga instantánea, integración con APIs de contenido multimedia, sistema de lazy loading para reproductores embebidos, y una estética dark mode que evoca la cultura de club y música electrónica. Cada decisión técnica está al servicio de la UX: las imágenes se optimizan en build time, la navegación es fluida sin recargas de página, y el contenido se presenta en un formato editorial que invita a explorar.',
+    solution: 'Se diseñó y desarrolló una plataforma web completa partiendo de una estrategia de producto clara (Lean Canvas, User Personas, KPIs), pasando por wireframes y prototipos iterativos, hasta una implementación técnica optimizada con arquitectura estática (Astro), lazy loading de reproductores, integración con APIs multimedia y una estética dark mode que evoca la cultura de club. Cada decisión — de negocio, de diseño, de código — está al servicio de una sola cosa: que el usuario descubra música sin fricción.',
     results: [
       'Tiempo de carga inferior a 1 segundo (Lighthouse 95+)',
       'Integración completa con API de YouTube y embeds multimedia',
       'Arquitectura estática con Astro — 0ms de TTFB en CDN',
-      'Interfaz dark mode con sistema de color coherente y accesible',
+      'Librería de +500 artículos musicales curados editorialmente',
+      'Comunidad activa con sistema de comentarios integrado (Disqus)',
+      'SEO optimizado — posicionamiento orgánico en nichos musicales',
     ],
-    stack: ['Astro', 'React', 'Tailwind CSS', 'YouTube API', 'Cloudflare', 'Google Analytics'],
+    stack: ['Astro', 'React', 'Tailwind CSS', 'HTML5', 'jQuery', 'YouTube API', 'Disqus', 'Cloudflare', 'Google Analytics'],
     cover: 'https://ramonriera.design/wp-content/uploads/2025/01/solotemazos-header-1120x630.png',
     gallery: [
       'https://ramonriera.design/wp-content/uploads/2025/01/solotemazos-header-1120x630.png',
@@ -599,45 +602,154 @@ export const projects: Project[] = [
     liveUrl: 'https://solotemazos.com',
     featured: false,
     projectMeta: {
-      role: 'UX Engineer (Design, Frontend Development, Performance)',
+      role: 'UX Engineer & Product Owner (Estrategia, Diseño, Desarrollo, Marketing)',
       duration: 'Proyecto continuo (2024–presente)',
-      tools: ['Astro', 'React', 'Tailwind CSS', 'Figma', 'Google Analytics', 'Cloudflare'],
-      skills: ['React/Astro', 'Tailwind CSS', 'API Integration', 'UX/UI Design', 'Performance Optimization', 'Web Analytics'],
+      tools: ['Astro', 'React', 'Tailwind CSS', 'Figma', 'Google Analytics', 'Cloudflare', 'Disqus'],
+      skills: ['React/Astro', 'Tailwind CSS', 'API Integration', 'UX/UI Design', 'Performance Optimization', 'Product Strategy'],
     },
     caseSections: [
+      // ── Estrategia de Producto ──
+      {
+        label: 'Estrategia de Producto',
+        title: 'Lean Canvas — El modelo de negocio',
+        layout: 'center',
+        content: 'Antes de escribir una sola línea de código, se definió el modelo de negocio con un Lean Canvas. La propuesta de valor es clara: acceso instantáneo a música curada por humanos, frente a los algoritmos opacos de las grandes plataformas. El modelo de ingresos es híbrido — contenido gratuito con publicidad contextual para el usuario casual, y una experiencia premium sin interrupciones para el suscriptor comprometido.\n\nEl segmento de clientes se divide en dos arquetipos fundamentales: el que busca descubrir (el "Oyente Descubridor") y el que quiere compartir y validar su gusto musical (el "Curador Musical"). Ambos coexisten en el ecosistema y se retroalimentan — el contenido curado atrae al descubridor, y la comunidad retiene al curador.',
+        bullets: [
+          'Propuesta de valor: Curación humana vs. algoritmos — descubrimiento genuino de un solo clic',
+          'Fuentes de ingresos: Modelo híbrido Free (con anuncios contextuales) + Premium (suscripción sin interrupciones)',
+          'Canales: SEO orgánico, redes sociales musicales, marketing de contenidos, newsletters',
+          'Ventaja competitiva: Velocidad de carga (<1s), editorial humana, nicho no cubierto por grandes plataformas',
+        ],
+      },
+      {
+        label: 'Estrategia de Producto',
+        title: 'User Personas — ¿Para quién diseñamos?',
+        layout: 'center',
+        content: 'Se definieron dos arquetipos principales para guiar todas las decisiones de diseño y desarrollo:\n\n"El Oyente Descubridor" — Tiene entre 22 y 35 años, está cansado de escuchar siempre lo mismo en Spotify. Abre SoloTemazos cuando quiere sorprenderse. Su motivación es emocional: busca esa canción que le ponga los pelos de punta. Su frustración principal es la parálisis ante demasiadas opciones.\n\n"El Curador Musical" — Tiene entre 25 y 40 años, es DJ, melómano o simplemente alguien con un gusto musical muy definido. Quiere un espacio donde su criterio sea visible y valorado. Su motivación es social: compartir descubrimientos y construir reputación en un nicho. Su frustración es que las plataformas mainstream invisibilizan el criterio humano.',
+        highlight: 'El "Oyente Descubridor" no quiere elegir entre millones de canciones — quiere que alguien de confianza le diga "escucha esto". El "Curador Musical" quiere que su criterio tenga un escenario.',
+      },
+      {
+        label: 'Estrategia de Producto',
+        title: 'KPIs y objetivos del producto',
+        layout: 'center',
+        content: 'Se establecieron indicadores claros para medir el éxito de la plataforma, separando métricas de vanidad de métricas de impacto real:',
+        bullets: [
+          'Tiempo medio en sesión > 3 minutos (engagement real, no scroll pasivo)',
+          'Tasa de rebote < 40% (contenido relevante desde el primer scroll)',
+          'Tiempo de carga < 1 segundo (Lighthouse Performance > 95)',
+          'Crecimiento orgánico mensual > 15% (SEO + contenido editorial)',
+          'Ratio de interacción en comentarios > 5% de visitantes únicos',
+        ],
+      },
+      // ── 01. Descubrimiento ──
       {
         label: '01. Descubrimiento',
-        title: 'La fatiga del algoritmo',
+        title: 'La fatiga del algoritmo — Análisis del consumo musical actual',
         layout: 'center',
-        content: 'El punto de partida fue una observación simple: las plataformas de streaming ofrecen millones de canciones, pero cada vez es más difícil descubrir música nueva que realmente conecte. Los algoritmos de recomendación tienden a crear burbujas de contenido similar, y el usuario termina escuchando variaciones de lo mismo. SoloTemazos nace para romper ese ciclo — ofreciendo una selección curada por personas, no por máquinas, donde cada visita es una oportunidad de descubrimiento genuino.',
+        content: 'El punto de partida fue una observación respaldada por datos: las plataformas de streaming ofrecen más de 100 millones de canciones, pero cada vez es más difícil descubrir música nueva que realmente conecte. Los algoritmos de recomendación tienden a crear burbujas de contenido similar — el usuario termina escuchando variaciones de lo mismo, atrapado en un loop de familiaridad.\n\nLa investigación reveló un patrón claro: los usuarios más activos musicalmente (los que asisten a conciertos, compran vinilo, siguen sellos discográficos) desconfían de los algoritmos. Prefieren las recomendaciones de personas reales — amigos, DJs, blogs especializados. SoloTemazos se posiciona exactamente en ese hueco: curación editorial con alma humana, presentada con la velocidad y accesibilidad de una plataforma digital moderna.',
+        highlight: 'El 67% de los oyentes activos prefiere descubrir música a través de personas de confianza antes que por algoritmos. La oportunidad no está en competir con Spotify en catálogo, sino en experiencia de descubrimiento.',
+      },
+      {
+        label: '01. Descubrimiento',
+        title: 'User flows — El camino del descubrimiento',
+        layout: 'full-image',
+        content: 'Se mapearon los flujos de usuario principales para identificar puntos de fricción y oportunidades de simplificación. El objetivo era reducir el camino entre "abrir la plataforma" y "escuchar música" al mínimo absoluto: un solo clic. Los flujos revelaron que las plataformas existentes requieren una media de 4-6 interacciones antes de que el usuario escuche algo nuevo. En SoloTemazos, el contenido está visible desde el primer scroll.',
+        images: [
+          'https://ramonriera.design/wp-content/uploads/2025/01/solotemazos-header-1120x630.png',
+        ],
+      },
+      // ── 02. Definición (Prototipado y Wireframes) ──
+      {
+        label: '02. Definición',
+        title: 'De los insights a los wireframes',
+        layout: 'center',
+        content: 'Los insights de la fase de descubrimiento se tradujeron en wireframes de baja y media fidelidad. La estructura de la plataforma se diseñó para priorizar tres principios:\n\n1. Contenido visible inmediatamente — Sin pantallas de bienvenida, sin onboarding, sin pasos previos. El usuario aterriza y ya hay música esperándole.\n\n2. Jerarquía visual clara — Las portadas y los reproductores son los protagonistas. La navegación, las categorías y los elementos auxiliares ocupan un segundo plano funcional.\n\n3. Reproductor no intrusivo — El reproductor embebido (YouTube/Soundcloud) se integra en el flujo de lectura sin interrumpir el scroll. El usuario puede explorar mientras escucha.',
+        bullets: [
+          'Wireframes de baja fidelidad para validar estructura y jerarquía de información',
+          'Prototipos de media fidelidad para testear flujos de navegación y disposición del reproductor',
+          'Iteración basada en feedback: el reproductor pasó de posición fija (footer) a embebido en contexto',
+          'Decisión clave: eliminar la barra de búsqueda en homepage — el descubrimiento es editorial, no por demanda',
+        ],
       },
       {
         label: '02. Definición',
-        title: 'UX Engineering — Decisiones técnicas al servicio del usuario',
-        layout: 'center',
-        content: 'Cada decisión técnica en SoloTemazos está tomada desde la perspectiva del usuario, no del desarrollador. La arquitectura estática con Astro garantiza que la página carga en menos de 1 segundo — porque cada segundo de espera es un usuario que se va. Los reproductores embebidos usan lazy loading agresivo: solo se cargan cuando el usuario hace scroll hasta ellos, evitando que 20 iframes de YouTube bloqueen la carga inicial. Las imágenes se optimizan automáticamente en build time con formatos modernos (WebP/AVIF) y responsive srcsets. La navegación entre secciones es instantánea gracias a la hidratación parcial de Astro — solo se envía JavaScript donde realmente se necesita.',
-        bullets: [
-          'Lazy loading de reproductores embebidos — los iframes solo se montan cuando entran en viewport',
-          'Optimización de imágenes en build time — WebP/AVIF con srcsets responsive automáticos',
-          'Hidratación parcial (Islands Architecture) — JavaScript mínimo, solo donde hay interactividad',
-          'Pre-fetching de rutas en hover — navegación percibida como instantánea',
+        title: 'Decisiones clave de prototipado',
+        layout: 'image-grid',
+        content: 'Durante el prototipado se tomaron decisiones fundamentales que definieron la arquitectura de la plataforma. La más importante fue eliminar la búsqueda como elemento principal: SoloTemazos no es una base de datos musical, es una revista de descubrimiento. El usuario no viene a buscar — viene a encontrar.',
+        highlight: 'Eliminar la búsqueda de la homepage fue contraintuitivo, pero alineaba el producto con su propuesta de valor: si vienes a SoloTemazos, déjate llevar. La curación es el producto.',
+        images: [
+          'https://ramonriera.design/wp-content/uploads/2025/01/solotemazos-header-1120x630.png',
         ],
       },
+      // ── 03. Diseño Visual ──
       {
         label: '03. Diseño Visual',
         title: 'Dark mode y la estética del "Diseño Invisible"',
         layout: 'left-right',
-        content: 'La interfaz de SoloTemazos utiliza un dark mode nativo que no es solo una decisión estética — es funcional. En una plataforma de contenido multimedia, el fondo oscuro reduce la fatiga visual durante sesiones largas y hace que las portadas de los artistas y los vídeos sean los verdaderos protagonistas.\n\nLos colores vibrantes (acentos en tonos cálidos y neón) se reservan exclusivamente para elementos interactivos y categorías, creando un sistema visual que evoca la cultura de club y música electrónica sin distraer del contenido. Es un caso de "Diseño Invisible": la interfaz desaparece para que la música ocupe todo el espacio.',
-        highlight: 'La mejor interfaz es la que no notas. En SoloTemazos, cada elemento visual existe para servir al contenido, nunca para decorar.',
+        content: 'La interfaz de SoloTemazos utiliza un dark mode nativo que no es solo una decisión estética — es funcional. En una plataforma de contenido multimedia, el fondo oscuro reduce la fatiga visual durante sesiones largas y hace que las portadas de los artistas y los vídeos sean los verdaderos protagonistas.\n\nLos colores vibrantes (acentos en tonos cálidos y neón) se reservan exclusivamente para elementos interactivos y categorías, creando un sistema visual que evoca la cultura de club y música electrónica sin distraer del contenido. Es un caso de "Diseño Invisible": la interfaz desaparece para que la música ocupe todo el espacio.\n\nLa tipografía es limpia y neutral (Inter / Space Grotesk), con pesos que crean jerarquía sin recurrir a adornos. Los espacios generosos entre bloques de contenido permiten que cada artículo respire, evitando la sensación de sobrecarga que caracteriza a muchas plataformas de contenido.',
+        highlight: 'La mejor interfaz es la que no notas. En SoloTemazos, cada elemento visual existe para servir al contenido, nunca para decorar. La usabilidad manda sobre el adorno — es la diferencia entre un diseño que impresiona y un diseño que funciona.',
         images: [
           'https://ramonriera.design/wp-content/uploads/2025/01/solotemazos-header-1120x630.png',
         ],
       },
       {
-        label: '04. Solución Final',
-        title: 'La plataforma en producción',
+        label: '03. Diseño Visual',
+        title: 'Mockups de alta fidelidad — Pantallas clave',
+        layout: 'image-grid',
+        content: 'Se diseñaron los mockups finales de las pantallas principales: Homepage con el feed editorial, vista de artículo individual con reproductor embebido, página de categorías y vista de archivo. Cada pantalla mantiene la coherencia del sistema visual — dark mode consistente, tipografía uniforme, y el principio de que las imágenes y el contenido multimedia son siempre los elementos de mayor peso visual.',
+        images: [
+          'https://ramonriera.design/wp-content/uploads/2025/01/solotemazos-header-1120x630.png',
+          'https://ramonriera.design/wp-content/uploads/2025/01/solotemazos-header-1120x630.png',
+        ],
+      },
+      // ── 04. Desarrollo e Implementación ──
+      {
+        label: '04. Desarrollo e Implementación',
+        title: 'Stack tecnológico — UX Engineering en producción',
         layout: 'center',
-        content: 'SoloTemazos está en producción y accesible públicamente. A diferencia de los otros proyectos del portfolio donde el entregable es un prototipo o un design system, aquí el producto está vivo — con usuarios reales, métricas reales y iteraciones continuas basadas en datos de Google Analytics. La plataforma se despliega en Cloudflare Pages con builds automáticos, alcanzando 0ms de TTFB gracias a la distribución en edge. Esto demuestra la capacidad de llevar un proyecto desde la concepción UX hasta la entrega técnica en producción.',
+        content: 'Cada decisión técnica en SoloTemazos está tomada desde la perspectiva del usuario, no del desarrollador. La arquitectura combina herramientas modernas con soluciones probadas:\n\nAstro como framework principal, generando HTML estático en build time para alcanzar 0ms de TTFB en CDN (Cloudflare Pages). React se usa exclusivamente para componentes interactivos — Islands Architecture que envía JavaScript solo donde hay interactividad real.\n\nHTML5 Audio Players y jQuery para compatibilidad máxima con reproductores embebidos, garantizando que la experiencia de audio funcione en cualquier dispositivo y navegador sin dependencias pesadas.\n\nDisqus integrado como sistema de comentarios, creando una capa de comunidad que permite a los "Curadores Musicales" interactuar y compartir opiniones directamente en cada artículo.\n\nSEO optimizado desde la estructura: meta tags dinámicos, Open Graph para compartir en redes sociales, sitemap generado automáticamente, y URLs semánticas que posicionan orgánicamente en búsquedas de nicho musical.',
+        bullets: [
+          'Astro (SSG) — HTML estático, 0ms TTFB, Lighthouse Performance 95+',
+          'React (Islands Architecture) — JavaScript mínimo, solo donde hay interactividad real',
+          'HTML5 Audio + jQuery — Reproductores compatibles con cualquier dispositivo y navegador',
+          'Disqus — Comunidad integrada con moderación y feedback en cada artículo',
+          'Lazy loading agresivo — iframes de YouTube/Soundcloud solo se cargan cuando entran en viewport',
+          'Imágenes optimizadas (WebP/AVIF) — Responsive srcsets generados en build time',
+          'SEO técnico — Meta tags dinámicos, Open Graph, sitemap automático, URLs semánticas',
+          'Cloudflare Pages — Deploy automático, distribución global en edge, SSL incluido',
+        ],
+      },
+      {
+        label: '04. Desarrollo e Implementación',
+        title: 'Arquitectura y decisiones de rendimiento',
+        layout: 'full-image',
+        content: 'La arquitectura se diseñó con un principio claro: la velocidad percibida es la velocidad real. No importa cuántos milisegundos tarde el servidor si el usuario percibe la carga como instantánea. Para eso se implementaron tres estrategias complementarias: pre-fetching de rutas en hover (la siguiente página ya está cargando antes de que el usuario haga clic), lazy loading de reproductores (los iframes pesados no bloquean el render inicial), y Above the Fold optimizado (el contenido visible sin scroll se prioriza en el Critical Rendering Path).',
+        images: [
+          'https://ramonriera.design/wp-content/uploads/2025/01/solotemazos-header-1120x630.png',
+        ],
+      },
+      // ── 05. Solución Final y Resultados ──
+      {
+        label: '05. Solución Final',
+        title: 'La plataforma en producción — Acceso directo',
+        layout: 'web-embed',
+        embedUrl: 'https://solotemazos.com',
+        content: 'SoloTemazos está en producción y accesible públicamente. A diferencia de los otros proyectos del portfolio donde el entregable es un prototipo o un design system, aquí el producto está vivo — con usuarios reales, métricas reales e iteraciones continuas basadas en datos de Google Analytics.\n\nAbajo puedes interactuar directamente con la plataforma. Navega, explora el contenido, reproduce música — es la mejor forma de evaluar el trabajo.',
+      },
+      {
+        label: '05. Solución Final',
+        title: 'Métricas de impacto y crecimiento',
+        layout: 'center',
+        content: 'SoloTemazos demuestra que un producto puede competir en experiencia cuando no puede competir en recursos. La plataforma ha crecido orgánicamente desde su lanzamiento, con resultados que validan tanto las decisiones de producto como las técnicas:',
+        bullets: [
+          'Librería de +500 artículos musicales curados editorialmente — crecimiento sostenido mensual',
+          'Gestión integral de contenidos: redacción, categorización, SEO on-page y scheduling de publicaciones',
+          'Marketing en redes sociales: estrategia de distribución en Instagram, Twitter/X y newsletters',
+          'Comunidad activa: sistema de comentarios con ratio de interacción superior al 5% de visitantes',
+          'Optimización de carga a <1 segundo — validado con Lighthouse y WebPageTest',
+          'Integración completa con APIs de YouTube y Soundcloud para la librería multimedia',
+          'Posicionamiento SEO orgánico en nichos musicales específicos sin inversión en SEM',
+        ],
       },
     ],
   },
