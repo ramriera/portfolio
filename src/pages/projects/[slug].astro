@@ -210,7 +210,7 @@ const meta = project.projectMeta;
         {section.layout === 'center' && (
           <div class="max-w-4xl mx-auto">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-            <h3 data-reveal data-delay="100" class="heading-md mt-3 mb-6">{section.title}</h3>
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed">{section.content}</p>
             )}
@@ -242,7 +242,7 @@ const meta = project.projectMeta;
             </div>
             <div>
               {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-              <h3 data-reveal data-delay="100" class="heading-md mt-3 mb-6">{section.title}</h3>
+              <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
               {section.content?.split('\n\n').map((paragraph: string) => (
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-4">{paragraph}</p>
               ))}
@@ -264,7 +264,7 @@ const meta = project.projectMeta;
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             <div>
               {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-              <h3 data-reveal data-delay="100" class="heading-md mt-3 mb-6">{section.title}</h3>
+              <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
               {section.content?.split('\n\n').map((paragraph: string) => (
                 <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-4">{paragraph}</p>
               ))}
@@ -291,15 +291,17 @@ const meta = project.projectMeta;
         {section.layout === 'full-image' && (
           <div class="max-w-4xl mx-auto">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-            <h3 data-reveal data-delay="100" class="heading-md mt-3 mb-6">{section.title}</h3>
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10">{section.content}</p>
             )}
-            {section.images?.map((img: string) => (
-              <div data-reveal class="rounded-xl overflow-hidden">
-                <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
-              </div>
-            ))}
+            <div class="space-y-6">
+              {section.images?.map((img: string) => (
+                <div data-reveal class="rounded-xl overflow-hidden">
+                  <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
@@ -307,7 +309,7 @@ const meta = project.projectMeta;
         {section.layout === 'image-grid' && (
           <div class="max-w-4xl mx-auto">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-            <h3 data-reveal data-delay="100" class="heading-md mt-3 mb-6">{section.title}</h3>
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content?.split('\n\n').map((paragraph: string) => (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-4">{paragraph}</p>
             ))}
@@ -332,7 +334,7 @@ const meta = project.projectMeta;
         {section.layout === 'screens-grid' && (
           <div class="max-w-4xl mx-auto">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-            <h3 data-reveal data-delay="100" class="heading-md mt-3 mb-6">{section.title}</h3>
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10">{section.content}</p>
             )}
@@ -350,7 +352,7 @@ const meta = project.projectMeta;
         {section.layout === 'figma-embed' && (
           <div class="max-w-4xl mx-auto">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-            <h3 data-reveal data-delay="100" class="heading-md mt-3 mb-6">{section.title}</h3>
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10">{section.content}</p>
             )}
@@ -371,7 +373,7 @@ const meta = project.projectMeta;
         {section.layout === 'whimsical-embed' && (
           <div class="max-w-4xl mx-auto">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-            <h3 data-reveal data-delay="100" class="heading-md mt-3 mb-6">{section.title}</h3>
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content?.split('\n\n').map((paragraph: string) => (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-4">{paragraph}</p>
             ))}
@@ -393,7 +395,7 @@ const meta = project.projectMeta;
         {section.layout === 'web-embed' && (
           <div class="max-w-4xl mx-auto">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-            <h3 data-reveal data-delay="100" class="heading-md mt-3 mb-6">{section.title}</h3>
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content?.split('\n\n').map((paragraph: string) => (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-4">{paragraph}</p>
             ))}
