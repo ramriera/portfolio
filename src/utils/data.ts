@@ -577,7 +577,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'solotemazos-music-platform',
-    title: 'SoloTemazos — Music Platform',
+    title: 'SoloTemazos — solotemazos-music-platform',
     client: 'SoloTemazos',
     year: '2024',
     category: 'Frontend & UX Engineering',
@@ -726,45 +726,6 @@ export const projects: Project[] = [
       },
       {
         label: '03. Diseño Visual',
-        title: 'Variantes del componente Song — Adaptación al contexto',
-        layout: 'image-grid',
-        content: 'La tarjeta de canción es el componente más utilizado de la plataforma y necesitaba adaptarse a múltiples contextos: vista de lista, vista de grid, vista destacada y vista compacta. Se diseñaron tres variantes que comparten la misma base pero adaptan su densidad de información según el espacio disponible y la jerarquía dentro de la página.',
-        images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-song-2.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-song-3.png',
-        ],
-      },
-      {
-        label: '03. Diseño Visual',
-        title: 'Navegación y barra de navegación',
-        layout: 'left-right',
-        content: 'La navegación se diseñó para ser omnipresente pero no intrusiva. La barra de navegación agrupa las secciones principales (Canciones, Noticias, Rankings, Festivales, Discos) con iconografía clara y labels concisos. En mobile, la navegación inferior permite acceso directo con el pulgar a las secciones más frecuentes.\n\nEl menú expandido ofrece acceso a todas las categorías y funciones secundarias, manteniendo la consistencia visual del dark mode y priorizando la legibilidad.',
-        images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-navigation-bar.png',
-        ],
-      },
-      {
-        label: '03. Diseño Visual',
-        title: 'Pantallas principales — Alta fidelidad',
-        layout: 'image-grid',
-        content: 'Las pantallas de alta fidelidad muestran el resultado final del proceso de diseño. Las tarjetas de contenido presentan la información esencial de cada artículo de forma compacta y escaneable. El menú y las listas de reproducción permiten la navegación entre secciones con jerarquía visual clara. Cada pantalla respeta el principio de "contenido primero" — la música y las imágenes dominan el espacio, mientras la interfaz se mantiene en segundo plano funcional.',
-        images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-song-3.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-menu.png',
-        ],
-      },
-      {
-        label: '03. Diseño Visual',
-        title: 'Vistas de contenido — Festivales y listas',
-        layout: 'image-grid',
-        content: 'Las vistas de contenido se diseñaron para maximizar el descubrimiento visual. La vista de festivales permite explorar eventos musicales con información clave visible desde la tarjeta; las listas de reproducción presentan las canciones en un formato editorial que invita al scroll vertical, eliminando pasos intermedios entre descubrir y escuchar.',
-        images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-festivals.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-lista.png',
-        ],
-      },
-      {
-        label: '03. Diseño Visual',
         title: 'Diseño mobile — Todas las pantallas',
         layout: 'screens-grid',
         content: 'La experiencia mobile se diseñó como first-class citizen, no como adaptación del desktop. Cada pantalla está optimizada para el uso con una sola mano: navegación inferior, acciones principales al alcance del pulgar, y reproductores que se pueden controlar sin interrumpir el flujo de navegación. A continuación, todas las pantallas del sistema en su versión mobile:',
@@ -799,16 +760,16 @@ export const projects: Project[] = [
           'Integración de comunidad — Sistema de comentarios para feedback y retención',
         ],
       },
-      // ── 05. Prototipo Interactivo y Resultados ──
+      // ── 05. Solución Final ──
       {
-        label: '05. Prototipo Interactivo',
-        title: 'Prototipo funcional en Figma',
+        label: '05. Solución Final',
+        title: 'Prototipo interactivo',
         layout: 'figma-embed',
-        content: 'El prototipo interactivo permite navegar por los flujos principales de la plataforma tal y como fueron diseñados: descubrimiento de contenido, navegación entre secciones, reproducción de música y exploración de categorías. Es la pieza que conecta toda la investigación, el wireframing y el diseño visual en una experiencia cohesiva y testeable.',
-        figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FSoloTemazos-Music-Platform',
+        content: 'El prototipo interactivo es la pieza central del proyecto. Permite navegar por todos los flujos diseñados — descubrimiento de contenido, navegación entre secciones, reproducción de música y exploración de categorías — tal y como se verían en el producto final. Es la síntesis de toda la investigación, el wireframing y el diseño visual en una experiencia cohesiva y testeable.',
+        figmaUrl: 'https://embed.figma.com/proto/pML3Qqh9KRdjqNinLaPR76/Solotemazos?content-scaling=responsive&kind=proto&node-id=98-594&page-id=0%3A1&scaling=scale-down&starting-point-node-id=12%3A2&embed-host=share',
       },
       {
-        label: '05. Prototipo Interactivo',
+        label: '05. Solución Final',
         title: 'Métricas de impacto y crecimiento',
         layout: 'center',
         content: 'El proyecto completo demuestra un proceso end-to-end: desde la estrategia de producto y la investigación de usuarios, hasta un sistema de diseño completo con componentes reutilizables y un prototipo interactivo validado. Estos son los hitos principales:',

@@ -357,10 +357,10 @@ const meta = project.projectMeta;
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10">{section.content}</p>
             )}
             {section.figmaUrl && (
-              <div data-reveal class="rounded-2xl overflow-hidden dashed-border">
+              <div data-reveal class="rounded-2xl overflow-hidden border border-[#3f3f46]">
                 <iframe
                   src={section.figmaUrl}
-                  class="w-full border-0 h-[480px] sm:h-[600px] md:h-[800px]"
+                  class="w-full border-0 h-[800px]"
                   allowfullscreen
                   loading="lazy"
                 />
