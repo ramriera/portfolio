@@ -577,7 +577,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'solotemazos-music-platform',
-    title: 'SoloTemazos — solotemazos-music-platform',
+    title: 'SoloTemazos',
     client: 'SoloTemazos',
     year: '2024',
     category: 'Frontend & UX Engineering',
@@ -722,6 +722,16 @@ export const projects: Project[] = [
           'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-noticia.png',
           'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-ranking.png',
           'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-festival.png',
+        ],
+      },
+      {
+        label: '03. Diseño Visual',
+        title: 'Vistas completas — Listas y festivales',
+        layout: 'image-grid',
+        content: 'Los componentes individuales se integran en vistas completas que muestran cómo el sistema de diseño funciona en contexto real. La vista de listas de reproducción organiza las canciones en un formato editorial que prioriza la portada del artista y permite reproducir directamente desde la lista. La vista de festivales presenta los eventos musicales con información clave visible de un vistazo, facilitando el descubrimiento de experiencias en vivo.',
+        images: [
+          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-lista.png',
+          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-festivals.png',
         ],
       },
       {
