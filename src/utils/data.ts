@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: 'Ramon Riera',
-  title: 'Ramon Riera — Senior UX/UI Designer',
+  title: 'Ramon Riera - Senior UX/UI Designer',
   description: 'Diseñador de experiencias de usuario. Especializado en Design Systems, Product Design y Design Operations.',
   url: 'https://ramonriera.design',
   email: 'hello@ramonriera.design',
@@ -112,8 +112,8 @@ export const projects: Project[] = [
     category: 'UX/UI Design',
     tags: ['UX/UI', 'UX Research', 'Interaction Design', 'Design System'],
     description: 'Diseño de la experiencia de usuario para una app móvil de un fabricante de coches eléctricos que entra en el mercado español, con un servicio innovador de cambio de baterías.',
-    longDescription: 'España se sitúa a la cola de Europa en adopción del vehículo eléctrico. El precio, la autonomía limitada y la escasez de infraestructura de recarga frenan a los consumidores. MoveFast nace como respuesta a este problema real: diseñar la experiencia de una app móvil para un fabricante internacional que quiere entrar en el mercado español con una propuesta de valor inexistente en la competencia — el cambio de baterías bajo demanda.',
-    challenge: 'Los datos del mercado español son contundentes: las matriculaciones de vehículos eléctricos apenas representan una fracción mínima del total europeo. Según coches.net, las tres barreras principales son la escasez de puntos de carga, el precio elevado frente al vehículo convencional, y la autonomía limitada (muchos modelos por debajo de 300 km). A esto se suman tiempos de carga superiores a 45 minutos. El usuario reconoce las ventajas — menos contaminación, ahorro en combustible, acceso a zonas restringidas — pero las barreras pesan más que los beneficios.',
+    longDescription: 'España se sitúa a la cola de Europa en adopción del vehículo eléctrico. El precio, la autonomía limitada y la escasez de infraestructura de recarga frenan a los consumidores. MoveFast nace como respuesta a este problema real: diseñar la experiencia de una app móvil para un fabricante internacional que quiere entrar en el mercado español con una propuesta de valor inexistente en la competencia - el cambio de baterías bajo demanda.',
+    challenge: 'Los datos del mercado español son contundentes: las matriculaciones de vehículos eléctricos apenas representan una fracción mínima del total europeo. Según coches.net, las tres barreras principales son la escasez de puntos de carga, el precio elevado frente al vehículo convencional, y la autonomía limitada (muchos modelos por debajo de 300 km). A esto se suman tiempos de carga superiores a 45 minutos. El usuario reconoce las ventajas - menos contaminación, ahorro en combustible, acceso a zonas restringidas - pero las barreras pesan más que los beneficios.',
     solution: 'Tras analizar el mercado y la competencia, se proponen dos conceptos innovadores: un servicio de cambio de batería bajo demanda donde personal de la empresa acude a tu ubicación (10 cambios gratuitos al año para compradores, 59€ cada cambio adicional), y puntos dinámicos de intercambio modulares en ubicaciones estratégicas de la ciudad que cambian semanalmente con posibilidad de reserva anticipada. Ninguna app competidora ofrece este modelo de servicio.',
     results: [
       'UX completa definida en 2 semanas (45 horas)',
@@ -146,7 +146,7 @@ export const projects: Project[] = [
         label: '02. Investigación y Análisis',
         title: 'Los datos del mercado español',
         layout: 'image-grid',
-        content: 'Según un estudio de coches.net, los españoles conocen las ventajas del coche eléctrico — reducción de contaminación, ahorro en combustible, menor ruido, acceso sin restricciones a centros urbanos y beneficios fiscales — pero estas no superan las barreras de compra. Las tres razones principales por las que el coche eléctrico no termina de despegar son: escasos puntos de carga en autopistas y ciudades, precio elevado respecto al vehículo convencional, y autonomía limitada que genera "ansiedad de rango" en viajes largos.',
+        content: 'Según un estudio de coches.net, los españoles conocen las ventajas del coche eléctrico - reducción de contaminación, ahorro en combustible, menor ruido, acceso sin restricciones a centros urbanos y beneficios fiscales - pero estas no superan las barreras de compra. Las tres razones principales por las que el coche eléctrico no termina de despegar son: escasos puntos de carga en autopistas y ciudades, precio elevado respecto al vehículo convencional, y autonomía limitada que genera "ansiedad de rango" en viajes largos.',
         images: [
           '/assets/projects/movefast/movefast-flota-vehiculos-electricos.png',
           '/assets/projects/movefast/movefast-evolucion-esp.png',
@@ -157,9 +157,9 @@ export const projects: Project[] = [
       },
       {
         label: '02. Investigación y Análisis',
-        title: 'Benchmarking — El hueco que nadie cubre',
+        title: 'Benchmarking - El hueco que nadie cubre',
         layout: 'image-grid',
-        content: 'Analicé las principales aplicaciones del sector de recarga eléctrica disponibles en el mercado. Todas compartían funcionalidades similares: mapas interactivos con ubicación de estaciones de carga, filtros por voltaje y tipo de conector, favoritos, perfiles de usuario y pasarelas de pago integradas.\n\nLa mayoría presentaban una usabilidad pobre y un diseño visual poco cuidado — solo Iberdrola destacaba visualmente, pero sufría de rendimiento lento y funcionalidad limitada. Este vacío en el mercado justifica directamente nuestra propuesta de valor.',
+        content: 'Analicé las principales aplicaciones del sector de recarga eléctrica disponibles en el mercado. Todas compartían funcionalidades similares: mapas interactivos con ubicación de estaciones de carga, filtros por voltaje y tipo de conector, favoritos, perfiles de usuario y pasarelas de pago integradas.\n\nLa mayoría presentaban una usabilidad pobre y un diseño visual poco cuidado - solo Iberdrola destacaba visualmente, pero sufría de rendimiento lento y funcionalidad limitada. Este vacío en el mercado justifica directamente nuestra propuesta de valor.',
         highlight: 'Ninguna de las aplicaciones analizadas ofrecía un servicio de cambio de baterías. MoveFast cubre un vacío crítico en el mercado.',
         images: [
           '/assets/projects/movefast/movefast-benchmarking-apps.png',
@@ -168,16 +168,16 @@ export const projects: Project[] = [
       },
       {
         label: '03. Definición y Empatía',
-        title: 'User Persona — Oriol Vallmajor',
+        title: 'User Persona - Oriol Vallmajor',
         layout: 'full-image',
-        content: 'Para dar forma a la experiencia, creé a Oriol Vallmajor: arquitecto, con ingresos por encima de la media, familiarizado con la tecnología y preocupado por la sostenibilidad. Oriol quiere viajar por España con su familia en un vehículo eléctrico. Es un early adopter dispuesto a invertir en movilidad sostenible, pero la ansiedad por la autonomía y la falta de infraestructura le generan inseguridad real.\n\nSu dolor principal no es técnico — es emocional: la incertidumbre de quedarse sin batería en medio de un viaje familiar. Necesita sentir que tiene el control y que siempre hay una solución cerca.',
+        content: 'Para dar forma a la experiencia, creé a Oriol Vallmajor: arquitecto, con ingresos por encima de la media, familiarizado con la tecnología y preocupado por la sostenibilidad. Oriol quiere viajar por España con su familia en un vehículo eléctrico. Es un early adopter dispuesto a invertir en movilidad sostenible, pero la ansiedad por la autonomía y la falta de infraestructura le generan inseguridad real.\n\nSu dolor principal no es técnico - es emocional: la incertidumbre de quedarse sin batería en medio de un viaje familiar. Necesita sentir que tiene el control y que siempre hay una solución cerca.',
         images: ['/assets/projects/movefast/movefast-user-persona.png'],
       },
       {
         label: '03. Definición y Empatía',
         title: 'Mapa de empatía',
         layout: 'full-image',
-        content: 'A través del mapa de empatía exploré la personalidad, necesidades, deseos y preocupaciones de Oriol. ¿Qué piensa cuando planifica un viaje largo? ¿Qué siente al ver que el punto de carga más cercano está a 80 km? ¿Qué oye de su entorno sobre los coches eléctricos? Los insights revelaron que la barrera principal no es racional sino emocional: la "range anxiety" — el miedo a quedarse tirado — es el factor que más frena la decisión de compra.',
+        content: 'A través del mapa de empatía exploré la personalidad, necesidades, deseos y preocupaciones de Oriol. ¿Qué piensa cuando planifica un viaje largo? ¿Qué siente al ver que el punto de carga más cercano está a 80 km? ¿Qué oye de su entorno sobre los coches eléctricos? Los insights revelaron que la barrera principal no es racional sino emocional: la "range anxiety" - el miedo a quedarse tirado - es el factor que más frena la decisión de compra.',
         images: ['/assets/projects/movefast/movefast-mapa-empatia.png'],
       },
       {
@@ -248,8 +248,8 @@ export const projects: Project[] = [
     category: 'Design Thinking',
     tags: ['Design Thinking', 'Social Impact', 'NGO', 'UX Research'],
     description: 'Plataforma web que reúne donaciones, voluntariado y crowdfunding en un solo lugar para dar visibilidad a ONGs locales frente a las grandes organizaciones internacionales.',
-    longDescription: 'Vivimos en un mundo con 10 grandes problemáticas identificadas por 15.000 científicos de 184 países: escasez de agua, sobrepesca, crecimiento demográfico, degradación del suelo, contaminación, extinción de especies y escasez alimentaria. A partir de la pregunta "¿Cómo podemos mejorar la calidad de vida de los más desfavorecidos?" nació Global Helping — una plataforma web que conecta personas solidarias con ONGs y causas sociales a través de donaciones, voluntariado y crowdfunding.',
-    challenge: 'La investigación inicial reveló un problema inesperado: las ONGs locales carecen de la capacidad y los recursos de comunicación que tienen las grandes organizaciones internacionales. Tras encuestar a 48 personas, el proyecto pivotó de un enfoque generalista ("ayudar a países subdesarrollados") a uno centrado en dar visibilidad a estas organizaciones locales. Además, no existía ninguna plataforma que reuniera donaciones, voluntariado y crowdfunding en un mismo sitio — cada servicio vivía aislado.',
+    longDescription: 'Vivimos en un mundo con 10 grandes problemáticas identificadas por 15.000 científicos de 184 países: escasez de agua, sobrepesca, crecimiento demográfico, degradación del suelo, contaminación, extinción de especies y escasez alimentaria. A partir de la pregunta "¿Cómo podemos mejorar la calidad de vida de los más desfavorecidos?" nació Global Helping - una plataforma web que conecta personas solidarias con ONGs y causas sociales a través de donaciones, voluntariado y crowdfunding.',
+    challenge: 'La investigación inicial reveló un problema inesperado: las ONGs locales carecen de la capacidad y los recursos de comunicación que tienen las grandes organizaciones internacionales. Tras encuestar a 48 personas, el proyecto pivotó de un enfoque generalista ("ayudar a países subdesarrollados") a uno centrado en dar visibilidad a estas organizaciones locales. Además, no existía ninguna plataforma que reuniera donaciones, voluntariado y crowdfunding en un mismo sitio - cada servicio vivía aislado.',
     solution: 'Aplicando Design Thinking end-to-end, diseñé una plataforma web que unifica tres servicios en uno: donar a causas verificadas, apuntarse como voluntario y lanzar campañas de crowdfunding. El diseño se basa en un sistema visual con Design Tokens para garantizar consistencia y escalabilidad, y prioriza la conexión emocional con las causas a través de storytelling visual.',
     results: [
       'UX completa definida en 2 semanas (45 horas)',
@@ -283,7 +283,7 @@ export const projects: Project[] = [
       },
       {
         label: '01. Descubrimiento',
-        title: 'Cuestionarios — El pivote del proyecto',
+        title: 'Cuestionarios - El pivote del proyecto',
         layout: 'image-grid',
         content: 'Se diseñaron dos cuestionarios en Google Forms, dirigidos a personas con diferentes grados de experiencia en solidaridad y voluntariado. Se recogieron 48 respuestas que revelaron un insight que cambió la dirección del proyecto.\n\nEl enfoque inicial era amplio: "¿Cómo ayudar a países subdesarrollados?" Pero los datos mostraron que el problema real estaba más cerca: las ONGs locales no tienen la capacidad de comunicación ni los recursos de las grandes organizaciones internacionales. El proyecto pivotó hacia darles visibilidad y herramientas.',
         highlight: 'Tras encuestar a 48 personas, el proyecto pivotó: el problema no era la falta de solidaridad, sino la falta de visibilidad de las ONGs locales frente a las internacionales.',
@@ -296,7 +296,7 @@ export const projects: Project[] = [
         label: '02. Definición',
         title: 'User Persona y Mapa de empatía',
         layout: 'image-grid',
-        content: 'Con los datos de los cuestionarios, se construyó un User Persona que representa al usuario objetivo: una persona solidaria, con voluntad de ayudar pero frustrada por la falta de plataformas que le faciliten el proceso. El mapa de empatía profundizó en su personalidad, necesidades, deseos y miedos — revelando que la barrera principal no es la falta de interés, sino la falta de confianza y transparencia en las plataformas existentes.',
+        content: 'Con los datos de los cuestionarios, se construyó un User Persona que representa al usuario objetivo: una persona solidaria, con voluntad de ayudar pero frustrada por la falta de plataformas que le faciliten el proceso. El mapa de empatía profundizó en su personalidad, necesidades, deseos y miedos - revelando que la barrera principal no es la falta de interés, sino la falta de confianza y transparencia en las plataformas existentes.',
         images: [
           '/assets/projects/global-helping/gh-user-persona.png',
           '/assets/projects/global-helping/gh-mapa-empatia.png',
@@ -306,14 +306,14 @@ export const projects: Project[] = [
         label: '02. Definición',
         title: 'Customer Journey Map',
         layout: 'full-image',
-        content: 'El Customer Journey Map definió el viaje completo del usuario: desde que descubre una causa que le motiva, pasando por la búsqueda de una forma de ayudar, hasta la acción concreta (donar, ser voluntario o contribuir a crowdfunding). Los puntos de mayor fricción se identificaron en la fragmentación de servicios — el usuario tenía que saltar entre múltiples plataformas para encontrar opciones y ninguna le daba seguimiento ni conexión emocional con el impacto de su ayuda.',
+        content: 'El Customer Journey Map definió el viaje completo del usuario: desde que descubre una causa que le motiva, pasando por la búsqueda de una forma de ayudar, hasta la acción concreta (donar, ser voluntario o contribuir a crowdfunding). Los puntos de mayor fricción se identificaron en la fragmentación de servicios - el usuario tenía que saltar entre múltiples plataformas para encontrar opciones y ninguna le daba seguimiento ni conexión emocional con el impacto de su ayuda.',
         images: ['/assets/projects/global-helping/gh-customer-journey.png'],
       },
       {
         label: '03. Ideación y Benchmarking',
         title: 'Análisis de competencia',
         layout: 'left-right',
-        content: 'Se realizó un benchmarking exhaustivo evaluando servicios, productos, opiniones, valores y marketing de las plataformas existentes en el sector solidario.\n\nEl resultado confirmó la oportunidad: existían plataformas de donaciones, plataformas de voluntariado y plataformas de crowdfunding — pero ninguna reunía los tres servicios en un mismo sitio. El usuario que quería ayudar tenía que navegar entre múltiples webs, cada una con su registro, su interfaz y su lógica. Global Helping nace para resolver esa fragmentación.',
+        content: 'Se realizó un benchmarking exhaustivo evaluando servicios, productos, opiniones, valores y marketing de las plataformas existentes en el sector solidario.\n\nEl resultado confirmó la oportunidad: existían plataformas de donaciones, plataformas de voluntariado y plataformas de crowdfunding - pero ninguna reunía los tres servicios en un mismo sitio. El usuario que quería ayudar tenía que navegar entre múltiples webs, cada una con su registro, su interfaz y su lógica. Global Helping nace para resolver esa fragmentación.',
         highlight: 'No existía ninguna plataforma que reuniera donaciones, voluntariado y crowdfunding en un mismo sitio. Global Helping cubre ese vacío.',
         images: ['/assets/projects/global-helping/gh-benchmarking.png'],
       },
@@ -331,7 +331,7 @@ export const projects: Project[] = [
         label: '04. Desarrollo',
         title: 'De Wireframes a componentes',
         layout: 'full-image',
-        content: 'El proceso fue de menor a mayor fidelidad: primero wireframes rápidos (esquemas de baja calidad, digitales o a mano) para validar la estructura de información y los flujos principales sin invertir tiempo en detalle visual. Una vez validada la arquitectura, se diseñaron los componentes finales: bloques de texto, iconos, cards, botones, campos de texto, selectores, barras de navegación, tablas y listas — todos construidos como elementos independientes y combinables.',
+        content: 'El proceso fue de menor a mayor fidelidad: primero wireframes rápidos (esquemas de baja calidad, digitales o a mano) para validar la estructura de información y los flujos principales sin invertir tiempo en detalle visual. Una vez validada la arquitectura, se diseñaron los componentes finales: bloques de texto, iconos, cards, botones, campos de texto, selectores, barras de navegación, tablas y listas - todos construidos como elementos independientes y combinables.',
         images: ['/assets/projects/global-helping/gh-wireframing.png'],
       },
       {
@@ -391,7 +391,7 @@ export const projects: Project[] = [
     category: 'UX Audit',
     tags: ['Auditoría Heurística', 'Usabilidad', 'Nielsen', 'Banking', 'Mobile'],
     description: 'Auditoría de usabilidad de la app móvil de Imaginbank (CaixaBank) aplicando las 10 Heurísticas de Jakob Nielsen para identificar oportunidades de mejora en la experiencia de usuario.',
-    longDescription: 'Imaginbank es el banco 100% digital de CaixaBank, lanzado en 2016 para operar exclusivamente en dispositivos móviles. Su misión: captar al público joven y nativo digital con servicios financieros ágiles y sin sucursales. Sin embargo, el mercado ha cambiado radicalmente desde su lanzamiento — neobancos como Revolut, N26 y Bnext han redefinido las expectativas de la Gen Z con interfaces limpias, onboardings de 5 minutos y experiencias que se sienten más como apps de consumo que como banca.',
+    longDescription: 'Imaginbank es el banco 100% digital de CaixaBank, lanzado en 2016 para operar exclusivamente en dispositivos móviles. Su misión: captar al público joven y nativo digital con servicios financieros ágiles y sin sucursales. Sin embargo, el mercado ha cambiado radicalmente desde su lanzamiento - neobancos como Revolut, N26 y Bnext han redefinido las expectativas de la Gen Z con interfaces limpias, onboardings de 5 minutos y experiencias que se sienten más como apps de consumo que como banca.',
     challenge: 'Como parte de un ejercicio de evaluación experta, realicé un análisis heurístico de la aplicación móvil de Imaginbank con el objetivo de identificar oportunidades de mejora en su experiencia de usuario. A través de los principios de usabilidad de Nielsen, examiné la interfaz y los flujos clave desde una perspectiva crítica, prestando especial atención a aspectos como la visibilidad del estado del sistema, la consistencia, el control del usuario y la prevención de errores.',
     solution: 'Durante el análisis surgieron hallazgos significativos relacionados con la nomenclatura de ciertas funciones, la falta de flexibilidad en la navegación y la visibilidad limitada de opciones secundarias. Además, se identificaron puntos de mejora en los mensajes de error y en la retroalimentación de acciones críticas. Este caso práctico resume los principales problemas detectados y propone recomendaciones concretas para optimizar la experiencia, con especial énfasis en accesibilidad cognitiva, claridad de los flujos y soporte contextual.',
     results: [
@@ -418,7 +418,7 @@ export const projects: Project[] = [
         label: '01. Contexto',
         title: 'Un banco digital que compite con neobancos',
         layout: 'center',
-        content: 'Imaginbank nació en 2016 como la apuesta de CaixaBank por captar al público joven y nativo digital. Banco 100% móvil, sin sucursales, con servicios financieros diseñados para operar exclusivamente desde el smartphone. La propuesta era clara: competir con los neobancos que estaban redefiniendo la banca.\n\nPero el mercado evolucionó más rápido que el producto. Revolut, N26 y Bnext elevaron el estándar con onboardings de 5 minutos, interfaces ultra-limpias y experiencias que se sienten más como apps de consumo que como banca tradicional. La Gen Z espera ese nivel de calidad — y Imaginbank necesitaba entender por qué no conectaba con ellos a pesar de ser un producto digital-first.',
+        content: 'Imaginbank nació en 2016 como la apuesta de CaixaBank por captar al público joven y nativo digital. Banco 100% móvil, sin sucursales, con servicios financieros diseñados para operar exclusivamente desde el smartphone. La propuesta era clara: competir con los neobancos que estaban redefiniendo la banca.\n\nPero el mercado evolucionó más rápido que el producto. Revolut, N26 y Bnext elevaron el estándar con onboardings de 5 minutos, interfaces ultra-limpias y experiencias que se sienten más como apps de consumo que como banca tradicional. La Gen Z espera ese nivel de calidad - y Imaginbank necesitaba entender por qué no conectaba con ellos a pesar de ser un producto digital-first.',
       },
       {
         label: '01. Contexto',
@@ -432,9 +432,9 @@ export const projects: Project[] = [
       },
       {
         label: '02. Análisis Heurístico',
-        title: 'H1 — Visibilidad del estado del sistema',
+        title: 'H1 - Visibilidad del estado del sistema',
         layout: 'right-left',
-        content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante feedback apropiado y en un tiempo razonable.\n\nEn Imaginbank se detectaron carencias significativas: la app no proporcionaba feedback visual suficiente al realizar acciones críticas como transferencias o pagos. El usuario no siempre sabía si una operación estaba en proceso, se había completado o había fallado — generando incertidumbre y desconfianza en momentos donde la claridad es esencial.',
+        content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante feedback apropiado y en un tiempo razonable.\n\nEn Imaginbank se detectaron carencias significativas: la app no proporcionaba feedback visual suficiente al realizar acciones críticas como transferencias o pagos. El usuario no siempre sabía si una operación estaba en proceso, se había completado o había fallado - generando incertidumbre y desconfianza en momentos donde la claridad es esencial.',
         highlight: 'La falta de feedback en acciones financieras críticas compromete la confianza del usuario en los momentos donde más la necesita.',
         images: [
           '/assets/projects/imaginbank/imaginbank-3.png',
@@ -443,10 +443,10 @@ export const projects: Project[] = [
       },
       {
         label: '02. Análisis Heurístico',
-        title: 'H4 — Consistencia y estándares',
+        title: 'H4 - Consistencia y estándares',
         layout: 'right-left',
         content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEl análisis reveló inconsistencias en la nomenclatura de funciones: las mismas acciones recibían nombres diferentes según la sección de la app. La iconografía no seguía un lenguaje visual coherente y algunos patrones de interacción variaban entre pantallas similares. Para un público joven acostumbrado a apps de consumo ultra-consistentes (Instagram, Spotify, Revolut), estas fricciones son especialmente evidentes.',
-        highlight: 'La nomenclatura inconsistente entre secciones genera confusión cognitiva — el usuario tiene que "reaprender" la interfaz en cada pantalla.',
+        highlight: 'La nomenclatura inconsistente entre secciones genera confusión cognitiva - el usuario tiene que "reaprender" la interfaz en cada pantalla.',
         images: [
           '/assets/projects/imaginbank/imaginbank-5.png',
           '/assets/projects/imaginbank/imaginbank-6.png',
@@ -454,7 +454,7 @@ export const projects: Project[] = [
       },
       {
         label: '02. Análisis Heurístico',
-        title: 'H3 — Control y libertad del usuario',
+        title: 'H3 - Control y libertad del usuario',
         layout: 'right-left',
         content: 'Los usuarios necesitan una "salida de emergencia" clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nLa navegación de Imaginbank presentaba una rigidez notable: la falta de flexibilidad impedía al usuario deshacer acciones, volver atrás de forma intuitiva o acceder a opciones secundarias sin recorrer múltiples pantallas. Las opciones secundarias quedaban enterradas en submenús, obligando al usuario a memorizar dónde encontrar funcionalidades que deberían estar accesibles contextualmente.',
         images: [
@@ -464,10 +464,10 @@ export const projects: Project[] = [
       },
       {
         label: '02. Análisis Heurístico',
-        title: 'H5 / H9 — Prevención de errores y recuperación',
+        title: 'H5 / H9 - Prevención de errores y recuperación',
         layout: 'right-left',
-        content: 'Un diseño cuidadoso que prevenga errores es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en lenguaje claro y ofrecer una solución constructiva.\n\nEn Imaginbank, los mensajes de error eran genéricos y no orientaban al usuario hacia la solución. En operaciones financieras — donde un error puede tener consecuencias económicas reales — la app no ofrecía confirmaciones claras, pasos de verificación ni mecanismos de "undo" que son estándar en neobancos competidores.',
-        highlight: 'Los mensajes de error genéricos en operaciones financieras no solo frustran — erosionan activamente la confianza en la plataforma.',
+        content: 'Un diseño cuidadoso que prevenga errores es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en lenguaje claro y ofrecer una solución constructiva.\n\nEn Imaginbank, los mensajes de error eran genéricos y no orientaban al usuario hacia la solución. En operaciones financieras - donde un error puede tener consecuencias económicas reales - la app no ofrecía confirmaciones claras, pasos de verificación ni mecanismos de "undo" que son estándar en neobancos competidores.',
+        highlight: 'Los mensajes de error genéricos en operaciones financieras no solo frustran - erosionan activamente la confianza en la plataforma.',
         images: [
           '/assets/projects/imaginbank/imaginbank-9.png',
           '/assets/projects/imaginbank/imaginbank-10.png',
@@ -475,9 +475,9 @@ export const projects: Project[] = [
       },
       {
         label: '02. Análisis Heurístico',
-        title: 'H8 — Diseño estético y minimalista',
+        title: 'H8 - Diseño estético y minimalista',
         layout: 'right-left',
-        content: 'Cada unidad extra de información compite con las unidades relevantes y disminuye su visibilidad relativa.\n\nAunque la estética general de Imaginbank era limpia y cuidaba la presentación de información financiera, se detectaron áreas donde la jerarquía visual era confusa y elementos decorativos competían con la información funcional. La priorización visual de las acciones más frecuentes del usuario joven no era óptima — funcionalidades como Bizum o transferencias rápidas no tenían la prominencia que su frecuencia de uso justifica.',
+        content: 'Cada unidad extra de información compite con las unidades relevantes y disminuye su visibilidad relativa.\n\nAunque la estética general de Imaginbank era limpia y cuidaba la presentación de información financiera, se detectaron áreas donde la jerarquía visual era confusa y elementos decorativos competían con la información funcional. La priorización visual de las acciones más frecuentes del usuario joven no era óptima - funcionalidades como Bizum o transferencias rápidas no tenían la prominencia que su frecuencia de uso justifica.',
         images: [
           '/assets/projects/imaginbank/imaginbank-11.png',
           '/assets/projects/imaginbank/imaginbank-12.png',
@@ -485,7 +485,7 @@ export const projects: Project[] = [
       },
       {
         label: '03. Definición y Empatía',
-        title: 'El usuario joven — perfil y frustraciones',
+        title: 'El usuario joven - perfil y frustraciones',
         layout: 'image-grid',
         content: 'El target de Imaginbank es claro: jóvenes de 18-30 años, nativos digitales, usuarios intensivos de apps de consumo que esperan la misma calidad de experiencia en su app bancaria.\n\nSu frustración nace de una interfaz que no habla su lenguaje: nomenclatura bancaria tradicional en lugar de términos directos, flujos que requieren demasiados pasos para acciones simples, y una experiencia que se siente como "la app del banco de mis padres" en lugar de una herramienta financiera moderna. La brecha entre expectativas (definidas por Revolut, N26) y realidad (Imaginbank) es lo que genera abandono.',
         images: [
@@ -508,10 +508,10 @@ export const projects: Project[] = [
         layout: 'center',
         content: 'Basándome en la severidad y el impacto de cada hallazgo, las propuestas de mejora se organizaron en tres niveles de prioridad:',
         bullets: [
-          'Crítico — Rediseñar el sistema de feedback de acciones financieras: confirmaciones visuales claras, estados de progreso y mensajes de error constructivos que guíen al usuario hacia la solución',
-          'Alto — Unificar la nomenclatura en toda la app: lenguaje consistente, directo y alineado con el vocabulario del usuario joven, eliminando jerga bancaria innecesaria',
-          'Alto — Flexibilizar la navegación: accesos directos a acciones frecuentes (Bizum, transferencias), "deshacer" accesible y opciones secundarias visibles sin explorar submenús',
-          'Medio — Optimizar la jerarquía visual: priorizar las 3-4 acciones más frecuentes en la pantalla principal, reducir el ruido visual y aplicar progressive disclosure',
+          'Crítico - Rediseñar el sistema de feedback de acciones financieras: confirmaciones visuales claras, estados de progreso y mensajes de error constructivos que guíen al usuario hacia la solución',
+          'Alto - Unificar la nomenclatura en toda la app: lenguaje consistente, directo y alineado con el vocabulario del usuario joven, eliminando jerga bancaria innecesaria',
+          'Alto - Flexibilizar la navegación: accesos directos a acciones frecuentes (Bizum, transferencias), "deshacer" accesible y opciones secundarias visibles sin explorar submenús',
+          'Medio - Optimizar la jerarquía visual: priorizar las 3-4 acciones más frecuentes en la pantalla principal, reducir el ruido visual y aplicar progressive disclosure',
         ],
       },
       {
@@ -584,9 +584,9 @@ export const projects: Project[] = [
     category: 'Frontend & UX Engineering',
     tags: ['Product Strategy', 'UX/UI Design', 'Design Systems', 'Prototyping', 'UX Research', 'Visual Design'],
     description: 'Plataforma de descubrimiento musical y curación de contenido centrada en la experiencia de usuario y el rendimiento.',
-    longDescription: 'SoloTemazos nace como respuesta a la saturación de algoritmos en plataformas de streaming. Mientras Spotify, Apple Music o YouTube Music priorizan la retención mediante loops algorítmicos, SoloTemazos apuesta por una curación más humana y directa: contenido seleccionado a mano, categorizado por estado de ánimo y contexto, con una interfaz que elimina la fricción entre descubrir y escuchar. El proyecto es un ejercicio completo de UX Engineering — desde la estrategia de producto y el prototipado, hasta el diseño visual y las especificaciones técnicas para implementación.',
-    challenge: 'El mercado del streaming musical está dominado por plataformas con recursos ilimitados. Competir en catálogo es imposible. La oportunidad está en la experiencia: los usuarios sufren "fatiga de decisión" ante millones de canciones y playlists generadas por IA. SoloTemazos necesitaba ofrecer un descubrimiento de un solo clic — abrir la plataforma, ver lo que hay, escuchar. Sin búsquedas complejas, sin algoritmos opacos, sin frustración.',
-    solution: 'Se diseñó el producto completo partiendo de una estrategia clara (Lean Canvas, User Personas, KPIs), pasando por wireframes y prototipos iterativos, hasta un sistema de diseño con componentes reutilizables y un prototipo interactivo en Figma. La estética dark mode evoca la cultura de club, y cada decisión — de negocio, de diseño, de especificación técnica — está al servicio de una sola cosa: que el usuario descubra música sin fricción.',
+    longDescription: 'SoloTemazos nace como respuesta a la saturación de algoritmos en plataformas de streaming. Mientras Spotify, Apple Music o YouTube Music priorizan la retención mediante loops algorítmicos, SoloTemazos apuesta por una curación más humana y directa: contenido seleccionado a mano, categorizado por estado de ánimo y contexto, con una interfaz que elimina la fricción entre descubrir y escuchar. El proyecto es un ejercicio completo de UX Engineering - desde la estrategia de producto y el prototipado, hasta el diseño visual y las especificaciones técnicas para implementación.',
+    challenge: 'El mercado del streaming musical está dominado por plataformas con recursos ilimitados. Competir en catálogo es imposible. La oportunidad está en la experiencia: los usuarios sufren "fatiga de decisión" ante millones de canciones y playlists generadas por IA. SoloTemazos necesitaba ofrecer un descubrimiento de un solo clic - abrir la plataforma, ver lo que hay, escuchar. Sin búsquedas complejas, sin algoritmos opacos, sin frustración.',
+    solution: 'Se diseñó el producto completo partiendo de una estrategia clara (Lean Canvas, User Personas, KPIs), pasando por wireframes y prototipos iterativos, hasta un sistema de diseño con componentes reutilizables y un prototipo interactivo en Figma. La estética dark mode evoca la cultura de club, y cada decisión - de negocio, de diseño, de especificación técnica - está al servicio de una sola cosa: que el usuario descubra música sin fricción.',
     results: [
       'Estrategia de producto completa (Lean Canvas, Personas, KPIs)',
       'Design system con +20 componentes y variantes documentadas',
@@ -612,11 +612,11 @@ export const projects: Project[] = [
       // ── Estrategia de Producto ──
       {
         label: 'Estrategia de Producto',
-        title: 'Lean Canvas — El modelo de negocio',
+        title: 'Lean Canvas - El modelo de negocio',
         layout: 'center',
-        content: 'Antes de escribir una sola línea de código, se definió el modelo de negocio con un Lean Canvas. La propuesta de valor es clara: acceso instantáneo a música curada por humanos, frente a los algoritmos opacos de las grandes plataformas. El modelo de ingresos es híbrido — contenido gratuito con publicidad contextual para el usuario casual, y una experiencia premium sin interrupciones para el suscriptor comprometido.\n\nEl segmento de clientes se divide en dos arquetipos fundamentales: el que busca descubrir (el "Oyente Descubridor") y el que quiere compartir y validar su gusto musical (el "Curador Musical"). Ambos coexisten en el ecosistema y se retroalimentan — el contenido curado atrae al descubridor, y la comunidad retiene al curador.',
+        content: 'Antes de escribir una sola línea de código, se definió el modelo de negocio con un Lean Canvas. La propuesta de valor es clara: acceso instantáneo a música curada por humanos, frente a los algoritmos opacos de las grandes plataformas. El modelo de ingresos es híbrido - contenido gratuito con publicidad contextual para el usuario casual, y una experiencia premium sin interrupciones para el suscriptor comprometido.\n\nEl segmento de clientes se divide en dos arquetipos fundamentales: el que busca descubrir (el "Oyente Descubridor") y el que quiere compartir y validar su gusto musical (el "Curador Musical"). Ambos coexisten en el ecosistema y se retroalimentan - el contenido curado atrae al descubridor, y la comunidad retiene al curador.',
         bullets: [
-          'Propuesta de valor: Curación humana vs. algoritmos — descubrimiento genuino de un solo clic',
+          'Propuesta de valor: Curación humana vs. algoritmos - descubrimiento genuino de un solo clic',
           'Fuentes de ingresos: Modelo híbrido Free (con anuncios contextuales) + Premium (suscripción sin interrupciones)',
           'Canales: SEO orgánico, redes sociales musicales, marketing de contenidos, newsletters',
           'Ventaja competitiva: Velocidad de carga (<1s), editorial humana, nicho no cubierto por grandes plataformas',
@@ -624,10 +624,10 @@ export const projects: Project[] = [
       },
       {
         label: 'Estrategia de Producto',
-        title: 'User Personas — ¿Para quién diseñamos?',
+        title: 'User Personas - ¿Para quién diseñamos?',
         layout: 'center',
-        content: 'Se definieron dos arquetipos principales para guiar todas las decisiones de diseño y desarrollo:\n\n"El Oyente Descubridor" — Tiene entre 22 y 35 años, está cansado de escuchar siempre lo mismo en Spotify. Abre SoloTemazos cuando quiere sorprenderse. Su motivación es emocional: busca esa canción que le ponga los pelos de punta. Su frustración principal es la parálisis ante demasiadas opciones.\n\n"El Curador Musical" — Tiene entre 25 y 40 años, es DJ, melómano o simplemente alguien con un gusto musical muy definido. Quiere un espacio donde su criterio sea visible y valorado. Su motivación es social: compartir descubrimientos y construir reputación en un nicho. Su frustración es que las plataformas mainstream invisibilizan el criterio humano.',
-        highlight: 'El "Oyente Descubridor" no quiere elegir entre millones de canciones — quiere que alguien de confianza le diga "escucha esto". El "Curador Musical" quiere que su criterio tenga un escenario.',
+        content: 'Se definieron dos arquetipos principales para guiar todas las decisiones de diseño y desarrollo:\n\n"El Oyente Descubridor" - Tiene entre 22 y 35 años, está cansado de escuchar siempre lo mismo en Spotify. Abre SoloTemazos cuando quiere sorprenderse. Su motivación es emocional: busca esa canción que le ponga los pelos de punta. Su frustración principal es la parálisis ante demasiadas opciones.\n\n"El Curador Musical" - Tiene entre 25 y 40 años, es DJ, melómano o simplemente alguien con un gusto musical muy definido. Quiere un espacio donde su criterio sea visible y valorado. Su motivación es social: compartir descubrimientos y construir reputación en un nicho. Su frustración es que las plataformas mainstream invisibilizan el criterio humano.',
+        highlight: 'El "Oyente Descubridor" no quiere elegir entre millones de canciones - quiere que alguien de confianza le diga "escucha esto". El "Curador Musical" quiere que su criterio tenga un escenario.',
       },
       {
         label: 'Estrategia de Producto',
@@ -645,16 +645,16 @@ export const projects: Project[] = [
       // ── 01. Descubrimiento ──
       {
         label: '01. Descubrimiento',
-        title: 'La fatiga del algoritmo — Análisis del consumo musical actual',
+        title: 'La fatiga del algoritmo - Análisis del consumo musical actual',
         layout: 'center',
-        content: 'El punto de partida fue una observación respaldada por datos: las plataformas de streaming ofrecen más de 100 millones de canciones, pero cada vez es más difícil descubrir música nueva que realmente conecte. Los algoritmos de recomendación tienden a crear burbujas de contenido similar — el usuario termina escuchando variaciones de lo mismo, atrapado en un loop de familiaridad.\n\nLa investigación reveló un patrón claro: los usuarios más activos musicalmente (los que asisten a conciertos, compran vinilo, siguen sellos discográficos) desconfían de los algoritmos. Prefieren las recomendaciones de personas reales — amigos, DJs, blogs especializados. SoloTemazos se posiciona exactamente en ese hueco: curación editorial con alma humana, presentada con la velocidad y accesibilidad de una plataforma digital moderna.',
+        content: 'El punto de partida fue una observación respaldada por datos: las plataformas de streaming ofrecen más de 100 millones de canciones, pero cada vez es más difícil descubrir música nueva que realmente conecte. Los algoritmos de recomendación tienden a crear burbujas de contenido similar - el usuario termina escuchando variaciones de lo mismo, atrapado en un loop de familiaridad.\n\nLa investigación reveló un patrón claro: los usuarios más activos musicalmente (los que asisten a conciertos, compran vinilo, siguen sellos discográficos) desconfían de los algoritmos. Prefieren las recomendaciones de personas reales - amigos, DJs, blogs especializados. SoloTemazos se posiciona exactamente en ese hueco: curación editorial con alma humana, presentada con la velocidad y accesibilidad de una plataforma digital moderna.',
         highlight: 'El 67% de los oyentes activos prefiere descubrir música a través de personas de confianza antes que por algoritmos. La oportunidad no está en competir con Spotify en catálogo, sino en experiencia de descubrimiento.',
       },
       {
         label: '01. Descubrimiento',
-        title: 'Identidad visual — Logo y marca',
+        title: 'Identidad visual - Logo y marca',
         layout: 'image-grid',
-        content: 'La identidad de SoloTemazos necesitaba funcionar en dos contextos opuestos: sobre fondos oscuros (la plataforma) y sobre fondos claros (redes sociales, compartidos). Se diseñaron dos versiones del logo — negativa y positiva — manteniendo la legibilidad y el reconocimiento en cualquier entorno.',
+        content: 'La identidad de SoloTemazos necesitaba funcionar en dos contextos opuestos: sobre fondos oscuros (la plataforma) y sobre fondos claros (redes sociales, compartidos). Se diseñaron dos versiones del logo - negativa y positiva - manteniendo la legibilidad y el reconocimiento en cualquier entorno.',
         images: [
           '/assets/projects/solotemazos/solotemazos-logo-BLK.png',
           '/assets/projects/solotemazos/solotemazos-logo-WHT.png',
@@ -665,17 +665,17 @@ export const projects: Project[] = [
         label: '02. Definición',
         title: 'De los insights a los wireframes',
         layout: 'center',
-        content: 'Los insights de la fase de descubrimiento se tradujeron en wireframes de baja y media fidelidad. La estructura de la plataforma se diseñó para priorizar tres principios:\n\n1. Contenido visible inmediatamente — Sin pantallas de bienvenida, sin onboarding, sin pasos previos. El usuario aterriza y ya hay música esperándole.\n\n2. Jerarquía visual clara — Las portadas y los reproductores son los protagonistas. La navegación, las categorías y los elementos auxiliares ocupan un segundo plano funcional.\n\n3. Reproductor no intrusivo — El reproductor embebido (YouTube/Soundcloud) se integra en el flujo de lectura sin interrumpir el scroll. El usuario puede explorar mientras escucha.',
+        content: 'Los insights de la fase de descubrimiento se tradujeron en wireframes de baja y media fidelidad. La estructura de la plataforma se diseñó para priorizar tres principios:\n\n1. Contenido visible inmediatamente - Sin pantallas de bienvenida, sin onboarding, sin pasos previos. El usuario aterriza y ya hay música esperándole.\n\n2. Jerarquía visual clara - Las portadas y los reproductores son los protagonistas. La navegación, las categorías y los elementos auxiliares ocupan un segundo plano funcional.\n\n3. Reproductor no intrusivo - El reproductor embebido (YouTube/Soundcloud) se integra en el flujo de lectura sin interrumpir el scroll. El usuario puede explorar mientras escucha.',
         bullets: [
           'Wireframes de baja fidelidad para validar estructura y jerarquía de información',
           'Prototipos de media fidelidad para testear flujos de navegación y disposición del reproductor',
           'Iteración basada en feedback: el reproductor pasó de posición fija (footer) a embebido en contexto',
-          'Decisión clave: eliminar la barra de búsqueda en homepage — el descubrimiento es editorial, no por demanda',
+          'Decisión clave: eliminar la barra de búsqueda en homepage - el descubrimiento es editorial, no por demanda',
         ],
       },
       {
         label: '02. Definición',
-        title: 'Wireframes — Arquitectura de la información',
+        title: 'Wireframes - Arquitectura de la información',
         layout: 'full-image',
         content: 'Los wireframes permitieron validar la estructura antes de invertir tiempo en diseño visual. El foco estaba en la disposición de los bloques de contenido: ¿dónde va el reproductor respecto al texto? ¿Cómo se navega entre categorías sin perder el contexto de lo que se está escuchando? Estos bocetos fueron la base para todas las decisiones de UI posteriores.',
         images: [
@@ -684,7 +684,7 @@ export const projects: Project[] = [
       },
       {
         label: '02. Definición',
-        title: 'Sistema de grids — Estructura responsive',
+        title: 'Sistema de grids - Estructura responsive',
         layout: 'image-grid',
         content: 'Se definió un sistema de grids que garantiza la coherencia visual en todas las resoluciones. La estructura principal usa un grid de 12 columnas con variaciones de 2 y 3 columnas para las tarjetas de contenido, asegurando que la experiencia de descubrimiento funcione tanto en desktop como en móvil.',
         highlight: 'Eliminar la búsqueda de la homepage fue contraintuitivo, pero alineaba el producto con su propuesta de valor: si vienes a SoloTemazos, déjate llevar. La curación es el producto.',
@@ -698,14 +698,14 @@ export const projects: Project[] = [
         label: '03. Diseño Visual',
         title: 'Dark mode y la estética del "Diseño Invisible"',
         layout: 'full-image',
-        content: 'La interfaz de SoloTemazos utiliza un dark mode nativo que no es solo una decisión estética — es funcional. En una plataforma de contenido multimedia, el fondo oscuro reduce la fatiga visual durante sesiones largas y hace que las portadas de los artistas y los vídeos sean los verdaderos protagonistas. Los colores vibrantes (acentos en tonos cálidos y neón) se reservan exclusivamente para elementos interactivos y categorías, creando un sistema visual que evoca la cultura de club y música electrónica sin distraer del contenido. Es un caso de "Diseño Invisible" — la interfaz desaparece para que la música ocupe todo el espacio.',
+        content: 'La interfaz de SoloTemazos utiliza un dark mode nativo que no es solo una decisión estética - es funcional. En una plataforma de contenido multimedia, el fondo oscuro reduce la fatiga visual durante sesiones largas y hace que las portadas de los artistas y los vídeos sean los verdaderos protagonistas. Los colores vibrantes (acentos en tonos cálidos y neón) se reservan exclusivamente para elementos interactivos y categorías, creando un sistema visual que evoca la cultura de club y música electrónica sin distraer del contenido. Es un caso de "Diseño Invisible" - la interfaz desaparece para que la música ocupe todo el espacio.',
         images: [
           '/assets/projects/solotemazos/solotemazos-color.png',
         ],
       },
       {
         label: '03. Diseño Visual',
-        title: 'Tipografía y espaciado — El ritmo visual',
+        title: 'Tipografía y espaciado - El ritmo visual',
         layout: 'full-image',
         content: 'La tipografía es limpia y neutral, con pesos que crean jerarquía sin recurrir a adornos. El sistema de espaciado define márgenes y paddings consistentes que permiten que cada artículo respire, evitando la sensación de sobrecarga que caracteriza a muchas plataformas de contenido. Juntos, tipografía y espaciado crean el ritmo visual que guía al usuario a través del contenido.',
         images: [
@@ -715,9 +715,9 @@ export const projects: Project[] = [
       },
       {
         label: '03. Diseño Visual',
-        title: 'Sistema de componentes — Tarjetas de contenido',
+        title: 'Sistema de componentes - Tarjetas de contenido',
         layout: 'image-grid',
-        content: 'Cada tipo de contenido tiene su propia tarjeta diseñada para comunicar la información esencial de un vistazo. La tarjeta de canción prioriza la portada y el artista; la de noticias, el titular y la imagen destacada; la de ranking, la posición y la tendencia. Todas comparten el mismo lenguaje visual pero están optimizadas para su función específica — simplificando el acceso al reproductor para cumplir con la premisa de descubrimiento en un solo clic.',
+        content: 'Cada tipo de contenido tiene su propia tarjeta diseñada para comunicar la información esencial de un vistazo. La tarjeta de canción prioriza la portada y el artista; la de noticias, el titular y la imagen destacada; la de ranking, la posición y la tendencia. Todas comparten el mismo lenguaje visual pero están optimizadas para su función específica - simplificando el acceso al reproductor para cumplir con la premisa de descubrimiento en un solo clic.',
         images: [
           '/assets/projects/solotemazos/solotemazos-card-song.png',
           '/assets/projects/solotemazos/solotemazos-card-noticia.png',
@@ -727,7 +727,7 @@ export const projects: Project[] = [
       },
       {
         label: '03. Diseño Visual',
-        title: 'Vistas completas — Listas y festivales',
+        title: 'Vistas completas - Listas y festivales',
         layout: 'image-grid',
         content: 'Los componentes individuales se integran en vistas completas que muestran cómo el sistema de diseño funciona en contexto real. La vista de listas de reproducción organiza las canciones en un formato editorial que prioriza la portada del artista y permite reproducir directamente desde la lista. La vista de festivales presenta los eventos musicales con información clave visible de un vistazo, facilitando el descubrimiento de experiencias en vivo.',
         images: [
@@ -737,7 +737,7 @@ export const projects: Project[] = [
       },
       {
         label: '03. Diseño Visual',
-        title: 'Diseño mobile — Todas las pantallas',
+        title: 'Diseño mobile - Todas las pantallas',
         layout: 'screens-grid',
         content: 'La experiencia mobile se diseñó como first-class citizen, no como adaptación del desktop. Cada pantalla está optimizada para el uso con una sola mano: navegación inferior, acciones principales al alcance del pulgar, y reproductores que se pueden controlar sin interrumpir el flujo de navegación. A continuación, todas las pantallas del sistema en su versión mobile:',
         images: [
@@ -760,15 +760,15 @@ export const projects: Project[] = [
         label: '04. Especificaciones Técnicas',
         title: 'Decisiones de UX Engineering',
         layout: 'center',
-        content: 'Cada decisión técnica en SoloTemazos está tomada desde la perspectiva del usuario, no del desarrollador. Las especificaciones de implementación se definieron durante el proceso de diseño para garantizar que la experiencia diseñada sea técnicamente viable y óptima:\n\nArquitectura estática (SSG) recomendada para carga instantánea — generando HTML en build time se alcanza 0ms de TTFB. Componentes interactivos aislados con hidratación parcial (Islands Architecture) que envía JavaScript solo donde hay interactividad real.\n\nReproductores embebidos con lazy loading: los iframes de YouTube/Soundcloud solo se cargan cuando el usuario hace scroll hasta ellos, evitando bloquear la carga inicial con múltiples embeds pesados.\n\nSistema de imágenes optimizado: formatos modernos (WebP/AVIF), responsive srcsets automáticos y Above the Fold priorizado en el Critical Rendering Path.',
+        content: 'Cada decisión técnica en SoloTemazos está tomada desde la perspectiva del usuario, no del desarrollador. Las especificaciones de implementación se definieron durante el proceso de diseño para garantizar que la experiencia diseñada sea técnicamente viable y óptima:\n\nArquitectura estática (SSG) recomendada para carga instantánea - generando HTML en build time se alcanza 0ms de TTFB. Componentes interactivos aislados con hidratación parcial (Islands Architecture) que envía JavaScript solo donde hay interactividad real.\n\nReproductores embebidos con lazy loading: los iframes de YouTube/Soundcloud solo se cargan cuando el usuario hace scroll hasta ellos, evitando bloquear la carga inicial con múltiples embeds pesados.\n\nSistema de imágenes optimizado: formatos modernos (WebP/AVIF), responsive srcsets automáticos y Above the Fold priorizado en el Critical Rendering Path.',
         bullets: [
-          'Arquitectura SSG — HTML estático, 0ms TTFB, Lighthouse Performance objetivo 95+',
-          'Islands Architecture — JavaScript mínimo, hidratación parcial donde hay interactividad',
-          'Lazy loading de embeds — iframes de YouTube/Soundcloud montados solo en viewport',
-          'Imágenes optimizadas — WebP/AVIF con srcsets responsive generados en build time',
-          'Pre-fetching de rutas en hover — navegación percibida como instantánea',
-          'SEO técnico — Meta tags dinámicos, Open Graph, sitemap automático, URLs semánticas',
-          'Integración de comunidad — Sistema de comentarios para feedback y retención',
+          'Arquitectura SSG - HTML estático, 0ms TTFB, Lighthouse Performance objetivo 95+',
+          'Islands Architecture - JavaScript mínimo, hidratación parcial donde hay interactividad',
+          'Lazy loading de embeds - iframes de YouTube/Soundcloud montados solo en viewport',
+          'Imágenes optimizadas - WebP/AVIF con srcsets responsive generados en build time',
+          'Pre-fetching de rutas en hover - navegación percibida como instantánea',
+          'SEO técnico - Meta tags dinámicos, Open Graph, sitemap automático, URLs semánticas',
+          'Integración de comunidad - Sistema de comentarios para feedback y retención',
         ],
       },
       // ── 05. Solución Final ──
@@ -776,7 +776,7 @@ export const projects: Project[] = [
         label: '05. Solución Final',
         title: 'Prototipo interactivo',
         layout: 'figma-embed',
-        content: 'El prototipo interactivo es la pieza central del proyecto. Permite navegar por todos los flujos diseñados — descubrimiento de contenido, navegación entre secciones, reproducción de música y exploración de categorías — tal y como se verían en el producto final. Es la síntesis de toda la investigación, el wireframing y el diseño visual en una experiencia cohesiva y testeable.',
+        content: 'El prototipo interactivo es la pieza central del proyecto. Permite navegar por todos los flujos diseñados - descubrimiento de contenido, navegación entre secciones, reproducción de música y exploración de categorías - tal y como se verían en el producto final. Es la síntesis de toda la investigación, el wireframing y el diseño visual en una experiencia cohesiva y testeable.',
         figmaUrl: 'https://embed.figma.com/proto/pML3Qqh9KRdjqNinLaPR76/Solotemazos?content-scaling=responsive&kind=proto&node-id=98-594&page-id=0%3A1&scaling=scale-down&starting-point-node-id=12%3A2&embed-host=share',
       },
       {
@@ -832,43 +832,40 @@ export const projects: Project[] = [
       // ── 01. Auditoría e Investigación ──
       {
         label: '01. Auditoría e Investigación',
-        title: 'El flujo actual — ¿Por qué no funciona?',
+        title: 'El flujo actual - ¿Por qué no funciona?',
         layout: 'center',
         content: 'El punto de partida fue una auditoría exhaustiva del flujo de reserva existente. Se mapeó paso a paso el journey completo: desde que el usuario descubre el producto hasta que lo recoge en tienda. En paralelo, se realizó benchmarking de cómo resuelven el mismo problema otras empresas del grupo Inditex y competidores directos.\n\nTres hipótesis guiaron la investigación: ¿El usuario no entiende bien qué es "reservar" vs "comprar"? ¿No hay feedback claro del estado de la reserva? ¿El tiempo de expiración genera ansiedad? Las respuestas confirmaron que los tres problemas coexisten y se retroalimentan.',
         bullets: [
-          'Difícil acceso — La acción "reservar en tienda" está escondida y es poco escaneable en la ficha de producto',
-          'Demasiados pasos — Talla → CP → selección de tienda → login → reservar → solicitud → validación manual → email',
-          'Seguimiento opaco — La reserva vive en un email y en "Mi cuenta", sin una capa clara de seguimiento in-app',
-          'Dudas sobre caducidad y compra — 24 horas de margen y no compra obligatoria generan incertidumbre en lugar de confianza',
+          'Difícil acceso - La acción "reservar en tienda" está escondida y es poco escaneable en la ficha de producto',
+          'Demasiados pasos - Talla → CP → selección de tienda → login → reservar → solicitud → validación manual → email',
+          'Seguimiento opaco - La reserva vive en un email y en "Mi cuenta", sin una capa clara de seguimiento in-app',
+          'Dudas sobre caducidad y compra - 24 horas de margen y no compra obligatoria generan incertidumbre en lugar de confianza',
         ],
-        highlight: 'Cada paso extra es una oportunidad perdida de conversión. El usuario no abandona porque no quiera el producto — abandona porque el proceso le genera más fricción que confianza.',
+        highlight: 'Cada paso extra es una oportunidad perdida de conversión. El usuario no abandona porque no quiera el producto - abandona porque el proceso le genera más fricción que confianza.',
       },
       {
         label: '01. Auditoría e Investigación',
-        title: 'Flujo actual — Ficha de producto',
-        layout: 'screens-grid',
-        content: 'El análisis del flujo actual reveló que la opción de "Reservar en tienda" está enterrada al final de la ficha de producto, debajo del scroll. El usuario tiene que desplazarse más allá de la información de composición, cuidados, envíos y devoluciones para encontrar un enlace de texto — ni siquiera un botón — que dice "Disponibilidad y reserva en tienda". La jerarquía visual prioriza completamente la compra online sobre la experiencia omnicanal.',
+        title: 'Flujo actual - Ficha de producto',
+        layout: 'right-left',
+        content: 'El análisis del flujo actual reveló que la opción de "Reservar en tienda" está enterrada al final de la ficha de producto, debajo del scroll. El usuario tiene que desplazarse más allá de la información de composición, cuidados, envíos y devoluciones para encontrar un enlace de texto - ni siquiera un botón - que dice "Disponibilidad y reserva en tienda". La jerarquía visual prioriza completamente la compra online sobre la experiencia omnicanal.',
         images: [
-          '/assets/projects/massimo-dutti/viejo-portada.png',
           '/assets/projects/massimo-dutti/viejo-portada-2.png',
-          '/assets/projects/massimo-dutti/viejo-portada-3.png',
         ],
       },
       {
         label: '01. Auditoría e Investigación',
-        title: 'Flujo actual — Selección de talla y tienda',
-        layout: 'screens-grid',
+        title: 'Flujo actual - Selección de talla y tienda',
+        layout: 'image-grid',
         content: 'Una vez localizada la opción de reserva, el usuario entra en un flujo con demasiados pasos intermedios: seleccionar talla, introducir código postal, elegir tienda de una lista sin información clara de stock, y obligatoriamente loguearse o crear cuenta antes de poder confirmar. La selección de tienda muestra disponibilidad como "Talla disponible: M" pero no comunica cuándo estará lista ni qué pasa si no la recoge.',
         images: [
-          '/assets/projects/massimo-dutti/viejo-talla.png',
           '/assets/projects/massimo-dutti/viejo-mapa.png',
           '/assets/projects/massimo-dutti/viejo-login.png',
         ],
       },
       {
         label: '01. Auditoría e Investigación',
-        title: 'Flujo actual — Confirmación y seguimiento',
-        layout: 'screens-grid',
+        title: 'Flujo actual - Confirmación y seguimiento',
+        layout: 'image-grid',
         content: 'La confirmación de reserva es una pantalla mínima que redirige al usuario a su email y a "Mis reservas en tienda" dentro de "Mi cuenta". El tracking in-app es básico: muestra el estado como "Pendiente" con fecha, pero sin progresión visual, sin estimación de tiempo, y sin ninguna acción que el usuario pueda realizar. No hay integración con wallet, no hay mapa, no hay recordatorio de caducidad. El usuario queda en un limbo de espera pasiva.',
         images: [
           '/assets/projects/massimo-dutti/viejo-solicitud-reserva.png',
@@ -892,23 +889,12 @@ export const projects: Project[] = [
     style G fill:#e8e8e4,stroke:#18181b,stroke-width:3px,color:#18181b`,
         highlight: 'De 8 pasos a 4. El flujo elimina el registro obligatorio, preselecciona la tienda favorita y confirma en un solo tap.',
       },
-      {
-        label: '02. Flujo de Usuario y Conversión',
-        title: 'El paso a paso — De producto a confirmación',
-        layout: 'screens-grid',
-        content: 'Las tres pantallas clave del nuevo flujo: visualización de producto con CTA dual visible, detalle de composición y selección de talla con acceso directo a la reserva, y la pantalla final de "Solicitud de reserva realizada" con QR, tracking y opciones de wallet.',
-        images: [
-          '/assets/projects/massimo-dutti/nuevo-reservar-en-tienda.png',
-          '/assets/projects/massimo-dutti/nuevo-selecciona-tienda.png',
-          '/assets/projects/massimo-dutti/nuevo-solicitud-reserva.png',
-        ],
-      },
       // ── 03. Estrategia de Producto ──
       {
         label: '03. Estrategia de Producto',
-        title: 'Los 3 pilares — Claridad, Velocidad, Confianza',
+        title: 'Los 3 pilares - Claridad, Velocidad, Confianza',
         layout: 'center',
-        content: 'A partir del diagnóstico, se definieron tres pilares estratégicos que guían cada decisión de diseño del nuevo flujo:\n\nClaridad — Que el usuario entienda exactamente qué está haciendo. "Reservar" no es "comprar". No hay cargo online. El producto le espera en tienda para que lo pruebe sin compromiso.\n\nVelocidad — Que reservar sea tan directo como "añadir a la bolsa". Tienda favorita preseleccionada, email como único dato necesario, confirmación en un tap.\n\nConfianza — Que el usuario sepa qué pasará, cuándo y cómo. Confirmación inmediata con QR, tracking con estados claros, recordatorios antes de que caduque, y siempre el mensaje: "Pagarás en tienda. Ningún cargo online".',
+        content: 'A partir del diagnóstico, se definieron tres pilares estratégicos que guían cada decisión de diseño del nuevo flujo:\n\nClaridad - Que el usuario entienda exactamente qué está haciendo. "Reservar" no es "comprar". No hay cargo online. El producto le espera en tienda para que lo pruebe sin compromiso.\n\nVelocidad - Que reservar sea tan directo como "añadir a la bolsa". Tienda favorita preseleccionada, email como único dato necesario, confirmación en un tap.\n\nConfianza - Que el usuario sepa qué pasará, cuándo y cómo. Confirmación inmediata con QR, tracking con estados claros, recordatorios antes de que caduque, y siempre el mensaje: "Pagarás en tienda. Ningún cargo online".',
         highlight: 'Si reducimos la ansiedad por el tiempo de expiración y clarificamos que no hay cargo online, la conversión subirá. Esta es la hipótesis de valor que vertebra todo el rediseño.',
       },
       {
@@ -917,9 +903,9 @@ export const projects: Project[] = [
         layout: 'center',
         content: 'Se establecieron tres categorías de objetivos para medir el impacto del rediseño:',
         bullets: [
-          'Experiencia — Percepción de rapidez: que reservar se sienta tan directo como añadir a la bolsa. Mostrar disponibilidad real. Eliminar incertidumbre con información clara de qué pasará, cuándo y cómo',
-          'Flujo — Eliminar registro obligatorio (permitir reserva como invitado). Confirmación inmediata con dirección, horario, tiempo estimado y mapa. Notificaciones push con estados claros',
-          'Conversión — Aumentar clics en "Reservar en tienda" vs. situación actual. Mejorar ratio reservas confirmadas / reservas iniciadas. Incrementar recogida en tienda en menos de 24h. Crear ventas cruzadas in-app y en tienda física',
+          'Experiencia - Percepción de rapidez: que reservar se sienta tan directo como añadir a la bolsa. Mostrar disponibilidad real. Eliminar incertidumbre con información clara de qué pasará, cuándo y cómo',
+          'Flujo - Eliminar registro obligatorio (permitir reserva como invitado). Confirmación inmediata con dirección, horario, tiempo estimado y mapa. Notificaciones push con estados claros',
+          'Conversión - Aumentar clics en "Reservar en tienda" vs. situación actual. Mejorar ratio reservas confirmadas / reservas iniciadas. Incrementar recogida en tienda en menos de 24h. Crear ventas cruzadas in-app y en tienda física',
         ],
       },
       // ── 04. El Nuevo Flujo de Reserva ──
@@ -927,13 +913,13 @@ export const projects: Project[] = [
         label: '04. Nuevo Flujo de Reserva',
         title: 'Las 6 fases del nuevo flujo',
         layout: 'center',
-        content: 'El nuevo flujo se estructura en 6 fases diseñadas para minimizar la fricción y maximizar la confianza en cada paso:\n\n1. Ficha de producto — CTA dual: "Añadir a la cesta" + "Pruébalo hoy en tienda", con la misma jerarquía visual. Sin necesidad de hacer scroll.\n\n2. Selección de tienda — Tienda favorita preseleccionada si el usuario está logueado. Lista con distancia, horarios y servicios disponibles (Style Advisor, probadores).\n\n3. Resumen de reserva — Pantalla con producto, talla, tienda y opción de ir a mapas. Solo necesita email si no está logueado. Mensaje claro: "Recuerda que esta reserva no implica la compra final del producto".\n\n4. Confirmación inmediata — QR generado al instante, integración con Apple Wallet y Google Wallet, estados de progreso visibles (Reservado → Finalizando → Listo).\n\n5. Tracking in-app — Sección "Mis reservas" con estados: Pendiente → Confirmada → Caducada → Recogida. Con venta cruzada de stock de la misma tienda.\n\n6. Recogida y post-visita — Push + email con instrucciones claras. QR para escanear en tienda. Valoración rápida post-visita.',
+        content: 'El nuevo flujo se estructura en 6 fases diseñadas para minimizar la fricción y maximizar la confianza en cada paso:\n\n1. Ficha de producto - CTA dual: "Añadir a la cesta" + "Pruébalo hoy en tienda", con la misma jerarquía visual. Sin necesidad de hacer scroll.\n\n2. Selección de tienda - Tienda favorita preseleccionada si el usuario está logueado. Lista con distancia, horarios y servicios disponibles (Style Advisor, probadores).\n\n3. Resumen de reserva - Pantalla con producto, talla, tienda y opción de ir a mapas. Solo necesita email si no está logueado. Mensaje claro: "Recuerda que esta reserva no implica la compra final del producto".\n\n4. Confirmación inmediata - QR generado al instante, integración con Apple Wallet y Google Wallet, estados de progreso visibles (Reservado → Finalizando → Listo).\n\n5. Tracking in-app - Sección "Mis reservas" con estados: Pendiente → Confirmada → Caducada → Recogida. Con venta cruzada de stock de la misma tienda.\n\n6. Recogida y post-visita - Push + email con instrucciones claras. QR para escanear en tienda. Valoración rápida post-visita.',
       },
       {
         label: '04. Nuevo Flujo de Reserva',
-        title: 'Ficha de producto — CTA dual visible',
-        layout: 'screens-grid',
-        content: 'El cambio más impactante del rediseño: el CTA "Reservar en tienda" deja de estar escondido y pasa a convivir con "Añadir a la cesta" en la misma jerarquía visual. Se ofrecen dos variantes — un enlace de texto sutil bajo el botón principal ("¿Lo quieres hoy? Pruébalo en tienda") y un botón secundario con la misma prominencia ("RESERVAR EN TIENDA"). Ambas opciones son visibles sin necesidad de hacer scroll.',
+        title: 'Ficha de producto - CTA dual visible',
+        layout: 'image-grid',
+        content: 'El cambio más impactante del rediseño: el CTA "Reservar en tienda" deja de estar escondido y pasa a convivir con "Añadir a la cesta" en la misma jerarquía visual. Se ofrecen dos variantes - un enlace de texto sutil bajo el botón principal ("¿Lo quieres hoy? Pruébalo en tienda") y un botón secundario con la misma prominencia ("RESERVAR EN TIENDA"). Ambas opciones son visibles sin necesidad de hacer scroll.',
         images: [
           '/assets/projects/massimo-dutti/nuevo-reservar-en-tienda-link.png',
           '/assets/projects/massimo-dutti/nuevo-reservar-en-tienda.png',
@@ -942,7 +928,7 @@ export const projects: Project[] = [
       {
         label: '04. Nuevo Flujo de Reserva',
         title: 'Selección de tienda y resumen de reserva',
-        layout: 'screens-grid',
+        layout: 'image-grid',
         content: 'La selección de tienda muestra la tienda favorita preseleccionada con distancia, horario de disponibilidad ("Hoy a partir de las 10:30") y stock en tiempo real. Las tiendas sin stock lo indican claramente ("No hay stock") evitando frustraciones posteriores. El resumen de reserva incluye toda la información práctica: producto, talla, tienda con dirección y teléfono, horarios y servicios disponibles. Solo se pide el email si el usuario no está logueado. Un banner superior refuerza: "Recuerda que esta reserva no implica la compra final del producto".',
         images: [
           '/assets/projects/massimo-dutti/nuevo-selecciona-tienda.png',
@@ -952,8 +938,8 @@ export const projects: Project[] = [
       {
         label: '04. Nuevo Flujo de Reserva',
         title: 'Confirmación inmediata y tracking in-app',
-        layout: 'screens-grid',
-        content: 'La confirmación genera un código QR al instante con el número de referencia de la reserva, botones para añadir a Apple Wallet o Google Wallet, y toda la información del producto y la tienda. La barra de progreso muestra visualmente el estado: Reservado → Finalizando → Listo. El tracking in-app mantiene al usuario informado con la hora estimada ("Pendiente — A partir de las 10:30"), el producto con foto y detalles, y acceso directo al QR y a las indicaciones para llegar a la tienda.',
+        layout: 'image-grid',
+        content: 'La confirmación genera un código QR al instante con el número de referencia de la reserva, botones para añadir a Apple Wallet o Google Wallet, y toda la información del producto y la tienda. La barra de progreso muestra visualmente el estado: Reservado → Finalizando → Listo. El tracking in-app mantiene al usuario informado con la hora estimada ("Pendiente - A partir de las 10:30"), el producto con foto y detalles, y acceso directo al QR y a las indicaciones para llegar a la tienda.',
         images: [
           '/assets/projects/massimo-dutti/nuevo-solicitud-reserva.png',
           '/assets/projects/massimo-dutti/nuevo-reserva.png',
@@ -963,7 +949,7 @@ export const projects: Project[] = [
         label: '04. Nuevo Flujo de Reserva',
         title: 'Venta cruzada contextual',
         layout: 'right-left',
-        content: 'Mientras el usuario espera la confirmación de su reserva o consulta el tracking, el sistema sugiere productos complementarios del stock de la misma tienda bajo el título "Completa tu look en tienda". Un cliente que va a recoger una reserva tiene un 30% más de probabilidades de comprar un accesorio o prenda complementaria.\n\nEsta venta cruzada no es intrusiva — aparece después de toda la información funcional y utiliza el formato de "Looks" que el usuario ya conoce de la ficha de producto. El objetivo: transformar cada visita de recogida en una oportunidad de venta adicional.',
+        content: 'Mientras el usuario espera la confirmación de su reserva o consulta el tracking, el sistema sugiere productos complementarios del stock de la misma tienda bajo el título "Completa tu look en tienda". Un cliente que va a recoger una reserva tiene un 30% más de probabilidades de comprar un accesorio o prenda complementaria.\n\nEsta venta cruzada no es intrusiva - aparece después de toda la información funcional y utiliza el formato de "Looks" que el usuario ya conoce de la ficha de producto. El objetivo: transformar cada visita de recogida en una oportunidad de venta adicional.',
         highlight: 'Un cliente que va a recoger una reserva tiene un 30% más de probabilidades de comprar un accesorio. La venta cruzada contextual convierte cada recogida en una oportunidad.',
         images: [
           '/assets/projects/massimo-dutti/nuevo-tracking-in-app.png',
@@ -972,31 +958,31 @@ export const projects: Project[] = [
       // ── 05. Service Design & Post-Visita ──
       {
         label: '05. Service Design',
-        title: 'Poste de Recogida QR — La experiencia en tienda',
+        title: 'Poste de Recogida QR - La experiencia en tienda',
         layout: 'center',
         content: '¿Por qué no añadir una sección de recogida con un poste que lea los códigos QR? Esta propuesta de Service Design extiende la experiencia digital al mundo físico. En lugar de depender al 100% del personal de tienda para gestionar las recogidas, se propone un poste automatizado donde el cliente escanea su QR al llegar y el sistema notifica al staff para preparar el pedido.\n\nEsto resuelve tres problemas simultáneamente: reduce los tiempos de espera del cliente, libera al personal para tareas de mayor valor (asesoramiento, venta), y genera datos medibles sobre el flujo de recogida que permiten optimizar la operación.',
         bullets: [
-          'Cliente tiene mejor experiencia — Escanea el QR al llegar, sin buscar a nadie, sin esperas. El sistema confirma "Tu reserva se está preparando"',
-          'Servicio personalizado — El staff recibe una notificación con el nombre del cliente, el producto reservado y sugerencias de cross-selling antes de que llegue al mostrador',
-          'Datos operativos — Tiempo medio de recogida, horas pico, ratio de recogida vs. caducidad. Información para optimizar turnos y stock',
+          'Cliente tiene mejor experiencia - Escanea el QR al llegar, sin buscar a nadie, sin esperas. El sistema confirma "Tu reserva se está preparando"',
+          'Servicio personalizado - El staff recibe una notificación con el nombre del cliente, el producto reservado y sugerencias de cross-selling antes de que llegue al mostrador',
+          'Datos operativos - Tiempo medio de recogida, horas pico, ratio de recogida vs. caducidad. Información para optimizar turnos y stock',
         ],
         highlight: 'El poste QR transforma la recogida de un momento transaccional en una experiencia de servicio. El cliente se siente atendido antes de hablar con nadie.',
       },
       // ── 06. Acciones de Conversión ──
       {
         label: '06. Acciones de Conversión',
-        title: 'CRO — Acciones concretas para mejorar conversión',
+        title: 'CRO - Acciones concretas para mejorar conversión',
         layout: 'center',
-        content: 'Cada mejora propuesta responde a un punto de abandono identificado en la auditoría. No son ideas genéricas — son intervenciones quirúrgicas en los momentos exactos donde el flujo actual pierde usuarios:',
+        content: 'Cada mejora propuesta responde a un punto de abandono identificado en la auditoría. No son ideas genéricas - son intervenciones quirúrgicas en los momentos exactos donde el flujo actual pierde usuarios:',
         bullets: [
-          'CTA visible — Botón principal "Reservar en tienda" en la ficha de producto, con la misma jerarquía visual que "Añadir a la cesta". Sin scroll necesario',
-          'Menos fricción — Tienda favorita preseleccionada por defecto. Tiempo estimado visible: "Se confirma en menos de 30 min". Sin registro obligatorio',
-          'Mensajes de seguridad — "Pagarás en tienda. Ningún cargo online". "Tendrás 24h para recogerlo". Eliminar la ansiedad transaccional',
-          'Reforzar valor — Destacar servicios de tienda: Style Advisor, probadores, personalización. "Prueba tu selección con un Style Advisor"',
-          'Recuperar abandonos — Notificación push si el usuario cierra el flujo: "¿Quieres terminar la reserva en [Tienda]?". Push recordatorio 2h antes de caducar',
-          'Ventas cruzadas — Sugerir looks complementarios del stock de la misma tienda durante el tracking. Convertir cada recogida en oportunidad de venta',
+          'CTA visible - Botón principal "Reservar en tienda" en la ficha de producto, con la misma jerarquía visual que "Añadir a la cesta". Sin scroll necesario',
+          'Menos fricción - Tienda favorita preseleccionada por defecto. Tiempo estimado visible: "Se confirma en menos de 30 min". Sin registro obligatorio',
+          'Mensajes de seguridad - "Pagarás en tienda. Ningún cargo online". "Tendrás 24h para recogerlo". Eliminar la ansiedad transaccional',
+          'Reforzar valor - Destacar servicios de tienda: Style Advisor, probadores, personalización. "Prueba tu selección con un Style Advisor"',
+          'Recuperar abandonos - Notificación push si el usuario cierra el flujo: "¿Quieres terminar la reserva en [Tienda]?". Push recordatorio 2h antes de caducar',
+          'Ventas cruzadas - Sugerir looks complementarios del stock de la misma tienda durante el tracking. Convertir cada recogida en oportunidad de venta',
         ],
-        highlight: '"Pagarás en tienda. Ningún cargo online" — Este mensaje, repetido en los momentos clave del flujo, elimina la principal barrera psicológica de la reserva.',
+        highlight: '"Pagarás en tienda. Ningún cargo online" - Este mensaje, repetido en los momentos clave del flujo, elimina la principal barrera psicológica de la reserva.',
       },
     ],
   },

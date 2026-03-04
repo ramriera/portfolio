@@ -194,7 +194,7 @@ main {
   overflow: visible;
 }
 
-/* Animated section icons — Lottie-style */
+/* Animated section icons - Lottie-style */
 .section-icon {
   display: inline-flex;
   align-items: center;
@@ -238,7 +238,7 @@ main {
   stroke: none;
 }
 
-/* Eye icon — pupil looks around */
+/* Eye icon - pupil looks around */
 @keyframes eyeLook {
   0%, 100% { transform: translateX(0) translateY(0); }
   15% { transform: translateX(2px) translateY(-0.5px); }
@@ -262,7 +262,7 @@ main {
   transform-origin: center center;
 }
 
-/* Hand icon — wave */
+/* Hand icon - wave */
 @keyframes handWave {
   0%, 70%, 100% { transform: rotate(0deg); }
   10% { transform: rotate(18deg); }
@@ -286,7 +286,7 @@ main {
 .icon-wave-line-1 { animation: sparkleFloat 3s ease-in-out 0.2s infinite; }
 .icon-wave-line-2 { animation: sparkleFloat 3s ease-in-out 1s infinite; }
 
-/* Rocket icon — hover / launch */
+/* Rocket icon - hover / launch */
 @keyframes rocketHover {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-3px); }
@@ -306,7 +306,7 @@ main {
 .icon-flame-2 { animation: flamePulse 0.8s ease-in-out 0.25s infinite; }
 .icon-flame-3 { animation: flamePulse 0.8s ease-in-out 0.5s infinite; }
 
-/* Ruler / set-square icon — breathing pulse */
+/* Ruler / set-square icon - breathing pulse */
 @keyframes rulerPulse {
   0%, 100% { transform: scale(1) rotate(0deg); }
   25% { transform: scale(1.06) rotate(-2deg); }
