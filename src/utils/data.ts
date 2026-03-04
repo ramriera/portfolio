@@ -795,6 +795,182 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    slug: 'massimo-dutti-conversion',
+    title: 'Massimo Dutti — Rediseño para la Conversión Omnicanal',
+    client: 'Massimo Dutti (Inditex)',
+    year: '2025',
+    category: 'UX Strategy & Service Design',
+    tags: ['UX Strategy', 'Service Design', 'CRO', 'User Journey Mapping', 'Omnichannel Retail', 'Prototyping'],
+    description: 'Optimizando el flujo de reserva en tienda para eliminar la fricción entre el mundo online y físico.',
+    longDescription: 'Massimo Dutti ofrece una funcionalidad de "Reserva en tienda" que permite al usuario separar un producto online para probarlo y comprarlo en tienda física, sin cargo previo. Sobre el papel, es una solución omnicanal potente. En la práctica, el flujo actual presenta fricciones que provocan abandono: la acción de reservar está escondida, el proceso requiere demasiados pasos, el seguimiento es opaco y las dudas sobre caducidad y compromiso de compra generan incertidumbre.\n\nEste proyecto propone un rediseño completo del flujo de reserva centrado en tres pilares: claridad (que el usuario entienda exactamente qué está haciendo), velocidad (que reservar sea tan directo como añadir a la cesta) y confianza (que sepa que no hay cargo online y que tiene 24 horas para decidir).',
+    challenge: 'El usuario confunde "Click & Collect" con "Reserva en Tienda". La acción de reservar está enterrada en la ficha de producto, el flujo obliga a loguearse antes de completar la reserva, la selección de tienda carece de información sobre disponibilidad real, y la confirmación se limita a un email sin seguimiento in-app. Cada paso extra es una oportunidad perdida de conversión. El resultado: usuarios que abandonan el flujo antes de completarlo y una tasa de recogida en tienda por debajo del potencial.',
+    solution: 'Se rediseñó el flujo completo en 6 fases: ficha de producto con CTA dual visible ("Añadir a la cesta" + "Pruébalo hoy en tienda"), selección de tienda con favorita preseleccionada, resumen de reserva sin registro obligatorio, confirmación inmediata con QR y Apple/Google Wallet, tracking in-app con estados claros (Pendiente → Confirmada → Recogida) y venta cruzada contextual, más una propuesta de Service Design para la recogida física con poste QR automatizado.',
+    results: [
+      'Flujo de reserva reducido de 8 pasos a 4',
+      'CTA "Reservar en tienda" visible en ficha de producto (misma jerarquía que "Añadir a la cesta")',
+      'Tracking in-app con estados y venta cruzada integrada',
+      'Propuesta de Service Design: poste QR para recogida autónoma en tienda',
+      'Integración con Apple Wallet y Google Wallet para acceso rápido al QR',
+      'Sistema de recuperación de abandonos con push notifications',
+    ],
+    stack: ['Figma', 'Miro', 'Research', 'Service Blueprint', 'Prototyping'],
+    cover: '/assets/projects/massimo-dutti/viejo-portada.png',
+    gallery: [
+      '/assets/projects/massimo-dutti/viejo-portada.png',
+    ],
+    liveUrl: '#',
+    featured: true,
+    projectMeta: {
+      role: 'UX/UI Strategy & Service Design',
+      duration: '2 semanas',
+      tools: ['Figma', 'Miro', 'Research', 'Service Blueprint'],
+      skills: ['UX Strategy', 'Service Design', 'CRO', 'User Journey Mapping', 'Omnichannel Retail', 'Prototyping'],
+    },
+    caseSections: [
+      // ── 01. Auditoría e Investigación ──
+      {
+        label: '01. Auditoría e Investigación',
+        title: 'El flujo actual — ¿Por qué no funciona?',
+        layout: 'center',
+        content: 'El punto de partida fue una auditoría exhaustiva del flujo de reserva existente. Se mapeó paso a paso el journey completo: desde que el usuario descubre el producto hasta que lo recoge en tienda. En paralelo, se realizó benchmarking de cómo resuelven el mismo problema otras empresas del grupo Inditex y competidores directos.\n\nTres hipótesis guiaron la investigación: ¿El usuario no entiende bien qué es "reservar" vs "comprar"? ¿No hay feedback claro del estado de la reserva? ¿El tiempo de expiración genera ansiedad? Las respuestas confirmaron que los tres problemas coexisten y se retroalimentan.',
+        bullets: [
+          'Difícil acceso — La acción "reservar en tienda" está escondida y es poco escaneable en la ficha de producto',
+          'Demasiados pasos — Talla → CP → selección de tienda → login → reservar → solicitud → validación manual → email',
+          'Seguimiento opaco — La reserva vive en un email y en "Mi cuenta", sin una capa clara de seguimiento in-app',
+          'Dudas sobre caducidad y compra — 24 horas de margen y no compra obligatoria generan incertidumbre en lugar de confianza',
+        ],
+        highlight: 'Cada paso extra es una oportunidad perdida de conversión. El usuario no abandona porque no quiera el producto — abandona porque el proceso le genera más fricción que confianza.',
+      },
+      {
+        label: '01. Auditoría e Investigación',
+        title: 'Flujo actual — Ficha de producto',
+        layout: 'screens-grid',
+        content: 'El análisis del flujo actual reveló que la opción de "Reservar en tienda" está enterrada al final de la ficha de producto, debajo del scroll. El usuario tiene que desplazarse más allá de la información de composición, cuidados, envíos y devoluciones para encontrar un enlace de texto — ni siquiera un botón — que dice "Disponibilidad y reserva en tienda". La jerarquía visual prioriza completamente la compra online sobre la experiencia omnicanal.',
+        images: [
+          '/assets/projects/massimo-dutti/viejo-portada.png',
+          '/assets/projects/massimo-dutti/viejo-portada-2.png',
+          '/assets/projects/massimo-dutti/viejo-portada-3.png',
+        ],
+      },
+      {
+        label: '01. Auditoría e Investigación',
+        title: 'Flujo actual — Selección de talla y tienda',
+        layout: 'screens-grid',
+        content: 'Una vez localizada la opción de reserva, el usuario entra en un flujo con demasiados pasos intermedios: seleccionar talla, introducir código postal, elegir tienda de una lista sin información clara de stock, y obligatoriamente loguearse o crear cuenta antes de poder confirmar. La selección de tienda muestra disponibilidad como "Talla disponible: M" pero no comunica cuándo estará lista ni qué pasa si no la recoge.',
+        images: [
+          '/assets/projects/massimo-dutti/viejo-talla.png',
+          '/assets/projects/massimo-dutti/viejo-mapa.png',
+          '/assets/projects/massimo-dutti/viejo-login.png',
+        ],
+      },
+      {
+        label: '01. Auditoría e Investigación',
+        title: 'Flujo actual — Confirmación y seguimiento',
+        layout: 'screens-grid',
+        content: 'La confirmación de reserva es una pantalla mínima que redirige al usuario a su email y a "Mis reservas en tienda" dentro de "Mi cuenta". El tracking in-app es básico: muestra el estado como "Pendiente" con fecha, pero sin progresión visual, sin estimación de tiempo, y sin ninguna acción que el usuario pueda realizar. No hay integración con wallet, no hay mapa, no hay recordatorio de caducidad. El usuario queda en un limbo de espera pasiva.',
+        images: [
+          '/assets/projects/massimo-dutti/viejo-solicitud-reserva.png',
+          '/assets/projects/massimo-dutti/viejo-tracking-in-app.png',
+        ],
+      },
+      // ── 02. Estrategia de Producto ──
+      {
+        label: '02. Estrategia de Producto',
+        title: 'Los 3 pilares — Claridad, Velocidad, Confianza',
+        layout: 'center',
+        content: 'A partir del diagnóstico, se definieron tres pilares estratégicos que guían cada decisión de diseño del nuevo flujo:\n\nClaridad — Que el usuario entienda exactamente qué está haciendo. "Reservar" no es "comprar". No hay cargo online. El producto le espera en tienda para que lo pruebe sin compromiso.\n\nVelocidad — Que reservar sea tan directo como "añadir a la bolsa". Tienda favorita preseleccionada, email como único dato necesario, confirmación en un tap.\n\nConfianza — Que el usuario sepa qué pasará, cuándo y cómo. Confirmación inmediata con QR, tracking con estados claros, recordatorios antes de que caduque, y siempre el mensaje: "Pagarás en tienda. Ningún cargo online".',
+        highlight: 'Si reducimos la ansiedad por el tiempo de expiración y clarificamos que no hay cargo online, la conversión subirá. Esta es la hipótesis de valor que vertebra todo el rediseño.',
+      },
+      {
+        label: '02. Estrategia de Producto',
+        title: 'Objetivos medibles',
+        layout: 'center',
+        content: 'Se establecieron tres categorías de objetivos para medir el impacto del rediseño:',
+        bullets: [
+          'Experiencia — Percepción de rapidez: que reservar se sienta tan directo como añadir a la bolsa. Mostrar disponibilidad real. Eliminar incertidumbre con información clara de qué pasará, cuándo y cómo',
+          'Flujo — Eliminar registro obligatorio (permitir reserva como invitado). Confirmación inmediata con dirección, horario, tiempo estimado y mapa. Notificaciones push con estados claros',
+          'Conversión — Aumentar clics en "Reservar en tienda" vs. situación actual. Mejorar ratio reservas confirmadas / reservas iniciadas. Incrementar recogida en tienda en menos de 24h. Crear ventas cruzadas in-app y en tienda física',
+        ],
+      },
+      // ── 03. El Nuevo Flujo de Reserva ──
+      {
+        label: '03. Nuevo Flujo de Reserva',
+        title: 'Las 6 fases del nuevo flujo',
+        layout: 'center',
+        content: 'El nuevo flujo se estructura en 6 fases diseñadas para minimizar la fricción y maximizar la confianza en cada paso:\n\n1. Ficha de producto — CTA dual: "Añadir a la cesta" + "Pruébalo hoy en tienda", con la misma jerarquía visual. Sin necesidad de hacer scroll.\n\n2. Selección de tienda — Tienda favorita preseleccionada si el usuario está logueado. Lista con distancia, horarios y servicios disponibles (Style Advisor, probadores).\n\n3. Resumen de reserva — Pantalla con producto, talla, tienda y opción de ir a mapas. Solo necesita email si no está logueado. Mensaje claro: "Recuerda que esta reserva no implica la compra final del producto".\n\n4. Confirmación inmediata — QR generado al instante, integración con Apple Wallet y Google Wallet, estados de progreso visibles (Reservado → Finalizando → Listo).\n\n5. Tracking in-app — Sección "Mis reservas" con estados: Pendiente → Confirmada → Caducada → Recogida. Con venta cruzada de stock de la misma tienda.\n\n6. Recogida y post-visita — Push + email con instrucciones claras. QR para escanear en tienda. Valoración rápida post-visita.',
+      },
+      {
+        label: '03. Nuevo Flujo de Reserva',
+        title: 'Ficha de producto — CTA dual visible',
+        layout: 'screens-grid',
+        content: 'El cambio más impactante del rediseño: el CTA "Reservar en tienda" deja de estar escondido y pasa a convivir con "Añadir a la cesta" en la misma jerarquía visual. Se ofrecen dos variantes — un enlace de texto sutil bajo el botón principal ("¿Lo quieres hoy? Pruébalo en tienda") y un botón secundario con la misma prominencia ("RESERVAR EN TIENDA"). Ambas opciones son visibles sin necesidad de hacer scroll.',
+        images: [
+          '/assets/projects/massimo-dutti/nuevo-reservar-en-tienda-link.png',
+          '/assets/projects/massimo-dutti/nuevo-reservar-en-tienda.png',
+        ],
+      },
+      {
+        label: '03. Nuevo Flujo de Reserva',
+        title: 'Selección de tienda y resumen de reserva',
+        layout: 'screens-grid',
+        content: 'La selección de tienda muestra la tienda favorita preseleccionada con distancia, horario de disponibilidad ("Hoy a partir de las 10:30") y stock en tiempo real. Las tiendas sin stock lo indican claramente ("No hay stock") evitando frustraciones posteriores. El resumen de reserva incluye toda la información práctica: producto, talla, tienda con dirección y teléfono, horarios y servicios disponibles. Solo se pide el email si el usuario no está logueado. Un banner superior refuerza: "Recuerda que esta reserva no implica la compra final del producto".',
+        images: [
+          '/assets/projects/massimo-dutti/nuevo-selecciona-tienda.png',
+          '/assets/projects/massimo-dutti/nuevo-resumen-reserva-email.png',
+        ],
+      },
+      {
+        label: '03. Nuevo Flujo de Reserva',
+        title: 'Confirmación inmediata y tracking in-app',
+        layout: 'screens-grid',
+        content: 'La confirmación genera un código QR al instante con el número de referencia de la reserva, botones para añadir a Apple Wallet o Google Wallet, y toda la información del producto y la tienda. La barra de progreso muestra visualmente el estado: Reservado → Finalizando → Listo. El tracking in-app mantiene al usuario informado con la hora estimada ("Pendiente — A partir de las 10:30"), el producto con foto y detalles, y acceso directo al QR y a las indicaciones para llegar a la tienda.',
+        images: [
+          '/assets/projects/massimo-dutti/nuevo-solicitud-reserva.png',
+          '/assets/projects/massimo-dutti/nuevo-reserva.png',
+        ],
+      },
+      {
+        label: '03. Nuevo Flujo de Reserva',
+        title: 'Venta cruzada contextual',
+        layout: 'right-left',
+        content: 'Mientras el usuario espera la confirmación de su reserva o consulta el tracking, el sistema sugiere productos complementarios del stock de la misma tienda bajo el título "Completa tu look en tienda". Un cliente que va a recoger una reserva tiene un 30% más de probabilidades de comprar un accesorio o prenda complementaria.\n\nEsta venta cruzada no es intrusiva — aparece después de toda la información funcional y utiliza el formato de "Looks" que el usuario ya conoce de la ficha de producto. El objetivo: transformar cada visita de recogida en una oportunidad de venta adicional.',
+        highlight: 'Un cliente que va a recoger una reserva tiene un 30% más de probabilidades de comprar un accesorio. La venta cruzada contextual convierte cada recogida en una oportunidad.',
+        images: [
+          '/assets/projects/massimo-dutti/nuevo-tracking-in-app.png',
+        ],
+      },
+      // ── 04. Service Design & Post-Visita ──
+      {
+        label: '04. Service Design',
+        title: 'Poste de Recogida QR — La experiencia en tienda',
+        layout: 'center',
+        content: '¿Por qué no añadir una sección de recogida con un poste que lea los códigos QR? Esta propuesta de Service Design extiende la experiencia digital al mundo físico. En lugar de depender al 100% del personal de tienda para gestionar las recogidas, se propone un poste automatizado donde el cliente escanea su QR al llegar y el sistema notifica al staff para preparar el pedido.\n\nEsto resuelve tres problemas simultáneamente: reduce los tiempos de espera del cliente, libera al personal para tareas de mayor valor (asesoramiento, venta), y genera datos medibles sobre el flujo de recogida que permiten optimizar la operación.',
+        bullets: [
+          'Cliente tiene mejor experiencia — Escanea el QR al llegar, sin buscar a nadie, sin esperas. El sistema confirma "Tu reserva se está preparando"',
+          'Servicio personalizado — El staff recibe una notificación con el nombre del cliente, el producto reservado y sugerencias de cross-selling antes de que llegue al mostrador',
+          'Datos operativos — Tiempo medio de recogida, horas pico, ratio de recogida vs. caducidad. Información para optimizar turnos y stock',
+        ],
+        highlight: 'El poste QR transforma la recogida de un momento transaccional en una experiencia de servicio. El cliente se siente atendido antes de hablar con nadie.',
+      },
+      // ── 05. Acciones de Conversión ──
+      {
+        label: '05. Acciones de Conversión',
+        title: 'CRO — Acciones concretas para mejorar conversión',
+        layout: 'center',
+        content: 'Cada mejora propuesta responde a un punto de abandono identificado en la auditoría. No son ideas genéricas — son intervenciones quirúrgicas en los momentos exactos donde el flujo actual pierde usuarios:',
+        bullets: [
+          'CTA visible — Botón principal "Reservar en tienda" en la ficha de producto, con la misma jerarquía visual que "Añadir a la cesta". Sin scroll necesario',
+          'Menos fricción — Tienda favorita preseleccionada por defecto. Tiempo estimado visible: "Se confirma en menos de 30 min". Sin registro obligatorio',
+          'Mensajes de seguridad — "Pagarás en tienda. Ningún cargo online". "Tendrás 24h para recogerlo". Eliminar la ansiedad transaccional',
+          'Reforzar valor — Destacar servicios de tienda: Style Advisor, probadores, personalización. "Prueba tu selección con un Style Advisor"',
+          'Recuperar abandonos — Notificación push si el usuario cierra el flujo: "¿Quieres terminar la reserva en [Tienda]?". Push recordatorio 2h antes de caducar',
+          'Ventas cruzadas — Sugerir looks complementarios del stock de la misma tienda durante el tracking. Convertir cada recogida en oportunidad de venta',
+        ],
+        highlight: '"Pagarás en tienda. Ningún cargo online" — Este mensaje, repetido en los momentos clave del flujo, elimina la principal barrera psicológica de la reserva.',
+      },
+    ],
+  },
 ];
 
 export const blogPosts = [
