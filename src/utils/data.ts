@@ -385,7 +385,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'imaginbank-digital-banking',
-    title: 'Imaginbank — Auditoría UX',
+    title: 'Imaginbank',
     client: 'CaixaBank (Imaginbank)',
     year: '2021',
     category: 'UX Audit',
@@ -574,7 +574,7 @@ export const projects: Project[] = [
       '/assets/projects/doctori/doctori-header.jpg',
     ],
     liveUrl: '#',
-    featured: true,
+    featured: false,
   },
   {
     slug: 'solotemazos-music-platform',
@@ -798,7 +798,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'massimo-dutti-conversion',
-    title: 'Massimo Dutti — E-commerce Conversion',
+    title: 'Massimo Dutti',
     client: 'Massimo Dutti (Inditex)',
     year: '2025',
     category: 'UX Strategy & Service Design',
