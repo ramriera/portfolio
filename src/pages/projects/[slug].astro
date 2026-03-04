@@ -391,6 +391,29 @@ const meta = project.projectMeta;
           </div>
         )}
 
+        {/* Mermaid diagram */}
+        {section.layout === 'mermaid' && (
+          <div class="max-w-4xl mx-auto">
+            {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
+            {section.content && (
+              <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10">{section.content}</p>
+            )}
+            {section.mermaidCode && (
+              <div data-reveal data-delay="300" class="rounded-2xl overflow-hidden border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-900 p-8 md:p-12">
+                <pre class="mermaid flex justify-center">{section.mermaidCode}</pre>
+              </div>
+            )}
+            {section.highlight && (
+              <blockquote data-reveal data-delay="400" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 dark:bg-primary-500/10 rounded-r-xl py-4 pr-5">
+                <p class="text-base font-semibold text-dark-800 dark:text-dark-100 leading-relaxed">
+                  <span class="text-primary-500 font-bold">Insight Clave:</span> {section.highlight}
+                </p>
+              </blockquote>
+            )}
+          </div>
+        )}
+
         {/* Web embed — live website preview */}
         {section.layout === 'web-embed' && (
           <div class="max-w-4xl mx-auto">
@@ -577,5 +600,30 @@ const meta = project.projectMeta;
 
   initParallaxCover();
   document.addEventListener('astro:page-load', initParallaxCover);
+</script>
+
+<script>
+  async function initMermaid() {
+    const mermaidEls = document.querySelectorAll('pre.mermaid');
+    if (mermaidEls.length === 0) return;
+
+    const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
+
+    const isDark = document.documentElement.classList.contains('dark');
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: isDark
+        ? { primaryColor: '#27272a', primaryTextColor: '#fafafa', primaryBorderColor: '#52525b', lineColor: '#71717a', secondaryColor: '#18181b', tertiaryColor: '#27272a', background: '#18181b', mainBkg: '#27272a', nodeBorder: '#52525b', clusterBkg: '#1f1f23', titleColor: '#fafafa', edgeLabelBackground: '#27272a' }
+        : { primaryColor: '#f4f4f5', primaryTextColor: '#18181b', primaryBorderColor: '#d4d4d8', lineColor: '#71717a', secondaryColor: '#fafafa', tertiaryColor: '#f4f4f5', background: '#ffffff', mainBkg: '#f4f4f5', nodeBorder: '#d4d4d8', clusterBkg: '#fafafa', titleColor: '#18181b', edgeLabelBackground: '#f4f4f5' },
+      flowchart: { curve: 'basis', padding: 20 },
+      fontFamily: 'inherit',
+    });
+
+    await mermaid.run({ nodes: mermaidEls });
+  }
+
+  initMermaid();
+  document.addEventListener('astro:page-load', initMermaid);
 </script>
 
