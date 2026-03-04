@@ -5,10 +5,10 @@ export const siteConfig = {
   url: 'https://ramonriera.design',
   email: 'hello@ramonriera.design',
   logo: {
-    dark: 'https://ramonriera.design/wp-content/uploads/2024/12/logo-negro-64x64-2.svg',
-    light: 'https://ramonriera.design/wp-content/uploads/2024/12/logo-blanco-64x64-2.svg',
+    dark: '/assets/shared/logo-negro.svg',
+    light: '/assets/shared/logo-blanco.svg',
   },
-  profilePhoto: 'https://ramonriera.design/wp-content/uploads/2025/01/foto-perfil.png',
+  profilePhoto: '/assets/shared/foto-perfil.png',
   social: {
     linkedin: 'https://linkedin.com/in/ramonrieradepares',
     medium: 'https://medium.com/@ramriera',
@@ -121,9 +121,9 @@ export const projects: Project[] = [
       'Dos flujos principales validados con wireframes',
     ],
     stack: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
-    cover: 'https://ramonriera.design/wp-content/uploads/2025/01/movefast-header.png',
+    cover: '/assets/projects/movefast/movefast-header.png',
     gallery: [
-      'https://ramonriera.design/wp-content/uploads/2025/01/movefast-header.png',
+      '/assets/projects/movefast/movefast-header.png',
     ],
     liveUrl: '#',
     featured: true,
@@ -139,7 +139,7 @@ export const projects: Project[] = [
         title: '¿Por qué no despega el coche eléctrico en España?',
         layout: 'left-right',
         content: 'El primer paso fue entender el contexto real del mercado. Existen dos tipos principales de vehículos eléctricos: el BEV (100% eléctrico, cero emisiones, motor alimentado por batería recargable) y el PHEV (híbrido enchufable con doble motor combustión + eléctrico, hasta 130 km/h en modo eléctrico con ~40 km de autonomía).\n\nEspaña se sitúa a la cola de Europa en matriculaciones de vehículos eléctricos. Los datos son claros: la cuota de mercado es mínima frente a países como Noruega, Países Bajos o Alemania. La infraestructura de recarga crece, pero no al ritmo necesario para generar confianza en el consumidor.',
-        images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-electric-passenger-cars-registrations-spain.png'],
+        images: ['/assets/projects/movefast/movefast-electric-passenger-cars-registrations-spain.png'],
       },
       {
         label: '02. Investigación y Análisis',
@@ -147,11 +147,11 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'Según un estudio de coches.net, los españoles conocen las ventajas del coche eléctrico — reducción de contaminación, ahorro en combustible, menor ruido, acceso sin restricciones a centros urbanos y beneficios fiscales — pero estas no superan las barreras de compra. Las tres razones principales por las que el coche eléctrico no termina de despegar son: escasos puntos de carga en autopistas y ciudades, precio elevado respecto al vehículo convencional, y autonomía limitada que genera "ansiedad de rango" en viajes largos.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-flota-vehiculos-electricos.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-evolucion-esp.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-recharging-points-spain.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/mf-estaciones-de-carga-en-europa-min.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-flota-coches-europa-2020.png',
+          '/assets/projects/movefast/movefast-flota-vehiculos-electricos.png',
+          '/assets/projects/movefast/movefast-evolucion-esp.png',
+          '/assets/projects/movefast/movefast-recharging-points-spain.png',
+          '/assets/projects/movefast/mf-estaciones-de-carga-en-europa-min.png',
+          '/assets/projects/movefast/movefast-flota-coches-europa-2020.png',
         ],
       },
       {
@@ -161,8 +161,8 @@ export const projects: Project[] = [
         content: 'Analicé las principales aplicaciones del sector de recarga eléctrica disponibles en el mercado. Todas compartían funcionalidades similares: mapas interactivos con ubicación de estaciones de carga, filtros por voltaje y tipo de conector, favoritos, perfiles de usuario y pasarelas de pago integradas.\n\nLa mayoría presentaban una usabilidad pobre y un diseño visual poco cuidado — solo Iberdrola destacaba visualmente, pero sufría de rendimiento lento y funcionalidad limitada. Este vacío en el mercado justifica directamente nuestra propuesta de valor.',
         highlight: 'Ninguna de las aplicaciones analizadas ofrecía un servicio de cambio de baterías. MoveFast cubre un vacío crítico en el mercado.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-benchmarking-apps.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-benchmarking.png',
+          '/assets/projects/movefast/movefast-benchmarking-apps.png',
+          '/assets/projects/movefast/movefast-benchmarking.png',
         ],
       },
       {
@@ -170,21 +170,21 @@ export const projects: Project[] = [
         title: 'User Persona — Oriol Vallmajor',
         layout: 'full-image',
         content: 'Para dar forma a la experiencia, creé a Oriol Vallmajor: arquitecto, con ingresos por encima de la media, familiarizado con la tecnología y preocupado por la sostenibilidad. Oriol quiere viajar por España con su familia en un vehículo eléctrico. Es un early adopter dispuesto a invertir en movilidad sostenible, pero la ansiedad por la autonomía y la falta de infraestructura le generan inseguridad real.\n\nSu dolor principal no es técnico — es emocional: la incertidumbre de quedarse sin batería en medio de un viaje familiar. Necesita sentir que tiene el control y que siempre hay una solución cerca.',
-        images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-user-persona.png'],
+        images: ['/assets/projects/movefast/movefast-user-persona.png'],
       },
       {
         label: '03. Definición y Empatía',
         title: 'Mapa de empatía',
         layout: 'full-image',
         content: 'A través del mapa de empatía exploré la personalidad, necesidades, deseos y preocupaciones de Oriol. ¿Qué piensa cuando planifica un viaje largo? ¿Qué siente al ver que el punto de carga más cercano está a 80 km? ¿Qué oye de su entorno sobre los coches eléctricos? Los insights revelaron que la barrera principal no es racional sino emocional: la "range anxiety" — el miedo a quedarse tirado — es el factor que más frena la decisión de compra.',
-        images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-mapa-empatia.png'],
+        images: ['/assets/projects/movefast/movefast-mapa-empatia.png'],
       },
       {
         label: '03. Definición y Empatía',
         title: 'Customer Journey Map',
         layout: 'full-image',
         content: 'El journey map documentó la experiencia completa de Oriol: desde el momento en que decide comprar un coche eléctrico, pasando por la planificación de su primer viaje largo, hasta el momento crítico en que necesita recargar en ruta. Los picos de frustración se concentran en tres puntos: descubrir que no hay puntos de carga en su ruta habitual, llegar a un punto de carga y encontrarlo ocupado, y la espera de más de 45 minutos durante la recarga. Estos puntos de dolor definen las oportunidades de diseño.',
-        images: ['https://ramonriera.design/wp-content/uploads/2025/01/movefast-costumer-journey.png'],
+        images: ['/assets/projects/movefast/movefast-costumer-journey.png'],
       },
       {
         label: '04. Ideación y Arquitectura',
@@ -209,20 +209,20 @@ export const projects: Project[] = [
         layout: 'screens-grid',
         content: 'Splash screen con animación de entrada del vehículo. Onboarding de 4 pantallas: puntos de carga actualizados, estado de ocupación en tiempo real, puntos de cambio de batería cercanos, y sistema de reserva. Mapa interactivo principal con puntos de carga, talleres de intercambio y opción de solicitar cambio a domicilio. Menú lateral con acceso a vehículos, baterías, pagos y notificaciones. Filtros avanzados por tipo de punto y disponibilidad. Vista de detalle de taller con horarios y disponibilidad. Gestión de favoritos. Flujo completo de reserva con selección de ubicación, fecha, hora y confirmación.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-spinner-2.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-spinner-1.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-inicial-1.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-inicial-2.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-inicial-3.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-inicial-4.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-mapa.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-menu.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-filtros.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-talleres.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-favoritos.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-escoger.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-reserva.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/movefast-pantalla-aceptado.png',
+          '/assets/projects/movefast/movefast-pantalla-spinner-2.png',
+          '/assets/projects/movefast/movefast-pantalla-spinner-1.png',
+          '/assets/projects/movefast/movefast-pantalla-inicial-1.png',
+          '/assets/projects/movefast/movefast-pantalla-inicial-2.png',
+          '/assets/projects/movefast/movefast-pantalla-inicial-3.png',
+          '/assets/projects/movefast/movefast-pantalla-inicial-4.png',
+          '/assets/projects/movefast/movefast-pantalla-mapa.png',
+          '/assets/projects/movefast/movefast-pantalla-menu.png',
+          '/assets/projects/movefast/movefast-pantalla-filtros.png',
+          '/assets/projects/movefast/movefast-pantalla-talleres.png',
+          '/assets/projects/movefast/movefast-pantalla-favoritos.png',
+          '/assets/projects/movefast/movefast-pantalla-escoger.png',
+          '/assets/projects/movefast/movefast-pantalla-reserva.png',
+          '/assets/projects/movefast/movefast-pantalla-aceptado.png',
         ],
       },
       {
@@ -257,9 +257,9 @@ export const projects: Project[] = [
       'Caso de estudio publicado en Medium',
     ],
     stack: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
-    cover: 'https://ramonriera.design/wp-content/uploads/2025/01/global-helping-header-1120x630.png',
+    cover: '/assets/projects/global-helping/global-helping-header.png',
     gallery: [
-      'https://ramonriera.design/wp-content/uploads/2025/01/global-helping-header-1120x630.png',
+      '/assets/projects/global-helping/global-helping-header.png',
     ],
     liveUrl: '#',
     featured: true,
@@ -276,8 +276,8 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'El punto de partida fue un brainstorming amplio para mapear las problemáticas globales y detectar oportunidades de diseño. A partir de ahí, se formularon Research Questions divididas en tres categorías de actores: Usuarios (comportamiento y necesidades de personas solidarias), Productos/Servicios (qué oferta existe y qué falta) e Instituciones (rol y capacidades de ONGs y asociaciones).\n\nEstas preguntas guiaron toda la fase de investigación, evitando sesgos y asegurando que las decisiones de diseño se basaran en datos reales, no en suposiciones.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/01/gh-brainstorming.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/gh-research-questions.png',
+          '/assets/projects/global-helping/gh-brainstorming.png',
+          '/assets/projects/global-helping/gh-research-questions.png',
         ],
       },
       {
@@ -287,8 +287,8 @@ export const projects: Project[] = [
         content: 'Se diseñaron dos cuestionarios en Google Forms, dirigidos a personas con diferentes grados de experiencia en solidaridad y voluntariado. Se recogieron 48 respuestas que revelaron un insight que cambió la dirección del proyecto.\n\nEl enfoque inicial era amplio: "¿Cómo ayudar a países subdesarrollados?" Pero los datos mostraron que el problema real estaba más cerca: las ONGs locales no tienen la capacidad de comunicación ni los recursos de las grandes organizaciones internacionales. El proyecto pivotó hacia darles visibilidad y herramientas.',
         highlight: 'Tras encuestar a 48 personas, el proyecto pivotó: el problema no era la falta de solidaridad, sino la falta de visibilidad de las ONGs locales frente a las internacionales.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/01/gh-cuestionarios-2.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/gh-cuestionarios-1.png',
+          '/assets/projects/global-helping/gh-cuestionarios-2.png',
+          '/assets/projects/global-helping/gh-cuestionarios-1.png',
         ],
       },
       {
@@ -297,8 +297,8 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'Con los datos de los cuestionarios, se construyó un User Persona que representa al usuario objetivo: una persona solidaria, con voluntad de ayudar pero frustrada por la falta de plataformas que le faciliten el proceso. El mapa de empatía profundizó en su personalidad, necesidades, deseos y miedos — revelando que la barrera principal no es la falta de interés, sino la falta de confianza y transparencia en las plataformas existentes.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/01/gh-user-persona.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/gh-mapa-empatia.png',
+          '/assets/projects/global-helping/gh-user-persona.png',
+          '/assets/projects/global-helping/gh-mapa-empatia.png',
         ],
       },
       {
@@ -306,7 +306,7 @@ export const projects: Project[] = [
         title: 'Customer Journey Map',
         layout: 'full-image',
         content: 'El Customer Journey Map definió el viaje completo del usuario: desde que descubre una causa que le motiva, pasando por la búsqueda de una forma de ayudar, hasta la acción concreta (donar, ser voluntario o contribuir a crowdfunding). Los puntos de mayor fricción se identificaron en la fragmentación de servicios — el usuario tenía que saltar entre múltiples plataformas para encontrar opciones y ninguna le daba seguimiento ni conexión emocional con el impacto de su ayuda.',
-        images: ['https://ramonriera.design/wp-content/uploads/2025/01/gh-customer-journey.png'],
+        images: ['/assets/projects/global-helping/gh-customer-journey.png'],
       },
       {
         label: '03. Ideación y Benchmarking',
@@ -314,7 +314,7 @@ export const projects: Project[] = [
         layout: 'left-right',
         content: 'Se realizó un benchmarking exhaustivo evaluando servicios, productos, opiniones, valores y marketing de las plataformas existentes en el sector solidario.\n\nEl resultado confirmó la oportunidad: existían plataformas de donaciones, plataformas de voluntariado y plataformas de crowdfunding — pero ninguna reunía los tres servicios en un mismo sitio. El usuario que quería ayudar tenía que navegar entre múltiples webs, cada una con su registro, su interfaz y su lógica. Global Helping nace para resolver esa fragmentación.',
         highlight: 'No existía ninguna plataforma que reuniera donaciones, voluntariado y crowdfunding en un mismo sitio. Global Helping cubre ese vacío.',
-        images: ['https://ramonriera.design/wp-content/uploads/2025/01/gh-benchmarking.png'],
+        images: ['/assets/projects/global-helping/gh-benchmarking.png'],
       },
       {
         label: '04. Desarrollo',
@@ -322,8 +322,8 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'Se definió un sistema de foundations que incluye color, tipografía, iconografía, grid, espaciado, fotografía, animación y formato. La base del sistema son los Design Tokens: variables de diseño reutilizables que garantizan consistencia visual en toda la plataforma.\n\nLas ventajas de trabajar con tokens: mantenimiento más fácil de la consistencia, facilita la toma de decisiones, promueve la escalabilidad, permite la propagación automática de cambios y optimiza recursos del equipo de diseño y desarrollo.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/01/gh-foundations.png',
-          'https://ramonriera.design/wp-content/uploads/2025/01/gh-componentes.png',
+          '/assets/projects/global-helping/gh-foundations.png',
+          '/assets/projects/global-helping/gh-componentes.png',
         ],
       },
       {
@@ -331,7 +331,7 @@ export const projects: Project[] = [
         title: 'De Wireframes a componentes',
         layout: 'full-image',
         content: 'El proceso fue de menor a mayor fidelidad: primero wireframes rápidos (esquemas de baja calidad, digitales o a mano) para validar la estructura de información y los flujos principales sin invertir tiempo en detalle visual. Una vez validada la arquitectura, se diseñaron los componentes finales: bloques de texto, iconos, cards, botones, campos de texto, selectores, barras de navegación, tablas y listas — todos construidos como elementos independientes y combinables.',
-        images: ['https://ramonriera.design/wp-content/uploads/2025/01/gh-wireframing.png'],
+        images: ['/assets/projects/global-helping/gh-wireframing.png'],
       },
       {
         label: '05. Solución Final',
@@ -375,9 +375,9 @@ export const projects: Project[] = [
       'Adoptado por 15 equipos de producto',
     ],
     stack: ['Figma', 'Zeroheight', 'Storybook', 'Tokens Studio', 'React'],
-    cover: 'https://ramonriera.design/wp-content/uploads/2025/05/banc-sabadell-header-1120x630.png',
+    cover: '/assets/projects/sabadell/banc-sabadell-header.png',
     gallery: [
-      'https://ramonriera.design/wp-content/uploads/2025/05/banc-sabadell-header-1120x630.png',
+      '/assets/projects/sabadell/banc-sabadell-header.png',
     ],
     liveUrl: '#',
     featured: true,
@@ -400,9 +400,9 @@ export const projects: Project[] = [
       'Documento de recomendaciones entregado al equipo de producto',
     ],
     stack: ['Figma', 'Chrome'],
-    cover: 'https://ramonriera.design/wp-content/uploads/2025/04/Imaginbank-header-1120x630.png',
+    cover: '/assets/projects/imaginbank/imaginbank-header.png',
     gallery: [
-      'https://ramonriera.design/wp-content/uploads/2025/04/Imaginbank-header-1120x630.png',
+      '/assets/projects/imaginbank/imaginbank-header.png',
     ],
     liveUrl: '#',
     featured: true,
@@ -425,8 +425,8 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'El objetivo fue realizar una evaluación experta (heuristic evaluation) de la app de Imaginbank utilizando las 10 Heurísticas de Jakob Nielsen como marco de análisis.\n\nNo se trataba de rediseñar, sino de diagnosticar: examinar cada flujo clave de la aplicación, documentar los problemas de usabilidad con capturas anotadas y proponer recomendaciones priorizadas por severidad e impacto. Se prestó especial atención a la visibilidad del estado del sistema, la consistencia, el control del usuario y la prevención de errores.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-1.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-2.png',
+          '/assets/projects/imaginbank/imaginbank-1.png',
+          '/assets/projects/imaginbank/imaginbank-2.png',
         ],
       },
       {
@@ -436,8 +436,8 @@ export const projects: Project[] = [
         content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante feedback apropiado y en un tiempo razonable.\n\nEn Imaginbank se detectaron carencias significativas: la app no proporcionaba feedback visual suficiente al realizar acciones críticas como transferencias o pagos. El usuario no siempre sabía si una operación estaba en proceso, se había completado o había fallado — generando incertidumbre y desconfianza en momentos donde la claridad es esencial.',
         highlight: 'La falta de feedback en acciones financieras críticas compromete la confianza del usuario en los momentos donde más la necesita.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-3.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-4.png',
+          '/assets/projects/imaginbank/imaginbank-3.png',
+          '/assets/projects/imaginbank/imaginbank-4.png',
         ],
       },
       {
@@ -447,8 +447,8 @@ export const projects: Project[] = [
         content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEl análisis reveló inconsistencias en la nomenclatura de funciones: las mismas acciones recibían nombres diferentes según la sección de la app. La iconografía no seguía un lenguaje visual coherente y algunos patrones de interacción variaban entre pantallas similares. Para un público joven acostumbrado a apps de consumo ultra-consistentes (Instagram, Spotify, Revolut), estas fricciones son especialmente evidentes.',
         highlight: 'La nomenclatura inconsistente entre secciones genera confusión cognitiva — el usuario tiene que "reaprender" la interfaz en cada pantalla.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-5.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-6.png',
+          '/assets/projects/imaginbank/imaginbank-5.png',
+          '/assets/projects/imaginbank/imaginbank-6.png',
         ],
       },
       {
@@ -457,8 +457,8 @@ export const projects: Project[] = [
         layout: 'right-left',
         content: 'Los usuarios necesitan una "salida de emergencia" clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nLa navegación de Imaginbank presentaba una rigidez notable: la falta de flexibilidad impedía al usuario deshacer acciones, volver atrás de forma intuitiva o acceder a opciones secundarias sin recorrer múltiples pantallas. Las opciones secundarias quedaban enterradas en submenús, obligando al usuario a memorizar dónde encontrar funcionalidades que deberían estar accesibles contextualmente.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-7.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-8.png',
+          '/assets/projects/imaginbank/imaginbank-7.png',
+          '/assets/projects/imaginbank/imaginbank-8.png',
         ],
       },
       {
@@ -468,8 +468,8 @@ export const projects: Project[] = [
         content: 'Un diseño cuidadoso que prevenga errores es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en lenguaje claro y ofrecer una solución constructiva.\n\nEn Imaginbank, los mensajes de error eran genéricos y no orientaban al usuario hacia la solución. En operaciones financieras — donde un error puede tener consecuencias económicas reales — la app no ofrecía confirmaciones claras, pasos de verificación ni mecanismos de "undo" que son estándar en neobancos competidores.',
         highlight: 'Los mensajes de error genéricos en operaciones financieras no solo frustran — erosionan activamente la confianza en la plataforma.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-9.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-10.png',
+          '/assets/projects/imaginbank/imaginbank-9.png',
+          '/assets/projects/imaginbank/imaginbank-10.png',
         ],
       },
       {
@@ -478,8 +478,8 @@ export const projects: Project[] = [
         layout: 'right-left',
         content: 'Cada unidad extra de información compite con las unidades relevantes y disminuye su visibilidad relativa.\n\nAunque la estética general de Imaginbank era limpia y cuidaba la presentación de información financiera, se detectaron áreas donde la jerarquía visual era confusa y elementos decorativos competían con la información funcional. La priorización visual de las acciones más frecuentes del usuario joven no era óptima — funcionalidades como Bizum o transferencias rápidas no tenían la prominencia que su frecuencia de uso justifica.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-11.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-12.png',
+          '/assets/projects/imaginbank/imaginbank-11.png',
+          '/assets/projects/imaginbank/imaginbank-12.png',
         ],
       },
       {
@@ -488,8 +488,8 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'El target de Imaginbank es claro: jóvenes de 18-30 años, nativos digitales, usuarios intensivos de apps de consumo que esperan la misma calidad de experiencia en su app bancaria.\n\nSu frustración nace de una interfaz que no habla su lenguaje: nomenclatura bancaria tradicional en lugar de términos directos, flujos que requieren demasiados pasos para acciones simples, y una experiencia que se siente como "la app del banco de mis padres" en lugar de una herramienta financiera moderna. La brecha entre expectativas (definidas por Revolut, N26) y realidad (Imaginbank) es lo que genera abandono.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-13.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-14.png',
+          '/assets/projects/imaginbank/imaginbank-13.png',
+          '/assets/projects/imaginbank/imaginbank-14.png',
         ],
       },
       {
@@ -498,7 +498,7 @@ export const projects: Project[] = [
         layout: 'full-image',
         content: 'El journey del usuario con Imaginbank revela tres momentos críticos: el onboarding (demasiado largo y con terminología bancaria), la primera transferencia (sin feedback claro ni confirmación visual), y la gestión de tarjetas (opciones enterradas en submenús).\n\nEstos puntos de fricción coinciden directamente con las heurísticas incumplidas: falta de visibilidad (H1), navegación rígida (H3) y prevención de errores insuficiente (H5). La frustración acumulada en estas micro-interacciones es lo que lleva al usuario a probar alternativas donde estas acciones se resuelven en 2-3 taps.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-15.png',
+          '/assets/projects/imaginbank/imaginbank-15.png',
         ],
       },
       {
@@ -519,8 +519,8 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'Las mejoras propuestas abarcan tanto la arquitectura de información como el diseño visual. A nivel arquitectónico: simplificación de la navegación principal a 4-5 secciones claras, accesos directos contextuales y reducción de la profundidad de los flujos más frecuentes. A nivel visual: sistema de feedback con micro-interacciones, jerarquía tipográfica revisada para priorizar la información financiera clave, y un lenguaje visual más cercano al estándar de los neobancos.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-16.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/imaginbank-17.png',
+          '/assets/projects/imaginbank/imaginbank-16.png',
+          '/assets/projects/imaginbank/imaginbank-17.png',
         ],
       },
     ],
@@ -543,9 +543,9 @@ export const projects: Project[] = [
       'Tiempo medio de reserva reducido un 28%',
     ],
     stack: ['Figma', 'Principle', 'Maze', 'Hotjar', 'Swift UI'],
-    cover: 'https://ramonriera.design/wp-content/uploads/2025/04/Iberia-header-1120x630.png',
+    cover: '/assets/projects/iberia/iberia-header.png',
     gallery: [
-      'https://ramonriera.design/wp-content/uploads/2025/04/Iberia-header-1120x630.png',
+      '/assets/projects/iberia/iberia-header.png',
     ],
     liveUrl: '#',
     featured: true,
@@ -568,9 +568,9 @@ export const projects: Project[] = [
       'Retención de usuarios del 78% al mes 3',
     ],
     stack: ['Figma', 'React', 'Storybook', 'Zeroheight', 'Hotjar'],
-    cover: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=800&fit=crop',
+    cover: '/assets/projects/doctori/doctori-header.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=800&fit=crop',
+      '/assets/projects/doctori/doctori-header.jpg',
     ],
     liveUrl: '#',
     featured: true,
@@ -595,9 +595,9 @@ export const projects: Project[] = [
       'Documentación de paleta cromática, tipografía y espaciado',
     ],
     stack: ['Figma', 'React', 'Tailwind CSS', 'Whimsical', 'Miro', 'Google Analytics'],
-    cover: 'https://ramonriera.design/wp-content/uploads/2025/01/solotemazos-header-1120x630.png',
+    cover: '/assets/projects/solotemazos/solotemazos-header.png',
     gallery: [
-      'https://ramonriera.design/wp-content/uploads/2025/01/solotemazos-header-1120x630.png',
+      '/assets/projects/solotemazos/solotemazos-header.png',
     ],
     liveUrl: '#',
     featured: false,
@@ -655,8 +655,8 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'La identidad de SoloTemazos necesitaba funcionar en dos contextos opuestos: sobre fondos oscuros (la plataforma) y sobre fondos claros (redes sociales, compartidos). Se diseñaron dos versiones del logo — negativa y positiva — manteniendo la legibilidad y el reconocimiento en cualquier entorno.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-logo-BLK.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-logo-WHT.png',
+          '/assets/projects/solotemazos/solotemazos-logo-BLK.png',
+          '/assets/projects/solotemazos/solotemazos-logo-WHT.png',
         ],
       },
       // ── 02. Definición (Prototipado y Wireframes) ──
@@ -678,7 +678,7 @@ export const projects: Project[] = [
         layout: 'full-image',
         content: 'Los wireframes permitieron validar la estructura antes de invertir tiempo en diseño visual. El foco estaba en la disposición de los bloques de contenido: ¿dónde va el reproductor respecto al texto? ¿Cómo se navega entre categorías sin perder el contexto de lo que se está escuchando? Estos bocetos fueron la base para todas las decisiones de UI posteriores.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-wireframing.png',
+          '/assets/projects/solotemazos/solotemazos-wireframing.png',
         ],
       },
       {
@@ -688,8 +688,8 @@ export const projects: Project[] = [
         content: 'Se definió un sistema de grids que garantiza la coherencia visual en todas las resoluciones. La estructura principal usa un grid de 12 columnas con variaciones de 2 y 3 columnas para las tarjetas de contenido, asegurando que la experiencia de descubrimiento funcione tanto en desktop como en móvil.',
         highlight: 'Eliminar la búsqueda de la homepage fue contraintuitivo, pero alineaba el producto con su propuesta de valor: si vienes a SoloTemazos, déjate llevar. La curación es el producto.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-grid-1.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-grid-2.png',
+          '/assets/projects/solotemazos/solotemazos-grid-1.png',
+          '/assets/projects/solotemazos/solotemazos-grid-2.png',
         ],
       },
       // ── 03. Diseño Visual ──
@@ -699,7 +699,7 @@ export const projects: Project[] = [
         layout: 'full-image',
         content: 'La interfaz de SoloTemazos utiliza un dark mode nativo que no es solo una decisión estética — es funcional. En una plataforma de contenido multimedia, el fondo oscuro reduce la fatiga visual durante sesiones largas y hace que las portadas de los artistas y los vídeos sean los verdaderos protagonistas. Los colores vibrantes (acentos en tonos cálidos y neón) se reservan exclusivamente para elementos interactivos y categorías, creando un sistema visual que evoca la cultura de club y música electrónica sin distraer del contenido. Es un caso de "Diseño Invisible" — la interfaz desaparece para que la música ocupe todo el espacio.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-color.png',
+          '/assets/projects/solotemazos/solotemazos-color.png',
         ],
       },
       {
@@ -708,8 +708,8 @@ export const projects: Project[] = [
         layout: 'full-image',
         content: 'La tipografía es limpia y neutral, con pesos que crean jerarquía sin recurrir a adornos. El sistema de espaciado define márgenes y paddings consistentes que permiten que cada artículo respire, evitando la sensación de sobrecarga que caracteriza a muchas plataformas de contenido. Juntos, tipografía y espaciado crean el ritmo visual que guía al usuario a través del contenido.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-typography.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-spacing.png',
+          '/assets/projects/solotemazos/solotemazos-typography.png',
+          '/assets/projects/solotemazos/solotemazos-spacing.png',
         ],
       },
       {
@@ -718,10 +718,10 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'Cada tipo de contenido tiene su propia tarjeta diseñada para comunicar la información esencial de un vistazo. La tarjeta de canción prioriza la portada y el artista; la de noticias, el titular y la imagen destacada; la de ranking, la posición y la tendencia. Todas comparten el mismo lenguaje visual pero están optimizadas para su función específica — simplificando el acceso al reproductor para cumplir con la premisa de descubrimiento en un solo clic.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-song.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-noticia.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-ranking.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-card-festival.png',
+          '/assets/projects/solotemazos/solotemazos-card-song.png',
+          '/assets/projects/solotemazos/solotemazos-card-noticia.png',
+          '/assets/projects/solotemazos/solotemazos-card-ranking.png',
+          '/assets/projects/solotemazos/solotemazos-card-festival.png',
         ],
       },
       {
@@ -730,8 +730,8 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'Los componentes individuales se integran en vistas completas que muestran cómo el sistema de diseño funciona en contexto real. La vista de listas de reproducción organiza las canciones en un formato editorial que prioriza la portada del artista y permite reproducir directamente desde la lista. La vista de festivales presenta los eventos musicales con información clave visible de un vistazo, facilitando el descubrimiento de experiencias en vivo.',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-lista.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-festivals.png',
+          '/assets/projects/solotemazos/solotemazos-lista.png',
+          '/assets/projects/solotemazos/solotemazos-festivals.png',
         ],
       },
       {
@@ -740,18 +740,18 @@ export const projects: Project[] = [
         layout: 'screens-grid',
         content: 'La experiencia mobile se diseñó como first-class citizen, no como adaptación del desktop. Cada pantalla está optimizada para el uso con una sola mano: navegación inferior, acciones principales al alcance del pulgar, y reproductores que se pueden controlar sin interrumpir el flujo de navegación. A continuación, todas las pantallas del sistema en su versión mobile:',
         images: [
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-principal.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-reproductor.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-charts.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-noticias.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-noticias-principal.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-discos.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-discos-kygo.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-festivales.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-festivales-tomorrowland.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-lista.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-lista-levels.png',
-          'https://ramonriera.design/wp-content/uploads/2025/04/solotemazos-mobile-logo.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-principal.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-reproductor.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-charts.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-noticias.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-noticias-principal.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-discos.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-discos-kygo.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-festivales.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-festivales-tomorrowland.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-lista.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-lista-levels.png',
+          '/assets/projects/solotemazos/solotemazos-mobile-logo.png',
         ],
       },
       // ── 04. Especificaciones Técnicas ──
@@ -805,7 +805,7 @@ export const blogPosts = [
     date: '2024-11-15',
     readTime: '8 min',
     tags: ['Design Systems', 'UX'],
-    cover: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=500&fit=crop',
+    cover: '/assets/shared/blog-design-systems.jpg',
   },
   {
     slug: 'design-thinking-en-la-practica',
@@ -814,7 +814,7 @@ export const blogPosts = [
     date: '2024-10-08',
     readTime: '6 min',
     tags: ['Design Thinking', 'Metodología'],
-    cover: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&h=500&fit=crop',
+    cover: '/assets/shared/blog-design-thinking.jpg',
   },
   {
     slug: 'de-disenador-a-design-ops',
@@ -823,7 +823,7 @@ export const blogPosts = [
     date: '2024-09-20',
     readTime: '10 min',
     tags: ['Design Ops', 'Carrera'],
-    cover: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop',
+    cover: '/assets/shared/blog-design-ops.jpg',
   },
   {
     slug: 'accesibilidad-no-es-opcional',
@@ -832,7 +832,7 @@ export const blogPosts = [
     date: '2024-08-12',
     readTime: '7 min',
     tags: ['Accesibilidad', 'UX'],
-    cover: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&h=500&fit=crop',
+    cover: '/assets/shared/blog-figma-vs-sketch.jpg',
   },
 ];
 
