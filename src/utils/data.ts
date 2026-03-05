@@ -323,7 +323,7 @@ export const projects: Project[] = [
     challenge: 'Los datos del mercado español son contundentes: las matriculaciones de vehículos eléctricos apenas representan una **fracción mínima del total europeo**. Las tres barreras principales son la **escasez de puntos de carga**, el **precio elevado** frente al vehículo convencional, y la **autonomía limitada** (muchos modelos por debajo de 300 km). A esto se suman **tiempos de carga superiores a 45 minutos**. El usuario reconoce las ventajas - menos contaminación, ahorro en combustible, acceso a zonas restringidas - pero las **barreras pesan más que los beneficios**.',
     solution: 'Tras analizar el mercado y la competencia, se proponen dos conceptos innovadores: un **servicio de cambio de batería bajo demanda** donde personal de la empresa acude a tu ubicación (10 cambios gratuitos al año para compradores, 59€ cada cambio adicional), y **puntos dinámicos de intercambio modulares** en ubicaciones estratégicas de la ciudad que cambian semanalmente con posibilidad de **reserva anticipada**. Ninguna app competidora ofrece este modelo de servicio.',
     results: [
-      'UX completa definida en 2 semanas (45 horas)',
+      'UX completa definida en 2 semanas',
       'Prototipo interactivo funcional en Figma',
       'Design system con componentes y variantes',
       'Dos flujos principales validados con wireframes',
@@ -337,9 +337,9 @@ export const projects: Project[] = [
     featured: true,
     projectMeta: {
       role: 'UX/UI Designer (Research, Visual Design, Interaction Design)',
-      duration: '2 semanas (45 horas)',
+      duration: '2 semanas',
       tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
-      skills: ['UX Research', 'Benchmarking', 'User Persona', 'Journey Mapping', 'Prototyping', 'Design System'],
+      skills: ['UX Research', 'Benchmarking', 'User Persona', 'Journey Mapping', 'Prototyping', 'Design System', 'Wireframing', 'Visual Design', 'Interaction Design', 'Information Architecture', 'Mobile Design', 'Competitive Analysis'],
     },
     caseSections: [
       {
