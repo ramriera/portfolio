@@ -846,7 +846,7 @@ export const projects: Project[] = [
       {
         label: '01. Auditoría e Investigación',
         title: 'Flujo actual - Ficha de producto',
-        layout: 'right-left',
+        layout: 'left-right',
         content: 'El análisis del flujo actual reveló que la opción de "Reservar en tienda" está enterrada al final de la ficha de producto, debajo del scroll. El usuario tiene que desplazarse más allá de la información de composición, cuidados, envíos y devoluciones para encontrar un enlace de texto - ni siquiera un botón - que dice "Disponibilidad y reserva en tienda". La jerarquía visual prioriza completamente la compra online sobre la experiencia omnicanal.',
         images: [
           '/assets/projects/massimo-dutti/viejo-portada-2.png',
@@ -854,7 +854,7 @@ export const projects: Project[] = [
       },
       {
         label: '01. Auditoría e Investigación',
-        title: 'Flujo actual - Selección de talla y tienda',
+        title: 'Flujo actual - Selección de tienda y logueo',
         layout: 'image-grid',
         content: 'Una vez localizada la opción de reserva, el usuario entra en un flujo con demasiados pasos intermedios: seleccionar talla, introducir código postal, elegir tienda de una lista sin información clara de stock, y obligatoriamente loguearse o crear cuenta antes de poder confirmar. La selección de tienda muestra disponibilidad como "Talla disponible: M" pero no comunica cuándo estará lista ni qué pasa si no la recoge.',
         images: [
@@ -876,17 +876,11 @@ export const projects: Project[] = [
       {
         label: '02. Flujo de Usuario y Conversión',
         title: 'Diagrama del flujo de reserva propuesto',
-        layout: 'mermaid',
+        layout: 'full-image',
         content: 'El nuevo flujo de reserva se simplifica en 5 pasos claros, eliminando las fricciones del proceso actual. Desde la ficha de producto hasta la confirmación, cada pantalla tiene un objetivo único y una salida clara hacia el siguiente paso.',
-        mermaidCode: `graph TD
-    A[Inicio: Ficha de Producto] --> B{¿Añadir a la cesta?}
-    B -- Sí --> C[Resumen de Cesta]
-    B -- Reservar en tienda --> D[Selección de Tienda]
-    C --> E[Selección de Método: Envío o Reserva]
-    E --> D
-    D --> F[Formulario de Datos]
-    F --> G[Confirmación de Reserva Realizada]
-    style G fill:#e8e8e4,stroke:#18181b,stroke-width:3px,color:#18181b`,
+        images: [
+          '/assets/projects/massimo-dutti/mermaid-flujo-reserva.svg',
+        ],
         highlight: 'De 8 pasos a 4. El flujo elimina el registro obligatorio, preselecciona la tienda favorita y confirma en un solo tap.',
       },
       // ── 03. Estrategia de Producto ──
@@ -959,7 +953,7 @@ export const projects: Project[] = [
       {
         label: '05. Service Design',
         title: 'Poste de Recogida QR - La experiencia en tienda',
-        layout: 'left-right',
+        layout: 'center',
         images: [
           '/assets/projects/massimo-dutti/poste-recogida-qr.png',
         ],
