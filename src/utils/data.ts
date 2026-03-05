@@ -803,10 +803,10 @@ export const projects: Project[] = [
     year: '2025',
     category: 'UX Strategy & Service Design',
     tags: ['UX Optimization', 'Checkout Flow', 'E-commerce Strategy', 'High-Fidelity Prototyping', 'Service Design', 'CRO'],
-    description: 'Optimizando el flujo de reserva en tienda para eliminar la fricción entre el mundo online y físico.',
-    longDescription: 'Massimo Dutti ofrece una funcionalidad de "Reserva en tienda" que permite al usuario separar un producto online para probarlo y comprarlo en tienda física, sin cargo previo. Sobre el papel, es una solución omnicanal potente. En la práctica, el flujo actual presenta fricciones que provocan abandono: la acción de reservar está escondida, el proceso requiere demasiados pasos, el seguimiento es opaco y las dudas sobre caducidad y compromiso de compra generan incertidumbre.\n\nEste proyecto propone un rediseño completo del flujo de reserva centrado en tres pilares: claridad (que el usuario entienda exactamente qué está haciendo), velocidad (que reservar sea tan directo como añadir a la cesta) y confianza (que sepa que no hay cargo online y que tiene 24 horas para decidir).',
+    description: 'Rediseño estratégico del flujo de reserva en tienda: equilibrando el lenguaje visual editorial de una marca premium con la eficiencia transaccional.',
+    longDescription: 'Mi enfoque para este proyecto fue equilibrar el lenguaje visual editorial de una marca premium con la eficiencia transaccional; reduciendo la **fricción cognitiva** y transformando la inspiración visual en una compra sin fricciones.\n\nMassimo Dutti ofrece una funcionalidad de "Reserva en tienda" que permite al usuario separar un producto online para probarlo y comprarlo en tienda física, sin cargo previo. Sobre el papel, es una solución omnicanal potente. En la práctica, el flujo actual presenta fricciones que provocan abandono: la acción de reservar está escondida, el proceso requiere demasiados pasos, el seguimiento es opaco y las dudas sobre caducidad generan incertidumbre.\n\nEste proyecto propone un rediseño completo del flujo centrado en tres pilares: **claridad** (que el usuario entienda exactamente qué está haciendo), **velocidad** (que reservar sea tan directo como añadir a la cesta) y **diseño para la confianza** (que sepa que no hay cargo online y que tiene 24 horas para decidir).',
     challenge: 'El usuario confunde "Click & Collect" con "Reserva en Tienda". La acción de reservar está enterrada en la ficha de producto, el flujo obliga a loguearse antes de completar la reserva, la selección de tienda carece de información sobre disponibilidad real, y la confirmación se limita a un email sin seguimiento in-app. Cada paso extra es una oportunidad perdida de conversión. El resultado: usuarios que abandonan el flujo antes de completarlo y una tasa de recogida en tienda por debajo del potencial.',
-    solution: 'Se rediseñó el flujo completo en 6 fases: ficha de producto con CTA dual visible ("Añadir a la cesta" + "Pruébalo hoy en tienda"), selección de tienda con favorita preseleccionada, resumen de reserva sin registro obligatorio, confirmación inmediata con QR y Apple/Google Wallet, tracking in-app con estados claros (Pendiente → Confirmada → Recogida) y venta cruzada contextual, más una propuesta de Service Design para la recogida física con poste QR automatizado.',
+    solution: 'Se rediseñó el flujo completo con un enfoque de **diseño orientado a la conversión** en 6 fases: ficha de producto con CTA dual visible, selección de tienda con favorita preseleccionada, resumen de reserva sin registro obligatorio, confirmación inmediata con QR y wallet, tracking in-app con estados claros y venta cruzada contextual, más una propuesta de Service Design para la recogida física con poste QR automatizado.',
     results: [
       'Flujo de reserva reducido de 8 pasos a 4',
       'CTA "Reservar en tienda" visible en ficha de producto (misma jerarquía que "Añadir a la cesta")',
@@ -815,7 +815,7 @@ export const projects: Project[] = [
       'Integración con Apple Wallet y Google Wallet para acceso rápido al QR',
       'Sistema de recuperación de abandonos con push notifications',
     ],
-    stack: ['Figma', 'Miro', 'Research', 'Service Blueprint', 'Prototyping'],
+    stack: ['UX Strategy', 'Service Design', 'Research', 'Service Blueprint', 'Prototyping'],
     cover: '/assets/projects/massimo-dutti/massimo-header-big-1920x1080.jpg',
     gallery: [
       '/assets/projects/massimo-dutti/massimo-header-big-1920x1080.jpg',
@@ -825,7 +825,7 @@ export const projects: Project[] = [
     projectMeta: {
       role: 'UX/UI Strategy & Service Design',
       duration: '2 semanas',
-      tools: ['Figma', 'Miro', 'Research', 'Service Blueprint'],
+      tools: ['Research', 'Service Blueprint', 'Prototyping', 'Wireframing'],
       skills: ['UX Optimization', 'Checkout Flow', 'E-commerce Strategy', 'High-Fidelity Prototyping', 'Service Design', 'CRO'],
     },
     caseSections: [
@@ -875,20 +875,20 @@ export const projects: Project[] = [
       // ── 02. Flujo de Usuario y Conversión ──
       {
         label: '02. Flujo de Usuario y Conversión',
-        title: 'Diagrama del flujo de reserva propuesto',
+        title: 'Arquitectura del flujo propuesto',
         layout: 'full-image',
-        content: 'Este era el flujo completo que existía hasta ahora: un recorrido con demasiados pasos intermedios, validaciones manuales y **puntos de fricción** que provocaban abandono. El objetivo del rediseño es simplificarlo drásticamente a **4 pasos claros**, eliminando el **registro obligatorio**, preseleccionando la tienda favorita y ofreciendo **confirmación inmediata**.',
+        content: 'Antes de diseñar una sola pantalla, se definió la lógica del sistema. Este diagrama es la pieza central del rediseño: mapea cada decisión del usuario, cada punto de bifurcación y cada **reducción de fricción** aplicada. La arquitectura demuestra que las decisiones de diseño no son estéticas - son estructurales. Se eliminaron **puntos de fricción** innecesarios, se redujo la **fricción cognitiva** con preselecciones inteligentes, y se priorizó la **confirmación inmediata** sobre validaciones manuales.',
         images: [
           '/assets/projects/massimo-dutti/mermaid-flujo-reserva.svg',
         ],
-        highlight: 'De **8 pasos a 4**. El flujo elimina el **registro obligatorio**, preselecciona la tienda favorita y confirma en un solo tap.',
+        highlight: 'De **8 pasos a 4**. La lógica del sistema está por encima de la decoración visual: cada nodo del diagrama justifica una decisión de producto.',
       },
       // ── 03. Estrategia de Producto ──
       {
         label: '03. Estrategia de Producto',
         title: 'Los 3 pilares - Claridad, Velocidad, Confianza',
         layout: 'center',
-        content: 'A partir del diagnóstico, se definieron tres pilares estratégicos que guían cada decisión de diseño del nuevo flujo:\n\n**Claridad** - Que el usuario entienda exactamente qué está haciendo. "Reservar" no es "comprar". No hay cargo online. El producto le espera en tienda para que lo pruebe sin compromiso.\n\n**Velocidad** - Que reservar sea tan directo como "añadir a la bolsa". Tienda favorita preseleccionada, email como único dato necesario, **confirmación en un tap**.\n\n**Confianza** - Que el usuario sepa qué pasará, cuándo y cómo. Confirmación inmediata con QR, **tracking con estados claros**, recordatorios antes de que caduque, y siempre el mensaje: "Pagarás en tienda. Ningún cargo online".',
+        content: 'A partir del diagnóstico, se definieron tres pilares estratégicos que guían cada decisión de diseño del nuevo flujo:\n\n**Claridad** - Que el usuario entienda exactamente qué está haciendo. "Reservar" no es "comprar". No hay cargo online. El producto le espera en tienda para que lo pruebe sin compromiso.\n\n**Velocidad** - Que reservar sea tan directo como "añadir a la bolsa". Tienda favorita preseleccionada, email como único dato necesario, **confirmación en un tap**.\n\n**Confianza** - El **diseño para la confianza** implica que el usuario sepa qué pasará, cuándo y cómo. Confirmación inmediata con QR, **tracking con estados claros**, recordatorios antes de que caduque, y siempre el mensaje: "Pagarás en tienda. Ningún cargo online".',
         highlight: 'Si reducimos la **ansiedad por el tiempo de expiración** y clarificamos que no hay cargo online, la **conversión** subirá. Esta es la **hipótesis de valor** que vertebra todo el rediseño.',
       },
       {
@@ -924,7 +924,7 @@ export const projects: Project[] = [
         label: '04. Nuevo Flujo de Reserva',
         title: 'Ficha de producto - CTA dual visible',
         layout: 'image-grid',
-        content: 'El cambio más impactante del rediseño: el CTA "Reservar en tienda" deja de estar escondido y pasa a convivir con "Añadir a la cesta" en la misma jerarquía visual. Se ofrecen dos variantes - un enlace de texto sutil bajo el botón principal ("¿Lo quieres hoy? Pruébalo en tienda") y un botón secundario con la misma prominencia ("RESERVAR EN TIENDA"). Ambas opciones son visibles sin necesidad de hacer scroll.',
+        content: 'El cambio más impactante del rediseño: el CTA "Reservar en tienda" deja de estar escondido y pasa a convivir con "Añadir a la cesta" en la misma **jerarquía visual**. Se ofrecen dos variantes - un enlace de texto sutil bajo el botón principal ("¿Lo quieres hoy? Pruébalo en tienda") y un botón secundario con la misma prominencia ("RESERVAR EN TIENDA"). Ambas opciones son visibles sin necesidad de hacer scroll.',
         images: [
           '/assets/projects/massimo-dutti/nuevo-reservar-en-tienda-link.png',
           '/assets/projects/massimo-dutti/nuevo-reservar-en-tienda.png',
@@ -934,7 +934,7 @@ export const projects: Project[] = [
         label: '04. Nuevo Flujo de Reserva',
         title: 'Selección de tienda y resumen de reserva',
         layout: 'image-grid',
-        content: 'La selección de tienda muestra la tienda favorita preseleccionada con distancia, horario de disponibilidad ("Hoy a partir de las 10:30") y stock en tiempo real. Las tiendas sin stock lo indican claramente ("No hay stock") evitando frustraciones posteriores. El resumen de reserva incluye toda la información práctica: producto, talla, tienda con dirección y teléfono, horarios y servicios disponibles. Solo se pide el email si el usuario no está logueado. Un banner superior refuerza: "Recuerda que esta reserva no implica la compra final del producto".',
+        content: 'Este flujo no es solo digital: gestiona la **experiencia de cliente global (Online-to-Store)**, facilitando que el usuario finalice su compra físicamente con la misma elegancia con la que navegó la web. La selección de tienda muestra la tienda favorita preseleccionada con distancia, horario de disponibilidad ("Hoy a partir de las 10:30") y stock en tiempo real. Las tiendas sin stock lo indican claramente evitando frustraciones posteriores. El resumen de reserva incluye toda la información práctica: producto, talla, tienda con dirección y teléfono, horarios y servicios. Solo se pide el email si el usuario no está logueado. Un banner superior refuerza: "Recuerda que esta reserva no implica la compra final del producto".',
         images: [
           '/assets/projects/massimo-dutti/nuevo-selecciona-tienda.png',
           '/assets/projects/massimo-dutti/nuevo-resumen-reserva-email.png',
@@ -981,9 +981,9 @@ export const projects: Project[] = [
         label: '06. Acciones de Conversión',
         title: 'CRO - Acciones concretas para mejorar conversión',
         layout: 'center',
-        content: 'Cada mejora propuesta responde a un punto de abandono identificado en la auditoría. No son ideas genéricas - son intervenciones quirúrgicas en los momentos exactos donde el flujo actual pierde usuarios:',
+        content: 'Cada mejora propuesta es **diseño orientado a la conversión**: responde a un punto de abandono identificado en la auditoría. No son ideas genéricas - son intervenciones quirúrgicas en los momentos exactos donde el flujo actual pierde usuarios:',
         bullets: [
-          'CTA visible - Botón principal "Reservar en tienda" en la ficha de producto, con la misma jerarquía visual que "Añadir a la cesta". Sin scroll necesario',
+          'CTA visible - Botón principal "Reservar en tienda" en la ficha de producto, con la misma **jerarquía visual** que "Añadir a la cesta". Sin scroll necesario',
           'Menos fricción - Tienda favorita preseleccionada por defecto. Tiempo estimado visible: "Se confirma en menos de 30 min". Sin registro obligatorio',
           'Mensajes de seguridad - "Pagarás en tienda. Ningún cargo online". "Tendrás 24h para recogerlo". Eliminar la ansiedad transaccional',
           'Reforzar valor - Destacar servicios de tienda: Style Advisor, probadores, personalización. "Prueba tu selección con un Style Advisor"',
