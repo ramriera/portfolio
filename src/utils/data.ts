@@ -735,15 +735,15 @@ export const projects: Project[] = [
   },
   {
     slug: 'iberia-flight-experience',
-    title: 'Iberia Flight Experience',
+    title: 'Iberia — Flight Experience',
     client: 'Iberia',
     year: '2023',
-    category: 'Product Design',
-    tags: ['Product Design', 'UX Research', 'Aviation', 'Mobile'],
-    description: 'Rediseño de la experiencia digital de vuelo para la aerolínea insignia de España, mejorando el journey completo del pasajero.',
-    longDescription: 'Proyecto integral de rediseño de la experiencia digital de Iberia, desde la reserva hasta el post-vuelo. Trabajé en la optimización del flujo de check-in, selección de asientos, gestión de equipaje y la experiencia de embarque digital.',
-    challenge: 'La experiencia digital existente presentaba altas tasas de abandono en el proceso de reserva y check-in, con una navegación confusa y flujos innecesariamente complejos.',
-    solution: 'Conduje investigación con usuarios reales, mapeo de journeys y testing de prototipos iterativos. Rediseñé los flujos críticos con foco en reducir fricción y tiempos de completación.',
+    category: 'Service Design & UX Strategy',
+    tags: ['Service Design', 'UX Strategy', 'Omnichannel Experience', 'High-Fidelity Prototyping', 'Design Systems', 'Aviation UX'],
+    description: 'Orquestación de la experiencia de vuelo de extremo a extremo: unificando los puntos de contacto digitales con los procesos físicos del aeropuerto en un flujo omnicanal sin fricciones.',
+    longDescription: 'Más que una aplicación, este proyecto consistió en orquestar la experiencia de vuelo de extremo a extremo. El reto fue unificar los **puntos de contacto** digitales con los procesos físicos del aeropuerto, creando un flujo omnicanal que reduce la fricción en momentos críticos para el pasajero.\n\nEl **ecosistema de servicio** de una aerolínea es uno de los más complejos del sector: reserva, check-in, equipaje, embarque, experiencia in-flight y post-vuelo. Cada uno de estos momentos tiene sus propias reglas, sistemas legacy y expectativas del usuario. La **jerarquía de información** debía adaptarse a contextos muy diferentes - desde la calma de planificar un viaje hasta el estrés de llegar tarde a una puerta de embarque.\n\nEl objetivo: diseñar una **experiencia sin fricciones** que conecte todos estos momentos en un flujo coherente, con **accesibilidad móvil** como premisa fundamental y el lenguaje visual premium de Iberia como hilo conductor.',
+    challenge: 'La experiencia digital existente presentaba altas tasas de abandono en el proceso de reserva y check-in. Los **puntos de contacto** estaban desconectados entre sí: la app, la web, los quioscos del aeropuerto y el personal de tierra operaban como silos independientes. La **jerarquía de información** no priorizaba las acciones críticas en cada momento del viaje, y la **accesibilidad móvil** era insuficiente para un usuario que necesita operar con una mano mientras arrastra una maleta.',
+    solution: 'Se diseñó un **ecosistema de servicio** unificado que conecta todos los **puntos de contacto** del viaje. Se redefinió la **jerarquía de información** para priorizar la acción correcta en cada contexto, se garantizó la **accesibilidad móvil** en condiciones reales de uso, y se creó un sistema de diseño coherente que traduce la identidad premium de Iberia en una **experiencia sin fricciones**.',
     results: [
       'Reducción del 35% en abandono de reservas',
       'Incremento del 50% en check-in digital',
@@ -757,6 +757,56 @@ export const projects: Project[] = [
     ],
     liveUrl: '#',
     featured: true,
+    projectMeta: {
+      role: 'Lead UX/Service Designer',
+      duration: '12 semanas',
+      tools: ['Figma', 'Principle', 'Maze', 'Hotjar', 'Miro'],
+      skills: ['Service Design', 'UX Strategy', 'Omnichannel Experience', 'High-Fidelity Prototyping', 'Design Systems', 'Aviation UX'],
+    },
+    caseSections: [
+      // ── 01. Proceso Metodológico ──
+      {
+        label: '01. Proceso Metodológico',
+        title: 'De la etnografía al prototipo - 6 fases de diseño',
+        layout: 'stepper',
+        content: 'El proyecto siguió una metodología rigurosa de Service Design, donde cada fase alimenta la siguiente. No se diseñó una sola pantalla hasta completar las tres primeras fases de investigación:',
+        steps: [
+          { title: 'Etnografía y Research', description: 'Observación de pasajeros en el hub de Madrid-Barajas. Entrevistas contextuales en zona de embarque, colas de check-in y recogida de equipaje. Identificación de patrones de comportamiento y **puntos de contacto** críticos.' },
+          { title: 'Mapeo del Customer Journey', description: 'Identificación de pain points desde la reserva hasta el embarque. Mapeo de emociones, expectativas y momentos de verdad en cada fase del viaje. Análisis de la **jerarquía de información** que el pasajero necesita en cada contexto.' },
+          { title: 'Service Blueprint', description: 'Definición de la interacción entre los procesos de backstage (sistemas de la aerolínea, personal de tierra, operaciones) y el usuario. Visualización del **ecosistema de servicio** completo con sus dependencias y puntos de fallo.' },
+          { title: 'Diseño de Interfaz Premium', description: 'Aplicación del lenguaje visual de Iberia: limpieza, espacios generosos y acentos en rojo corporativo. Cada pantalla respeta la **accesibilidad móvil** y la identidad de marca sin sacrificar funcionalidad.' },
+          { title: 'Prototipado de Alta Fidelidad', description: 'Validación de flujos complejos como el check-in, la gestión de equipaje y la selección de asientos. Prototipos interactivos que simulan condiciones reales de uso para garantizar una **experiencia sin fricciones**.' },
+          { title: 'Iteración en Entorno Real', description: 'Ajustes basados en tests de usabilidad con viajeros frecuentes en el aeropuerto. Validación de la **accesibilidad móvil** en condiciones de estrés, con una mano, en movimiento y con conectividad limitada.' },
+        ],
+      },
+      // ── 02. Viaje del Pasajero ──
+      {
+        label: '02. Customer Journey',
+        title: 'El viaje del pasajero - De la reserva al destino',
+        layout: 'mermaid',
+        content: 'Este diagrama representa los **puntos de contacto** principales del viaje del pasajero y cómo el rediseño conecta cada fase en un **ecosistema de servicio** coherente. Los nodos destacados en rojo representan los momentos de mayor **fricción** donde se concentró el esfuerzo de diseño:',
+        mermaidCode: 'graph LR\n  A[Reserva] --> B[Check-in Digital]\n  B --> C[Aeropuerto / Sala VIP]\n  C --> D[Puerta de Embarque]\n  D --> E[Experiencia In-flight]\n  style B fill:#E62232,color:#fff\n  style D fill:#E62232,color:#fff',
+        highlight: 'El **check-in digital** y la **puerta de embarque** son los dos momentos donde la experiencia se juega todo. Si el pasajero no puede resolver su check-in en 60 segundos o no encuentra su puerta con claridad, todo el diseño falla.',
+      },
+      // ── 03. Estrategia de Diseño ──
+      {
+        label: '03. Estrategia de Diseño',
+        title: 'Principios de diseño - Identidad premium sin sacrificar usabilidad',
+        layout: 'center',
+        content: 'El lenguaje visual de Iberia exige limpieza y sofisticación. Pero en una app de aerolínea, la funcionalidad es innegociable. Se definieron tres principios de diseño que equilibran marca y **experiencia sin fricciones**:\n\n**Blanco dominante** - El blanco es el lienzo. El rojo Iberia aparece solo en botones de acción primaria y elementos críticos de estado (retrasos, cambios de puerta, alertas). Esto crea una **jerarquía de información** natural donde lo importante destaca por contraste.\n\n**Contexto sobre decoración** - Cada pantalla muestra exactamente lo que el pasajero necesita en ese momento. En la puerta de embarque: tiempo restante, grupo de embarque y estado. Ni más ni menos. La **accesibilidad móvil** dicta que el contenido crítico debe ser legible a un brazo de distancia.\n\n**Consistencia omnicanal** - El mismo sistema de diseño alimenta la app, los quioscos del aeropuerto y las pantallas de información. Los **puntos de contacto** físicos y digitales hablan el mismo idioma visual.',
+        highlight: 'El rojo Iberia (#E62232) se reserva exclusivamente para acciones primarias y estados críticos. Su uso restringido garantiza que cuando aparece, el pasajero sabe que requiere atención inmediata.',
+      },
+      // ── 04. Flujo de Embarque ──
+      {
+        label: '04. Flujo de Embarque',
+        title: 'Del check-in a la puerta - El momento de la verdad',
+        layout: 'center',
+        content: 'El flujo de embarque es donde convergen todos los **puntos de contacto**: la app en el móvil del pasajero, los quioscos de autoservicio, las pantallas de información y el personal de tierra. Se rediseñó como un flujo progresivo donde cada paso prepara al siguiente:\n\nEl check-in digital se simplificó a tres taps: confirmar datos → seleccionar asiento → obtener tarjeta de embarque. La tarjeta de embarque digital incluye un código QR dinámico que se actualiza con cambios de puerta o retrasos en tiempo real. El **ecosistema de servicio** garantiza que la información sea consistente en todos los canales.\n\nLa pantalla de embarque prioriza la **jerarquía de información** según el contexto temporal: a 2 horas del vuelo muestra servicios de la sala VIP; a 30 minutos, el camino a la puerta; a 10 minutos, el grupo de embarque y estado.',
+        images: [
+          '/assets/projects/iberia/iberia-header.png',
+        ],
+      },
+    ],
   },
   {
     slug: 'solotemazos-music-platform',
