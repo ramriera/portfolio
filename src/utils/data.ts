@@ -72,6 +72,7 @@ export interface CaseSection {
   highlight?: string;
   bullets?: string[];
   images?: string[];
+  captions?: string[];
   steps?: { title: string; description: string }[];
 }
 
@@ -764,9 +765,71 @@ export const projects: Project[] = [
       skills: ['Design Systems', 'Design Tokens', 'Component Library', 'Cross-Platform Consistency', 'Information Architecture', 'Digital Product Design'],
     },
     caseSections: [
-      // ── 01. Proceso Metodológico ──
+      // ── 01. El Problema: Fragmentación Digital ──
       {
-        label: '01. Proceso Metodológico',
+        label: '01. El Problema: Fragmentación Digital',
+        title: 'Un ecosistema digital fragmentado',
+        layout: 'center',
+        content: 'Partíamos de un ecosistema digital fragmentado, con una deuda técnica y visual considerable. La falta de un sistema centralizado generaba una experiencia de usuario incoherente y aumentaba los costes de mantenimiento.\n\nLa web y la app de Iberia habían evolucionado de forma independiente durante años: equipos distintos, decisiones de diseño aisladas y sin una fuente de verdad compartida. El resultado era una experiencia rota donde un mismo usuario encontraba botones, colores, tipografías y flujos diferentes según la plataforma que utilizara.',
+        images: [
+          '/assets/projects/iberia/iberia-legacy-ui.png',
+          '/assets/projects/iberia/iberia-legacy-app.png',
+        ],
+        captions: [
+          'Interfaz web legacy: inconsistencias visuales en tipografía, color y espaciado entre secciones',
+          'App nativa antes de la unificación: componentes duplicados con variantes divergentes',
+        ],
+        highlight: 'Cada plataforma mantenía sus propios valores de color, tipografía y spacing. Un botón primario tenía 4 variantes distintas entre Web y App — ninguna era la "correcta" porque no existía una referencia centralizada.',
+      },
+      {
+        label: '01. El Problema: Fragmentación Digital',
+        title: 'El coste de la inconsistencia',
+        layout: 'image-grid',
+        content: 'La fragmentación no era solo visual — tenía un impacto directo en costes de desarrollo, tiempos de entrega y experiencia de usuario. Cada nueva feature requería diseñar y desarrollar por duplicado, con resultados diferentes en cada plataforma.',
+        images: [
+          '/assets/projects/iberia/iberia-legacy-web-booking.png',
+          '/assets/projects/iberia/iberia-legacy-web-checkin.png',
+          '/assets/projects/iberia/iberia-legacy-app-seats.png',
+          '/assets/projects/iberia/iberia-legacy-app-boarding.png',
+        ],
+        captions: [
+          'Flujo de reserva web: UI legacy con estilos inconsistentes',
+          'Check-in web: jerarquía de información confusa',
+          'Selección de asientos app: componentes no estandarizados',
+          'Tarjeta de embarque app: diseño desconectado del resto del ecosistema',
+        ],
+      },
+      // ── 02. Investigación y Descubrimiento ──
+      {
+        label: '02. Investigación y Descubrimiento',
+        title: 'Auditoría profunda del ecosistema digital',
+        layout: 'full-image',
+        content: 'La creación del Design System no fue una decisión estética — fue la respuesta a una auditoría profunda de la marca y la tecnología de Iberia. Se mapearon todas las inconsistencias existentes entre plataformas, se analizó la competencia (Vueling, British Airways, Lufthansa) y se documentó el estado actual de cada componente en uso.\n\nEl resultado fue un inventario visual completo que demostró la magnitud del problema: **+120 variantes de componentes** donde solo debían existir ~40, colores fuera de la paleta oficial en el 35% de las pantallas, y 3 escalas tipográficas diferentes coexistiendo sin lógica aparente.',
+        images: [
+          '/assets/projects/iberia/iberia-audit-research.png',
+          '/assets/projects/iberia/iberia-competitive-analysis.png',
+        ],
+        captions: [
+          'Auditoría UI: inventario de inconsistencias documentadas entre Web y App',
+          'Análisis competitivo: benchmark de sistemas de diseño en aerolíneas europeas',
+        ],
+        highlight: 'La auditoría reveló que el 35% de las pantallas usaban colores fuera de la paleta oficial de Iberia, y existían +120 variantes de componentes donde solo debían haber ~40.',
+      },
+      {
+        label: '02. Investigación y Descubrimiento',
+        title: 'Arquitectura de información y mapeo de flujos',
+        layout: 'full-image',
+        content: 'Se realizó un mapeo completo de la arquitectura de información existente para identificar redundancias, puntos de fricción y oportunidades de unificación. Este análisis reveló que los flujos críticos (reserva, check-in, selección de asientos) diferían significativamente entre Web y App, no solo en diseño sino en estructura y número de pasos.',
+        images: [
+          '/assets/projects/iberia/iberia-ia-map.png',
+        ],
+        captions: [
+          'Mapa de arquitectura de información: flujos existentes vs. flujos propuestos para la unificación',
+        ],
+      },
+      // ── 03. Proceso Metodológico ──
+      {
+        label: '03. Proceso Metodológico',
         title: 'Stepper vertical de producto - 6 fases técnicas',
         layout: 'stepper',
         content: 'El proyecto siguió una metodología rigurosa de Digital Product Design, donde cada fase construye sobre la anterior para garantizar la **Consistencia Multiplataforma** del ecosistema:',
@@ -779,9 +842,9 @@ export const projects: Project[] = [
           { title: 'Documentación Handoff', description: 'Guías claras para asegurar una implementación fiel en código. Documentación de cada **Design Token**, especificaciones de componentes y reglas de uso para maximizar la **Eficiencia en Desarrollo** del equipo.' },
         ],
       },
-      // ── 02. Arquitectura de Tokens y Componentes ──
+      // ── 04. Arquitectura de Tokens y Componentes ──
       {
-        label: '02. Arquitectura de Tokens y Componentes',
+        label: '04. Arquitectura de Tokens y Componentes',
         title: 'Design Tokens - La fuente única de verdad',
         layout: 'center',
         content: 'Se definieron **Design Tokens** como la capa de abstracción fundamental del sistema. Los tokens se organizaron en tres categorías principales:\n\n**Color** - Rojo Iberia (#E62232) como acento primario, una escala de Neutros de 10 niveles (del blanco al negro) y colores semánticos para estados (éxito, error, warning). Cada token de color tiene su variante para light y dark mode, garantizando la **Consistencia Multiplataforma**.\n\n**Spacing** - Escala basada en múltiplos de 4px (4, 8, 12, 16, 24, 32, 48, 64). Cada nivel del spacing está tokenizado para que un cambio en la escala base se propague instantáneamente a toda la **Librería de Componentes**.\n\n**Tipografía** - Definición de familias, pesos y tamaños como tokens. Escala tipográfica de 7 niveles (xs a 3xl) con line-heights optimizados para legibilidad en dispositivos móviles, respetando la **Arquitectura de Información** de cada pantalla.',
@@ -790,17 +853,54 @@ export const projects: Project[] = [
           '/assets/projects/iberia/iberia-header.png',
         ],
       },
-      // ── 03. Librería de Componentes ──
       {
-        label: '03. Librería de Componentes',
+        label: '04. Arquitectura de Tokens y Componentes',
+        title: 'Antes vs. Después - Evolución de componentes',
+        layout: 'image-grid',
+        content: 'La comparativa entre los componentes legacy y los nuevos componentes del sistema demuestra el impacto real de la unificación. Cada elemento fue rediseñado desde cero basándose en los **Design Tokens**, eliminando las variantes inconsistentes y creando una única fuente de verdad visual.',
+        images: [
+          '/assets/projects/iberia/iberia-legacy-button.png',
+          '/assets/projects/iberia/iberia-new-button.png',
+          '/assets/projects/iberia/iberia-legacy-datepicker.png',
+          '/assets/projects/iberia/iberia-new-datepicker.png',
+        ],
+        captions: [
+          'Antes: botón legacy con estilos hardcodeados y variantes inconsistentes',
+          'Después: botón basado en Design Tokens con estados y variantes sistematizadas',
+          'Antes: selector de fechas con UI fragmentada entre plataformas',
+          'Después: selector de fechas como átomo escalable basado en tokens de diseño',
+        ],
+        highlight: 'Evolución del componente: de un estilo legacy a un átomo basado en tokens de diseño escalables. Cada componente nuevo consume tokens directamente, eliminando cualquier valor hardcodeado.',
+      },
+      // ── 05. Librería de Componentes ──
+      {
+        label: '05. Librería de Componentes',
         title: 'Átomos y Moléculas - Componentes escalables',
         layout: 'center',
         content: 'La **Librería de Componentes** se construyó siguiendo la metodología de Atomic Design, organizando cada elemento en niveles de complejidad creciente:\n\n**Átomos** - Botones (primario, secundario, ghost), iconos, tags, inputs, checkboxes y radio buttons. Cada átomo consume directamente los **Design Tokens** de color, spacing y tipografía, garantizando coherencia visual sin excepciones.\n\n**Moléculas** - Listas con acciones, selectores de asiento, cards de servicio, barras de progreso y grupos de formulario. Cada molécula combina átomos siguiendo patrones predefinidos de layout y spacing.\n\n**Organismos** - Flujos completos como el stepper de check-in, el panel de selección de ancillaries y la tarjeta de embarque digital. Cada organismo es un bloque funcional autónomo que mantiene la **Consistencia Multiplataforma** entre Web y App.',
         highlight: 'Los componentes de listas, botones y selectores se diseñaron como **Átomos y Moléculas** reutilizables. Cada componente incluye todas sus variantes (estados, tamaños, temas) documentadas para maximizar la **Eficiencia en Desarrollo**.',
       },
-      // ── 04. Flujo Online Optimizado ──
+      // ── 06. Flujo Online Optimizado ──
       {
-        label: '04. Flujo Online Optimizado',
+        label: '06. Flujo Online Optimizado',
+        title: 'Mejora de flujos: Check-in y Selección de Asientos',
+        layout: 'image-grid',
+        content: 'Los flujos de Check-in online y Selección de Asientos fueron completamente rediseñados utilizando los nuevos componentes del sistema. Las mejoras se centran en la **jerarquía de información**, la **limpieza visual** y la reducción de pasos innecesarios. Cada pantalla está construida exclusivamente con componentes de la **Librería**, validando que el sistema soporta los flujos más complejos del ecosistema.',
+        images: [
+          '/assets/projects/iberia/iberia-flow-checkin-before.png',
+          '/assets/projects/iberia/iberia-flow-checkin-after.png',
+          '/assets/projects/iberia/iberia-flow-seats-before.png',
+          '/assets/projects/iberia/iberia-flow-seats-after.png',
+        ],
+        captions: [
+          'Check-in antes: flujo con jerarquía confusa y pasos redundantes',
+          'Check-in después: flujo limpio con jerarquía clara y componentes del sistema',
+          'Selección de asientos antes: interfaz densa y poco intuitiva',
+          'Selección de asientos después: diseño limpio con interacciones claras basadas en átomos del sistema',
+        ],
+      },
+      {
+        label: '06. Flujo Online Optimizado',
         title: 'Eficiencia del flujo digital - Del inicio al check-in',
         layout: 'mermaid',
         content: 'Este diagrama muestra la **Arquitectura de Información** del flujo online optimizado. Cada nodo del flujo está construido con componentes de la **Librería de Componentes**, consumiendo **Design Tokens** para garantizar la **Consistencia Multiplataforma**. Los nodos destacados en rojo representan los pasos donde los tokens tienen mayor impacto visual:',
