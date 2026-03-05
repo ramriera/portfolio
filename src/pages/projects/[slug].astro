@@ -229,6 +229,15 @@ const meta = project.projectMeta;
         {/* Center layout */}
         {section.layout === 'center' && (
           <div class="max-w-4xl mx-auto">
+            {section.images && (
+              <div data-reveal class="mb-10">
+                {section.images.map((img: string) => (
+                  <div class="rounded-xl overflow-hidden">
+                    <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            )}
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
@@ -252,15 +261,6 @@ const meta = project.projectMeta;
                   <span class="text-primary-500 font-bold">Insight Clave:</span> {section.highlight}
                 </p>
               </blockquote>
-            )}
-            {section.images && (
-              <div data-reveal data-delay="400" class="mt-10">
-                {section.images.map((img: string) => (
-                  <div class="rounded-xl overflow-hidden">
-                    <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
-                  </div>
-                ))}
-              </div>
             )}
           </div>
         )}
