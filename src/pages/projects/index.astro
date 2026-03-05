@@ -3,7 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { projects } from '@/utils/data';
 
-const projectOrder = ['banco-sabadell-design-system', 'global-helping', 'movefast-startup-platform', 'imaginbank-digital-banking'];
+const projectOrder = ['massimo-dutti-conversion', 'movefast-startup-platform', 'imaginbank-digital-banking', 'solotemazos-music-platform'];
 const sortedProjects = [...projects].sort((a, b) => {
   const aIdx = projectOrder.indexOf(a.slug);
   const bIdx = projectOrder.indexOf(b.slug);
