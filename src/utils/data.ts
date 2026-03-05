@@ -849,7 +849,7 @@ export const projects: Project[] = [
         layout: 'left-right',
         content: 'El análisis del flujo actual reveló que la opción de "Reservar en tienda" está enterrada al final de la ficha de producto, debajo del scroll. El usuario tiene que desplazarse más allá de la información de composición, cuidados, envíos y devoluciones para encontrar un enlace de texto - ni siquiera un botón - que dice "Disponibilidad y reserva en tienda". La jerarquía visual prioriza completamente la compra online sobre la experiencia omnicanal.',
         images: [
-          '/assets/projects/massimo-dutti/viejo-portada.png',
+          '/assets/projects/massimo-dutti/viejo-reserva-tienda-flujo.png',
         ],
       },
       {
