@@ -834,20 +834,20 @@ export const projects: Project[] = [
         label: '01. Auditoría e Investigación',
         title: 'El flujo actual - ¿Por qué no funciona?',
         layout: 'center',
-        content: 'El punto de partida fue una auditoría exhaustiva del flujo de reserva existente. Se mapeó paso a paso el journey completo: desde que el usuario descubre el producto hasta que lo recoge en tienda. En paralelo, se realizó benchmarking de cómo resuelven el mismo problema otras empresas del grupo Inditex y competidores directos.\n\nTres hipótesis guiaron la investigación: ¿El usuario no entiende bien qué es "reservar" vs "comprar"? ¿No hay feedback claro del estado de la reserva? ¿El tiempo de expiración genera ansiedad? Las respuestas confirmaron que los tres problemas coexisten y se retroalimentan.',
+        content: 'El punto de partida fue una **auditoría exhaustiva del flujo de reserva** existente. Se mapeó paso a paso el journey completo: desde que el usuario descubre el producto hasta que lo recoge en tienda. En paralelo, se realizó **benchmarking** de cómo resuelven el mismo problema otras empresas del grupo Inditex y competidores directos.\n\nTres hipótesis guiaron la investigación: ¿El usuario no entiende bien qué es "reservar" vs "comprar"? ¿No hay **feedback claro del estado de la reserva**? ¿El **tiempo de expiración genera ansiedad**? Las respuestas confirmaron que los tres problemas coexisten y se retroalimentan.',
         bullets: [
           'Difícil acceso - La acción "reservar en tienda" está escondida y es poco escaneable en la ficha de producto',
           'Demasiados pasos - Talla → CP → selección de tienda → login → reservar → solicitud → validación manual → email',
           'Seguimiento opaco - La reserva vive en un email y en "Mi cuenta", sin una capa clara de seguimiento in-app',
           'Dudas sobre caducidad y compra - 24 horas de margen y no compra obligatoria generan incertidumbre en lugar de confianza',
         ],
-        highlight: 'Cada paso extra es una oportunidad perdida de conversión. El usuario no abandona porque no quiera el producto - abandona porque el proceso le genera más fricción que confianza.',
+        highlight: 'Cada paso extra es una **oportunidad perdida de conversión**. El usuario no abandona porque no quiera el producto - abandona porque el proceso le genera más **fricción** que **confianza**.',
       },
       {
         label: '01. Auditoría e Investigación',
         title: 'Flujo actual - Ficha de producto',
         layout: 'left-right',
-        content: 'El análisis del flujo actual reveló que la opción de "Reservar en tienda" está enterrada al final de la ficha de producto, debajo del scroll. El usuario tiene que desplazarse más allá de la información de composición, cuidados, envíos y devoluciones para encontrar un enlace de texto - ni siquiera un botón - que dice "Disponibilidad y reserva en tienda". La jerarquía visual prioriza completamente la compra online sobre la experiencia omnicanal.',
+        content: 'El análisis del flujo actual reveló que la opción de "Reservar en tienda" está **enterrada al final de la ficha de producto**, debajo del scroll. El usuario tiene que desplazarse más allá de la información de composición, cuidados, envíos y devoluciones para encontrar un enlace de texto - ni siquiera un botón - que dice "Disponibilidad y reserva en tienda". La **jerarquía visual prioriza completamente la compra online** sobre la **experiencia omnicanal**.',
         images: [
           '/assets/projects/massimo-dutti/viejo-reserva-tienda-flujo.png',
         ],
@@ -856,7 +856,7 @@ export const projects: Project[] = [
         label: '01. Auditoría e Investigación',
         title: 'Flujo actual - Selección de tienda y logueo',
         layout: 'image-grid',
-        content: 'Una vez localizada la opción de reserva, el usuario entra en un flujo con demasiados pasos intermedios: seleccionar talla, introducir código postal, elegir tienda de una lista sin información clara de stock, y obligatoriamente loguearse o crear cuenta antes de poder confirmar. La selección de tienda muestra disponibilidad como "Talla disponible: M" pero no comunica cuándo estará lista ni qué pasa si no la recoge.',
+        content: 'Una vez localizada la opción de reserva, el usuario entra en un **flujo con demasiados pasos intermedios**: seleccionar talla, introducir código postal, elegir tienda de una lista sin información clara de stock, y obligatoriamente **loguearse o crear cuenta** antes de poder confirmar. La selección de tienda muestra disponibilidad como "Talla disponible: M" pero no comunica cuándo estará lista ni qué pasa si no la recoge.',
         images: [
           '/assets/projects/massimo-dutti/viejo-mapa.png',
           '/assets/projects/massimo-dutti/viejo-login.png',
@@ -866,7 +866,7 @@ export const projects: Project[] = [
         label: '01. Auditoría e Investigación',
         title: 'Flujo actual - Confirmación y seguimiento',
         layout: 'image-grid',
-        content: 'La confirmación de reserva es una pantalla mínima que redirige al usuario a su email y a "Mis reservas en tienda" dentro de "Mi cuenta". El tracking in-app es básico: muestra el estado como "Pendiente" con fecha, pero sin progresión visual, sin estimación de tiempo, y sin ninguna acción que el usuario pueda realizar. No hay integración con wallet, no hay mapa, no hay recordatorio de caducidad. El usuario queda en un limbo de espera pasiva.',
+        content: 'La confirmación de reserva es una pantalla mínima que redirige al usuario a su email y a "Mis reservas en tienda" dentro de "Mi cuenta". El **tracking in-app es básico**: muestra el estado como "Pendiente" con fecha, pero sin progresión visual, sin estimación de tiempo, y sin ninguna acción que el usuario pueda realizar. No hay **integración con wallet**, no hay mapa, no hay **recordatorio de caducidad**. El usuario queda en un limbo de espera pasiva.',
         images: [
           '/assets/projects/massimo-dutti/viejo-solicitud-reserva.png',
           '/assets/projects/massimo-dutti/viejo-tracking-in-app.png',
@@ -877,19 +877,19 @@ export const projects: Project[] = [
         label: '02. Flujo de Usuario y Conversión',
         title: 'Diagrama del flujo de reserva propuesto',
         layout: 'full-image',
-        content: 'Este era el flujo completo que existía hasta ahora: un recorrido con demasiados pasos intermedios, validaciones manuales y puntos de fricción que provocaban abandono. El objetivo del rediseño es simplificarlo drásticamente a 4 pasos claros, eliminando el registro obligatorio, preseleccionando la tienda favorita y ofreciendo confirmación inmediata.',
+        content: 'Este era el flujo completo que existía hasta ahora: un recorrido con demasiados pasos intermedios, validaciones manuales y **puntos de fricción** que provocaban abandono. El objetivo del rediseño es simplificarlo drásticamente a **4 pasos claros**, eliminando el **registro obligatorio**, preseleccionando la tienda favorita y ofreciendo **confirmación inmediata**.',
         images: [
           '/assets/projects/massimo-dutti/mermaid-flujo-reserva.svg',
         ],
-        highlight: 'De 8 pasos a 4. El flujo elimina el registro obligatorio, preselecciona la tienda favorita y confirma en un solo tap.',
+        highlight: 'De **8 pasos a 4**. El flujo elimina el **registro obligatorio**, preselecciona la tienda favorita y confirma en un solo tap.',
       },
       // ── 03. Estrategia de Producto ──
       {
         label: '03. Estrategia de Producto',
         title: 'Los 3 pilares - Claridad, Velocidad, Confianza',
         layout: 'center',
-        content: 'A partir del diagnóstico, se definieron tres pilares estratégicos que guían cada decisión de diseño del nuevo flujo:\n\nClaridad - Que el usuario entienda exactamente qué está haciendo. "Reservar" no es "comprar". No hay cargo online. El producto le espera en tienda para que lo pruebe sin compromiso.\n\nVelocidad - Que reservar sea tan directo como "añadir a la bolsa". Tienda favorita preseleccionada, email como único dato necesario, confirmación en un tap.\n\nConfianza - Que el usuario sepa qué pasará, cuándo y cómo. Confirmación inmediata con QR, tracking con estados claros, recordatorios antes de que caduque, y siempre el mensaje: "Pagarás en tienda. Ningún cargo online".',
-        highlight: 'Si reducimos la ansiedad por el tiempo de expiración y clarificamos que no hay cargo online, la conversión subirá. Esta es la hipótesis de valor que vertebra todo el rediseño.',
+        content: 'A partir del diagnóstico, se definieron tres pilares estratégicos que guían cada decisión de diseño del nuevo flujo:\n\n**Claridad** - Que el usuario entienda exactamente qué está haciendo. "Reservar" no es "comprar". No hay cargo online. El producto le espera en tienda para que lo pruebe sin compromiso.\n\n**Velocidad** - Que reservar sea tan directo como "añadir a la bolsa". Tienda favorita preseleccionada, email como único dato necesario, **confirmación en un tap**.\n\n**Confianza** - Que el usuario sepa qué pasará, cuándo y cómo. Confirmación inmediata con QR, **tracking con estados claros**, recordatorios antes de que caduque, y siempre el mensaje: "Pagarás en tienda. Ningún cargo online".',
+        highlight: 'Si reducimos la **ansiedad por el tiempo de expiración** y clarificamos que no hay cargo online, la **conversión** subirá. Esta es la **hipótesis de valor** que vertebra todo el rediseño.',
       },
       {
         label: '03. Estrategia de Producto',
@@ -897,9 +897,20 @@ export const projects: Project[] = [
         layout: 'center',
         content: 'Se establecieron tres categorías de objetivos para medir el impacto del rediseño:',
         bullets: [
-          'Experiencia - Percepción de rapidez: que reservar se sienta tan directo como añadir a la bolsa. Mostrar disponibilidad real. Eliminar incertidumbre con información clara de qué pasará, cuándo y cómo',
-          'Flujo - Eliminar registro obligatorio (permitir reserva como invitado). Confirmación inmediata con dirección, horario, tiempo estimado y mapa. Notificaciones push con estados claros',
-          'Conversión - Aumentar clics en "Reservar en tienda" vs. situación actual. Mejorar ratio reservas confirmadas / reservas iniciadas. Incrementar recogida en tienda en menos de 24h. Crear ventas cruzadas in-app y en tienda física',
+          '**Experiencia** - Percepción de rapidez: que reservar se sienta tan directo como añadir a la bolsa. Mostrar **disponibilidad real**. Eliminar incertidumbre con información clara de qué pasará, cuándo y cómo',
+          '**Flujo** - Eliminar **registro obligatorio** (permitir reserva como invitado). **Confirmación inmediata** con dirección, horario, tiempo estimado y mapa. Notificaciones push con estados claros',
+          '**Conversión** - Aumentar clics en "Reservar en tienda" vs. situación actual. Mejorar **ratio reservas confirmadas / reservas iniciadas**. Incrementar recogida en tienda en menos de 24h. Crear **ventas cruzadas** in-app y en tienda física',
+        ],
+      },
+      {
+        label: '03. Estrategia de Producto',
+        title: 'Impacto en el Producto',
+        layout: 'center',
+        content: 'El rediseño del flujo de reserva se traduce en mejoras concretas y medibles en tres áreas clave del producto:',
+        bullets: [
+          '**Optimización del Checkout** - Reducción de pasos innecesarios para agilizar la **compra por impulso**. Menos fricción = más reservas completadas',
+          '**Mejora en la Reserva en Tienda** - Interfaz intuitiva para facilitar la **omnicanalidad (Online-to-Store)**. El usuario pasa de 8 pasos a 4 con confirmación inmediata',
+          '**Branding de Lujo** - Mantenimiento de una **estética minimalista** que eleva el **valor percibido** del producto. Cada pantalla respira el diseño editorial de Massimo Dutti',
         ],
       },
       // ── 04. El Nuevo Flujo de Reserva ──
