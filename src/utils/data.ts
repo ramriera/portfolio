@@ -877,7 +877,7 @@ export const projects: Project[] = [
         label: '02. Flujo de Usuario y Conversión',
         title: 'Diagrama del flujo de reserva propuesto',
         layout: 'full-image',
-        content: 'El nuevo flujo de reserva se simplifica en 5 pasos claros, eliminando las fricciones del proceso actual. Desde la ficha de producto hasta la confirmación, cada pantalla tiene un objetivo único y una salida clara hacia el siguiente paso.',
+        content: 'Este era el flujo completo que existía hasta ahora: un recorrido con demasiados pasos intermedios, validaciones manuales y puntos de fricción que provocaban abandono. El objetivo del rediseño es simplificarlo drásticamente a 4 pasos claros, eliminando el registro obligatorio, preseleccionando la tienda favorita y ofreciendo confirmación inmediata.',
         images: [
           '/assets/projects/massimo-dutti/mermaid-flujo-reserva.svg',
         ],
