@@ -335,7 +335,7 @@ function md(text: string): string {
             {section.content && (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10" set:html={md(section.content)} />
             )}
-            <div class="space-y-6">
+            <div class={`space-y-6 ${section.images?.length === 1 && !section.images[0].endsWith('.svg') ? 'max-w-2xl mx-auto' : ''}`}>
               {section.images?.map((img: string) => (
                 <div data-reveal class={`rounded-xl overflow-hidden ${img.endsWith('.svg') ? 'bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700/50 p-6 md:p-10' : ''}`}>
                   <img src={img} alt={section.title} class={`w-full h-auto ${img.endsWith('.svg') ? '' : 'lightbox-trigger object-cover cursor-zoom-in'}`} loading="lazy" />
@@ -449,6 +449,45 @@ function md(text: string): string {
             {section.mermaidCode && (
               <div data-reveal data-delay="300" class="rounded-2xl overflow-hidden border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-900 p-8 md:p-12">
                 <pre class="mermaid flex justify-center">{section.mermaidCode}</pre>
+              </div>
+            )}
+            {section.highlight && (
+              <blockquote data-reveal data-delay="400" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 dark:bg-primary-500/10 rounded-r-xl py-4 pr-5">
+                <p class="text-base font-semibold text-dark-800 dark:text-dark-100 leading-relaxed">
+                  <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
+                </p>
+              </blockquote>
+            )}
+          </div>
+        )}
+
+        {/* Stepper vertical */}
+        {section.layout === 'stepper' && (
+          <div class="max-w-4xl mx-auto">
+            {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
+            {section.content && (
+              <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10" set:html={md(section.content)} />
+            )}
+            {section.steps && (
+              <div data-reveal data-delay="300" class="relative ml-4 md:ml-6">
+                {section.steps.map((step: { title: string; description: string }, i: number) => (
+                  <div class={`relative flex gap-6 ${i < section.steps!.length - 1 ? 'pb-10' : ''}`}>
+                    {/* Vertical line */}
+                    {i < section.steps!.length - 1 && (
+                      <div class="absolute left-5 top-10 bottom-0 w-px bg-dark-200 dark:bg-dark-700"></div>
+                    )}
+                    {/* Step indicator */}
+                    <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-dark-100 dark:bg-dark-800 border-2 border-dark-300 dark:border-dark-600 flex items-center justify-center">
+                      <span class="text-sm font-bold text-dark-600 dark:text-dark-300">{i + 1}</span>
+                    </div>
+                    {/* Step content */}
+                    <div class="pt-1">
+                      <h4 class="text-lg font-bold text-dark-900 dark:text-dark-50 mb-1">{step.title}</h4>
+                      <p class="text-body text-base leading-relaxed" set:html={md(step.description)} />
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
             {section.highlight && (
