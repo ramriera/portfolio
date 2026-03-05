@@ -959,7 +959,10 @@ export const projects: Project[] = [
       {
         label: '05. Service Design',
         title: 'Poste de Recogida QR - La experiencia en tienda',
-        layout: 'center',
+        layout: 'left-right',
+        images: [
+          '/assets/projects/massimo-dutti/poste-recogida-qr.png',
+        ],
         content: '¿Por qué no añadir una sección de recogida con un poste que lea los códigos QR? Esta propuesta de Service Design extiende la experiencia digital al mundo físico. En lugar de depender al 100% del personal de tienda para gestionar las recogidas, se propone un poste automatizado donde el cliente escanea su QR al llegar y el sistema notifica al staff para preparar el pedido.\n\nEsto resuelve tres problemas simultáneamente: reduce los tiempos de espera del cliente, libera al personal para tareas de mayor valor (asesoramiento, venta), y genera datos medibles sobre el flujo de recogida que permiten optimizar la operación.',
         bullets: [
           'Cliente tiene mejor experiencia - Escanea el QR al llegar, sin buscar a nadie, sin esperas. El sistema confirma "Tu reserva se está preparando"',
