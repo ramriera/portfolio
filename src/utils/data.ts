@@ -133,7 +133,7 @@ export const projects: Project[] = [
     featured: true,
     projectMeta: {
       role: 'UX/UI Strategy & Service Design',
-      duration: '2 semanas',
+      duration: '1 semana',
       tools: ['Research', 'Service Blueprint', 'Prototyping', 'Wireframing'],
       skills: ['UX Optimization', 'Checkout Flow', 'E-commerce Strategy', 'High-Fidelity Prototyping', 'Service Design', 'CRO'],
     },
@@ -475,7 +475,7 @@ export const projects: Project[] = [
       role: 'UX/UI Designer (Research, Visual Design, Interaction Design)',
       duration: '2 semanas (45 horas)',
       tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
-      skills: ['Design Thinking', 'Surveys', 'User Persona', 'Journey Mapping', 'Design Tokens', 'Prototyping'],
+      skills: ['Design Thinking', 'Surveys', 'User Persona', 'Journey Mapping', 'Design Tokens', 'Prototyping', 'Benchmarking', 'Wireframing', 'Visual Design', 'Interaction Design'],
     },
     caseSections: [
       {
