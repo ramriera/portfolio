@@ -331,14 +331,12 @@ function md(text: string): string {
 
         {/* Full image */}
         {section.layout === 'full-image' && (
-          <div>
-            <div class="max-w-4xl mx-auto">
-              {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-              <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
-              {section.content && (
-                <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10" set:html={md(section.content)} />
-              )}
-            </div>
+          <div class="max-w-4xl mx-auto">
+            {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
+            {section.content && (
+              <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10" set:html={md(section.content)} />
+            )}
             <div class={`space-y-6 ${section.images?.length === 1 && !section.images[0].endsWith('.svg') ? 'max-w-2xl mx-auto' : ''}`}>
               {section.images?.map((img: string) => (
                 <div data-reveal class="rounded-xl overflow-hidden">
@@ -346,15 +344,13 @@ function md(text: string): string {
                 </div>
               ))}
             </div>
-            <div class="max-w-4xl mx-auto">
-              {section.highlight && (
-                <blockquote data-reveal data-delay="300" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 dark:bg-primary-500/10 rounded-r-xl py-4 pr-5">
-                  <p class="text-base font-semibold text-dark-800 dark:text-dark-100 leading-relaxed">
-                    <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
-                  </p>
-                </blockquote>
-              )}
-            </div>
+            {section.highlight && (
+              <blockquote data-reveal data-delay="300" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 dark:bg-primary-500/10 rounded-r-xl py-4 pr-5">
+                <p class="text-base font-semibold text-dark-800 dark:text-dark-100 leading-relaxed">
+                  <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
+                </p>
+              </blockquote>
+            )}
           </div>
         )}
 
