@@ -58,7 +58,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
-  <body class="min-h-screen flex flex-col bg-dark-50 dark:bg-dark-950 text-dark-900 dark:text-dark-100 transition-colors duration-300">
+  <body class="min-h-screen flex flex-col bg-dark-50 text-dark-900 transition-colors duration-300">
     <Navbar />
     <main class="flex-1">
       <slot />
@@ -66,18 +66,8 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <Footer />
 
     <script is:inline>
-      // Theme: respect saved preference, then system preference, default light
+      // Code Mode: restore from localStorage
       (function() {
-        const saved = localStorage.getItem('theme');
-        if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark');
-          document.body.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-          document.body.classList.remove('dark');
-        }
-
-        // Code Mode: restore from localStorage
         if (localStorage.getItem('code-mode') === 'on') {
           document.documentElement.classList.add('code-mode');
           document.body.classList.add('code-mode');

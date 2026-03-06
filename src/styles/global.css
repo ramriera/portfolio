@@ -15,16 +15,8 @@
     @apply bg-dark-50 text-dark-900 font-sans transition-colors duration-300;
   }
 
-  body.dark {
-    @apply bg-dark-950 text-dark-100;
-  }
-
   ::selection {
     @apply bg-primary-200 text-primary-800;
-  }
-
-  .dark ::selection {
-    @apply bg-primary-500/30 text-primary-300;
   }
 }
 
@@ -63,11 +55,11 @@
   }
 
   .text-body {
-    @apply text-base sm:text-lg text-dark-500 dark:text-dark-400 leading-relaxed;
+    @apply text-base sm:text-lg text-dark-500 leading-relaxed;
   }
 
   .text-body-sm {
-    @apply text-sm sm:text-base text-dark-500 dark:text-dark-400 leading-relaxed;
+    @apply text-sm sm:text-base text-dark-500 leading-relaxed;
   }
 
   .link-underline {
@@ -104,25 +96,16 @@
     border-color: rgba(217, 119, 87, 0.18);
   }
 
-  .dark .meta-card:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-    border-color: rgba(217, 119, 87, 0.22);
-  }
-
   .gradient-text {
     @apply bg-gradient-to-r from-primary-500 to-primary-400 bg-clip-text text-transparent;
   }
 
-  .dark .gradient-text {
-    @apply from-primary-400 to-primary-300;
-  }
-
   .dashed-border {
-    @apply border border-dark-200 dark:border-dark-700;
+    @apply border border-dark-200
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 bg-dark-900 dark:bg-dark-100 text-white dark:text-dark-900 font-medium rounded-full transition-all duration-300 hover:bg-dark-800 dark:hover:bg-dark-200 active:scale-[0.98];
+    @apply inline-flex items-center gap-2 px-7 py-3.5 bg-dark-900 text-white font-medium rounded-full transition-all duration-300 hover:bg-dark-800 active:scale-[0.98];
   }
 
   .btn-primary svg,
@@ -136,11 +119,11 @@
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-dark-300 dark:border-dark-600 text-dark-700 dark:text-dark-300 font-medium rounded-full transition-all duration-300 hover:bg-dark-100 dark:hover:bg-dark-800 hover:border-primary-400 dark:hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 active:scale-[0.97];
+    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-dark-300 text-dark-700 font-medium rounded-full transition-all duration-300 hover:bg-dark-100 hover:border-primary-400 hover:text-primary-600 active:scale-[0.97];
   }
 
   .tag {
-    @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-primary-50 dark:bg-primary-500/10 text-primary-600 dark:text-primary-400;
+    @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-primary-50 text-primary-600
   }
 }
 
@@ -195,10 +178,10 @@
   @apply bg-transparent;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark-300 dark:bg-dark-600 rounded-full;
+  @apply bg-dark-300 rounded-full;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-dark-400 dark:bg-dark-500;
+  @apply bg-dark-400
 }
 
 /* Wave animation for hand emoji */
@@ -245,10 +228,6 @@ main {
   background: rgba(217, 119, 87, 0.08);
 }
 
-.dark .section-icon {
-  background: rgba(217, 119, 87, 0.1);
-}
-
 .section-icon-svg {
   overflow: visible;
 }
@@ -259,10 +238,6 @@ main {
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.dark .section-icon-svg .icon-stroke {
-  stroke: var(--color-dark-400, #9e9d9b);
 }
 
 .section-icon-svg .icon-accent {

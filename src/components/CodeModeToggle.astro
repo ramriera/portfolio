@@ -4,11 +4,11 @@
 
 <button
   id="code-mode-toggle"
-  class="relative flex items-center gap-1.5 px-3 py-1.5 rounded-md font-mono text-xs tracking-wider transition-all duration-300 border border-dark-200 dark:border-dark-700 hover:border-emerald-400/50 dark:hover:border-emerald-400/50 bg-dark-50 dark:bg-dark-900 text-dark-500 dark:text-dark-400 hover:text-emerald-500 dark:hover:text-emerald-400 group"
+  class="relative flex items-center gap-1.5 px-3 py-1.5 rounded-md font-mono text-xs tracking-wider transition-all duration-300 border border-dark-200 hover:border-emerald-400/50 bg-dark-50 text-dark-500 hover:text-emerald-500 group"
   aria-label="Activar Code Mode"
 >
-  <span class="inline-block w-1.5 h-1.5 rounded-full bg-dark-300 dark:bg-dark-600 transition-colors duration-300 group-hover:bg-emerald-400" id="code-mode-dot"></span>
-  <span id="code-mode-label">CODE_MODE:<span class="text-dark-400 dark:text-dark-500" id="code-mode-state">OFF</span></span>
+  <span class="inline-block w-1.5 h-1.5 rounded-full bg-dark-300 transition-colors duration-300 group-hover:bg-emerald-400" id="code-mode-dot"></span>
+  <span id="code-mode-label">CODE_MODE:<span class="text-dark-400" id="code-mode-state">OFF</span></span>
 </button>
 
 <script>
@@ -21,29 +21,29 @@
       document.documentElement.classList.add('code-mode');
       document.body.classList.add('code-mode');
       if (codeDot) codeDot.classList.add('bg-emerald-400', 'shadow-[0_0_6px_rgba(52,211,153,0.5)]');
-      if (codeDot) codeDot.classList.remove('bg-dark-300', 'dark:bg-dark-600');
+      if (codeDot) codeDot.classList.remove('bg-dark-300');
       if (codeModeState) {
         codeModeState.textContent = 'ON';
-        codeModeState.classList.remove('text-dark-400', 'dark:text-dark-500');
+        codeModeState.classList.remove('text-dark-400');
         codeModeState.classList.add('text-emerald-400');
       }
       if (codeToggle) {
-        codeToggle.classList.add('border-emerald-400/40', 'text-emerald-400', 'dark:text-emerald-400');
-        codeToggle.classList.remove('border-dark-200', 'dark:border-dark-700', 'text-dark-500', 'dark:text-dark-400');
+        codeToggle.classList.add('border-emerald-400/40', 'text-emerald-400');
+        codeToggle.classList.remove('border-dark-200', 'text-dark-500');
       }
     } else {
       document.documentElement.classList.remove('code-mode');
       document.body.classList.remove('code-mode');
       if (codeDot) codeDot.classList.remove('bg-emerald-400', 'shadow-[0_0_6px_rgba(52,211,153,0.5)]');
-      if (codeDot) codeDot.classList.add('bg-dark-300', 'dark:bg-dark-600');
+      if (codeDot) codeDot.classList.add('bg-dark-300');
       if (codeModeState) {
         codeModeState.textContent = 'OFF';
-        codeModeState.classList.add('text-dark-400', 'dark:text-dark-500');
+        codeModeState.classList.add('text-dark-400');
         codeModeState.classList.remove('text-emerald-400');
       }
       if (codeToggle) {
-        codeToggle.classList.remove('border-emerald-400/40', 'text-emerald-400', 'dark:text-emerald-400');
-        codeToggle.classList.add('border-dark-200', 'dark:border-dark-700', 'text-dark-500', 'dark:text-dark-400');
+        codeToggle.classList.remove('border-emerald-400/40', 'text-emerald-400');
+        codeToggle.classList.add('border-dark-200', 'text-dark-500');
       }
     }
   }
