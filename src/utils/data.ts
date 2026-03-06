@@ -488,7 +488,7 @@ export const projects: Project[] = [
       '/assets/projects/global-helping/global-helping-header.png',
     ],
     liveUrl: '#',
-    featured: true,
+    featured: false,
     projectMeta: {
       role: 'UX/UI Designer',
       industry: 'Non-Profit',
