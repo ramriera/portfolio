@@ -388,6 +388,316 @@ main {
   stroke-dashoffset: 0;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   CODE MODE — Global theme transformation
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. Base overrides: background, typography, text colors ── */
+.code-mode {
+  --cm-bg: #0c0e14;
+  --cm-bg-surface: #111520;
+  --cm-bg-card: #151a27;
+  --cm-border: rgba(56, 189, 248, 0.12);
+  --cm-border-hover: rgba(56, 189, 248, 0.3);
+  --cm-text: #c9d1d9;
+  --cm-text-muted: #6b7b8d;
+  --cm-keyword: #c678dd;      /* purple/pink — keywords */
+  --cm-function: #61afef;     /* blue — functions/links */
+  --cm-string: #98c379;       /* green — strings/success */
+  --cm-comment: #5c6370;      /* gray — muted */
+  --cm-number: #d19a66;       /* orange — numbers/accents */
+  --cm-tag: #e06c75;          /* red — HTML tags */
+  --cm-glow: 0 0 20px rgba(56, 189, 248, 0.06);
+}
+
+body.code-mode {
+  background: var(--cm-bg) !important;
+  color: var(--cm-text) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace !important;
+}
+
+/* All text goes monospace */
+.code-mode * {
+  font-family: inherit !important;
+}
+
+/* ── 2. Headings as syntax-highlighted keywords ── */
+.code-mode h1,
+.code-mode .heading-xl {
+  color: var(--cm-keyword) !important;
+  text-shadow: 0 0 30px rgba(198, 120, 221, 0.15);
+}
+
+.code-mode h2,
+.code-mode .heading-lg {
+  color: var(--cm-function) !important;
+  text-shadow: 0 0 25px rgba(97, 175, 239, 0.12);
+}
+
+.code-mode h3,
+.code-mode .heading-md {
+  color: var(--cm-string) !important;
+}
+
+.code-mode h4,
+.code-mode .heading-sm {
+  color: var(--cm-number) !important;
+}
+
+/* ── 3. Body text, muted text, links ── */
+.code-mode .text-body,
+.code-mode .text-body-sm {
+  color: var(--cm-text-muted) !important;
+}
+
+.code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo) {
+  color: var(--cm-function) !important;
+  text-decoration-color: rgba(97, 175, 239, 0.3);
+}
+
+.code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo):hover {
+  color: var(--cm-string) !important;
+  text-shadow: 0 0 8px rgba(152, 195, 121, 0.3);
+}
+
+/* Primary accent overrides */
+.code-mode .text-primary-500,
+.code-mode .text-primary-400 {
+  color: var(--cm-string) !important;
+}
+
+.code-mode .gradient-text {
+  background: linear-gradient(90deg, var(--cm-function), var(--cm-keyword)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ── 4. Surfaces, cards, containers ── */
+.code-mode .nav-scrolled {
+  background: rgba(12, 14, 20, 0.85) !important;
+}
+
+.code-mode .meta-card,
+.code-mode [class*="rounded-2xl"][class*="border"],
+.code-mode [class*="rounded-xl"][class*="border"] {
+  background: var(--cm-bg-card) !important;
+  border-color: var(--cm-border) !important;
+}
+
+.code-mode .meta-card:hover {
+  border-color: var(--cm-border-hover) !important;
+  box-shadow: var(--cm-glow) !important;
+}
+
+/* ── 5. Section pseudo-element code tags ── */
+.code-mode section {
+  position: relative;
+}
+
+.code-mode section > .container-custom::before,
+.code-mode section > .container-custom::after {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--cm-comment);
+  opacity: 0.5;
+  pointer-events: none;
+  display: block;
+  line-height: 1;
+}
+
+.code-mode section > .container-custom::before {
+  content: '<section>';
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+}
+
+.code-mode section > .container-custom::after {
+  content: '</section>';
+  margin-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+/* ── 6. Neon container borders (box-model) ── */
+.code-mode .container-custom {
+  border: 1px solid var(--cm-border);
+  border-radius: 4px;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  box-shadow: var(--cm-glow);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.code-mode .container-custom:hover {
+  border-color: var(--cm-border-hover);
+}
+
+/* Grid containers — neon subtle borders */
+.code-mode [class*="grid-cols-"] > * {
+  border: 1px solid rgba(56, 189, 248, 0.06);
+  border-radius: 4px;
+  padding: 0.5rem;
+  transition: border-color 0.3s ease;
+}
+
+.code-mode [class*="grid-cols-"] > *:hover {
+  border-color: var(--cm-border-hover);
+}
+
+/* ── 7. Buttons ── */
+.code-mode .btn-primary {
+  background: var(--cm-function) !important;
+  color: var(--cm-bg) !important;
+  border: 1px solid var(--cm-function) !important;
+  font-weight: 500 !important;
+}
+
+.code-mode .btn-primary:hover {
+  background: transparent !important;
+  color: var(--cm-function) !important;
+  box-shadow: 0 0 12px rgba(97, 175, 239, 0.25) !important;
+}
+
+.code-mode .btn-outline {
+  border-color: var(--cm-border-hover) !important;
+  color: var(--cm-function) !important;
+}
+
+.code-mode .btn-outline:hover {
+  background: rgba(97, 175, 239, 0.08) !important;
+  border-color: var(--cm-function) !important;
+  color: var(--cm-function) !important;
+  box-shadow: 0 0 12px rgba(97, 175, 239, 0.15) !important;
+}
+
+/* ── 8. Tags ── */
+.code-mode .tag {
+  background: rgba(152, 195, 121, 0.1) !important;
+  color: var(--cm-string) !important;
+  border: 1px solid rgba(152, 195, 121, 0.2) !important;
+}
+
+/* ── 9. Images: B&W filter + overlay ── */
+.code-mode img:not([src*="svg"]) {
+  filter: grayscale(0.85) brightness(0.7) contrast(1.1) !important;
+  transition: filter 0.5s ease !important;
+}
+
+.code-mode img:not([src*="svg"]):hover {
+  filter: grayscale(0.5) brightness(0.8) contrast(1.05) !important;
+}
+
+/* Project cards get a tech overlay effect */
+.code-mode .project-card-image {
+  position: relative;
+}
+
+/* ── 10. Scrollbar code theme ── */
+.code-mode ::-webkit-scrollbar-thumb {
+  background: var(--cm-comment) !important;
+}
+
+.code-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--cm-function) !important;
+}
+
+/* ── 11. Selection ── */
+.code-mode ::selection {
+  background: rgba(97, 175, 239, 0.25) !important;
+  color: #fff !important;
+}
+
+/* ── 12. Navbar in code mode ── */
+.code-mode .logo-name {
+  color: var(--cm-keyword) !important;
+}
+
+.code-mode .logo-role {
+  color: var(--cm-comment) !important;
+}
+
+.code-mode .logo-divider {
+  background: var(--cm-comment) !important;
+}
+
+/* ── 13. Footer ── */
+.code-mode footer {
+  border-top: 1px solid var(--cm-border);
+}
+
+.code-mode footer p {
+  color: var(--cm-comment) !important;
+}
+
+/* ── 14. Section icons ── */
+.code-mode .section-icon {
+  background: rgba(97, 175, 239, 0.08) !important;
+  border: 1px solid rgba(97, 175, 239, 0.15);
+}
+
+.code-mode .section-icon-svg .icon-stroke {
+  stroke: var(--cm-text-muted) !important;
+}
+
+.code-mode .section-icon-svg .icon-accent {
+  stroke: var(--cm-function) !important;
+}
+
+.code-mode .section-icon-svg .icon-accent-fill {
+  fill: var(--cm-function) !important;
+}
+
+/* ── 15. Mobile menu ── */
+.code-mode #mobile-menu {
+  background: var(--cm-bg) !important;
+}
+
+.code-mode #hamburger span {
+  background: var(--cm-text) !important;
+}
+
+/* ── 16. CTA cards ── */
+.code-mode .cta-card {
+  border-color: var(--cm-border) !important;
+  background: var(--cm-bg-card) !important;
+}
+
+.code-mode .cta-card:hover {
+  border-color: var(--cm-border-hover) !important;
+  background: var(--cm-bg-surface) !important;
+}
+
+.code-mode .cta-card:hover .cta-card-icon {
+  background: rgba(97, 175, 239, 0.15) !important;
+  color: var(--cm-function) !important;
+}
+
+/* ── 17. Cursor blink animation for code feel ── */
+@keyframes codeBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.code-mode .heading-xl::after,
+.code-mode .heading-lg::after {
+  content: '|';
+  animation: codeBlink 1s step-end infinite;
+  color: var(--cm-string);
+  margin-left: 2px;
+  font-weight: 300;
+}
+
+/* ── 18. Line numbers feel on body ── */
+.code-mode main {
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 1.8rem,
+      rgba(56, 189, 248, 0.02) 1.8rem,
+      rgba(56, 189, 248, 0.02) 3.6rem
+    );
+}
+
 /* CTA card-style social links */
 .cta-card {
   display: flex;

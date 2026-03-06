@@ -76,6 +76,12 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           document.documentElement.classList.remove('dark');
           document.body.classList.remove('dark');
         }
+
+        // Code Mode: restore from localStorage
+        if (localStorage.getItem('code-mode') === 'on') {
+          document.documentElement.classList.add('code-mode');
+          document.body.classList.add('code-mode');
+        }
       })();
     </script>
 

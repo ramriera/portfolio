@@ -1,6 +1,7 @@
 ---
 import { navLinks } from '@/utils/data';
 import ThemeToggle from '@/components/ThemeToggle.astro';
+import CodeModeToggle from '@/components/CodeModeToggle.astro';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -39,6 +40,9 @@ const currentPath = Astro.url.pathname;
 
       <!-- Actions -->
       <div class="flex items-center gap-3">
+        <div class="hidden sm:block">
+          <CodeModeToggle />
+        </div>
         <ThemeToggle />
         <a
           href="mailto:ramriera28@gmail.com"
@@ -87,9 +91,12 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
     </nav>
+    <div class="mt-6 sm:hidden">
+      <CodeModeToggle />
+    </div>
     <a
       href="mailto:ramriera28@gmail.com"
-      class="mt-8 btn-primary text-lg"
+      class="mt-6 btn-primary text-lg"
     >
       Hablemos
     </a>
