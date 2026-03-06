@@ -106,8 +106,6 @@ export interface Project {
   projectMeta?: ProjectMeta;
   caseSections?: CaseSection[];
   checks?: string[];
-  impactStats?: { value: string; label: string }[];
-  testimonial?: { quote: string; author: string; role: string };
 }
 
 export const projects: Project[] = [
@@ -633,16 +631,6 @@ export const projects: Project[] = [
       'La biblioteca de componentes estaba duplicada con variantes inconsistentes entre equipos, generando deuda de diseño acumulada',
       'Sin documentación técnica centralizada: las implementaciones divergían entre lo diseñado y lo desarrollado',
     ],
-    impactStats: [
-      { value: 'Single Source of Truth', label: 'Fuente única de verdad para todos los equipos' },
-      { value: 'Optimización de UI Library', label: 'Reducción de duplicados y deuda de diseño' },
-      { value: '+50 Componentes Documentados', label: 'Biblioteca centralizada en Zeroheight + Storybook' },
-    ],
-    testimonial: {
-      quote: 'La implementación de este sistema de diseño no solo mejoró la estética, sino que cambió nuestra forma de colaborar entre diseño e ingeniería, eliminando fricciones históricas.',
-      author: 'Design Manager',
-      role: 'Banco Sabadell — Digital Products',
-    },
     caseSections: [
       // ── 01. El Problema: Fragmentación Digital ──
       {
@@ -1010,16 +998,6 @@ export const projects: Project[] = [
       'Un botón primario tenía 4 variantes distintas entre plataformas — ninguna era la "correcta"',
       'La deuda de diseño acumulada ralentizaba el desarrollo de nuevas features un 35%',
     ],
-    impactStats: [
-      { value: '100% Consistencia Visual', label: 'Tokens unificados entre Web y App' },
-      { value: 'Reducción 30% Tiempo de Handoff', label: 'Documentación y specs automatizados' },
-      { value: 'Escalable a +5 Apps', label: 'Arquitectura modular multi-producto' },
-    ],
-    testimonial: {
-      quote: 'La implementación de este sistema de diseño no solo mejoró la estética, sino que cambió nuestra forma de colaborar entre diseño e ingeniería, eliminando fricciones históricas.',
-      author: 'Design Manager',
-      role: 'Iberia — Digital Products',
-    },
     caseSections: [
       // ── 01. El Problema: Fragmentación Digital ──
       {
@@ -1256,11 +1234,6 @@ export const projects: Project[] = [
       'Los usuarios sufren "fatiga de decisión" ante millones de canciones y playlists generadas por IA',
       'Las plataformas dominantes priorizan retención con loops algorítmicos, no descubrimiento real',
       'No existía una alternativa con curación humana, categorizada por estado de ánimo y contexto',
-    ],
-    impactStats: [
-      { value: '0 a 1 Product Launch', label: 'Producto diseñado de cero a entrega final' },
-      { value: 'App Nativa iOS/Android', label: 'Diseño mobile-first con prototipo validado' },
-      { value: 'Arquitectura de Información Unificada', label: 'Flujos coherentes en todos los touchpoints' },
     ],
     caseSections: [
       // ── Estrategia de Producto ──
