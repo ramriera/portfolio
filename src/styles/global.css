@@ -886,3 +886,192 @@ body.code-mode {
 .project-card:hover .project-card-image {
   transform: scale(1.03);
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SYSTEM CONSOLE — Terminal-style event log (Code Mode only)
+   ═══════════════════════════════════════════════════════════ */
+
+.system-console {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  border-top: 1px solid rgba(56, 189, 248, 0.15);
+  background: #0d1117;
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.4);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.code-mode .system-console {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.system-console.collapsed .system-console-body {
+  max-height: 0;
+  padding: 0;
+}
+
+/* ── Header bar ── */
+.system-console-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  height: 32px;
+  background: #010409;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+  user-select: none;
+}
+
+.system-console-tabs {
+  display: flex;
+  gap: 0;
+}
+
+.system-console-tab {
+  padding: 0 12px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #484f58;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.system-console-tab.active {
+  color: #e6edf3;
+  border-bottom-color: #58a6ff;
+}
+
+.system-console-tab:hover:not(.active) {
+  color: #8b949e;
+}
+
+.system-console-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.system-console-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  color: #484f58;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.system-console-action:hover {
+  color: #e6edf3;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.system-console-action svg {
+  transition: transform 0.3s ease;
+}
+
+/* ── Body / scroll area ── */
+.system-console-body {
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 6px 0;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.35s ease;
+}
+
+.system-console-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.system-console-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.system-console-body::-webkit-scrollbar-thumb {
+  background: #21262d;
+  border-radius: 4px;
+}
+
+.system-console-body::-webkit-scrollbar-thumb:hover {
+  background: #30363d;
+}
+
+/* ── Log lines ── */
+.console-line {
+  padding: 1px 14px;
+  white-space: nowrap;
+  animation: consoleFadeIn 0.25s ease-out;
+}
+
+.console-line:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+@keyframes consoleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.console-ts {
+  color: #30363d;
+  margin-right: 6px;
+}
+
+.console-tag {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.console-tag--info { color: #58a6ff; }
+.console-tag--system { color: #d2a8ff; }
+.console-tag--inspect { color: #3fb950; }
+.console-tag--view { color: #79c0ff; }
+.console-tag--debug { color: #484f58; }
+.console-tag--warn { color: #d29922; }
+.console-tag--coffee { color: #d19a66; }
+.console-tag--ready { color: #3fb950; }
+
+.console-msg {
+  color: #8b949e;
+}
+
+/* ── Pad body when console is visible ── */
+.code-mode footer {
+  padding-bottom: 190px;
+}
+
+/* ── Hide on small screens to avoid UX issues ── */
+@media (max-width: 640px) {
+  .system-console {
+    display: none;
+  }
+  .code-mode footer {
+    padding-bottom: 0;
+  }
+}

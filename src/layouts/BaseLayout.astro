@@ -1,6 +1,7 @@
 ---
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
+import SystemConsole from '@/components/SystemConsole.astro';
 import '@/styles/global.css';
 
 interface Props {
@@ -78,6 +79,9 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <!-- Token Inspector tooltip + focus overlay (only used in code mode) -->
     <div id="inspector-focus-overlay"></div>
     <div id="token-inspector-tooltip"></div>
+
+    <!-- System Console (only used in code mode) -->
+    <SystemConsole />
 
     <script>
       // ── Token Inspector: Component Architecture + Design Token tooltips ──
