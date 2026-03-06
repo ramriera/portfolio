@@ -193,26 +193,18 @@ function md(text: string): string {
                 <p class="text-body text-lg mb-6" set:html={md(paragraph)} />
               ))}
               <p class="text-body text-lg mb-8" set:html={md(project.challenge)} />
-              <ul class="space-y-3">
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-body text-base">La opción de "Reservar en tienda" está enterrada al final de la ficha de producto, invisible sin scroll</span>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-body text-base">El flujo actual requiere 8 pasos y registro obligatorio antes de confirmar la reserva</span>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span class="text-body text-base">Sin tracking in-app, sin integración con wallet y sin feedback claro del estado de la reserva</span>
-                </li>
-              </ul>
+              {project.checks && project.checks.length > 0 && (
+                <ul class="space-y-3">
+                  {project.checks.map((check: string) => (
+                    <li class="flex items-start gap-3">
+                      <svg class="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-body text-base">{check}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
             <div data-reveal>
               <h2 class="heading-md mb-6">Solución propuesta</h2>

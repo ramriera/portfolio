@@ -103,6 +103,7 @@ export interface Project {
   featured: boolean;
   projectMeta?: ProjectMeta;
   caseSections?: CaseSection[];
+  checks?: string[];
 }
 
 export const projects: Project[] = [
@@ -138,6 +139,11 @@ export const projects: Project[] = [
       tools: ['Research', 'Service Blueprint', 'Prototyping', 'Wireframing'],
       skills: ['UX Optimization', 'Checkout Flow', 'E-commerce Strategy', 'High-Fidelity Prototyping', 'Service Design', 'CRO'],
     },
+    checks: [
+      'La opción de "Reservar en tienda" está enterrada al final de la ficha de producto, invisible sin scroll',
+      'El flujo actual requiere 8 pasos y registro obligatorio antes de confirmar la reserva',
+      'Sin tracking in-app, sin integración con wallet y sin feedback claro del estado de la reserva',
+    ],
     caseSections: [
       // ── 01. Auditoría e Investigación ──
       {
@@ -342,6 +348,11 @@ export const projects: Project[] = [
       tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
       skills: ['UX Research', 'Benchmarking', 'User Persona', 'Journey Mapping', 'Prototyping', 'Design System', 'Wireframing', 'Visual Design', 'Interaction Design', 'Information Architecture', 'Mobile Design', 'Competitive Analysis'],
     },
+    checks: [
+      'España a la cola de Europa en adopción del vehículo eléctrico: escasos puntos de carga y autonomía limitada',
+      'Tiempos de recarga superiores a 45 minutos generan "ansiedad de rango" en el consumidor',
+      'Ninguna app competidora ofrece un modelo de cambio de batería bajo demanda',
+    ],
     caseSections: [
       {
         label: '01. Descubrimiento',
@@ -478,6 +489,11 @@ export const projects: Project[] = [
       tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
       skills: ['Design Thinking', 'Surveys', 'User Persona', 'Journey Mapping', 'Design Tokens', 'Prototyping', 'Benchmarking', 'Wireframing', 'Visual Design', 'Interaction Design'],
     },
+    checks: [
+      'Las ONGs locales carecen de recursos de comunicación frente a las grandes organizaciones internacionales',
+      'No existía ninguna plataforma que reuniera donaciones, voluntariado y crowdfunding en un mismo sitio',
+      'La desconexión emocional entre donantes y causas reduce la conversión y el compromiso recurrente',
+    ],
     caseSections: [
       {
         label: '01. Descubrimiento',
@@ -621,6 +637,11 @@ export const projects: Project[] = [
       tools: ['Figma', 'Chrome'],
       skills: ['Análisis Heurístico', 'Usabilidad', 'Accesibilidad', 'UX Research', 'Comunicación UX', 'Benchmarking'],
     },
+    checks: [
+      'La app no conecta con la Gen Z pese a ser digital-first: neobancos como Revolut y N26 han elevado el estándar',
+      'Nomenclatura confusa en funciones clave y falta de flexibilidad en la navegación principal',
+      'Mensajes de error genéricos sin retroalimentación clara en acciones críticas como transferencias',
+    ],
     caseSections: [
       {
         label: '01. Contexto',
@@ -767,8 +788,13 @@ export const projects: Project[] = [
       role: 'Design System Lead',
       duration: '12 semanas',
       tools: ['Figma', 'Tokens Studio', 'Storybook', 'Zeroheight', 'Miro'],
-      skills: ['Design Systems', 'Design Tokens', 'Component Library', 'Cross-Platform Consistency', 'Information Architecture', 'Digital Product Design'],
+      skills: ['Design Systems', 'Design Tokens', 'Component Library', 'Cross-Platform Consistency', 'Information Architecture', 'Digital Product Design', 'Atomic Design', 'Accessibility (WCAG)', 'Design Ops', 'Responsive Design', 'Prototyping', 'Documentation'],
     },
+    checks: [
+      'Sin una fuente de verdad compartida: Web y App mantenían estilos, componentes y tokens independientes',
+      'Un botón primario tenía 4 variantes distintas entre plataformas — ninguna era la "correcta"',
+      'La deuda de diseño acumulada ralentizaba el desarrollo de nuevas features un 35%',
+    ],
     caseSections: [
       // ── 01. El Problema: Fragmentación Digital ──
       {
@@ -900,13 +926,11 @@ export const projects: Project[] = [
           '/assets/projects/iberia/iberia-components-17.png',
           '/assets/projects/iberia/iberia-components-20.png',
           '/assets/projects/iberia/iberia-components-19.png',
-          '/assets/projects/iberia/iberia-components-16.png',
         ],
         captions: [
           'Tarjeta Clásica Iberia Plus: variantes de tamaño y layout para diferentes contextos',
           'Cards de fidelización: variantes completas con imagen, texto y CTA para captación',
           'Fila de selección de vuelo: horario, operador y tarifas (Turista, Premium, Business)',
-          'Layouts de botones secundarios: agrupaciones de 1, 2 y 3 botones para acciones múltiples',
         ],
         highlight: 'Los componentes de listas, botones y selectores se diseñaron como **Átomos y Moléculas** reutilizables. Cada componente incluye todas sus variantes (estados, tamaños, temas) documentadas para maximizar la **Eficiencia en Desarrollo**.',
       },
@@ -1001,6 +1025,11 @@ export const projects: Project[] = [
       tools: ['Figma', 'Whimsical', 'Miro', 'Adobe Photoshop', 'Google Analytics'],
       skills: ['Product Strategy', 'UX/UI Design', 'Design Systems', 'Prototyping', 'UX Research', 'Visual Design'],
     },
+    checks: [
+      'Los usuarios sufren "fatiga de decisión" ante millones de canciones y playlists generadas por IA',
+      'Las plataformas dominantes priorizan retención con loops algorítmicos, no descubrimiento real',
+      'No existía una alternativa con curación humana, categorizada por estado de ánimo y contexto',
+    ],
     caseSections: [
       // ── Estrategia de Producto ──
       {
