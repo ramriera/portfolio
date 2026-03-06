@@ -20,9 +20,34 @@
   }
 }
 
+/* ── Layout consistency variables (persist across modes) ── */
+:root {
+  --main-margin: 1.5rem;      /* px-6 */
+  --main-margin-sm: 2rem;     /* sm:px-8 */
+  --main-margin-lg: 3rem;     /* lg:px-12 */
+  --navbar-height: 5rem;      /* h-20 */
+  --container-max: 72rem;     /* max-w-6xl */
+  --grid-sidebar: 1fr;
+  --grid-content: 1fr;
+  --layout-border: 0px;       /* code mode overrides to 1px */
+}
+
+@media (min-width: 640px) {
+  :root { --main-margin: var(--main-margin-sm); }
+}
+@media (min-width: 1024px) {
+  :root {
+    --main-margin: var(--main-margin-lg);
+    --grid-sidebar: 1fr;
+    --grid-content: 2fr;
+  }
+}
+
 @layer components {
   .container-custom {
-    @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-12;
+    @apply max-w-6xl mx-auto;
+    padding-left: var(--main-margin);
+    padding-right: var(--main-margin);
   }
 
   .section-padding {
@@ -383,6 +408,9 @@ main {
   --cm-number: #d19a66;       /* orange — numbers/accents */
   --cm-tag: #e06c75;          /* red — HTML tags */
   --cm-glow: 0 0 20px rgba(56, 189, 248, 0.06);
+
+  /* Layout-border: code mode adds 1px borders — margins compensate */
+  --layout-border: 1px;
 }
 
 body.code-mode {
@@ -406,19 +434,20 @@ body.code-mode {
 }
 
 /* ── Structural borders — article, section, aside (GitHub-style) ── */
+/* Use outline instead of border to avoid layout shift */
 body.code-mode article,
 body.code-mode section,
 body.code-mode aside {
-  border: 1px solid #30363d;
+  outline: 1px solid #30363d;
+  outline-offset: -1px;
   border-radius: 6px;
-  margin-bottom: 2px;
-  transition: border-color 0.3s ease;
+  transition: outline-color 0.3s ease;
 }
 
 body.code-mode article:hover,
 body.code-mode section:hover,
 body.code-mode aside:hover {
-  border-color: #484f58;
+  outline-color: #484f58;
 }
 
 /* All text goes monospace */
@@ -495,9 +524,7 @@ body.code-mode aside:hover {
 }
 
 /* ── 5. Section pseudo-element code tags ── */
-.code-mode section {
-  position: relative;
-}
+/* position: relative already implicit, outline doesn't shift layout */
 
 .code-mode section > .container-custom::before,
 .code-mode section > .container-custom::after {
@@ -525,7 +552,7 @@ body.code-mode aside:hover {
 
 /* ── 6. Neon container borders (box-model) ── */
 .code-mode .container-custom {
-  border: 1px solid var(--cm-border);
+  border: var(--layout-border) solid var(--cm-border);
   border-radius: 4px;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -547,6 +574,32 @@ body.code-mode aside:hover {
 
 .code-mode [class*="grid-cols-"] > *:hover {
   border-color: var(--cm-border-hover);
+}
+
+/* ── Hero Data Reveal: force grid persistence so stats stay right ── */
+.code-mode [data-component="HeroSection"] .container-custom {
+  position: relative;
+}
+
+.code-mode [data-component="StatsBar"] {
+  background: var(--cm-bg-surface) !important;
+  border: 1px solid var(--cm-border) !important;
+  border-radius: 4px !important;
+  padding: 0.75rem 1rem !important;
+}
+
+/* ── Project detail: persistent 1/3 + 2/3 grid with visible columns ── */
+.code-mode [data-component="ProjectSidebar"] {
+  outline: 1px solid #30363d;
+  outline-offset: -1px;
+  border-radius: 4px;
+}
+
+.code-mode [data-component="ProjectSidebar"] + .lg\:col-span-2,
+.code-mode .lg\:col-span-2[data-component="ProjectContent"] {
+  outline: 1px solid #30363d;
+  outline-offset: -1px;
+  border-radius: 4px;
 }
 
 /* ── 7. Buttons ── */
@@ -612,7 +665,54 @@ body.code-mode aside:hover {
   color: #fff !important;
 }
 
-/* ── 12. Navbar in code mode ── */
+/* ── 12. Navbar in code mode — IDE tab bar aesthetic ── */
+
+/* Navbar container adapts to layout-border so vertical lines are continuous */
+.code-mode #navbar .container-custom {
+  padding-left: calc(var(--main-margin) - var(--layout-border));
+  padding-right: calc(var(--main-margin) - var(--layout-border));
+}
+
+/* IDE tab-bar feel: bottom border + dark surface */
+.code-mode #navbar {
+  background: var(--cm-bg) !important;
+  border-bottom: 1px solid var(--cm-border) !important;
+  backdrop-filter: none !important;
+}
+
+.code-mode #navbar.backdrop-blur-xl {
+  backdrop-filter: none !important;
+}
+
+.code-mode .nav-scrolled {
+  background: var(--cm-bg) !important;
+  border-bottom-color: var(--cm-border-hover) !important;
+}
+
+/* Nav links as IDE tabs */
+.code-mode #navbar nav a:not(#logo):not(.logo):not(.btn-primary):not([href^="mailto"]) {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.04em;
+  border-radius: 0 !important;
+  border-bottom: 2px solid transparent;
+  padding: 0.5rem 1rem !important;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+/* Active tab */
+.code-mode #navbar nav a.text-primary-500 {
+  color: var(--cm-function) !important;
+  background: var(--cm-bg-surface) !important;
+  border-bottom-color: var(--cm-function) !important;
+}
+
+/* Inactive tab hover */
+.code-mode #navbar nav a:not(.text-primary-500):hover {
+  background: var(--cm-bg-card) !important;
+  border-bottom-color: var(--cm-comment) !important;
+}
+
 .code-mode .logo-name {
   color: var(--cm-keyword) !important;
 }
@@ -625,9 +725,14 @@ body.code-mode aside:hover {
   background: var(--cm-comment) !important;
 }
 
-/* ── 13. Footer ── */
+/* ── 13. Footer — aligned to same margins ── */
 .code-mode footer {
   border-top: 1px solid var(--cm-border);
+}
+
+.code-mode footer .container-custom {
+  padding-left: calc(var(--main-margin) - var(--layout-border));
+  padding-right: calc(var(--main-margin) - var(--layout-border));
 }
 
 .code-mode footer p {
@@ -657,8 +762,16 @@ body.code-mode aside:hover {
   background: var(--cm-bg) !important;
 }
 
+.code-mode #mobile-menu nav a {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
 .code-mode #hamburger span {
   background: var(--cm-text) !important;
+}
+
+.code-mode #mobile-menu-btn:hover {
+  background: var(--cm-bg-card) !important;
 }
 
 /* ── 16. CTA cards ── */
