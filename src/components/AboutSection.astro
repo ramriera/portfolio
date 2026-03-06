@@ -12,6 +12,7 @@
             src="/assets/shared/foto-perfil.png"
             alt="Ramon Riera"
             class="w-full aspect-[4/3] lg:aspect-[4/5] object-cover"
+            data-token="$aspect-ratio: 4/3 → 4/5 (lg)|$radius-2xl: 1rem / 16px|$border: 1px solid $dark-200"
           />
         </div>
       </div>
@@ -37,12 +38,15 @@
           </span>
         </div>
 
-        <h2 data-reveal data-delay="100" class="heading-lg mb-6">
+        <h2 data-reveal data-delay="100" class="heading-lg mb-6"
+          data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)|$spacing-bottom: 1.5rem / 24px">
           Diseñador con visión
-          <span class="text-primary-500">estratégica</span>
+          <span class="text-primary-500"
+            data-token="$color-primary-500: #D97757">estratégica</span>
         </h2>
 
-        <div data-reveal data-delay="200" class="space-y-5 text-body mb-10">
+        <div data-reveal data-delay="200" class="space-y-5 text-body mb-10"
+          data-token="$font-family-sans: Inter|$color-text-body: #7c766c|$spacing-gap: 1.25rem / 20px">
           <p>
             Soy Ramon Riera, Senior UX/UI Designer con más de 8 años de experiencia creando productos digitales para empresas líderes en banca, aviación, salud y tecnología.
           </p>
@@ -55,7 +59,8 @@
         </div>
 
         <div data-reveal data-delay="300" class="flex flex-wrap gap-4">
-          <a href="/about" class="btn-primary">
+          <a href="/about" class="btn-primary"
+            data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
             Conocer más
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

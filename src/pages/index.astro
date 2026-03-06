@@ -51,14 +51,17 @@ const featuredProjects = projects
               </svg>
             </span>
           </div>
-          <h2 data-reveal data-delay="100" class="heading-lg">
-            Trabajo <span class="text-primary-500">destacado</span>
+          <h2 data-reveal data-delay="100" class="heading-lg"
+            data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)">
+            Trabajo <span class="text-primary-500"
+              data-token="$color-primary-500: #D97757">destacado</span>
           </h2>
         </div>
         <a
           href="/projects"
           class="btn-outline text-sm"
           data-reveal
+          data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px"
         >
           Ver todos
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -68,7 +71,8 @@ const featuredProjects = projects
       </div>
 
       <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8"
+        data-token="$grid-cols: 1 → 2 (md)|$spacing-gap: 2rem / 32px">
         {featuredProjects.map((project, i) => (
           <div data-reveal data-delay={String(i * 100)}>
             <ProjectCard {...project} />
@@ -104,14 +108,18 @@ const featuredProjects = projects
           </svg>
         </span>
       </div>
-      <h2 data-reveal data-delay="100" class="heading-lg mb-6">
-        ¿Tienes un <span class="text-primary-500">proyecto</span> en mente?
+      <h2 data-reveal data-delay="100" class="heading-lg mb-6"
+        data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)|$spacing-bottom: 1.5rem / 24px">
+        ¿Tienes un <span class="text-primary-500"
+          data-token="$color-primary-500: #D97757">proyecto</span> en mente?
       </h2>
-      <p data-reveal data-delay="200" class="text-body text-lg mb-10">
+      <p data-reveal data-delay="200" class="text-body text-lg mb-10"
+        data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$spacing-bottom: 2.5rem / 40px">
         Me encantaría escuchar tu idea. Hablemos sobre cómo puedo ayudarte a crear algo extraordinario.
       </p>
       <div data-reveal data-delay="300">
-        <a href="mailto:ramriera28@gmail.com" class="btn-primary text-base">
+        <a href="mailto:ramriera28@gmail.com" class="btn-primary text-base"
+          data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
           Contactar
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

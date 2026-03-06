@@ -698,6 +698,108 @@ body.code-mode {
     );
 }
 
+/* ── 19. Token Inspector — hover tooltips for design tokens ── */
+.code-mode [data-token] {
+  position: relative;
+  cursor: crosshair;
+}
+
+.code-mode [data-token]::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1.5px solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  z-index: 40;
+}
+
+.code-mode [data-token]:hover::after {
+  border-color: var(--cm-inspector-glow, #00ff88);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.2), inset 0 0 8px rgba(0, 255, 136, 0.05);
+}
+
+/* Scanner sweep animation on hover */
+@keyframes tokenScanLine {
+  0% { top: -2px; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: calc(100% + 2px); opacity: 0; }
+}
+
+.code-mode [data-token]:hover::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00ff88, transparent);
+  z-index: 41;
+  pointer-events: none;
+  animation: tokenScanLine 0.6s ease-out forwards;
+}
+
+/* Token Inspector tooltip */
+#token-inspector-tooltip {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  max-width: 280px;
+  padding: 8px 12px;
+  background: #1a1a1a;
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #c9d1d9;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 255, 136, 0.08);
+}
+
+#token-inspector-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#token-inspector-tooltip .token-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 1px 0;
+  white-space: nowrap;
+}
+
+#token-inspector-tooltip .token-name {
+  color: #c678dd;
+}
+
+#token-inspector-tooltip .token-value {
+  color: #98c379;
+}
+
+#token-inspector-tooltip .token-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+#token-inspector-tooltip .token-label {
+  color: #5c6370;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 3px;
+  margin-bottom: 3px;
+}
+
 /* CTA card-style social links */
 .cta-card {
   display: flex;
