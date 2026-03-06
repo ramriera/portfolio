@@ -937,6 +937,24 @@ body.code-mode aside:hover {
   background: var(--cm-bg-card) !important;
 }
 
+/* Code mode: always show desktop nav tabs (even on small screens) */
+.code-mode #navbar .hidden.lg\:flex {
+  display: flex !important;
+}
+
+/* Code mode: hide hamburger button since tabs are always visible */
+.code-mode #mobile-menu-btn {
+  display: none !important;
+}
+
+/* Code mode on small screens: compact tabs to fit */
+@media (max-width: 1023px) {
+  .code-mode #navbar .hidden.lg\:flex a {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.65rem !important;
+  }
+}
+
 /* ── 16. CTA cards ── */
 .code-mode .cta-card {
   border-color: var(--cm-border) !important;
