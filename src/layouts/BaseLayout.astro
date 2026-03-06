@@ -84,7 +84,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <SystemConsole />
 
     <script>
-      // ── Token Inspector: Component Architecture + Design Token tooltips ──
+      // ── Truthful Token Inspector: Live computed styles + Design Token mapping ──
       function initTokenInspector() {
         const tooltip = document.getElementById('token-inspector-tooltip');
         const overlay = document.getElementById('inspector-focus-overlay');
@@ -93,10 +93,98 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         let currentTarget: HTMLElement | null = null;
         let rafId: number | null = null;
 
-        // Categorize token by its name prefix
+        // ── RGB → HEX conversion ──
+        function rgbToHex(rgb: string): string {
+          const match = rgb.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+          if (!match) return rgb;
+          const [, r, g, b] = match;
+          return '#' + [r, g, b].map(c => parseInt(c).toString(16).padStart(2, '0')).join('');
+        }
+
+        // Normalize any color string to uppercase HEX
+        function normalizeColor(val: string): string {
+          const v = val.trim();
+          if (v.startsWith('rgb')) return rgbToHex(v).toUpperCase();
+          if (v.startsWith('#')) return v.toUpperCase();
+          return v;
+        }
+
+        // ── CSS Variable → Token Name mapping ──
+        // Scan :root and .code-mode for all CSS custom properties
+        function buildTokenMap(): Record<string, string> {
+          const map: Record<string, string> = {};
+          const isCodeMode = document.documentElement.classList.contains('code-mode');
+
+          try {
+            for (const sheet of document.styleSheets) {
+              try {
+                for (const rule of sheet.cssRules) {
+                  const style = rule as CSSStyleRule;
+                  // Match :root OR .code-mode rules
+                  if (!style.selectorText) continue;
+                  const isRoot = style.selectorText === ':root';
+                  const isCodeRule = style.selectorText.includes('.code-mode');
+
+                  if (!isRoot && !isCodeRule) continue;
+                  // In code-mode, code-mode rules override :root; in normal, only :root
+                  if (isCodeRule && !isCodeMode) continue;
+
+                  for (let i = 0; i < style.style.length; i++) {
+                    const prop = style.style[i];
+                    if (!prop.startsWith('--')) continue;
+                    const rawVal = style.style.getPropertyValue(prop).trim();
+                    const hex = normalizeColor(rawVal);
+                    // Code-mode rules override root values
+                    if (isCodeRule || !map[hex]) {
+                      map[hex] = prop;
+                    }
+                  }
+                }
+              } catch { /* cross-origin sheet, skip */ }
+            }
+          } catch { /* no sheets */ }
+
+          // Also add Tailwind-generated token aliases
+          const aliases: Record<string, string> = {
+            '#D97757': '--color-primary-500',
+            '#FAF9F7': '--color-dark-50',
+            '#F3F1ED': '--color-dark-100',
+            '#E8E4DD': '--color-dark-200',
+            '#D4CFC5': '--color-dark-300',
+            '#A8A196': '--color-dark-400',
+            '#7C766C': '--color-dark-500',
+            '#5C574F': '--color-dark-600',
+            '#403D38': '--color-dark-700',
+            '#2A2825': '--color-dark-800',
+            '#1A1918': '--color-dark-900',
+            '#141413': '--color-dark-950',
+            '#FDF6F3': '--color-primary-50',
+            '#FCEAE2': '--color-primary-100',
+            '#F9D5C5': '--color-primary-200',
+            '#F4B89D': '--color-primary-300',
+            '#EC9372': '--color-primary-400',
+            '#C4613F': '--color-primary-600',
+            '#A34D32': '--color-primary-700',
+            '#86412D': '--color-primary-800',
+            '#6F3828': '--color-primary-900',
+          };
+          for (const [hex, token] of Object.entries(aliases)) {
+            if (!map[hex]) map[hex] = token;
+          }
+
+          return map;
+        }
+
+        let tokenMap = buildTokenMap();
+
+        // Rebuild map when code-mode toggles
+        const mapObserver = new MutationObserver(() => { tokenMap = buildTokenMap(); });
+        mapObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+        // ── Categorize token by its name prefix ──
         function categorizeToken(name: string): string {
           const n = name.toLowerCase();
-          if (n.includes('color') || n.includes('gradient')) return 'Color';
+          if (n.includes('color') || n.includes('gradient') || n.includes('bg') || n.includes('text')) return 'Color';
           if (n.includes('spacing') || n.includes('gap') || n.includes('padding') || n.includes('margin')) return 'Spacing';
           if (n.includes('font') || n.includes('typo')) return 'Typography';
           if (n.includes('radius')) return 'Border Radius';
@@ -108,30 +196,106 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           return 'Token';
         }
 
-        // Parse pipe-separated token string into grouped structured data
-        function parseTokenString(raw: string): { groups: { label: string; rows: { name: string; value: string; swatch?: string }[] }[] } {
+        // Check if a token name refers to a color property
+        function isColorToken(name: string): boolean {
+          const n = name.toLowerCase();
+          return n.includes('color') || n.includes('bg') || n.includes('gradient')
+            || n.includes('text') || n.includes('border');
+        }
+
+        // CSS property to read for a given token name
+        function cssPropertyForToken(name: string): string | null {
+          const n = name.toLowerCase();
+          if (n.includes('bg') || n.includes('background')) return 'backgroundColor';
+          if (n.includes('text') || n.includes('color-text')) return 'color';
+          if (n.includes('border-color') || (n.includes('border') && n.includes('color'))) return 'borderColor';
+          if (n.includes('color')) return 'color';
+          return null;
+        }
+
+        // ── Parse pipe-separated token string with live computed overrides ──
+        type TokenRow = { name: string; value: string; swatch?: string };
+        type TokenGroup = { label: string; rows: TokenRow[] };
+
+        function parseTokenString(raw: string, el: HTMLElement): { groups: TokenGroup[] } {
           const lines = raw.split('|');
-          const groupMap: Record<string, { name: string; value: string; swatch?: string }[]> = {};
+          const groupMap: Record<string, TokenRow[]> = {};
+          const computed = getComputedStyle(el);
 
           for (const line of lines) {
             const parts = line.split(':').map(s => s.trim());
             const name = parts[0] || '';
-            const value = parts.slice(1).join(':').trim();
-            const hexMatch = value.match(/#[0-9a-fA-F]{3,8}/);
+            let value = parts.slice(1).join(':').trim();
+            let swatch: string | undefined;
+
+            // For color tokens, override with computed value
+            if (isColorToken(name)) {
+              const cssProp = cssPropertyForToken(name);
+              if (cssProp) {
+                const liveVal = (computed as any)[cssProp];
+                if (liveVal && liveVal !== 'rgba(0, 0, 0, 0)' && liveVal !== 'transparent') {
+                  const hex = normalizeColor(liveVal);
+                  // Look up token alias
+                  const tokenAlias = tokenMap[hex];
+                  if (tokenAlias) {
+                    value = `${tokenAlias} → ${hex}`;
+                  } else {
+                    value = hex;
+                  }
+                  swatch = hex;
+                }
+              }
+              // Fallback: if value still contains a hardcoded hex, use it for swatch
+              if (!swatch) {
+                const hexMatch = value.match(/#[0-9a-fA-F]{3,8}/);
+                if (hexMatch) swatch = hexMatch[0];
+              }
+            } else {
+              const hexMatch = value.match(/#[0-9a-fA-F]{3,8}/);
+              if (hexMatch) swatch = hexMatch[0];
+            }
+
             const label = categorizeToken(name);
             if (!groupMap[label]) groupMap[label] = [];
-            groupMap[label].push({ name, value, ...(hexMatch ? { swatch: hexMatch[0] } : {}) });
+            groupMap[label].push({ name, value, ...(swatch ? { swatch } : {}) });
           }
 
-          const groups = Object.entries(groupMap).map(([label, rows]) => ({ label, rows }));
-          return { groups };
+          // Inject live computed colors not in data-token (background, text color, border)
+          const liveProps: [string, string, string][] = [
+            ['backgroundColor', '$computed-bg', 'Color'],
+            ['color', '$computed-text', 'Color'],
+            ['borderColor', '$computed-border', 'Border'],
+          ];
+
+          const existingNames = lines.map(l => l.split(':')[0].trim().toLowerCase());
+
+          for (const [cssProp, tokenName, label] of liveProps) {
+            // Skip if already covered by a declared token
+            const alreadyCovered = existingNames.some(n =>
+              (cssProp === 'backgroundColor' && (n.includes('bg') || n.includes('background'))) ||
+              (cssProp === 'color' && (n.includes('text') || (n.includes('color') && !n.includes('bg') && !n.includes('border')))) ||
+              (cssProp === 'borderColor' && n.includes('border'))
+            );
+            if (alreadyCovered) continue;
+
+            const liveVal = (computed as any)[cssProp];
+            if (liveVal && liveVal !== 'rgba(0, 0, 0, 0)' && liveVal !== 'transparent') {
+              const hex = normalizeColor(liveVal);
+              if (hex === '#000000' && cssProp === 'borderColor') continue;
+              const tokenAlias = tokenMap[hex];
+              const displayVal = tokenAlias ? `${tokenAlias} → ${hex}` : hex;
+              if (!groupMap[label]) groupMap[label] = [];
+              groupMap[label].push({ name: tokenName, value: displayVal, swatch: hex });
+            }
+          }
+
+          return { groups: Object.entries(groupMap).map(([label, rows]) => ({ label, rows })) };
         }
 
-        // Build tooltip HTML with component name + grouped token rows
-        function renderTooltip(componentName: string | null, tokenData: { groups: { label: string; rows: { name: string; value: string; swatch?: string }[] }[] } | null): string {
+        // ── Build tooltip HTML ──
+        function renderTooltip(componentName: string | null, tokenData: { groups: TokenGroup[] } | null): string {
           let html = '';
 
-          // Component header — show the real Astro/React component name
           if (componentName) {
             html += `<div class="token-component">`;
             html += `<span class="tag-bracket">&lt;</span>`;
@@ -140,7 +304,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
             html += `</div>`;
           }
 
-          // Token rows grouped by category — show token NAME prominently, value as secondary
           if (tokenData && tokenData.groups) {
             for (const group of tokenData.groups) {
               html += `<div class="token-label">${group.label}</div>`;
@@ -149,10 +312,8 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
                 if (row.swatch) {
                   html += `<span class="token-swatch" style="background:${row.swatch}"></span>`;
                 }
-                // Token name (e.g. $spacing-xl) shown in purple
                 html += `<span class="token-name">${row.name}</span>`;
                 if (row.value) {
-                  // Colon separator + value in green
                   html += `<span style="color:#6272a4">:</span> <span class="token-value">${row.value}</span>`;
                 }
                 html += `</div>`;
@@ -163,6 +324,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           return html;
         }
 
+        // ── Tooltip positioning ──
         function positionTooltip(e: MouseEvent) {
           if (!tooltip) return;
           const gap = 14;
@@ -170,12 +332,8 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           let x = e.clientX + gap;
           let y = e.clientY + gap;
 
-          if (x + rect.width > window.innerWidth - 8) {
-            x = e.clientX - rect.width - gap;
-          }
-          if (y + rect.height > window.innerHeight - 8) {
-            y = e.clientY - rect.height - gap;
-          }
+          if (x + rect.width > window.innerWidth - 8) x = e.clientX - rect.width - gap;
+          if (y + rect.height > window.innerHeight - 8) y = e.clientY - rect.height - gap;
           if (x < 8) x = 8;
           if (y < 8) y = 8;
 
@@ -195,22 +353,23 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           const componentName = el.getAttribute('data-component');
           const tokenRaw = el.getAttribute('data-token');
 
-          // Must have at least one attribute
           if (!componentName && !tokenRaw) return;
 
-          let tokenData: { groups: { label: string; rows: { name: string; value: string; swatch?: string }[] }[] } | null = null;
+          let tokenData: { groups: TokenGroup[] } | null = null;
           if (tokenRaw) {
             try {
               const parsed = JSON.parse(tokenRaw);
-              // Support both new grouped format and legacy flat format
               if (parsed.groups) {
                 tokenData = parsed;
               } else if (parsed.label && parsed.rows) {
                 tokenData = { groups: [parsed] };
               }
             } catch {
-              tokenData = parseTokenString(tokenRaw);
+              tokenData = parseTokenString(tokenRaw, el);
             }
+          } else {
+            // Component-only element: show live computed colors
+            tokenData = parseTokenString('', el);
           }
 
           currentTarget = el;
@@ -220,7 +379,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           tooltip.offsetHeight;
           tooltip.classList.add('visible');
 
-          // Focus overlay (Easter Egg) — activate for component-level elements
           if (componentName && overlay) {
             el.classList.add('inspector-focused');
             overlay.classList.add('active');
@@ -236,8 +394,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           overlay?.classList.remove('active');
         }
 
-        // Attach listeners — use event delegation to handle specificity
-        // Elements with both data-component and data-token, or either one
         function attachListeners() {
           const elements = document.querySelectorAll<HTMLElement>('[data-token], [data-component]');
           elements.forEach(el => {
@@ -247,8 +403,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           });
         }
 
-        // Smart specificity: stop propagation on nested inspectable elements
-        // so inner elements take priority over outer ones
         function setupSpecificity() {
           const elements = document.querySelectorAll<HTMLElement>('[data-token], [data-component]');
           elements.forEach(el => {
