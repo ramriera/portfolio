@@ -76,18 +76,29 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
       })();
     </script>
 
-    <!-- Token Inspector tooltip + focus overlay (only used in code mode) -->
+    <!-- Token Inspector tooltip + focus overlay + box-model overlay (only used in code mode) -->
     <div id="inspector-focus-overlay"></div>
     <div id="token-inspector-tooltip"></div>
+    <div id="inspector-box-model-overlay">
+      <div id="box-model-margin"></div>
+      <div id="box-model-border"></div>
+      <div id="box-model-padding"></div>
+      <div id="box-model-content"></div>
+    </div>
 
     <!-- System Console (only used in code mode) -->
     <SystemConsole />
 
     <script>
-      // ── Truthful Token Inspector: Live computed styles + Design Token mapping ──
+      // ── Advanced Technical Inspector: Layout, Architecture & Live Computed Styles ──
       function initTokenInspector() {
         const tooltip = document.getElementById('token-inspector-tooltip');
         const overlay = document.getElementById('inspector-focus-overlay');
+        const boxOverlay = document.getElementById('inspector-box-model-overlay');
+        const boxMargin = document.getElementById('box-model-margin');
+        const boxBorder = document.getElementById('box-model-border');
+        const boxPadding = document.getElementById('box-model-padding');
+        const boxContent = document.getElementById('box-model-content');
         if (!tooltip) return;
 
         let currentTarget: HTMLElement | null = null;
@@ -101,7 +112,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           return '#' + [r, g, b].map(c => parseInt(c).toString(16).padStart(2, '0')).join('');
         }
 
-        // Normalize any color string to uppercase HEX
         function normalizeColor(val: string): string {
           const v = val.trim();
           if (v.startsWith('rgb')) return rgbToHex(v).toUpperCase();
@@ -110,7 +120,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         }
 
         // ── CSS Variable → Token Name mapping ──
-        // Scan :root and .code-mode for all CSS custom properties
         function buildTokenMap(): Record<string, string> {
           const map: Record<string, string> = {};
           const isCodeMode = document.documentElement.classList.contains('code-mode');
@@ -120,13 +129,10 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
               try {
                 for (const rule of sheet.cssRules) {
                   const style = rule as CSSStyleRule;
-                  // Match :root OR .code-mode rules
                   if (!style.selectorText) continue;
                   const isRoot = style.selectorText === ':root';
                   const isCodeRule = style.selectorText.includes('.code-mode');
-
                   if (!isRoot && !isCodeRule) continue;
-                  // In code-mode, code-mode rules override :root; in normal, only :root
                   if (isCodeRule && !isCodeMode) continue;
 
                   for (let i = 0; i < style.style.length; i++) {
@@ -134,54 +140,38 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
                     if (!prop.startsWith('--')) continue;
                     const rawVal = style.style.getPropertyValue(prop).trim();
                     const hex = normalizeColor(rawVal);
-                    // Code-mode rules override root values
-                    if (isCodeRule || !map[hex]) {
-                      map[hex] = prop;
-                    }
+                    if (isCodeRule || !map[hex]) map[hex] = prop;
                   }
                 }
-              } catch { /* cross-origin sheet, skip */ }
+              } catch { /* cross-origin */ }
             }
           } catch { /* no sheets */ }
 
-          // Also add Tailwind-generated token aliases
           const aliases: Record<string, string> = {
             '#D97757': '--color-primary-500',
-            '#FAF9F7': '--color-dark-50',
-            '#F3F1ED': '--color-dark-100',
-            '#E8E4DD': '--color-dark-200',
-            '#D4CFC5': '--color-dark-300',
-            '#A8A196': '--color-dark-400',
-            '#7C766C': '--color-dark-500',
-            '#5C574F': '--color-dark-600',
-            '#403D38': '--color-dark-700',
-            '#2A2825': '--color-dark-800',
-            '#1A1918': '--color-dark-900',
+            '#FAF9F7': '--color-dark-50',   '#F3F1ED': '--color-dark-100',
+            '#E8E4DD': '--color-dark-200',   '#D4CFC5': '--color-dark-300',
+            '#A8A196': '--color-dark-400',   '#7C766C': '--color-dark-500',
+            '#5C574F': '--color-dark-600',   '#403D38': '--color-dark-700',
+            '#2A2825': '--color-dark-800',   '#1A1918': '--color-dark-900',
             '#141413': '--color-dark-950',
-            '#FDF6F3': '--color-primary-50',
-            '#FCEAE2': '--color-primary-100',
-            '#F9D5C5': '--color-primary-200',
-            '#F4B89D': '--color-primary-300',
-            '#EC9372': '--color-primary-400',
-            '#C4613F': '--color-primary-600',
-            '#A34D32': '--color-primary-700',
-            '#86412D': '--color-primary-800',
+            '#FDF6F3': '--color-primary-50', '#FCEAE2': '--color-primary-100',
+            '#F9D5C5': '--color-primary-200','#F4B89D': '--color-primary-300',
+            '#EC9372': '--color-primary-400','#C4613F': '--color-primary-600',
+            '#A34D32': '--color-primary-700','#86412D': '--color-primary-800',
             '#6F3828': '--color-primary-900',
           };
           for (const [hex, token] of Object.entries(aliases)) {
             if (!map[hex]) map[hex] = token;
           }
-
           return map;
         }
 
         let tokenMap = buildTokenMap();
-
-        // Rebuild map when code-mode toggles
         const mapObserver = new MutationObserver(() => { tokenMap = buildTokenMap(); });
         mapObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
-        // ── Categorize token by its name prefix ──
+        // ── Token categorization ──
         function categorizeToken(name: string): string {
           const n = name.toLowerCase();
           if (n.includes('color') || n.includes('gradient') || n.includes('bg') || n.includes('text')) return 'Color';
@@ -196,14 +186,12 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           return 'Token';
         }
 
-        // Check if a token name refers to a color property
         function isColorToken(name: string): boolean {
           const n = name.toLowerCase();
           return n.includes('color') || n.includes('bg') || n.includes('gradient')
             || n.includes('text') || n.includes('border');
         }
 
-        // CSS property to read for a given token name
         function cssPropertyForToken(name: string): string | null {
           const n = name.toLowerCase();
           if (n.includes('bg') || n.includes('background')) return 'backgroundColor';
@@ -213,39 +201,33 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           return null;
         }
 
-        // ── Parse pipe-separated token string with live computed overrides ──
+        // ── Parse tokens with live computed overrides ──
         type TokenRow = { name: string; value: string; swatch?: string };
         type TokenGroup = { label: string; rows: TokenRow[] };
 
         function parseTokenString(raw: string, el: HTMLElement): { groups: TokenGroup[] } {
-          const lines = raw.split('|');
+          const lines = raw ? raw.split('|') : [];
           const groupMap: Record<string, TokenRow[]> = {};
           const computed = getComputedStyle(el);
 
           for (const line of lines) {
+            if (!line.trim()) continue;
             const parts = line.split(':').map(s => s.trim());
             const name = parts[0] || '';
             let value = parts.slice(1).join(':').trim();
             let swatch: string | undefined;
 
-            // For color tokens, override with computed value
             if (isColorToken(name)) {
               const cssProp = cssPropertyForToken(name);
               if (cssProp) {
                 const liveVal = (computed as any)[cssProp];
                 if (liveVal && liveVal !== 'rgba(0, 0, 0, 0)' && liveVal !== 'transparent') {
                   const hex = normalizeColor(liveVal);
-                  // Look up token alias
                   const tokenAlias = tokenMap[hex];
-                  if (tokenAlias) {
-                    value = `${tokenAlias} → ${hex}`;
-                  } else {
-                    value = hex;
-                  }
+                  value = tokenAlias ? `${tokenAlias} → ${hex}` : hex;
                   swatch = hex;
                 }
               }
-              // Fallback: if value still contains a hardcoded hex, use it for swatch
               if (!swatch) {
                 const hexMatch = value.match(/#[0-9a-fA-F]{3,8}/);
                 if (hexMatch) swatch = hexMatch[0];
@@ -260,24 +242,20 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
             groupMap[label].push({ name, value, ...(swatch ? { swatch } : {}) });
           }
 
-          // Inject live computed colors not in data-token (background, text color, border)
-          const liveProps: [string, string, string][] = [
+          // Inject live computed colors not already declared
+          const existingNames = lines.map(l => l.split(':')[0].trim().toLowerCase());
+          const liveColorProps: [string, string, string][] = [
             ['backgroundColor', '$computed-bg', 'Color'],
             ['color', '$computed-text', 'Color'],
             ['borderColor', '$computed-border', 'Border'],
           ];
-
-          const existingNames = lines.map(l => l.split(':')[0].trim().toLowerCase());
-
-          for (const [cssProp, tokenName, label] of liveProps) {
-            // Skip if already covered by a declared token
+          for (const [cssProp, tokenName, label] of liveColorProps) {
             const alreadyCovered = existingNames.some(n =>
               (cssProp === 'backgroundColor' && (n.includes('bg') || n.includes('background'))) ||
               (cssProp === 'color' && (n.includes('text') || (n.includes('color') && !n.includes('bg') && !n.includes('border')))) ||
               (cssProp === 'borderColor' && n.includes('border'))
             );
             if (alreadyCovered) continue;
-
             const liveVal = (computed as any)[cssProp];
             if (liveVal && liveVal !== 'rgba(0, 0, 0, 0)' && liveVal !== 'transparent') {
               const hex = normalizeColor(liveVal);
@@ -292,10 +270,79 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           return { groups: Object.entries(groupMap).map(([label, rows]) => ({ label, rows })) };
         }
 
+        // ── Extract live layout & architecture metrics ──
+        function getLayoutMetrics(el: HTMLElement): { display: string; gap: string; padding: string; zIndex: string; width: number; height: number; borderRadius: string; position: string } {
+          const cs = getComputedStyle(el);
+          const rect = el.getBoundingClientRect();
+          return {
+            display: cs.display,
+            gap: cs.gap && cs.gap !== 'normal' ? cs.gap : '',
+            padding: cs.padding,
+            zIndex: cs.zIndex,
+            width: Math.round(rect.width),
+            height: Math.round(rect.height),
+            borderRadius: cs.borderRadius,
+            position: cs.position,
+          };
+        }
+
+        // ── Box Model Overlay: padding + margin visualization ──
+        function showBoxModel(el: HTMLElement) {
+          if (!boxOverlay || !boxMargin || !boxPadding || !boxContent || !boxBorder) return;
+          const cs = getComputedStyle(el);
+          const rect = el.getBoundingClientRect();
+
+          const mt = parseFloat(cs.marginTop) || 0;
+          const mr = parseFloat(cs.marginRight) || 0;
+          const mb = parseFloat(cs.marginBottom) || 0;
+          const ml = parseFloat(cs.marginLeft) || 0;
+          const bt = parseFloat(cs.borderTopWidth) || 0;
+          const br = parseFloat(cs.borderRightWidth) || 0;
+          const bb = parseFloat(cs.borderBottomWidth) || 0;
+          const blw = parseFloat(cs.borderLeftWidth) || 0;
+          const pt = parseFloat(cs.paddingTop) || 0;
+          const pr = parseFloat(cs.paddingRight) || 0;
+          const pb = parseFloat(cs.paddingBottom) || 0;
+          const pl = parseFloat(cs.paddingLeft) || 0;
+
+          const scrollX = window.scrollX;
+          const scrollY = window.scrollY;
+
+          // Margin layer (outermost)
+          boxOverlay.style.display = 'block';
+          boxMargin.style.top = `${rect.top + scrollY - mt}px`;
+          boxMargin.style.left = `${rect.left + scrollX - ml}px`;
+          boxMargin.style.width = `${rect.width + ml + mr}px`;
+          boxMargin.style.height = `${rect.height + mt + mb}px`;
+
+          // Border layer
+          boxBorder.style.top = `${rect.top + scrollY}px`;
+          boxBorder.style.left = `${rect.left + scrollX}px`;
+          boxBorder.style.width = `${rect.width}px`;
+          boxBorder.style.height = `${rect.height}px`;
+
+          // Padding layer
+          boxPadding.style.top = `${rect.top + scrollY + bt}px`;
+          boxPadding.style.left = `${rect.left + scrollX + blw}px`;
+          boxPadding.style.width = `${rect.width - blw - br}px`;
+          boxPadding.style.height = `${rect.height - bt - bb}px`;
+
+          // Content layer (innermost)
+          boxContent.style.top = `${rect.top + scrollY + bt + pt}px`;
+          boxContent.style.left = `${rect.left + scrollX + blw + pl}px`;
+          boxContent.style.width = `${rect.width - blw - br - pl - pr}px`;
+          boxContent.style.height = `${rect.height - bt - bb - pt - pb}px`;
+        }
+
+        function hideBoxModel() {
+          if (boxOverlay) boxOverlay.style.display = 'none';
+        }
+
         // ── Build tooltip HTML ──
-        function renderTooltip(componentName: string | null, tokenData: { groups: TokenGroup[] } | null): string {
+        function renderTooltip(componentName: string | null, tokenData: { groups: TokenGroup[] } | null, metrics: ReturnType<typeof getLayoutMetrics> | null): string {
           let html = '';
 
+          // Component header
           if (componentName) {
             html += `<div class="token-component">`;
             html += `<span class="tag-bracket">&lt;</span>`;
@@ -304,6 +351,42 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
             html += `</div>`;
           }
 
+          // Layout & Architecture block
+          if (metrics) {
+            html += `<div class="token-label">Layout</div>`;
+            // Display + position
+            const isFlexGrid = metrics.display === 'flex' || metrics.display === 'inline-flex'
+              || metrics.display === 'grid' || metrics.display === 'inline-grid';
+            html += `<div class="token-row"><span class="token-name">display</span><span style="color:#6272a4">:</span> <span class="token-value">${metrics.display}</span></div>`;
+
+            if (metrics.position !== 'static') {
+              html += `<div class="token-row"><span class="token-name">position</span><span style="color:#6272a4">:</span> <span class="token-value">${metrics.position}</span></div>`;
+            }
+
+            // Gap (for flex/grid) or padding
+            if (isFlexGrid && metrics.gap) {
+              html += `<div class="token-row"><span class="token-name">gap</span><span style="color:#6272a4">:</span> <span class="token-value">${metrics.gap}</span></div>`;
+            }
+            if (metrics.padding && metrics.padding !== '0px') {
+              html += `<div class="token-row"><span class="token-name">padding</span><span style="color:#6272a4">:</span> <span class="token-value">${metrics.padding}</span></div>`;
+            }
+
+            // Border radius
+            if (metrics.borderRadius && metrics.borderRadius !== '0px') {
+              html += `<div class="token-row"><span class="token-name">radius</span><span style="color:#6272a4">:</span> <span class="token-value">${metrics.borderRadius}</span></div>`;
+            }
+
+            // Size
+            html += `<div class="token-label">Size</div>`;
+            html += `<div class="token-row"><span class="token-name">dimensions</span><span style="color:#6272a4">:</span> <span class="token-value">${metrics.width} × ${metrics.height} px</span></div>`;
+
+            // Z-index
+            if (metrics.zIndex !== 'auto' && metrics.zIndex !== '0') {
+              html += `<div class="token-row"><span class="token-name">z-index</span><span style="color:#6272a4">:</span> <span class="token-value">${metrics.zIndex}</span></div>`;
+            }
+          }
+
+          // Token groups (Color, Spacing, Typography, etc.)
           if (tokenData && tokenData.groups) {
             for (const group of tokenData.groups) {
               html += `<div class="token-label">${group.label}</div>`;
@@ -352,32 +435,34 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
 
           const componentName = el.getAttribute('data-component');
           const tokenRaw = el.getAttribute('data-token');
-
           if (!componentName && !tokenRaw) return;
 
+          // Parse tokens
           let tokenData: { groups: TokenGroup[] } | null = null;
           if (tokenRaw) {
             try {
               const parsed = JSON.parse(tokenRaw);
-              if (parsed.groups) {
-                tokenData = parsed;
-              } else if (parsed.label && parsed.rows) {
-                tokenData = { groups: [parsed] };
-              }
+              if (parsed.groups) tokenData = parsed;
+              else if (parsed.label && parsed.rows) tokenData = { groups: [parsed] };
             } catch {
               tokenData = parseTokenString(tokenRaw, el);
             }
           } else {
-            // Component-only element: show live computed colors
             tokenData = parseTokenString('', el);
           }
 
+          // Get live layout metrics
+          const metrics = getLayoutMetrics(el);
+
           currentTarget = el;
-          tooltip.innerHTML = renderTooltip(componentName, tokenData);
+          tooltip.innerHTML = renderTooltip(componentName, tokenData, metrics);
           positionTooltip(e);
 
           tooltip.offsetHeight;
           tooltip.classList.add('visible');
+
+          // Show box-model overlay
+          showBoxModel(el);
 
           if (componentName && overlay) {
             el.classList.add('inspector-focused');
@@ -392,6 +477,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           currentTarget = null;
           tooltip.classList.remove('visible');
           overlay?.classList.remove('active');
+          hideBoxModel();
         }
 
         function attachListeners() {
@@ -415,10 +501,22 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         attachListeners();
         setupSpecificity();
 
+        // Update box-model on scroll/resize for accuracy
+        let scrollRaf: number | null = null;
+        function onScrollResize() {
+          if (scrollRaf) cancelAnimationFrame(scrollRaf);
+          scrollRaf = requestAnimationFrame(() => {
+            if (currentTarget) showBoxModel(currentTarget);
+          });
+        }
+        window.addEventListener('scroll', onScrollResize, { passive: true });
+        window.addEventListener('resize', onScrollResize, { passive: true });
+
         const codeToggle = document.getElementById('code-mode-toggle');
         codeToggle?.addEventListener('click', () => {
           tooltip.classList.remove('visible');
           overlay?.classList.remove('active');
+          hideBoxModel();
           if (currentTarget) {
             currentTarget.classList.remove('inspector-focused');
             currentTarget = null;

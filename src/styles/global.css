@@ -1157,6 +1157,54 @@ body.code-mode aside:hover {
   margin: 4px 0;
 }
 
+/* ── Box Model Overlay: DevTools-style padding/margin visualization ── */
+#inspector-box-model-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 32;
+  pointer-events: none;
+}
+
+#box-model-margin,
+#box-model-border,
+#box-model-padding,
+#box-model-content {
+  position: absolute;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+/* Margin: orange tint */
+#box-model-margin {
+  background: rgba(255, 155, 50, 0.12);
+  border: 1px dashed rgba(255, 155, 50, 0.35);
+  border-radius: 2px;
+}
+
+/* Border: dark slate */
+#box-model-border {
+  background: rgba(108, 117, 125, 0.15);
+  border-radius: 2px;
+}
+
+/* Padding: purple/blue tint */
+#box-model-padding {
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px dashed rgba(139, 92, 246, 0.30);
+  border-radius: 2px;
+}
+
+/* Content: teal core */
+#box-model-content {
+  background: rgba(80, 250, 123, 0.08);
+  border: 1px solid rgba(80, 250, 123, 0.20);
+  border-radius: 2px;
+}
+
 /* CTA card-style social links */
 .cta-card {
   display: flex;
