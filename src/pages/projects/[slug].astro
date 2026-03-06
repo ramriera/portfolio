@@ -114,6 +114,51 @@ function md(text: string): string {
                 </div>
               )}
 
+              {meta && (
+                <!-- Rol -->
+                <div class="flex items-start gap-3 p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 dark:bg-dark-700/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-dark-500 dark:text-dark-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-1">Rol</h4>
+                    <p class="font-semibold text-sm">{meta.role}</p>
+                  </div>
+                </div>
+              )}
+
+              {meta && (
+                <!-- Industria -->
+                <div class="flex items-start gap-3 p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 dark:bg-dark-700/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-dark-500 dark:text-dark-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-1">Industria</h4>
+                    <p class="font-semibold text-sm">{meta.industry}</p>
+                  </div>
+                </div>
+              )}
+
+              {meta && (
+                <!-- Output -->
+                <div class="flex items-start gap-3 p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 dark:bg-dark-700/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-dark-500 dark:text-dark-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 dark:text-dark-500 mb-1">Output</h4>
+                    <p class="font-semibold text-sm">{meta.output}</p>
+                  </div>
+                </div>
+              )}
+
               <!-- Skills / Stack -->
               {meta && (
                 <div class="flex items-start gap-4 p-5 rounded-xl bg-dark-100/60 dark:bg-dark-800/60">

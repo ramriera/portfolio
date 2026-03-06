@@ -78,6 +78,8 @@ export interface CaseSection {
 
 export interface ProjectMeta {
   role: string;
+  industry: string;
+  output: string;
   duration: string;
   tools: string[];
   skills: string[];
@@ -134,7 +136,9 @@ export const projects: Project[] = [
     liveUrl: '#',
     featured: true,
     projectMeta: {
-      role: 'UX/UI Strategy & Service Design',
+      role: 'UI Designer',
+      industry: 'Fashion Retail',
+      output: 'E-commerce Optimization',
       duration: '1 semana',
       tools: ['Research', 'Service Blueprint', 'Prototyping', 'Wireframing'],
       skills: ['UX Optimization', 'Checkout Flow', 'E-commerce Strategy', 'High-Fidelity Prototyping', 'Service Design', 'CRO'],
@@ -343,7 +347,9 @@ export const projects: Project[] = [
     liveUrl: '#',
     featured: true,
     projectMeta: {
-      role: 'UX/UI Designer (Research, Visual Design, Interaction Design)',
+      role: 'UX/UI Designer',
+      industry: 'Mobility',
+      output: 'Mobile App Design',
       duration: '2 semanas',
       tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
       skills: ['UX Research', 'Benchmarking', 'User Persona', 'Journey Mapping', 'Prototyping', 'Design System', 'Wireframing', 'Visual Design', 'Interaction Design', 'Information Architecture', 'Mobile Design', 'Competitive Analysis'],
@@ -484,7 +490,9 @@ export const projects: Project[] = [
     liveUrl: '#',
     featured: true,
     projectMeta: {
-      role: 'UX/UI Designer (Research, Visual Design, Interaction Design)',
+      role: 'UX/UI Designer',
+      industry: 'Non-Profit',
+      output: 'Platform Design & Prototype',
       duration: '2 semanas (45 horas)',
       tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
       skills: ['Design Thinking', 'Surveys', 'User Persona', 'Journey Mapping', 'Design Tokens', 'Prototyping', 'Benchmarking', 'Wireframing', 'Visual Design', 'Interaction Design'],
@@ -611,7 +619,9 @@ export const projects: Project[] = [
     liveUrl: '#',
     featured: true,
     projectMeta: {
-      role: 'UX/UI Consultant — Design System Lead',
+      role: 'Product Designer',
+      industry: 'Fintech',
+      output: 'UI Library & Documentation',
       duration: '4 meses',
       tools: ['Figma', 'Sketch', 'Zeroheight', 'Storybook', 'Tokens Studio'],
       skills: ['Design Systems', 'Design Tokens', 'Component Library', 'UX Bancaria', 'Accessibility (WCAG)', 'Documentation', 'Governance', 'Cross-Platform Consistency', 'Responsive Design', 'Interaction Design'],
@@ -822,6 +832,8 @@ export const projects: Project[] = [
     featured: true,
     projectMeta: {
       role: 'UX Consultant',
+      industry: 'Fintech',
+      output: 'UX Audit & Recommendations',
       duration: '5 horas',
       tools: ['Figma', 'Chrome'],
       skills: ['Análisis Heurístico', 'Usabilidad', 'Accesibilidad', 'UX Research', 'Comunicación UX', 'Benchmarking'],
@@ -975,6 +987,8 @@ export const projects: Project[] = [
     featured: true,
     projectMeta: {
       role: 'Design System Lead',
+      industry: 'Travel',
+      output: 'Unified Design System & Tokens',
       duration: '12 semanas',
       tools: ['Figma', 'Tokens Studio', 'Storybook', 'Zeroheight', 'Miro'],
       skills: ['Design Systems', 'Design Tokens', 'Component Library', 'Cross-Platform Consistency', 'Information Architecture', 'Digital Product Design', 'Atomic Design', 'Accessibility (WCAG)', 'Design Ops', 'Responsive Design', 'Prototyping', 'Documentation'],
@@ -1209,7 +1223,9 @@ export const projects: Project[] = [
     liveUrl: '#',
     featured: true,
     projectMeta: {
-      role: 'UX Engineer & Product Designer (Estrategia, UX Research, Visual Design, Prototyping)',
+      role: 'UX Engineer & Product Designer',
+      industry: 'Music & Entertainment',
+      output: 'Product Design & Prototype',
       duration: '8 semanas',
       tools: ['Figma', 'Whimsical', 'Miro', 'Adobe Photoshop', 'Google Analytics'],
       skills: ['Product Strategy', 'UX/UI Design', 'Design Systems', 'Prototyping', 'UX Research', 'Visual Design'],
