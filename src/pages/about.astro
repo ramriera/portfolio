@@ -82,11 +82,14 @@ const values = [
           </span>
           <span class="text-sm font-medium text-primary-500 tracking-wide">Sobre mí</span>
         </div>
-        <h1 data-reveal data-delay="100" class="heading-xl mb-8">
+        <h1 data-reveal data-delay="100" class="heading-xl mb-8"
+          data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2rem / 32px">
           Diseñador, pensador,
-          <span class="text-primary-500">creador</span>
+          <span class="text-primary-500"
+            data-token="$color-primary-500: #D97757">creador</span>
         </h1>
-        <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl">
+        <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl"
+          data-token="$font-family-sans: Inter|$color-text-muted: #7c766c">
           Con más de 8 años de experiencia, he dedicado mi carrera a crear productos digitales que combinan estética, usabilidad y estrategia de negocio.
         </p>
       </div>
@@ -263,13 +266,17 @@ const values = [
         Cuéntame sobre tu proyecto y veamos cómo puedo ayudarte a alcanzar tus objetivos de diseño.
       </p>
       <div data-reveal data-delay="200" class="flex flex-wrap items-center justify-center gap-4">
-        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base">
+        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base"
+          data-component="ButtonPrimary"
+          data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
           Contactar
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
-        <a href={`mailto:${siteConfig.email}`} class="btn-outline text-base">
+        <a href={`mailto:${siteConfig.email}`} class="btn-outline text-base"
+          data-component="ButtonOutline"
+          data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px">
           {siteConfig.email}
         </a>
       </div>

@@ -465,21 +465,37 @@ main {
    ═══════════════════════════════════════════════════════════ */
 
 /* ── 1. Base overrides: background, typography, text colors ── */
+/* Palette: GitHub Dark Dimmed + Dracula accents — consistent syntax coloring */
 .code-mode {
-  --cm-bg: #0c0e14;
-  --cm-bg-surface: #111520;
-  --cm-bg-card: #151a27;
-  --cm-border: rgba(56, 189, 248, 0.12);
-  --cm-border-hover: rgba(56, 189, 248, 0.3);
-  --cm-text: #c9d1d9;
-  --cm-text-muted: #6b7b8d;
-  --cm-keyword: #c678dd;      /* purple/pink — keywords */
-  --cm-function: #61afef;     /* blue — functions/links */
-  --cm-string: #98c379;       /* green — strings/success */
-  --cm-comment: #5c6370;      /* gray — muted */
-  --cm-number: #d19a66;       /* orange — numbers/accents */
-  --cm-tag: #e06c75;          /* red — HTML tags */
-  --cm-glow: 0 0 20px rgba(56, 189, 248, 0.06);
+  /* Backgrounds (GitHub Dark Dimmed) */
+  --cm-bg: #0d1117;
+  --cm-bg-surface: #161b22;
+  --cm-bg-card: #1c2128;
+  --cm-bg-hover: #21262d;
+
+  /* Borders */
+  --cm-border: #30363d;
+  --cm-border-hover: #484f58;
+
+  /* Text hierarchy */
+  --cm-text: #e6edf3;            /* primary text — bright white */
+  --cm-text-secondary: #c9d1d9;  /* secondary text — light gray */
+  --cm-text-muted: #7d8590;      /* muted/comments — mid gray */
+
+  /* Syntax tokens (Dracula-inspired, WCAG AA on --cm-bg) */
+  --cm-tag: #ff79c6;             /* pink — HTML tags, brackets */
+  --cm-attr: #ffb86c;            /* orange — attributes, numbers */
+  --cm-keyword: #bd93f9;         /* purple — keywords, reserved */
+  --cm-function: #8be9fd;        /* cyan — functions, links */
+  --cm-string: #50fa7b;          /* green — strings, success */
+  --cm-content: #f8f8f2;         /* white — text content */
+  --cm-comment: #6272a4;         /* blue-gray — comments */
+  --cm-number: #ffb86c;          /* orange — numbers (alias) */
+  --cm-constant: #f1fa8c;        /* yellow — constants, component names */
+
+  /* Inspector glow */
+  --cm-inspector-glow: #50fa7b;
+  --cm-glow: 0 0 20px rgba(80, 250, 123, 0.06);
 
   /* Layout-border: code mode adds 1px borders — margins compensate */
   --layout-border: 1px;
@@ -489,6 +505,9 @@ body.code-mode {
   background: var(--cm-bg) !important;
   color: var(--cm-text) !important;
   font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace !important;
+  /* Zero Shift: tighten monospace to approximate Inter metrics */
+  letter-spacing: -0.02em;
+  word-spacing: -0.05em;
   transition: opacity 0.5s ease, background 0.4s ease, color 0.4s ease;
 }
 
@@ -500,7 +519,7 @@ body.code-mode--booting {
 /* ── Dot Grid background pattern (8px) ── */
 body.code-mode {
   background-image:
-    radial-gradient(circle, rgba(56, 189, 248, 0.08) 1px, transparent 1px) !important;
+    radial-gradient(circle, rgba(139, 233, 253, 0.06) 1px, transparent 1px) !important;
   background-size: 8px 8px !important;
   background-position: 0 0 !important;
 }
@@ -510,7 +529,7 @@ body.code-mode {
 body.code-mode article,
 body.code-mode section,
 body.code-mode aside {
-  outline: 1px solid #30363d;
+  outline: 1px solid var(--cm-border);
   outline-offset: -1px;
   border-radius: 6px;
   transition: outline-color 0.3s ease;
@@ -519,7 +538,7 @@ body.code-mode aside {
 body.code-mode article:hover,
 body.code-mode section:hover,
 body.code-mode aside:hover {
-  outline-color: #484f58;
+  outline-color: var(--cm-border-hover);
 }
 
 /* All text goes monospace */
@@ -530,46 +549,46 @@ body.code-mode aside:hover {
 /* ── 2. Headings as syntax-highlighted keywords ── */
 .code-mode h1,
 .code-mode .heading-xl {
-  color: var(--cm-keyword) !important;
-  text-shadow: 0 0 30px rgba(198, 120, 221, 0.15);
+  color: var(--cm-keyword) !important;    /* purple — primary keywords */
+  text-shadow: 0 0 30px rgba(189, 147, 249, 0.15);
 }
 
 .code-mode h2,
 .code-mode .heading-lg {
-  color: var(--cm-function) !important;
-  text-shadow: 0 0 25px rgba(97, 175, 239, 0.12);
+  color: var(--cm-function) !important;   /* cyan — functions */
+  text-shadow: 0 0 25px rgba(139, 233, 253, 0.12);
 }
 
 .code-mode h3,
 .code-mode .heading-md {
-  color: var(--cm-string) !important;
+  color: var(--cm-string) !important;     /* green — strings */
 }
 
 .code-mode h4,
 .code-mode .heading-sm {
-  color: var(--cm-number) !important;
+  color: var(--cm-attr) !important;       /* orange — attributes */
 }
 
 /* ── 3. Body text, muted text, links ── */
 .code-mode .text-body,
 .code-mode .text-body-sm {
-  color: var(--cm-text-muted) !important;
+  color: var(--cm-text-secondary) !important;  /* light gray — readable content */
 }
 
 .code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo) {
-  color: var(--cm-function) !important;
-  text-decoration-color: rgba(97, 175, 239, 0.3);
+  color: var(--cm-function) !important;        /* cyan — functions/links */
+  text-decoration-color: rgba(139, 233, 253, 0.3);
 }
 
 .code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo):hover {
-  color: var(--cm-string) !important;
-  text-shadow: 0 0 8px rgba(152, 195, 121, 0.3);
+  color: var(--cm-string) !important;          /* green — hover state */
+  text-shadow: 0 0 8px rgba(80, 250, 123, 0.3);
 }
 
 /* Primary accent overrides */
 .code-mode .text-primary-500,
 .code-mode .text-primary-400 {
-  color: var(--cm-string) !important;
+  color: var(--cm-tag) !important;             /* pink — accent color */
 }
 
 .code-mode .gradient-text {
@@ -580,7 +599,7 @@ body.code-mode aside:hover {
 
 /* ── 4. Surfaces, cards, containers ── */
 .code-mode .nav-scrolled {
-  background: rgba(12, 14, 20, 0.85) !important;
+  background: rgba(13, 17, 23, 0.85) !important;
 }
 
 .code-mode .meta-card,
@@ -622,7 +641,37 @@ body.code-mode aside:hover {
   padding-bottom: 0.5rem;
 }
 
-/* ── 6. Neon container borders (box-model) ── */
+/* Override with real component names when data-component is set */
+.code-mode section[data-component="HeroSection"] > .container-custom::before { content: '<HeroSection>'; }
+.code-mode section[data-component="HeroSection"] > .container-custom::after { content: '</HeroSection>'; }
+.code-mode section[data-component="AboutSection"] > .container-custom::before { content: '<AboutSection>'; }
+.code-mode section[data-component="AboutSection"] > .container-custom::after { content: '</AboutSection>'; }
+.code-mode section[data-component="FeaturedProjects"] > .container-custom::before { content: '<FeaturedProjects>'; }
+.code-mode section[data-component="FeaturedProjects"] > .container-custom::after { content: '</FeaturedProjects>'; }
+.code-mode section[data-component="CallToAction"] > .container-custom::before { content: '<CallToAction>'; }
+.code-mode section[data-component="CallToAction"] > .container-custom::after { content: '</CallToAction>'; }
+.code-mode section[data-component="AboutHero"] > .container-custom::before { content: '<AboutHero>'; }
+.code-mode section[data-component="AboutHero"] > .container-custom::after { content: '</AboutHero>'; }
+.code-mode section[data-component="BiographySection"] > .container-custom::before { content: '<BiographySection>'; }
+.code-mode section[data-component="BiographySection"] > .container-custom::after { content: '</BiographySection>'; }
+.code-mode section[data-component="SpecialtiesSection"] > .container-custom::before { content: '<SpecialtiesSection>'; }
+.code-mode section[data-component="SpecialtiesSection"] > .container-custom::after { content: '</SpecialtiesSection>'; }
+.code-mode section[data-component="ProcessSection"] > .container-custom::before { content: '<ProcessSection>'; }
+.code-mode section[data-component="ProcessSection"] > .container-custom::after { content: '</ProcessSection>'; }
+.code-mode section[data-component="ProjectHero"] > .container-custom::before { content: '<ProjectHero>'; }
+.code-mode section[data-component="ProjectHero"] > .container-custom::after { content: '</ProjectHero>'; }
+.code-mode section[data-component="ProjectsHero"] > .container-custom::before { content: '<ProjectsHero>'; }
+.code-mode section[data-component="ProjectsHero"] > .container-custom::after { content: '</ProjectsHero>'; }
+.code-mode section[data-component="ProjectsListing"] > .container-custom::before { content: '<ProjectsListing>'; }
+.code-mode section[data-component="ProjectsListing"] > .container-custom::after { content: '</ProjectsListing>'; }
+.code-mode section[data-component="ResultsShowcase"] > .container-custom::before { content: '<ResultsShowcase>'; }
+.code-mode section[data-component="ResultsShowcase"] > .container-custom::after { content: '</ResultsShowcase>'; }
+.code-mode section[data-component="RelatedProjects"] > .container-custom::before { content: '<RelatedProjects>'; }
+.code-mode section[data-component="RelatedProjects"] > .container-custom::after { content: '</RelatedProjects>'; }
+.code-mode section[data-component="ParallaxCover"] > .container-custom::before { content: '<ParallaxCover>'; }
+.code-mode section[data-component="ParallaxCover"] > .container-custom::after { content: '</ParallaxCover>'; }
+
+/* ── 6. Container borders (box-model) ── */
 /* Use outline instead of border so padding/margin stays identical to normal mode */
 .code-mode .container-custom {
   outline: var(--layout-border) solid var(--cm-border);
@@ -636,9 +685,9 @@ body.code-mode aside:hover {
   outline-color: var(--cm-border-hover);
 }
 
-/* Grid containers — neon subtle borders (skip hero-grid which has its own treatment) */
+/* Grid containers — subtle borders (skip hero-grid which has its own treatment) */
 .code-mode [class*="grid-cols-"]:not(.hero-grid) > * {
-  border: 1px solid rgba(56, 189, 248, 0.06);
+  border: 1px solid rgba(48, 54, 61, 0.5);
   border-radius: 4px;
   padding: 0.5rem;
   transition: border-color 0.3s ease;
@@ -656,12 +705,35 @@ body.code-mode aside:hover {
 
 /* ── Hero Data Reveal: grid persists, only skin changes ── */
 
+/* Zero Shift: lock hero heading line-height to match Inter metrics */
+.code-mode .heading-xl {
+  line-height: 1.08 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.code-mode .heading-lg {
+  line-height: 1.12 !important;
+  letter-spacing: -0.02em !important;
+}
+
 /* Stats panel — terminal aesthetic without moving it */
 .code-mode .hero-stats-col {
   background: var(--cm-bg-surface);
   border: 1px solid var(--cm-border);
   border-radius: 4px;
   padding: 1rem 1.25rem;
+}
+
+/* Zero Shift: force hero-grid right column to stay pinned */
+@media (min-width: 1280px) {
+  .code-mode .hero-grid {
+    grid-template-columns: 1fr auto;
+  }
+  .code-mode .hero-stats-col {
+    position: relative;
+    justify-self: end;
+    flex-shrink: 0;
+  }
 }
 
 /* Stats dividers adopt code mode colors */
@@ -675,7 +747,7 @@ body.code-mode aside:hover {
 
 /* Stats text colors */
 .code-mode .hero-stats-col .text-dark-900 {
-  color: var(--cm-number) !important;
+  color: var(--cm-attr) !important;
 }
 
 .code-mode .hero-stats-col .text-dark-400 {
@@ -684,14 +756,14 @@ body.code-mode aside:hover {
 
 /* ── Project detail: persistent 1/3 + 2/3 grid with visible columns ── */
 .code-mode [data-component="ProjectSidebar"] {
-  outline: 1px solid #30363d;
+  outline: 1px solid var(--cm-border);
   outline-offset: -1px;
   border-radius: 4px;
 }
 
 .code-mode [data-component="ProjectSidebar"] + .lg\:col-span-2,
 .code-mode .lg\:col-span-2[data-component="ProjectContent"] {
-  outline: 1px solid #30363d;
+  outline: 1px solid var(--cm-border);
   outline-offset: -1px;
   border-radius: 4px;
 }
@@ -707,7 +779,7 @@ body.code-mode aside:hover {
 .code-mode .btn-primary:hover {
   background: transparent !important;
   color: var(--cm-function) !important;
-  box-shadow: 0 0 12px rgba(97, 175, 239, 0.25) !important;
+  box-shadow: 0 0 12px rgba(139, 233, 253, 0.25) !important;
 }
 
 .code-mode .btn-outline {
@@ -716,17 +788,17 @@ body.code-mode aside:hover {
 }
 
 .code-mode .btn-outline:hover {
-  background: rgba(97, 175, 239, 0.08) !important;
+  background: rgba(139, 233, 253, 0.08) !important;
   border-color: var(--cm-function) !important;
   color: var(--cm-function) !important;
-  box-shadow: 0 0 12px rgba(97, 175, 239, 0.15) !important;
+  box-shadow: 0 0 12px rgba(139, 233, 253, 0.15) !important;
 }
 
 /* ── 8. Tags ── */
 .code-mode .tag {
-  background: rgba(152, 195, 121, 0.1) !important;
+  background: rgba(80, 250, 123, 0.08) !important;
   color: var(--cm-string) !important;
-  border: 1px solid rgba(152, 195, 121, 0.2) !important;
+  border: 1px solid rgba(80, 250, 123, 0.2) !important;
 }
 
 /* ── 9. Images: B&W filter + overlay ── */
@@ -755,7 +827,7 @@ body.code-mode aside:hover {
 
 /* ── 11. Selection ── */
 .code-mode ::selection {
-  background: rgba(97, 175, 239, 0.25) !important;
+  background: rgba(189, 147, 249, 0.25) !important;
   color: #fff !important;
 }
 
@@ -810,7 +882,7 @@ body.code-mode aside:hover {
 }
 
 .code-mode .logo-name {
-  color: var(--cm-keyword) !important;
+  color: var(--cm-tag) !important;       /* pink — like an HTML tag */
 }
 
 .code-mode .logo-role {
@@ -832,8 +904,8 @@ body.code-mode aside:hover {
 
 /* ── 14. Section icons ── */
 .code-mode .section-icon {
-  background: rgba(97, 175, 239, 0.08) !important;
-  border: 1px solid rgba(97, 175, 239, 0.15);
+  background: rgba(139, 233, 253, 0.08) !important;
+  border: 1px solid rgba(139, 233, 253, 0.15);
 }
 
 .code-mode .section-icon-svg .icon-stroke {
@@ -877,7 +949,7 @@ body.code-mode aside:hover {
 }
 
 .code-mode .cta-card:hover .cta-card-icon {
-  background: rgba(97, 175, 239, 0.15) !important;
+  background: rgba(139, 233, 253, 0.15) !important;
   color: var(--cm-function) !important;
 }
 
@@ -902,8 +974,8 @@ body.code-mode aside:hover {
     repeating-linear-gradient(
       transparent,
       transparent 1.8rem,
-      rgba(56, 189, 248, 0.02) 1.8rem,
-      rgba(56, 189, 248, 0.02) 3.6rem
+      rgba(98, 114, 164, 0.04) 1.8rem,
+      rgba(98, 114, 164, 0.04) 3.6rem
     );
 }
 
@@ -928,8 +1000,8 @@ body.code-mode aside:hover {
 
 .code-mode [data-token]:hover::after,
 .code-mode [data-component]:hover::after {
-  border-color: var(--cm-inspector-glow, #00ff88);
-  box-shadow: 0 0 8px rgba(0, 255, 136, 0.2), inset 0 0 8px rgba(0, 255, 136, 0.05);
+  border-color: var(--cm-inspector-glow);
+  box-shadow: 0 0 8px rgba(80, 250, 123, 0.2), inset 0 0 8px rgba(80, 250, 123, 0.05);
 }
 
 /* Scanner sweep animation on hover */
@@ -947,7 +1019,7 @@ body.code-mode aside:hover {
   left: -2px;
   right: -2px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #00ff88, transparent);
+  background: linear-gradient(90deg, transparent, var(--cm-inspector-glow), transparent);
   z-index: 41;
   pointer-events: none;
   animation: tokenScanLine 0.6s ease-out forwards;
@@ -976,24 +1048,24 @@ body.code-mode aside:hover {
   position: relative;
 }
 
-/* Token Inspector tooltip */
+/* Token Inspector tooltip — Dracula palette */
 #token-inspector-tooltip {
   position: fixed;
   z-index: 9999;
   pointer-events: none;
-  max-width: 320px;
+  max-width: 360px;
   padding: 10px 14px;
-  background: #1a1a1a;
-  border: 1px solid rgba(0, 255, 136, 0.25);
+  background: #21222c;
+  border: 1px solid rgba(80, 250, 123, 0.25);
   border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   line-height: 1.5;
-  color: #c9d1d9;
+  color: #f8f8f2;
   opacity: 0;
   transform: translateY(4px);
   transition: opacity 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 255, 136, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(80, 250, 123, 0.08);
 }
 
 #token-inspector-tooltip.visible {
@@ -1001,27 +1073,27 @@ body.code-mode aside:hover {
   transform: translateY(0);
 }
 
-/* Component name header */
+/* Component name header — yellow constant */
 #token-inspector-tooltip .token-component {
-  color: #e5c07b;
+  color: #f1fa8c;
   font-size: 12px;
   font-weight: 500;
   padding-bottom: 5px;
   margin-bottom: 5px;
-  border-bottom: 1px solid rgba(229, 192, 123, 0.15);
+  border-bottom: 1px solid rgba(241, 250, 140, 0.15);
   white-space: nowrap;
 }
 
 #token-inspector-tooltip .token-component .tag-bracket {
-  color: #e06c75;
+  color: #ff79c6;           /* pink — like HTML tags */
 }
 
 #token-inspector-tooltip .token-component .tag-name {
-  color: #e5c07b;
+  color: #f1fa8c;           /* yellow — component name */
 }
 
 #token-inspector-tooltip .token-component .tag-slash {
-  color: #e06c75;
+  color: #ff79c6;           /* pink — brackets */
 }
 
 #token-inspector-tooltip .token-row {
@@ -1032,12 +1104,13 @@ body.code-mode aside:hover {
   white-space: nowrap;
 }
 
+/* Token name: purple (keyword), value: green (string) */
 #token-inspector-tooltip .token-name {
-  color: #c678dd;
+  color: #bd93f9;           /* purple — token name */
 }
 
 #token-inspector-tooltip .token-value {
-  color: #98c379;
+  color: #50fa7b;           /* green — token value */
 }
 
 #token-inspector-tooltip .token-swatch {
@@ -1049,8 +1122,9 @@ body.code-mode aside:hover {
   flex-shrink: 0;
 }
 
+/* Category label — comment color */
 #token-inspector-tooltip .token-label {
-  color: #5c6370;
+  color: #6272a4;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -1134,8 +1208,8 @@ body.code-mode aside:hover {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 11px;
   line-height: 1.6;
-  border-top: 1px solid rgba(56, 189, 248, 0.15);
-  background: #0d1117;
+  border-top: 1px solid #44475a;
+  background: #1e1f29;
   box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.4);
   transform: translateY(100%);
   opacity: 0;
@@ -1162,8 +1236,8 @@ body.code-mode aside:hover {
   justify-content: space-between;
   padding: 0 12px;
   height: 32px;
-  background: #010409;
-  border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+  background: #191a21;
+  border-bottom: 1px solid #44475a;
   user-select: none;
 }
 
@@ -1186,8 +1260,8 @@ body.code-mode aside:hover {
 }
 
 .system-console-tab.active {
-  color: #e6edf3;
-  border-bottom-color: #58a6ff;
+  color: #f8f8f2;
+  border-bottom-color: #bd93f9;
 }
 
 .system-console-tab:hover:not(.active) {
@@ -1282,14 +1356,14 @@ body.code-mode aside:hover {
   margin-right: 4px;
 }
 
-.console-tag--info { color: #58a6ff; }
-.console-tag--system { color: #d2a8ff; }
-.console-tag--inspect { color: #3fb950; }
-.console-tag--view { color: #79c0ff; }
-.console-tag--debug { color: #484f58; }
-.console-tag--warn { color: #d29922; }
-.console-tag--coffee { color: #d19a66; }
-.console-tag--ready { color: #3fb950; }
+.console-tag--info { color: #8be9fd; }     /* cyan — function */
+.console-tag--system { color: #bd93f9; }   /* purple — keyword */
+.console-tag--inspect { color: #50fa7b; }  /* green — string */
+.console-tag--view { color: #8be9fd; }     /* cyan — function */
+.console-tag--debug { color: #6272a4; }    /* blue-gray — comment */
+.console-tag--warn { color: #ffb86c; }     /* orange — attribute */
+.console-tag--coffee { color: #ffb86c; }   /* orange — attribute */
+.console-tag--ready { color: #50fa7b; }    /* green — string */
 
 .console-msg {
   color: #8b949e;

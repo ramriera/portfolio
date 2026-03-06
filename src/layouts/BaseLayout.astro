@@ -93,34 +93,45 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         let currentTarget: HTMLElement | null = null;
         let rafId: number | null = null;
 
-        // Parse pipe-separated token string into structured data
-        function parseTokenString(raw: string): { label: string; rows: { name: string; value: string; swatch?: string }[] } {
+        // Categorize token by its name prefix
+        function categorizeToken(name: string): string {
+          const n = name.toLowerCase();
+          if (n.includes('color') || n.includes('gradient')) return 'Color';
+          if (n.includes('spacing') || n.includes('gap') || n.includes('padding') || n.includes('margin')) return 'Spacing';
+          if (n.includes('font') || n.includes('typo')) return 'Typography';
+          if (n.includes('radius')) return 'Border Radius';
+          if (n.includes('shadow')) return 'Shadow';
+          if (n.includes('filter')) return 'Filter';
+          if (n.includes('grid') || n.includes('position')) return 'Layout';
+          if (n.includes('aspect') || n.includes('object')) return 'Media';
+          if (n.includes('border')) return 'Border';
+          return 'Token';
+        }
+
+        // Parse pipe-separated token string into grouped structured data
+        function parseTokenString(raw: string): { groups: { label: string; rows: { name: string; value: string; swatch?: string }[] }[] } {
           const lines = raw.split('|');
-          const rows = lines.map(line => {
+          const groupMap: Record<string, { name: string; value: string; swatch?: string }[]> = {};
+
+          for (const line of lines) {
             const parts = line.split(':').map(s => s.trim());
             const name = parts[0] || '';
             const value = parts.slice(1).join(':').trim();
             const hexMatch = value.match(/#[0-9a-fA-F]{3,8}/);
-            return { name, value, ...(hexMatch ? { swatch: hexMatch[0] } : {}) };
-          });
-          const firstName = rows[0]?.name?.toLowerCase() || '';
-          let label = 'Token';
-          if (firstName.includes('color') || firstName.includes('gradient')) label = 'Color';
-          else if (firstName.includes('spacing') || firstName.includes('gap') || firstName.includes('padding')) label = 'Spacing';
-          else if (firstName.includes('font') || firstName.includes('typo')) label = 'Typography';
-          else if (firstName.includes('radius')) label = 'Border Radius';
-          else if (firstName.includes('shadow')) label = 'Shadow';
-          else if (firstName.includes('filter')) label = 'Filter';
-          else if (firstName.includes('grid')) label = 'Layout';
-          else if (firstName.includes('aspect') || firstName.includes('object')) label = 'Media';
-          return { label, rows };
+            const label = categorizeToken(name);
+            if (!groupMap[label]) groupMap[label] = [];
+            groupMap[label].push({ name, value, ...(hexMatch ? { swatch: hexMatch[0] } : {}) });
+          }
+
+          const groups = Object.entries(groupMap).map(([label, rows]) => ({ label, rows }));
+          return { groups };
         }
 
-        // Build tooltip HTML with optional component name + token rows
-        function renderTooltip(componentName: string | null, tokenData: { label: string; rows: { name: string; value: string; swatch?: string }[] } | null): string {
+        // Build tooltip HTML with component name + grouped token rows
+        function renderTooltip(componentName: string | null, tokenData: { groups: { label: string; rows: { name: string; value: string; swatch?: string }[] }[] } | null): string {
           let html = '';
 
-          // Component header
+          // Component header — show the real Astro/React component name
           if (componentName) {
             html += `<div class="token-component">`;
             html += `<span class="tag-bracket">&lt;</span>`;
@@ -129,19 +140,23 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
             html += `</div>`;
           }
 
-          // Token rows grouped by label
-          if (tokenData) {
-            html += `<div class="token-label">${tokenData.label}</div>`;
-            for (const row of tokenData.rows) {
-              html += `<div class="token-row">`;
-              if (row.swatch) {
-                html += `<span class="token-swatch" style="background:${row.swatch}"></span>`;
+          // Token rows grouped by category — show token NAME prominently, value as secondary
+          if (tokenData && tokenData.groups) {
+            for (const group of tokenData.groups) {
+              html += `<div class="token-label">${group.label}</div>`;
+              for (const row of group.rows) {
+                html += `<div class="token-row">`;
+                if (row.swatch) {
+                  html += `<span class="token-swatch" style="background:${row.swatch}"></span>`;
+                }
+                // Token name (e.g. $spacing-xl) shown in purple
+                html += `<span class="token-name">${row.name}</span>`;
+                if (row.value) {
+                  // Colon separator + value in green
+                  html += `<span style="color:#6272a4">:</span> <span class="token-value">${row.value}</span>`;
+                }
+                html += `</div>`;
               }
-              html += `<span class="token-name">${row.name}</span>`;
-              if (row.value) {
-                html += `<span style="color:#5c6370">:</span> <span class="token-value">${row.value}</span>`;
-              }
-              html += `</div>`;
             }
           }
 
@@ -183,10 +198,16 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           // Must have at least one attribute
           if (!componentName && !tokenRaw) return;
 
-          let tokenData: { label: string; rows: { name: string; value: string; swatch?: string }[] } | null = null;
+          let tokenData: { groups: { label: string; rows: { name: string; value: string; swatch?: string }[] }[] } | null = null;
           if (tokenRaw) {
             try {
-              tokenData = JSON.parse(tokenRaw);
+              const parsed = JSON.parse(tokenRaw);
+              // Support both new grouped format and legacy flat format
+              if (parsed.groups) {
+                tokenData = parsed;
+              } else if (parsed.label && parsed.rows) {
+                tokenData = { groups: [parsed] };
+              }
             } catch {
               tokenData = parseTokenString(tokenRaw);
             }
