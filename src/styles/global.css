@@ -598,9 +598,6 @@ body.code-mode aside:hover {
 }
 
 /* ── 4. Surfaces, cards, containers ── */
-.code-mode .nav-scrolled {
-  background: rgba(13, 17, 23, 0.85) !important;
-}
 
 .code-mode .meta-card,
 .code-mode [class*="rounded-2xl"][class*="border"],
@@ -833,13 +830,20 @@ body.code-mode aside:hover {
 
 /* ── 12. Navbar in code mode — IDE tab bar aesthetic ── */
 
-/* IDE tab-bar feel: bottom border + dark surface */
+/* IDE tab-bar feel: bottom border + dark surface — always fixed */
 .code-mode #navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 50 !important;
   background: var(--cm-bg) !important;
   border-bottom: 1px solid var(--cm-border) !important;
-  backdrop-filter: none !important;
+  backdrop-filter: blur(12px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.2) !important;
   /* Override structural outline — navbar is fixed, not a content section */
   outline: none !important;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 .code-mode #navbar .container-custom {
@@ -848,12 +852,16 @@ body.code-mode aside:hover {
   box-shadow: none !important;
 }
 
+/* Scrolled state: darker surface + subtle depth shadow */
 .code-mode #navbar.backdrop-blur-xl {
-  backdrop-filter: none !important;
+  background: rgba(13, 17, 23, 0.95) !important;
+  backdrop-filter: blur(16px) saturate(1.3) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.3) !important;
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.4), 0 0 1px rgba(80, 250, 123, 0.06) !important;
 }
 
 .code-mode .nav-scrolled {
-  background: var(--cm-bg) !important;
+  background: rgba(13, 17, 23, 0.95) !important;
   border-bottom-color: var(--cm-border-hover) !important;
 }
 
