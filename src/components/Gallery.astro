@@ -7,9 +7,9 @@ interface Props {
 const { images, alt } = Astro.props;
 ---
 
-<div class="space-y-4">
+<div class="space-y-4" data-component="Gallery" data-token="$spacing-gap: 1rem / 16px">
   <!-- Main image -->
-  <div class="rounded-2xl overflow-hidden dashed-border">
+  <div class="rounded-2xl overflow-hidden dashed-border" data-component="GalleryMain" data-token="$radius-2xl: 1rem / 16px">
     <img
       id="gallery-main"
       src={images[0]}

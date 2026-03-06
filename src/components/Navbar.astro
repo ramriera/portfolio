@@ -9,11 +9,12 @@ const currentPath = Astro.url.pathname;
 <header
   id="navbar"
   class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out-expo"
+  data-component="Navbar"
 >
   <div class="container-custom">
     <nav class="flex items-center justify-between h-20">
       <!-- Logo: contracts from "Ramon Riera · UX Engineer" → "RR" -->
-      <a href="/" id="logo" class="logo relative z-10 flex items-center gap-3">
+      <a href="/" id="logo" class="logo relative z-10 flex items-center gap-3" data-component="AnimatedLogo">
         <span class="logo-name">
           <span class="logo-letter">R</span><span class="logo-collapse c1">amon</span><span class="logo-collapse c2">&nbsp;</span><span class="logo-letter">R</span><span class="logo-collapse c3">iera</span>
         </span>

@@ -699,12 +699,14 @@ body.code-mode {
 }
 
 /* ── 19. Token Inspector — hover tooltips for design tokens ── */
-.code-mode [data-token] {
+.code-mode [data-token],
+.code-mode [data-component] {
   position: relative;
   cursor: crosshair;
 }
 
-.code-mode [data-token]::after {
+.code-mode [data-token]::after,
+.code-mode [data-component]::after {
   content: '';
   position: absolute;
   inset: -2px;
@@ -715,7 +717,8 @@ body.code-mode {
   z-index: 40;
 }
 
-.code-mode [data-token]:hover::after {
+.code-mode [data-token]:hover::after,
+.code-mode [data-component]:hover::after {
   border-color: var(--cm-inspector-glow, #00ff88);
   box-shadow: 0 0 8px rgba(0, 255, 136, 0.2), inset 0 0 8px rgba(0, 255, 136, 0.05);
 }
@@ -728,7 +731,8 @@ body.code-mode {
   100% { top: calc(100% + 2px); opacity: 0; }
 }
 
-.code-mode [data-token]:hover::before {
+.code-mode [data-token]:hover::before,
+.code-mode [data-component]:hover::before {
   content: '';
   position: absolute;
   left: -2px;
@@ -740,13 +744,36 @@ body.code-mode {
   animation: tokenScanLine 0.6s ease-out forwards;
 }
 
+/* ── 20. Inspector focus overlay (Easter Egg) ── */
+#inspector-focus-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  pointer-events: none;
+  transition: background 0.35s ease, backdrop-filter 0.35s ease;
+}
+
+#inspector-focus-overlay.active {
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+/* Inspected element rises above the overlay */
+.code-mode [data-component].inspector-focused,
+.code-mode [data-token].inspector-focused {
+  z-index: 35;
+  position: relative;
+}
+
 /* Token Inspector tooltip */
 #token-inspector-tooltip {
   position: fixed;
   z-index: 9999;
   pointer-events: none;
-  max-width: 280px;
-  padding: 8px 12px;
+  max-width: 320px;
+  padding: 10px 14px;
   background: #1a1a1a;
   border: 1px solid rgba(0, 255, 136, 0.25);
   border-radius: 6px;
@@ -763,6 +790,29 @@ body.code-mode {
 #token-inspector-tooltip.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Component name header */
+#token-inspector-tooltip .token-component {
+  color: #e5c07b;
+  font-size: 12px;
+  font-weight: 500;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(229, 192, 123, 0.15);
+  white-space: nowrap;
+}
+
+#token-inspector-tooltip .token-component .tag-bracket {
+  color: #e06c75;
+}
+
+#token-inspector-tooltip .token-component .tag-name {
+  color: #e5c07b;
+}
+
+#token-inspector-tooltip .token-component .tag-slash {
+  color: #e06c75;
 }
 
 #token-inspector-tooltip .token-row {
@@ -798,6 +848,12 @@ body.code-mode {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding-bottom: 3px;
   margin-bottom: 3px;
+}
+
+#token-inspector-tooltip .token-separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 4px 0;
 }
 
 /* CTA card-style social links */

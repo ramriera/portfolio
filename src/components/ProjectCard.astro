@@ -20,6 +20,8 @@ const { slug, title, client, year, category, tags, description, cover, featured 
     'project-card group relative block rounded-2xl overflow-hidden cursor-pointer',
     featured ? 'lg:col-span-2' : '',
   ]}
+  data-component="ProjectCard"
+  data-token="$radius-2xl: 1rem / 16px|$spacing-padding: 1.5rem → 2rem (md)"
 >
   <div class="relative aspect-[4/3]">
     <!-- Image mockup -->
@@ -57,7 +59,7 @@ const { slug, title, client, year, category, tags, description, cover, featured 
       <div class="h-3"></div>
 
       <!-- Tags - first always visible, rest reveal on hover -->
-      <div class="flex flex-wrap items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2" data-component="TagGroup" data-token="$spacing-gap: 0.5rem / 8px">
         {tags.slice(0, 4).map((tag, i) => (
           <span
             class:list={[

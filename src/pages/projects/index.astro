@@ -20,11 +20,11 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
   description="Portfolio de proyectos de UX/UI Design, Design Systems y Product Design."
 >
   <!-- Hero -->
-  <section class="section-padding pb-12">
+  <section class="section-padding pb-12" data-component="ProjectsHero">
     <div class="container-custom">
       <div class="max-w-4xl">
         <div data-reveal class="mb-8">
-          <span class="section-icon">
+          <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
               <g class="icon-rocket-launch">
                 <path d="M22 6C22 6 14 14 14 26L18 30L22 32L26 30L30 26C30 14 22 6 22 6Z" class="icon-stroke icon-draw" />
@@ -47,7 +47,8 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
       </div>
 
       <!-- Filters -->
-      <div data-reveal data-delay="300" class="flex flex-wrap gap-2 mt-12" id="project-filters">
+      <div data-reveal data-delay="300" class="flex flex-wrap gap-2 mt-12" id="project-filters"
+        data-component="FilterGroup" data-token="$spacing-gap: 0.5rem / 8px">
         {categories.map((cat) => (
           <button
             class:list={[
@@ -66,9 +67,10 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
   </section>
 
   <!-- Projects grid -->
-  <section class="pb-32">
+  <section class="pb-32" data-component="ProjectsListing">
     <div class="container-custom">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid"
+        data-component="ProjectGrid" data-token="$grid-cols: 1 → 2 (md)|$spacing-gap: 2rem / 32px">
         {sortedProjects.map((project, i) => (
           <div
             data-reveal
@@ -84,10 +86,10 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
   </section>
 
   <!-- CTA -->
-  <section class="section-padding">
+  <section class="section-padding" data-component="CallToAction">
     <div class="container-custom text-center max-w-3xl mx-auto">
       <div data-reveal class="mb-6 flex justify-center">
-        <span class="section-icon">
+        <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
           <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
             <g class="icon-ruler-idle">
               <path d="M6 38L6 8L36 38H6Z" class="icon-stroke icon-draw" />

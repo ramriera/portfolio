@@ -85,61 +85,72 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
       })();
     </script>
 
-    <!-- Token Inspector tooltip element (only used in code mode) -->
+    <!-- Token Inspector tooltip + focus overlay (only used in code mode) -->
+    <div id="inspector-focus-overlay"></div>
     <div id="token-inspector-tooltip"></div>
 
     <script>
-      // ── Token Inspector: design-token tooltips in Code Mode ──
+      // ── Token Inspector: Component Architecture + Design Token tooltips ──
       function initTokenInspector() {
         const tooltip = document.getElementById('token-inspector-tooltip');
+        const overlay = document.getElementById('inspector-focus-overlay');
         if (!tooltip) return;
 
         let currentTarget: HTMLElement | null = null;
         let rafId: number | null = null;
 
-        function getTokenData(el: HTMLElement): { label: string; rows: { name: string; value: string; swatch?: string }[] } | null {
-          const raw = el.getAttribute('data-token');
-          if (!raw) return null;
-
-          try {
-            // Try JSON format first: data-token='{"label":"Color","rows":[...]}'
-            return JSON.parse(raw);
-          } catch {
-            // Simple format: data-token="$token-name: value"
-            const lines = raw.split('|');
-            const rows = lines.map(line => {
-              const parts = line.split(':').map(s => s.trim());
-              const name = parts[0] || '';
-              const value = parts.slice(1).join(':').trim();
-              // Detect hex colors for swatch
-              const hexMatch = value.match(/#[0-9a-fA-F]{3,8}/);
-              return { name, value, ...(hexMatch ? { swatch: hexMatch[0] } : {}) };
-            });
-            // Derive label from first token name
-            const firstName = rows[0]?.name?.toLowerCase() || '';
-            let label = 'Token';
-            if (firstName.includes('color')) label = 'Color';
-            else if (firstName.includes('spacing') || firstName.includes('gap') || firstName.includes('padding')) label = 'Spacing';
-            else if (firstName.includes('font') || firstName.includes('typo')) label = 'Typography';
-            else if (firstName.includes('radius')) label = 'Border Radius';
-            else if (firstName.includes('shadow')) label = 'Shadow';
-            return { label, rows };
-          }
+        // Parse pipe-separated token string into structured data
+        function parseTokenString(raw: string): { label: string; rows: { name: string; value: string; swatch?: string }[] } {
+          const lines = raw.split('|');
+          const rows = lines.map(line => {
+            const parts = line.split(':').map(s => s.trim());
+            const name = parts[0] || '';
+            const value = parts.slice(1).join(':').trim();
+            const hexMatch = value.match(/#[0-9a-fA-F]{3,8}/);
+            return { name, value, ...(hexMatch ? { swatch: hexMatch[0] } : {}) };
+          });
+          const firstName = rows[0]?.name?.toLowerCase() || '';
+          let label = 'Token';
+          if (firstName.includes('color') || firstName.includes('gradient')) label = 'Color';
+          else if (firstName.includes('spacing') || firstName.includes('gap') || firstName.includes('padding')) label = 'Spacing';
+          else if (firstName.includes('font') || firstName.includes('typo')) label = 'Typography';
+          else if (firstName.includes('radius')) label = 'Border Radius';
+          else if (firstName.includes('shadow')) label = 'Shadow';
+          else if (firstName.includes('filter')) label = 'Filter';
+          else if (firstName.includes('grid')) label = 'Layout';
+          else if (firstName.includes('aspect') || firstName.includes('object')) label = 'Media';
+          return { label, rows };
         }
 
-        function renderTooltip(data: { label: string; rows: { name: string; value: string; swatch?: string }[] }) {
-          let html = `<div class="token-label">${data.label}</div>`;
-          for (const row of data.rows) {
-            html += `<div class="token-row">`;
-            if (row.swatch) {
-              html += `<span class="token-swatch" style="background:${row.swatch}"></span>`;
-            }
-            html += `<span class="token-name">${row.name}</span>`;
-            if (row.value) {
-              html += `<span style="color:#5c6370">:</span> <span class="token-value">${row.value}</span>`;
-            }
+        // Build tooltip HTML with optional component name + token rows
+        function renderTooltip(componentName: string | null, tokenData: { label: string; rows: { name: string; value: string; swatch?: string }[] } | null): string {
+          let html = '';
+
+          // Component header
+          if (componentName) {
+            html += `<div class="token-component">`;
+            html += `<span class="tag-bracket">&lt;</span>`;
+            html += `<span class="tag-name">${componentName}</span>`;
+            html += `<span class="tag-bracket"> /&gt;</span>`;
             html += `</div>`;
           }
+
+          // Token rows grouped by label
+          if (tokenData) {
+            html += `<div class="token-label">${tokenData.label}</div>`;
+            for (const row of tokenData.rows) {
+              html += `<div class="token-row">`;
+              if (row.swatch) {
+                html += `<span class="token-swatch" style="background:${row.swatch}"></span>`;
+              }
+              html += `<span class="token-name">${row.name}</span>`;
+              if (row.value) {
+                html += `<span style="color:#5c6370">:</span> <span class="token-value">${row.value}</span>`;
+              }
+              html += `</div>`;
+            }
+          }
+
           return html;
         }
 
@@ -150,15 +161,12 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           let x = e.clientX + gap;
           let y = e.clientY + gap;
 
-          // Prevent overflow right
           if (x + rect.width > window.innerWidth - 8) {
             x = e.clientX - rect.width - gap;
           }
-          // Prevent overflow bottom
           if (y + rect.height > window.innerHeight - 8) {
             y = e.clientY - rect.height - gap;
           }
-          // Prevent overflow left/top
           if (x < 8) x = 8;
           if (y < 8) y = 8;
 
@@ -175,26 +183,48 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           const el = (e.currentTarget as HTMLElement);
           if (!document.body.classList.contains('code-mode')) return;
 
-          const data = getTokenData(el);
-          if (!data) return;
+          const componentName = el.getAttribute('data-component');
+          const tokenRaw = el.getAttribute('data-token');
+
+          // Must have at least one attribute
+          if (!componentName && !tokenRaw) return;
+
+          let tokenData: { label: string; rows: { name: string; value: string; swatch?: string }[] } | null = null;
+          if (tokenRaw) {
+            try {
+              tokenData = JSON.parse(tokenRaw);
+            } catch {
+              tokenData = parseTokenString(tokenRaw);
+            }
+          }
 
           currentTarget = el;
-          tooltip.innerHTML = renderTooltip(data);
+          tooltip.innerHTML = renderTooltip(componentName, tokenData);
           positionTooltip(e);
 
-          // Force reflow before showing for smooth transition
           tooltip.offsetHeight;
           tooltip.classList.add('visible');
+
+          // Focus overlay (Easter Egg) — activate for component-level elements
+          if (componentName && overlay) {
+            el.classList.add('inspector-focused');
+            overlay.classList.add('active');
+          }
         }
 
         function onMouseLeave() {
+          if (currentTarget) {
+            currentTarget.classList.remove('inspector-focused');
+          }
           currentTarget = null;
           tooltip.classList.remove('visible');
+          overlay?.classList.remove('active');
         }
 
-        // Attach listeners to all [data-token] elements
+        // Attach listeners — use event delegation to handle specificity
+        // Elements with both data-component and data-token, or either one
         function attachListeners() {
-          const elements = document.querySelectorAll<HTMLElement>('[data-token]');
+          const elements = document.querySelectorAll<HTMLElement>('[data-token], [data-component]');
           elements.forEach(el => {
             el.addEventListener('mouseenter', onMouseEnter);
             el.addEventListener('mousemove', onMouseMove);
@@ -202,13 +232,28 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           });
         }
 
-        attachListeners();
+        // Smart specificity: stop propagation on nested inspectable elements
+        // so inner elements take priority over outer ones
+        function setupSpecificity() {
+          const elements = document.querySelectorAll<HTMLElement>('[data-token], [data-component]');
+          elements.forEach(el => {
+            el.addEventListener('mouseenter', (e: MouseEvent) => {
+              e.stopPropagation();
+            });
+          });
+        }
 
-        // Re-attach on code mode toggle changes
+        attachListeners();
+        setupSpecificity();
+
         const codeToggle = document.getElementById('code-mode-toggle');
         codeToggle?.addEventListener('click', () => {
-          // Hide tooltip when toggling
           tooltip.classList.remove('visible');
+          overlay?.classList.remove('active');
+          if (currentTarget) {
+            currentTarget.classList.remove('inspector-focused');
+            currentTarget = null;
+          }
         });
       }
 
