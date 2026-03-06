@@ -584,12 +584,12 @@ export const projects: Project[] = [
   },
   {
     slug: 'banco-sabadell-design-system',
-    title: 'Banco Sabadell — Design System',
+    title: 'Banco Sabadell - Design System',
     client: 'Banco Sabadell',
     year: '2022',
     category: 'Design Systems & UX Engineering',
     tags: ['Design Systems', 'Design Tokens', 'Component Library', 'UX Bancaria', 'Documentation', 'Accessibility'],
-    description: 'Creación y **documentación técnica** del Design System del Banco Sabadell, construyendo una **biblioteca de componentes** escalable y una arquitectura de **Design Tokens** como única fuente de verdad para los equipos de producto e ingeniería.',
+    description: 'Creación y documentación técnica del Design System del Banco Sabadell, construyendo una biblioteca de componentes escalable y una arquitectura de Design Tokens como única fuente de verdad para los equipos de producto e ingeniería.',
     longDescription: 'Lideré la creación y **documentación técnica** del Design System del Banco Sabadell, enfocado en la **escalabilidad** y la **coherencia visual** de sus productos digitales. El proyecto se centró en construir una base sólida de **Design Tokens** que permitiera a los equipos de producto e ingeniería trabajar de forma sincronizada bajo una única fuente de verdad.\n\nEl ecosistema digital de un banco opera sobre múltiples plataformas — web pública, banca online, app móvil y canales internos — con equipos independientes que tomaban decisiones visuales de forma aislada. Sin un sistema centralizado, cada producto acumulaba deuda de diseño: colores ligeramente distintos, tipografías inconsistentes, componentes duplicados y patrones de interacción divergentes.',
     challenge: 'La **UX bancaria** del ecosistema digital presentaba una fragmentación severa. Múltiples equipos trabajaban con estilos inconsistentes, generando deuda de diseño y fricción en el desarrollo. No existía una fuente única de verdad para la **biblioteca de componentes** ni patrones de interacción. Los **Design Tokens** no estaban definidos como concepto unificado: cada plataforma mantenía sus propios valores de color, tipografía y spacing. La **documentación técnica** era inexistente, lo que provocaba implementaciones dispares entre diseño y código.',
     solution: 'Se diseñó un sistema modular basado en **Design Tokens** como única fuente de verdad para Color (Azul Sabadell #006DFF, Neutros), Spacing (escala de 4px) y Tipografía. Se construyó una **biblioteca de componentes** basada en Átomos y Moléculas, garantizando la **coherencia visual** y la **escalabilidad** entre todas las plataformas. La **documentación técnica** se centralizó en Zeroheight con sincronización directa a Storybook para maximizar la eficiencia en desarrollo.',
@@ -946,7 +946,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'iberia-flight-experience',
-    title: 'Iberia — Flight Experience',
+    title: 'Iberia - Flight Experience',
     client: 'Iberia',
     year: '2023',
     category: 'Digital Product Design & Design Systems',
