@@ -221,7 +221,7 @@ function md(text: string): string {
     const prevLabel = idx > 0 ? project.caseSections![idx - 1].label : '';
     const showLabel = section.label !== prevLabel;
     return (
-    <section class={showLabel && idx > 0 ? 'case-section-new-group' : 'case-section'}>
+    <section class={`${showLabel && idx > 0 ? 'case-section-new-group' : 'case-section'} ${idx === 0 ? 'pt-20 md:pt-24' : ''}`}>
       <div class="container-custom">
 
         {/* Center layout */}
