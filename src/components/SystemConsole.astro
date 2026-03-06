@@ -110,15 +110,38 @@
 
     function bootSequence() {
       const page = document.title.split(' - ')[0] || 'Portfolio';
-      log('SYSTEM', 'Code Mode: ENABLED. Injecting Design Tokens...');
 
-      setTimeout(() => log('INFO', `Initializing page: ${page}... Done.`), 400);
+      // Step 1: Kernel init
+      log('SYSTEM', 'Bootstrapping Code Mode v2.0...');
+
+      // Step 2: Loading design tokens
+      setTimeout(() => log('SYSTEM', 'Loading design tokens from system palette...'), 350);
+
+      // Step 3: Page init
+      setTimeout(() => log('INFO', `Initializing page: ${page}... Done.`), 700);
+
+      // Step 4: Component scan
       setTimeout(() => {
         const componentCount = document.querySelectorAll('[data-component]').length;
         const tokenCount = document.querySelectorAll('[data-token]').length;
         log('INFO', `Scanned ${componentCount} components, ${tokenCount} token annotations.`);
-      }, 900);
-      setTimeout(() => log('READY', 'System console ready. Monitoring user events.'), 1400);
+      }, 1100);
+
+      // Step 5: Injection complete — triggers the visual transition
+      setTimeout(() => log('SYSTEM', 'Injection complete. IDE environment ready.'), 1500);
+
+      // Step 6: Ready
+      setTimeout(() => {
+        log('READY', 'System console ready. Monitoring user events.');
+
+        // First-time TIP — only shown once
+        if (!localStorage.getItem('code-mode-tip-shown')) {
+          localStorage.setItem('code-mode-tip-shown', '1');
+          setTimeout(() => {
+            log('INFO', '[TIP] Hover over elements to inspect Design Tokens.');
+          }, 400);
+        }
+      }, 1800);
     }
 
     // ── Code Mode toggle listener ──

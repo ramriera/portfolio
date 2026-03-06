@@ -389,6 +389,36 @@ body.code-mode {
   background: var(--cm-bg) !important;
   color: var(--cm-text) !important;
   font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace !important;
+  transition: opacity 0.5s ease, background 0.4s ease, color 0.4s ease;
+}
+
+/* Boot sequence: delayed visual reveal */
+body.code-mode--booting {
+  opacity: 0.4;
+}
+
+/* ── Dot Grid background pattern (8px) ── */
+body.code-mode {
+  background-image:
+    radial-gradient(circle, rgba(56, 189, 248, 0.08) 1px, transparent 1px) !important;
+  background-size: 8px 8px !important;
+  background-position: 0 0 !important;
+}
+
+/* ── Structural borders — article, section, aside (GitHub-style) ── */
+body.code-mode article,
+body.code-mode section,
+body.code-mode aside {
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  margin-bottom: 2px;
+  transition: border-color 0.3s ease;
+}
+
+body.code-mode article:hover,
+body.code-mode section:hover,
+body.code-mode aside:hover {
+  border-color: #484f58;
 }
 
 /* All text goes monospace */

@@ -16,10 +16,21 @@
   const codeDot = document.getElementById('code-mode-dot');
   const codeModeState = document.getElementById('code-mode-state');
 
-  function applyCodeMode(active: boolean) {
+  function applyCodeMode(active: boolean, instant = false) {
     if (active) {
+      // Add code-mode but start with hidden visual state for boot effect
       document.documentElement.classList.add('code-mode');
       document.body.classList.add('code-mode');
+
+      if (!instant) {
+        // Delayed visual reveal: start transparent, fade in after boot sequence
+        document.body.classList.add('code-mode--booting');
+        // Remove booting class after the last boot log fires (~1800ms)
+        setTimeout(() => {
+          document.body.classList.remove('code-mode--booting');
+        }, 1800);
+      }
+
       if (codeDot) codeDot.classList.add('bg-emerald-400', 'shadow-[0_0_6px_rgba(52,211,153,0.5)]');
       if (codeDot) codeDot.classList.remove('bg-dark-300');
       if (codeModeState) {
@@ -34,6 +45,7 @@
     } else {
       document.documentElement.classList.remove('code-mode');
       document.body.classList.remove('code-mode');
+      document.body.classList.remove('code-mode--booting');
       if (codeDot) codeDot.classList.remove('bg-emerald-400', 'shadow-[0_0_6px_rgba(52,211,153,0.5)]');
       if (codeDot) codeDot.classList.add('bg-dark-300');
       if (codeModeState) {
@@ -48,9 +60,9 @@
     }
   }
 
-  // Initialize from localStorage
+  // Initialize from localStorage (instant = true to skip boot animation on page load)
   const savedCodeMode = localStorage.getItem('code-mode') === 'on';
-  applyCodeMode(savedCodeMode);
+  applyCodeMode(savedCodeMode, true);
 
   codeToggle?.addEventListener('click', () => {
     const isActive = document.documentElement.classList.contains('code-mode');
