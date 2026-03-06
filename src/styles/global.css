@@ -37,6 +37,15 @@
     @apply py-16 md:py-24 lg:py-32;
   }
 
+  /* ── Spacing system for case study sections ── */
+  .case-section {
+    @apply pb-14 md:pb-16;
+  }
+
+  .case-section-new-group {
+    @apply pt-16 md:pt-20 pb-14 md:pb-16;
+  }
+
   .heading-xl {
     @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08];
   }

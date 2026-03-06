@@ -62,7 +62,7 @@ function md(text: string): string {
   </section>
 
   <!-- Hero Image - parallax zoom -->
-  <section class="pb-20">
+  <section class="case-section">
     <div class="container-custom">
       <div data-reveal class="rounded-2xl overflow-hidden dashed-border">
         <div class="parallax-cover-wrapper">
@@ -78,7 +78,7 @@ function md(text: string): string {
   </section>
 
   <!-- Project metadata sidebar + About content -->
-  <section class="pb-20">
+  <section class="case-section">
     <div class="container-custom">
       <div class="max-w-5xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
@@ -221,7 +221,7 @@ function md(text: string): string {
     const prevLabel = idx > 0 ? project.caseSections![idx - 1].label : '';
     const showLabel = section.label !== prevLabel;
     return (
-    <section class={showLabel && idx > 0 ? 'pt-24 pb-24' : 'pb-24'}>
+    <section class={showLabel && idx > 0 ? 'case-section-new-group' : 'case-section'}>
       <div class="container-custom">
 
         {/* Center layout */}
@@ -541,7 +541,7 @@ function md(text: string): string {
   })}
 
   <!-- Resultados -->
-  <section class="pb-24">
+  <section class="case-section">
     <div class="container-custom">
       <div class="relative rounded-3xl bg-dark-900 dark:bg-dark-800 p-12 md:p-20 overflow-hidden max-w-4xl mx-auto">
         <div class="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary-500/[0.07] blur-3xl"></div>
