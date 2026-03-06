@@ -74,8 +74,39 @@
     @apply relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-primary-500 after:transition-all after:duration-300 hover:after:w-full;
   }
 
+  /* External / prototype links – coherent primary color transition */
+  .link-external {
+    @apply text-primary-500 transition-all duration-300;
+  }
+  .link-external:hover {
+    @apply text-primary-400;
+    text-shadow: 0 0 12px rgba(217, 119, 87, 0.2);
+  }
+  .link-external:active {
+    @apply text-primary-600 scale-[0.97];
+  }
+
   .card-hover {
     @apply transition-all duration-500 ease-out-expo hover:-translate-y-1;
+  }
+
+  /* Sidebar metadata cards – subtle lift on hover */
+  .meta-card {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .meta-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    border-color: rgba(217, 119, 87, 0.18);
+  }
+
+  .dark .meta-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    border-color: rgba(217, 119, 87, 0.22);
   }
 
   .gradient-text {
@@ -105,7 +136,7 @@
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-dark-300 dark:border-dark-600 text-dark-700 dark:text-dark-300 font-medium rounded-full transition-all duration-300 hover:bg-dark-100 dark:hover:bg-dark-800 hover:border-dark-400 dark:hover:border-dark-500;
+    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-dark-300 dark:border-dark-600 text-dark-700 dark:text-dark-300 font-medium rounded-full transition-all duration-300 hover:bg-dark-100 dark:hover:bg-dark-800 hover:border-primary-400 dark:hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 active:scale-[0.97];
   }
 
   .tag {
