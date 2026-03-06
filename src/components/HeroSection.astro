@@ -13,96 +13,102 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
   </div>
 
   <div class="container-custom w-full">
-    <div class="hero-main-content max-w-4xl mx-auto text-center">
-      <!-- Greeting line -->
-      <div data-reveal data-delay="0" class="mb-10 flex flex-col items-center">
-        <div class="w-14 h-14 mb-4">
-          <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
-              <g class="icon-hand-wave">
-                <!-- Wrist to palm -->
-                <path d="M18 38C12 36 9 30 9 25L9 22" class="icon-stroke icon-draw" />
-                <!-- Index finger (accent) -->
-                <path d="M15 22V10C15 8 16.5 6 19 6C21.5 6 22 8 22 10V21" class="icon-accent icon-draw-delay" />
-                <!-- Middle finger -->
-                <path d="M22 21V7C22 5 23.5 3 26 3C28.5 3 29 5 29 7V21" class="icon-stroke icon-draw" />
-                <!-- Ring finger -->
-                <path d="M29 21V10C29 8 30.5 6 33 6C35.5 6 36 8 36 10V24C36 32 30 38 24 38" class="icon-stroke icon-draw" />
-                <!-- Thumb -->
-                <path d="M15 22C13 21 10 19 9 17C8 15 9.5 13 12 13C14 13 15 15 15 17" class="icon-stroke icon-draw" />
-              </g>
-              <!-- Sparkle near index finger tip -->
-              <circle cx="18" cy="3" r="1.2" class="icon-accent icon-wave-line-1" />
-              <path d="M5 10L3 8M3 12L1 12M5 14L3 16" class="icon-accent icon-wave-line-2" />
-            </svg>
+    <!-- Persistent grid: intro left, stats right on xl -->
+    <div class="hero-grid">
+      <!-- Left: intro content -->
+      <div class="hero-main-content max-w-4xl xl:max-w-none text-center xl:text-left">
+        <!-- Greeting line -->
+        <div data-reveal data-delay="0" class="mb-10 flex flex-col items-center xl:items-start">
+          <div class="w-14 h-14 mb-4">
+            <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+                <g class="icon-hand-wave">
+                  <!-- Wrist to palm -->
+                  <path d="M18 38C12 36 9 30 9 25L9 22" class="icon-stroke icon-draw" />
+                  <!-- Index finger (accent) -->
+                  <path d="M15 22V10C15 8 16.5 6 19 6C21.5 6 22 8 22 10V21" class="icon-accent icon-draw-delay" />
+                  <!-- Middle finger -->
+                  <path d="M22 21V7C22 5 23.5 3 26 3C28.5 3 29 5 29 7V21" class="icon-stroke icon-draw" />
+                  <!-- Ring finger -->
+                  <path d="M29 21V10C29 8 30.5 6 33 6C35.5 6 36 8 36 10V24C36 32 30 38 24 38" class="icon-stroke icon-draw" />
+                  <!-- Thumb -->
+                  <path d="M15 22C13 21 10 19 9 17C8 15 9.5 13 12 13C14 13 15 15 15 17" class="icon-stroke icon-draw" />
+                </g>
+                <!-- Sparkle near index finger tip -->
+                <circle cx="18" cy="3" r="1.2" class="icon-accent icon-wave-line-1" />
+                <path d="M5 10L3 8M3 12L1 12M5 14L3 16" class="icon-accent icon-wave-line-2" />
+              </svg>
+            </span>
+          </div>
+          <span class="text-2xl md:text-3xl font-medium text-dark-900 tracking-wide"
+            data-token="$font-family-display: Space Grotesk|$font-size-2xl: 1.5rem / 24px">
+            Soy <span class="text-primary-500"
+              data-token="$color-primary-500: #D97757">Ramon Riera</span>
           </span>
         </div>
-        <span class="text-2xl md:text-3xl font-medium text-dark-900 tracking-wide"
-          data-token="$font-family-display: Space Grotesk|$font-size-2xl: 1.5rem / 24px">
-          Soy <span class="text-primary-500"
-            data-token="$color-primary-500: #D97757">Ramon Riera</span>
-        </span>
-      </div>
 
-      <!-- Main heading -->
-      <h1 data-reveal data-delay="100" class="heading-xl mb-10"
-        data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2.5rem / 40px">
-        Diseño experiencias<br />
-        <span class="whitespace-nowrap">digitales que
-        <span class="text-primary-500"><WordsCarousel words={rotatingWords} interval={2000} /></span></span>
-      </h1>
+        <!-- Main heading -->
+        <h1 data-reveal data-delay="100" class="heading-xl mb-10"
+          data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2.5rem / 40px">
+          Diseño experiencias<br />
+          <span class="whitespace-nowrap">digitales que
+          <span class="text-primary-500"><WordsCarousel words={rotatingWords} interval={2000} /></span></span>
+        </h1>
 
-      <!-- Subtitle -->
-      <p data-reveal data-delay="200" class="text-body text-xl max-w-2xl mx-auto mb-14 leading-relaxed"
-        data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$spacing-bottom: 3.5rem / 56px">
-        Especializado en Design Systems, Product Design y Design Operations.
-        Transformando ideas complejas en interfaces intuitivas y elegantes.
-      </p>
+        <!-- Subtitle -->
+        <p data-reveal data-delay="200" class="text-body text-xl max-w-2xl mx-auto xl:mx-0 mb-14 leading-relaxed"
+          data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$spacing-bottom: 3.5rem / 56px">
+          Especializado en Design Systems, Product Design y Design Operations.
+          Transformando ideas complejas en interfaces intuitivas y elegantes.
+        </p>
 
-      <!-- CTA buttons -->
-      <div data-reveal data-delay="300" class="flex flex-wrap items-center justify-center gap-4">
-        <a href="/projects" class="btn-primary text-base"
-          data-component="ButtonPrimary"
-          data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
-          Ver proyectos
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
-        <a href="mailto:ramriera28@gmail.com" class="btn-outline text-base"
-          data-component="ButtonOutline"
-          data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
-          Hablemos
-        </a>
-      </div>
-    </div>
-
-    <!-- Stats - horizontal on mobile, vertical on xl side -->
-    <div data-reveal data-delay="400" class="flex justify-center gap-8 mt-16 xl:mt-0 xl:absolute xl:right-12 xl:top-1/2 xl:-translate-y-1/2 xl:flex-col xl:gap-10" data-reveal-dir="right-xl"
-      data-component="StatsBar"
-      data-token="$spacing-gap: 2rem / 32px|$spacing-margin-top: 4rem / 64px">
-      <div class="text-center">
-        <div class="text-3xl font-semibold text-dark-900"
-          data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
-          <span class="count-up" data-target="8">0</span>+
+        <!-- CTA buttons -->
+        <div data-reveal data-delay="300" class="flex flex-wrap items-center justify-center xl:justify-start gap-4">
+          <a href="/projects" class="btn-primary text-base"
+            data-component="ButtonPrimary"
+            data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
+            Ver proyectos
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="mailto:ramriera28@gmail.com" class="btn-outline text-base"
+            data-component="ButtonOutline"
+            data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
+            Hablemos
+          </a>
         </div>
-        <div class="text-xs text-dark-400 tracking-wide mt-1">Años exp.</div>
       </div>
-      <div class="hidden xl:block w-6 h-px bg-dark-200 mx-auto"></div>
-      <div class="w-px h-8 bg-dark-200 my-auto xl:hidden"></div>
-      <div class="text-center">
-        <div class="text-3xl font-semibold text-dark-900">
-          <span class="count-up" data-target="50">0</span>+
+
+      <!-- Right: Stats (persistent column — never moves below) -->
+      <div data-reveal data-delay="400" class="hero-stats-col"
+        data-component="StatsBar"
+        data-token="$spacing-gap: 2rem / 32px|$spacing-margin-top: 4rem / 64px">
+        <div class="hero-stats-inner">
+          <div class="text-center">
+            <div class="text-3xl font-semibold text-dark-900"
+              data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
+              <span class="count-up" data-target="8">0</span>+
+            </div>
+            <div class="text-xs text-dark-400 tracking-wide mt-1">Años exp.</div>
+          </div>
+          <div class="hero-stats-divider-h"></div>
+          <div class="hero-stats-divider-v"></div>
+          <div class="text-center">
+            <div class="text-3xl font-semibold text-dark-900">
+              <span class="count-up" data-target="50">0</span>+
+            </div>
+            <div class="text-xs text-dark-400 tracking-wide mt-1">Proyectos</div>
+          </div>
+          <div class="hero-stats-divider-h"></div>
+          <div class="hero-stats-divider-v"></div>
+          <div class="text-center">
+            <div class="text-3xl font-semibold text-dark-900">
+              <span class="count-up" data-target="15">0</span>+
+            </div>
+            <div class="text-xs text-dark-400 tracking-wide mt-1">Clientes</div>
+          </div>
         </div>
-        <div class="text-xs text-dark-400 tracking-wide mt-1">Proyectos</div>
-      </div>
-      <div class="hidden xl:block w-6 h-px bg-dark-200 mx-auto"></div>
-      <div class="w-px h-8 bg-dark-200 my-auto xl:hidden"></div>
-      <div class="text-center">
-        <div class="text-3xl font-semibold text-dark-900">
-          <span class="count-up" data-target="15">0</span>+
-        </div>
-        <div class="text-xs text-dark-400 tracking-wide mt-1">Clientes</div>
       </div>
     </div>
   </div>

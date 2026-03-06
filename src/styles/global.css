@@ -389,6 +389,78 @@ main {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   HERO GRID — Persistent two-column layout (both modes)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Mobile: single column, stats centered below */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 0;
+}
+
+/* Stats column: horizontal on mobile, right-side on xl */
+.hero-stats-col {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-stats-inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Horizontal divider: visible only on xl */
+.hero-stats-divider-h {
+  display: none;
+}
+
+/* Vertical divider: visible only on < xl */
+.hero-stats-divider-v {
+  width: 1px;
+  height: 2rem;
+  background: var(--color-dark-200, #d4cfc5);
+}
+
+/* XL: two-column layout — intro left, stats right */
+@media (min-width: 1280px) {
+  .hero-grid {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr;
+    gap: 3rem;
+  }
+
+  .hero-stats-col {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+
+  .hero-stats-inner {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .hero-stats-divider-h {
+    display: block;
+    width: 1.5rem;
+    height: 1px;
+    background: var(--color-dark-200, #d4cfc5);
+    margin: 0 auto;
+  }
+
+  .hero-stats-divider-v {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
    CODE MODE — Global theme transformation
    ═══════════════════════════════════════════════════════════ */
 
@@ -551,41 +623,63 @@ body.code-mode aside:hover {
 }
 
 /* ── 6. Neon container borders (box-model) ── */
+/* Use outline instead of border so padding/margin stays identical to normal mode */
 .code-mode .container-custom {
-  border: var(--layout-border) solid var(--cm-border);
+  outline: var(--layout-border) solid var(--cm-border);
+  outline-offset: -1px;
   border-radius: 4px;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
   box-shadow: var(--cm-glow);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: outline-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .code-mode .container-custom:hover {
-  border-color: var(--cm-border-hover);
+  outline-color: var(--cm-border-hover);
 }
 
-/* Grid containers — neon subtle borders */
-.code-mode [class*="grid-cols-"] > * {
+/* Grid containers — neon subtle borders (skip hero-grid which has its own treatment) */
+.code-mode [class*="grid-cols-"]:not(.hero-grid) > * {
   border: 1px solid rgba(56, 189, 248, 0.06);
   border-radius: 4px;
   padding: 0.5rem;
   transition: border-color 0.3s ease;
 }
 
-.code-mode [class*="grid-cols-"] > *:hover {
+.code-mode [class*="grid-cols-"]:not(.hero-grid) > *:hover {
   border-color: var(--cm-border-hover);
 }
 
-/* ── Hero Data Reveal: force grid persistence so stats stay right ── */
-.code-mode [data-component="HeroSection"] .container-custom {
-  position: relative;
+/* Hero grid columns: no extra border/padding to avoid layout shift */
+.code-mode .hero-grid > * {
+  border: none;
+  padding: 0;
 }
 
-.code-mode [data-component="StatsBar"] {
-  background: var(--cm-bg-surface) !important;
-  border: 1px solid var(--cm-border) !important;
-  border-radius: 4px !important;
-  padding: 0.75rem 1rem !important;
+/* ── Hero Data Reveal: grid persists, only skin changes ── */
+
+/* Stats panel — terminal aesthetic without moving it */
+.code-mode .hero-stats-col {
+  background: var(--cm-bg-surface);
+  border: 1px solid var(--cm-border);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+}
+
+/* Stats dividers adopt code mode colors */
+.code-mode .hero-stats-divider-h {
+  background: var(--cm-border) !important;
+}
+
+.code-mode .hero-stats-divider-v {
+  background: var(--cm-border) !important;
+}
+
+/* Stats text colors */
+.code-mode .hero-stats-col .text-dark-900 {
+  color: var(--cm-number) !important;
+}
+
+.code-mode .hero-stats-col .text-dark-400 {
+  color: var(--cm-comment) !important;
 }
 
 /* ── Project detail: persistent 1/3 + 2/3 grid with visible columns ── */
@@ -667,17 +761,19 @@ body.code-mode aside:hover {
 
 /* ── 12. Navbar in code mode — IDE tab bar aesthetic ── */
 
-/* Navbar container adapts to layout-border so vertical lines are continuous */
-.code-mode #navbar .container-custom {
-  padding-left: calc(var(--main-margin) - var(--layout-border));
-  padding-right: calc(var(--main-margin) - var(--layout-border));
-}
-
 /* IDE tab-bar feel: bottom border + dark surface */
 .code-mode #navbar {
   background: var(--cm-bg) !important;
   border-bottom: 1px solid var(--cm-border) !important;
   backdrop-filter: none !important;
+  /* Override structural outline — navbar is fixed, not a content section */
+  outline: none !important;
+}
+
+.code-mode #navbar .container-custom {
+  /* Navbar container: no section outline, no extra padding */
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .code-mode #navbar.backdrop-blur-xl {
@@ -728,11 +824,6 @@ body.code-mode aside:hover {
 /* ── 13. Footer — aligned to same margins ── */
 .code-mode footer {
   border-top: 1px solid var(--cm-border);
-}
-
-.code-mode footer .container-custom {
-  padding-left: calc(var(--main-margin) - var(--layout-border));
-  padding-right: calc(var(--main-margin) - var(--layout-border));
 }
 
 .code-mode footer p {
