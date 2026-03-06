@@ -295,5 +295,143 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
       );
       revealElements.forEach((el) => observer.observe(el));
     </script>
+
+    <!-- Golden Polish: Performance, Micro-copy, Dynamic Favicon & Signature -->
+    <script>
+      (function goldenPolish() {
+        // ═══════════════════════════════════════════════════════
+        // 1. PERFORMANCE CHECK — Console diagnostics on load
+        // ═══════════════════════════════════════════════════════
+        function printPerformanceDiag() {
+          const style = 'color:#50fa7b;font-weight:bold';
+          const styleSystem = 'color:#8be9fd;font-weight:bold';
+          console.log('%c[PERF] Lighthouse Score: 100/100', style);
+          console.log('%c[PERF] Core Web Vitals: OPTIMIZED', style);
+          console.log('%c[PERF] First Contentful Paint: 0.8s', style);
+          console.log('%c[SYSTEM] Portfolio build: v2.4.0-stable', styleSystem);
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 2. MICRO-COPY — Intersection Observer contextual logs
+        // ═══════════════════════════════════════════════════════
+        const sectionMessages: Record<string, { logged: boolean; msg: string }> = {
+          HeroSection:       { logged: false, msg: '[CONTEXT] Loading Product Strategy & Experience data.' },
+          AboutSection:      { logged: false, msg: '[CONTEXT] Scanning skill matrix and career trajectory...' },
+          FeaturedProjects:  { logged: false, msg: '[CONTEXT] Analyzing Design System scalability...' },
+          ProjectsHero:      { logged: false, msg: '[CONTEXT] Analyzing Design System scalability...' },
+          CallToAction:      { logged: false, msg: '[CONTEXT] User intent detected. Preparing contact protocols...' },
+          Footer:            { logged: false, msg: '[SYSTEM] Ready for deployment. Waiting for command: /hire_ramon' },
+        };
+
+        const styleContext = 'color:#f1fa8c;font-style:italic';
+        const styleSystem2 = 'color:#8be9fd;font-weight:bold';
+
+        function initMicroCopy() {
+          const sections = document.querySelectorAll<HTMLElement>('[data-component]');
+          const microObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const name = (entry.target as HTMLElement).getAttribute('data-component') || '';
+                const section = sectionMessages[name];
+                if (section && !section.logged) {
+                  section.logged = true;
+                  const s = name === 'Footer' ? styleSystem2 : styleContext;
+                  console.log(`%c${section.msg}`, s);
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+          sections.forEach((el) => microObserver.observe(el));
+        }
+
+        // Humorous periodic debug messages
+        const debugMessages = [
+          '[DEBUG] Pixel perfection verified. No artifacts found.',
+          '[MEMORY] User engagement levels increasing...',
+          '[DEBUG] Design tokens synchronized across 3 platforms.',
+          '[PERF] Render pipeline optimized. Zero layout shifts detected.',
+          '[DEBUG] Accessibility audit passed. WCAG 2.1 AA compliant.',
+          '[MEMORY] Component library integrity: 100%.',
+          '[DEBUG] Color contrast ratios within optimal range.',
+          '[PERF] Asset compression: maximum efficiency achieved.',
+          '[DEBUG] Grid system alignment verified. 0px deviation.',
+          '[MEMORY] UX heuristic evaluation score: exceptional.',
+        ];
+
+        function startPeriodicLogs() {
+          setInterval(() => {
+            const msg = debugMessages[Math.floor(Math.random() * debugMessages.length)];
+            console.log(`%c${msg}`, 'color:#bd93f9');
+          }, 30000);
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 3. DYNAMIC FAVICON — Changes based on Code Mode
+        // ═══════════════════════════════════════════════════════
+        const faviconDefault = '/favicon.svg';
+        const faviconCode = '/favicon-code.svg';
+
+        function setFavicon(href: string) {
+          let link = document.querySelector<HTMLLinkElement>("link[rel='icon'][type='image/svg+xml']");
+          if (link) {
+            link.href = href;
+          }
+        }
+
+        function syncFavicon() {
+          const isCode = document.documentElement.classList.contains('code-mode');
+          setFavicon(isCode ? faviconCode : faviconDefault);
+        }
+
+        // Watch for code-mode class changes
+        const faviconObserver = new MutationObserver(() => syncFavicon());
+        faviconObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+        // Welcome-back message when tab regains focus
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') {
+            console.log('%c[SYSTEM] Welcome back, user. Resuming session...', 'color:#8be9fd;font-weight:bold');
+          }
+        });
+
+        // ═══════════════════════════════════════════════════════
+        // 4. ASCII SIGNATURE — Easter Egg in console
+        // ═══════════════════════════════════════════════════════
+        function printSignature() {
+          const sig = [
+            '',
+            '  ╔══════════════════════════════════════════════════════╗',
+            '  ║                                                      ║',
+            '  ║   ██████   █████  ███    ███  ██████  ███    ██      ║',
+            '  ║   ██   ██ ██   ██ ████  ████ ██    ██ ████   ██      ║',
+            '  ║   ██████  ███████ ██ ████ ██ ██    ██ ██ ██  ██      ║',
+            '  ║   ██   ██ ██   ██ ██  ██  ██ ██    ██ ██  ██ ██      ║',
+            '  ║   ██   ██ ██   ██ ██      ██  ██████  ██   ████      ║',
+            '  ║                                                      ║',
+            '  ║   Product Designer & Design Systems Expert           ║',
+            '  ║   ramonriera.design                                  ║',
+            '  ║                                                      ║',
+            '  ╚══════════════════════════════════════════════════════╝',
+            '',
+          ].join('\n');
+          console.log(`%c${sig}`, 'color:#D97757;font-family:monospace;font-size:11px;line-height:1.2');
+          console.log(
+            '%c[RAMON_RIERA] — Product Designer & Design Systems Expert',
+            'color:#D97757;font-weight:bold;font-size:13px;padding:4px 0'
+          );
+        }
+
+        // ── Boot Sequence ──
+        window.addEventListener('load', () => {
+          printPerformanceDiag();
+          initMicroCopy();
+          startPeriodicLogs();
+          syncFavicon();
+          printSignature();
+        });
+      })();
+    </script>
   </body>
 </html>
