@@ -136,12 +136,12 @@ export const projects: Project[] = [
     liveUrl: '#',
     featured: true,
     projectMeta: {
-      role: 'UI Designer',
+      role: 'UX Strategist & Service Designer',
       industry: 'Fashion Retail',
       output: 'E-commerce Optimization',
       duration: '1 semana',
       tools: ['Research', 'Service Blueprint', 'Prototyping', 'Wireframing'],
-      skills: ['UX Optimization', 'Checkout Flow', 'E-commerce Strategy', 'High-Fidelity Prototyping', 'Service Design', 'CRO'],
+      skills: ['UX Optimization', 'Checkout Flow', 'E-commerce Strategy', 'High-Fidelity Prototyping', 'Service Design', 'CRO', 'Omnichannel', 'User Flow Design', 'Conversion Optimization', 'Wireframing'],
     },
     checks: [
       'La opción de "Reservar en tienda" está enterrada al final de la ficha de producto, invisible sin scroll',
@@ -328,7 +328,7 @@ export const projects: Project[] = [
     client: 'MoveFast',
     year: '2021',
     category: 'UX/UI Design',
-    tags: ['UX/UI', 'UX Research', 'Interaction Design', 'Design System'],
+    tags: ['UX/UI', 'UX Research', 'Interaction Design', 'Design System', 'Mobile Design', 'Prototyping', 'User Persona', 'Benchmarking', 'Electric Mobility'],
     description: 'Diseño de la experiencia de usuario para una app móvil de un fabricante de coches eléctricos que entra en el mercado español, con un servicio innovador de cambio de baterías.',
     longDescription: 'España se sitúa a la cola de Europa en **adopción del vehículo eléctrico**. El precio, la **autonomía limitada** y la **escasez de infraestructura de recarga** frenan a los consumidores. MoveFast nace como respuesta a este problema real: diseñar la experiencia de una app móvil para un fabricante internacional que quiere entrar en el mercado español con una **propuesta de valor inexistente en la competencia** - el **cambio de baterías bajo demanda**.',
     challenge: 'Los datos del mercado español son contundentes: las matriculaciones de vehículos eléctricos apenas representan una **fracción mínima del total europeo**. Las tres barreras principales son la **escasez de puntos de carga**, el **precio elevado** frente al vehículo convencional, y la **autonomía limitada** (muchos modelos por debajo de 300 km). A esto se suman **tiempos de carga superiores a 45 minutos**. El usuario reconoce las ventajas - menos contaminación, ahorro en combustible, acceso a zonas restringidas - pero las **barreras pesan más que los beneficios**.',
@@ -347,7 +347,7 @@ export const projects: Project[] = [
     liveUrl: '#',
     featured: true,
     projectMeta: {
-      role: 'UX/UI Designer',
+      role: 'Product Designer',
       industry: 'Mobility',
       output: 'Mobile App Design',
       duration: '2 semanas',
@@ -363,7 +363,7 @@ export const projects: Project[] = [
       {
         label: '01. Descubrimiento',
         title: '¿Por qué no despega el coche eléctrico en España?',
-        layout: 'left-right',
+        layout: 'right-left',
         content: 'El primer paso fue entender el contexto real del mercado. Existen dos tipos principales de vehículos eléctricos: el **BEV** (100% eléctrico, cero emisiones, motor alimentado por batería recargable) y el **PHEV** (híbrido enchufable con doble motor combustión + eléctrico, hasta 130 km/h en modo eléctrico con ~40 km de autonomía).\n\nEspaña se sitúa **a la cola de Europa** en matriculaciones de vehículos eléctricos. Los datos son claros: la cuota de mercado es mínima frente a países como Noruega, Países Bajos o Alemania. La **infraestructura de recarga** crece, pero **no al ritmo necesario** para generar confianza en el consumidor.',
         images: ['/assets/projects/movefast/movefast-electric-passenger-cars-registrations-spain.png'],
       },
@@ -495,7 +495,7 @@ export const projects: Project[] = [
       output: 'Platform Design & Prototype',
       duration: '2 semanas (45 horas)',
       tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
-      skills: ['Design Thinking', 'Surveys', 'User Persona', 'Journey Mapping', 'Design Tokens', 'Prototyping', 'Benchmarking', 'Wireframing', 'Visual Design', 'Interaction Design'],
+      skills: ['Design Thinking', 'Surveys', 'User Persona', 'Journey Mapping', 'Design Tokens', 'Prototyping', 'Benchmarking', 'Wireframing', 'Visual Design', 'Interaction Design', 'Information Architecture', 'Responsive Design', 'Crowdfunding', 'Storytelling Visual'],
     },
     checks: [
       'Las ONGs locales carecen de recursos de comunicación frente a las grandes organizaciones internacionales',
@@ -836,7 +836,7 @@ export const projects: Project[] = [
       output: 'UX Audit & Recommendations',
       duration: '5 horas',
       tools: ['Figma', 'Chrome'],
-      skills: ['Análisis Heurístico', 'Usabilidad', 'Accesibilidad', 'UX Research', 'Comunicación UX', 'Benchmarking'],
+      skills: ['Análisis Heurístico', 'Usabilidad', 'Accesibilidad', 'UX Research', 'Comunicación UX', 'Benchmarking', 'Heurísticas de Nielsen', 'Mobile Design', 'Auditoría UX', 'Evaluación Experta'],
     },
     checks: [
       'La app no conecta con la Gen Z pese a ser digital-first: neobancos como Revolut y N26 han elevado el estándar',
@@ -1228,7 +1228,7 @@ export const projects: Project[] = [
       output: 'Product Design & Prototype',
       duration: '8 semanas',
       tools: ['Figma', 'Whimsical', 'Miro', 'Adobe Photoshop', 'Google Analytics'],
-      skills: ['Product Strategy', 'UX/UI Design', 'Design Systems', 'Prototyping', 'UX Research', 'Visual Design'],
+      skills: ['Product Strategy', 'UX/UI Design', 'Design Systems', 'Prototyping', 'UX Research', 'Visual Design', 'Wireframing', 'Mobile Design', 'UX Engineering', 'Lean Canvas', 'Dark Mode Design', 'Component Design'],
     },
     checks: [
       'Los usuarios sufren "fatiga de decisión" ante millones de canciones y playlists generadas por IA',

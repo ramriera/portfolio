@@ -377,7 +377,7 @@ function md(text: string): string {
             {section.content && (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10" set:html={md(section.content)} />
             )}
-            <div class={`space-y-6 ${section.images?.length === 1 && !section.images[0].endsWith('.svg') ? 'max-w-2xl mx-auto' : ''}`}>
+            <div class={`space-y-6 ${section.images?.length === 1 && !section.images[0].endsWith('.svg') ? 'max-w-4xl mx-auto' : ''}`}>
               {section.images?.map((img: string, i: number) => (
                 <figure data-reveal class="rounded-xl overflow-hidden">
                   <img src={img} alt={section.title} class={`w-full h-auto ${img.endsWith('.svg') ? '' : 'lightbox-trigger object-cover cursor-zoom-in'}`} loading="lazy" />
