@@ -2,6 +2,39 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { services, siteConfig } from '@/utils/data';
 
+const process = [
+  {
+    step: '01',
+    title: 'Descubrimiento',
+    description: 'Entiendo el problema, los usuarios y el contexto de negocio a través de investigación y workshops.',
+  },
+  {
+    step: '02',
+    title: 'Estrategia',
+    description: 'Defino la visión del producto, la arquitectura de información y los flujos de usuario clave.',
+  },
+  {
+    step: '03',
+    title: 'Diseño',
+    description: 'Creo wireframes, prototipos y diseños de alta fidelidad, iterando con feedback constante.',
+  },
+  {
+    step: '04',
+    title: 'Validación',
+    description: 'Testing con usuarios reales, análisis de datos y refinamiento basado en resultados.',
+  },
+  {
+    step: '05',
+    title: 'Entrega',
+    description: 'Handoff detallado al equipo de desarrollo con specs, assets y documentación completa.',
+  },
+  {
+    step: '06',
+    title: 'Iteración',
+    description: 'Monitorización post-lanzamiento y mejora continua basada en métricas y feedback.',
+  },
+];
+
 const timeline = [
   { year: '2024', role: 'Senior UX/UI Designer', company: 'Doctori.com', description: 'Liderando Design Ops y el Design System para la plataforma de salud digital.' },
   { year: '2022', role: 'UX/UI Designer', company: 'Iberia', description: 'Rediseño de la experiencia digital de vuelo y sistemas de check-in.' },
@@ -164,6 +197,60 @@ const values = [
             <p class="text-body-sm">{service.description}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div data-reveal class="mb-6">
+          <span class="text-sm font-medium text-primary-500 tracking-wide">Proceso</span>
+        </div>
+        <h2 data-reveal data-delay="100" class="heading-lg mb-4">
+          Cómo <span class="text-primary-500">trabajo</span>
+        </h2>
+        <p data-reveal data-delay="200" class="text-body">
+          Un proceso iterativo y colaborativo que garantiza resultados alineados con tus objetivos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {process.map((item, i) => (
+          <div data-reveal data-delay={String(i * 100)} class="relative p-8 rounded-2xl dashed-border bg-white dark:bg-dark-900">
+            <span class="text-6xl font-black text-dark-100 dark:text-dark-800 absolute top-4 right-6">
+              {item.step}
+            </span>
+            <div class="relative z-10">
+              <h3 class="heading-sm mb-3">{item.title}</h3>
+              <p class="text-body-sm">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding">
+    <div class="container-custom text-center max-w-3xl mx-auto">
+      <h2 data-reveal class="heading-lg mb-6">
+        ¿Listo para empezar?
+      </h2>
+      <p data-reveal data-delay="100" class="text-body text-lg mb-10">
+        Cuéntame sobre tu proyecto y veamos cómo puedo ayudarte a alcanzar tus objetivos de diseño.
+      </p>
+      <div data-reveal data-delay="200" class="flex flex-wrap items-center justify-center gap-4">
+        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base">
+          Contactar
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+        <a href={`mailto:${siteConfig.email}`} class="btn-outline text-base">
+          {siteConfig.email}
+        </a>
       </div>
     </div>
   </section>
