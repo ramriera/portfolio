@@ -64,10 +64,47 @@
   const savedCodeMode = localStorage.getItem('code-mode') === 'on';
   applyCodeMode(savedCodeMode, true);
 
+  // ── Subtle activation sound via Web Audio API ──
+  function playCodeModeSound(activate: boolean) {
+    try {
+      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (activate) {
+        // Rising "power on" beep — two quick tones
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, ctx.currentTime);
+        osc.frequency.setValueAtTime(900, ctx.currentTime + 0.06);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.15);
+      } else {
+        // Falling "power off" beep
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(900, ctx.currentTime);
+        osc.frequency.setValueAtTime(400, ctx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.03, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.12);
+      }
+
+      // Clean up context after sound finishes
+      setTimeout(() => ctx.close(), 300);
+    } catch {
+      // Web Audio API not available — silently skip
+    }
+  }
+
   codeToggle?.addEventListener('click', () => {
     const isActive = document.documentElement.classList.contains('code-mode');
     const newState = !isActive;
     localStorage.setItem('code-mode', newState ? 'on' : 'off');
+    playCodeModeSound(newState);
     applyCodeMode(newState);
   });
 </script>

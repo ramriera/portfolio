@@ -509,6 +509,24 @@ body.code-mode {
   letter-spacing: -0.02em;
   word-spacing: -0.05em;
   transition: opacity 0.5s ease, background 0.4s ease, color 0.4s ease;
+  /* Precision crosshair cursor — "auditing" feel */
+  cursor: crosshair;
+}
+
+/* Inspectable elements: DevTools-style pointer cursor */
+body.code-mode [data-component],
+body.code-mode [data-token] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M5 1L5 5L1 5' fill='none' stroke='%2350fa7b' stroke-width='1.5'/%3E%3Cpath d='M15 1L15 5L19 5' fill='none' stroke='%2350fa7b' stroke-width='1.5'/%3E%3Cpath d='M5 19L5 15L1 15' fill='none' stroke='%2350fa7b' stroke-width='1.5'/%3E%3Cpath d='M15 19L15 15L19 15' fill='none' stroke='%2350fa7b' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='2' fill='none' stroke='%2350fa7b' stroke-width='1'/%3E%3C/svg%3E") 10 10, crosshair;
+}
+
+/* Neon highlight on hover — selection highlighter */
+body.code-mode [data-component]:hover,
+body.code-mode [data-token]:hover {
+  outline: 1px solid var(--cm-inspector-glow) !important;
+  outline-offset: 2px;
+  background-color: rgba(80, 250, 123, 0.03) !important;
+  box-shadow: 0 0 12px rgba(80, 250, 123, 0.08), inset 0 0 20px rgba(80, 250, 123, 0.02);
+  transition: outline-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 /* Boot sequence: delayed visual reveal */

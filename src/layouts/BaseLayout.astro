@@ -468,6 +468,17 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
             el.classList.add('inspector-focused');
             overlay.classList.add('active');
           }
+
+          // Console feedback — DevTools-style inspect log
+          if (componentName) {
+            console.log(
+              `%c[INSPECT]%c Element %c<${componentName} />%c selected. Analyzing architecture...`,
+              'color:#50fa7b;font-weight:bold',
+              'color:#f8f8f2',
+              'color:#f1fa8c;font-weight:bold',
+              'color:#f8f8f2'
+            );
+          }
         }
 
         function onMouseLeave() {
