@@ -131,6 +131,8 @@
 
   .btn-primary {
     @apply inline-flex items-center gap-2 px-7 py-3.5 bg-dark-900 text-white font-medium rounded-full transition-all duration-300 hover:bg-dark-800 active:scale-[0.98];
+    border: 1px solid transparent;
+    box-sizing: border-box;
   }
 
   .btn-primary svg,
@@ -392,6 +394,26 @@ main {
    HERO GRID — Persistent two-column layout (both modes)
    ═══════════════════════════════════════════════════════════ */
 
+/* Hero Consistency — fixed height so content below never shifts */
+.hero-main-content {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .hero-main-content {
+    min-height: 480px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-main-content {
+    min-height: 520px;
+  }
+}
+
 /* Mobile: single column, stats centered below */
 .hero-grid {
   display: grid;
@@ -406,6 +428,10 @@ main {
   margin-top: 4rem;
   display: flex;
   justify-content: center;
+  /* Pre-allocate border + padding so code mode toggle doesn't shift layout */
+  border: 1px solid transparent;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
 }
 
 .hero-stats-inner {
@@ -508,7 +534,8 @@ body.code-mode {
   /* Zero Shift: tighten monospace to approximate Inter metrics */
   letter-spacing: -0.02em;
   word-spacing: -0.05em;
-  transition: opacity 0.5s ease, background 0.4s ease, color 0.4s ease;
+  /* Only animate visual properties — never layout-affecting ones */
+  transition: opacity 0.5s ease, background-color 0.4s ease, color 0.4s ease;
   /* Precision crosshair cursor — "auditing" feel */
   cursor: crosshair;
 }
@@ -588,9 +615,18 @@ body.code-mode aside:hover {
 }
 
 /* ── 3. Body text, muted text, links ── */
+/* Optical Adjustment: monospace is narrower, so bump line-height +5% and
+   add letter-spacing so text blocks occupy the same physical space as Inter */
 .code-mode .text-body,
 .code-mode .text-body-sm {
   color: var(--cm-text-secondary) !important;  /* light gray — readable content */
+  line-height: 1.89 !important;   /* 1.8 (relaxed) × 1.05 ≈ 1.89 */
+  letter-spacing: 0.01em !important;
+}
+
+.code-mode p {
+  line-height: 1.89 !important;
+  letter-spacing: 0.01em !important;
 }
 
 .code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo) {
@@ -642,18 +678,23 @@ body.code-mode aside:hover {
   pointer-events: none;
   display: block;
   line-height: 1;
+  /* Absolute positioning so pseudo-elements don't affect layout flow */
+  position: absolute;
+  left: var(--main-margin);
+}
+
+.code-mode section > .container-custom {
+  position: relative;
 }
 
 .code-mode section > .container-custom::before {
   content: '<section>';
-  margin-bottom: 1rem;
-  padding-top: 0.5rem;
+  top: -1.25rem;
 }
 
 .code-mode section > .container-custom::after {
   content: '</section>';
-  margin-top: 1rem;
-  padding-bottom: 0.5rem;
+  bottom: -1.25rem;
 }
 
 /* Override with real component names when data-component is set */
@@ -700,16 +741,16 @@ body.code-mode aside:hover {
   outline-color: var(--cm-border-hover);
 }
 
-/* Grid containers — subtle borders (skip hero-grid which has its own treatment) */
+/* Grid containers — outline borders to avoid layout shift (skip hero-grid) */
 .code-mode [class*="grid-cols-"]:not(.hero-grid) > * {
-  border: 1px solid rgba(48, 54, 61, 0.5);
+  outline: 1px solid rgba(48, 54, 61, 0.5);
+  outline-offset: -1px;
   border-radius: 4px;
-  padding: 0.5rem;
-  transition: border-color 0.3s ease;
+  transition: outline-color 0.3s ease;
 }
 
 .code-mode [class*="grid-cols-"]:not(.hero-grid) > *:hover {
-  border-color: var(--cm-border-hover);
+  outline-color: var(--cm-border-hover);
 }
 
 /* Hero grid columns: no extra border/padding to avoid layout shift */
@@ -734,9 +775,7 @@ body.code-mode aside:hover {
 /* Stats panel — terminal aesthetic without moving it */
 .code-mode .hero-stats-col {
   background: var(--cm-bg-surface);
-  border: 1px solid var(--cm-border);
-  border-radius: 4px;
-  padding: 1rem 1.25rem;
+  border-color: var(--cm-border);
 }
 
 /* Zero Shift: force hero-grid right column to stay pinned */
@@ -783,11 +822,11 @@ body.code-mode aside:hover {
   border-radius: 4px;
 }
 
-/* ── 7. Buttons ── */
+/* ── 7. Buttons (Mirror Layout — identical box size in both modes) ── */
 .code-mode .btn-primary {
   background: var(--cm-function) !important;
   color: var(--cm-bg) !important;
-  border: 1px solid var(--cm-function) !important;
+  border-color: var(--cm-function) !important;
   font-weight: 500 !important;
 }
 

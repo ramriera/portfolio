@@ -103,8 +103,15 @@
   codeToggle?.addEventListener('click', () => {
     const isActive = document.documentElement.classList.contains('code-mode');
     const newState = !isActive;
+
+    // Freeze scroll position — prevent any jump when styles change
+    const scrollY = window.scrollY;
     localStorage.setItem('code-mode', newState ? 'on' : 'off');
     playCodeModeSound(newState);
     applyCodeMode(newState);
+    // Restore scroll position after style recalc
+    requestAnimationFrame(() => {
+      window.scrollTo(0, scrollY);
+    });
   });
 </script>
