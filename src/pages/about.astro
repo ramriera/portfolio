@@ -165,7 +165,8 @@ const values = [
           <!-- Timeline -->
           <div data-reveal data-component="CareerTimeline">
             <h2 class="heading-md mb-8">Trayectoria</h2>
-            <div class="space-y-0">
+            <!-- Normal mode: card timeline -->
+            <div class="timeline-cards space-y-0">
               {timeline.map((item, i) => (
                 <div class="relative pl-8 pb-8 border-l-2 border-dark-200 last:pb-0 last:border-l-transparent group">
                   <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-white border-2 border-primary-500 group-hover:bg-primary-500 transition-colors duration-300"></div>
@@ -175,6 +176,25 @@ const values = [
                   <p class="text-body-sm">{item.description}</p>
                 </div>
               ))}
+            </div>
+            <!-- Code mode: git log format -->
+            <div class="timeline-gitlog">
+              <div class="gitlog-pre">
+                {timeline.map((item, i) => (
+                  <div class="gitlog-entry">
+                    <span class="gitlog-marker">*</span>{' '}
+                    <span class="gitlog-hash">commit</span>{' '}
+                    <span class="gitlog-date">[{item.year}]</span>
+                    {' \u2014 '}
+                    <span class="gitlog-role">{item.role}</span>
+                    {' en '}
+                    <span class="gitlog-company">{item.company}</span>
+                    <br />
+                    <span class="gitlog-indent">&nbsp;&nbsp;</span>
+                    <span class="gitlog-message">{item.description}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -223,6 +243,18 @@ const values = [
                 </div>
                 <span class="text-sm font-medium text-dark-700">Variables</span>
               </div>
+              <div class="flex items-center gap-4 group">
+                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
+                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25z" /></svg>
+                </div>
+                <span class="text-sm font-medium text-dark-700">Framer</span>
+              </div>
+              <div class="flex items-center gap-4 group">
+                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
+                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                </div>
+                <span class="text-sm font-medium text-dark-700">Zeroheight</span>
+              </div>
             </div>
           </div>
 
@@ -234,13 +266,25 @@ const values = [
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.31 0-.592.06-.846.18C4.803 2.18 4.157 4.16 4.59 7.068c-2.57.9-4.157 2.277-4.157 3.936 0 1.66 1.587 3.037 4.157 3.936-.433 2.908.213 4.889 1.667 5.555.254.12.536.18.846.18 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.604 4.887 2.604.31 0 .592-.06.846-.18 1.454-.666 2.1-2.647 1.667-5.555 2.57-.9 4.157-2.277 4.157-3.936 0-1.659-1.587-3.036-4.157-3.936.433-2.908-.213-4.889-1.667-5.555a1.986 1.986 0 0 0-.846-.18zM12 15.065a3.065 3.065 0 1 1 0-6.13 3.065 3.065 0 0 1 0 6.13z"/></svg>
                 </div>
-                <span class="text-sm font-medium text-dark-700">React</span>
+                <span class="text-sm font-medium text-dark-700">React / Next.js</span>
+              </div>
+              <div class="flex items-center gap-4 group">
+                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
+                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.677.12a6.988 6.988 0 011.427.375v3.067a5.42 5.42 0 00-.724-.39 4.958 4.958 0 00-1.036-.317 5.482 5.482 0 00-1.075-.106c-.377 0-.719.052-1.018.156a1.725 1.725 0 00-.69.421.887.887 0 00-.244.622c0 .229.078.426.233.59.156.168.39.31.7.424.312.117.694.232 1.15.347.636.166 1.192.365 1.664.596.476.232.848.536 1.114.916.267.38.4.854.4 1.424 0 .63-.167 1.163-.5 1.6-.334.434-.813.763-1.434.985-.623.222-1.368.332-2.235.332-.673 0-1.31-.057-1.91-.172a7.798 7.798 0 01-1.59-.49v-3.168c.3.217.636.406 1.01.567.378.164.778.29 1.2.379.424.09.822.135 1.198.135.377 0 .684-.049.917-.148a.978.978 0 00.486-.401.962.962 0 00.146-.51.755.755 0 00-.264-.587 2.487 2.487 0 00-.806-.419c-.342-.13-.775-.267-1.296-.414-.568-.16-1.076-.37-1.524-.629a3.045 3.045 0 01-1.072-.975c-.267-.398-.4-.891-.4-1.477 0-.616.158-1.145.476-1.59.318-.443.77-.785 1.358-1.023.588-.24 1.291-.36 2.108-.36zm-10.363.066h3.348L14.22 18h-3.375l-2.747-8.184z"/></svg>
+                </div>
+                <span class="text-sm font-medium text-dark-700">TypeScript</span>
               </div>
               <div class="flex items-center gap-4 group">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Tailwind</span>
+              </div>
+              <div class="flex items-center gap-4 group">
+                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
+                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M8.358 20.162c-1.186-1.07-1.532-3.316-1.038-5.156.414-1.573 1.225-3.417 2.275-4.98.1.078.2.148.31.218-.066 1.036-.046 2.073.063 3.087.133 1.226.419 2.487.86 3.587a9.776 9.776 0 001.598 2.683c-.438.13-.895.22-1.356.256a4.805 4.805 0 01-2.712-.695zm7.415-1.078c-.186.37-.486.7-.793.958-1.155.97-2.67 1.152-3.91.484l-.003-.003c.627-.42 1.237-.93 1.787-1.512.65-.69 1.207-1.467 1.66-2.307a17.66 17.66 0 001.19-3.14 17.08 17.08 0 00.573-3.376c.007-.117.014-.234.018-.351l.002-.07c.205.353.396.722.565 1.098.488 1.1.703 2.334.596 3.491-.104 1.13-.494 2.186-1.178 3.088l-.005.008-.018.021c-.08.1-.158.194-.232.28a7.685 7.685 0 01-.252.281zm-2.072-12.858c.22.154.428.322.627.503-.1.098-.199.199-.298.301-.827.87-1.553 1.843-2.17 2.89-.527.895-.977 1.852-1.346 2.846-.3.807-.54 1.643-.72 2.5a14.756 14.756 0 01-1.458-2.394c-.39-.826-.7-1.716-.922-2.653a13.52 13.52 0 01-.31-2.1c.11-.072.22-.14.338-.203 1.102-.608 2.5-.995 3.833-1.094a9.088 9.088 0 012.426.404zm8.326 3.753l-.001-.004c-.058-.15-.141-.369-.258-.644l-.004-.012c.1.173.183.358.252.549.41 1.08.516 2.303.303 3.502-.26 1.459-.88 2.817-1.78 3.93a10.14 10.14 0 01-1.693 1.692l-.157.115c.022-.066.044-.127.064-.193.365-1.15.509-2.387.422-3.624-.09-1.281-.413-2.55-.955-3.706a12.26 12.26 0 00-.543-1.04l-.01-.017c.258-.086.518-.157.779-.21.856-.18 1.735-.142 2.571.112.297.092.577.211.84.354a4.786 4.786 0 01.17.096v.1zm-6.028 1.2c-.104-.08-.209-.155-.316-.228-.104-.072-.212-.14-.321-.205a13.762 13.762 0 00-3.325-.87c-.7-.098-1.408-.11-2.112-.04l-.102-.044c-.037-.016-.075-.031-.112-.048l.001-.004c.383-.372.806-.69 1.26-.95.932-.529 2.013-.822 3.118-.836a6.373 6.373 0 012.64.527c.063.03.123.062.183.095l-.005.009a12.77 12.77 0 00-.909 2.594z"/></svg>
+                </div>
+                <span class="text-sm font-medium text-dark-700">Astro</span>
               </div>
               <div class="flex items-center gap-4 group">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
@@ -257,21 +301,27 @@ const values = [
             </div>
           </div>
 
-          <!-- Strategy Column -->
+          <!-- Systems Column -->
           <div class="p-8 rounded-2xl dashed-border bg-white" data-component="StackColumn">
-            <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">Strategy</h3>
+            <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">Systems</h3>
             <div class="space-y-5">
+              <div class="flex items-center gap-4 group">
+                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
+                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                </div>
+                <span class="text-sm font-medium text-dark-700">Tokens Studio</span>
+              </div>
+              <div class="flex items-center gap-4 group">
+                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
+                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125V18a3.75 3.75 0 01-3.75 3.75zM13.5 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v9.375a3.75 3.75 0 11-7.5 0V8.625z" /></svg>
+                </div>
+                <span class="text-sm font-medium text-dark-700">Style Dictionary</span>
+              </div>
               <div class="flex items-center gap-4 group">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" /></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Linear</span>
-              </div>
-              <div class="flex items-center gap-4 group">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.992 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" /></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">Agile</span>
               </div>
               <div class="flex items-center gap-4 group">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
@@ -292,21 +342,23 @@ const values = [
                 <span class="json-dot json-dot--yellow"></span>
                 <span class="json-dot json-dot--green"></span>
               </div>
-              <span class="json-filename">profile.json</span>
+              <span class="json-filename"><svg class="json-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>profile.json</span>
+              <span class="json-tab-active">profile.json</span>
             </div>
-            <pre class="json-body"><code><span class="json-bracket">{</span>
-  <span class="json-key">"profile"</span><span class="json-colon">:</span> <span class="json-string">"Ramon Riera"</span><span class="json-comma">,</span>
-  <span class="json-key">"role"</span><span class="json-colon">:</span> <span class="json-string">"Design Systems Lead"</span><span class="json-comma">,</span>
-  <span class="json-key">"stack"</span><span class="json-colon">:</span> <span class="json-bracket">{</span>
-    <span class="json-key">"design"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Figma"</span><span class="json-comma">,</span> <span class="json-string">"Tokens Studio"</span><span class="json-comma">,</span> <span class="json-string">"Variables"</span><span class="json-bracket">]</span><span class="json-comma">,</span>
-    <span class="json-key">"dev"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"React"</span><span class="json-comma">,</span> <span class="json-string">"Tailwind"</span><span class="json-comma">,</span> <span class="json-string">"Storybook"</span><span class="json-comma">,</span> <span class="json-string">"Git"</span><span class="json-bracket">]</span><span class="json-comma">,</span>
-    <span class="json-key">"ops"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Linear"</span><span class="json-comma">,</span> <span class="json-string">"Agile"</span><span class="json-comma">,</span> <span class="json-string">"Documentation"</span><span class="json-bracket">]</span>
-  <span class="json-bracket">}</span><span class="json-comma">,</span>
-  <span class="json-key">"metrics"</span><span class="json-colon">:</span> <span class="json-bracket">{</span>
-    <span class="json-key">"efficiency_boost"</span><span class="json-colon">:</span> <span class="json-string">"<span class="json-number">+40%</span>"</span><span class="json-comma">,</span>
-    <span class="json-key">"component_adoption"</span><span class="json-colon">:</span> <span class="json-string">"<span class="json-number">95%</span>"</span>
-  <span class="json-bracket">}</span>
-<span class="json-bracket">}</span></code></pre>
+            <div class="json-line-numbers" aria-hidden="true"></div>
+            <pre class="json-body"><code><span class="json-line"><span class="json-bracket">{</span></span>
+<span class="json-line">  <span class="json-key">"profile"</span><span class="json-colon">:</span> <span class="json-string">"Ramon Riera"</span><span class="json-comma">,</span></span>
+<span class="json-line">  <span class="json-key">"role"</span><span class="json-colon">:</span> <span class="json-string">"Design Systems Lead"</span><span class="json-comma">,</span></span>
+<span class="json-line">  <span class="json-key">"stack"</span><span class="json-colon">:</span> <span class="json-bracket">{</span></span>
+<span class="json-line">    <span class="json-key">"design"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Figma"</span><span class="json-comma">,</span> <span class="json-string">"Tokens Studio"</span><span class="json-comma">,</span> <span class="json-string">"Variables"</span><span class="json-comma">,</span> <span class="json-string">"Framer"</span><span class="json-comma">,</span> <span class="json-string">"Zeroheight"</span><span class="json-bracket">]</span><span class="json-comma">,</span></span>
+<span class="json-line">    <span class="json-key">"dev"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"React / Next.js"</span><span class="json-comma">,</span> <span class="json-string">"TypeScript"</span><span class="json-comma">,</span> <span class="json-string">"Tailwind"</span><span class="json-comma">,</span> <span class="json-string">"Astro"</span><span class="json-comma">,</span> <span class="json-string">"Storybook"</span><span class="json-comma">,</span> <span class="json-string">"Git"</span><span class="json-bracket">]</span><span class="json-comma">,</span></span>
+<span class="json-line">    <span class="json-key">"systems"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Tokens Studio"</span><span class="json-comma">,</span> <span class="json-string">"Style Dictionary"</span><span class="json-comma">,</span> <span class="json-string">"Linear"</span><span class="json-comma">,</span> <span class="json-string">"Documentation"</span><span class="json-bracket">]</span></span>
+<span class="json-line">  <span class="json-bracket">}</span><span class="json-comma">,</span></span>
+<span class="json-line">  <span class="json-key">"metrics"</span><span class="json-colon">:</span> <span class="json-bracket">{</span></span>
+<span class="json-line">    <span class="json-key">"efficiency_boost"</span><span class="json-colon">:</span> <span class="json-string">"<span class="json-number">+40%</span>"</span><span class="json-comma">,</span></span>
+<span class="json-line">    <span class="json-key">"component_adoption"</span><span class="json-colon">:</span> <span class="json-string">"<span class="json-number">95%</span>"</span></span>
+<span class="json-line">  <span class="json-bracket">}</span></span>
+<span class="json-line"><span class="json-bracket">}</span></span></code></pre>
           </div>
         </div>
       </div>
