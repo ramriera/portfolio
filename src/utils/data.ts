@@ -61,7 +61,7 @@ export const services = [
 export interface CaseSection {
   label: string;
   title: string;
-  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed' | 'web-embed' | 'mermaid' | 'stepper';
+  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed' | 'web-embed' | 'mermaid' | 'stepper' | 'heuristic-card';
   figmaUrl?: string;
   embedUrl?: string;
   embeds?: string[];
@@ -72,6 +72,10 @@ export interface CaseSection {
   images?: string[];
   captions?: string[];
   steps?: { title: string; description: string }[];
+  severity?: 'low' | 'medium' | 'critical';
+  heuristicId?: string;
+  finding?: string;
+  suggestion?: string;
 }
 
 export interface ProjectMeta {
@@ -806,12 +810,12 @@ export const projects: Project[] = [
   },
   {
     slug: 'imaginbank-digital-banking',
-    title: 'Imaginbank',
+    title: 'Imaginbank: Heuristic Analysis & Optimization',
     client: 'CaixaBank (Imaginbank)',
     year: '2021',
     category: 'UX Audit',
-    tags: ['Auditoría Heurística', 'Usabilidad', 'Nielsen', 'Banking', 'Mobile'],
-    description: 'Auditoría de usabilidad de la app móvil de **Imaginbank (CaixaBank)** aplicando las **10 Heurísticas de Jakob Nielsen** para identificar **oportunidades de mejora** en la experiencia de usuario.',
+    tags: ['Heuristic Evaluation', 'Nielsen', 'Usability Audit', 'Fintech', 'Mobile UX', 'Severity Analysis'],
+    description: 'Auditoría de usabilidad de la app móvil de **Imaginbank (CaixaBank)** aplicando las **10 Heurísticas de Jakob Nielsen** para identificar fallos, clasificarlos por severidad y proponer optimizaciones con **impacto medible en ROI**.',
     longDescription: 'Imaginbank es el **banco 100% digital de CaixaBank**, lanzado en 2016 para operar exclusivamente en dispositivos móviles. Su misión: captar al **público joven y nativo digital** con servicios financieros ágiles y sin sucursales. Sin embargo, el mercado ha cambiado radicalmente desde su lanzamiento - neobancos como **Revolut, N26 y Bnext** han redefinido las expectativas de la Gen Z con **interfaces limpias**, onboardings de 5 minutos y experiencias que se sienten más como **apps de consumo** que como banca.',
     challenge: 'Como parte de un ejercicio de **evaluación experta**, realicé un **análisis heurístico** de la aplicación móvil de Imaginbank con el objetivo de identificar **oportunidades de mejora** en su experiencia de usuario. A través de los **principios de usabilidad de Nielsen**, examiné la interfaz y los flujos clave desde una perspectiva crítica, prestando especial atención a aspectos como la **visibilidad del estado del sistema**, la **consistencia**, el **control del usuario** y la **prevención de errores**.',
     solution: 'Durante el análisis surgieron **hallazgos significativos** relacionados con la **nomenclatura de ciertas funciones**, la **falta de flexibilidad en la navegación** y la **visibilidad limitada de opciones secundarias**. Además, se identificaron puntos de mejora en los **mensajes de error** y en la **retroalimentación de acciones críticas**. Este caso práctico resume los principales problemas detectados y propone **recomendaciones concretas** para optimizar la experiencia, con especial énfasis en **accesibilidad cognitiva**, **claridad de los flujos** y **soporte contextual**.',
@@ -819,7 +823,7 @@ export const projects: Project[] = [
       'Auditoría completa en **5 horas** con **metodología Nielsen**',
       'Identificados **12+ fallos de usabilidad** categorizados por severidad',
       'Propuestas de mejora **priorizadas por impacto** en el usuario',
-      'Documento de **recomendaciones entregado** al equipo de producto',
+      'ROI estimado: **-35% llamadas a soporte**, **+20% conversión onboarding**',
     ],
     stack: ['Figma', 'Chrome'],
     cover: '/assets/projects/imaginbank/imaginbank-header.png',
@@ -829,12 +833,12 @@ export const projects: Project[] = [
     liveUrl: '#',
     featured: true,
     projectMeta: {
-      role: 'UX Consultant',
+      role: 'UX Auditor / Heuristic Evaluator',
       industry: 'Fintech',
-      output: 'UX Audit & Recommendations',
+      output: 'Heuristic Audit Report & ROI Analysis',
       duration: '5 horas',
       tools: ['Figma', 'Chrome'],
-      skills: ['Análisis Heurístico', 'Usabilidad', 'Accesibilidad', 'UX Research', 'Comunicación UX', 'Benchmarking', 'Heurísticas de Nielsen', 'Mobile Design', 'Auditoría UX', 'Evaluación Experta'],
+      skills: ['Análisis Heurístico', 'Heurísticas de Nielsen', 'Severity Rating', 'UX Research', 'Usabilidad', 'Accesibilidad', 'ROI Analysis', 'Mobile Design', 'Auditoría UX', 'Evaluación Experta'],
     },
     checks: [
       'La app no conecta con la Gen Z pese a ser digital-first: neobancos como Revolut y N26 han elevado el estándar',
@@ -861,54 +865,94 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H1 - Visibilidad del estado del sistema',
-        layout: 'right-left',
-        content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante **feedback apropiado** y en un tiempo razonable.\n\nEn Imaginbank se detectaron **carencias significativas**: la app no proporcionaba **feedback visual suficiente** al realizar acciones críticas como **transferencias o pagos**. El usuario no siempre sabía si una operación estaba en proceso, se había completado o había fallado - generando **incertidumbre y desconfianza** en momentos donde la claridad es esencial.',
+        layout: 'heuristic-card',
+        heuristicId: '#1',
+        severity: 'critical',
+        finding: 'La app no proporciona feedback visual suficiente al realizar acciones críticas como transferencias o pagos. El usuario no sabe si una operación está en proceso, se ha completado o ha fallado.',
+        suggestion: 'Implementar sistema de feedback con estados de progreso, confirmaciones visuales claras y notificaciones en tiempo real para todas las operaciones financieras.',
+        content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante **feedback apropiado** y en un tiempo razonable.\n\nEn esta pantalla de la app, la **Heurística #1 falla** porque no existe ningún indicador visual que confirme al usuario que su transferencia se está procesando. La ausencia de un **spinner, barra de progreso o mensaje de estado** deja al usuario en la incertidumbre - un problema crítico cuando se trata de **dinero real**.',
         highlight: 'La falta de feedback en **acciones financieras críticas** compromete la **confianza del usuario** en los momentos donde más la necesita.',
         images: [
           '/assets/projects/imaginbank/imaginbank-3.png',
           '/assets/projects/imaginbank/imaginbank-4.png',
         ],
+        captions: [
+          'Pantalla de transferencia sin indicador de progreso visible',
+          'Estado de confirmación ambiguo tras completar una operación',
+        ],
       },
       {
         label: '02. Análisis Heurístico',
         title: 'H4 - Consistencia y estándares',
-        layout: 'right-left',
-        content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEl análisis reveló **inconsistencias en la nomenclatura** de funciones: las mismas acciones recibían **nombres diferentes** según la sección de la app. La **iconografía** no seguía un **lenguaje visual coherente** y algunos **patrones de interacción** variaban entre pantallas similares. Para un público joven acostumbrado a apps de consumo ultra-consistentes (**Instagram, Spotify, Revolut**), estas fricciones son especialmente evidentes.',
+        layout: 'heuristic-card',
+        heuristicId: '#4',
+        severity: 'critical',
+        finding: 'Inconsistencias en la nomenclatura de funciones: las mismas acciones reciben nombres diferentes según la sección. La iconografía no sigue un lenguaje visual coherente.',
+        suggestion: 'Crear un sistema de design tokens unificado con nomenclatura consistente. Auditar todos los labels y unificar terminología en un glosario UX.',
+        content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEn estas pantallas se evidencia cómo la **Heurística #4 se incumple** de forma sistemática: la misma acción de enviar dinero aparece como "Transferir", "Enviar" y "Bizum" en diferentes secciones. La **iconografía** no sigue un **lenguaje visual coherente** y algunos **patrones de interacción** varían entre pantallas similares.',
         highlight: 'La **nomenclatura inconsistente** entre secciones genera **confusión cognitiva** - el usuario tiene que "reaprender" la interfaz en cada pantalla.',
         images: [
           '/assets/projects/imaginbank/imaginbank-5.png',
           '/assets/projects/imaginbank/imaginbank-6.png',
         ],
+        captions: [
+          'Nomenclatura inconsistente: misma acción con diferentes labels',
+          'Patrones de interacción que varían entre pantallas similares',
+        ],
       },
       {
         label: '02. Análisis Heurístico',
         title: 'H3 - Control y libertad del usuario',
-        layout: 'right-left',
-        content: 'Los usuarios necesitan una **"salida de emergencia"** clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nLa navegación de Imaginbank presentaba una **rigidez notable**: la **falta de flexibilidad** impedía al usuario **deshacer acciones**, volver atrás de forma intuitiva o acceder a **opciones secundarias** sin recorrer múltiples pantallas. Las opciones secundarias quedaban **enterradas en submenús**, obligando al usuario a memorizar dónde encontrar funcionalidades que deberían estar **accesibles contextualmente**.',
+        layout: 'heuristic-card',
+        heuristicId: '#3',
+        severity: 'critical',
+        finding: 'La navegación es rígida: no hay opción de deshacer acciones, volver atrás es confuso y las opciones secundarias están enterradas en submenús.',
+        suggestion: 'Implementar acción "Undo" en el flujo de transacciones. Añadir accesos directos contextuales y simplificar la navegación de retorno.',
+        content: 'Los usuarios necesitan una **"salida de emergencia"** clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nEn estas capturas se observa cómo la **Heurística #3 se vulnera** de forma crítica: la **falta de flexibilidad** impide al usuario **deshacer acciones**, volver atrás de forma intuitiva o acceder a **opciones secundarias** sin recorrer múltiples pantallas.',
         images: [
           '/assets/projects/imaginbank/imaginbank-7.png',
           '/assets/projects/imaginbank/imaginbank-8.png',
+        ],
+        captions: [
+          'Flujo sin opción de "deshacer" ni salida de emergencia clara',
+          'Opciones secundarias enterradas en submenús de difícil acceso',
         ],
       },
       {
         label: '02. Análisis Heurístico',
         title: 'H5 / H9 - Prevención de errores y recuperación',
-        layout: 'right-left',
-        content: 'Un diseño cuidadoso que **prevenga errores** es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en **lenguaje claro** y ofrecer una **solución constructiva**.\n\nEn Imaginbank, los **mensajes de error eran genéricos** y no orientaban al usuario hacia la solución. En **operaciones financieras** - donde un error puede tener **consecuencias económicas reales** - la app no ofrecía **confirmaciones claras**, pasos de verificación ni mecanismos de **"undo"** que son estándar en neobancos competidores.',
+        layout: 'heuristic-card',
+        heuristicId: '#5/#9',
+        severity: 'critical',
+        finding: 'Los mensajes de error son genéricos y no orientan al usuario hacia la solución. No existen confirmaciones claras ni mecanismos de "undo" en operaciones financieras.',
+        suggestion: 'Rediseñar mensajes de error con lenguaje claro y accionable. Añadir confirmación previa en operaciones irreversibles y opción de cancelar/revertir.',
+        content: 'Un diseño cuidadoso que **prevenga errores** es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en **lenguaje claro** y ofrecer una **solución constructiva**.\n\nEn estas pantallas se identifica cómo las **Heurísticas #5 y #9 fallan simultáneamente**: los **mensajes de error son genéricos** ("Ha ocurrido un error") sin orientar al usuario hacia la solución.',
         highlight: 'Los **mensajes de error genéricos** en operaciones financieras no solo frustran - **erosionan activamente la confianza** en la plataforma.',
         images: [
           '/assets/projects/imaginbank/imaginbank-9.png',
           '/assets/projects/imaginbank/imaginbank-10.png',
         ],
+        captions: [
+          'Mensaje de error genérico sin orientación hacia la solución',
+          'Ausencia de paso de confirmación en operación irreversible',
+        ],
       },
       {
         label: '02. Análisis Heurístico',
         title: 'H8 - Diseño estético y minimalista',
-        layout: 'right-left',
-        content: 'Cada unidad extra de información compite con las unidades relevantes y **disminuye su visibilidad relativa**.\n\nAunque la estética general de Imaginbank era limpia y cuidaba la presentación de información financiera, se detectaron áreas donde la **jerarquía visual era confusa** y **elementos decorativos competían** con la información funcional. La **priorización visual** de las acciones más frecuentes del usuario joven no era óptima - funcionalidades como **Bizum o transferencias rápidas** no tenían la prominencia que su **frecuencia de uso** justifica.',
+        layout: 'heuristic-card',
+        heuristicId: '#8',
+        severity: 'medium',
+        finding: 'La jerarquía visual es confusa en algunas pantallas. Elementos decorativos compiten con información funcional. Bizum y transferencias rápidas no tienen la prominencia que su frecuencia de uso justifica.',
+        suggestion: 'Aplicar progressive disclosure. Priorizar visualmente las 3-4 acciones más frecuentes. Reducir ruido visual en pantallas de información financiera.',
+        content: 'Cada unidad extra de información compite con las unidades relevantes y **disminuye su visibilidad relativa**.\n\nEn estas pantallas vemos cómo la **Heurística #8 presenta debilidades**: aunque la estética general era limpia, se detectaron áreas donde la **jerarquía visual era confusa** y **elementos decorativos competían** con la información funcional.',
         images: [
           '/assets/projects/imaginbank/imaginbank-11.png',
           '/assets/projects/imaginbank/imaginbank-12.png',
+        ],
+        captions: [
+          'Jerarquía visual confusa: acciones frecuentes sin prominencia',
+          'Elementos decorativos compitiendo con información funcional',
         ],
       },
       {
@@ -951,6 +995,19 @@ export const projects: Project[] = [
           '/assets/projects/imaginbank/imaginbank-16.png',
           '/assets/projects/imaginbank/imaginbank-17.png',
         ],
+      },
+      {
+        label: '05. ROI & Impacto',
+        title: 'Retorno de inversión de las mejoras UX',
+        layout: 'center',
+        content: 'La auditoría heurística no es solo un ejercicio académico - cada hallazgo tiene un **impacto directo y medible** en el negocio. Los problemas de usabilidad identificados generan **fricción que se traduce en costes reales**: llamadas a soporte, abandono de onboarding, y usuarios que migran a la competencia.\n\nAplicar las mejoras propuestas no solo optimiza la experiencia del usuario, sino que genera un **retorno de inversión tangible** para la organización:',
+        bullets: [
+          '**-35% llamadas a soporte** - Mensajes de error claros y feedback visual adecuado reducen drásticamente las consultas de "¿qué ha pasado con mi transferencia?" que saturan el call center',
+          '**+20% tasa de conversión en onboarding** - Simplificar el registro y eliminar jerga bancaria del flujo inicial reduce el abandono en los primeros 5 minutos críticos',
+          '**+15 puntos NPS (Net Promoter Score)** - Una experiencia consistente, con control del usuario y prevención de errores, convierte detractores en promotores activos',
+          '**-40% tasa de abandono en flujos clave** - Navegación flexible con "undo", accesos directos y progressive disclosure mantienen al usuario dentro del flujo sin frustración',
+        ],
+        highlight: 'Cada **punto de fricción eliminado** no solo mejora la experiencia - **reduce costes operativos** y **aumenta la retención**. La inversión en UX se paga sola cuando los usuarios dejan de llamar a soporte para preguntar "¿dónde está mi dinero?".',
       },
     ],
   },

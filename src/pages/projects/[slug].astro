@@ -373,6 +373,108 @@ function md(text: string): string {
           </div>
         )}
 
+        {/* Heuristic Card - Nielsen audit findings */}
+        {section.layout === 'heuristic-card' && (
+          <div class="max-w-4xl mx-auto" data-component="HeuristicCard">
+            {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
+
+            {/* Heuristic Finding Card */}
+            <div data-reveal data-delay="150" class="heuristic-card mb-8 rounded-2xl border-2 overflow-hidden"
+              data-severity={section.severity}
+              data-heuristic-id={section.heuristicId}>
+              {/* Card Header with severity badge */}
+              <div class={`heuristic-card-header flex items-center justify-between px-6 py-4 ${
+                section.severity === 'critical' ? 'bg-red-50 border-b-2 border-red-200' :
+                section.severity === 'medium' ? 'bg-amber-50 border-b-2 border-amber-200' :
+                'bg-emerald-50 border-b-2 border-emerald-200'
+              }`}>
+                <div class="flex items-center gap-3">
+                  <span class="font-mono text-sm font-bold text-dark-600">Heuristic {section.heuristicId}</span>
+                  <span class="text-dark-300">|</span>
+                  <span class="font-semibold text-sm text-dark-700">{section.title.replace(/^H\d+\s*\/?\s*H?\d*\s*-\s*/, '')}</span>
+                </div>
+                <span class={`heuristic-severity-badge px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
+                  section.severity === 'critical' ? 'bg-red-500 text-white' :
+                  section.severity === 'medium' ? 'bg-amber-500 text-white' :
+                  'bg-emerald-500 text-white'
+                }`}>
+                  {section.severity === 'critical' ? 'Crítica' : section.severity === 'medium' ? 'Media' : 'Baja'}
+                </span>
+              </div>
+
+              {/* Card Body */}
+              <div class="heuristic-card-body p-6 bg-white">
+                {/* Finding */}
+                {section.finding && (
+                  <div class="mb-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-dark-400 mb-2 flex items-center gap-2">
+                      <svg class="w-4 h-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                      </svg>
+                      Finding
+                    </h4>
+                    <p class="text-dark-700 text-sm leading-relaxed">{section.finding}</p>
+                  </div>
+                )}
+                {/* Suggestion */}
+                {section.suggestion && (
+                  <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-dark-400 mb-2 flex items-center gap-2">
+                      <svg class="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Suggestion
+                    </h4>
+                    <p class="text-dark-700 text-sm leading-relaxed">{section.suggestion}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Auditor Console Log (visible only in code mode) */}
+              <div class="heuristic-auditor-log hidden" data-severity={section.severity}>
+                <div class="px-6 py-3 font-mono text-xs leading-relaxed">
+                  <p class="text-red-400">[UX_ERROR] Heuristic {section.heuristicId}: {section.title.replace(/^H\d+\s*\/?\s*H?\d*\s*-\s*/, '')}. Status: FAILED.</p>
+                  {section.finding && <p class="text-red-300 opacity-80 mt-1">[FINDING] {section.finding}</p>}
+                  {section.suggestion && <p class="text-emerald-400 mt-1">[SUGGESTION] {section.suggestion}</p>}
+                  <p class={`mt-1 ${
+                    section.severity === 'critical' ? 'text-red-500' :
+                    section.severity === 'medium' ? 'text-amber-400' :
+                    'text-emerald-400'
+                  }`}>[SEVERITY] {section.severity === 'critical' ? 'CRITICAL' : section.severity === 'medium' ? 'MEDIUM' : 'LOW'} — Priority: {section.severity === 'critical' ? 'P0' : section.severity === 'medium' ? 'P1' : 'P2'}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Content text explaining what we see in images */}
+            {section.content?.split('\n\n').map((paragraph: string) => (
+              <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-4" set:html={md(paragraph)} />
+            ))}
+
+            {/* Images side by side */}
+            {section.images && section.images.length > 0 && (
+              <div class={`grid grid-cols-1 ${section.images.length > 1 ? 'sm:grid-cols-2' : ''} gap-4 md:gap-6 mt-8`}>
+                {section.images.map((img: string, i: number) => (
+                  <figure data-reveal data-delay={String(250 + i * 80)} class="rounded-xl overflow-hidden">
+                    <img src={img} alt={`${section.title} ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                    {section.captions?.[i] && (
+                      <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            )}
+
+            {section.highlight && (
+              <blockquote data-reveal data-delay="400" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
+                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                  <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
+                </p>
+              </blockquote>
+            )}
+          </div>
+        )}
+
         {/* Full image */}
         {section.layout === 'full-image' && (
           <div class="max-w-4xl mx-auto" data-component="SolutionShowcase">
@@ -761,5 +863,41 @@ function md(text: string): string {
 
   initMermaid();
   document.addEventListener('astro:page-load', initMermaid);
+</script>
+
+<script>
+  // Auditor Mode: toggle heuristic console logs based on code-mode state
+  function initAuditorMode() {
+    const auditorLogs = document.querySelectorAll('.heuristic-auditor-log');
+    if (auditorLogs.length === 0) return;
+
+    function updateAuditorLogs() {
+      const isCodeMode = document.documentElement.classList.contains('code-mode');
+      auditorLogs.forEach((log) => {
+        if (isCodeMode) {
+          log.classList.remove('hidden');
+          log.classList.add('block');
+        } else {
+          log.classList.add('hidden');
+          log.classList.remove('block');
+        }
+      });
+    }
+
+    // Watch for code-mode toggle
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.attributeName === 'class') {
+          updateAuditorLogs();
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    updateAuditorLogs();
+  }
+
+  initAuditorMode();
+  document.addEventListener('astro:page-load', initAuditorMode);
 </script>
 
