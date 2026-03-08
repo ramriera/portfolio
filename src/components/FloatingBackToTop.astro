@@ -1,0 +1,54 @@
+---
+
+---
+
+<button
+  id="floating-back-to-top"
+  class="floating-btt"
+  aria-label="Volver arriba"
+  data-component="FloatingBackToTop"
+>
+  <!-- Normal mode: arrow icon -->
+  <span class="floating-btt-normal">
+    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+    </svg>
+  </span>
+  <!-- Code mode: terminal style -->
+  <span class="floating-btt-code">
+    <span class="floating-btt-code-icon">[^]</span>
+    <span class="floating-btt-code-label">RETURN_TO_HEADER</span>
+  </span>
+</button>
+
+<script>
+  function initFloatingBtt() {
+    const btn = document.getElementById('floating-back-to-top');
+    if (!btn) return;
+
+    let visible = false;
+    const THRESHOLD = 300;
+
+    function update() {
+      const shouldShow = window.scrollY > THRESHOLD;
+      if (shouldShow === visible) return;
+      visible = shouldShow;
+
+      if (shouldShow) {
+        btn.classList.add('floating-btt--visible');
+      } else {
+        btn.classList.remove('floating-btt--visible');
+      }
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  initFloatingBtt();
+  document.addEventListener('astro:page-load', initFloatingBtt);
+</script>

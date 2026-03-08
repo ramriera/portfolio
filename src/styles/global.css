@@ -2363,3 +2363,130 @@ body.code-mode .heuristic-card[data-severity="medium"] .heuristic-severity-badge
   0%, 100% { box-shadow: 0 0 0 0 rgba(241, 250, 140, 0.2); }
   50% { box-shadow: 0 0 6px 1px rgba(241, 250, 140, 0.1); }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   FLOATING BACK TO TOP — FAB button
+   ═══════════════════════════════════════════════════════════ */
+
+.floating-btt {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid #e8e4dd;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #6b6560;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+}
+
+.floating-btt--visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.floating-btt:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #d4cfc8;
+  color: #1a1918;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.floating-btt:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Normal mode: show arrow, hide code label */
+.floating-btt-normal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-btt-code {
+  display: none;
+}
+
+/* ── Code Mode overrides ── */
+body.code-mode .floating-btt {
+  border-radius: 6px;
+  border-color: #30363d;
+  background: rgba(22, 27, 34, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--cm-text-muted, #8b949e);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  width: auto;
+  height: auto;
+  padding: 8px 10px;
+}
+
+body.code-mode .floating-btt:hover {
+  border-color: rgba(139, 233, 253, 0.4);
+  background: rgba(22, 27, 34, 0.95);
+  color: var(--cm-function, #8be9fd);
+  box-shadow: 0 0 12px rgba(139, 233, 253, 0.1), 0 4px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Code mode: hide arrow, show terminal label */
+body.code-mode .floating-btt-normal {
+  display: none;
+}
+
+body.code-mode .floating-btt-code {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.floating-btt-code-icon {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.floating-btt-code-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: opacity 0.25s ease, max-width 0.3s ease;
+}
+
+body.code-mode .floating-btt:hover .floating-btt-code-label {
+  opacity: 1;
+  max-width: 120px;
+}
+
+/* Mobile: keep button smaller and avoid overlap */
+@media (max-width: 640px) {
+  .floating-btt {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 42px;
+    height: 42px;
+  }
+
+  body.code-mode .floating-btt {
+    padding: 6px 8px;
+  }
+}
