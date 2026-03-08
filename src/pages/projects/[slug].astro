@@ -474,7 +474,9 @@ function md(text: string): string {
               <div class={`grid grid-cols-1 ${section.images.length > 1 ? 'sm:grid-cols-2' : ''} gap-4 md:gap-6 mt-8`}>
                 {section.images.map((img: string, i: number) => (
                   <figure data-reveal data-delay={String(250 + i * 80)} class="audit-image-figure group relative rounded-xl overflow-hidden border border-dark-200">
-                    <img src={img} alt={`${section.title} ${i + 1}`} class="lightbox-trigger audit-image w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                    <img src={img} alt={section.captions?.[i] || `${section.title} ${i + 1}`} class="lightbox-trigger audit-image w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                    {/* Code-mode image path */}
+                    <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                     {/* Hotspot overlay — appears on hover */}
                     <div class="audit-hotspot" data-severity={section.severity}>
                       <div class="audit-hotspot-badge">
@@ -520,7 +522,8 @@ function md(text: string): string {
             <div class={`space-y-6 ${section.images?.length === 1 && !section.images[0].endsWith('.svg') ? 'max-w-4xl mx-auto' : ''}`}>
               {section.images?.map((img: string, i: number) => (
                 <figure data-reveal class="rounded-xl overflow-hidden">
-                  <img src={img} alt={section.title} class={`w-full h-auto ${img.endsWith('.svg') ? '' : 'lightbox-trigger object-cover cursor-zoom-in'}`} loading="lazy" />
+                  <img src={img} alt={section.captions?.[i] || section.title} class={`w-full h-auto ${img.endsWith('.svg') ? '' : 'lightbox-trigger object-cover cursor-zoom-in'}`} loading="lazy" />
+                  <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                   {section.captions?.[i] && (
                     <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
@@ -555,7 +558,8 @@ function md(text: string): string {
             <div class={`grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto ${!section.highlight ? 'mt-10' : ''}`}>
               {section.images?.map((img: string, i: number) => (
                 <figure data-reveal data-delay={String(i * 80)} class="rounded-xl overflow-hidden">
-                  <img src={img} alt={`${section.title} ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                  <img src={img} alt={section.captions?.[i] || `${section.title} ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                  <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                   {section.captions?.[i] && (
                     <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
@@ -575,8 +579,9 @@ function md(text: string): string {
             )}
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {section.images?.map((img: string, i: number) => (
-                <div data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden">
-                  <img src={img} alt={`Pantalla ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                <div data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden relative">
+                  <img src={img} alt={`Slide ${i + 1} del audit`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                  <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                 </div>
               ))}
             </div>
@@ -893,7 +898,8 @@ function md(text: string): string {
   function initAuditorMode() {
     const auditorLogs = document.querySelectorAll('.heuristic-auditor-log');
     const scanHeader = document.querySelector('.audit-scan-header') as HTMLElement | null;
-    if (auditorLogs.length === 0 && !scanHeader) return;
+    const cmImagePaths = document.querySelectorAll('[data-cm-path]');
+    if (auditorLogs.length === 0 && !scanHeader && cmImagePaths.length === 0) return;
 
     let scanAnimated = false;
 
@@ -937,6 +943,17 @@ function md(text: string): string {
         } else {
           log.classList.add('hidden');
           log.classList.remove('block');
+        }
+      });
+
+      // Toggle code-mode image paths
+      cmImagePaths.forEach((el) => {
+        if (isCodeMode) {
+          el.classList.remove('hidden');
+          el.classList.add('block');
+        } else {
+          el.classList.add('hidden');
+          el.classList.remove('block');
         }
       });
 

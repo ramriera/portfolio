@@ -2203,6 +2203,31 @@ body.code-mode .audit-image-figure:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   CODE-MODE IMAGE PATH — System string below images
+   ═══════════════════════════════════════════════════════════ */
+
+.cm-image-path {
+  display: none;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: #8b949e;
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-top: none;
+  border-radius: 0 0 0.5rem 0.5rem;
+  padding: 0.35rem 0.75rem;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.code-mode .cm-image-path.block {
+  display: block;
+}
+
+/* ═══════════════════════════════════════════════════════════
    INTERACTIVE HOTSPOTS — Hover overlay on audit images
    ═══════════════════════════════════════════════════════════ */
 

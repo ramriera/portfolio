@@ -861,6 +861,10 @@ export const projects: Project[] = [
           '/assets/projects/imaginbank/imaginbank-1.png',
           '/assets/projects/imaginbank/imaginbank-2.png',
         ],
+        captions: [
+          'Portada del análisis heurístico: capturas de la app Imaginbank sobre fondo turquesa corporativo',
+          'Las 10 heurísticas de Jakob Nielsen como marco de evaluación del audit',
+        ],
       },
       {
         label: '02. Análisis Heurístico',
@@ -877,8 +881,8 @@ export const projects: Project[] = [
           '/assets/projects/imaginbank/imaginbank-4.png',
         ],
         captions: [
-          'Pantalla de transferencia sin indicador de progreso visible',
-          'Estado de confirmación ambiguo tras completar una operación',
+          'Slide H1: análisis de visibilidad del sistema — falta de feedback en acciones financieras',
+          'Slide H1: ejemplos de pantallas sin indicadores de estado durante operaciones críticas',
         ],
       },
       {
@@ -896,8 +900,8 @@ export const projects: Project[] = [
           '/assets/projects/imaginbank/imaginbank-6.png',
         ],
         captions: [
-          'Nomenclatura inconsistente: misma acción con diferentes labels',
-          'Patrones de interacción que varían entre pantallas similares',
+          'Slide H4: inconsistencias en nomenclatura — "Transferir", "Enviar" y "Bizum" para la misma acción',
+          'Slide H4: patrones de interacción divergentes entre pantallas con funcionalidad similar',
         ],
       },
       {
@@ -914,8 +918,8 @@ export const projects: Project[] = [
           '/assets/projects/imaginbank/imaginbank-8.png',
         ],
         captions: [
-          'Flujo sin opción de "deshacer" ni salida de emergencia clara',
-          'Opciones secundarias enterradas en submenús de difícil acceso',
+          'Slide H3: navegación rígida sin opción de retroceso ni "salida de emergencia"',
+          'Slide H3: funciones secundarias ocultas tras múltiples niveles de submenú',
         ],
       },
       {
@@ -933,8 +937,8 @@ export const projects: Project[] = [
           '/assets/projects/imaginbank/imaginbank-10.png',
         ],
         captions: [
-          'Mensaje de error genérico sin orientación hacia la solución',
-          'Ausencia de paso de confirmación en operación irreversible',
+          'Slide H5/H9: mensaje de error genérico "Ha ocurrido un error" sin guía de resolución',
+          'Slide H5/H9: operación financiera irreversible sin paso previo de confirmación',
         ],
       },
       {
@@ -951,8 +955,8 @@ export const projects: Project[] = [
           '/assets/projects/imaginbank/imaginbank-12.png',
         ],
         captions: [
-          'Jerarquía visual confusa: acciones frecuentes sin prominencia',
-          'Elementos decorativos compitiendo con información funcional',
+          'Slide H8: jerarquía visual confusa — Bizum y acciones frecuentes sin prominencia visual',
+          'Slide H8: elementos decorativos compitiendo con la información financiera funcional',
         ],
       },
       {
@@ -964,6 +968,10 @@ export const projects: Project[] = [
           '/assets/projects/imaginbank/imaginbank-13.png',
           '/assets/projects/imaginbank/imaginbank-14.png',
         ],
+        captions: [
+          'Perfil del usuario joven: nativo digital, usuario intensivo de apps de consumo (18-30 años)',
+          'Expectativas vs. realidad: la brecha entre neobancos (Revolut, N26) e Imaginbank',
+        ],
       },
       {
         label: '03. Definición y Empatía',
@@ -972,6 +980,9 @@ export const projects: Project[] = [
         content: 'El journey del usuario con Imaginbank revela **tres momentos críticos**: el **onboarding** (demasiado largo y con terminología bancaria), la **primera transferencia** (sin feedback claro ni confirmación visual), y la **gestión de tarjetas** (opciones enterradas en submenús).\n\nEstos **puntos de fricción** coinciden directamente con las heurísticas incumplidas: **falta de visibilidad (H1)**, **navegación rígida (H3)** y **prevención de errores insuficiente (H5)**. La frustración acumulada en estas **micro-interacciones** es lo que lleva al usuario a probar alternativas donde estas acciones se resuelven en **2-3 taps**.',
         images: [
           '/assets/projects/imaginbank/imaginbank-15.png',
+        ],
+        captions: [
+          'Journey map con puntos de fricción: onboarding, primera transferencia y gestión de tarjetas',
         ],
       },
       {
@@ -992,6 +1003,35 @@ export const projects: Project[] = [
         layout: 'image-grid',
         content: 'Las mejoras propuestas abarcan tanto la **arquitectura de información** como el **diseño visual**. A nivel arquitectónico: **simplificación de la navegación** principal a **4-5 secciones claras**, **accesos directos contextuales** y reducción de la profundidad de los flujos más frecuentes. A nivel visual: sistema de **feedback con micro-interacciones**, **jerarquía tipográfica revisada** para priorizar la información financiera clave, y un **lenguaje visual** más cercano al estándar de los neobancos.',
         images: [
+          '/assets/projects/imaginbank/imaginbank-16.png',
+          '/assets/projects/imaginbank/imaginbank-17.png',
+        ],
+        captions: [
+          'Wireframes de mejoras UX: reorganización de la home y página de productos con jerarquía optimizada',
+          'Conclusiones del audit: puntos fuertes, áreas de mejora y recomendaciones finales',
+        ],
+      },
+      {
+        label: '04. Presentación',
+        title: 'Full Audit Slides',
+        layout: 'screens-grid',
+        content: 'Galería completa de las diapositivas del **análisis heurístico**: desde la metodología inicial hasta las conclusiones y propuestas de mejora. Cada slide documenta una fase del audit con **capturas anotadas**, hallazgos clasificados por severidad y recomendaciones priorizadas.',
+        images: [
+          '/assets/projects/imaginbank/imaginbank-1.png',
+          '/assets/projects/imaginbank/imaginbank-2.png',
+          '/assets/projects/imaginbank/imaginbank-3.png',
+          '/assets/projects/imaginbank/imaginbank-4.png',
+          '/assets/projects/imaginbank/imaginbank-5.png',
+          '/assets/projects/imaginbank/imaginbank-6.png',
+          '/assets/projects/imaginbank/imaginbank-7.png',
+          '/assets/projects/imaginbank/imaginbank-8.png',
+          '/assets/projects/imaginbank/imaginbank-9.png',
+          '/assets/projects/imaginbank/imaginbank-10.png',
+          '/assets/projects/imaginbank/imaginbank-11.png',
+          '/assets/projects/imaginbank/imaginbank-12.png',
+          '/assets/projects/imaginbank/imaginbank-13.png',
+          '/assets/projects/imaginbank/imaginbank-14.png',
+          '/assets/projects/imaginbank/imaginbank-15.png',
           '/assets/projects/imaginbank/imaginbank-16.png',
           '/assets/projects/imaginbank/imaginbank-17.png',
         ],
