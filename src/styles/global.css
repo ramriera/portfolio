@@ -1550,8 +1550,16 @@ body.code-mode .timeline-gitlog {
   white-space: pre-wrap;
 }
 
+.gitlog-header {
+  color: #6c7086;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(108, 112, 134, 0.2);
+  font-size: 0.8rem;
+}
+
 .gitlog-entry {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .gitlog-entry:last-child {
@@ -1564,12 +1572,12 @@ body.code-mode .timeline-gitlog {
 }
 
 .gitlog-hash {
-  color: #fab387;
+  color: #f9e2af;
   font-weight: 600;
 }
 
 .gitlog-date {
-  color: #89b4fa;
+  color: #50fa7b;
 }
 
 .gitlog-role {
@@ -1589,6 +1597,7 @@ body.code-mode .timeline-gitlog {
 
 .gitlog-indent {
   user-select: none;
+  color: #50fa7b;
 }
 
 /* ── About page: "Soy" and section headings adopt code-mode colors ── */
@@ -1822,4 +1831,40 @@ body.code-mode [data-component="AboutHero"] .text-primary-500 {
   .code-mode footer {
     padding-bottom: 0;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TOOL ICONS — Grayscale in Code Mode, color on hover
+   ═══════════════════════════════════════════════════════════ */
+
+body.code-mode .stack-tool-icon {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+  cursor: crosshair;
+}
+
+body.code-mode .stack-tool-icon:hover,
+body.code-mode .group:hover .stack-tool-icon {
+  filter: grayscale(0%);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LAYOUT SYNC — Prevent layout shift between modes
+   ═══════════════════════════════════════════════════════════ */
+
+/* Tech stack container: match min-height for 4-column layout */
+.tech-stack-container {
+  min-height: 460px;
+}
+
+/* Git log enhanced glow in code mode */
+body.code-mode .gitlog-pre {
+  border-color: rgba(80, 250, 123, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(80, 250, 123, 0.03);
+}
+
+/* Ensure About page headings inherit #e6edf3 and monospace in Code Mode */
+body.code-mode [data-component="AboutHero"] p.text-body,
+body.code-mode [data-component="BiographySection"] p {
+  color: var(--cm-text-secondary) !important;
 }

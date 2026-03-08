@@ -29,9 +29,9 @@ export const navLinks = [
 
 export const services = [
   {
-    title: 'UX/UI Design',
-    description: 'Diseño de interfaces centradas en el usuario, con foco en usabilidad, accesibilidad y estética moderna.',
-    icon: 'layout',
+    title: 'UX Strategy',
+    description: 'User Research, Information Architecture y evaluación heurística para definir experiencias alineadas con objetivos de negocio.',
+    icon: 'search',
   },
   {
     title: 'Design Systems',
@@ -39,24 +39,24 @@ export const services = [
     icon: 'layers',
   },
   {
-    title: 'Product Design',
-    description: 'Diseño de producto end-to-end, desde la investigación y conceptualización hasta la entrega final.',
+    title: 'Escalabilidad de Producto',
+    description: 'Diseño de producto end-to-end con foco en crecimiento sostenible, desde la conceptualización hasta la entrega.',
     icon: 'box',
   },
   {
-    title: 'Design Ops',
-    description: 'Optimización de flujos de trabajo de diseño, herramientas y procesos para equipos de alto rendimiento.',
+    title: 'DesignOps',
+    description: 'Design Governance, Design Tokens Architecture y System Analytics para equipos de alto rendimiento.',
     icon: 'settings',
   },
   {
-    title: 'Branding Digital',
-    description: 'Identidad visual y branding para productos digitales que conectan con su audiencia.',
+    title: 'Puente Diseño-Ingeniería',
+    description: 'Conexión fluida entre diseño y desarrollo mediante tokens, documentación viva y procesos compartidos.',
     icon: 'star',
   },
   {
-    title: 'Consultoría UX',
-    description: 'Auditorías heurísticas, research y estrategia de diseño para mejorar productos existentes.',
-    icon: 'search',
+    title: 'WCAG Accessibility',
+    description: 'Auditorías de accesibilidad WCAG 2.1 AA, testing con usuarios reales y estrategia de diseño inclusivo.',
+    icon: 'layout',
   },
 ];
 
