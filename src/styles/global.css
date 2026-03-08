@@ -774,12 +774,13 @@ body.code-mode aside:hover {
 
 /* ── Hero "Soy" greeting — adopt heading color in Code Mode ── */
 .code-mode [data-component="HeroSection"] .hero-main-content > div:first-child .text-dark-900 {
-  color: var(--cm-text) !important;      /* bright white like headings */
+  color: var(--cm-function) !important;  /* cyan — match h2 headings */
   text-shadow: none !important;          /* flat, no glow residuals */
 }
 
 /* Ensure h1 "Diseño experiencias digitales que" has clean, solid color */
 .code-mode [data-component="HeroSection"] h1.heading-xl {
+  color: var(--cm-function) !important;  /* cyan — match h2 headings */
   text-shadow: none !important;          /* remove purple glow — flat terminal style */
   background: none !important;
   -webkit-text-fill-color: unset !important;
