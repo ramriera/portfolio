@@ -12,8 +12,6 @@ export const siteConfig = {
   social: {
     linkedin: 'https://linkedin.com/in/ramonrieradepares',
     medium: 'https://medium.com/@ramriera',
-    github: 'https://github.com/ramriera',
-    dribbble: 'https://dribbble.com/ramriera',
   },
   og: {
     image: '/images/og-image.jpg',
@@ -607,7 +605,7 @@ export const projects: Project[] = [
       '+200 componentes documentados y versionados',
       'Adoptado por 15 equipos de producto e ingeniería',
     ],
-    stack: ['Figma', 'Zeroheight', 'Storybook', 'Tokens Studio', 'React'],
+    stack: ['Figma', 'Zeroheight', 'Storybook', 'React'],
     cover: '/assets/projects/sabadell/banc-sabadell-header.png',
     gallery: [
       '/assets/projects/sabadell/banc-sabadell-header.png',
@@ -623,7 +621,7 @@ export const projects: Project[] = [
       industry: 'Fintech',
       output: 'UI Library & Documentation',
       duration: '4 meses',
-      tools: ['Figma', 'Sketch', 'Zeroheight', 'Storybook', 'Tokens Studio'],
+      tools: ['Figma', 'Sketch', 'Zeroheight', 'Storybook'],
       skills: ['Design Systems', 'Design Tokens', 'Component Library', 'UX Bancaria', 'Accessibility (WCAG)', 'Documentation', 'Governance', 'Cross-Platform Consistency', 'Responsive Design', 'Interaction Design'],
     },
     checks: [
@@ -973,7 +971,7 @@ export const projects: Project[] = [
       'Tiempo de desarrollo de nuevas features reducido un 35%',
       'Adopción del 100% de Design Tokens en ambas plataformas',
     ],
-    stack: ['Figma', 'Tokens Studio', 'Storybook', 'Zeroheight', 'Swift UI'],
+    stack: ['Figma', 'Storybook', 'Zeroheight', 'Swift UI'],
     cover: '/assets/projects/iberia/iberia-header.png',
     gallery: [
       '/assets/projects/iberia/iberia-header.png',
@@ -990,7 +988,7 @@ export const projects: Project[] = [
       industry: 'Travel',
       output: 'Unified Design System & Tokens',
       duration: '12 semanas',
-      tools: ['Figma', 'Tokens Studio', 'Storybook', 'Zeroheight', 'Miro'],
+      tools: ['Figma', 'Storybook', 'Zeroheight', 'Miro'],
       skills: ['Design Systems', 'Design Tokens', 'Component Library', 'Cross-Platform Consistency', 'Information Architecture', 'Digital Product Design', 'Atomic Design', 'Accessibility (WCAG)', 'Design Ops', 'Responsive Design', 'Prototyping', 'Documentation'],
     },
     checks: [
