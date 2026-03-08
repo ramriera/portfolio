@@ -1327,6 +1327,138 @@ body.code-mode aside:hover {
   overflow: hidden;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   TECH STACK — Grid ↔ JSON toggle (Code Mode)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Container: fixed min-height prevents layout shift when toggling modes */
+.tech-stack-container {
+  min-height: 420px;
+}
+
+/* Normal mode: show grid, hide JSON */
+.tech-stack-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .tech-stack-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+.tech-stack-json {
+  display: none;
+}
+
+/* Code mode: hide grid, show JSON */
+body.code-mode .tech-stack-grid {
+  display: none;
+}
+
+body.code-mode .tech-stack-json {
+  display: block;
+}
+
+/* ── JSON Window (VS Code aesthetic) ── */
+.json-window {
+  background: #1e1e2e;
+  border-radius: 12px;
+  border: 1px solid var(--cm-border, #30363d);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.json-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #181825;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.json-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.json-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.json-dot--red { background: #ff5f57; }
+.json-dot--yellow { background: #febc2e; }
+.json-dot--green { background: #28c840; }
+
+.json-filename {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #7d8590;
+  letter-spacing: 0.02em;
+}
+
+.json-body {
+  padding: 1.5rem 2rem;
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.875rem;
+  line-height: 1.8;
+  overflow-x: auto;
+  color: #cdd6f4;
+}
+
+.json-body code {
+  font-family: inherit;
+}
+
+/* VS Code / Dracula-inspired syntax tokens */
+.json-key {
+  color: #89b4fa; /* blue — keys */
+}
+
+.json-string {
+  color: #a6e3a1; /* green — string values */
+}
+
+.json-number {
+  color: #fab387; /* orange/peach — numbers */
+}
+
+.json-bracket {
+  color: #f9e2af; /* yellow — braces & brackets */
+  font-weight: 600;
+}
+
+.json-colon {
+  color: #cdd6f4; /* base text — punctuation */
+}
+
+.json-comma {
+  color: #6c7086; /* muted — commas */
+}
+
+/* Normal mode: JSON window gets light theme look (hidden anyway, but safe) */
+:not(.code-mode) .json-window {
+  background: #1e1e2e;
+}
+
+/* Code mode: enhance glow */
+body.code-mode .json-window {
+  border-color: rgba(80, 250, 123, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(80, 250, 123, 0.03);
+}
+
+body.code-mode .json-titlebar {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom-color: var(--cm-border);
+}
+
 .parallax-cover-img {
   will-change: transform;
   transition: transform 0.1s linear;
