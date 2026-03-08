@@ -27,6 +27,23 @@ function md(text: string): string {
   description={project.description}
   image={project.cover}
 >
+  <!-- Audit Scan Header (visible only in code mode for heuristic audits) -->
+  {project.caseSections?.some((s: CaseSection) => s.layout === 'heuristic-card') && (
+    <div class="audit-scan-header hidden" data-component="AuditScanHeader">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto py-3 font-mono text-xs leading-relaxed">
+          <p class="audit-scan-line text-emerald-400" data-delay="0">[SYSTEM_CHECK] Initializing UX Vulnerability Scanner v2.1...</p>
+          <p class="audit-scan-line text-emerald-400" data-delay="200">[SYSTEM_CHECK] Target: {project.title} — {project.client}</p>
+          <p class="audit-scan-line text-cyan-400" data-delay="400">[SCAN] Applying Nielsen Heuristic Framework (10/10 heuristics)...</p>
+          <p class="audit-scan-line text-cyan-400" data-delay="600">[SCAN] Analyzing user flows, feedback systems, navigation patterns...</p>
+          <p class="audit-scan-line text-amber-400" data-delay="800">[WARN] {project.caseSections!.filter((s: CaseSection) => s.severity === 'critical').length} CRITICAL violations detected.</p>
+          <p class="audit-scan-line text-amber-400" data-delay="1000">[WARN] {project.caseSections!.filter((s: CaseSection) => s.severity === 'medium').length} MEDIUM violations detected.</p>
+          <p class="audit-scan-line text-emerald-400 font-bold" data-delay="1200">[SYSTEM_CHECK] Scanning Imaginbank App for UX Vulnerabilities... <span class="text-white">100% COMPLETE.</span></p>
+        </div>
+      </div>
+    </div>
+  )}
+
   <!-- Hero -->
   <section class="section-padding pb-12" data-component="ProjectHero">
     <div class="container-custom">
@@ -451,12 +468,28 @@ function md(text: string): string {
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-4" set:html={md(paragraph)} />
             ))}
 
-            {/* Images side by side */}
+            {/* Images with interactive hotspots */}
             {section.images && section.images.length > 0 && (
               <div class={`grid grid-cols-1 ${section.images.length > 1 ? 'sm:grid-cols-2' : ''} gap-4 md:gap-6 mt-8`}>
                 {section.images.map((img: string, i: number) => (
-                  <figure data-reveal data-delay={String(250 + i * 80)} class="rounded-xl overflow-hidden">
-                    <img src={img} alt={`${section.title} ${i + 1}`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                  <figure data-reveal data-delay={String(250 + i * 80)} class="audit-image-figure group relative rounded-xl overflow-hidden border border-dark-200">
+                    <img src={img} alt={`${section.title} ${i + 1}`} class="lightbox-trigger audit-image w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                    {/* Hotspot overlay — appears on hover */}
+                    <div class="audit-hotspot" data-severity={section.severity}>
+                      <div class="audit-hotspot-badge">
+                        <span class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-bold ${
+                          section.severity === 'critical' ? 'bg-red-500/90 text-white' :
+                          section.severity === 'medium' ? 'bg-amber-500/90 text-white' :
+                          'bg-emerald-500/90 text-white'
+                        }`}>
+                          <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" />
+                          </svg>
+                          H{section.heuristicId?.replace('#', '')}
+                        </span>
+                        <span class="block mt-1.5 text-xs font-semibold text-white drop-shadow-lg">{section.title.replace(/^H\d+\s*\/?\s*H?\d*\s*-\s*/, '')}</span>
+                      </div>
+                    </div>
                     {section.captions?.[i] && (
                       <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                     )}
@@ -866,13 +899,47 @@ function md(text: string): string {
 </script>
 
 <script>
-  // Auditor Mode: toggle heuristic console logs based on code-mode state
+  // Auditor Mode: toggle heuristic console logs + scan header based on code-mode state
   function initAuditorMode() {
     const auditorLogs = document.querySelectorAll('.heuristic-auditor-log');
-    if (auditorLogs.length === 0) return;
+    const scanHeader = document.querySelector('.audit-scan-header') as HTMLElement | null;
+    if (auditorLogs.length === 0 && !scanHeader) return;
 
-    function updateAuditorLogs() {
+    let scanAnimated = false;
+
+    function animateScanLines() {
+      if (!scanHeader || scanAnimated) return;
+      scanAnimated = true;
+      const lines = scanHeader.querySelectorAll('.audit-scan-line');
+      lines.forEach((line) => {
+        const el = line as HTMLElement;
+        const delay = parseInt(el.dataset.delay || '0', 10);
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(-8px)';
+        setTimeout(() => {
+          el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          el.style.opacity = '1';
+          el.style.transform = 'translateX(0)';
+        }, delay);
+      });
+    }
+
+    function resetScanLines() {
+      scanAnimated = false;
+      if (!scanHeader) return;
+      const lines = scanHeader.querySelectorAll('.audit-scan-line');
+      lines.forEach((line) => {
+        const el = line as HTMLElement;
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(-8px)';
+        el.style.transition = 'none';
+      });
+    }
+
+    function updateAuditorMode() {
       const isCodeMode = document.documentElement.classList.contains('code-mode');
+
+      // Toggle auditor logs
       auditorLogs.forEach((log) => {
         if (isCodeMode) {
           log.classList.remove('hidden');
@@ -882,19 +949,32 @@ function md(text: string): string {
           log.classList.remove('block');
         }
       });
+
+      // Toggle scan header
+      if (scanHeader) {
+        if (isCodeMode) {
+          scanHeader.classList.remove('hidden');
+          scanHeader.classList.add('block');
+          animateScanLines();
+        } else {
+          scanHeader.classList.add('hidden');
+          scanHeader.classList.remove('block');
+          resetScanLines();
+        }
+      }
     }
 
     // Watch for code-mode toggle
     const observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         if (mutation.attributeName === 'class') {
-          updateAuditorLogs();
+          updateAuditorMode();
         }
       }
     });
 
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    updateAuditorLogs();
+    updateAuditorMode();
   }
 
   initAuditorMode();
