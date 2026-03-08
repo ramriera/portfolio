@@ -1600,6 +1600,181 @@ body.code-mode .timeline-gitlog {
   color: #50fa7b;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   WORKFLOW PIPELINE — Normal + Code Mode (CI/CD)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Visibility toggles ── */
+.workflow-pipeline { display: none; }
+.specialties-code { display: none; }
+
+body.code-mode .workflow-normal { display: none; }
+body.code-mode .specialties-normal { display: none; }
+
+body.code-mode .workflow-pipeline { display: block; }
+body.code-mode .specialties-code { display: block; }
+
+/* ── Normal Mode: Step Cards ── */
+.workflow-step-card {
+  position: relative;
+  overflow: visible;
+}
+
+.workflow-arrow {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  opacity: 0.35;
+}
+
+/* ── Code Mode: Specialty tags ── */
+.workflow-specialty-tag {
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  background: rgba(139, 233, 253, 0.06);
+  border: 1px solid rgba(139, 233, 253, 0.15);
+}
+
+/* ── Code Mode: Pipeline Window ── */
+.pipeline-window {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 60px rgba(63, 185, 80, 0.04);
+}
+
+.pipeline-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  font-size: 0.75rem;
+  color: #7d8590;
+}
+
+.pipeline-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.pipeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.pipeline-dot--red { background: #ff5f57; }
+.pipeline-dot--yellow { background: #febc2e; }
+.pipeline-dot--green { background: #28c840; }
+
+.pipeline-filename {
+  display: flex;
+  align-items: center;
+  color: #7d8590;
+  font-size: 0.75rem;
+}
+
+.pipeline-body {
+  padding: 1.5rem 2rem;
+}
+
+.pipeline-header {
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.pipeline-separator {
+  border-top: 1px solid rgba(48, 54, 61, 0.6);
+  margin: 0.75rem 0;
+}
+
+.pipeline-stages {
+  padding: 0.5rem 0;
+}
+
+.pipeline-stage {
+  margin-bottom: 0.25rem;
+}
+
+.pipeline-stage-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pipeline-status {
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.pipeline-status--pass { color: #3fb950; }
+.pipeline-status--building { color: #58a6ff; }
+.pipeline-status--deploying { color: #58a6ff; }
+.pipeline-status--success { color: #3fb950; }
+
+.pipeline-script {
+  color: #e6edf3;
+  font-weight: 500;
+}
+
+.pipeline-stage-detail {
+  padding-left: 0;
+}
+
+.pipeline-desc {
+  color: #7d8590;
+  font-size: 0.78rem;
+}
+
+.pipeline-stage-meta {
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.pipeline-indent {
+  color: #30363d;
+  user-select: none;
+}
+
+.pipeline-connector {
+  color: #30363d;
+  user-select: none;
+  line-height: 1.3;
+}
+
+.pipeline-footer {
+  font-size: 0.8rem;
+}
+
+/* Blinking effect for active stages */
+@keyframes pipelineBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.pipeline-blink {
+  animation: pipelineBlink 2s ease-in-out infinite;
+}
+
+/* Active stage subtle highlight */
+.pipeline-stage--active {
+  padding: 0.35rem 0.5rem;
+  margin: 0.25rem -0.5rem;
+  border-radius: 6px;
+  background: rgba(88, 166, 255, 0.04);
+  border-left: 2px solid #58a6ff;
+}
+
 /* ── About page: "Soy" and section headings adopt code-mode colors ── */
 body.code-mode [data-component="AboutHero"] h1,
 body.code-mode [data-component="AboutHero"] .heading-xl,
@@ -1607,8 +1782,7 @@ body.code-mode [data-component="BiographySection"] .heading-md,
 body.code-mode [data-component="CareerTimeline"] .heading-md,
 body.code-mode [data-component="ValuesGrid"] .heading-md,
 body.code-mode [data-component="TechStackSection"] .heading-lg,
-body.code-mode [data-component="SpecialtiesSection"] .heading-lg,
-body.code-mode [data-component="ProcessSection"] .heading-lg,
+body.code-mode [data-component="WorkflowSection"] .heading-lg,
 body.code-mode [data-component="CallToAction"] .heading-lg {
   color: #e6edf3 !important;
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
@@ -1622,10 +1796,9 @@ body.code-mode .hero-main-content .text-dark-900 {
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
 }
 
-/* Section labels (Stack, Especialidades, Proceso, etc.) in code mode */
+/* Section labels (Stack, Workflow, etc.) in code mode */
 body.code-mode [data-component="TechStackSection"] .text-primary-500,
-body.code-mode [data-component="SpecialtiesSection"] .text-primary-500,
-body.code-mode [data-component="ProcessSection"] .text-primary-500,
+body.code-mode [data-component="WorkflowSection"] .text-primary-500,
 body.code-mode [data-component="AboutHero"] .text-primary-500 {
   color: #50fa7b !important;
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
