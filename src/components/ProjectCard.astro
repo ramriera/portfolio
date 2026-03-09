@@ -9,23 +9,25 @@ interface Props {
   description: string;
   cover: string;
   featured?: boolean;
-  variant?: 'default' | 'featured';
+  variant?: 'default' | 'featured' | 'tall';
 }
 
 const { slug, title, client, year, category, tags, description, cover, featured, variant = 'default' } = Astro.props;
 const isFeatured = variant === 'featured';
+const isTall = variant === 'tall';
 ---
 
 <a
   href={`/projects/${slug}`}
   class:list={[
     'project-card group relative block rounded-2xl overflow-hidden cursor-pointer',
+    isTall ? 'h-full' : '',
     featured ? 'lg:col-span-2' : '',
   ]}
   data-component="ProjectCard"
   data-token="$radius-2xl: 1rem / 16px|$spacing-padding: 1.5rem → 2rem (md)"
 >
-  <div class:list={['relative', isFeatured ? 'aspect-[16/9]' : 'aspect-[4/3]']}>
+  <div class:list={['relative', isTall ? 'h-full min-h-[400px]' : isFeatured ? 'aspect-[16/9]' : 'aspect-[4/3]']}>
     <!-- Image mockup -->
     <img
       src={cover}
