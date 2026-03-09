@@ -18,7 +18,7 @@ const featuredProjects = projects
   });
 ---
 
-<BaseLayout title="Ramon Riera - Senior UX/UI Designer | Design Systems & Product Design">
+<BaseLayout title="Ramon Riera · UX Lead - Product Designer">
   <!-- Hero -->
   <HeroSection />
 
@@ -76,8 +76,8 @@ const featuredProjects = projects
         data-component="ProjectGrid"
         data-token="$grid-cols: 1 → 2 (md)|$spacing-gap: 2rem / 32px">
         {featuredProjects.map((project, i) => (
-          <div data-reveal data-delay={String(i * 100)}>
-            <ProjectCard {...project} />
+          <div data-reveal data-delay={String(i * 100)} class={i === 0 ? 'md:col-span-2' : ''}>
+            <ProjectCard {...project} variant={i === 0 ? 'featured' : 'default'} />
           </div>
         ))}
       </div>

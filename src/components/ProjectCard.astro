@@ -9,9 +9,11 @@ interface Props {
   description: string;
   cover: string;
   featured?: boolean;
+  variant?: 'default' | 'featured';
 }
 
-const { slug, title, client, year, category, tags, description, cover, featured } = Astro.props;
+const { slug, title, client, year, category, tags, description, cover, featured, variant = 'default' } = Astro.props;
+const isFeatured = variant === 'featured';
 ---
 
 <a
@@ -23,7 +25,7 @@ const { slug, title, client, year, category, tags, description, cover, featured 
   data-component="ProjectCard"
   data-token="$radius-2xl: 1rem / 16px|$spacing-padding: 1.5rem → 2rem (md)"
 >
-  <div class="relative aspect-[4/3]">
+  <div class:list={['relative', isFeatured ? 'aspect-[16/9]' : 'aspect-[4/3]']}>
     <!-- Image mockup -->
     <img
       src={cover}
@@ -43,7 +45,10 @@ const { slug, title, client, year, category, tags, description, cover, featured 
     <!-- Bottom content -->
     <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
       <!-- Title - always visible -->
-      <h3 class="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-1"
+      <h3 class:list={[
+          'font-semibold tracking-tight text-white mb-1',
+          isFeatured ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-xl sm:text-2xl',
+        ]}
         data-token="$font-size-heading-sm: 1.25rem → 1.5rem|$font-weight: 600 (semibold)|$color-text: #ffffff">
         {title}
       </h3>
