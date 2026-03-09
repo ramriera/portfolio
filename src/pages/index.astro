@@ -5,7 +5,7 @@ import AboutSection from '@/components/AboutSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { projects, siteConfig } from '@/utils/data';
 
-const projectOrder = ['massimo-dutti-conversion', 'imaginbank-digital-banking', 'solotemazos-music-platform', 'iberia-flight-experience'];
+const projectOrder = ['massimo-dutti-conversion', 'banco-sabadell-design-system', 'movefast-startup-platform', 'imaginbank-digital-banking', 'solotemazos-music-platform', 'iberia-flight-experience'];
 const featuredProjects = projects
   .filter((p) => p.featured)
   .sort((a, b) => {
@@ -75,11 +75,14 @@ const featuredProjects = projects
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8"
         data-component="ProjectGrid"
         data-token="$grid-cols: 1 → 2 (md)|$spacing-gap: 2rem / 32px">
-        {featuredProjects.map((project, i) => (
-          <div data-reveal data-delay={String(i * 100)} class={i <= 1 ? 'md:col-span-2' : ''}>
-            <ProjectCard {...project} variant={i <= 1 ? 'featured' : 'default'} />
-          </div>
-        ))}
+        {featuredProjects.map((project, i) => {
+          const isFeatured = i === 0 || i === 3;
+          return (
+            <div data-reveal data-delay={String(i * 100)} class={isFeatured ? 'md:col-span-2' : ''}>
+              <ProjectCard {...project} variant={isFeatured ? 'featured' : 'default'} />
+            </div>
+          );
+        })}
       </div>
     </div>
   </section>
