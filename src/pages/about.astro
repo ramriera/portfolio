@@ -2,46 +2,6 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { services, siteConfig } from '@/utils/data';
 
-const workflow = [
-  {
-    step: '01',
-    title: 'Audit & Inventory',
-    description: 'Mapeo completo del ecosistema actual: componentes, tokens, inconsistencias y deuda de diseño.',
-    script: '01_audit_inventory.sh',
-    status: 'PASS',
-    statusIcon: '✔',
-  },
-  {
-    step: '02',
-    title: 'Core Foundation',
-    description: 'Arquitectura de tokens, primitivas visuales y la base escalable del sistema de diseño.',
-    script: '02_core_foundation.sh',
-    status: 'PASS',
-    statusIcon: '✔',
-  },
-  {
-    step: '03',
-    title: 'Component Architecture',
-    description: 'Diseño y desarrollo de componentes modulares, documentados y listos para producción.',
-    script: '03_component_arch.sh',
-    status: 'BUILDING',
-    statusIcon: '⟳',
-  },
-  {
-    step: '04',
-    title: 'Governance & Adoption',
-    description: 'Procesos de contribución, métricas de adopción y evolución continua del sistema.',
-    script: '04_governance_adoption.sh',
-    status: 'DEPLOYING',
-    statusIcon: '▶',
-  },
-];
-
-const specialties = [
-  'Design Systems',
-  'DesignOps',
-  'UX Strategy',
-];
 
 const timeline = [
   { year: '2023-2025', role: 'Design Systems & Strategy Lead', company: 'Doctori.com', description: 'Liderando Design Ops y el Design System para la plataforma de salud digital.', gitMsg: 'feat(design-ops): implement token architecture & system analytics' },
@@ -206,7 +166,7 @@ const timeline = [
       <!-- Stack container with fixed min-height to prevent layout shift -->
       <div class="tech-stack-container" data-reveal data-delay="300">
         <!-- Normal Mode: Icon Grid -->
-        <div class="tech-stack-grid" data-component="TechStackGrid" data-token="$grid-columns: 4|$gap: 2rem / 32px">
+        <div class="tech-stack-grid" data-component="TechStackGrid" data-token="$grid-columns: 2|$gap: 2rem / 32px">
           <!-- Design Column -->
           <div class="p-8 rounded-2xl dashed-border bg-white" data-component="StackColumn">
             <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">Design</h3>
@@ -376,127 +336,6 @@ const timeline = [
 <span class="json-line">    <span class="json-key">"component_adoption"</span><span class="json-colon">:</span> <span class="json-string">"<span class="json-number">95%</span>"</span></span>
 <span class="json-line">  <span class="json-bracket">}</span></span>
 <span class="json-line"><span class="json-bracket">}</span></span></code></pre>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- My System Workflow -->
-  <section class="section-padding" data-component="WorkflowSection">
-    <div class="container-custom">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <div data-reveal class="mb-6">
-          <span class="text-sm font-medium text-primary-500 tracking-wide">Proceso</span>
-        </div>
-        <h2 data-reveal data-delay="100" class="heading-lg mb-4">
-          My System <span class="text-primary-500">Workflow</span>
-        </h2>
-        <p data-reveal data-delay="200" class="text-body">
-          Un proceso sistemático para construir, escalar y gobernar sistemas de diseño de clase enterprise.
-        </p>
-      </div>
-
-      <!-- Specialties bar (above pipeline) -->
-      <div data-reveal data-delay="150" class="workflow-specialties-bar" data-component="SpecialtiesBar">
-        <!-- Normal mode -->
-        <div class="specialties-normal">
-          <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
-            {specialties.map((s) => (
-              <span class="px-5 py-2 rounded-full text-sm font-semibold bg-primary-50 text-primary-600 border border-primary-200">
-                {s}
-              </span>
-            ))}
-          </div>
-        </div>
-        <!-- Code mode -->
-        <div class="specialties-code">
-          <div class="flex flex-wrap items-center justify-center gap-3 mb-10 font-mono text-sm">
-            {specialties.map((s, i) => (
-              <span class="workflow-specialty-tag">
-                <span class="text-[#8be9fd]">export</span> <span class="text-[#50fa7b]">{s.replace(/\s+/g, '_').toUpperCase()}</span>=<span class="text-[#f1fa8c]">"active"</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <!-- Normal Mode: Horizontal Grid -->
-      <div class="workflow-normal" data-component="WorkflowGrid">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {workflow.map((item, i) => (
-            <div data-reveal data-delay={String(i * 100)} class="workflow-step-card group relative p-8 rounded-2xl dashed-border bg-white card-hover"
-              data-component="WorkflowStep" data-token="$spacing-padding: 2rem / 32px|$radius-2xl: 1rem / 16px">
-              <span class="text-6xl font-black text-dark-100 absolute top-4 right-6">
-                {item.step}
-              </span>
-              <div class="relative z-10">
-                <h3 class="heading-sm mb-3">{item.title}</h3>
-                <p class="text-body-sm">{item.description}</p>
-              </div>
-              {i < workflow.length - 1 && (
-                <div class="workflow-arrow hidden lg:block">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-dark-200">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Code Mode: CI/CD Pipeline -->
-      <div class="workflow-pipeline" data-component="CICDPipeline">
-        <div class="pipeline-window">
-          <div class="pipeline-titlebar">
-            <div class="pipeline-dots">
-              <span class="pipeline-dot pipeline-dot--red"></span>
-              <span class="pipeline-dot pipeline-dot--yellow"></span>
-              <span class="pipeline-dot pipeline-dot--green"></span>
-            </div>
-            <span class="pipeline-filename">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="inline-block mr-1 opacity-50">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
-              </svg>
-              deploy_pipeline.yml
-            </span>
-          </div>
-          <div class="pipeline-body">
-            <div class="pipeline-header">
-              <span class="text-[#7d8590]">$</span> <span class="text-[#e6edf3]">./run_pipeline.sh</span> <span class="text-[#7d8590]">--env=production --verbose</span>
-            </div>
-            <div class="pipeline-separator"></div>
-            <div class="pipeline-stages">
-              {workflow.map((item, i) => (
-                <div class:list={['pipeline-stage', { 'pipeline-stage--active': item.status === 'BUILDING' || item.status === 'DEPLOYING' }]}>
-                  <div class="pipeline-stage-header">
-                    <span class:list={['pipeline-status', `pipeline-status--${item.status.toLowerCase()}`]}>
-                      [{item.statusIcon} {item.status}]
-                    </span>
-                    <span class="pipeline-script">{item.script}</span>
-                  </div>
-                  <div class="pipeline-stage-detail">
-                    <span class="pipeline-indent">  ├─</span>
-                    <span class="pipeline-desc">{item.description}</span>
-                  </div>
-                  <div class="pipeline-stage-meta">
-                    <span class="pipeline-indent">  └─</span>
-                    <span class="text-[#7d8590]">stage {item.step}/04</span>
-                    {(item.status === 'PASS') && <span class="text-[#3fb950]"> ● completed</span>}
-                    {(item.status === 'BUILDING') && <span class="text-[#58a6ff] pipeline-blink"> ◉ in progress...</span>}
-                    {(item.status === 'DEPLOYING') && <span class="text-[#58a6ff] pipeline-blink"> ◉ queued</span>}
-                  </div>
-                  {i < workflow.length - 1 && (
-                    <div class="pipeline-connector">  │</div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div class="pipeline-separator"></div>
-            <div class="pipeline-footer">
-              <span class="text-[#3fb950]">✔ Pipeline status:</span> <span class="text-[#e6edf3]">2/4 stages complete</span> <span class="text-[#7d8590]">| ETA: scaling in progress</span>
-            </div>
           </div>
         </div>
       </div>

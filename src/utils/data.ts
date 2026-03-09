@@ -868,14 +868,6 @@ export const projects: Project[] = [
         suggestion: 'Implementar sistema de feedback con estados de progreso, confirmaciones visuales claras y notificaciones en tiempo real para todas las operaciones financieras.',
         content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante **feedback apropiado** y en un tiempo razonable.\n\nEn esta pantalla de la app, la **Heurística #1 falla** porque no existe ningún indicador visual que confirme al usuario que su transferencia se está procesando. La ausencia de un **spinner, barra de progreso o mensaje de estado** deja al usuario en la incertidumbre - un problema crítico cuando se trata de **dinero real**.',
         highlight: 'La falta de feedback en **acciones financieras críticas** compromete la **confianza del usuario** en los momentos donde más la necesita.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-3.png',
-          '/assets/projects/imaginbank/imaginbank-4.png',
-        ],
-        captions: [
-          'Slide H1: análisis de visibilidad del sistema — falta de feedback en acciones financieras',
-          'Slide H1: ejemplos de pantallas sin indicadores de estado durante operaciones críticas',
-        ],
       },
       {
         label: '02. Análisis Heurístico',
@@ -887,14 +879,6 @@ export const projects: Project[] = [
         suggestion: 'Crear un sistema de design tokens unificado con nomenclatura consistente. Auditar todos los labels y unificar terminología en un glosario UX.',
         content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEn estas pantallas se evidencia cómo la **Heurística #4 se incumple** de forma sistemática: la misma acción de enviar dinero aparece como "Transferir", "Enviar" y "Bizum" en diferentes secciones. La **iconografía** no sigue un **lenguaje visual coherente** y algunos **patrones de interacción** varían entre pantallas similares.',
         highlight: 'La **nomenclatura inconsistente** entre secciones genera **confusión cognitiva** - el usuario tiene que "reaprender" la interfaz en cada pantalla.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-5.png',
-          '/assets/projects/imaginbank/imaginbank-6.png',
-        ],
-        captions: [
-          'Slide H4: inconsistencias en nomenclatura — "Transferir", "Enviar" y "Bizum" para la misma acción',
-          'Slide H4: patrones de interacción divergentes entre pantallas con funcionalidad similar',
-        ],
       },
       {
         label: '02. Análisis Heurístico',
@@ -905,14 +889,6 @@ export const projects: Project[] = [
         finding: 'La navegación es rígida: no hay opción de deshacer acciones, volver atrás es confuso y las opciones secundarias están enterradas en submenús.',
         suggestion: 'Implementar acción "Undo" en el flujo de transacciones. Añadir accesos directos contextuales y simplificar la navegación de retorno.',
         content: 'Los usuarios necesitan una **"salida de emergencia"** clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nEn estas capturas se observa cómo la **Heurística #3 se vulnera** de forma crítica: la **falta de flexibilidad** impide al usuario **deshacer acciones**, volver atrás de forma intuitiva o acceder a **opciones secundarias** sin recorrer múltiples pantallas.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-7.png',
-          '/assets/projects/imaginbank/imaginbank-8.png',
-        ],
-        captions: [
-          'Slide H3: navegación rígida sin opción de retroceso ni "salida de emergencia"',
-          'Slide H3: funciones secundarias ocultas tras múltiples niveles de submenú',
-        ],
       },
       {
         label: '02. Análisis Heurístico',
@@ -924,14 +900,6 @@ export const projects: Project[] = [
         suggestion: 'Rediseñar mensajes de error con lenguaje claro y accionable. Añadir confirmación previa en operaciones irreversibles y opción de cancelar/revertir.',
         content: 'Un diseño cuidadoso que **prevenga errores** es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en **lenguaje claro** y ofrecer una **solución constructiva**.\n\nEn estas pantallas se identifica cómo las **Heurísticas #5 y #9 fallan simultáneamente**: los **mensajes de error son genéricos** ("Ha ocurrido un error") sin orientar al usuario hacia la solución.',
         highlight: 'Los **mensajes de error genéricos** en operaciones financieras no solo frustran - **erosionan activamente la confianza** en la plataforma.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-9.png',
-          '/assets/projects/imaginbank/imaginbank-10.png',
-        ],
-        captions: [
-          'Slide H5/H9: mensaje de error genérico "Ha ocurrido un error" sin guía de resolución',
-          'Slide H5/H9: operación financiera irreversible sin paso previo de confirmación',
-        ],
       },
       {
         label: '02. Análisis Heurístico',
@@ -942,14 +910,6 @@ export const projects: Project[] = [
         finding: 'La jerarquía visual es confusa en algunas pantallas. Elementos decorativos compiten con información funcional. Bizum y transferencias rápidas no tienen la prominencia que su frecuencia de uso justifica.',
         suggestion: 'Aplicar progressive disclosure. Priorizar visualmente las 3-4 acciones más frecuentes. Reducir ruido visual en pantallas de información financiera.',
         content: 'Cada unidad extra de información compite con las unidades relevantes y **disminuye su visibilidad relativa**.\n\nEn estas pantallas vemos cómo la **Heurística #8 presenta debilidades**: aunque la estética general era limpia, se detectaron áreas donde la **jerarquía visual era confusa** y **elementos decorativos competían** con la información funcional.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-11.png',
-          '/assets/projects/imaginbank/imaginbank-12.png',
-        ],
-        captions: [
-          'Slide H8: jerarquía visual confusa — Bizum y acciones frecuentes sin prominencia visual',
-          'Slide H8: elementos decorativos compitiendo con la información financiera funcional',
-        ],
       },
       {
         label: '03. Definición y Empatía',
@@ -986,13 +946,6 @@ export const projects: Project[] = [
         title: 'Capturas de la app',
         layout: 'screens-grid',
         content: 'Capturas reales de la interfaz de **Imaginbank**: las pantallas que se analizaron durante el audit heurístico, mostrando la UI tal y como la encuentra el usuario.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-3.png',
-          '/assets/projects/imaginbank/imaginbank-5.png',
-          '/assets/projects/imaginbank/imaginbank-7.png',
-          '/assets/projects/imaginbank/imaginbank-9.png',
-          '/assets/projects/imaginbank/imaginbank-11.png',
-        ],
       },
       {
         label: '05. ROI & Impacto',
