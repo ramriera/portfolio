@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Gallery from '@/components/Gallery.astro';
+import HeuristicCard from '@/components/HeuristicCard.astro';
 import Tag from '@/components/Tag.astro';
 import { projects } from '@/utils/data';
 import type { CaseSection } from '@/utils/data';
@@ -312,13 +313,33 @@ function md(text: string): string {
             )}
             {section.bullets && (
               <ul data-reveal data-delay="300" class="mt-6 space-y-3">
-                {section.bullets.map((bullet: string) => (
-                  <li class="flex items-start gap-3">
-                    <svg class="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span class="text-body text-base" set:html={md(bullet)} />
-                  </li>
+                {section.bullets.map((bullet: string, bIdx: number) => (
+                  <>
+                    <li class="flex items-start gap-3">
+                      <svg class="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span class="text-body text-base" set:html={md(bullet)} />
+                    </li>
+                    {section.bulletEvidence?.[bIdx] && (
+                      <li class="list-none ml-8">
+                        <figure class="audit-evidence-figure my-4">
+                          <img
+                            src={section.bulletEvidence[bIdx].image}
+                            alt={`Evidencia de auditoría: ${section.bulletEvidence[bIdx].caption}`}
+                            class="audit-evidence-img lightbox-trigger cursor-zoom-in"
+                            loading="lazy"
+                          />
+                          <figcaption class="audit-evidence-caption">
+                            Evidencia de auditoría: {section.bulletEvidence[bIdx].caption}
+                          </figcaption>
+                          <figcaption class="audit-evidence-caption-code">
+                            <code>/* EVIDENCE_REF: {section.bulletEvidence[bIdx].image.split('/').pop()} | STATUS: AUDITED */</code>
+                          </figcaption>
+                        </figure>
+                      </li>
+                    )}
+                  </>
                 ))}
               </ul>
             )}
@@ -570,6 +591,77 @@ function md(text: string): string {
                 </p>
               </blockquote>
             )}
+          </div>
+        )}
+
+        {/* Heuristic card - UX audit findings */}
+        {section.layout === 'heuristic-card' && (
+          <div class="max-w-4xl mx-auto" data-component="HeuristicSection">
+            {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
+            {section.content && (
+              <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-8" set:html={md(section.content)} />
+            )}
+            <div data-reveal data-delay="300">
+              <HeuristicCard
+                heuristicId={section.heuristicId || ''}
+                title={section.title}
+                severity={section.severity || 'medium'}
+                finding={section.finding}
+                suggestion={section.suggestion}
+              />
+            </div>
+            {section.evidenceImage && (
+              <figure data-reveal data-delay="400" class="audit-evidence-figure mt-6">
+                <img
+                  src={section.evidenceImage}
+                  alt={`Evidencia de auditoría: ${section.evidenceCaption || section.title}`}
+                  class="audit-evidence-img lightbox-trigger cursor-zoom-in"
+                  loading="lazy"
+                />
+                <figcaption class="audit-evidence-caption">
+                  Evidencia de auditoría: {section.evidenceCaption || section.title}
+                </figcaption>
+                <figcaption class="audit-evidence-caption-code">
+                  <code>/* EVIDENCE_REF: {section.evidenceImage.split('/').pop()} | STATUS: AUDITED */</code>
+                </figcaption>
+              </figure>
+            )}
+            {section.highlight && (
+              <blockquote data-reveal data-delay="500" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
+                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                  <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
+                </p>
+              </blockquote>
+            )}
+          </div>
+        )}
+
+        {/* Audit deck grid - full presentation gallery with lightbox */}
+        {section.layout === 'audit-deck-grid' && (
+          <div class="max-w-4xl mx-auto" data-component="AuditDeckGrid">
+            {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
+            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
+            {section.content && (
+              <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10" set:html={md(section.content)} />
+            )}
+            <div class="audit-deck-gallery grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+              {section.images?.map((img: string, i: number) => (
+                <figure data-reveal data-delay={String(i * 60)} class="audit-deck-item">
+                  <div class="audit-deck-thumb">
+                    <img
+                      src={img}
+                      alt={section.captions?.[i] || `Slide ${i + 1} del audit`}
+                      class="lightbox-trigger cursor-zoom-in"
+                      loading="lazy"
+                    />
+                  </div>
+                  {section.captions?.[i] && (
+                    <figcaption class="audit-deck-caption">{section.captions[i]}</figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
           </div>
         )}
 

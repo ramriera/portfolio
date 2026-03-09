@@ -61,7 +61,7 @@ export const services = [
 export interface CaseSection {
   label: string;
   title: string;
-  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed' | 'web-embed' | 'mermaid' | 'stepper' | 'heuristic-card';
+  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed' | 'web-embed' | 'mermaid' | 'stepper' | 'heuristic-card' | 'audit-deck-grid';
   figmaUrl?: string;
   embedUrl?: string;
   embeds?: string[];
@@ -76,6 +76,9 @@ export interface CaseSection {
   heuristicId?: string;
   finding?: string;
   suggestion?: string;
+  evidenceImage?: string;
+  evidenceCaption?: string;
+  bulletEvidence?: { image: string; caption: string }[];
 }
 
 export interface ProjectMeta {
@@ -868,6 +871,8 @@ export const projects: Project[] = [
         suggestion: 'Implementar sistema de feedback con estados de progreso, confirmaciones visuales claras y notificaciones en tiempo real para todas las operaciones financieras.',
         content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante **feedback apropiado** y en un tiempo razonable.\n\nEn esta pantalla de la app, la **Heurística #1 falla** porque no existe ningún indicador visual que confirme al usuario que su transferencia se está procesando. La ausencia de un **spinner, barra de progreso o mensaje de estado** deja al usuario en la incertidumbre - un problema crítico cuando se trata de **dinero real**.',
         highlight: 'La falta de feedback en **acciones financieras críticas** compromete la **confianza del usuario** en los momentos donde más la necesita.',
+        evidenceImage: '/assets/projects/imaginbank/imaginbank-6.png',
+        evidenceCaption: 'Visibilidad del estado del sistema',
       },
       {
         label: '02. Análisis Heurístico',
@@ -879,6 +884,8 @@ export const projects: Project[] = [
         suggestion: 'Crear un sistema de design tokens unificado con nomenclatura consistente. Auditar todos los labels y unificar terminología en un glosario UX.',
         content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEn estas pantallas se evidencia cómo la **Heurística #4 se incumple** de forma sistemática: la misma acción de enviar dinero aparece como "Transferir", "Enviar" y "Bizum" en diferentes secciones. La **iconografía** no sigue un **lenguaje visual coherente** y algunos **patrones de interacción** varían entre pantallas similares.',
         highlight: 'La **nomenclatura inconsistente** entre secciones genera **confusión cognitiva** - el usuario tiene que "reaprender" la interfaz en cada pantalla.',
+        evidenceImage: '/assets/projects/imaginbank/imaginbank-9.png',
+        evidenceCaption: 'Consistencia y estándares',
       },
       {
         label: '02. Análisis Heurístico',
@@ -889,6 +896,8 @@ export const projects: Project[] = [
         finding: 'La navegación es rígida: no hay opción de deshacer acciones, volver atrás es confuso y las opciones secundarias están enterradas en submenús.',
         suggestion: 'Implementar acción "Undo" en el flujo de transacciones. Añadir accesos directos contextuales y simplificar la navegación de retorno.',
         content: 'Los usuarios necesitan una **"salida de emergencia"** clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nEn estas capturas se observa cómo la **Heurística #3 se vulnera** de forma crítica: la **falta de flexibilidad** impide al usuario **deshacer acciones**, volver atrás de forma intuitiva o acceder a **opciones secundarias** sin recorrer múltiples pantallas.',
+        evidenceImage: '/assets/projects/imaginbank/imaginbank-8.png',
+        evidenceCaption: 'Control y libertad del usuario',
       },
       {
         label: '02. Análisis Heurístico',
@@ -900,6 +909,8 @@ export const projects: Project[] = [
         suggestion: 'Rediseñar mensajes de error con lenguaje claro y accionable. Añadir confirmación previa en operaciones irreversibles y opción de cancelar/revertir.',
         content: 'Un diseño cuidadoso que **prevenga errores** es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en **lenguaje claro** y ofrecer una **solución constructiva**.\n\nEn estas pantallas se identifica cómo las **Heurísticas #5 y #9 fallan simultáneamente**: los **mensajes de error son genéricos** ("Ha ocurrido un error") sin orientar al usuario hacia la solución.',
         highlight: 'Los **mensajes de error genéricos** en operaciones financieras no solo frustran - **erosionan activamente la confianza** en la plataforma.',
+        evidenceImage: '/assets/projects/imaginbank/imaginbank-10.png',
+        evidenceCaption: 'Prevención de errores y recuperación',
       },
       {
         label: '02. Análisis Heurístico',
@@ -910,6 +921,8 @@ export const projects: Project[] = [
         finding: 'La jerarquía visual es confusa en algunas pantallas. Elementos decorativos compiten con información funcional. Bizum y transferencias rápidas no tienen la prominencia que su frecuencia de uso justifica.',
         suggestion: 'Aplicar progressive disclosure. Priorizar visualmente las 3-4 acciones más frecuentes. Reducir ruido visual en pantallas de información financiera.',
         content: 'Cada unidad extra de información compite con las unidades relevantes y **disminuye su visibilidad relativa**.\n\nEn estas pantallas vemos cómo la **Heurística #8 presenta debilidades**: aunque la estética general era limpia, se detectaron áreas donde la **jerarquía visual era confusa** y **elementos decorativos competían** con la información funcional.',
+        evidenceImage: '/assets/projects/imaginbank/imaginbank-13.png',
+        evidenceCaption: 'Diseño estético y minimalista',
       },
       {
         label: '03. Definición y Empatía',
@@ -934,6 +947,12 @@ export const projects: Project[] = [
           '**Alto** - Flexibilizar la **navegación**: accesos directos a acciones frecuentes (**Bizum, transferencias**), **"deshacer" accesible** y opciones secundarias visibles sin explorar submenús',
           '**Medio** - Optimizar la **jerarquía visual**: priorizar las **3-4 acciones más frecuentes** en la pantalla principal, reducir el **ruido visual** y aplicar **progressive disclosure**',
         ],
+        bulletEvidence: [
+          { image: '/assets/projects/imaginbank/imaginbank-6.png', caption: 'H1 - Visibilidad del estado del sistema' },
+          { image: '/assets/projects/imaginbank/imaginbank-9.png', caption: 'H4 - Consistencia y estándares' },
+          { image: '/assets/projects/imaginbank/imaginbank-8.png', caption: 'H3 - Control y libertad del usuario' },
+          { image: '/assets/projects/imaginbank/imaginbank-13.png', caption: 'H8 - Diseño estético y minimalista' },
+        ],
       },
       {
         label: '04. Propuestas de Mejora',
@@ -946,6 +965,40 @@ export const projects: Project[] = [
         title: 'Capturas de la app',
         layout: 'screens-grid',
         content: 'Capturas reales de la interfaz de **Imaginbank**: las pantallas que se analizaron durante el audit heurístico, mostrando la UI tal y como la encuentra el usuario.',
+      },
+      {
+        label: '04. Presentación',
+        title: 'Full Audit Deck',
+        layout: 'audit-deck-grid',
+        content: 'Todas las diapositivas de la presentación de auditoría heurística. Haz clic en cualquier imagen para ampliarla y leer las anotaciones en detalle.',
+        images: [
+          '/assets/projects/imaginbank/imaginbank-1.png',
+          '/assets/projects/imaginbank/imaginbank-2.png',
+          '/assets/projects/imaginbank/imaginbank-3.png',
+          '/assets/projects/imaginbank/imaginbank-4.png',
+          '/assets/projects/imaginbank/imaginbank-5.png',
+          '/assets/projects/imaginbank/imaginbank-7.png',
+          '/assets/projects/imaginbank/imaginbank-11.png',
+          '/assets/projects/imaginbank/imaginbank-12.png',
+          '/assets/projects/imaginbank/imaginbank-14.png',
+          '/assets/projects/imaginbank/imaginbank-15.png',
+          '/assets/projects/imaginbank/imaginbank-16.png',
+          '/assets/projects/imaginbank/imaginbank-17.png',
+        ],
+        captions: [
+          'Portada — Análisis Heurístico',
+          'Contexto de mercado',
+          'Imagin 2021 — Datos clave',
+          'Heurísticas de Nielsen — Marco de análisis',
+          'H1 — Mostrar estado del sistema',
+          'H2 — Hablar el lenguaje del usuario',
+          'H6 — Aliviar la carga en memoria',
+          'H7 — Atajos, flexibilidad y eficiencia',
+          'H9 — Comunicar errores con claridad',
+          'H10 — Ayuda y documentación',
+          'Mejoras UX — Wireframes',
+          'Conclusiones',
+        ],
       },
       {
         label: '05. ROI & Impacto',
