@@ -154,14 +154,6 @@
   }
 }
 
-@layer utilities {
-  .animate-delay-100 { animation-delay: 100ms; }
-  .animate-delay-200 { animation-delay: 200ms; }
-  .animate-delay-300 { animation-delay: 300ms; }
-  .animate-delay-400 { animation-delay: 400ms; }
-  .animate-delay-500 { animation-delay: 500ms; }
-  .animate-delay-600 { animation-delay: 600ms; }
-}
 
 /* Scroll reveal base */
 [data-reveal] {
@@ -223,9 +215,6 @@
   100% { transform: rotate(0deg); }
 }
 
-.animate-wave {
-  animation: wave 2.5s ease-in-out infinite;
-}
 
 /* Page transition */
 @keyframes pageTransition {
@@ -1034,21 +1023,6 @@ body.code-mode aside:hover {
   }
 }
 
-/* ── 16. CTA cards ── */
-.code-mode .cta-card {
-  border-color: var(--cm-border) !important;
-  background: var(--cm-bg-card) !important;
-}
-
-.code-mode .cta-card:hover {
-  border-color: var(--cm-border-hover) !important;
-  background: var(--cm-bg-surface) !important;
-}
-
-.code-mode .cta-card:hover .cta-card-icon {
-  background: rgba(139, 233, 253, 0.15) !important;
-  color: var(--cm-function) !important;
-}
 
 /* ── 17. Cursor blink animation for code feel ── */
 @keyframes codeBlink {
@@ -1284,43 +1258,6 @@ body.code-mode aside:hover {
   border-radius: 2px;
 }
 
-/* CTA card-style social links */
-.cta-card {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  padding: 0.875rem 1.125rem;
-  border-radius: 0.875rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.cta-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(217, 119, 87, 0.3);
-  transform: translateY(-2px);
-}
-
-.cta-card-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
-  color: #9e9d9b;
-  flex-shrink: 0;
-  transition: all 0.3s ease;
-}
-
-.cta-card:hover .cta-card-icon {
-  background: rgba(217, 119, 87, 0.15);
-  color: #D97757;
-}
 
 /* Parallax zoom on project cover */
 .parallax-cover-wrapper {
@@ -1868,41 +1805,6 @@ body.code-mode [data-component="BiographySection"] p {
 }
 
 
-/* ═══════════════════════════════════════════════════════════
-   AUDIT IMAGES — Consistent styling for audit screenshots
-   ═══════════════════════════════════════════════════════════ */
-
-/* Audit image container: border, radius, hover zoom */
-.audit-image-figure {
-  border: 1px solid #e8e4dd;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  position: relative;
-  transition: box-shadow 0.3s ease;
-}
-
-.audit-image-figure:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-/* Smooth zoom on hover */
-.audit-image {
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.audit-image-figure:hover .audit-image {
-  transform: scale(1.03);
-}
-
-/* Code mode: darker border for audit images */
-body.code-mode .audit-image-figure {
-  border-color: #30363d !important;
-}
-
-body.code-mode .audit-image-figure:hover {
-  border-color: rgba(139, 233, 253, 0.3) !important;
-  box-shadow: 0 0 16px rgba(139, 233, 253, 0.08) !important;
-}
 
 /* ═══════════════════════════════════════════════════════════
    CODE-MODE IMAGE PATH — System string below images
@@ -1927,114 +1829,6 @@ body.code-mode .audit-image-figure:hover {
 
 body.code-mode .cm-image-path.block {
   display: block;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   INTERACTIVE HOTSPOTS — Hover overlay on audit images
-   ═══════════════════════════════════════════════════════════ */
-
-.audit-hotspot {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 1rem;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.65) 0%,
-    rgba(0, 0, 0, 0.15) 40%,
-    transparent 100%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.audit-image-figure:hover .audit-hotspot {
-  opacity: 1;
-}
-
-/* Hotspot badge slides up on hover */
-.audit-hotspot-badge {
-  transform: translateY(8px);
-  transition: transform 0.3s ease;
-}
-
-.audit-image-figure:hover .audit-hotspot-badge {
-  transform: translateY(0);
-}
-
-/* Severity-colored top accent line on hotspot */
-.audit-hotspot[data-severity="critical"]::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: #ef4444;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.audit-hotspot[data-severity="medium"]::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: #f59e0b;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.audit-hotspot[data-severity="low"]::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: #10b981;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.audit-image-figure:hover .audit-hotspot::before {
-  opacity: 1;
-}
-
-/* Code mode hotspot overrides: terminal-style badge */
-body.code-mode .audit-hotspot {
-  background: linear-gradient(
-    to top,
-    rgba(13, 17, 23, 0.85) 0%,
-    rgba(13, 17, 23, 0.3) 40%,
-    transparent 100%
-  );
-}
-
-body.code-mode .audit-hotspot-badge span:first-child {
-  font-family: 'JetBrains Mono', monospace !important;
-}
-
-body.code-mode .audit-hotspot[data-severity="critical"] .audit-hotspot-badge span:first-child {
-  background: rgba(255, 85, 85, 0.25) !important;
-  color: #ff5555 !important;
-  border: 1px solid rgba(255, 85, 85, 0.5);
-}
-
-body.code-mode .audit-hotspot[data-severity="medium"] .audit-hotspot-badge span:first-child {
-  background: rgba(241, 250, 140, 0.2) !important;
-  color: #f1fa8c !important;
-  border: 1px solid rgba(241, 250, 140, 0.4);
-}
-
-body.code-mode .audit-hotspot[data-severity="low"] .audit-hotspot-badge span:first-child {
-  background: rgba(80, 250, 123, 0.2) !important;
-  color: #50fa7b !important;
-  border: 1px solid rgba(80, 250, 123, 0.4);
 }
 
 

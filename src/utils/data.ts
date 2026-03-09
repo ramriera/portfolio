@@ -30,9 +30,8 @@ export const navLinks = [
 export interface CaseSection {
   label: string;
   title: string;
-  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed' | 'web-embed' | 'mermaid' | 'stepper' | 'audit-deck-grid';
+  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed' | 'mermaid' | 'stepper' | 'audit-deck-grid';
   figmaUrl?: string;
-  embedUrl?: string;
   embeds?: string[];
   mermaidCode?: string;
   content?: string;
@@ -49,7 +48,6 @@ export interface ProjectMeta {
   industry: string;
   output: string;
   duration: string;
-  tools: string[];
   skills: string[];
 }
 
@@ -67,8 +65,6 @@ export interface Project {
   results: string[];
   stack: string[];
   cover: string;
-  gallery: string[];
-  liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
   projectMeta?: ProjectMeta;
@@ -98,17 +94,12 @@ export const projects: Project[] = [
     ],
     stack: ['UX Strategy', 'Service Design', 'Research', 'Service Blueprint', 'Prototyping'],
     cover: '/assets/projects/massimo-dutti/massimo-header-big-1920x1080.jpg',
-    gallery: [
-      '/assets/projects/massimo-dutti/massimo-header-big-1920x1080.jpg',
-    ],
-    liveUrl: '#',
     featured: true,
     projectMeta: {
       role: 'UX Strategist & Service Designer',
       industry: 'Fashion Retail',
       output: 'E-commerce Optimization',
       duration: '1 semana',
-      tools: ['Research', 'Service Blueprint', 'Prototyping', 'Wireframing'],
       skills: ['UX Optimization', 'Checkout Flow', 'E-commerce Strategy', 'High-Fidelity Prototyping', 'Service Design', 'CRO', 'Omnichannel', 'User Flow Design', 'Conversion Optimization', 'Wireframing'],
     },
     checks: [
@@ -309,17 +300,12 @@ export const projects: Project[] = [
     ],
     stack: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
     cover: '/assets/projects/movefast/movefast-header.png',
-    gallery: [
-      '/assets/projects/movefast/movefast-header.png',
-    ],
-    liveUrl: '#',
     featured: true,
     projectMeta: {
       role: 'Product Designer',
       industry: 'Mobility',
       output: 'Mobile App Design',
       duration: '2 semanas',
-      tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
       skills: ['UX Research', 'Benchmarking', 'User Persona', 'Journey Mapping', 'Prototyping', 'Design System', 'Wireframing', 'Visual Design', 'Interaction Design', 'Information Architecture', 'Mobile Design', 'Competitive Analysis'],
     },
     checks: [
@@ -452,17 +438,12 @@ export const projects: Project[] = [
     ],
     stack: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
     cover: '/assets/projects/global-helping/global-helping-header.png',
-    gallery: [
-      '/assets/projects/global-helping/global-helping-header.png',
-    ],
-    liveUrl: '#',
     featured: false,
     projectMeta: {
       role: 'UX/UI Designer',
       industry: 'Non-Profit',
       output: 'Platform Design & Prototype',
       duration: '2 semanas (45 horas)',
-      tools: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
       skills: ['Design Thinking', 'Surveys', 'User Persona', 'Journey Mapping', 'Design Tokens', 'Prototyping', 'Benchmarking', 'Wireframing', 'Visual Design', 'Interaction Design', 'Information Architecture', 'Responsive Design', 'Crowdfunding', 'Storytelling Visual'],
     },
     checks: [
@@ -584,14 +565,12 @@ export const projects: Project[] = [
       '/assets/projects/sabadell/sabadell-screen-1.png',
       '/assets/projects/sabadell/sabadell-screen-9.png',
     ],
-    liveUrl: '#',
     featured: true,
     projectMeta: {
       role: 'Product Designer',
       industry: 'Fintech',
       output: 'UI Library & Documentation',
       duration: '4 meses',
-      tools: ['Figma', 'Sketch', 'Zeroheight', 'Storybook'],
       skills: ['Design Systems', 'Design Tokens', 'Component Library', 'UX Bancaria', 'Accessibility (WCAG)', 'Documentation', 'Governance', 'Cross-Platform Consistency', 'Responsive Design', 'Interaction Design'],
     },
     checks: [
@@ -793,17 +772,12 @@ export const projects: Project[] = [
     ],
     stack: ['Figma', 'Chrome'],
     cover: '/assets/projects/imaginbank/imaginbank-header.png',
-    gallery: [
-      '/assets/projects/imaginbank/imaginbank-header.png',
-    ],
-    liveUrl: '#',
     featured: true,
     projectMeta: {
       role: 'UX Auditor / Heuristic Evaluator',
       industry: 'Fintech',
       output: 'Heuristic Audit Report & ROI Analysis',
       duration: '5 horas',
-      tools: ['Figma', 'Chrome'],
       skills: ['Análisis Heurístico', 'Heurísticas de Nielsen', 'Severity Rating', 'UX Research', 'Usabilidad', 'Accesibilidad', 'ROI Analysis', 'Mobile Design', 'Auditoría UX', 'Evaluación Experta'],
     },
     checks: [
@@ -985,14 +959,12 @@ export const projects: Project[] = [
       '/assets/projects/iberia/Iberia-screen-1.png',
       '/assets/projects/iberia/Iberia-screen-8.png',
     ],
-    liveUrl: '#',
     featured: true,
     projectMeta: {
       role: 'Design System Lead',
       industry: 'Travel',
       output: 'Unified Design System & Tokens',
       duration: '12 semanas',
-      tools: ['Figma', 'Storybook', 'Zeroheight', 'Miro'],
       skills: ['Design Systems', 'Design Tokens', 'Component Library', 'Cross-Platform Consistency', 'Information Architecture', 'Digital Product Design', 'Atomic Design', 'Accessibility (WCAG)', 'Design Ops', 'Responsive Design', 'Prototyping', 'Documentation'],
     },
     checks: [
@@ -1219,17 +1191,12 @@ export const projects: Project[] = [
     ],
     stack: ['Figma', 'React', 'Tailwind CSS', 'Whimsical', 'Miro', 'Google Analytics'],
     cover: '/assets/projects/solotemazos/solotemazos-header.png',
-    gallery: [
-      '/assets/projects/solotemazos/solotemazos-header.png',
-    ],
-    liveUrl: '#',
     featured: true,
     projectMeta: {
       role: 'UX Engineer & Product Designer',
       industry: 'Music & Entertainment',
       output: 'Product Design & Prototype',
       duration: '8 semanas',
-      tools: ['Figma', 'Whimsical', 'Miro', 'Adobe Photoshop', 'Google Analytics'],
       skills: ['Product Strategy', 'UX/UI Design', 'Design Systems', 'Prototyping', 'UX Research', 'Visual Design', 'Wireframing', 'Mobile Design', 'UX Engineering', 'Lean Canvas', 'Dark Mode Design', 'Component Design'],
     },
     checks: [
