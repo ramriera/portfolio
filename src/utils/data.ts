@@ -25,38 +25,7 @@ export const navLinks = [
 
 ];
 
-export const services = [
-  {
-    title: 'UX Strategy',
-    description: 'User Research, Information Architecture y evaluación heurística para definir experiencias alineadas con objetivos de negocio.',
-    icon: 'search',
-  },
-  {
-    title: 'Design Systems',
-    description: 'Creación y mantenimiento de sistemas de diseño escalables que unifican equipos y aceleran el desarrollo.',
-    icon: 'layers',
-  },
-  {
-    title: 'Escalabilidad de Producto',
-    description: 'Diseño de producto end-to-end con foco en crecimiento sostenible, desde la conceptualización hasta la entrega.',
-    icon: 'box',
-  },
-  {
-    title: 'DesignOps',
-    description: 'Design Governance, Design Tokens Architecture y System Analytics para equipos de alto rendimiento.',
-    icon: 'settings',
-  },
-  {
-    title: 'Puente Diseño-Ingeniería',
-    description: 'Conexión fluida entre diseño y desarrollo mediante tokens, documentación viva y procesos compartidos.',
-    icon: 'star',
-  },
-  {
-    title: 'WCAG Accessibility',
-    description: 'Auditorías de accesibilidad WCAG 2.1 AA, testing con usuarios reales y estrategia de diseño inclusivo.',
-    icon: 'layout',
-  },
-];
+
 
 export interface CaseSection {
   label: string;

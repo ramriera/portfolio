@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Gallery from '@/components/Gallery.astro';
 import Tag from '@/components/Tag.astro';
 import { projects } from '@/utils/data';
 import type { CaseSection } from '@/utils/data';
@@ -305,18 +304,15 @@ function md(text: string): string {
                     </li>
                     {section.bulletEvidence?.[bIdx] && (
                       <li class="list-none ml-8">
-                        <figure class="audit-evidence-figure my-4">
+                        <figure class="relative rounded-xl overflow-hidden my-4">
                           <img
                             src={section.bulletEvidence[bIdx].image}
-                            alt={`Evidencia de auditoría: ${section.bulletEvidence[bIdx].caption}`}
-                            class="audit-evidence-img lightbox-trigger cursor-zoom-in"
+                            alt={`Evidencia: ${section.bulletEvidence[bIdx].caption}`}
+                            class="w-full h-auto max-h-[480px] object-cover block lightbox-trigger cursor-zoom-in"
                             loading="lazy"
                           />
-                          <figcaption class="audit-evidence-caption">
-                            Evidencia de auditoría: {section.bulletEvidence[bIdx].caption}
-                          </figcaption>
-                          <figcaption class="audit-evidence-caption-code">
-                            <code>/* EVIDENCE_REF: {section.bulletEvidence[bIdx].image.split('/').pop()} | STATUS: AUDITED */</code>
+                          <figcaption class="text-sm text-dark-400 mt-3 text-center italic">
+                            {section.bulletEvidence[bIdx].caption}
                           </figcaption>
                         </figure>
                       </li>
@@ -576,7 +572,6 @@ function md(text: string): string {
           </div>
         )}
 
-        {/* Heuristic card - UX audit findings */}
         {/* Audit deck grid - full presentation gallery with lightbox */}
         {section.layout === 'audit-deck-grid' && (
           <div class="max-w-4xl mx-auto" data-component="AuditDeckGrid">
