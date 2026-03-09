@@ -2,65 +2,331 @@
 
 ---
 
+<!-- Screen sweep overlay for transitions -->
+<div id="code-mode-sweep" class="code-sweep" aria-hidden="true">
+  <div class="code-sweep__scanline"></div>
+</div>
+
 <button
   id="code-mode-toggle"
-  class="relative flex items-center gap-1.5 px-3 py-1.5 rounded-md font-mono text-xs tracking-wider transition-all duration-300 border border-dark-200 hover:border-emerald-400/50 bg-dark-50 text-dark-500 hover:text-emerald-500 group"
-  aria-label="Activar Code Mode"
+  class="cmt"
+  aria-label="Toggle Code Mode"
+  data-active="false"
 >
-  <span class="inline-block w-1.5 h-1.5 rounded-full bg-dark-300 transition-colors duration-300 group-hover:bg-emerald-400" id="code-mode-dot"></span>
-  <span id="code-mode-label">CODE_MODE:<span class="text-dark-400" id="code-mode-state">OFF</span></span>
+  <!-- Industrial left bracket -->
+  <span class="cmt__bracket cmt__bracket--left" aria-hidden="true">[</span>
+
+  <!-- Status indicator LED -->
+  <span class="cmt__led" id="code-mode-led" aria-hidden="true"></span>
+
+  <!-- Primary label -->
+  <span class="cmt__label" id="code-mode-label">
+    <span class="cmt__prefix">VIEW:</span>
+    <span class="cmt__mode" id="code-mode-state">VISUAL</span>
+  </span>
+
+  <!-- Industrial right bracket -->
+  <span class="cmt__bracket cmt__bracket--right" aria-hidden="true">]</span>
+
+  <!-- Hover micro-copy overlay -->
+  <span class="cmt__hover-copy" id="code-mode-hover" aria-hidden="true">Execute logic.sh</span>
 </button>
+
+<style>
+  /* ── The Ultimate Code Mode Toggle ── */
+  .cmt {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7C766C;
+    background: #1A1918;
+    border: 1px solid #403D38;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    outline: none;
+  }
+
+  /* Industrial cut corners */
+  .cmt {
+    clip-path: polygon(
+      0 4px, 4px 0, calc(100% - 4px) 0, 100% 4px,
+      100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px)
+    );
+  }
+
+  /* Subtle border glow on hover (OFF state) */
+  .cmt:hover {
+    border-color: #5C574F;
+    color: #A8A196;
+  }
+
+  /* ── LED indicator ── */
+  .cmt__led {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #403D38;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+  }
+
+  /* ── Brackets ── */
+  .cmt__bracket {
+    color: #403D38;
+    font-weight: 400;
+    transition: color 0.3s ease;
+  }
+
+  /* ── Label ── */
+  .cmt__label {
+    display: inline-flex;
+    gap: 4px;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .cmt__prefix {
+    color: #5C574F;
+  }
+
+  .cmt__mode {
+    color: #A8A196;
+    transition: color 0.3s ease;
+  }
+
+  /* ── Hover micro-copy overlay ── */
+  .cmt__hover-copy {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: #A8A196;
+    background: #1A1918;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .cmt:hover .cmt__hover-copy {
+    opacity: 1;
+  }
+
+  .cmt:hover .cmt__label {
+    opacity: 0;
+  }
+
+  .cmt:hover .cmt__led {
+    opacity: 0;
+  }
+
+  .cmt:hover .cmt__bracket {
+    opacity: 0;
+  }
+
+  /* ── ACTIVE STATE (Code Mode ON) ── */
+  .cmt[data-active="true"] {
+    border-color: rgba(52, 211, 153, 0.3);
+    background: #141413;
+    color: #34D399;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='20'%3E%3Crect x='0' y='0' width='2' height='16' fill='%2334D399'/%3E%3C/svg%3E") 1 8, text;
+  }
+
+  .cmt[data-active="true"] .cmt__led {
+    background: #34D399;
+    box-shadow: 0 0 6px rgba(52, 211, 153, 0.6), 0 0 12px rgba(52, 211, 153, 0.3);
+    animation: led-pulse 2s ease-in-out infinite;
+  }
+
+  .cmt[data-active="true"] .cmt__bracket {
+    color: rgba(52, 211, 153, 0.4);
+  }
+
+  .cmt[data-active="true"] .cmt__prefix {
+    color: rgba(52, 211, 153, 0.5);
+  }
+
+  .cmt[data-active="true"] .cmt__mode {
+    color: #34D399;
+  }
+
+  .cmt[data-active="true"] .cmt__hover-copy {
+    color: #34D399;
+    background: #141413;
+  }
+
+  /* Glow aura behind the toggle when active */
+  .cmt[data-active="true"]::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: radial-gradient(ellipse at center, rgba(52, 211, 153, 0.08) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+    animation: glow-breathe 3s ease-in-out infinite;
+  }
+
+  @keyframes led-pulse {
+    0%, 100% { box-shadow: 0 0 6px rgba(52, 211, 153, 0.6), 0 0 12px rgba(52, 211, 153, 0.3); }
+    50% { box-shadow: 0 0 8px rgba(52, 211, 153, 0.8), 0 0 18px rgba(52, 211, 153, 0.4); }
+  }
+
+  @keyframes glow-breathe {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  /* ── Glitch effect on click ── */
+  @keyframes cmt-glitch {
+    0% { transform: translate(0); filter: none; }
+    10% { transform: translate(-2px, 1px); filter: hue-rotate(90deg); }
+    20% { transform: translate(2px, -1px); filter: hue-rotate(-90deg); }
+    30% { transform: translate(-1px, -1px); }
+    40% { transform: translate(1px, 1px); filter: hue-rotate(45deg); }
+    50% { transform: translate(0); filter: none; }
+    100% { transform: translate(0); filter: none; }
+  }
+
+  .cmt--glitch {
+    animation: cmt-glitch 0.4s ease-out;
+  }
+
+  /* ── Screen sweep overlay ── */
+  .code-sweep {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(52, 211, 153, 0.03) 0%,
+      rgba(52, 211, 153, 0.06) 50%,
+      transparent 100%
+    );
+  }
+
+  .code-sweep--active {
+    animation: sweep-flash 0.6s ease-out forwards;
+  }
+
+  .code-sweep__scanline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.5), transparent);
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+    opacity: 0;
+    top: -2px;
+  }
+
+  .code-sweep--active .code-sweep__scanline {
+    animation: scanline-sweep 0.6s ease-out forwards;
+  }
+
+  /* Deactivation sweep — neutral color */
+  .code-sweep--deactivate {
+    animation: sweep-flash-off 0.5s ease-out forwards;
+  }
+
+  .code-sweep--deactivate .code-sweep__scanline {
+    background: linear-gradient(90deg, transparent, rgba(168, 161, 150, 0.4), transparent);
+    box-shadow: 0 0 12px rgba(168, 161, 150, 0.2);
+    animation: scanline-sweep 0.5s ease-out forwards;
+  }
+
+  @keyframes sweep-flash {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes sweep-flash-off {
+    0% { opacity: 0.8; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes scanline-sweep {
+    0% { top: -2px; opacity: 1; }
+    100% { top: 100vh; opacity: 0.2; }
+  }
+</style>
 
 <script>
   const codeToggle = document.getElementById('code-mode-toggle');
-  const codeDot = document.getElementById('code-mode-dot');
+  const codeLed = document.getElementById('code-mode-led');
   const codeModeState = document.getElementById('code-mode-state');
+  const hoverCopy = document.getElementById('code-mode-hover');
+  const sweepOverlay = document.getElementById('code-mode-sweep');
+
+  function updateToggleVisuals(active: boolean) {
+    if (!codeToggle) return;
+    codeToggle.setAttribute('data-active', String(active));
+    codeToggle.setAttribute('aria-label', active ? 'Switch to Visual Mode' : 'Switch to Code Mode');
+
+    if (codeModeState) {
+      codeModeState.textContent = active ? 'CODE' : 'VISUAL';
+    }
+
+    if (hoverCopy) {
+      hoverCopy.textContent = active ? 'View Source' : 'Execute logic.sh';
+    }
+  }
+
+  function triggerSweep(activating: boolean) {
+    if (!sweepOverlay) return;
+    sweepOverlay.classList.remove('code-sweep--active', 'code-sweep--deactivate');
+    // Force reflow
+    void sweepOverlay.offsetHeight;
+    sweepOverlay.classList.add(activating ? 'code-sweep--active' : 'code-sweep--deactivate');
+    // Clean up after animation
+    setTimeout(() => {
+      sweepOverlay.classList.remove('code-sweep--active', 'code-sweep--deactivate');
+    }, 700);
+  }
+
+  function triggerGlitch() {
+    if (!codeToggle) return;
+    codeToggle.classList.remove('cmt--glitch');
+    void codeToggle.offsetHeight;
+    codeToggle.classList.add('cmt--glitch');
+    setTimeout(() => codeToggle.classList.remove('cmt--glitch'), 450);
+  }
 
   function applyCodeMode(active: boolean, instant = false) {
     if (active) {
-      // Add code-mode but start with hidden visual state for boot effect
       document.documentElement.classList.add('code-mode');
       document.body.classList.add('code-mode');
 
       if (!instant) {
-        // Delayed visual reveal: start transparent, fade in after boot sequence
         document.body.classList.add('code-mode--booting');
-        // Remove booting class after the last boot log fires (~1800ms)
         setTimeout(() => {
           document.body.classList.remove('code-mode--booting');
         }, 1800);
-      }
-
-      if (codeDot) codeDot.classList.add('bg-emerald-400', 'shadow-[0_0_6px_rgba(52,211,153,0.5)]');
-      if (codeDot) codeDot.classList.remove('bg-dark-300');
-      if (codeModeState) {
-        codeModeState.textContent = 'ON';
-        codeModeState.classList.remove('text-dark-400');
-        codeModeState.classList.add('text-emerald-400');
-      }
-      if (codeToggle) {
-        codeToggle.classList.add('border-emerald-400/40', 'text-emerald-400');
-        codeToggle.classList.remove('border-dark-200', 'text-dark-500');
       }
     } else {
       document.documentElement.classList.remove('code-mode');
       document.body.classList.remove('code-mode');
       document.body.classList.remove('code-mode--booting');
-      if (codeDot) codeDot.classList.remove('bg-emerald-400', 'shadow-[0_0_6px_rgba(52,211,153,0.5)]');
-      if (codeDot) codeDot.classList.add('bg-dark-300');
-      if (codeModeState) {
-        codeModeState.textContent = 'OFF';
-        codeModeState.classList.add('text-dark-400');
-        codeModeState.classList.remove('text-emerald-400');
-      }
-      if (codeToggle) {
-        codeToggle.classList.remove('border-emerald-400/40', 'text-emerald-400');
-        codeToggle.classList.add('border-dark-200', 'text-dark-500');
-      }
     }
+
+    updateToggleVisuals(active);
   }
 
-  // Initialize from localStorage (instant = true to skip boot animation on page load)
+  // Initialize from localStorage (instant = true to skip animations on page load)
   const savedCodeMode = localStorage.getItem('code-mode') === 'on';
   applyCodeMode(savedCodeMode, true);
 
@@ -68,10 +334,19 @@
     const isActive = document.documentElement.classList.contains('code-mode');
     const newState = !isActive;
 
-    // Freeze scroll position — prevent any jump when styles change
+    // Freeze scroll position
     const scrollY = window.scrollY;
+
+    // Save to localStorage for persistence across pages
     localStorage.setItem('code-mode', newState ? 'on' : 'off');
+
+    // Trigger visual effects
+    triggerGlitch();
+    triggerSweep(newState);
+
+    // Apply the mode
     applyCodeMode(newState);
+
     // Restore scroll position after style recalc
     requestAnimationFrame(() => {
       window.scrollTo(0, scrollY);
