@@ -61,7 +61,7 @@ export const services = [
 export interface CaseSection {
   label: string;
   title: string;
-  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed' | 'web-embed' | 'mermaid' | 'stepper' | 'heuristic-card' | 'audit-deck-grid';
+  layout: 'center' | 'left-right' | 'right-left' | 'full-image' | 'image-grid' | 'screens-grid' | 'figma-embed' | 'whimsical-embed' | 'web-embed' | 'mermaid' | 'stepper' | 'audit-deck-grid';
   figmaUrl?: string;
   embedUrl?: string;
   embeds?: string[];
@@ -72,12 +72,6 @@ export interface CaseSection {
   images?: string[];
   captions?: string[];
   steps?: { title: string; description: string }[];
-  severity?: 'low' | 'medium' | 'critical';
-  heuristicId?: string;
-  finding?: string;
-  suggestion?: string;
-  evidenceImage?: string;
-  evidenceCaption?: string;
   bulletEvidence?: { image: string; caption: string }[];
 }
 
@@ -864,65 +858,45 @@ export const projects: Project[] = [
       {
         label: '02. Análisis Heurístico',
         title: 'H1 - Visibilidad del estado del sistema',
-        layout: 'heuristic-card',
-        heuristicId: '#1',
-        severity: 'critical',
-        finding: 'La app no proporciona feedback visual suficiente al realizar acciones críticas como transferencias o pagos. El usuario no sabe si una operación está en proceso, se ha completado o ha fallado.',
-        suggestion: 'Implementar sistema de feedback con estados de progreso, confirmaciones visuales claras y notificaciones en tiempo real para todas las operaciones financieras.',
-        content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante **feedback apropiado** y en un tiempo razonable.\n\nEn esta pantalla de la app, la **Heurística #1 falla** porque no existe ningún indicador visual que confirme al usuario que su transferencia se está procesando. La ausencia de un **spinner, barra de progreso o mensaje de estado** deja al usuario en la incertidumbre - un problema crítico cuando se trata de **dinero real**.',
+        layout: 'center',
+        content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante **feedback apropiado** y en un tiempo razonable.\n\nEn esta pantalla de la app, la **Heurística #1 falla** porque no existe ningún indicador visual que confirme al usuario que su transferencia se está procesando. La ausencia de un **spinner, barra de progreso o mensaje de estado** deja al usuario en la incertidumbre - un problema crítico cuando se trata de **dinero real**.\n\n**Hallazgo:** La app no proporciona feedback visual suficiente al realizar acciones críticas como transferencias o pagos. El usuario no sabe si una operación está en proceso, se ha completado o ha fallado.\n\n**Recomendación:** Implementar sistema de feedback con estados de progreso, confirmaciones visuales claras y notificaciones en tiempo real para todas las operaciones financieras.',
         highlight: 'La falta de feedback en **acciones financieras críticas** compromete la **confianza del usuario** en los momentos donde más la necesita.',
-        evidenceImage: '/assets/projects/imaginbank/imaginbank-6.png',
-        evidenceCaption: 'Visibilidad del estado del sistema',
+        images: ['/assets/projects/imaginbank/imaginbank-6.png'],
+        captions: ['Visibilidad del estado del sistema'],
       },
       {
         label: '02. Análisis Heurístico',
         title: 'H4 - Consistencia y estándares',
-        layout: 'heuristic-card',
-        heuristicId: '#4',
-        severity: 'critical',
-        finding: 'Inconsistencias en la nomenclatura de funciones: las mismas acciones reciben nombres diferentes según la sección. La iconografía no sigue un lenguaje visual coherente.',
-        suggestion: 'Crear un sistema de design tokens unificado con nomenclatura consistente. Auditar todos los labels y unificar terminología en un glosario UX.',
-        content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEn estas pantallas se evidencia cómo la **Heurística #4 se incumple** de forma sistemática: la misma acción de enviar dinero aparece como "Transferir", "Enviar" y "Bizum" en diferentes secciones. La **iconografía** no sigue un **lenguaje visual coherente** y algunos **patrones de interacción** varían entre pantallas similares.',
+        layout: 'center',
+        content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEn estas pantallas se evidencia cómo la **Heurística #4 se incumple** de forma sistemática: la misma acción de enviar dinero aparece como "Transferir", "Enviar" y "Bizum" en diferentes secciones. La **iconografía** no sigue un **lenguaje visual coherente** y algunos **patrones de interacción** varían entre pantallas similares.\n\n**Hallazgo:** Inconsistencias en la nomenclatura de funciones: las mismas acciones reciben nombres diferentes según la sección. La iconografía no sigue un lenguaje visual coherente.\n\n**Recomendación:** Crear un sistema de design tokens unificado con nomenclatura consistente. Auditar todos los labels y unificar terminología en un glosario UX.',
         highlight: 'La **nomenclatura inconsistente** entre secciones genera **confusión cognitiva** - el usuario tiene que "reaprender" la interfaz en cada pantalla.',
-        evidenceImage: '/assets/projects/imaginbank/imaginbank-9.png',
-        evidenceCaption: 'Consistencia y estándares',
+        images: ['/assets/projects/imaginbank/imaginbank-9.png'],
+        captions: ['Consistencia y estándares'],
       },
       {
         label: '02. Análisis Heurístico',
         title: 'H3 - Control y libertad del usuario',
-        layout: 'heuristic-card',
-        heuristicId: '#3',
-        severity: 'critical',
-        finding: 'La navegación es rígida: no hay opción de deshacer acciones, volver atrás es confuso y las opciones secundarias están enterradas en submenús.',
-        suggestion: 'Implementar acción "Undo" en el flujo de transacciones. Añadir accesos directos contextuales y simplificar la navegación de retorno.',
-        content: 'Los usuarios necesitan una **"salida de emergencia"** clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nEn estas capturas se observa cómo la **Heurística #3 se vulnera** de forma crítica: la **falta de flexibilidad** impide al usuario **deshacer acciones**, volver atrás de forma intuitiva o acceder a **opciones secundarias** sin recorrer múltiples pantallas.',
-        evidenceImage: '/assets/projects/imaginbank/imaginbank-8.png',
-        evidenceCaption: 'Control y libertad del usuario',
+        layout: 'center',
+        content: 'Los usuarios necesitan una **"salida de emergencia"** clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nEn estas capturas se observa cómo la **Heurística #3 se vulnera** de forma crítica: la **falta de flexibilidad** impide al usuario **deshacer acciones**, volver atrás de forma intuitiva o acceder a **opciones secundarias** sin recorrer múltiples pantallas.\n\n**Hallazgo:** La navegación es rígida: no hay opción de deshacer acciones, volver atrás es confuso y las opciones secundarias están enterradas en submenús.\n\n**Recomendación:** Implementar acción "Undo" en el flujo de transacciones. Añadir accesos directos contextuales y simplificar la navegación de retorno.',
+        images: ['/assets/projects/imaginbank/imaginbank-8.png'],
+        captions: ['Control y libertad del usuario'],
       },
       {
         label: '02. Análisis Heurístico',
         title: 'H5 / H9 - Prevención de errores y recuperación',
-        layout: 'heuristic-card',
-        heuristicId: '#5/#9',
-        severity: 'critical',
-        finding: 'Los mensajes de error son genéricos y no orientan al usuario hacia la solución. No existen confirmaciones claras ni mecanismos de "undo" en operaciones financieras.',
-        suggestion: 'Rediseñar mensajes de error con lenguaje claro y accionable. Añadir confirmación previa en operaciones irreversibles y opción de cancelar/revertir.',
-        content: 'Un diseño cuidadoso que **prevenga errores** es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en **lenguaje claro** y ofrecer una **solución constructiva**.\n\nEn estas pantallas se identifica cómo las **Heurísticas #5 y #9 fallan simultáneamente**: los **mensajes de error son genéricos** ("Ha ocurrido un error") sin orientar al usuario hacia la solución.',
+        layout: 'center',
+        content: 'Un diseño cuidadoso que **prevenga errores** es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en **lenguaje claro** y ofrecer una **solución constructiva**.\n\nEn estas pantallas se identifica cómo las **Heurísticas #5 y #9 fallan simultáneamente**: los **mensajes de error son genéricos** ("Ha ocurrido un error") sin orientar al usuario hacia la solución.\n\n**Hallazgo:** Los mensajes de error son genéricos y no orientan al usuario hacia la solución. No existen confirmaciones claras ni mecanismos de "undo" en operaciones financieras.\n\n**Recomendación:** Rediseñar mensajes de error con lenguaje claro y accionable. Añadir confirmación previa en operaciones irreversibles y opción de cancelar/revertir.',
         highlight: 'Los **mensajes de error genéricos** en operaciones financieras no solo frustran - **erosionan activamente la confianza** en la plataforma.',
-        evidenceImage: '/assets/projects/imaginbank/imaginbank-10.png',
-        evidenceCaption: 'Prevención de errores y recuperación',
+        images: ['/assets/projects/imaginbank/imaginbank-10.png'],
+        captions: ['Prevención de errores y recuperación'],
       },
       {
         label: '02. Análisis Heurístico',
         title: 'H8 - Diseño estético y minimalista',
-        layout: 'heuristic-card',
-        heuristicId: '#8',
-        severity: 'medium',
-        finding: 'La jerarquía visual es confusa en algunas pantallas. Elementos decorativos compiten con información funcional. Bizum y transferencias rápidas no tienen la prominencia que su frecuencia de uso justifica.',
-        suggestion: 'Aplicar progressive disclosure. Priorizar visualmente las 3-4 acciones más frecuentes. Reducir ruido visual en pantallas de información financiera.',
-        content: 'Cada unidad extra de información compite con las unidades relevantes y **disminuye su visibilidad relativa**.\n\nEn estas pantallas vemos cómo la **Heurística #8 presenta debilidades**: aunque la estética general era limpia, se detectaron áreas donde la **jerarquía visual era confusa** y **elementos decorativos competían** con la información funcional.',
-        evidenceImage: '/assets/projects/imaginbank/imaginbank-13.png',
-        evidenceCaption: 'Diseño estético y minimalista',
+        layout: 'center',
+        content: 'Cada unidad extra de información compite con las unidades relevantes y **disminuye su visibilidad relativa**.\n\nEn estas pantallas vemos cómo la **Heurística #8 presenta debilidades**: aunque la estética general era limpia, se detectaron áreas donde la **jerarquía visual era confusa** y **elementos decorativos competían** con la información funcional.\n\n**Hallazgo:** La jerarquía visual es confusa en algunas pantallas. Elementos decorativos compiten con información funcional. Bizum y transferencias rápidas no tienen la prominencia que su frecuencia de uso justifica.\n\n**Recomendación:** Aplicar progressive disclosure. Priorizar visualmente las 3-4 acciones más frecuentes. Reducir ruido visual en pantallas de información financiera.',
+        images: ['/assets/projects/imaginbank/imaginbank-13.png'],
+        captions: ['Diseño estético y minimalista'],
       },
       {
         label: '03. Definición y Empatía',

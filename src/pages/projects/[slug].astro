@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Gallery from '@/components/Gallery.astro';
-import HeuristicCard from '@/components/HeuristicCard.astro';
 import Tag from '@/components/Tag.astro';
 import { projects } from '@/utils/data';
 import type { CaseSection } from '@/utils/data';
@@ -28,23 +27,6 @@ function md(text: string): string {
   description={project.description}
   image={project.cover}
 >
-  <!-- Audit Scan Header (visible only in code mode for heuristic audits) -->
-  {project.caseSections?.some((s: CaseSection) => s.layout === 'heuristic-card') && (
-    <div class="audit-scan-header hidden" data-component="AuditScanHeader">
-      <div class="container-custom">
-        <div class="max-w-4xl mx-auto py-3 font-mono text-xs leading-relaxed">
-          <p class="audit-scan-line text-emerald-400" data-delay="0">[SYSTEM_CHECK] Initializing UX Vulnerability Scanner v2.1...</p>
-          <p class="audit-scan-line text-emerald-400" data-delay="200">[SYSTEM_CHECK] Target: {project.title} — {project.client}</p>
-          <p class="audit-scan-line text-cyan-400" data-delay="400">[SCAN] Applying Nielsen Heuristic Framework (10/10 heuristics)...</p>
-          <p class="audit-scan-line text-cyan-400" data-delay="600">[SCAN] Analyzing user flows, feedback systems, navigation patterns...</p>
-          <p class="audit-scan-line text-amber-400" data-delay="800">[WARN] {project.caseSections!.filter((s: CaseSection) => s.severity === 'critical').length} CRITICAL violations detected.</p>
-          <p class="audit-scan-line text-amber-400" data-delay="1000">[WARN] {project.caseSections!.filter((s: CaseSection) => s.severity === 'medium').length} MEDIUM violations detected.</p>
-          <p class="audit-scan-line text-emerald-400 font-bold" data-delay="1200">[SYSTEM_CHECK] Scanning Imaginbank App for UX Vulnerabilities... <span class="text-white">100% COMPLETE.</span></p>
-        </div>
-      </div>
-    </div>
-  )}
-
   <!-- Hero -->
   <section class="section-padding pb-12" data-component="ProjectHero">
     <div class="container-custom">
@@ -595,48 +577,6 @@ function md(text: string): string {
         )}
 
         {/* Heuristic card - UX audit findings */}
-        {section.layout === 'heuristic-card' && (
-          <div class="max-w-4xl mx-auto" data-component="HeuristicSection">
-            {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
-            <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
-            {section.content && (
-              <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-8" set:html={md(section.content)} />
-            )}
-            <div data-reveal data-delay="300">
-              <HeuristicCard
-                heuristicId={section.heuristicId || ''}
-                title={section.title}
-                severity={section.severity || 'medium'}
-                finding={section.finding}
-                suggestion={section.suggestion}
-              />
-            </div>
-            {section.evidenceImage && (
-              <figure data-reveal data-delay="400" class="audit-evidence-figure mt-6">
-                <img
-                  src={section.evidenceImage}
-                  alt={`Evidencia de auditoría: ${section.evidenceCaption || section.title}`}
-                  class="audit-evidence-img lightbox-trigger cursor-zoom-in"
-                  loading="lazy"
-                />
-                <figcaption class="audit-evidence-caption">
-                  Evidencia de auditoría: {section.evidenceCaption || section.title}
-                </figcaption>
-                <figcaption class="audit-evidence-caption-code">
-                  <code>/* EVIDENCE_REF: {section.evidenceImage.split('/').pop()} | STATUS: AUDITED */</code>
-                </figcaption>
-              </figure>
-            )}
-            {section.highlight && (
-              <blockquote data-reveal data-delay="500" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
-                  <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
-                </p>
-              </blockquote>
-            )}
-          </div>
-        )}
-
         {/* Audit deck grid - full presentation gallery with lightbox */}
         {section.layout === 'audit-deck-grid' && (
           <div class="max-w-4xl mx-auto" data-component="AuditDeckGrid">
@@ -863,98 +803,4 @@ function md(text: string): string {
   document.addEventListener('astro:page-load', initMermaid);
 </script>
 
-<script>
-  // Auditor Mode: toggle heuristic cards (visual ↔ JSON), console logs + scan header
-  function initAuditorMode() {
-    const auditorLogs = document.querySelectorAll('.heuristic-auditor-log');
-    const scanHeader = document.querySelector('.audit-scan-header') as HTMLElement | null;
-    const cmImagePaths = document.querySelectorAll('[data-cm-path]');
-    if (auditorLogs.length === 0 && !scanHeader && cmImagePaths.length === 0) return;
-
-    let scanAnimated = false;
-
-    function animateScanLines() {
-      if (!scanHeader || scanAnimated) return;
-      scanAnimated = true;
-      const lines = scanHeader.querySelectorAll('.audit-scan-line');
-      lines.forEach((line) => {
-        const el = line as HTMLElement;
-        const delay = parseInt(el.dataset.delay || '0', 10);
-        el.style.opacity = '0';
-        el.style.transform = 'translateX(-8px)';
-        setTimeout(() => {
-          el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-          el.style.opacity = '1';
-          el.style.transform = 'translateX(0)';
-        }, delay);
-      });
-    }
-
-    function resetScanLines() {
-      scanAnimated = false;
-      if (!scanHeader) return;
-      const lines = scanHeader.querySelectorAll('.audit-scan-line');
-      lines.forEach((line) => {
-        const el = line as HTMLElement;
-        el.style.opacity = '0';
-        el.style.transform = 'translateX(-8px)';
-        el.style.transition = 'none';
-      });
-    }
-
-    function updateAuditorMode() {
-      const isCodeMode = document.documentElement.classList.contains('code-mode');
-
-      // Toggle auditor logs
-      auditorLogs.forEach((log) => {
-        if (isCodeMode) {
-          log.classList.remove('hidden');
-          log.classList.add('block');
-        } else {
-          log.classList.add('hidden');
-          log.classList.remove('block');
-        }
-      });
-
-      // Toggle code-mode image paths
-      cmImagePaths.forEach((el) => {
-        if (isCodeMode) {
-          el.classList.remove('hidden');
-          el.classList.add('block');
-        } else {
-          el.classList.add('hidden');
-          el.classList.remove('block');
-        }
-      });
-
-      // Toggle scan header
-      if (scanHeader) {
-        if (isCodeMode) {
-          scanHeader.classList.remove('hidden');
-          scanHeader.classList.add('block');
-          animateScanLines();
-        } else {
-          scanHeader.classList.add('hidden');
-          scanHeader.classList.remove('block');
-          resetScanLines();
-        }
-      }
-    }
-
-    // Watch for code-mode toggle
-    const observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.attributeName === 'class') {
-          updateAuditorMode();
-        }
-      }
-    });
-
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    updateAuditorMode();
-  }
-
-  initAuditorMode();
-  document.addEventListener('astro:page-load', initAuditorMode);
-</script>
 
