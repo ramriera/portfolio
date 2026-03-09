@@ -1,0 +1,146 @@
+---
+export interface Props {
+  heuristicId: string;
+  title: string;
+  severity: 'low' | 'medium' | 'critical';
+  finding?: string;
+  suggestion?: string;
+}
+
+const { heuristicId, title, severity, finding, suggestion } = Astro.props;
+
+const cleanTitle = title.replace(/^H\d+\s*\/?\s*H?\d*\s*-\s*/, '');
+
+const severityConfig = {
+  critical: {
+    label: 'Crítica',
+    labelCode: 'CRITICAL',
+    priority: 'P0',
+    headerBg: 'bg-red-50 border-b-2 border-red-200',
+    badgeBg: 'bg-red-500 text-white',
+    borderColor: 'border-red-300',
+    logColor: 'text-red-500',
+  },
+  medium: {
+    label: 'Media',
+    labelCode: 'MEDIUM',
+    priority: 'P1',
+    headerBg: 'bg-amber-50 border-b-2 border-amber-200',
+    badgeBg: 'bg-amber-500 text-white',
+    borderColor: 'border-amber-300',
+    logColor: 'text-amber-400',
+  },
+  low: {
+    label: 'Baja',
+    labelCode: 'LOW',
+    priority: 'P2',
+    headerBg: 'bg-emerald-50 border-b-2 border-emerald-200',
+    badgeBg: 'bg-emerald-500 text-white',
+    borderColor: 'border-emerald-300',
+    logColor: 'text-emerald-400',
+  },
+};
+
+const cfg = severityConfig[severity];
+
+// Build the JSON representation for code mode
+const jsonData = {
+  id: parseInt(heuristicId.replace(/[^0-9]/g, '')) || heuristicId,
+  heuristic: cleanTitle.replace(/\s+/g, '_').replace(/[áàä]/g, 'a').replace(/[éèë]/g, 'e').replace(/[íìï]/g, 'i').replace(/[óòö]/g, 'o').replace(/[úùü]/g, 'u'),
+  severity: severity,
+  finding: finding || '',
+  fix: suggestion || '',
+};
+---
+
+<div
+  class="heuristic-card-wrapper"
+  data-severity={severity}
+  data-heuristic-id={heuristicId}
+>
+  <!-- Visual Mode: styled card -->
+  <div class="heuristic-card-visual mb-8 rounded-2xl border-2 overflow-hidden" data-severity={severity}>
+    <!-- Card Header -->
+    <div class={`heuristic-card-header flex items-center justify-between px-6 py-4 ${cfg.headerBg}`}>
+      <div class="flex items-center gap-3">
+        <span class="font-mono text-sm font-bold text-dark-600">Heuristic {heuristicId}</span>
+        <span class="text-dark-300">|</span>
+        <span class="font-semibold text-sm text-dark-700">{cleanTitle}</span>
+      </div>
+      <span class={`heuristic-severity-badge px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${cfg.badgeBg}`}>
+        {cfg.label}
+      </span>
+    </div>
+
+    <!-- Card Body -->
+    <div class="heuristic-card-body p-6 bg-white">
+      {finding && (
+        <div class="mb-4">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-dark-400 mb-2 flex items-center gap-2">
+            <svg class="w-4 h-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
+            Finding
+          </h4>
+          <p class="text-dark-700 text-sm leading-relaxed">{finding}</p>
+        </div>
+      )}
+      {suggestion && (
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-dark-400 mb-2 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Suggestion
+          </h4>
+          <p class="text-dark-700 text-sm leading-relaxed">{suggestion}</p>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Code Mode: JSON object -->
+  <div class="heuristic-card-json hidden mb-8">
+    <div class="rounded-2xl overflow-hidden border-2 border-emerald-500/30 bg-[#0d1117] font-mono text-sm">
+      <!-- JSON header bar -->
+      <div class="flex items-center justify-between px-5 py-3 bg-[#161b22] border-b border-emerald-500/20">
+        <div class="flex items-center gap-2">
+          <span class="text-emerald-400 text-xs font-bold tracking-wider">UX_AUDIT</span>
+          <span class="text-gray-600 text-xs">//</span>
+          <span class="text-gray-400 text-xs">heuristic_{heuristicId.replace(/[^0-9]/g, '') || heuristicId}.json</span>
+        </div>
+        <span class={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+          severity === 'critical' ? 'bg-red-500/20 text-red-400' :
+          severity === 'medium' ? 'bg-amber-500/20 text-amber-400' :
+          'bg-emerald-500/20 text-emerald-400'
+        }`}>
+          {cfg.labelCode}
+        </span>
+      </div>
+      <!-- JSON body -->
+      <div class="p-5 leading-relaxed">
+        <span class="text-gray-500">{'{'}</span><br />
+        <span class="ml-4 text-purple-400">"id"</span><span class="text-gray-500">:</span> <span class="text-amber-300">{jsonData.id}</span><span class="text-gray-500">,</span><br />
+        <span class="ml-4 text-purple-400">"heuristic"</span><span class="text-gray-500">:</span> <span class="text-emerald-300">"{jsonData.heuristic}"</span><span class="text-gray-500">,</span><br />
+        <span class="ml-4 text-purple-400">"severity"</span><span class="text-gray-500">:</span> <span class={`${
+          severity === 'critical' ? 'text-red-400' :
+          severity === 'medium' ? 'text-amber-400' :
+          'text-emerald-400'
+        }`}>"{severity}"</span><span class="text-gray-500">,</span><br />
+        <span class="ml-4 text-purple-400">"finding"</span><span class="text-gray-500">:</span> <span class="text-sky-300">"{jsonData.finding}"</span><span class="text-gray-500">,</span><br />
+        <span class="ml-4 text-purple-400">"fix"</span><span class="text-gray-500">:</span> <span class="text-sky-300">"{jsonData.fix}"</span><br />
+        <span class="text-gray-500">{'}'}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auditor Console Log (code mode overlay on visual card) -->
+  <div class="heuristic-auditor-log hidden" data-severity={severity}>
+    <div class="px-6 py-3 font-mono text-xs leading-relaxed">
+      <p class="text-red-400">[UX_ERROR] Heuristic {heuristicId}: {cleanTitle}. Status: FAILED.</p>
+      {finding && <p class="text-red-300 opacity-80 mt-1">[FINDING] {finding}</p>}
+      {suggestion && <p class="text-emerald-400 mt-1">[SUGGESTION] {suggestion}</p>}
+      <p class={`mt-1 ${cfg.logColor}`}>[SEVERITY] {cfg.labelCode} — Priority: {cfg.priority}</p>
+    </div>
+  </div>
+</div>

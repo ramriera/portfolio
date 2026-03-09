@@ -855,16 +855,8 @@ export const projects: Project[] = [
       {
         label: '01. Contexto',
         title: 'Objetivo y metodología',
-        layout: 'image-grid',
+        layout: 'center',
         content: 'El objetivo fue realizar una **evaluación experta** (heuristic evaluation) de la app de Imaginbank utilizando las **10 Heurísticas de Jakob Nielsen** como marco de análisis.\n\nNo se trataba de rediseñar, sino de **diagnosticar**: examinar cada **flujo clave** de la aplicación, documentar los **problemas de usabilidad** con capturas anotadas y proponer **recomendaciones priorizadas** por severidad e impacto. Se prestó especial atención a la **visibilidad del estado del sistema**, la **consistencia**, el **control del usuario** y la **prevención de errores**.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-1.png',
-          '/assets/projects/imaginbank/imaginbank-2.png',
-        ],
-        captions: [
-          'Portada del análisis heurístico: capturas de la app Imaginbank sobre fondo turquesa corporativo',
-          'Las 10 heurísticas de Jakob Nielsen como marco de evaluación del audit',
-        ],
       },
       {
         label: '02. Análisis Heurístico',
@@ -962,28 +954,14 @@ export const projects: Project[] = [
       {
         label: '03. Definición y Empatía',
         title: 'El usuario joven - perfil y frustraciones',
-        layout: 'image-grid',
+        layout: 'center',
         content: 'El target de Imaginbank es claro: **jóvenes de 18-30 años**, nativos digitales, **usuarios intensivos de apps de consumo** que esperan la misma calidad de experiencia en su app bancaria.\n\nSu frustración nace de una interfaz que **no habla su lenguaje**: **nomenclatura bancaria tradicional** en lugar de términos directos, flujos que requieren **demasiados pasos** para acciones simples, y una experiencia que se siente como "la app del banco de mis padres" en lugar de una **herramienta financiera moderna**. La brecha entre expectativas (definidas por **Revolut, N26**) y realidad (Imaginbank) es lo que genera **abandono**.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-13.png',
-          '/assets/projects/imaginbank/imaginbank-14.png',
-        ],
-        captions: [
-          'Perfil del usuario joven: nativo digital, usuario intensivo de apps de consumo (18-30 años)',
-          'Expectativas vs. realidad: la brecha entre neobancos (Revolut, N26) e Imaginbank',
-        ],
       },
       {
         label: '03. Definición y Empatía',
         title: 'Puntos de fricción en el journey',
-        layout: 'full-image',
+        layout: 'center',
         content: 'El journey del usuario con Imaginbank revela **tres momentos críticos**: el **onboarding** (demasiado largo y con terminología bancaria), la **primera transferencia** (sin feedback claro ni confirmación visual), y la **gestión de tarjetas** (opciones enterradas en submenús).\n\nEstos **puntos de fricción** coinciden directamente con las heurísticas incumplidas: **falta de visibilidad (H1)**, **navegación rígida (H3)** y **prevención de errores insuficiente (H5)**. La frustración acumulada en estas **micro-interacciones** es lo que lleva al usuario a probar alternativas donde estas acciones se resuelven en **2-3 taps**.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-15.png',
-        ],
-        captions: [
-          'Journey map con puntos de fricción: onboarding, primera transferencia y gestión de tarjetas',
-        ],
       },
       {
         label: '04. Propuestas de Mejora',
@@ -1000,40 +978,20 @@ export const projects: Project[] = [
       {
         label: '04. Propuestas de Mejora',
         title: 'Cambios arquitectónicos y visuales',
-        layout: 'image-grid',
+        layout: 'center',
         content: 'Las mejoras propuestas abarcan tanto la **arquitectura de información** como el **diseño visual**. A nivel arquitectónico: **simplificación de la navegación** principal a **4-5 secciones claras**, **accesos directos contextuales** y reducción de la profundidad de los flujos más frecuentes. A nivel visual: sistema de **feedback con micro-interacciones**, **jerarquía tipográfica revisada** para priorizar la información financiera clave, y un **lenguaje visual** más cercano al estándar de los neobancos.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-16.png',
-          '/assets/projects/imaginbank/imaginbank-17.png',
-        ],
-        captions: [
-          'Wireframes de mejoras UX: reorganización de la home y página de productos con jerarquía optimizada',
-          'Conclusiones del audit: puntos fuertes, áreas de mejora y recomendaciones finales',
-        ],
       },
       {
         label: '04. Presentación',
-        title: 'Full Audit Slides',
+        title: 'Capturas de la app',
         layout: 'screens-grid',
-        content: 'Galería completa de las diapositivas del **análisis heurístico**: desde la metodología inicial hasta las conclusiones y propuestas de mejora. Cada slide documenta una fase del audit con **capturas anotadas**, hallazgos clasificados por severidad y recomendaciones priorizadas.',
+        content: 'Capturas reales de la interfaz de **Imaginbank**: las pantallas que se analizaron durante el audit heurístico, mostrando la UI tal y como la encuentra el usuario.',
         images: [
-          '/assets/projects/imaginbank/imaginbank-1.png',
-          '/assets/projects/imaginbank/imaginbank-2.png',
           '/assets/projects/imaginbank/imaginbank-3.png',
-          '/assets/projects/imaginbank/imaginbank-4.png',
           '/assets/projects/imaginbank/imaginbank-5.png',
-          '/assets/projects/imaginbank/imaginbank-6.png',
           '/assets/projects/imaginbank/imaginbank-7.png',
-          '/assets/projects/imaginbank/imaginbank-8.png',
           '/assets/projects/imaginbank/imaginbank-9.png',
-          '/assets/projects/imaginbank/imaginbank-10.png',
           '/assets/projects/imaginbank/imaginbank-11.png',
-          '/assets/projects/imaginbank/imaginbank-12.png',
-          '/assets/projects/imaginbank/imaginbank-13.png',
-          '/assets/projects/imaginbank/imaginbank-14.png',
-          '/assets/projects/imaginbank/imaginbank-15.png',
-          '/assets/projects/imaginbank/imaginbank-16.png',
-          '/assets/projects/imaginbank/imaginbank-17.png',
         ],
       },
       {
