@@ -74,6 +74,16 @@ const currentPath = Astro.url.pathname;
     id="mobile-menu"
     class="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out-expo"
   >
+    <!-- Close button -->
+    <button
+      id="mobile-menu-close"
+      class="absolute top-6 right-6 p-2 rounded-lg hover:bg-dark-100 transition-colors z-10"
+      aria-label="Cerrar menú"
+    >
+      <svg class="w-7 h-7 text-dark-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
     <nav class="flex flex-col items-center gap-2">
       {navLinks.map((link, i) => (
         <a
@@ -211,6 +221,24 @@ const currentPath = Astro.url.pathname;
     lastScroll = currentScroll;
   }, { passive: true });
 
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+  function closeMenu() {
+    isMenuOpen = false;
+    if (mobileMenu && hamburger) {
+      mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+      mobileMenu.classList.remove('opacity-100');
+      document.body.style.overflow = '';
+      const spans = hamburger.querySelectorAll('span');
+      spans[0].style.transform = '';
+      spans[1].style.opacity = '1';
+      spans[2].style.transform = '';
+      spans[2].style.width = '75%';
+    }
+  }
+
+  mobileMenuClose?.addEventListener('click', closeMenu);
+
   // Mobile menu toggle
   mobileMenuBtn?.addEventListener('click', () => {
     isMenuOpen = !isMenuOpen;
@@ -235,5 +263,10 @@ const currentPath = Astro.url.pathname;
         spans[2].style.width = '75%';
       }
     }
+  });
+
+  // Close menu when a nav link is clicked
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
   });
 </script>
