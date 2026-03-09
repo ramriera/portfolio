@@ -93,7 +93,8 @@ const timeline = [
         <div class="lg:col-span-3 space-y-12">
           <div data-reveal>
             <h2 class="heading-md mb-6">Mi historia</h2>
-            <div class="space-y-4 text-body">
+            <!-- Normal mode: prose paragraphs -->
+            <div class="bio-prose space-y-4 text-body">
               <p>
                 Empecé mi carrera como diseñador gráfico, pero rápidamente descubrí que mi verdadera pasión estaba en la intersección entre diseño y tecnología. El mundo digital me fascinó por su capacidad de crear experiencias que impactan a millones de personas.
               </p>
@@ -106,6 +107,49 @@ const timeline = [
               <p>
                 Cuando no estoy diseñando, probablemente estoy explorando nuevas herramientas, leyendo sobre psicología cognitiva o experimentando con código creativo.
               </p>
+            </div>
+            <!-- Code mode: README / JSDoc comment block -->
+            <div class="bio-readme">
+              <div class="readme-window">
+                <div class="readme-titlebar">
+                  <div class="readme-dots">
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
+                  </div>
+                  <span class="readme-filename">
+                    <svg class="readme-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                    README.md
+                  </span>
+                  <span class="readme-tab-active">README.md</span>
+                </div>
+                <pre class="readme-body"><code><span class="readme-comment">/**</span>
+<span class="readme-comment"> * <span class="readme-tag">@module</span> ramon-riera</span>
+<span class="readme-comment"> * <span class="readme-tag">@version</span> 8.0.0</span>
+<span class="readme-comment"> * <span class="readme-tag">@description</span></span>
+<span class="readme-comment"> *</span>
+<span class="readme-comment"> * Empecé mi carrera como diseñador gráfico, pero rápidamente</span>
+<span class="readme-comment"> * descubrí que mi verdadera pasión estaba en la intersección</span>
+<span class="readme-comment"> * entre <span class="readme-highlight">diseño</span> y <span class="readme-highlight">tecnología</span>. El mundo digital me fascinó</span>
+<span class="readme-comment"> * por su capacidad de crear experiencias que impactan a</span>
+<span class="readme-comment"> * millones de personas.</span>
+<span class="readme-comment"> *</span>
+<span class="readme-comment"> * He tenido el privilegio de trabajar con empresas como</span>
+<span class="readme-comment"> * <span class="readme-highlight">Banco Sabadell</span>, <span class="readme-highlight">Iberia</span>, y <span class="readme-highlight">Doctori</span>, aplicando mi</span>
+<span class="readme-comment"> * experiencia en Design Systems, Product Design y Design</span>
+<span class="readme-comment"> * Operations para transformar productos digitales complejos</span>
+<span class="readme-comment"> * en experiencias intuitivas.</span>
+<span class="readme-comment"> *</span>
+<span class="readme-comment"> * <span class="readme-tag">@methodology</span> Design Thinking | Lean UX | Agile</span>
+<span class="readme-comment"> * <span class="readme-tag">@philosophy</span> El diseño no es solo cómo se ve algo,</span>
+<span class="readme-comment"> *   sino cómo funciona, cómo se siente y qué problema resuelve.</span>
+<span class="readme-comment"> *</span>
+<span class="readme-comment"> * <span class="readme-tag">@idle</span> Explorando herramientas, leyendo sobre psicología</span>
+<span class="readme-comment"> *   cognitiva o experimentando con código creativo.</span>
+<span class="readme-comment"> *</span>
+<span class="readme-comment"> * <span class="readme-tag">@license</span> MIT</span>
+<span class="readme-comment"> */</span></code></pre>
+              </div>
             </div>
           </div>
 
@@ -185,25 +229,25 @@ const timeline = [
           <div class="p-8 rounded-2xl dashed-border bg-white" data-component="StackColumn">
             <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">Design</h3>
             <div class="space-y-5">
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v2024 · collaborative design">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-1 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9zM6.5 13c-.83 0-1.5-.67-1.5-1.5S5.67 10 6.5 10s1.5.67 1.5 1.5S7.33 13 6.5 13zm3-4C8.67 9 8 8.33 8 7.5S8.67 6 9.5 6s1.5.67 1.5 1.5S10.33 9 9.5 9zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 6 14.5 6s1.5.67 1.5 1.5S15.33 9 14.5 9zm3 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Figma</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="design tokens · modes">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.255 3C20.38 5.78 21 8.817 21 12s-.62 6.22-1.745 9m-13.51-9h12.51" /><circle cx="12" cy="12" r="3" /></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Variables</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="motion · no-code">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25z" /></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Framer</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="DS documentation">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
                 </div>
@@ -216,31 +260,31 @@ const timeline = [
           <div class="p-8 rounded-2xl dashed-border bg-white" data-component="StackColumn">
             <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">UX Strategy</h3>
             <div class="space-y-5">
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="qualitative · quantitative">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">User Research</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="sitemaps · taxonomies">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Information Architecture</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="AA compliance · ARIA">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">WCAG 2.1 Accessibility</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="Nielsen's 10 heuristics">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Heuristic Evaluation</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="discovery · validation">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
                 </div>
@@ -253,31 +297,31 @@ const timeline = [
           <div class="p-8 rounded-2xl dashed-border bg-white" data-component="StackColumn">
             <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">Development</h3>
             <div class="space-y-5">
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v18+ · hooks · SSR">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.31 0-.592.06-.846.18C4.803 2.18 4.157 4.16 4.59 7.068c-2.57.9-4.157 2.277-4.157 3.936 0 1.66 1.587 3.037 4.157 3.936-.433 2.908.213 4.889 1.667 5.555.254.12.536.18.846.18 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.604 4.887 2.604.31 0 .592-.06.846-.18 1.454-.666 2.1-2.647 1.667-5.555 2.57-.9 4.157-2.277 4.157-3.936 0-1.659-1.587-3.036-4.157-3.936.433-2.908-.213-4.889-1.667-5.555a1.986 1.986 0 0 0-.846-.18zM12 15.065a3.065 3.065 0 1 1 0-6.13 3.065 3.065 0 0 1 0 6.13z"/></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">React / Next.js</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v5+ · strict mode">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.677.12a6.988 6.988 0 011.427.375v3.067a5.42 5.42 0 00-.724-.39 4.958 4.958 0 00-1.036-.317 5.482 5.482 0 00-1.075-.106c-.377 0-.719.052-1.018.156a1.725 1.725 0 00-.69.421.887.887 0 00-.244.622c0 .229.078.426.233.59.156.168.39.31.7.424.312.117.694.232 1.15.347.636.166 1.192.365 1.664.596.476.232.848.536 1.114.916.267.38.4.854.4 1.424 0 .63-.167 1.163-.5 1.6-.334.434-.813.763-1.434.985-.623.222-1.368.332-2.235.332-.673 0-1.31-.057-1.91-.172a7.798 7.798 0 01-1.59-.49v-3.168c.3.217.636.406 1.01.567.378.164.778.29 1.2.379.424.09.822.135 1.198.135.377 0 .684-.049.917-.148a.978.978 0 00.486-.401.962.962 0 00.146-.51.755.755 0 00-.264-.587 2.487 2.487 0 00-.806-.419c-.342-.13-.775-.267-1.296-.414-.568-.16-1.076-.37-1.524-.629a3.045 3.045 0 01-1.072-.975c-.267-.398-.4-.891-.4-1.477 0-.616.158-1.145.476-1.59.318-.443.77-.785 1.358-1.023.588-.24 1.291-.36 2.108-.36zm-10.363.066h3.348L14.22 18h-3.375l-2.747-8.184z"/></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">TypeScript</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v3.4 · utility-first">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Tailwind</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v8 · component docs">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.243 20.844l-.189-.09c-.395-.191-.587-.36-.587-.72v-.84c0-.54-.16-1.2-.9-1.2h-.28c-1.6 0-3.01-1.19-3.01-2.79v-.36c0-.26.22-.48.48-.48h.4c.28 0 .48.22.48.48v.36c0 .89.73 1.35 1.65 1.35h.28c1.16 0 2.34.77 2.34 2.64v.84c0 .36.1.42.19.48.42.21.48.78.09 1.07-.12.08-.33.21-.94.27zm3.576-.27c-.61-.06-.82-.19-.94-.27-.39-.29-.33-.86.09-1.07.09-.06.19-.12.19-.48v-.84c0-1.87 1.18-2.64 2.34-2.64h.28c.92 0 1.65-.46 1.65-1.35v-.36c0-.26.2-.48.48-.48h.4c.26 0 .48.22.48.48v.36c0 1.6-1.41 2.79-3.01 2.79h-.28c-.74 0-.9.66-.9 1.2v.84c0 .36-.192.529-.587.72l-.189.09z"/></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Storybook</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="version control · CI/CD">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M11.998 0C5.373 0 0 5.373 0 12.002 0 17.302 3.438 21.8 8.207 23.387c.6.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12.002 24 5.373 18.627 0 11.998 0z"/></svg>
                 </div>
@@ -290,25 +334,25 @@ const timeline = [
           <div class="p-8 rounded-2xl dashed-border bg-white" data-component="StackColumn">
             <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">DesignOps</h3>
             <div class="space-y-5">
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="contribution model">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Design Governance</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v4 · multi-platform tokens">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125V18a3.75 3.75 0 01-3.75 3.75zM13.5 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v9.375a3.75 3.75 0 11-7.5 0V8.625z" /></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">Style Dictionary</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="adoption · coverage KPIs">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
                 </div>
                 <span class="text-sm font-medium text-dark-700">System Analytics</span>
               </div>
-              <div class="flex items-center gap-4 group">
+              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="Storybook · Zeroheight">
                 <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
                   <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
                 </div>
@@ -393,7 +437,23 @@ const timeline = [
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
-        <a href={`mailto:${siteConfig.email}`} class="btn-outline text-base"
+        <!-- CV Button: Normal mode -->
+        <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
+          class="btn-outline text-base btn-cv-normal"
+          data-component="ButtonCV"
+          data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px">
+          Descargar CV
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+          </svg>
+        </a>
+        <!-- CV Button: Code mode terminal style -->
+        <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
+          class="btn-cv-code"
+          data-component="ButtonCVCode">
+          <span class="btn-cv-prompt">&gt;</span> ramon-riera <span class="btn-cv-flag">--download-cv</span>
+        </a>
+        <a href={`mailto:${siteConfig.email}`} class="btn-outline text-base btn-cv-normal"
           data-component="ButtonOutline"
           data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px">
           {siteConfig.email}
