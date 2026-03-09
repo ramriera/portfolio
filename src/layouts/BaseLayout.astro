@@ -67,9 +67,9 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <Footer />
 
     <script is:inline>
-      // Code Mode: restore from localStorage
+      // Code Mode: restore from localStorage (desktop only — lg breakpoint 1024px)
       (function() {
-        if (localStorage.getItem('code-mode') === 'on') {
+        if (window.innerWidth >= 1024 && localStorage.getItem('code-mode') === 'on') {
           document.documentElement.classList.add('code-mode');
           document.body.classList.add('code-mode');
         }

@@ -396,7 +396,7 @@ main {
 
 /* Hero Consistency — fixed height so content below never shifts */
 .hero-main-content {
-  min-height: 420px;
+  min-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -425,7 +425,7 @@ main {
 
 /* Stats column: horizontal on mobile, right-side on xl */
 .hero-stats-col {
-  margin-top: 4rem;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   /* Pre-allocate border + padding so code mode toggle doesn't shift layout */

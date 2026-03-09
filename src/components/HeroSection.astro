@@ -4,7 +4,7 @@ import WordsCarousel from './WordsCarousel.astro';
 const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brillan', 'impactan', 'perduran'];
 ---
 
-<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden"
+<section class="relative min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden"
   data-component="HeroSection">
   <!-- Background decoration -->
   <div class="absolute inset-0 -z-10">
@@ -18,7 +18,7 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
       <!-- Left: intro content -->
       <div class="hero-main-content max-w-4xl xl:max-w-none text-center xl:text-left">
         <!-- Greeting line -->
-        <div data-reveal data-delay="0" class="mb-10 flex flex-col items-center xl:items-start">
+        <div data-reveal data-delay="0" class="mb-6 md:mb-10 flex flex-col items-center xl:items-start">
           <div class="w-14 h-14 mb-4">
             <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
               <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
@@ -48,7 +48,7 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
         </div>
 
         <!-- Main heading -->
-        <h1 data-reveal data-delay="100" class="heading-xl mb-10"
+        <h1 data-reveal data-delay="100" class="heading-xl mb-6 md:mb-10"
           data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2.5rem / 40px">
           Diseño experiencias<br />
           <span class="whitespace-nowrap">digitales que
@@ -56,7 +56,7 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
         </h1>
 
         <!-- Subtitle -->
-        <p data-reveal data-delay="200" class="text-body text-xl max-w-2xl mx-auto xl:mx-0 mb-14 leading-relaxed"
+        <p data-reveal data-delay="200" class="text-body text-base md:text-xl max-w-2xl mx-auto xl:mx-0 mb-8 md:mb-14 leading-relaxed"
           data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$spacing-bottom: 3.5rem / 56px">
           Especializado en Design Systems, Product Design y Design Operations.
           Transformando ideas complejas en interfaces intuitivas y elegantes.
