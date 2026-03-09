@@ -7,201 +7,159 @@
   <div class="code-sweep__scanline"></div>
 </div>
 
-<button
-  id="code-mode-toggle"
-  class="cmt"
-  aria-label="Toggle Code Mode"
-  data-active="false"
->
-  <!-- Industrial left bracket -->
-  <span class="cmt__bracket cmt__bracket--left" aria-hidden="true">[</span>
+<div class="cmt-wrapper" id="code-mode-wrapper">
+  <!-- Left label -->
+  <span class="cmt-label cmt-label--visual" id="cmt-label-visual">VISUAL</span>
 
-  <!-- Status indicator LED -->
-  <span class="cmt__led" id="code-mode-led" aria-hidden="true"></span>
+  <!-- Switch track -->
+  <button
+    id="code-mode-toggle"
+    class="cmt-track"
+    aria-label="Toggle Code Mode"
+    role="switch"
+    aria-checked="false"
+  >
+    <!-- Thumb with icon -->
+    <span class="cmt-thumb" id="cmt-thumb">
+      <span class="cmt-thumb__icon" id="cmt-thumb-icon" aria-hidden="true">_</span>
+    </span>
+  </button>
 
-  <!-- Primary label -->
-  <span class="cmt__label" id="code-mode-label">
-    <span class="cmt__prefix">VIEW:</span>
-    <span class="cmt__mode" id="code-mode-state">VISUAL</span>
-  </span>
-
-  <!-- Industrial right bracket -->
-  <span class="cmt__bracket cmt__bracket--right" aria-hidden="true">]</span>
-
-  <!-- Hover micro-copy overlay -->
-  <span class="cmt__hover-copy" id="code-mode-hover" aria-hidden="true">Execute logic.sh</span>
-</button>
+  <!-- Right label -->
+  <span class="cmt-label cmt-label--code" id="cmt-label-code">CODE</span>
+</div>
 
 <style>
-  /* ── The Ultimate Code Mode Toggle ── */
-  .cmt {
-    position: relative;
+  /* ── Accent-Themed Code Mode Toggle ── */
+
+  .cmt-wrapper {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #7C766C;
-    background: #1A1918;
-    border: 1px solid #403D38;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
+    gap: 8px;
     user-select: none;
     -webkit-user-select: none;
-    outline: none;
   }
 
-  /* Industrial cut corners */
-  .cmt {
-    clip-path: polygon(
-      0 4px, 4px 0, calc(100% - 4px) 0, 100% 4px,
-      100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px)
-    );
+  /* ── Side Labels ── */
+  .cmt-label {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
   }
 
-  /* Subtle border glow on hover (OFF state) */
-  .cmt:hover {
-    border-color: #5C574F;
-    color: #A8A196;
+  .cmt-label--visual {
+    color: #D97757;
   }
 
-  /* ── LED indicator ── */
-  .cmt__led {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #403D38;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    flex-shrink: 0;
-  }
-
-  /* ── Brackets ── */
-  .cmt__bracket {
-    color: #403D38;
-    font-weight: 400;
-    transition: color 0.3s ease;
-  }
-
-  /* ── Label ── */
-  .cmt__label {
-    display: inline-flex;
-    gap: 4px;
-    transition: opacity 0.2s ease;
-    pointer-events: none;
-  }
-
-  .cmt__prefix {
+  .cmt-label--code {
     color: #5C574F;
   }
 
-  .cmt__mode {
-    color: #A8A196;
-    transition: color 0.3s ease;
+  /* Active state swaps — driven by JS via data attribute on wrapper */
+  .cmt-wrapper[data-active="true"] .cmt-label--visual {
+    color: #5C574F;
   }
 
-  /* ── Hover micro-copy overlay ── */
-  .cmt__hover-copy {
+  .cmt-wrapper[data-active="true"] .cmt-label--code {
+    color: #D97757;
+    text-shadow: 0 0 8px rgba(217, 119, 87, 0.4);
+  }
+
+  /* Subtle glow on VISUAL label when off */
+  .cmt-label--visual {
+    text-shadow: 0 0 8px rgba(217, 119, 87, 0.4);
+  }
+
+  .cmt-wrapper[data-active="true"] .cmt-label--visual {
+    text-shadow: none;
+  }
+
+  /* ── Switch Track ── */
+  .cmt-track {
+    position: relative;
+    width: 44px;
+    height: 22px;
+    border-radius: 11px;
+    background: #2A2825;
+    border: 1.5px solid #403D38;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+  }
+
+  .cmt-track:hover {
+    border-color: #5C574F;
+  }
+
+  .cmt-track:focus-visible {
+    outline: 2px solid #D97757;
+    outline-offset: 2px;
+  }
+
+  /* Active track: accent background + glow */
+  .cmt-track[aria-checked="true"] {
+    background: #D97757;
+    border-color: #EC9372;
+    box-shadow:
+      0 0 8px rgba(217, 119, 87, 0.4),
+      0 0 20px rgba(217, 119, 87, 0.15);
+  }
+
+  .cmt-track[aria-checked="true"]:hover {
+    border-color: #F4B89D;
+    box-shadow:
+      0 0 10px rgba(217, 119, 87, 0.5),
+      0 0 24px rgba(217, 119, 87, 0.2);
+  }
+
+  /* ── Thumb ── */
+  .cmt-thumb {
     position: absolute;
-    inset: 0;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #FAF9F7;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: #A8A196;
-    background: #1A1918;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
 
-  .cmt:hover .cmt__hover-copy {
-    opacity: 1;
+  /* Active thumb: dark background, slides right with elastic bounce */
+  .cmt-track[aria-checked="true"] .cmt-thumb {
+    left: calc(100% - 18px);
+    background: #0d1117;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   }
 
-  .cmt:hover .cmt__label {
-    opacity: 0;
+  /* Elastic bounce on deactivation too */
+  .cmt-track[aria-checked="false"] .cmt-thumb {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .cmt:hover .cmt__led {
-    opacity: 0;
+  /* ── Thumb Icon ── */
+  .cmt-thumb__icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .cmt:hover .cmt__bracket {
-    opacity: 0;
-  }
-
-  /* ── ACTIVE STATE (Code Mode ON) ── */
-  .cmt[data-active="true"] {
-    border-color: rgba(52, 211, 153, 0.3);
-    background: #141413;
-    color: #34D399;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='20'%3E%3Crect x='0' y='0' width='2' height='16' fill='%2334D399'/%3E%3C/svg%3E") 1 8, text;
-  }
-
-  .cmt[data-active="true"] .cmt__led {
-    background: #34D399;
-    box-shadow: 0 0 6px rgba(52, 211, 153, 0.6), 0 0 12px rgba(52, 211, 153, 0.3);
-    animation: led-pulse 2s ease-in-out infinite;
-  }
-
-  .cmt[data-active="true"] .cmt__bracket {
-    color: rgba(52, 211, 153, 0.4);
-  }
-
-  .cmt[data-active="true"] .cmt__prefix {
-    color: rgba(52, 211, 153, 0.5);
-  }
-
-  .cmt[data-active="true"] .cmt__mode {
-    color: #34D399;
-  }
-
-  .cmt[data-active="true"] .cmt__hover-copy {
-    color: #34D399;
-    background: #141413;
-  }
-
-  /* Glow aura behind the toggle when active */
-  .cmt[data-active="true"]::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: radial-gradient(ellipse at center, rgba(52, 211, 153, 0.08) 0%, transparent 70%);
-    z-index: -1;
-    pointer-events: none;
-    animation: glow-breathe 3s ease-in-out infinite;
-  }
-
-  @keyframes led-pulse {
-    0%, 100% { box-shadow: 0 0 6px rgba(52, 211, 153, 0.6), 0 0 12px rgba(52, 211, 153, 0.3); }
-    50% { box-shadow: 0 0 8px rgba(52, 211, 153, 0.8), 0 0 18px rgba(52, 211, 153, 0.4); }
-  }
-
-  @keyframes glow-breathe {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-  }
-
-  /* ── Glitch effect on click ── */
-  @keyframes cmt-glitch {
-    0% { transform: translate(0); filter: none; }
-    10% { transform: translate(-2px, 1px); filter: hue-rotate(90deg); }
-    20% { transform: translate(2px, -1px); filter: hue-rotate(-90deg); }
-    30% { transform: translate(-1px, -1px); }
-    40% { transform: translate(1px, 1px); filter: hue-rotate(45deg); }
-    50% { transform: translate(0); filter: none; }
-    100% { transform: translate(0); filter: none; }
-  }
-
-  .cmt--glitch {
-    animation: cmt-glitch 0.4s ease-out;
+  /* Show cursor icon when active */
+  .cmt-track[aria-checked="true"] .cmt-thumb__icon {
+    color: #D97757;
   }
 
   /* ── Screen sweep overlay ── */
@@ -213,8 +171,8 @@
     opacity: 0;
     background: linear-gradient(
       180deg,
-      rgba(52, 211, 153, 0.03) 0%,
-      rgba(52, 211, 153, 0.06) 50%,
+      rgba(217, 119, 87, 0.03) 0%,
+      rgba(217, 119, 87, 0.05) 50%,
       transparent 100%
     );
   }
@@ -228,8 +186,8 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.5), transparent);
-    box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+    background: linear-gradient(90deg, transparent, rgba(217, 119, 87, 0.5), transparent);
+    box-shadow: 0 0 20px rgba(217, 119, 87, 0.3);
     opacity: 0;
     top: -2px;
   }
@@ -238,7 +196,6 @@
     animation: scanline-sweep 0.6s ease-out forwards;
   }
 
-  /* Deactivation sweep — neutral color */
   .code-sweep--deactivate {
     animation: sweep-flash-off 0.5s ease-out forwards;
   }
@@ -267,43 +224,29 @@
 
 <script>
   const codeToggle = document.getElementById('code-mode-toggle');
-  const codeLed = document.getElementById('code-mode-led');
-  const codeModeState = document.getElementById('code-mode-state');
-  const hoverCopy = document.getElementById('code-mode-hover');
+  const wrapper = document.getElementById('code-mode-wrapper');
+  const thumbIcon = document.getElementById('cmt-thumb-icon');
   const sweepOverlay = document.getElementById('code-mode-sweep');
 
   function updateToggleVisuals(active: boolean) {
-    if (!codeToggle) return;
-    codeToggle.setAttribute('data-active', String(active));
+    if (!codeToggle || !wrapper) return;
+    codeToggle.setAttribute('aria-checked', String(active));
     codeToggle.setAttribute('aria-label', active ? 'Switch to Visual Mode' : 'Switch to Code Mode');
+    wrapper.setAttribute('data-active', String(active));
 
-    if (codeModeState) {
-      codeModeState.textContent = active ? 'CODE' : 'VISUAL';
-    }
-
-    if (hoverCopy) {
-      hoverCopy.textContent = active ? 'View Source' : 'Execute logic.sh';
+    if (thumbIcon) {
+      thumbIcon.textContent = active ? '>' : '_';
     }
   }
 
   function triggerSweep(activating: boolean) {
     if (!sweepOverlay) return;
     sweepOverlay.classList.remove('code-sweep--active', 'code-sweep--deactivate');
-    // Force reflow
     void sweepOverlay.offsetHeight;
     sweepOverlay.classList.add(activating ? 'code-sweep--active' : 'code-sweep--deactivate');
-    // Clean up after animation
     setTimeout(() => {
       sweepOverlay.classList.remove('code-sweep--active', 'code-sweep--deactivate');
     }, 700);
-  }
-
-  function triggerGlitch() {
-    if (!codeToggle) return;
-    codeToggle.classList.remove('cmt--glitch');
-    void codeToggle.offsetHeight;
-    codeToggle.classList.add('cmt--glitch');
-    setTimeout(() => codeToggle.classList.remove('cmt--glitch'), 450);
   }
 
   function applyCodeMode(active: boolean, instant = false) {
@@ -340,8 +283,7 @@
     // Save to localStorage for persistence across pages
     localStorage.setItem('code-mode', newState ? 'on' : 'off');
 
-    // Trigger visual effects
-    triggerGlitch();
+    // Trigger sweep effect
     triggerSweep(newState);
 
     // Apply the mode
