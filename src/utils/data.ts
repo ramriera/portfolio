@@ -130,6 +130,7 @@ export const projects: Project[] = [
         images: [
           '/assets/projects/massimo-dutti/viejo-reserva-tienda-flujo.png',
         ],
+        captions: ['Flujo actual: la opción de reserva está enterrada debajo del scroll en la ficha de producto'],
       },
       {
         label: '01. Auditoría e Investigación',
@@ -140,6 +141,7 @@ export const projects: Project[] = [
           '/assets/projects/massimo-dutti/viejo-mapa.png',
           '/assets/projects/massimo-dutti/viejo-login.png',
         ],
+        captions: ['Selección de tienda con mapa y disponibilidad limitada', 'Login obligatorio antes de confirmar la reserva'],
       },
       {
         label: '01. Auditoría e Investigación',
@@ -150,6 +152,7 @@ export const projects: Project[] = [
           '/assets/projects/massimo-dutti/viejo-solicitud-reserva.png',
           '/assets/projects/massimo-dutti/viejo-tracking-in-app.png',
         ],
+        captions: ['Confirmación de solicitud de reserva con redirección al email', 'Tracking in-app básico: estado pendiente sin progresión visual'],
       },
       // ── 02. Flujo de Usuario y Conversión ──
       {
@@ -160,6 +163,7 @@ export const projects: Project[] = [
         images: [
           '/assets/projects/massimo-dutti/mermaid-flujo-reserva.svg',
         ],
+        captions: ['Diagrama del flujo de reserva propuesto: de 8 pasos a 4'],
         highlight: 'De **8 pasos a 4**. La lógica del sistema está por encima de la decoración visual: cada nodo del diagrama justifica una decisión de producto.',
       },
       // ── 03. Estrategia de Producto ──
@@ -216,6 +220,7 @@ export const projects: Project[] = [
           '/assets/projects/massimo-dutti/nuevo-reservar-en-tienda-link.png',
           '/assets/projects/massimo-dutti/nuevo-reservar-en-tienda.png',
         ],
+        captions: ['Variante con enlace de texto: "¿Lo quieres hoy? Pruébalo en tienda"', 'Variante con botón secundario: CTA dual con misma jerarquía visual'],
       },
       {
         label: '04. Nuevo Flujo de Reserva',
@@ -226,6 +231,7 @@ export const projects: Project[] = [
           '/assets/projects/massimo-dutti/nuevo-selecciona-tienda.png',
           '/assets/projects/massimo-dutti/nuevo-resumen-reserva-email.png',
         ],
+        captions: ['Selección de tienda con favorita preseleccionada y disponibilidad en tiempo real', 'Resumen de reserva simplificado con email como único dato requerido'],
       },
       {
         label: '04. Nuevo Flujo de Reserva',
@@ -236,6 +242,7 @@ export const projects: Project[] = [
           '/assets/projects/massimo-dutti/nuevo-solicitud-reserva.png',
           '/assets/projects/massimo-dutti/nuevo-reserva.png',
         ],
+        captions: ['Confirmación inmediata con QR e integración con Apple/Google Wallet', 'Tracking in-app con barra de progreso y estado en tiempo real'],
       },
       {
         label: '04. Nuevo Flujo de Reserva',
@@ -246,6 +253,7 @@ export const projects: Project[] = [
         images: [
           '/assets/projects/massimo-dutti/nuevo-tracking-in-app.png',
         ],
+        captions: ['Venta cruzada contextual: "Completa tu look en tienda" con stock real'],
       },
       // ── 05. Service Design & Post-Visita ──
       {
@@ -255,6 +263,7 @@ export const projects: Project[] = [
         images: [
           '/assets/projects/massimo-dutti/poste-recogida-qr.png',
         ],
+        captions: ['Propuesta de Service Design: poste QR automatizado para recogida en tienda'],
         content: '¿Por qué no añadir una sección de recogida con un poste que lea los códigos QR? Esta propuesta de Service Design extiende la **experiencia premium** digital al mundo físico. En lugar de depender al 100% del personal de tienda para gestionar las recogidas, se propone un poste automatizado donde el cliente escanea su QR al llegar y el sistema notifica al staff para preparar el pedido.\n\nEsto resuelve tres problemas simultáneamente: reduce los tiempos de espera del cliente, libera al personal para tareas de mayor valor (asesoramiento, venta), y genera datos medibles sobre el flujo de recogida que permiten optimizar la **conversión** y la operación.',
         bullets: [
           '**Cliente tiene mejor experiencia** - Escanea el QR al llegar, sin buscar a nadie, sin esperas. El sistema ofrece **feedback inmediato**: "Tu reserva se está preparando"',
@@ -320,6 +329,7 @@ export const projects: Project[] = [
         layout: 'right-left',
         content: 'El primer paso fue entender el contexto real del mercado. Existen dos tipos principales de vehículos eléctricos: el **BEV** (100% eléctrico, cero emisiones, motor alimentado por batería recargable) y el **PHEV** (híbrido enchufable con doble motor combustión + eléctrico, hasta 130 km/h en modo eléctrico con ~40 km de autonomía).\n\nEspaña se sitúa **a la cola de Europa** en matriculaciones de vehículos eléctricos. Los datos son claros: la cuota de mercado es mínima frente a países como Noruega, Países Bajos o Alemania. La **infraestructura de recarga** crece, pero **no al ritmo necesario** para generar confianza en el consumidor.',
         images: ['/assets/projects/movefast/movefast-electric-passenger-cars-registrations-spain.png'],
+        captions: ['Matriculaciones de vehículos eléctricos en España vs. Europa'],
       },
       {
         label: '02. Investigación y Análisis',
@@ -333,6 +343,13 @@ export const projects: Project[] = [
           '/assets/projects/movefast/mf-estaciones-de-carga-en-europa-min.png',
           '/assets/projects/movefast/movefast-flota-coches-europa-2020.png',
         ],
+        captions: [
+          'Flota de vehículos eléctricos en España: cuota de mercado mínima',
+          'Evolución de matriculaciones de vehículos eléctricos en España',
+          'Puntos de recarga en España: infraestructura insuficiente',
+          'Estaciones de carga en Europa: comparativa entre países',
+          'Flota de coches eléctricos en Europa (2020): España a la cola',
+        ],
       },
       {
         label: '02. Investigación y Análisis',
@@ -344,6 +361,10 @@ export const projects: Project[] = [
           '/assets/projects/movefast/movefast-benchmarking-apps.png',
           '/assets/projects/movefast/movefast-benchmarking.png',
         ],
+        captions: [
+          'Apps analizadas: Electromaps, PlugSurfing, ChargeMap, Iberdrola y Wallbox',
+          'Matriz comparativa de funcionalidades entre apps del sector',
+        ],
       },
       {
         label: '03. Definición y Empatía',
@@ -351,6 +372,7 @@ export const projects: Project[] = [
         layout: 'full-image',
         content: 'Para dar forma a la experiencia, creé a Oriol Vallmajor: arquitecto, con ingresos por encima de la media, familiarizado con la tecnología y preocupado por la sostenibilidad. Oriol quiere viajar por España con su familia en un vehículo eléctrico. Es un **early adopter** dispuesto a invertir en movilidad sostenible, pero la **ansiedad por la autonomía** y la falta de infraestructura le generan inseguridad real.\n\nSu dolor principal **no es técnico - es emocional**: la incertidumbre de quedarse sin batería en medio de un viaje familiar. Necesita sentir que **tiene el control** y que siempre hay una **solución cerca**.',
         images: ['/assets/projects/movefast/movefast-user-persona.png'],
+        captions: ['User Persona: Oriol Vallmajor, arquitecto early adopter de movilidad sostenible'],
       },
       {
         label: '03. Definición y Empatía',
@@ -358,6 +380,7 @@ export const projects: Project[] = [
         layout: 'full-image',
         content: 'A través del mapa de empatía exploré la personalidad, necesidades, deseos y preocupaciones de Oriol. ¿Qué piensa cuando planifica un viaje largo? ¿Qué siente al ver que el punto de carga más cercano está a 80 km? ¿Qué oye de su entorno sobre los coches eléctricos? Los insights revelaron que la **barrera principal no es racional sino emocional**: la **"range anxiety"** - el miedo a quedarse tirado - es el factor que **más frena la decisión de compra**.',
         images: ['/assets/projects/movefast/movefast-mapa-empatia.png'],
+        captions: ['Mapa de empatía de Oriol: pensamientos, sentimientos y frustraciones'],
       },
       {
         label: '03. Definición y Empatía',
@@ -365,6 +388,7 @@ export const projects: Project[] = [
         layout: 'full-image',
         content: 'El journey map documentó la experiencia completa de Oriol: desde el momento en que decide comprar un coche eléctrico, pasando por la planificación de su primer viaje largo, hasta el momento crítico en que necesita recargar en ruta. Los **picos de frustración** se concentran en tres puntos: descubrir que **no hay puntos de carga** en su ruta habitual, llegar a un punto de carga y **encontrarlo ocupado**, y la **espera de más de 45 minutos** durante la recarga. Estos **puntos de dolor** definen las oportunidades de diseño.',
         images: ['/assets/projects/movefast/movefast-costumer-journey.png'],
+        captions: ['Customer Journey Map: picos de frustración en recarga y planificación de rutas'],
       },
       {
         label: '04. Ideación y Arquitectura',
@@ -403,6 +427,22 @@ export const projects: Project[] = [
           '/assets/projects/movefast/movefast-pantalla-escoger.png',
           '/assets/projects/movefast/movefast-pantalla-reserva.png',
           '/assets/projects/movefast/movefast-pantalla-aceptado.png',
+        ],
+        captions: [
+          'Splash screen con animación del vehículo eléctrico',
+          'Pantalla de carga con progreso de inicialización',
+          'Onboarding: puntos de carga actualizados en tiempo real',
+          'Onboarding: estado de ocupación de estaciones',
+          'Onboarding: puntos de cambio de batería cercanos',
+          'Onboarding: sistema de reserva anticipada',
+          'Mapa interactivo principal con puntos de carga y talleres',
+          'Menú lateral: vehículos, baterías, pagos y notificaciones',
+          'Filtros avanzados por tipo de punto y disponibilidad',
+          'Vista de detalle de taller con horarios y servicios',
+          'Gestión de talleres favoritos del usuario',
+          'Selección de ubicación para cambio de batería',
+          'Formulario de reserva: fecha, hora y confirmación',
+          'Confirmación de reserva aceptada con resumen',
         ],
       },
       {
@@ -461,6 +501,10 @@ export const projects: Project[] = [
           '/assets/projects/global-helping/gh-brainstorming.png',
           '/assets/projects/global-helping/gh-research-questions.png',
         ],
+        captions: [
+          'Brainstorming: mapeo de problemáticas globales y oportunidades de diseño',
+          'Research Questions organizadas por actores: usuarios, productos e instituciones',
+        ],
       },
       {
         label: '01. Descubrimiento',
@@ -472,6 +516,10 @@ export const projects: Project[] = [
           '/assets/projects/global-helping/gh-cuestionarios-2.png',
           '/assets/projects/global-helping/gh-cuestionarios-1.png',
         ],
+        captions: [
+          'Cuestionario dirigido a personas con experiencia en voluntariado',
+          'Resultados: 48 respuestas que revelaron la falta de visibilidad de ONGs locales',
+        ],
       },
       {
         label: '02. Definición',
@@ -482,6 +530,10 @@ export const projects: Project[] = [
           '/assets/projects/global-helping/gh-user-persona.png',
           '/assets/projects/global-helping/gh-mapa-empatia.png',
         ],
+        captions: [
+          'User Persona: persona solidaria frustrada por la fragmentación de plataformas',
+          'Mapa de empatía: la barrera principal es la falta de confianza y transparencia',
+        ],
       },
       {
         label: '02. Definición',
@@ -489,6 +541,7 @@ export const projects: Project[] = [
         layout: 'full-image',
         content: 'El **Customer Journey Map** definió el viaje completo del usuario: desde que descubre una causa que le motiva, pasando por la búsqueda de una forma de ayudar, hasta la acción concreta (donar, ser voluntario o contribuir a crowdfunding). Los **puntos de mayor fricción** se identificaron en la **fragmentación de servicios** - el usuario tenía que saltar entre múltiples plataformas para encontrar opciones y ninguna le daba seguimiento ni **conexión emocional** con el impacto de su ayuda.',
         images: ['/assets/projects/global-helping/gh-customer-journey.png'],
+        captions: ['Customer Journey Map: fricción en la fragmentación de servicios de donación y voluntariado'],
       },
       {
         label: '03. Ideación y Benchmarking',
@@ -497,6 +550,7 @@ export const projects: Project[] = [
         content: 'Se realizó un **benchmarking exhaustivo** evaluando servicios, productos, opiniones, valores y marketing de las plataformas existentes en el sector solidario.\n\nEl resultado confirmó la oportunidad: existían plataformas de donaciones, plataformas de voluntariado y plataformas de crowdfunding - pero **ninguna reunía los tres servicios en un mismo sitio**. El usuario que quería ayudar tenía que navegar entre múltiples webs, cada una con su registro, su interfaz y su lógica. Global Helping nace para **resolver esa fragmentación**.',
         highlight: 'No existía ninguna plataforma que reuniera **donaciones, voluntariado y crowdfunding** en un mismo sitio. Global Helping **cubre ese vacío**.',
         images: ['/assets/projects/global-helping/gh-benchmarking.png'],
+        captions: ['Benchmarking: ninguna plataforma reunía donaciones, voluntariado y crowdfunding'],
       },
       {
         label: '04. Desarrollo',
@@ -507,6 +561,10 @@ export const projects: Project[] = [
           '/assets/projects/global-helping/gh-foundations.png',
           '/assets/projects/global-helping/gh-componentes.png',
         ],
+        captions: [
+          'Foundations del sistema: color, tipografía, iconografía, grid y espaciado',
+          'Componentes UI: bloques de texto, cards, botones, inputs y navegación',
+        ],
       },
       {
         label: '04. Desarrollo',
@@ -514,6 +572,7 @@ export const projects: Project[] = [
         layout: 'full-image',
         content: 'El proceso fue de **menor a mayor fidelidad**: primero wireframes rápidos (esquemas de baja calidad, digitales o a mano) para validar la **estructura de información** y los flujos principales sin invertir tiempo en detalle visual. Una vez validada la arquitectura, se diseñaron los **componentes finales**: bloques de texto, iconos, cards, botones, campos de texto, selectores, barras de navegación, tablas y listas - todos construidos como **elementos independientes y combinables**.',
         images: ['/assets/projects/global-helping/gh-wireframing.png'],
+        captions: ['Wireframes de baja fidelidad a componentes finales: evolución del diseño'],
       },
       {
         label: '05. Solución Final',
@@ -918,40 +977,6 @@ export const projects: Project[] = [
         ],
       },
       {
-        label: '04. Presentación',
-        title: 'Full Audit Deck',
-        layout: 'audit-deck-grid',
-        content: 'Todas las diapositivas de la presentación de auditoría heurística. Haz clic en cualquier imagen para ampliarla y leer las anotaciones en detalle.',
-        images: [
-          '/assets/projects/imaginbank/imaginbank-1.png',
-          '/assets/projects/imaginbank/imaginbank-2.png',
-          '/assets/projects/imaginbank/imaginbank-3.png',
-          '/assets/projects/imaginbank/imaginbank-4.png',
-          '/assets/projects/imaginbank/imaginbank-5.png',
-          '/assets/projects/imaginbank/imaginbank-7.png',
-          '/assets/projects/imaginbank/imaginbank-11.png',
-          '/assets/projects/imaginbank/imaginbank-12.png',
-          '/assets/projects/imaginbank/imaginbank-14.png',
-          '/assets/projects/imaginbank/imaginbank-15.png',
-          '/assets/projects/imaginbank/imaginbank-16.png',
-          '/assets/projects/imaginbank/imaginbank-17.png',
-        ],
-        captions: [
-          'Portada — Análisis Heurístico',
-          'Contexto de mercado',
-          'Imagin 2021 — Datos clave',
-          'Heurísticas de Nielsen — Marco de análisis',
-          'H1 — Mostrar estado del sistema',
-          'H2 — Hablar el lenguaje del usuario',
-          'H6 — Aliviar la carga en memoria',
-          'H7 — Atajos, flexibilidad y eficiencia',
-          'H9 — Comunicar errores con claridad',
-          'H10 — Ayuda y documentación',
-          'Mejoras UX — Wireframes',
-          'Conclusiones',
-        ],
-      },
-      {
         label: '05. ROI & Impacto',
         title: 'Retorno de inversión de las mejoras UX',
         layout: 'center',
@@ -1289,6 +1314,10 @@ export const projects: Project[] = [
           '/assets/projects/solotemazos/solotemazos-logo-BLK.png',
           '/assets/projects/solotemazos/solotemazos-logo-WHT.png',
         ],
+        captions: [
+          'Logo versión negativa: optimizado para fondos oscuros de la plataforma',
+          'Logo versión positiva: para redes sociales y fondos claros',
+        ],
       },
       // ── 02. Definición (Prototipado y Wireframes) ──
       {
@@ -1311,6 +1340,7 @@ export const projects: Project[] = [
         images: [
           '/assets/projects/solotemazos/solotemazos-wireframing.png',
         ],
+        captions: ['Wireframes de baja y media fidelidad: validación de estructura y flujos de navegación'],
       },
       {
         label: '02. Definición',
@@ -1322,6 +1352,10 @@ export const projects: Project[] = [
           '/assets/projects/solotemazos/solotemazos-grid-1.png',
           '/assets/projects/solotemazos/solotemazos-grid-2.png',
         ],
+        captions: [
+          'Grid de 12 columnas con variaciones de 2 y 3 columnas para tarjetas',
+          'Sistema de grids responsive para desktop, tablet y móvil',
+        ],
       },
       // ── 03. Diseño Visual ──
       {
@@ -1332,6 +1366,7 @@ export const projects: Project[] = [
         images: [
           '/assets/projects/solotemazos/solotemazos-color.png',
         ],
+        captions: ['Paleta cromática: dark mode con acentos cálidos y neón para la cultura de club'],
       },
       {
         label: '03. Diseño Visual',
@@ -1341,6 +1376,10 @@ export const projects: Project[] = [
         images: [
           '/assets/projects/solotemazos/solotemazos-typography.png',
           '/assets/projects/solotemazos/solotemazos-spacing.png',
+        ],
+        captions: [
+          'Tipografía: escala limpia y neutral con pesos para crear jerarquía',
+          'Sistema de espaciado: márgenes y paddings consistentes para ritmo visual',
         ],
       },
       {
@@ -1354,6 +1393,12 @@ export const projects: Project[] = [
           '/assets/projects/solotemazos/solotemazos-card-ranking.png',
           '/assets/projects/solotemazos/solotemazos-card-festival.png',
         ],
+        captions: [
+          'Tarjeta de canción: portada, artista y acceso directo al reproductor',
+          'Tarjeta de noticia: titular, imagen destacada y fecha de publicación',
+          'Tarjeta de ranking: posición, tendencia y reproductor integrado',
+          'Tarjeta de festival: imagen, fecha, ubicación e información del evento',
+        ],
       },
       {
         label: '03. Diseño Visual',
@@ -1363,6 +1408,10 @@ export const projects: Project[] = [
         images: [
           '/assets/projects/solotemazos/solotemazos-lista.png',
           '/assets/projects/solotemazos/solotemazos-festivals.png',
+        ],
+        captions: [
+          'Vista de lista de reproducción con formato editorial y reproductor integrado',
+          'Vista de festivales con información clave visible de un vistazo',
         ],
       },
       {
@@ -1383,6 +1432,20 @@ export const projects: Project[] = [
           '/assets/projects/solotemazos/solotemazos-mobile-lista.png',
           '/assets/projects/solotemazos/solotemazos-mobile-lista-levels.png',
           '/assets/projects/solotemazos/solotemazos-mobile-logo.png',
+        ],
+        captions: [
+          'Home principal: contenido curado visible sin scroll',
+          'Reproductor embebido: YouTube/Soundcloud integrado en el flujo',
+          'Charts: rankings en tiempo real con tendencias',
+          'Noticias: artículos editoriales sobre música',
+          'Detalle de noticia: lectura con reproductor accesible',
+          'Discos: catálogo de álbumes destacados',
+          'Detalle de disco: Kygo con tracklist y reproductor',
+          'Festivales: eventos musicales con fecha y ubicación',
+          'Detalle de festival: Tomorrowland con lineup y entradas',
+          'Lista de reproducción: canciones curadas por tema',
+          'Detalle de lista: Levels con reproductor y comentarios',
+          'Splash screen: logo animado de carga de la app',
         ],
       },
       // ── 04. Especificaciones Técnicas ──

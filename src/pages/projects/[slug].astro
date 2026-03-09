@@ -458,10 +458,15 @@ function md(text: string): string {
             )}
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {section.images?.map((img: string, i: number) => (
-                <div data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden relative">
-                  <img src={img} alt={`Slide ${i + 1} del audit`} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" />
+                <figure data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden relative">
+                  <div class="aspect-[3/4] overflow-hidden">
+                    <img src={img} alt={section.captions?.[i] || `Slide ${i + 1}`} class="lightbox-trigger w-full h-full object-cover cursor-zoom-in" loading="lazy" />
+                  </div>
+                  {section.captions?.[i] && (
+                    <figcaption class="text-xs text-dark-400 mt-2 text-center italic px-1">{section.captions[i]}</figcaption>
+                  )}
                   <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
-                </div>
+                </figure>
               ))}
             </div>
           </div>
