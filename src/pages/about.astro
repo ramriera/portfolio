@@ -23,27 +23,27 @@ const timeline = [
   <section class="section-padding" data-component="AboutHero">
     <div class="container-custom">
       <div class="max-w-4xl">
-        <div data-reveal class="mb-8 flex items-center gap-3">
+        <div data-reveal class="mb-8">
           <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
-              <!-- Head -->
-              <circle cx="18" cy="12" r="6" class="icon-stroke icon-draw" />
-              <!-- Body -->
-              <path d="M18 18C12 18 8 23 8 29V36" class="icon-stroke icon-draw" />
-              <path d="M18 18C24 18 28 23 28 29V36" class="icon-stroke icon-draw-delay" />
-              <!-- Waving hand -->
-              <g class="icon-hand-wave">
-                <path d="M30 8L34 4" class="icon-accent" stroke-width="2" />
-                <path d="M32 12L37 10" class="icon-accent" stroke-width="2" />
-                <path d="M28 16L26 22" class="icon-stroke" stroke-width="1.8" />
-                <circle cx="34" cy="4" r="1.2" class="icon-accent-fill" />
+              <!-- Lightbulb body -->
+              <path d="M16 28C16 24 12 22 12 16C12 10.5 16.5 6 22 6C27.5 6 32 10.5 32 16C32 22 28 24 28 28" class="icon-stroke icon-draw" />
+              <!-- Bulb base -->
+              <path d="M16 28H28" class="icon-stroke icon-draw-delay" />
+              <path d="M17 32H27" class="icon-stroke icon-draw-delay" />
+              <path d="M19 36H25" class="icon-accent icon-draw-delay" />
+              <!-- Filament -->
+              <g class="icon-bulb-glow">
+                <path d="M19 18C19 18 20.5 20 22 20C23.5 20 25 18 25 18" class="icon-accent icon-draw-delay" />
               </g>
-              <!-- Sparkle lines -->
-              <line x1="36" y1="6" x2="39" y2="5" class="icon-accent icon-wave-line-1" stroke-width="1.5" />
-              <line x1="37" y1="14" x2="40" y2="14" class="icon-accent icon-wave-line-2" stroke-width="1.5" />
+              <!-- Light rays -->
+              <line x1="22" y1="1" x2="22" y2="4" class="icon-accent icon-bulb-ray-1" stroke-width="1.5" />
+              <line x1="35" y1="8" x2="33" y2="10" class="icon-accent icon-bulb-ray-2" stroke-width="1.5" />
+              <line x1="9" y1="8" x2="11" y2="10" class="icon-accent icon-bulb-ray-3" stroke-width="1.5" />
+              <line x1="38" y1="16" x2="35" y2="16" class="icon-accent icon-bulb-ray-1" stroke-width="1.5" />
+              <line x1="6" y1="16" x2="9" y2="16" class="icon-accent icon-bulb-ray-2" stroke-width="1.5" />
             </svg>
           </span>
-          <span class="text-sm font-medium text-primary-500 tracking-wide">Sobre mí</span>
         </div>
         <h1 data-reveal data-delay="100" class="heading-xl mb-8"
           data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2rem / 32px">
@@ -152,8 +152,22 @@ const timeline = [
   <section class="section-padding" data-component="TechStackSection">
     <div class="container-custom">
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <div data-reveal class="mb-6">
-          <span class="text-sm font-medium text-primary-500 tracking-wide">Stack</span>
+        <div data-reveal class="mb-6 flex justify-center">
+          <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+              <!-- Bottom layer -->
+              <path d="M6 30L22 38L38 30" class="icon-stroke icon-draw" />
+              <!-- Middle layer -->
+              <path d="M6 22L22 30L38 22" class="icon-stroke icon-draw-delay" />
+              <!-- Top layer (accent) -->
+              <g class="icon-stack-float">
+                <path d="M6 14L22 22L38 14L22 6Z" class="icon-accent icon-draw-delay" />
+              </g>
+              <!-- Sparkle -->
+              <circle cx="36" cy="8" r="1.2" class="icon-accent-fill icon-bulb-ray-1" />
+              <circle cx="8" cy="8" r="1" class="icon-accent-fill icon-bulb-ray-2" />
+            </svg>
+          </span>
         </div>
         <h2 data-reveal data-delay="100" class="heading-lg mb-4">
           Herramientas que <span class="text-primary-500">domino</span>

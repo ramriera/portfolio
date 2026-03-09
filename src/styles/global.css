@@ -361,6 +361,37 @@ main {
 
 .icon-ruler-pencil { animation: pencilDraw 3.5s ease-in-out infinite; }
 
+/* Lightbulb icon - glow pulse & rays */
+@keyframes bulbGlow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes bulbRayPulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.icon-bulb-glow {
+  animation: bulbGlow 3s ease-in-out infinite;
+  transform-origin: 22px 18px;
+}
+
+.icon-bulb-ray-1 { animation: bulbRayPulse 3s ease-in-out 0s infinite; }
+.icon-bulb-ray-2 { animation: bulbRayPulse 3s ease-in-out 0.6s infinite; }
+.icon-bulb-ray-3 { animation: bulbRayPulse 3s ease-in-out 1.2s infinite; }
+
+/* Stack / layers icon - gentle float */
+@keyframes stackFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.icon-stack-float {
+  animation: stackFloat 2.5s ease-in-out infinite;
+  transform-origin: center center;
+}
+
 /* Draw-in on scroll reveal */
 .section-icon-svg .icon-draw {
   stroke-dasharray: 300;
