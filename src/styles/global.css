@@ -9,6 +9,7 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   body {
@@ -64,11 +65,13 @@
   }
 
   .heading-xl {
-    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08];
+    font-size: clamp(2.25rem, 5vw + 0.5rem, 4.5rem);
+    @apply font-semibold tracking-tight leading-[1.08];
   }
 
   .heading-lg {
-    @apply text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-tight;
+    font-size: clamp(1.875rem, 4vw + 0.25rem, 3rem);
+    @apply font-semibold tracking-tight leading-tight;
   }
 
   .heading-md {
