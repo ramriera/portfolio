@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: 'Ramon Riera',
-  title: 'Ramon Riera - Senior UX/UI Designer',
-  description: 'Diseñador de experiencias de usuario. Especializado en Design Systems, Product Design y Design Operations.',
+  title: 'Ramon Riera · UX Lead',
+  description: 'Puente entre diseño y frontend escalable. Design Systems, Product Design y Design Ops.',
   url: 'https://ramonriera.design',
   email: 'hello@ramonriera.design',
   logo: {

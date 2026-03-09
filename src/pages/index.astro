@@ -5,7 +5,14 @@ import AboutSection from '@/components/AboutSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { projects, siteConfig } from '@/utils/data';
 
-const projectOrder = ['massimo-dutti-conversion', 'movefast-startup-platform', 'imaginbank-digital-banking', 'solotemazos-music-platform'];
+const projectOrder = [
+  'massimo-dutti-conversion',
+  'movefast-startup-platform',
+  'banco-sabadell-design-system',
+  'imaginbank-digital-banking',
+  'iberia-flight-experience',
+  'solotemazos-music-platform',
+];
 const featuredProjects = projects
   .filter((p) => p.featured)
   .sort((a, b) => {
@@ -16,9 +23,32 @@ const featuredProjects = projects
     if (bIdx === -1) return 1;
     return aIdx - bIdx;
   });
+
+// Process image map — TODO: reemplazar con imágenes de proceso reales
+const processImages: Record<string, string> = {
+  'massimo-dutti-conversion': '/assets/projects/massimo-dutti/proceso-wireframe.png',
+  'movefast-startup-platform': '/assets/projects/movefast/proceso-flow.png',
+  'banco-sabadell-design-system': '/assets/projects/sabadell/proceso-tokens.png',
+  'imaginbank-digital-banking': '/assets/projects/imaginbank/proceso-heuristica.png',
+  'iberia-flight-experience': '/assets/projects/iberia/proceso-sistema.png',
+  'solotemazos-music-platform': '/assets/projects/solotemazos/proceso-prototipo.png',
+};
+
+// Helper to get process image, falling back to project cover
+function getProcessImage(slug: string, cover: string): string {
+  // TODO: cuando existan las imágenes de proceso reales, eliminar el fallback al cover
+  return cover;
+}
+
+const p1 = featuredProjects[0]; // Massimo Dutti — featured full-width
+const p2 = featuredProjects[1]; // MoveFast — grid 50%
+const p3 = featuredProjects[2]; // Banco Sabadell — grid 50%
+const p4 = featuredProjects[3]; // Imaginbank — compact horizontal
+const p5 = featuredProjects[4]; // Iberia — compact horizontal
+const p6 = featuredProjects[5]; // SoloTemazos — secondary
 ---
 
-<BaseLayout title="Ramon Riera - Senior UX/UI Designer | Design Systems & Product Design">
+<BaseLayout title="Ramon Riera · UX Lead">
   <!-- Hero -->
   <HeroSection />
 
@@ -71,15 +101,51 @@ const featuredProjects = projects
         </a>
       </div>
 
-      <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8"
-        data-component="ProjectGrid"
-        data-token="$grid-cols: 1 → 2 (md)|$spacing-gap: 2rem / 32px">
-        {featuredProjects.map((project, i) => (
-          <div data-reveal data-delay={String(i * 100)}>
-            <ProjectCard {...project} />
+      <!-- Projects Grid — Varied rhythm layout -->
+      <div class="space-y-8" data-component="ProjectGrid">
+
+        <!-- Row 1: Featured full-width (Massimo Dutti) -->
+        {p1 && (
+          <div data-reveal>
+            <ProjectCard {...p1} variant="featured" processImage={getProcessImage(p1.slug, p1.cover)} />
           </div>
-        ))}
+        )}
+
+        <!-- Row 2: Two-column grid (MoveFast + Banco Sabadell) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {p2 && (
+            <div data-reveal data-delay="100">
+              <ProjectCard {...p2} processImage={getProcessImage(p2.slug, p2.cover)} />
+            </div>
+          )}
+          {p3 && (
+            <div data-reveal data-delay="200">
+              <ProjectCard {...p3} processImage={getProcessImage(p3.slug, p3.cover)} />
+            </div>
+          )}
+        </div>
+
+        <!-- Row 3: Compact horizontal cards (Imaginbank + Iberia) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {p4 && (
+            <div data-reveal data-delay="100">
+              <ProjectCard {...p4} variant="compact" processImage={getProcessImage(p4.slug, p4.cover)} />
+            </div>
+          )}
+          {p5 && (
+            <div data-reveal data-delay="200">
+              <ProjectCard {...p5} variant="compact" processImage={getProcessImage(p5.slug, p5.cover)} />
+            </div>
+          )}
+        </div>
+
+        <!-- Row 4: Secondary card (SoloTemazos) -->
+        {p6 && (
+          <div data-reveal data-delay="100" class="max-w-2xl">
+            <ProjectCard {...p6} variant="secondary" processImage={getProcessImage(p6.slug, p6.cover)} />
+          </div>
+        )}
+
       </div>
     </div>
   </section>
