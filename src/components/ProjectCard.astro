@@ -9,168 +9,73 @@ interface Props {
   description: string;
   cover: string;
   featured?: boolean;
-  variant?: 'default' | 'featured' | 'compact' | 'secondary';
-  processImage?: string;
 }
 
-const { slug, title, client, year, category, tags, description, cover, featured, variant = 'default', processImage } = Astro.props;
-
-const isFeatured = variant === 'featured';
-const isCompact = variant === 'compact';
-const isSecondary = variant === 'secondary';
+const { slug, title, client, year, category, tags, description, cover, featured } = Astro.props;
 ---
 
-{isCompact ? (
-  <!-- Compact horizontal card -->
-  <a
-    href={`/projects/${slug}`}
-    class="project-card group relative block rounded-2xl overflow-hidden cursor-pointer"
-    data-component="ProjectCard"
-  >
-    <div class="flex flex-col sm:flex-row">
-      <!-- Image side -->
-      <div class="relative sm:w-[35%] aspect-[4/3] sm:aspect-auto sm:min-h-[200px]">
-        <img
-          src={cover}
-          alt={title}
-          class="card-mockup w-full h-full object-cover"
-          loading="lazy"
-        />
-        <div class="card-gradient absolute inset-0 sm:hidden"></div>
-        <!-- Process thumbnail -->
-        {processImage && (
-          <div class="absolute bottom-2 left-2 w-16 h-16 rounded-lg overflow-hidden border border-white/10 shadow-lg">
-            <img src={processImage} alt={`Proceso - ${title}`} class="w-full h-full object-cover" loading="lazy" />
-            <span class="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-[0.5rem] text-center py-0.5 font-medium tracking-wide uppercase">Proceso</span>
-          </div>
-        )}
-      </div>
-      <!-- Text side -->
-      <div class="sm:w-[65%] p-5 md:p-6 bg-dark-900 flex flex-col justify-center">
-        <h3 class="text-lg font-semibold tracking-tight text-white mb-1">
-          {title}
-        </h3>
-        <p class="text-sm leading-relaxed text-dark-300 line-clamp-2 mb-3">
+<a
+  href={`/projects/${slug}`}
+  class:list={[
+    'project-card group relative block rounded-2xl overflow-hidden cursor-pointer',
+    featured ? 'lg:col-span-2' : '',
+  ]}
+  data-component="ProjectCard"
+  data-token="$radius-2xl: 1rem / 16px|$spacing-padding: 1.5rem → 2rem (md)"
+>
+  <div class="relative aspect-[4/3]">
+    <!-- Image mockup -->
+    <img
+      src={cover}
+      alt={title}
+      class="card-mockup w-full h-full object-cover"
+      loading="lazy"
+      data-token="$filter-saturate: 1.1|$filter-brightness: 1.05|$aspect-ratio: 4/3|$object-fit: cover"
+    />
+
+    <!-- Gradient overlay -->
+    <div class="card-gradient absolute inset-0"
+      data-token="$color-gradient-start: rgba(0,0,0,0.92)|$color-gradient-end: rgba(0,0,0,0.05)|$gradient-direction: to top"></div>
+
+    <!-- Inset shadow for depth -->
+    <div class="absolute inset-0 rounded-2xl card-inset-shadow pointer-events-none"></div>
+
+    <!-- Bottom content -->
+    <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+      <!-- Title - always visible -->
+      <h3 class="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-1"
+        data-token="$font-size-heading-sm: 1.25rem → 1.5rem|$font-weight: 600 (semibold)|$color-text: #ffffff">
+        {title}
+      </h3>
+
+      <!-- Description - hidden, reveals on hover -->
+      <div class="card-desc-reveal">
+        <p class="card-description text-sm leading-relaxed line-clamp-2"
+          data-token="$font-size-sm: 0.875rem / 14px|$color-text: #F8FAFC|$line-height: 1.6">
           {description}
         </p>
-        <div class="flex flex-wrap items-center gap-2">
-          {tags.slice(0, 3).map((tag) => (
-            <span class="card-tag">{tag}</span>
-          ))}
-        </div>
+      </div>
+
+      <!-- Spacer -->
+      <div class="h-3"></div>
+
+      <!-- Tags - first always visible, rest reveal on hover -->
+      <div class="flex flex-wrap items-center gap-2" data-component="TagGroup" data-token="$spacing-gap: 0.5rem / 8px">
+        {tags.slice(0, 4).map((tag, i) => (
+          <span
+            class:list={[
+              'card-tag',
+              i > 0 ? 'card-tag-hidden' : '',
+            ]}
+            style={i > 0 ? `transition-delay: ${i * 60}ms` : ''}
+          >
+            {tag}
+          </span>
+        ))}
       </div>
     </div>
-  </a>
-) : (
-  <!-- Standard / Featured / Secondary card -->
-  <a
-    href={`/projects/${slug}`}
-    class:list={[
-      'project-card group relative block rounded-2xl overflow-hidden cursor-pointer',
-      featured && !isFeatured ? 'lg:col-span-2' : '',
-      isSecondary ? 'card-secondary' : '',
-    ]}
-    data-component="ProjectCard"
-    data-token="$radius-2xl: 1rem / 16px|$spacing-padding: 1.5rem → 2rem (md)"
-  >
-    <div class:list={[
-      'relative',
-      isFeatured ? 'aspect-[16/9]' : 'aspect-[4/3]',
-    ]}>
-      <!-- Image mockup -->
-      <img
-        src={cover}
-        alt={title}
-        class="card-mockup w-full h-full object-cover"
-        loading="lazy"
-        data-token="$filter-saturate: 1.1|$filter-brightness: 1.05|$object-fit: cover"
-      />
-
-      <!-- Gradient overlay -->
-      <div class="card-gradient absolute inset-0"
-        data-token="$color-gradient-start: rgba(0,0,0,0.92)|$color-gradient-end: rgba(0,0,0,0.05)|$gradient-direction: to top"></div>
-
-      <!-- Inset shadow for depth -->
-      <div class="absolute inset-0 rounded-2xl card-inset-shadow pointer-events-none"></div>
-
-      <!-- Featured badge -->
-      {isFeatured && (
-        <div class="absolute top-5 left-5 md:top-6 md:left-8 flex items-center gap-3">
-          <span class="text-6xl md:text-7xl font-bold text-white/10 leading-none font-display select-none">01</span>
-          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-500/90 text-white tracking-wide uppercase">Proyecto destacado</span>
-        </div>
-      )}
-
-      <!-- Secondary badge -->
-      {isSecondary && (
-        <div class="absolute top-4 right-4">
-          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[0.65rem] font-medium bg-white/10 text-white/60 border border-white/10 tracking-wide uppercase">Proyecto personal</span>
-        </div>
-      )}
-
-      <!-- Process thumbnail -->
-      {processImage && (
-        <div class:list={[
-          'absolute rounded-lg overflow-hidden border border-white/10 shadow-lg',
-          isFeatured ? 'bottom-28 md:bottom-32 left-5 md:left-8 w-20 h-20' : 'bottom-24 left-5 md:left-7 w-16 h-16',
-        ]}>
-          <img src={processImage} alt={`Proceso - ${title}`} class="w-full h-full object-cover" loading="lazy" />
-          <span class="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-[0.5rem] text-center py-0.5 font-medium tracking-wide uppercase">Proceso</span>
-        </div>
-      )}
-
-      <!-- Bottom content -->
-      <div class:list={[
-        'absolute bottom-0 left-0 right-0',
-        isFeatured ? 'p-6 md:p-10' : 'p-6 md:p-8',
-      ]}>
-        <!-- Title - always visible -->
-        <h3 class:list={[
-          'font-semibold tracking-tight text-white mb-1',
-          isFeatured ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-xl sm:text-2xl',
-        ]}
-          data-token="$font-weight: 600 (semibold)|$color-text: #ffffff">
-          {title}
-        </h3>
-
-        <!-- Description -->
-        {isFeatured ? (
-          <!-- Featured: description always visible -->
-          <p class="card-description text-sm md:text-base leading-relaxed line-clamp-3 max-w-2xl mt-2"
-            data-token="$color-text: #F8FAFC|$line-height: 1.6">
-            {description}
-          </p>
-        ) : (
-          <!-- Default: description reveals on hover -->
-          <div class="card-desc-reveal">
-            <p class="card-description text-sm leading-relaxed line-clamp-2"
-              data-token="$font-size-sm: 0.875rem / 14px|$color-text: #F8FAFC|$line-height: 1.6">
-              {description}
-            </p>
-          </div>
-        )}
-
-        <!-- Spacer -->
-        <div class={isFeatured ? 'h-4' : 'h-3'}></div>
-
-        <!-- Tags -->
-        <div class="flex flex-wrap items-center gap-2" data-component="TagGroup" data-token="$spacing-gap: 0.5rem / 8px">
-          {tags.slice(0, isFeatured ? 5 : 4).map((tag, i) => (
-            <span
-              class:list={[
-                'card-tag',
-                !isFeatured && i > 0 ? 'card-tag-hidden' : '',
-              ]}
-              style={!isFeatured && i > 0 ? `transition-delay: ${i * 60}ms` : ''}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  </a>
-)}
+  </div>
+</a>
 
 <style>
   /* Card base */
@@ -181,12 +86,6 @@ const isSecondary = variant === 'secondary';
 
   .project-card:hover {
     transform: scale(1.02);
-  }
-
-  /* Secondary card subtle bg */
-  .card-secondary {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   /* Gradient background */
