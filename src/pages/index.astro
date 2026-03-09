@@ -3,7 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroSection from '@/components/HeroSection.astro';
 import AboutSection from '@/components/AboutSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
-import { projects } from '@/utils/data';
+import { projects, siteConfig } from '@/utils/data';
 
 const projectOrder = ['massimo-dutti-conversion', 'movefast-startup-platform', 'imaginbank-digital-banking', 'solotemazos-music-platform'];
 const featuredProjects = projects
@@ -120,7 +120,7 @@ const featuredProjects = projects
         Me encantaría escuchar tu idea. Hablemos sobre cómo puedo ayudarte a crear algo extraordinario.
       </p>
       <div data-reveal data-delay="300">
-        <a href="mailto:ramriera28@gmail.com" class="btn-primary text-base"
+        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base"
           data-component="ButtonPrimary"
           data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
           Contactar

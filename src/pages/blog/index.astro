@@ -13,7 +13,21 @@ import { blogPosts } from '@/utils/data';
     <div class="container-custom">
       <div class="max-w-4xl">
         <div data-reveal class="mb-8">
-          <span class="text-sm font-medium text-primary-500 tracking-wide">Blog</span>
+          <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+              <!-- Pencil body -->
+              <path d="M8 36L12 20L32 8L36 12L24 32Z" class="icon-stroke icon-draw" />
+              <!-- Pencil tip -->
+              <path d="M8 36L12 20L16 24Z" class="icon-accent icon-draw-delay" />
+              <!-- Pencil eraser -->
+              <path d="M32 8L36 12L38 10L34 6Z" class="icon-stroke icon-draw-delay" />
+              <!-- Writing lines -->
+              <g class="icon-ruler-pencil">
+                <line x1="18" y1="4" x2="28" y2="4" class="icon-accent" stroke-width="1.5" />
+                <line x1="20" y1="8" x2="26" y2="8" class="icon-accent" stroke-width="1.5" />
+              </g>
+            </svg>
+          </span>
         </div>
         <h1 data-reveal data-delay="100" class="heading-xl mb-8">
           Pensamientos y

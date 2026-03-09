@@ -90,22 +90,6 @@
     @apply text-sm sm:text-base text-dark-500 leading-relaxed;
   }
 
-  .link-underline {
-    @apply relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-primary-500 after:transition-all after:duration-300 hover:after:w-full;
-  }
-
-  /* External / prototype links – coherent primary color transition */
-  .link-external {
-    @apply text-primary-500 transition-all duration-300;
-  }
-  .link-external:hover {
-    @apply text-primary-400;
-    text-shadow: 0 0 12px rgba(217, 119, 87, 0.2);
-  }
-  .link-external:active {
-    @apply text-primary-600 scale-[0.97];
-  }
-
   .card-hover {
     @apply transition-all duration-500 ease-out-expo hover:-translate-y-1;
   }
@@ -227,13 +211,6 @@
 
 main {
   animation: pageTransition 0.5s ease-out;
-}
-
-/* Hand-drawn underline (reusable, matches WordsCarousel) */
-.hand-underline {
-  height: 10px;
-  color: var(--color-primary-500, #D97757);
-  overflow: visible;
 }
 
 /* Animated section icons - Lottie-style */

@@ -1,5 +1,5 @@
 ---
-import { navLinks } from '@/utils/data';
+import { navLinks, siteConfig } from '@/utils/data';
 import CodeModeToggle from '@/components/CodeModeToggle.astro';
 
 const currentPath = Astro.url.pathname;
@@ -44,7 +44,7 @@ const currentPath = Astro.url.pathname;
           <CodeModeToggle />
         </div>
         <a
-          href="mailto:ramriera28@gmail.com"
+          href={`mailto:${siteConfig.email}`}
           class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-dark-900 text-white text-sm font-medium rounded-full transition-all duration-300 hover:bg-dark-800 hover:shadow-md hover:shadow-dark-900/10 group/btn"
         >
           Hablemos
@@ -101,7 +101,7 @@ const currentPath = Astro.url.pathname;
       ))}
     </nav>
     <a
-      href="mailto:ramriera28@gmail.com"
+      href={`mailto:${siteConfig.email}`}
       class="mt-6 btn-primary text-lg"
     >
       Hablemos

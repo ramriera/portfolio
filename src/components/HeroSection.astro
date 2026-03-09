@@ -1,5 +1,6 @@
 ---
 import WordsCarousel from './WordsCarousel.astro';
+import { siteConfig } from '@/utils/data';
 
 const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brillan', 'impactan', 'perduran'];
 ---
@@ -72,7 +73,7 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
-          <a href="mailto:ramriera28@gmail.com" class="btn-outline text-base"
+          <a href={`mailto:${siteConfig.email}`} class="btn-outline text-base"
             data-component="ButtonOutline"
             data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
             Hablemos
