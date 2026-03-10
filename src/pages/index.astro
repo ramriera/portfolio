@@ -5,12 +5,17 @@ import AboutSection from '@/components/AboutSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { projects, siteConfig } from '@/utils/data';
 
-const projectOrder = ['massimo-dutti-conversion', 'iberia-flight-experience', 'banco-sabadell-design-system', 'imaginbank-digital-banking'];
+const projectOrder = [
+  'massimo-dutti-conversion',
+  'iberia-flight-experience',
+  'banco-sabadell-design-system',
+  'imaginbank-digital-banking',
+  'solotemazos-music-platform',
+  'movefast-startup-platform',
+];
 const featuredProjects = projects
   .filter((p) => projectOrder.includes(p.slug))
-  .sort((a, b) => {
-    return projectOrder.indexOf(a.slug) - projectOrder.indexOf(b.slug);
-  });
+  .sort((a, b) => projectOrder.indexOf(a.slug) - projectOrder.indexOf(b.slug));
 ---
 
 <BaseLayout title="Home ⚡ Ramon Riera">
@@ -66,24 +71,18 @@ const featuredProjects = projects
         </a>
       </div>
 
-      <!-- Projects Grid — Diagonal Balance & Editorial Grid -->
+      <!-- Projects Grid — 3 Rows, 60/40 Alternating Rhythm -->
       <div class="editorial-grid"
         data-component="ProjectGrid"
-        data-token="$grid-cols: 3 (md)|$spacing-gap: 2rem / 32px|$layout: diagonal-balance">
-        {featuredProjects.map((project, i) => {
-          // ROW 1: Massimo Dutti (2/3) + Iberia (1/3)
-          // ROW 2: Banc Sabadell (1/3) + Imaginbank (2/3)
-          const gridClass =
-            i === 0 ? 'editorial-wide-left' :
-            i === 1 ? 'editorial-narrow-right' :
-            i === 2 ? 'editorial-narrow-left' :
-            'editorial-wide-right';
-          return (
-            <div data-reveal data-delay={String(i * 100)} class={gridClass}>
-              <ProjectCard {...project} variant="default" />
-            </div>
-          );
-        })}
+        data-token="$grid-cols: 60/40 alternating|$spacing-gap: 1.5rem / 24px|$layout: alternating-rhythm">
+        {featuredProjects.map((project, i) => (
+          // ROW 1: Massimo Dutti (60%) + Iberia (40%)
+          // ROW 2: Banc Sabadell (40%) + Imaginbank (60%)
+          // ROW 3: SoloTemazos (60%) + MoveFast (40%)
+          <div data-reveal data-delay={String(i * 100)}>
+            <ProjectCard {...project} variant="default" />
+          </div>
+        ))}
       </div>
     </div>
   </section>
