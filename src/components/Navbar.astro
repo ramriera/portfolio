@@ -72,7 +72,7 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile Navigation -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out-expo"
+    class="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out-expo overscroll-none"
   >
     <!-- Close button -->
     <button
@@ -223,12 +223,30 @@ const currentPath = Astro.url.pathname;
 
   const mobileMenuClose = document.getElementById('mobile-menu-close');
 
+  let scrollPosition = 0;
+
+  function lockScroll() {
+    scrollPosition = window.scrollY;
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollPosition}px`;
+    document.body.style.width = '100%';
+  }
+
+  function unlockScroll() {
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollPosition);
+  }
+
   function closeMenu() {
     isMenuOpen = false;
     if (mobileMenu && hamburger) {
       mobileMenu.classList.add('opacity-0', 'pointer-events-none');
       mobileMenu.classList.remove('opacity-100');
-      document.body.style.overflow = '';
+      unlockScroll();
       const spans = hamburger.querySelectorAll('span');
       spans[0].style.transform = '';
       spans[1].style.opacity = '1';
@@ -246,7 +264,7 @@ const currentPath = Astro.url.pathname;
       if (isMenuOpen) {
         mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
         mobileMenu.classList.add('opacity-100');
-        document.body.style.overflow = 'hidden';
+        lockScroll();
         const spans = hamburger.querySelectorAll('span');
         spans[0].style.transform = 'rotate(45deg) translateY(2px)';
         spans[1].style.opacity = '0';
@@ -255,7 +273,7 @@ const currentPath = Astro.url.pathname;
       } else {
         mobileMenu.classList.add('opacity-0', 'pointer-events-none');
         mobileMenu.classList.remove('opacity-100');
-        document.body.style.overflow = '';
+        unlockScroll();
         const spans = hamburger.querySelectorAll('span');
         spans[0].style.transform = '';
         spans[1].style.opacity = '1';
