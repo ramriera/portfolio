@@ -5,7 +5,7 @@ import AboutSection from '@/components/AboutSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { projects, siteConfig } from '@/utils/data';
 
-const projectOrder = ['massimo-dutti-conversion', 'banco-sabadell-design-system', 'imaginbank-digital-banking', 'movefast-startup-platform', 'solotemazos-music-platform', 'iberia-flight-experience'];
+const projectOrder = ['massimo-dutti-conversion', 'solotemazos-music-platform', 'iberia-flight-experience', 'imaginbank-digital-banking', 'banco-sabadell-design-system', 'movefast-startup-platform'];
 const featuredProjects = projects
   .filter((p) => p.featured)
   .sort((a, b) => {
@@ -76,8 +76,11 @@ const featuredProjects = projects
         data-component="ProjectGrid"
         data-token="$grid-cols: 1 → 2 (md)|$spacing-gap: 2rem / 32px">
         {featuredProjects.map((project, i) => {
-          const variant = i === 0 ? 'featured' : i === 2 ? 'tall' : (i === 4 || i === 5) ? 'wide' : 'default';
-          const classes = i === 0 ? 'md:col-span-2' : i === 2 ? 'md:row-span-2 [&_.project-card]:h-full' : '';
+          // FILA 1: Massimo Dutti (hero, full width, 21/9)
+          // FILA 2: SoloTemazos + Iberia (50/50, 16/9)
+          // FILA 3: Imaginbank (tall left) | Sabadell + MoveFast (stacked right, 16/9 each)
+          const variant = i === 0 ? 'featured' : i === 3 ? 'tall' : 'default';
+          const classes = i === 0 ? 'md:col-span-2' : i === 3 ? 'md:row-span-2 [&_.project-card]:h-full' : '';
           return (
             <div data-reveal data-delay={String(i * 100)} class={classes}>
               <ProjectCard {...project} variant={variant} />
