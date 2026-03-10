@@ -79,7 +79,8 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           else if (p === '/blog') document.title = '\u{1F4DF} root@ramonriera:~/blog';
           else if (p.indexOf('/projects/') === 0) {
             var slug = p.split('/projects/')[1];
-            document.title = '\u{1F4DF} root@ramonriera:~/projects/' + slug;
+            var shortNames = {'imaginbank-digital-banking':'imaginbank','massimo-dutti-conversion':'massimo-dutti','solotemazos-music-platform':'solotemazos','banco-sabadell-design-system':'banco-sabadell','iberia-flight-experience':'iberia','movefast-startup-platform':'movefast','global-helping':'global-helping'};
+            document.title = '\u{1F4DF} root@ramonriera:~/projects/' + (shortNames[slug] || slug);
           }
           else if (p === '/projects') document.title = '\u{1F4DF} root@ramonriera:~/projects';
           else document.title = '\u{1F4DF} root@ramonriera:~' + p;
@@ -723,6 +724,16 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         };
 
         // Route → technical path mapping for Code Mode
+        const projectShortNames: Record<string, string> = {
+          'imaginbank-digital-banking': 'imaginbank',
+          'massimo-dutti-conversion': 'massimo-dutti',
+          'solotemazos-music-platform': 'solotemazos',
+          'banco-sabadell-design-system': 'banco-sabadell',
+          'iberia-flight-experience': 'iberia',
+          'movefast-startup-platform': 'movefast',
+          'global-helping': 'global-helping',
+        };
+
         function getCodeModeTitle(): string {
           const path = window.location.pathname.replace(/\/$/, '') || '/';
           if (path === '/') return '📟 root@ramonriera:~/portfolio';
@@ -730,7 +741,8 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           if (path === '/blog') return '📟 root@ramonriera:~/blog';
           if (path.startsWith('/projects/')) {
             const slug = path.split('/projects/')[1];
-            return `📟 root@ramonriera:~/projects/${slug}`;
+            const shortName = projectShortNames[slug] || slug;
+            return `📟 root@ramonriera:~/projects/${shortName}`;
           }
           if (path === '/projects') return '📟 root@ramonriera:~/projects';
           return `📟 root@ramonriera:~${path}`;
@@ -802,6 +814,41 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
             '%c[RAMON_RIERA] — Product Designer & Design Systems Expert',
             'color:#D97757;font-weight:bold;font-size:13px;padding:4px 0'
           );
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 5. EASTER EGG — System log in DevTools on Code Mode activation
+        // ═══════════════════════════════════════════════════════
+        let easterEggPrinted = false;
+
+        function printCodeModeEasterEgg() {
+          if (easterEggPrinted) return;
+          easterEggPrinted = true;
+
+          const accentStyle = 'color:#D97757;font-weight:bold;font-size:12px;padding:2px 0';
+          const systemStyle = 'color:#8be9fd;font-weight:bold;font-size:12px;padding:2px 0';
+          const userStyle = 'color:#50fa7b;font-weight:bold;font-size:12px;padding:2px 0';
+
+          console.log('%c─────────────────────────────────────────────', accentStyle);
+          console.log('%c[SYSTEM] Environment: Production | Mode: Engineering', systemStyle);
+          console.log('%c[USER] Welcome, Recruiter. Accessing design system specs...', userStyle);
+          console.log('%c─────────────────────────────────────────────', accentStyle);
+        }
+
+        // Listen for Code Mode activation via class mutation
+        const easterEggObserver = new MutationObserver(() => {
+          const isCode = document.documentElement.classList.contains('code-mode');
+          if (isCode) {
+            printCodeModeEasterEgg();
+          } else {
+            easterEggPrinted = false;
+          }
+        });
+        easterEggObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+        // Print immediately if already in Code Mode
+        if (document.documentElement.classList.contains('code-mode')) {
+          printCodeModeEasterEgg();
         }
 
         // ── Boot Sequence ──
