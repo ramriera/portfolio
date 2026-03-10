@@ -1,21 +1,169 @@
 ---
-
+const year = new Date().getFullYear();
 ---
 
-<footer class="mt-8" data-component="Footer" data-token="$spacing-padding-y: 3rem / 48px|$color-text-muted: #a8a196">
-  <div class="container-custom py-12">
-    <!-- Copyright -->
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-sm text-dark-400"
+<footer class="footer-poly mt-8" data-component="Footer" data-token="$spacing-padding-y: 3rem / 48px|$color-text-muted: #a8a196">
+  <div class="container-custom footer-poly__inner">
+    <!-- Single row that morphs between modes -->
+    <div class="footer-poly__row">
+      <!-- Normal mode content -->
+      <p class="footer-poly__text footer-poly__text--normal text-sm text-dark-400"
         data-token="$font-size-sm: 0.875rem / 14px|$color-text-muted: #a8a196">
-        &copy; {new Date().getFullYear()} Ramon Riera. Todos los derechos reservados.
+        &copy; {year} Ramon Riera. Todos los derechos reservados.
       </p>
-      <p class="text-sm text-dark-400"
+      <!-- Code mode content -->
+      <p class="footer-poly__text footer-poly__text--code text-sm">
+        <span class="footer-poly__led"></span>
+        <span>[STATUS: OK]</span>
+        <span class="footer-poly__sep">|</span>
+        <span>[ENV: PROD]</span>
+        <span class="footer-poly__sep">|</span>
+        <span>[STACK: ASTRO+TS]</span>
+      </p>
+    </div>
+
+    <div class="footer-poly__row">
+      <!-- Normal mode content -->
+      <p class="footer-poly__text footer-poly__text--normal text-sm text-dark-400"
         data-token="$font-size-sm: 0.875rem / 14px|$color-text-muted: #a8a196">
         Diseñado y desarrollado con
         <span class="text-primary-500">&hearts;</span>
         usando Astro + Tailwind
       </p>
+      <!-- Code mode content (secondary line) -->
+      <p class="footer-poly__text footer-poly__text--code text-sm">
+        <span class="footer-poly__prompt">&gt;_</span>
+        <span>ready for deployment</span>
+        <span class="footer-poly__cursor">|</span>
+      </p>
     </div>
   </div>
 </footer>
+
+<style>
+  /* ── Polymorphic Footer — fixed height, zero layout shift ── */
+  .footer-poly {
+    /* Fixed dimensions: identical in both modes */
+    height: 120px;
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-poly__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .footer-poly__row {
+    position: relative;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Text layers: overlapping, toggled via opacity ── */
+  .footer-poly__text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    transition: opacity 0.4s ease, filter 0.4s ease;
+  }
+
+  /* Normal mode: show normal, hide code */
+  .footer-poly__text--normal {
+    opacity: 1;
+    filter: blur(0);
+  }
+  .footer-poly__text--code {
+    opacity: 0;
+    filter: blur(4px);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    letter-spacing: 0.05em;
+    color: var(--cm-text-muted, #7d8590);
+    pointer-events: none;
+  }
+
+  /* Code mode: swap visibility */
+  :global(.code-mode) .footer-poly__text--normal {
+    opacity: 0;
+    filter: blur(4px);
+    pointer-events: none;
+  }
+  :global(.code-mode) .footer-poly__text--code {
+    opacity: 1;
+    filter: blur(0);
+    pointer-events: auto;
+  }
+
+  /* ── LED indicator — pulsing accent dot ── */
+  .footer-poly__led {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-color, #D97757);
+    box-shadow: 0 0 6px var(--accent-color, #D97757), 0 0 12px rgba(217, 119, 87, 0.3);
+    animation: footerLedPulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes footerLedPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--accent-color, #D97757), 0 0 12px rgba(217, 119, 87, 0.3); }
+    50% { opacity: 0.4; box-shadow: 0 0 2px var(--accent-color, #D97757); }
+  }
+
+  /* ── Separator ── */
+  .footer-poly__sep {
+    color: var(--cm-border, #30363d);
+    margin: 0 0.25rem;
+  }
+
+  /* ── Prompt & cursor ── */
+  .footer-poly__prompt {
+    color: var(--accent-color, #D97757);
+    font-weight: 700;
+  }
+
+  .footer-poly__cursor {
+    color: var(--accent-color, #D97757);
+    animation: footerCursorBlink 1s step-end infinite;
+  }
+
+  @keyframes footerCursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ── Responsive: stack on mobile ── */
+  @media (max-width: 640px) {
+    .footer-poly {
+      height: auto;
+      padding: 2rem 0;
+    }
+    .footer-poly__inner {
+      gap: 2rem;
+    }
+    .footer-poly__row {
+      height: auto;
+      min-height: 1.5rem;
+    }
+    .footer-poly__text {
+      position: relative;
+      flex-wrap: wrap;
+      justify-content: center;
+      white-space: normal;
+      text-align: center;
+    }
+    /* On mobile, hide code text entirely (no code mode on mobile) */
+    .footer-poly__text--code {
+      display: none;
+    }
+  }
+</style>

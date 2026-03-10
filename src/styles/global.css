@@ -31,6 +31,7 @@
   --grid-sidebar: 1fr;
   --grid-content: 1fr;
   --layout-border: 0px;       /* code mode overrides to 1px */
+  --accent-color: #D97757;    /* Unified accent — favicon, toggle, footer LED */
 }
 
 @media (min-width: 640px) {
@@ -972,13 +973,9 @@ body.code-mode aside:hover {
   background: var(--cm-comment) !important;
 }
 
-/* ── 13. Footer — aligned to same margins ── */
+/* ── 13. Footer — polymorphic, transitions handled in component ── */
 .code-mode footer {
   border-top: 1px solid var(--cm-border);
-}
-
-.code-mode footer p {
-  color: var(--cm-comment) !important;
 }
 
 /* ── 14. Section icons ── */
@@ -1930,9 +1927,10 @@ body.code-mode .btn-cv-code:hover {
   color: #8b949e;
 }
 
-/* ── Pad body when console is visible ── */
-.code-mode footer {
+/* ── Pad footer when console is visible ── */
+.code-mode .footer-poly {
   padding-bottom: 190px;
+  height: auto;
 }
 
 /* ── Hide on small screens to avoid UX issues ── */
@@ -1940,8 +1938,9 @@ body.code-mode .btn-cv-code:hover {
   .system-console {
     display: none;
   }
-  .code-mode footer {
+  .code-mode .footer-poly {
     padding-bottom: 0;
+    height: auto;
   }
 }
 

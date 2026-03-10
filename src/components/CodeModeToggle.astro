@@ -52,7 +52,7 @@
   }
 
   .cmt-label--visual {
-    color: #D97757;
+    color: var(--accent-color, #D97757);
   }
 
   .cmt-label--code {
@@ -65,7 +65,7 @@
   }
 
   .cmt-wrapper[data-active="true"] .cmt-label--code {
-    color: #D97757;
+    color: var(--accent-color, #D97757);
     text-shadow: 0 0 8px rgba(217, 119, 87, 0.4);
   }
 
@@ -98,13 +98,13 @@
   }
 
   .cmt-track:focus-visible {
-    outline: 2px solid #D97757;
+    outline: 2px solid var(--accent-color, #D97757);
     outline-offset: 2px;
   }
 
   /* Active track: accent background + glow */
   .cmt-track[aria-checked="true"] {
-    background: #D97757;
+    background: var(--accent-color, #D97757);
     border-color: #EC9372;
     box-shadow:
       0 0 8px rgba(217, 119, 87, 0.4),
@@ -159,7 +159,7 @@
 
   /* Show cursor icon when active */
   .cmt-track[aria-checked="true"] .cmt-thumb__icon {
-    color: #D97757;
+    color: var(--accent-color, #D97757);
   }
 
   /* ── Screen sweep overlay ── */

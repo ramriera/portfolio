@@ -646,19 +646,31 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         // 3. DYNAMIC FAVICON — Changes based on Code Mode
         // ═══════════════════════════════════════════════════════
 
-        // Inline SVG favicons as data URIs — uniform 64×64 container, rx=16 (25%)
-        const faviconNormalSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1A1918"/><text x="32" y="44" font-family="sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" text-anchor="middle">R</text></svg>`;
+        // Unified SVG favicon generator — shared viewBox & base structure
+        // Accent color synced with --accent-color in :root (global.css)
+        const FAVICON_ACCENT = '#D97757';
 
-        const faviconCodeOnSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1A1918"/><text x="32" y="44" font-family="monospace" font-size="36" font-weight="700" fill="#D97757" text-anchor="middle">&gt;_</text></svg>`;
-        const faviconCodeOffSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1A1918"/><text x="32" y="44" font-family="monospace" font-size="36" font-weight="700" fill="#D97757" opacity="0.15" text-anchor="middle">&gt;_</text></svg>`;
-
-        function svgToDataUri(svg: string): string {
-          return 'data:image/svg+xml;base64,' + btoa(svg);
+        function buildFavicon(mode: 'normal' | 'code-on' | 'code-off'): string {
+          // Shared container: 64×64, rounded corners (rx="25%")
+          let inner = '';
+          if (mode === 'normal') {
+            // Minimalist "R" in white
+            inner = `<text x="32" y="44" font-family="'Space Grotesk',sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" text-anchor="middle">R</text>`;
+          } else {
+            // Cursor block (vertical rectangle) in accent color
+            const opacity = mode === 'code-on' ? '1' : '0.15';
+            inner = `<rect x="24" y="12" width="16" height="40" rx="3" fill="${FAVICON_ACCENT}" opacity="${opacity}"/>`;
+          }
+          return `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1A1918"/>${inner}</svg>`;
         }
 
-        const faviconNormal = svgToDataUri(faviconNormalSvg);
-        const faviconCodeOn = svgToDataUri(faviconCodeOnSvg);
-        const faviconCodeOff = svgToDataUri(faviconCodeOffSvg);
+        function svgToDataUri(svg: string): string {
+          return 'data:image/svg+xml,' + encodeURIComponent(svg);
+        }
+
+        const faviconNormal = svgToDataUri(buildFavicon('normal'));
+        const faviconCodeOn = svgToDataUri(buildFavicon('code-on'));
+        const faviconCodeOff = svgToDataUri(buildFavicon('code-off'));
 
         let faviconBlinkInterval: ReturnType<typeof setInterval> | null = null;
 
