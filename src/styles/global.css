@@ -2162,4 +2162,62 @@ body.code-mode [data-component="AboutHero"] .about-desc-code {
   font-weight: 700;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   EDITORIAL GRID — Diagonal Balance (Dípticos Asimétricos)
+   Row 1: 2/3 + 1/3  |  Row 2: 1/3 + 2/3
+   ═══════════════════════════════════════════════════════════ */
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .editorial-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Row 1: Massimo Dutti 2/3, Iberia 1/3 */
+  .editorial-wide-left {
+    grid-column: 1 / 3;
+  }
+
+  .editorial-narrow-right {
+    grid-column: 3 / 4;
+  }
+
+  /* Row 2: Banc Sabadell 1/3, Imaginbank 2/3 */
+  .editorial-narrow-left {
+    grid-column: 1 / 2;
+  }
+
+  .editorial-wide-right {
+    grid-column: 2 / 4;
+  }
+
+  /* Force same height per row — cards fill their cell */
+  .editorial-grid > div {
+    display: flex;
+  }
+
+  .editorial-grid > div > .project-card {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Override aspect-ratio: let height be driven by the row */
+  .editorial-grid .project-card > div {
+    aspect-ratio: unset !important;
+    height: 100%;
+    min-height: 340px;
+  }
+
+  .editorial-grid .project-card .card-mockup {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
 
