@@ -45,16 +45,31 @@ const timeline = [
             </svg>
           </span>
         </div>
-        <h1 data-reveal data-delay="100" class="heading-xl mb-8"
+        <!-- Normal mode title -->
+        <h1 data-reveal data-delay="100" class="heading-xl mb-8 about-title-normal"
           data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2rem / 32px">
           Diseñador, pensador,
           <span class="text-primary-500"
             data-token="$color-primary-500: #D97757">creador</span>
         </h1>
-        <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl"
+        <!-- Code mode title: console.log -->
+        <h1 data-reveal data-delay="100" class="heading-xl mb-8 about-title-code">
+          <span class="code-fn">console</span><span class="code-punct">.</span><span class="code-fn">log</span><span class="code-punct">(</span><span class="code-str">"Diseñador, pensador, </span><span class="code-accent">creador</span><span class="code-str">"</span><span class="code-punct">)</span>
+        </h1>
+
+        <!-- Normal mode description -->
+        <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl about-desc-normal"
           data-token="$font-family-sans: Inter|$color-text-muted: #7c766c">
           Con más de 8 años de experiencia, he dedicado mi carrera a crear productos digitales que combinan estética, usabilidad y estrategia de negocio.
         </p>
+        <!-- Code mode description: comment block -->
+        <div data-reveal data-delay="200" class="about-desc-code">
+          <span>/*</span><br/>
+          <span>&nbsp;* Con más de 8 años de experiencia, he dedicado mi carrera</span><br/>
+          <span>&nbsp;* a crear <span class="comment-highlight">productos digitales</span> que combinan estética,</span><br/>
+          <span>&nbsp;* <span class="comment-highlight">usabilidad</span> y <span class="comment-highlight">estrategia de negocio</span>.</span><br/>
+          <span>&nbsp;*/</span>
+        </div>
       </div>
     </div>
   </section>
