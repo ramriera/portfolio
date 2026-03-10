@@ -662,7 +662,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
             // Green console background with blinking cursor
             bg = FAVICON_CODE_BG;
             const opacity = mode === 'code-on' ? '1' : '0.15';
-            inner = `<rect x="24" y="12" width="16" height="40" rx="3" fill="#33ff33" opacity="${opacity}"/>`;
+            inner = `<rect x="27" y="12" width="10" height="40" rx="3" fill="${FAVICON_ACCENT}" opacity="${opacity}"/>`;
           }
           return `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="${bg}"/>${inner}</svg>`;
         }
