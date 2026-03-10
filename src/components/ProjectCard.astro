@@ -28,7 +28,7 @@ const isWide = variant === 'wide';
   data-component="ProjectCard"
   data-token="$radius-2xl: 1rem / 16px|$spacing-padding: 1.5rem → 2rem (md)"
 >
-  <div class:list={['relative aspect-[4/3]', isTall ? 'md:aspect-auto md:h-full' : isFeatured ? 'md:aspect-[21/9]' : isWide ? 'md:aspect-[16/9]' : '']}>
+  <div class:list={['relative aspect-[4/3]', isTall ? 'md:aspect-auto md:h-full' : isFeatured ? 'md:aspect-[21/9] md:max-h-[520px]' : 'md:aspect-[16/9]']}>
     <!-- Image mockup -->
     <img
       src={cover}
