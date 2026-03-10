@@ -2051,4 +2051,116 @@ body.code-mode .cm-image-path.block {
   text-overflow: ellipsis;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ABOUT PAGE — Final polish & Code Mode enhancements
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Style sync: dashed-border blocks in code mode ── */
+body.code-mode .dashed-border {
+  border-color: var(--cm-border) !important;
+  background: var(--cm-bg-card) !important;
+}
+
+body.code-mode .dashed-border:hover {
+  border-color: var(--cm-border-hover) !important;
+  box-shadow: var(--cm-glow) !important;
+}
+
+/* Process cards: consistent with Home card surfaces */
+body.code-mode [data-component="ProcessSection"] .dashed-border {
+  background: var(--cm-bg-surface) !important;
+  border-color: var(--cm-border) !important;
+}
+
+body.code-mode [data-component="ProcessSection"] .dashed-border h3 {
+  color: var(--cm-constant) !important; /* yellow — component names */
+}
+
+body.code-mode [data-component="ProcessSection"] .dashed-border p {
+  color: var(--cm-text-muted) !important;
+}
+
+/* Social links on About */
+body.code-mode [data-component="SocialLinks"] a.dashed-border {
+  background: var(--cm-bg-surface) !important;
+}
+
+body.code-mode [data-component="SocialLinks"] a.dashed-border:hover {
+  background: rgba(80, 250, 123, 0.08) !important;
+  border-color: var(--cm-string) !important;
+}
+
+body.code-mode [data-component="SocialLinks"] a svg {
+  color: var(--cm-text-muted) !important;
+}
+
+body.code-mode [data-component="SocialLinks"] a:hover svg {
+  color: var(--cm-string) !important;
+}
+
+/* Profile photo border in code mode */
+body.code-mode [data-component="BiographySection"] .dashed-border:has(img) {
+  border-color: var(--cm-border) !important;
+  background: transparent !important;
+}
+
+/* ── Code Mode: Hero title as console.log ── */
+body.code-mode [data-component="AboutHero"] .about-title-normal {
+  display: none;
+}
+
+body.code-mode [data-component="AboutHero"] .about-title-code {
+  display: block;
+}
+
+.about-title-code {
+  display: none;
+}
+
+.about-title-code .code-fn {
+  color: var(--cm-function, #8be9fd);
+  font-weight: 600;
+}
+
+.about-title-code .code-punct {
+  color: var(--cm-text-muted, #7d8590);
+}
+
+.about-title-code .code-str {
+  color: var(--cm-string, #50fa7b);
+}
+
+.about-title-code .code-accent {
+  color: var(--cm-tag, #ff79c6);
+}
+
+/* ── Code Mode: Description as code comment block ── */
+body.code-mode [data-component="AboutHero"] .about-desc-normal {
+  display: none;
+}
+
+body.code-mode [data-component="AboutHero"] .about-desc-code {
+  display: block;
+}
+
+.about-desc-code {
+  display: none;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--cm-comment, #6272a4);
+  max-width: 48rem;
+}
+
+.about-desc-code .comment-highlight {
+  color: var(--cm-constant, #f1fa8c);
+  font-style: normal;
+}
+
+/* ── Git Log: accent-colored hashes ── */
+.gitlog-hash {
+  color: #D97757 !important;
+  font-weight: 700;
+}
+
 
