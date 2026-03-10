@@ -633,8 +633,22 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         // ═══════════════════════════════════════════════════════
         // 3. DYNAMIC FAVICON — Changes based on Code Mode
         // ═══════════════════════════════════════════════════════
-        const faviconDefault = '/favicon.svg';
-        const faviconCode = '/favicon-code.svg';
+
+        // Inline SVG favicons as data URIs for instant switching
+        const faviconNormalSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="${window.matchMedia('(prefers-color-scheme: dark)').matches ? '#FFFFFF' : '#1A1918'}"/></svg>`;
+
+        const faviconCodeOnSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#1A1918"/><rect x="22" y="10" width="20" height="44" rx="3" fill="#D97757"/></svg>`;
+        const faviconCodeOffSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#1A1918"/><rect x="22" y="10" width="20" height="44" rx="3" fill="#D97757" opacity="0.15"/></svg>`;
+
+        function svgToDataUri(svg: string): string {
+          return 'data:image/svg+xml;base64,' + btoa(svg);
+        }
+
+        const faviconNormal = svgToDataUri(faviconNormalSvg);
+        const faviconCodeOn = svgToDataUri(faviconCodeOnSvg);
+        const faviconCodeOff = svgToDataUri(faviconCodeOffSvg);
+
+        let faviconBlinkInterval: ReturnType<typeof setInterval> | null = null;
 
         function setFavicon(href: string) {
           let link = document.querySelector<HTMLLinkElement>("link[rel='icon'][type='image/svg+xml']");
@@ -643,14 +657,47 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           }
         }
 
+        function startFaviconBlink() {
+          stopFaviconBlink();
+          let visible = true;
+          faviconBlinkInterval = setInterval(() => {
+            visible = !visible;
+            setFavicon(visible ? faviconCodeOn : faviconCodeOff);
+          }, 1000);
+        }
+
+        function stopFaviconBlink() {
+          if (faviconBlinkInterval !== null) {
+            clearInterval(faviconBlinkInterval);
+            faviconBlinkInterval = null;
+          }
+        }
+
         function syncFavicon() {
           const isCode = document.documentElement.classList.contains('code-mode');
-          setFavicon(isCode ? faviconCode : faviconDefault);
+          if (isCode) {
+            setFavicon(faviconCodeOn);
+            startFaviconBlink();
+          } else {
+            stopFaviconBlink();
+            setFavicon(faviconNormal);
+          }
         }
+
+        // Adapt normal favicon to system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+          if (!document.documentElement.classList.contains('code-mode')) {
+            const updatedSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="${window.matchMedia('(prefers-color-scheme: dark)').matches ? '#FFFFFF' : '#1A1918'}"/></svg>`;
+            setFavicon(svgToDataUri(updatedSvg));
+          }
+        });
 
         // Watch for code-mode class changes
         const faviconObserver = new MutationObserver(() => syncFavicon());
         faviconObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+        // Initial sync
+        syncFavicon();
 
         // Welcome-back message when tab regains focus
         document.addEventListener('visibilitychange', () => {
