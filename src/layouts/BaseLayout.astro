@@ -72,6 +72,14 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         if (window.innerWidth >= 1024 && localStorage.getItem('code-mode') === 'on') {
           document.documentElement.classList.add('code-mode');
           document.body.classList.add('code-mode');
+          // Instant title switch to avoid flicker
+          var p = window.location.pathname.replace(/\/$/, '') || '/';
+          if (p === '/') document.title = 'root@ramonriera:~/portfolio';
+          else if (p === '/about') document.title = 'root@ramonriera:~/about';
+          else if (p === '/blog') document.title = 'root@ramonriera:~/blog';
+          else if (p.indexOf('/projects/') === 0) document.title = 'root@ramonriera:~/projects/' + p.split('/projects/')[1];
+          else if (p === '/projects') document.title = 'root@ramonriera:~/projects';
+          else document.title = 'root@ramonriera:~' + p;
         }
       })();
     </script>
@@ -692,12 +700,44 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           }
         });
 
-        // Watch for code-mode class changes
-        const faviconObserver = new MutationObserver(() => syncFavicon());
-        faviconObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        // ═══════════════════════════════════════════════════════
+        // 3b. DYNAMIC TAB TITLE — Terminal-style in Code Mode
+        // ═══════════════════════════════════════════════════════
+
+        const originalTitle = document.title;
+
+        function getCodeModeTitle(): string {
+          const path = window.location.pathname.replace(/\/$/, '') || '/';
+          if (path === '/') return 'root@ramonriera:~/portfolio';
+          if (path === '/about') return 'root@ramonriera:~/about';
+          if (path === '/blog') return 'root@ramonriera:~/blog';
+          if (path.startsWith('/projects/')) {
+            const slug = path.split('/projects/')[1];
+            return `root@ramonriera:~/projects/${slug}`;
+          }
+          if (path === '/projects') return 'root@ramonriera:~/projects';
+          return `root@ramonriera:~${path}`;
+        }
+
+        function syncTitle() {
+          const isCode = document.documentElement.classList.contains('code-mode');
+          document.title = isCode ? getCodeModeTitle() : originalTitle;
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 3c. UNIFIED STATE SYNC — Favicon + Title on class change
+        // ═══════════════════════════════════════════════════════
+
+        function syncCodeModeTab() {
+          syncFavicon();
+          syncTitle();
+        }
+
+        const codeModeTabObserver = new MutationObserver(() => syncCodeModeTab());
+        codeModeTabObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
         // Initial sync
-        syncFavicon();
+        syncCodeModeTab();
 
         // Welcome-back message when tab regains focus
         document.addEventListener('visibilitychange', () => {
