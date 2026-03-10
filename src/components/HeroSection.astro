@@ -84,27 +84,27 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
           <div class="text-center">
             <div class="text-3xl font-semibold text-dark-900"
               data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
-              <span class="count-up" data-target="8">0</span>+
+              <span class="count-up" data-target="6">0</span>+
             </div>
-            <div class="text-xs text-dark-400 tracking-wide mt-1">Años exp.</div>
+            <div class="text-xs text-dark-400 tracking-wide mt-1">Años de experiencia</div>
           </div>
           <div class="hero-stats-divider-h"></div>
           <div class="hero-stats-divider-v"></div>
           <div class="text-center">
             <div class="text-3xl font-semibold text-dark-900"
               data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
-              <span class="count-up" data-target="50">0</span>+
+              <span class="count-up" data-target="25">0</span>+
             </div>
-            <div class="text-xs text-dark-400 tracking-wide mt-1">Proyectos</div>
+            <div class="text-xs text-dark-400 tracking-wide mt-1">Proyectos completados</div>
           </div>
           <div class="hero-stats-divider-h"></div>
           <div class="hero-stats-divider-v"></div>
           <div class="text-center">
             <div class="text-3xl font-semibold text-dark-900"
               data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
-              <span class="count-up" data-target="15">0</span>+
+              <span class="count-up" data-target="10">0</span>+
             </div>
-            <div class="text-xs text-dark-400 tracking-wide mt-1">Clientes</div>
+            <div class="text-xs text-dark-400 tracking-wide mt-1">Clientes corporativos</div>
           </div>
         </div>
       </div>
@@ -140,7 +140,7 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
         requestAnimationFrame(update);
         observer.unobserve(el);
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.2 });
 
     counters.forEach((c) => observer.observe(c));
   }
