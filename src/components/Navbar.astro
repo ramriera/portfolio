@@ -12,13 +12,11 @@ const currentPath = Astro.url.pathname;
 >
   <div class="container-custom">
     <nav class="flex items-center justify-between h-20">
-      <!-- Logo: contracts from "Ramon Riera · UX Engineer" → "RR" -->
-      <a href="/" id="logo" class="logo relative z-10 flex items-center gap-3" data-component="AnimatedLogo">
-        <span class="logo-name">
-          <span class="logo-letter">R</span><span class="logo-collapse c1">amon</span><span class="logo-collapse c2">&nbsp;</span><span class="logo-letter">R</span><span class="logo-collapse c3">iera</span>
-        </span>
+      <!-- Logo: static identity -->
+      <a href="/" id="logo" class="logo relative z-10 flex items-center gap-3" data-component="Logo">
+        <span class="logo-name">Ramon Riera</span>
         <span class="logo-divider"></span>
-        <span class="logo-role logo-collapse c4">UX Lead</span>
+        <span class="logo-role">UX Lead</span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -124,13 +122,8 @@ const currentPath = Astro.url.pathname;
     font-size: 1.5rem;
     line-height: 1;
     color: #1a1918;
-    display: inline-flex;
     white-space: nowrap;
     letter-spacing: -0.03em;
-  }
-
-  .logo-letter {
-    display: inline-block;
   }
 
   .logo-divider {
@@ -138,9 +131,6 @@ const currentPath = Astro.url.pathname;
     height: 1.1rem;
     background: rgba(0, 0, 0, 0.2);
     flex-shrink: 0;
-    transition:
-      opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-      width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .logo-role {
@@ -151,51 +141,14 @@ const currentPath = Astro.url.pathname;
     color: rgba(0, 0, 0, 0.45);
     white-space: nowrap;
   }
-
-  .logo-collapse {
-    display: inline-block;
-    max-width: 12em;
-    opacity: 1;
-    overflow: hidden;
-    vertical-align: bottom;
-    transition:
-      max-width 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  /* Staggered delays - expanding */
-  .logo-collapse.c1 { transition-delay: 0s; }
-  .logo-collapse.c2 { transition-delay: 0.06s; }
-  .logo-collapse.c3 { transition-delay: 0.12s; }
-  .logo-collapse.c4 { transition-delay: 0.05s; }
-
-  /* Contracted state */
-  .logo.contracted .logo-collapse {
-    max-width: 0;
-    opacity: 0;
-  }
-
-  /* Staggered delays - contracting (reverse order) */
-  .logo.contracted .logo-collapse.c1 { transition-delay: 0.12s; }
-  .logo.contracted .logo-collapse.c2 { transition-delay: 0.06s; }
-  .logo.contracted .logo-collapse.c3 { transition-delay: 0s; }
-  .logo.contracted .logo-collapse.c4 { transition-delay: 0s; }
-
-  .logo.contracted .logo-divider {
-    opacity: 0;
-    width: 0;
-  }
 </style>
 
 <script>
   const navbar = document.getElementById('navbar');
-  const logo = document.getElementById('logo');
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburger = document.getElementById('hamburger');
   let isMenuOpen = false;
-  let lastScroll = 0;
-  let isContracted = false;
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.scrollY;
@@ -208,17 +161,6 @@ const currentPath = Astro.url.pathname;
         navbar.classList.remove('backdrop-blur-xl', 'nav-scrolled');
       }
     }
-
-    // Logo contraction: "Ramon Riera" → "RR"
-    if (currentScroll > 200 && !isContracted) {
-      isContracted = true;
-      logo?.classList.add('contracted');
-    } else if (currentScroll <= 200 && isContracted) {
-      isContracted = false;
-      logo?.classList.remove('contracted');
-    }
-
-    lastScroll = currentScroll;
   }, { passive: true });
 
   const mobileMenuClose = document.getElementById('mobile-menu-close');

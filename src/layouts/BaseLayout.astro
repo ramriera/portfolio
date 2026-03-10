@@ -646,11 +646,11 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         // 3. DYNAMIC FAVICON — Changes based on Code Mode
         // ═══════════════════════════════════════════════════════
 
-        // Inline SVG favicons as data URIs for instant switching
-        const faviconNormalSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="${window.matchMedia('(prefers-color-scheme: dark)').matches ? '#FFFFFF' : '#1A1918'}"/></svg>`;
+        // Inline SVG favicons as data URIs — uniform 64×64 container, rx=16 (25%)
+        const faviconNormalSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1A1918"/><text x="32" y="44" font-family="sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" text-anchor="middle">R</text></svg>`;
 
-        const faviconCodeOnSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#1A1918"/><rect x="22" y="10" width="20" height="44" rx="3" fill="#D97757"/></svg>`;
-        const faviconCodeOffSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#1A1918"/><rect x="22" y="10" width="20" height="44" rx="3" fill="#D97757" opacity="0.15"/></svg>`;
+        const faviconCodeOnSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1A1918"/><text x="32" y="44" font-family="monospace" font-size="36" font-weight="700" fill="#D97757" text-anchor="middle">&gt;_</text></svg>`;
+        const faviconCodeOffSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1A1918"/><text x="32" y="44" font-family="monospace" font-size="36" font-weight="700" fill="#D97757" opacity="0.15" text-anchor="middle">&gt;_</text></svg>`;
 
         function svgToDataUri(svg: string): string {
           return 'data:image/svg+xml;base64,' + btoa(svg);
@@ -696,13 +696,8 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           }
         }
 
-        // Adapt normal favicon to system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-          if (!document.documentElement.classList.contains('code-mode')) {
-            const updatedSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="${window.matchMedia('(prefers-color-scheme: dark)').matches ? '#FFFFFF' : '#1A1918'}"/></svg>`;
-            setFavicon(svgToDataUri(updatedSvg));
-          }
-        });
+        // Normal favicon is now theme-independent (dark container + white R glyph)
+        // No need to adapt to system theme changes
 
         // ═══════════════════════════════════════════════════════
         // 3b. DYNAMIC TAB TITLE — Route mapping & dual-mode titles
