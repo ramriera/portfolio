@@ -9,12 +9,13 @@ interface Props {
   description: string;
   cover: string;
   featured?: boolean;
-  variant?: 'default' | 'featured' | 'tall';
+  variant?: 'default' | 'featured' | 'tall' | 'wide';
 }
 
 const { slug, title, client, year, category, tags, description, cover, featured, variant = 'default' } = Astro.props;
 const isFeatured = variant === 'featured';
 const isTall = variant === 'tall';
+const isWide = variant === 'wide';
 ---
 
 <a
@@ -27,14 +28,14 @@ const isTall = variant === 'tall';
   data-component="ProjectCard"
   data-token="$radius-2xl: 1rem / 16px|$spacing-padding: 1.5rem → 2rem (md)"
 >
-  <div class:list={['relative aspect-[4/3]', isTall ? 'md:aspect-auto md:h-full md:min-h-[400px]' : isFeatured ? 'md:aspect-[16/9]' : '']}>
+  <div class:list={['relative aspect-[4/3]', isTall ? 'md:aspect-auto md:h-full' : isFeatured ? 'md:aspect-[21/9]' : isWide ? 'md:aspect-[16/9]' : '']}>
     <!-- Image mockup -->
     <img
       src={cover}
       alt={title}
-      class="card-mockup w-full h-full object-cover"
+      class="card-mockup w-full h-full object-cover object-center"
       loading="lazy"
-      data-token="$filter-saturate: 1.1|$filter-brightness: 1.05|$aspect-ratio: 4/3|$object-fit: cover"
+      data-token="$filter-saturate: 1.1|$filter-brightness: 1.05|$object-fit: cover|$object-position: center"
     />
 
     <!-- Gradient overlay -->
