@@ -74,16 +74,16 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           document.body.classList.add('code-mode');
           // Instant title switch to avoid flicker
           var p = window.location.pathname.replace(/\/$/, '') || '/';
-          if (p === '/') document.title = '\u{1F4DF} root@ramonriera:~/portfolio';
-          else if (p === '/about') document.title = '\u{1F4DF} root@ramonriera:~/about.md';
-          else if (p === '/blog') document.title = '\u{1F4DF} root@ramonriera:~/blog';
+          if (p === '/') document.title = 'root@ramonriera:~/portfolio';
+          else if (p === '/about') document.title = 'root@ramonriera:~/about.md';
+          else if (p === '/blog') document.title = 'root@ramonriera:~/blog';
           else if (p.indexOf('/projects/') === 0) {
             var slug = p.split('/projects/')[1];
             var shortNames = {'imaginbank-digital-banking':'imaginbank','massimo-dutti-conversion':'massimo-dutti','solotemazos-music-platform':'solotemazos','banco-sabadell-design-system':'banco-sabadell','iberia-flight-experience':'iberia','movefast-startup-platform':'movefast','global-helping':'global-helping'};
-            document.title = '\u{1F4DF} root@ramonriera:~/projects/' + (shortNames[slug] || slug);
+            document.title = 'root@ramonriera:~/projects/' + (shortNames[slug] || slug);
           }
-          else if (p === '/projects') document.title = '\u{1F4DF} root@ramonriera:~/projects';
-          else document.title = '\u{1F4DF} root@ramonriera:~' + p;
+          else if (p === '/projects') document.title = 'root@ramonriera:~/projects';
+          else document.title = 'root@ramonriera:~' + p;
         }
       })();
     </script>
@@ -650,7 +650,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         // Accent color synced with --accent-color in :root (global.css)
         const FAVICON_ACCENT = '#D97757';
 
-        const FAVICON_CODE_BG = '#0a2e0a';
+        const FAVICON_CODE_BG = '#1a5c1a';
 
         function buildFavicon(mode: 'normal' | 'code-on' | 'code-off'): string {
           let bg = '#1A1918';
@@ -746,16 +746,16 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
 
         function getCodeModeTitle(): string {
           const path = window.location.pathname.replace(/\/$/, '') || '/';
-          if (path === '/') return '📟 root@ramonriera:~/portfolio';
-          if (path === '/about') return '📟 root@ramonriera:~/about.md';
-          if (path === '/blog') return '📟 root@ramonriera:~/blog';
+          if (path === '/') return 'root@ramonriera:~/portfolio';
+          if (path === '/about') return 'root@ramonriera:~/about.md';
+          if (path === '/blog') return 'root@ramonriera:~/blog';
           if (path.startsWith('/projects/')) {
             const slug = path.split('/projects/')[1];
             const shortName = projectShortNames[slug] || slug;
-            return `📟 root@ramonriera:~/projects/${shortName}`;
+            return `root@ramonriera:~/projects/${shortName}`;
           }
-          if (path === '/projects') return '📟 root@ramonriera:~/projects';
-          return `📟 root@ramonriera:~${path}`;
+          if (path === '/projects') return 'root@ramonriera:~/projects';
+          return `root@ramonriera:~${path}`;
         }
 
         // Normal Mode title: [Page Name] ⚡ Ramon Riera
