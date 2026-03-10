@@ -4,15 +4,23 @@ const year = new Date().getFullYear();
 
 <footer class="footer-poly mt-8" data-component="Footer" data-token="$spacing-padding-y: 3rem / 48px|$color-text-muted: #a8a196">
   <div class="container-custom footer-poly__inner">
-    <!-- Single row that morphs between modes -->
-    <div class="footer-poly__row">
-      <!-- Normal mode content -->
-      <p class="footer-poly__text footer-poly__text--normal text-sm text-dark-400"
+    <!-- Normal mode content — two sides -->
+    <div class="footer-poly__row footer-poly__text--normal">
+      <p class="footer-poly__text text-sm text-dark-400"
         data-token="$font-size-sm: 0.875rem / 14px|$color-text-muted: #a8a196">
         &copy; {year} Ramon Riera. Todos los derechos reservados.
       </p>
-      <!-- Code mode content -->
-      <p class="footer-poly__text footer-poly__text--code text-sm">
+      <p class="footer-poly__text text-sm text-dark-400"
+        data-token="$font-size-sm: 0.875rem / 14px|$color-text-muted: #a8a196">
+        Diseñado y desarrollado con
+        <span class="text-primary-500">&hearts;</span>
+        usando Astro + Tailwind
+      </p>
+    </div>
+
+    <!-- Code mode content — two sides -->
+    <div class="footer-poly__row footer-poly__text--code">
+      <p class="footer-poly__text text-sm">
         <span class="footer-poly__led"></span>
         <span>[STATUS: OK]</span>
         <span class="footer-poly__sep">|</span>
@@ -20,18 +28,7 @@ const year = new Date().getFullYear();
         <span class="footer-poly__sep">|</span>
         <span>[STACK: ASTRO+TS]</span>
       </p>
-    </div>
-
-    <div class="footer-poly__row">
-      <!-- Normal mode content -->
-      <p class="footer-poly__text footer-poly__text--normal text-sm text-dark-400"
-        data-token="$font-size-sm: 0.875rem / 14px|$color-text-muted: #a8a196">
-        Diseñado y desarrollado con
-        <span class="text-primary-500">&hearts;</span>
-        usando Astro + Tailwind
-      </p>
-      <!-- Code mode content (secondary line) -->
-      <p class="footer-poly__text footer-poly__text--code text-sm">
+      <p class="footer-poly__text text-sm">
         <span class="footer-poly__prompt">&gt;_</span>
         <span>ready for deployment</span>
         <span class="footer-poly__cursor">|</span>
@@ -57,23 +54,18 @@ const year = new Date().getFullYear();
   }
 
   .footer-poly__row {
-    position: relative;
-    height: 1.5rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
+    transition: opacity 0.4s ease, filter 0.4s ease;
   }
 
-  /* ── Text layers: overlapping, toggled via opacity ── */
   .footer-poly__text {
-    position: absolute;
-    inset: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 0.5rem;
     white-space: nowrap;
-    transition: opacity 0.4s ease, filter 0.4s ease;
   }
 
   /* Normal mode: show normal, hide code */
@@ -84,6 +76,7 @@ const year = new Date().getFullYear();
   .footer-poly__text--code {
     opacity: 0;
     filter: blur(4px);
+    position: absolute;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     letter-spacing: 0.05em;
     color: var(--cm-text-muted, #7d8590);
@@ -94,11 +87,13 @@ const year = new Date().getFullYear();
   :global(.code-mode) .footer-poly__text--normal {
     opacity: 0;
     filter: blur(4px);
+    position: absolute;
     pointer-events: none;
   }
   :global(.code-mode) .footer-poly__text--code {
     opacity: 1;
     filter: blur(0);
+    position: relative;
     pointer-events: auto;
   }
 
@@ -148,18 +143,16 @@ const year = new Date().getFullYear();
       padding: 2rem 0;
     }
     .footer-poly__inner {
-      gap: 2rem;
+      gap: 1rem;
     }
     .footer-poly__row {
-      height: auto;
-      min-height: 1.5rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
     }
     .footer-poly__text {
-      position: relative;
-      flex-wrap: wrap;
-      justify-content: center;
       white-space: normal;
-      text-align: center;
+      justify-content: center;
     }
     /* On mobile, hide code text entirely (no code mode on mobile) */
     .footer-poly__text--code {

@@ -650,18 +650,21 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         // Accent color synced with --accent-color in :root (global.css)
         const FAVICON_ACCENT = '#D97757';
 
+        const FAVICON_CODE_BG = '#0a2e0a';
+
         function buildFavicon(mode: 'normal' | 'code-on' | 'code-off'): string {
-          // Shared container: 64×64, rounded corners (rx="25%")
+          let bg = '#1A1918';
           let inner = '';
           if (mode === 'normal') {
             // Minimalist "R" in white
             inner = `<text x="32" y="44" font-family="'Space Grotesk',sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" text-anchor="middle">R</text>`;
           } else {
-            // Cursor block (vertical rectangle) in accent color
+            // Green console background with blinking cursor
+            bg = FAVICON_CODE_BG;
             const opacity = mode === 'code-on' ? '1' : '0.15';
-            inner = `<rect x="24" y="12" width="16" height="40" rx="3" fill="${FAVICON_ACCENT}" opacity="${opacity}"/>`;
+            inner = `<rect x="24" y="12" width="16" height="40" rx="3" fill="#33ff33" opacity="${opacity}"/>`;
           }
-          return `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1A1918"/>${inner}</svg>`;
+          return `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="${bg}"/>${inner}</svg>`;
         }
 
         function svgToDataUri(svg: string): string {
