@@ -1428,42 +1428,4 @@ export const projects: Project[] = [
   },
 ];
 
-export const blogPosts = [
-  {
-    slug: 'construyendo-design-systems-escalables',
-    title: 'Construyendo Design Systems Escalables',
-    excerpt: 'Lecciones aprendidas creando sistemas de diseño para grandes organizaciones. Desde tokens hasta governance.',
-    date: '2024-11-15',
-    readTime: '8 min',
-    tags: ['Design Systems', 'UX'],
-    cover: '/assets/shared/blog-design-systems.jpg',
-  },
-  {
-    slug: 'design-thinking-en-la-practica',
-    title: 'Design Thinking en la Práctica',
-    excerpt: 'Cómo aplicar Design Thinking más allá de la teoría. Casos reales y frameworks adaptados al contexto español.',
-    date: '2024-10-08',
-    readTime: '6 min',
-    tags: ['Design Thinking', 'Metodología'],
-    cover: '/assets/shared/blog-design-thinking.jpg',
-  },
-  {
-    slug: 'de-disenador-a-design-ops',
-    title: 'De Diseñador a Design Ops',
-    excerpt: 'Mi transición hacia Design Operations y por qué creo que es el futuro de los equipos de diseño.',
-    date: '2024-09-20',
-    readTime: '10 min',
-    tags: ['Design Ops', 'Carrera'],
-    cover: '/assets/shared/blog-design-ops.jpg',
-  },
-  {
-    slug: 'accesibilidad-no-es-opcional',
-    title: 'Accesibilidad No Es Opcional',
-    excerpt: 'Por qué la accesibilidad debería ser el punto de partida, no un afterthought. Guía práctica para diseñadores.',
-    date: '2024-08-12',
-    readTime: '7 min',
-    tags: ['Accesibilidad', 'UX'],
-    cover: '/assets/shared/blog-figma-vs-sketch.jpg',
-  },
-];
 

@@ -2,6 +2,18 @@
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
 import SystemConsole from '@/components/SystemConsole.astro';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
+import '@fontsource/inter/900.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/space-grotesk/700.css';
 import '@/styles/global.css';
 
 interface Props {
@@ -14,7 +26,7 @@ interface Props {
 const {
   title,
   description = 'Ramon Riera — UX Lead & Product Designer. Puente entre diseño y frontend escalable: Design Systems, UX strategy y operaciones de producto.',
-  image = '/images/og-image.jpg',
+  image = '/assets/shared/og-image.png',
   canonicalUrl,
 } = Astro.props;
 
@@ -55,9 +67,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <!-- Preconnect for fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body class="min-h-screen flex flex-col bg-dark-50 text-dark-900 transition-colors duration-300">
     <Navbar />
@@ -76,7 +85,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           var p = window.location.pathname.replace(/\/$/, '') || '/';
           if (p === '/') document.title = 'root@ramonriera:~/portfolio';
           else if (p === '/about') document.title = 'root@ramonriera:~/about.md';
-          else if (p === '/blog') document.title = 'root@ramonriera:~/blog';
           else if (p.indexOf('/projects/') === 0) {
             var slug = p.split('/projects/')[1];
             var shortNames = {'imaginbank-digital-banking':'imaginbank','massimo-dutti-conversion':'massimo-dutti','solotemazos-music-platform':'solotemazos','banco-sabadell-design-system':'banco-sabadell','iberia-flight-experience':'iberia','movefast-startup-platform':'movefast','global-helping':'global-helping'};
@@ -723,7 +731,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           '/': 'Home',
           '/about': 'About',
           '/projects': 'Projects',
-          '/blog': 'Blog',
           '/projects/imaginbank-digital-banking': 'Imaginbank',
           '/projects/massimo-dutti-conversion': 'Massimo Dutti',
           '/projects/solotemazos-music-platform': 'SoloTemazos',
@@ -748,7 +755,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           const path = window.location.pathname.replace(/\/$/, '') || '/';
           if (path === '/') return 'root@ramonriera:~/portfolio';
           if (path === '/about') return 'root@ramonriera:~/about.md';
-          if (path === '/blog') return 'root@ramonriera:~/blog';
           if (path.startsWith('/projects/')) {
             const slug = path.split('/projects/')[1];
             const shortName = projectShortNames[slug] || slug;

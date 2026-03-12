@@ -70,7 +70,7 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile Navigation -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out-expo overscroll-none"
+    class="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out-expo overscroll-none mobile-menu-overlay"
   >
     <!-- Close button -->
     <button
@@ -114,6 +114,15 @@ const currentPath = Astro.url.pathname;
   .nav-scrolled {
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  :global(.code-mode) .nav-scrolled {
+    background: rgba(20, 20, 19, 0.85);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  :global(.code-mode) .mobile-menu-overlay {
+    background: #141413;
   }
 
   .logo-name {
