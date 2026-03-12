@@ -70,7 +70,7 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile Navigation -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out-expo overscroll-none"
+    class="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out-expo overscroll-none mobile-menu-overlay"
   >
     <!-- Close button -->
     <button
@@ -116,6 +116,15 @@ const currentPath = Astro.url.pathname;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
   }
 
+  :global(.code-mode) .nav-scrolled {
+    background: rgba(20, 20, 19, 0.85);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  :global(.code-mode) .mobile-menu-overlay {
+    background: #141413;
+  }
+
   .logo-name {
     font-family: 'Space Grotesk', system-ui, sans-serif;
     font-weight: 600;
@@ -150,12 +159,17 @@ const currentPath = Astro.url.pathname;
   const hamburger = document.getElementById('hamburger');
   let isMenuOpen = false;
 
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
+  // Track the real scroll position (body fixed resets scrollY to 0)
+  let lastKnownScroll = 0;
 
-    // Navbar background
+  window.addEventListener('scroll', () => {
+    // Don't update navbar state while menu is open (body is fixed, scrollY is 0)
+    if (isMenuOpen) return;
+
+    lastKnownScroll = window.scrollY;
+
     if (navbar) {
-      if (currentScroll > 50) {
+      if (lastKnownScroll > 50) {
         navbar.classList.add('backdrop-blur-xl', 'nav-scrolled');
       } else {
         navbar.classList.remove('backdrop-blur-xl', 'nav-scrolled');
@@ -169,6 +183,7 @@ const currentPath = Astro.url.pathname;
 
   function lockScroll() {
     scrollPosition = window.scrollY;
+    lastKnownScroll = scrollPosition;
     document.body.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollPosition}px`;
@@ -184,6 +199,15 @@ const currentPath = Astro.url.pathname;
     document.documentElement.style.scrollBehavior = 'auto';
     window.scrollTo(0, scrollPosition);
     document.documentElement.style.scrollBehavior = '';
+
+    // Restore navbar state based on saved scroll position
+    if (navbar) {
+      if (scrollPosition > 50) {
+        navbar.classList.add('backdrop-blur-xl', 'nav-scrolled');
+      } else {
+        navbar.classList.remove('backdrop-blur-xl', 'nav-scrolled');
+      }
+    }
   }
 
   let isAnimating = false;
@@ -205,10 +229,17 @@ const currentPath = Astro.url.pathname;
     mobileMenu.classList.add('opacity-0');
     mobileMenu.classList.remove('opacity-100');
     resetHamburger();
-    // Wait for fade-out to finish before unlocking scroll
+
+    // Safety timeout: unlock scroll even if transitionend doesn't fire
+    const safetyTimer = setTimeout(() => {
+      unlockScroll();
+      isAnimating = false;
+    }, 600);
+
     mobileMenu.addEventListener('transitionend', function handler(e) {
       if (e.propertyName !== 'opacity') return;
       mobileMenu.removeEventListener('transitionend', handler);
+      clearTimeout(safetyTimer);
       unlockScroll();
       isAnimating = false;
     }, { once: false });
@@ -226,9 +257,16 @@ const currentPath = Astro.url.pathname;
     spans[1].style.opacity = '0';
     spans[2].style.transform = 'rotate(-45deg) translateY(-2px)';
     spans[2].style.width = '100%';
+
+    // Safety timeout in case transitionend doesn't fire
+    const safetyTimer = setTimeout(() => {
+      isAnimating = false;
+    }, 600);
+
     mobileMenu.addEventListener('transitionend', function handler(e) {
       if (e.propertyName !== 'opacity') return;
       mobileMenu.removeEventListener('transitionend', handler);
+      clearTimeout(safetyTimer);
       isAnimating = false;
     }, { once: false });
   }
