@@ -29,6 +29,8 @@ export const navLinks = [
 
 export interface ConsultingProject {
   client: string;
+  period: string;
+  role: string;
   description: string;
 }
 
@@ -50,9 +52,9 @@ export interface ConsultingBlock {
 export const mainTimeline: TimelineEntry[] = [
   {
     year: '2021 — Presente',
-    role: 'UX Lead, Design Ops & Product Designer',
+    role: 'Senior Product Designer & Design Ops',
     company: 'Doctori.com',
-    description: 'Liderando Design Ops y el Design System para la plataforma de salud digital.',
+    description: 'Liderando la evolución del producto y la eficiencia operativa mediante la implementación de un Design System robusto. Enfoque en Design Ops para escalar procesos de diseño y sincronización con ingeniería.',
     gitMsg: 'feat(design-ops): implement token architecture & system analytics',
     current: true,
   },
@@ -69,9 +71,24 @@ export const consultingBlock: ConsultingBlock = {
   label: 'Proyectos de Consultoría Senior',
   via: 'Lead-it',
   projects: [
-    { client: 'Lemoons', description: 'UI Estratégica para plataforma educativa.' },
-    { client: 'Iberia', description: 'Arquitectura de Design Tokens y Sistema Global.' },
-    { client: 'Banco Sabadell', description: 'Componentes modulares y documentación técnica.' },
+    {
+      client: 'Lemoons',
+      period: '2023 — 2024',
+      role: 'Product & UI Consultant',
+      description: 'Definición de producto y UI estratégica para nuevos modelos de negocio en plataforma educativa.',
+    },
+    {
+      client: 'Iberia',
+      period: '2022 — 2023',
+      role: 'Design Systems Consultant',
+      description: 'Arquitectura de Design Tokens y sistema de diseño global para Web y App. Escalabilidad multi-plataforma y gobernanza del sistema.',
+    },
+    {
+      client: 'Banco Sabadell',
+      period: '2021 — 2022',
+      role: 'Design Systems Consultant',
+      description: 'Documentación técnica y componentes modulares para banca digital. Creación de librerías escalables y procesos de contribución.',
+    },
   ],
 };
 

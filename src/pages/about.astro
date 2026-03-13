@@ -191,41 +191,42 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
               {(() => {
                 const doctori = mainTimeline[0];
                 return (
-                  <div class="relative pl-6 sm:pl-8 pb-8 border-l-2 border-dashed border-gray-200">
-                    {/* Node — strong, filled */}
-                    <div class="absolute left-[-7px] top-0 w-3.5 h-3.5 rounded-full bg-primary-500 ring-4 ring-primary-100"></div>
-                    <span class="text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
-                    <h3 class="font-bold text-lg mt-1">{doctori.company}</h3>
-                    <p class="text-sm font-medium text-dark-500 mb-1">{doctori.role}</p>
-                    <p class="text-body-sm">{doctori.description}</p>
+                  <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-dashed border-gray-200">
+                    {/* Node — small circle with thin gray border */}
+                    <div class="absolute left-[-6px] top-[3px] w-2.5 h-2.5 rounded-full bg-white border-[1.5px] border-gray-300"></div>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{doctori.company}</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-2">{doctori.role}</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">{doctori.description}</p>
                   </div>
                 );
               })()}
 
               {/* --- Bloque de Consultoría (Nexo) --- */}
-              <div class="relative pl-6 sm:pl-8 pb-8 border-l-2 border-dashed border-gray-200">
+              <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-dashed border-gray-200">
                 {/* Node — small, subtle */}
-                <div class="absolute left-[-5px] top-1 w-2.5 h-2.5 rounded-full bg-gray-300"></div>
+                <div class="absolute left-[-5px] top-[5px] w-2 h-2 rounded-full bg-gray-200 border border-gray-300"></div>
 
                 {/* Pill tag */}
-                <div class="mb-3">
-                  <span class="inline-block text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500 border border-primary-300 bg-white rounded-full px-3 py-0.5">
+                <div class="mb-4">
+                  <span class="inline-block text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-primary-500 border border-primary-300 bg-white rounded-full px-3 py-1">
                     En paralelo a Doctori.com
                   </span>
                 </div>
 
-                <p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">
-                  {consultingBlock.label} <span class="normal-case tracking-normal">(Vía {consultingBlock.via})</span>
+                <p class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-gray-400 mb-4">
+                  {consultingBlock.label} <span class="normal-case tracking-normal font-normal">(Vía {consultingBlock.via})</span>
                 </p>
 
-                <div class="ml-0 sm:ml-2 space-y-2.5">
+                <div class="space-y-5">
                   {consultingBlock.projects.map((project) => (
-                    <div class="flex items-start gap-2">
-                      <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0"></span>
-                      <p class="text-sm text-gray-400">
-                        <span class="font-medium text-dark-400">{project.client}:</span>{' '}
-                        {project.description}
-                      </p>
+                    <div class="ml-0 sm:ml-1">
+                      <div class="flex items-baseline gap-2 mb-0.5">
+                        <span class="font-bold text-dark-900 text-sm">{project.client}</span>
+                        <span class="text-[10px] sm:text-xs text-gray-300 font-medium">{project.period}</span>
+                      </div>
+                      <p class="text-xs text-gray-400 mb-1">{project.role}</p>
+                      <p class="text-sm text-gray-400 leading-relaxed">{project.description}</p>
                     </div>
                   ))}
                 </div>
@@ -236,12 +237,12 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
                 const jbm = mainTimeline[1];
                 return (
                   <div class="relative pl-6 sm:pl-8 border-l-2 border-transparent">
-                    {/* Node — outline */}
-                    <div class="absolute left-[-7px] top-0 w-3.5 h-3.5 rounded-full bg-white border-2 border-gray-300"></div>
-                    <span class="text-xs font-semibold tracking-widest uppercase text-gray-400">{jbm.year}</span>
-                    <h3 class="font-bold text-lg mt-1">{jbm.company}</h3>
-                    <p class="text-sm font-medium text-dark-400 mb-1">{jbm.role}</p>
-                    <p class="text-body-sm">{jbm.description}</p>
+                    {/* Node — small circle with thin gray border */}
+                    <div class="absolute left-[-6px] top-[3px] w-2.5 h-2.5 rounded-full bg-white border-[1.5px] border-gray-300"></div>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-gray-400">{jbm.year}</span>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{jbm.company}</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-2">{jbm.role}</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">{jbm.description}</p>
                   </div>
                 );
               })()}
@@ -273,6 +274,7 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
                   <div class="gitlog-entry" style="opacity: 0.6;">
                     <span class="gitlog-marker">├</span>{' '}
                     <span class="gitlog-hash">{`${Math.random().toString(16).slice(2, 9)}`}</span>{' '}
+                    <span class="gitlog-date">({p.period})</span>{' '}
                     <span class="gitlog-company">[{p.client}]</span>{' '}
                     <span class="gitlog-message">{p.description}</span>
                   </div>
