@@ -1772,6 +1772,21 @@ body.code-mode .btn-cv-code:hover {
   letter-spacing: 0.04em;
 }
 
+/* Timeline: fade-out projection below JBM origin node */
+.timeline-origin {
+  position: relative;
+}
+.timeline-origin::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  bottom: 0;
+  width: 2px;
+  height: 2.5rem;
+  background: linear-gradient(to bottom, #f4b89d, transparent);
+  pointer-events: none;
+}
+
 .parallax-cover-img {
   will-change: transform;
   transition: transform 0.1s linear;
