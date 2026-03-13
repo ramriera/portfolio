@@ -193,7 +193,7 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
                 return (
                   <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-primary-300">
                     {/* Node — solid accent, current role */}
-                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300"></div>
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300 animate-doctori-pulse"></div>
                     <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
                     <h3 class="font-bold text-lg mt-1 text-dark-900">{doctori.company}</h3>
                     <p class="text-sm font-medium text-gray-500 mb-2">{doctori.role}</p>
@@ -209,7 +209,7 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
 
                 {/* Pill tag */}
                 <div class="mb-4">
-                  <span class="inline-block text-[9px] sm:text-[10px] font-bold tracking-[0.15em] uppercase text-primary-500 border border-primary-300 bg-white rounded-full px-3 py-1">
+                  <span class="inline-block text-[9px] sm:text-[10px] font-bold tracking-[0.15em] uppercase text-primary-400 rounded-full px-0 py-0">
                     En paralelo a Doctori.com
                   </span>
                 </div>
@@ -221,9 +221,9 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
                 <div class="consulting-list space-y-6">
                   {consultingBlock.projects.map((project) => (
                     <div class="consulting-item ml-0 sm:ml-1 transition-opacity duration-300">
-                      <div class="flex items-baseline gap-2 mb-1">
+                      <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{project.period}</span>
+                      <div class="flex items-baseline gap-2 mb-1 mt-0.5">
                         <span class="font-bold text-dark-900 text-sm">{project.client}</span>
-                        <span class="text-[10px] sm:text-xs text-gray-300 font-medium">{project.period}</span>
                       </div>
                       <p class="text-xs text-gray-400 mb-1.5">{project.role}</p>
                       <p class="text-sm text-gray-400 leading-relaxed">{project.description}</p>

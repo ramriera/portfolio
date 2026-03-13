@@ -42,6 +42,7 @@ export default {
         'slide-right': 'slideRight 0.6s ease-out forwards',
         'scale-in': 'scaleIn 0.4s ease-out forwards',
         'blur-in': 'blurIn 0.6s ease-out forwards',
+        'doctori-pulse': 'doctoriPulse 2s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -71,6 +72,10 @@ export default {
         blurIn: {
           '0%': { opacity: '0', filter: 'blur(10px)' },
           '100%': { opacity: '1', filter: 'blur(0)' },
+        },
+        doctoriPulse: {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(217, 119, 87, 0.4)' },
+          '50%': { boxShadow: '0 0 0 6px rgba(217, 119, 87, 0)' },
         },
       },
       transitionTimingFunction: {
