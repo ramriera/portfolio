@@ -1772,59 +1772,18 @@ body.code-mode .btn-cv-code:hover {
   letter-spacing: 0.04em;
 }
 
-/* ── Timeline accent line & nodes ── */
-
-/* Accent line segment (solid by default) */
-.timeline-segment {
-  border-left: 2px solid #f4b89d; /* primary-300 */
-}
-
-/* Dashed variant for consulting branch */
-.timeline-segment--dashed {
-  border-left-style: dashed;
-  border-left-color: #f9d5c5; /* primary-200 */
-}
-
-/* Node base — centered on the border-left line */
-.timeline-node {
-  position: absolute;
-  left: -7px;
-  top: 2px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  z-index: 1;
-}
-
-/* Solid accent node (Doctori & JBM) */
-.timeline-node--active {
-  background-color: #D97757; /* primary-500 */
-  border: 2px solid #f4b89d; /* primary-300 */
-}
-
-/* Hollow node (consulting) */
-.timeline-node--hollow {
-  width: 8px;
-  height: 8px;
-  left: -5px;
-  top: 5px;
-  background-color: #fff;
-  border: 1.5px solid #f9d5c5; /* primary-200 */
-}
-
-/* Fade-out projection below JBM */
+/* Timeline: fade-out projection below JBM origin node */
 .timeline-origin {
-  border-left-color: transparent;
   position: relative;
 }
-.timeline-origin::before {
+.timeline-origin::after {
   content: '';
   position: absolute;
   left: -2px;
-  top: 0;
+  bottom: 0;
   width: 2px;
-  height: calc(100% + 3rem);
-  background: linear-gradient(to bottom, #f4b89d 0%, #f4b89d 40%, transparent 100%);
+  height: 2.5rem;
+  background: linear-gradient(to bottom, #f4b89d, transparent);
   pointer-events: none;
 }
 

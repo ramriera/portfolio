@@ -186,26 +186,26 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
             <h2 class="heading-md mb-8">Trayectoria</h2>
 
             <!-- Normal mode: hybrid timeline -->
-            <div class="timeline-cards max-w-full overflow-x-hidden pl-3 sm:pl-0">
+            <div class="timeline-cards ml-4 sm:ml-0">
               {/* --- Hito Principal 1: Doctori (actual) --- */}
               {(() => {
                 const doctori = mainTimeline[0];
                 return (
-                  <div class="timeline-segment relative pl-7 sm:pl-8 pb-10">
+                  <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-primary-300">
                     {/* Node — solid accent, current role */}
-                    <div class="timeline-node timeline-node--active"></div>
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300"></div>
                     <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
-                    <h3 class="font-bold text-lg mt-1 text-dark-900 break-words">{doctori.company}</h3>
-                    <p class="text-sm font-medium text-gray-500 mb-2 break-words">{doctori.role}</p>
-                    <p class="text-sm text-gray-400 leading-relaxed break-words">{doctori.description}</p>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{doctori.company}</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-2">{doctori.role}</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">{doctori.description}</p>
                   </div>
                 );
               })()}
 
               {/* --- Bloque de Consultoría (Nexo) --- */}
-              <div class="timeline-segment timeline-segment--dashed relative pl-7 sm:pl-8 pb-10 group/nexo">
+              <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-dashed border-primary-200 group/nexo transition-opacity duration-300">
                 {/* Node — small, hollow, discrete */}
-                <div class="timeline-node timeline-node--hollow"></div>
+                <div class="absolute left-[-5px] top-[5px] w-2 h-2 rounded-full bg-white border-[1.5px] border-primary-200"></div>
 
                 {/* Pill tag */}
                 <div class="mb-4">
@@ -214,19 +214,19 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
                   </span>
                 </div>
 
-                <p class="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4 break-words">
+                <p class="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
                   {consultingBlock.label} <span class="normal-case tracking-normal font-normal">(Vía {consultingBlock.via})</span>
                 </p>
 
                 <div class="space-y-6">
                   {consultingBlock.projects.map((project) => (
-                    <div class="group/item hover:opacity-100 transition-opacity duration-200">
-                      <div class="flex items-baseline gap-2 mb-1 flex-wrap">
+                    <div class="ml-0 sm:ml-1 group/item hover:opacity-100 transition-opacity duration-200">
+                      <div class="flex items-baseline gap-2 mb-1">
                         <span class="font-bold text-dark-900 text-sm">{project.client}</span>
                         <span class="text-[10px] sm:text-xs text-gray-300 font-medium">{project.period}</span>
                       </div>
                       <p class="text-xs text-gray-400 mb-1.5">{project.role}</p>
-                      <p class="text-sm text-gray-400 leading-relaxed break-words">{project.description}</p>
+                      <p class="text-sm text-gray-400 leading-relaxed">{project.description}</p>
                     </div>
                   ))}
                 </div>
@@ -236,13 +236,13 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
               {(() => {
                 const jbm = mainTimeline[1];
                 return (
-                  <div class="timeline-segment timeline-origin relative pl-7 sm:pl-8 pb-6">
-                    {/* Node — solid accent, end of path */}
-                    <div class="timeline-node timeline-node--active"></div>
+                  <div class="timeline-origin relative pl-6 sm:pl-8 pb-6 border-l-2 border-primary-300">
+                    {/* Node — accent outline, end of path */}
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-white border-2 border-primary-500"></div>
                     <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-gray-400">{jbm.year}</span>
-                    <h3 class="font-bold text-lg mt-1 text-dark-900 break-words">{jbm.company}</h3>
-                    <p class="text-sm font-medium text-gray-500 mb-2 break-words">{jbm.role}</p>
-                    <p class="text-sm text-gray-400 leading-relaxed break-words">{jbm.description}</p>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{jbm.company}</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-2">{jbm.role}</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">{jbm.description}</p>
                   </div>
                 );
               })()}
