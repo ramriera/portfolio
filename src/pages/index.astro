@@ -73,14 +73,14 @@ const featuredProjects = projectOrder
       </div>
 
       <!-- Projects Grid — 3 rows, alternating 60/40 rhythm -->
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8"
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-x-6 gap-y-12 md:gap-x-8 md:gap-y-16"
         data-component="ProjectGrid"
         data-token="$grid-cols: 1 → 5 (md)|$spacing-gap: 1.5rem → 2rem (md)">
         {featuredProjects.map((project, i) => {
           const span = project.gridSpan ?? 2;
           const colClass = span === 3 ? 'md:col-span-3' : 'md:col-span-2';
           return (
-            <div data-reveal data-delay={String(i * 100)} class={colClass}>
+            <div data-reveal data-delay={String(i * 100)} class:list={[colClass, '[&_.card-image-wrap]:h-[240px] [&_.card-image-wrap]:md:h-[320px]']}>
               <ProjectCard {...project} />
             </div>
           );
