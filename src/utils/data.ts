@@ -97,7 +97,7 @@ export const projects: Project[] = [
     stack: ['UX Strategy', 'Service Design', 'Research', 'Service Blueprint', 'Prototyping'],
     cover: '/assets/projects/massimo-dutti/massimo-header-big-1920x1080.jpg',
     featured: true,
-    brandColor: '#1a1a1a',
+    brandColor: '#ffffff',
     gridSpan: 3,
     projectMeta: {
       role: 'UX Strategist & Service Designer',

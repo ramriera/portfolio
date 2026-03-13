@@ -452,7 +452,14 @@ main {
 .hero-stats-inner {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .hero-stats-inner {
+    gap: 2rem;
+  }
 }
 
 /* Equal-width stat items on mobile so all three columns balance */
