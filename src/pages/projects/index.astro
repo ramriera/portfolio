@@ -12,18 +12,7 @@ const sortedProjects = [...projects].sort((a, b) => {
   if (bIdx === -1) return 1;
   return aIdx - bIdx;
 });
-
-// Filter groups that map to the detailed per-project categories
-const filterCategories = ['Todas', 'UX/UI', 'Design Systems', 'Branding'] as const;
-
-function getFilterGroup(category: string): string[] {
-  const lower = category.toLowerCase();
-  const groups: string[] = [];
-  if (lower.includes('ux') || lower.includes('ui') || lower.includes('product') || lower.includes('design thinking') || lower.includes('audit')) groups.push('UX/UI');
-  if (lower.includes('system') || lower.includes('engineering')) groups.push('Design Systems');
-  if (lower.includes('brand') || lower.includes('digital product')) groups.push('Branding');
-  return groups.length ? groups : ['UX/UI'];
-}
+const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
 ---
 
 <BaseLayout
@@ -58,23 +47,21 @@ function getFilterGroup(category: string): string[] {
       </div>
 
       <!-- Filters -->
-      <div data-reveal data-delay="300" class="mt-12 mb-16 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide" id="project-filters"
+      <div data-reveal data-delay="300" class="flex flex-wrap gap-2 mt-12" id="project-filters"
         data-component="FilterGroup" data-token="$spacing-gap: 0.5rem / 8px">
-        <div class="flex items-center gap-6 sm:gap-8 whitespace-nowrap">
-          {filterCategories.map((cat) => (
-            <button
-              class:list={[
-                'filter-btn relative text-sm font-medium transition-colors duration-300 pb-1',
-                cat === 'Todas'
-                  ? 'text-primary-500 filter-active'
-                  : 'text-dark-400 hover:text-dark-700',
-              ]}
-              data-filter={cat}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        {categories.map((cat) => (
+          <button
+            class:list={[
+              'filter-btn px-5 py-2 text-sm font-medium rounded-full transition-all duration-300',
+              cat === 'Todas'
+                ? 'bg-primary-500/10 text-primary-500'
+                : 'bg-dark-100 text-dark-600 hover:bg-dark-200',
+            ]}
+            data-filter={cat}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
     </div>
   </section>
@@ -89,7 +76,6 @@ function getFilterGroup(category: string): string[] {
             data-reveal
             data-delay={String(i * 100)}
             data-category={project.category}
-            data-filter-groups={getFilterGroup(project.category).join(',')}
             class="project-item"
           >
             <ProjectCard {...project} />
@@ -161,43 +147,28 @@ function getFilterGroup(category: string): string[] {
     btn.addEventListener('click', () => {
       const filter = btn.getAttribute('data-filter');
 
-      // Update active button styles
+      // Update active button
       filterBtns.forEach((b) => {
-        b.classList.remove('text-primary-500', 'filter-active');
-        b.classList.add('text-dark-400');
+        b.classList.remove('bg-primary-500/10', 'text-primary-500');
+        b.classList.add('bg-dark-100', 'text-dark-600');
       });
-      btn.classList.remove('text-dark-400');
-      btn.classList.add('text-primary-500', 'filter-active');
+      btn.classList.remove('bg-dark-100', 'text-dark-600');
+      btn.classList.add('bg-primary-500/10', 'text-primary-500');
 
-      // Fade out all, then show matches
+      // Filter projects
       projectItems.forEach((item) => {
-        const el = item as HTMLElement;
-        el.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(8px)';
+        const category = item.getAttribute('data-category');
+        if (filter === 'Todas' || category === filter) {
+          (item as HTMLElement).style.display = '';
+          (item as HTMLElement).style.opacity = '0';
+          setTimeout(() => {
+            (item as HTMLElement).style.opacity = '1';
+            (item as HTMLElement).style.transition = 'opacity 0.3s ease';
+          }, 50);
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
       });
-
-      setTimeout(() => {
-        projectItems.forEach((item) => {
-          const el = item as HTMLElement;
-          const groups = (el.getAttribute('data-filter-groups') || '').split(',');
-          const match = filter === 'Todas' || groups.includes(filter || '');
-          el.style.display = match ? '' : 'none';
-        });
-
-        // Stagger fade-in for visible items
-        let delay = 0;
-        projectItems.forEach((item) => {
-          const el = item as HTMLElement;
-          if (el.style.display !== 'none') {
-            setTimeout(() => {
-              el.style.opacity = '1';
-              el.style.transform = 'translateY(0)';
-            }, delay);
-            delay += 60;
-          }
-        });
-      }, 250);
     });
   });
 </script>
