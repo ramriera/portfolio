@@ -30,7 +30,7 @@ const featuredProjects = projectOrder
   <section class="section-padding" data-component="FeaturedProjects">
     <div class="container-custom">
       <!-- Header -->
-      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 mb-16">
+      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-12 md:mb-16">
         <div>
           <div data-reveal class="mb-6 flex items-center gap-3">
             <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
@@ -73,14 +73,14 @@ const featuredProjects = projectOrder
       </div>
 
       <!-- Projects Grid — 3 rows, alternating 60/40 rhythm -->
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-x-6 gap-y-12 md:gap-x-8 md:gap-y-16"
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-x-5 gap-y-10 md:gap-x-8 md:gap-y-14 lg:gap-y-16"
         data-component="ProjectGrid"
-        data-token="$grid-cols: 1 → 5 (md)|$spacing-gap: 1.5rem → 2rem (md)">
+        data-token="$grid-cols: 1 → 5 (md)|$spacing-gap-x: 2rem|$spacing-gap-y: 3.5rem → 4rem">
         {featuredProjects.map((project, i) => {
           const span = project.gridSpan ?? 2;
           const colClass = span === 3 ? 'md:col-span-3' : 'md:col-span-2';
           return (
-            <div data-reveal data-delay={String(i * 100)} class:list={[colClass, '[&_.card-image-wrap]:h-[240px] [&_.card-image-wrap]:md:h-[320px]']}>
+            <div data-reveal data-delay={String(i * 100)} class:list={[colClass, 'project-grid-item']}>
               <ProjectCard {...project} />
             </div>
           );
@@ -115,8 +115,8 @@ const featuredProjects = projectOrder
           </svg>
         </span>
       </div>
-      <h2 data-reveal data-delay="100" class="heading-lg mb-6"
-        data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)|$spacing-bottom: 1.5rem / 24px">
+      <h2 data-reveal data-delay="100" class="heading-lg mb-5"
+        data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)|$spacing-bottom: 1.25rem / 20px">
         ¿Tienes un <span class="text-primary-500"
           data-token="$color-primary-500: #D97757">proyecto</span> en mente?
       </h2>
@@ -150,4 +150,20 @@ const featuredProjects = projectOrder
       </div>
     </div>
   </section>
+<style>
+  /* Force uniform image height within grid rows so text aligns horizontally */
+  .project-grid-item :global(.card-image-wrap) {
+    height: 220px;
+  }
+  @media (min-width: 768px) {
+    .project-grid-item :global(.card-image-wrap) {
+      height: 300px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .project-grid-item :global(.card-image-wrap) {
+      height: 340px;
+    }
+  }
+</style>
 </BaseLayout>
