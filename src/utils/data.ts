@@ -99,7 +99,6 @@ export const projects: Project[] = [
     cover: '/assets/projects/massimo-dutti/massimo-header-big-1920x1080.jpg',
     featured: true,
     brandColor: '#f1f0ed',
-    coverFit: 'contain',
     gridSpan: 3,
     projectMeta: {
       role: 'UX Strategist & Service Designer',
