@@ -191,11 +191,11 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
               {(() => {
                 const doctori = mainTimeline[0];
                 return (
-                  <div class="timeline-hito relative pl-6 sm:pl-8 pb-10 border-l-2 border-primary-300 group/hito">
+                  <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-primary-300">
                     {/* Node — solid accent, current role */}
-                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300 transition-transform duration-300 group-hover/hito:scale-150"></div>
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300"></div>
                     <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
-                    <h3 class="font-bold text-lg mt-1 text-dark-900 group-hover/hito:text-primary-600 transition-colors duration-300">{doctori.company}</h3>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{doctori.company}</h3>
                     <p class="text-sm font-medium text-gray-500 mb-2">{doctori.role}</p>
                     <p class="text-sm text-gray-400 leading-relaxed">{doctori.description}</p>
                   </div>
@@ -236,26 +236,16 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
               {(() => {
                 const jbm = mainTimeline[1];
                 return (
-                  <div class="timeline-origin relative pl-6 sm:pl-8 pb-6 border-l-2 border-primary-300 group/hito">
+                  <div class="timeline-origin relative pl-6 sm:pl-8 pb-6 border-l-2 border-primary-300">
                     {/* Node — accent outline, end of path */}
-                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-white border-2 border-primary-500 transition-transform duration-300 group-hover/hito:scale-150"></div>
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-white border-2 border-primary-500"></div>
                     <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-gray-400">{jbm.year}</span>
-                    <h3 class="font-bold text-lg mt-1 text-dark-900 group-hover/hito:text-primary-600 transition-colors duration-300">{jbm.company}</h3>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{jbm.company}</h3>
                     <p class="text-sm font-medium text-gray-500 mb-2">{jbm.role}</p>
                     <p class="text-sm text-gray-400 leading-relaxed">{jbm.description}</p>
                   </div>
                 );
               })()}
-
-              {/* --- CTA: Next chapter --- */}
-              <div class="timeline-next-chapter pt-2 pl-6 sm:pl-8" data-reveal>
-                <a href={`mailto:${siteConfig.email}`} class="group inline-flex items-baseline gap-2 text-sm text-gray-400 hover:text-primary-500 transition-colors duration-300">
-                  <span>¿El próximo capítulo?</span>
-                  <span class="font-semibold text-primary-500 group-hover:text-primary-600 transition-colors duration-300">
-                    Escríbeme<span class="timeline-cursor">|</span>
-                  </span>
-                </a>
-              </div>
             </div>
 
             <!-- Code mode: git log format -->
@@ -506,7 +496,7 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
   </section>
 
   <!-- CTA -->
-  <section class="pt-20 pb-32 sm:pb-40" data-component="CallToAction">
+  <section class="section-padding" data-component="CallToAction">
     <div class="container-custom text-center max-w-3xl mx-auto">
       <div data-reveal class="mb-6 flex justify-center">
         <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
