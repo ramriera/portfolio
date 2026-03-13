@@ -152,11 +152,14 @@ const featuredProjects = projectOrder
   </section>
 <style>
   /* Force uniform image height within grid rows so text aligns horizontally */
+  /* Mobile: taller / more square ratio so projects look substantial */
   .project-grid-item :global(.card-image-wrap) {
-    height: 220px;
+    aspect-ratio: 4 / 3;
+    height: auto;
   }
   @media (min-width: 768px) {
     .project-grid-item :global(.card-image-wrap) {
+      aspect-ratio: auto;
       height: 300px;
     }
   }

@@ -7,7 +7,7 @@ const currentPath = Astro.url.pathname;
 
 <header
   id="navbar"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out-expo"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out-expo navbar-base"
   data-component="Navbar"
 >
   <div class="container-custom">
@@ -111,13 +111,34 @@ const currentPath = Astro.url.pathname;
 <div class="h-20"></div>
 
 <style>
+  /* Navbar base — always glassmorphism-ready, safe-area aware */
+  .navbar-base {
+    padding-top: env(safe-area-inset-top, 0px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.85);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.5s ease,
+                box-shadow 0.5s ease;
+    will-change: transform;
+  }
+
   .nav-scrolled {
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Hide on scroll down */
+  .navbar-hidden {
+    transform: translateY(-100%);
+  }
+
+  :global(.code-mode) .navbar-base {
+    background: rgba(20, 20, 19, 0.85);
   }
 
   :global(.code-mode) .nav-scrolled {
-    background: rgba(20, 20, 19, 0.85);
+    background: rgba(20, 20, 19, 0.9);
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   }
 
@@ -159,22 +180,34 @@ const currentPath = Astro.url.pathname;
   const hamburger = document.getElementById('hamburger');
   let isMenuOpen = false;
 
-  // Track the real scroll position (body fixed resets scrollY to 0)
+  // Scroll-hide state
   let lastKnownScroll = 0;
+  let prevScroll = 0;
+  const SCROLL_THRESHOLD = 8; // px before toggling visibility
 
   window.addEventListener('scroll', () => {
-    // Don't update navbar state while menu is open (body is fixed, scrollY is 0)
     if (isMenuOpen) return;
 
     lastKnownScroll = window.scrollY;
 
     if (navbar) {
+      // Glassmorphism on scroll
       if (lastKnownScroll > 50) {
-        navbar.classList.add('backdrop-blur-xl', 'nav-scrolled');
+        navbar.classList.add('nav-scrolled');
       } else {
-        navbar.classList.remove('backdrop-blur-xl', 'nav-scrolled');
+        navbar.classList.remove('nav-scrolled');
+      }
+
+      // Scroll-hide: hide on scroll down, show on scroll up
+      const delta = lastKnownScroll - prevScroll;
+      if (delta > SCROLL_THRESHOLD && lastKnownScroll > 100) {
+        navbar.classList.add('navbar-hidden');
+      } else if (delta < -SCROLL_THRESHOLD || lastKnownScroll < 50) {
+        navbar.classList.remove('navbar-hidden');
       }
     }
+
+    prevScroll = lastKnownScroll;
   }, { passive: true });
 
   const mobileMenuClose = document.getElementById('mobile-menu-close');
@@ -195,17 +228,17 @@ const currentPath = Astro.url.pathname;
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
-    // Bypass smooth scroll to restore position instantly
     document.documentElement.style.scrollBehavior = 'auto';
     window.scrollTo(0, scrollPosition);
     document.documentElement.style.scrollBehavior = '';
 
-    // Restore navbar state based on saved scroll position
     if (navbar) {
+      // Ensure navbar is visible after closing menu
+      navbar.classList.remove('navbar-hidden');
       if (scrollPosition > 50) {
-        navbar.classList.add('backdrop-blur-xl', 'nav-scrolled');
+        navbar.classList.add('nav-scrolled');
       } else {
-        navbar.classList.remove('backdrop-blur-xl', 'nav-scrolled');
+        navbar.classList.remove('nav-scrolled');
       }
     }
   }
@@ -230,7 +263,6 @@ const currentPath = Astro.url.pathname;
     mobileMenu.classList.remove('opacity-100');
     resetHamburger();
 
-    // Safety timeout: unlock scroll even if transitionend doesn't fire
     const safetyTimer = setTimeout(() => {
       unlockScroll();
       isAnimating = false;
@@ -258,7 +290,9 @@ const currentPath = Astro.url.pathname;
     spans[2].style.transform = 'rotate(-45deg) translateY(-2px)';
     spans[2].style.width = '100%';
 
-    // Safety timeout in case transitionend doesn't fire
+    // Ensure navbar stays visible while menu is open
+    if (navbar) navbar.classList.remove('navbar-hidden');
+
     const safetyTimer = setTimeout(() => {
       isAnimating = false;
     }, 600);
@@ -273,7 +307,6 @@ const currentPath = Astro.url.pathname;
 
   mobileMenuClose?.addEventListener('click', closeMenu);
 
-  // Mobile menu toggle
   mobileMenuBtn?.addEventListener('click', () => {
     if (isMenuOpen) {
       closeMenu();
@@ -282,7 +315,6 @@ const currentPath = Astro.url.pathname;
     }
   });
 
-  // Close menu when a nav link is clicked
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMenu);
   });

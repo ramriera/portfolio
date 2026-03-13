@@ -88,24 +88,24 @@ const isWide = gridSpan === 3;
     transform: scale(1.05);
   }
 
-  /* Tags — muted, borderless pill */
+  /* Tags — near-invisible pill, text is what reads */
   .card-tag {
     display: inline-flex;
     align-items: center;
-    padding: 0.3rem 0.75rem;
-    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.01em;
     border-radius: 9999px;
-    background: theme('colors.dark.100');
-    color: theme('colors.dark.500');
+    background: rgba(0, 0, 0, 0.03);
+    color: theme('colors.dark.400');
     white-space: nowrap;
     transition: background 0.25s ease,
                 color 0.25s ease;
   }
 
   .project-card:hover .card-tag {
-    background: theme('colors.dark.200');
-    color: theme('colors.dark.600');
+    background: rgba(0, 0, 0, 0.05);
+    color: theme('colors.dark.500');
   }
 </style>
