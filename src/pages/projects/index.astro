@@ -12,7 +12,8 @@ const sortedProjects = [...projects].sort((a, b) => {
   if (bIdx === -1) return 1;
   return aIdx - bIdx;
 });
-const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
+const allTags = [...new Set(projects.flatMap((p) => p.tags))];
+const categories = ['Todas', ...allTags];
 ---
 
 <BaseLayout
@@ -76,6 +77,7 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
             data-reveal
             data-delay={String(i * 100)}
             data-category={project.category}
+            data-tags={JSON.stringify(project.tags)}
             class="project-item"
           >
             <ProjectCard {...project} />
@@ -157,8 +159,8 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
 
       // Filter projects
       projectItems.forEach((item) => {
-        const category = item.getAttribute('data-category');
-        if (filter === 'Todas' || category === filter) {
+        const tags = JSON.parse(item.getAttribute('data-tags') || '[]');
+        if (filter === 'Todas' || tags.includes(filter)) {
           (item as HTMLElement).style.display = '';
           (item as HTMLElement).style.opacity = '0';
           setTimeout(() => {
