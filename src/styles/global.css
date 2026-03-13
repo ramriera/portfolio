@@ -885,6 +885,34 @@ body.code-mode aside:hover {
   position: relative;
 }
 
+/* Code mode: project cards dark theme */
+.code-mode .card-wrapper {
+  background: var(--cm-bg-card) !important;
+  border: 1px solid var(--cm-border) !important;
+}
+
+.code-mode .card-content {
+  background: var(--cm-bg-card) !important;
+}
+
+.code-mode .card-content h3 {
+  color: var(--cm-text) !important;
+}
+
+.code-mode .card-content p {
+  color: var(--cm-text-secondary) !important;
+}
+
+.code-mode .card-type-pill {
+  background: rgba(80, 250, 123, 0.1) !important;
+  color: var(--cm-function) !important;
+}
+
+.code-mode .card-tag-pill {
+  background: rgba(139, 148, 158, 0.15) !important;
+  color: var(--cm-comment) !important;
+}
+
 /* ── 10. Scrollbar code theme ── */
 .code-mode ::-webkit-scrollbar-thumb {
   background: var(--cm-comment) !important;

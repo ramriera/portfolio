@@ -57,6 +57,8 @@ export interface Project {
   client: string;
   year: string;
   category: string;
+  type: string;
+  brandColor: string;
   tags: string[];
   description: string;
   longDescription: string;
@@ -79,8 +81,10 @@ export const projects: Project[] = [
     client: 'Massimo Dutti (Inditex)',
     year: '2025',
     category: 'UX Strategy & Service Design',
+    type: 'E-commerce',
+    brandColor: '#1a1a1a',
     tags: ['UX Optimization', 'Checkout Flow', 'E-commerce Strategy', 'High-Fidelity Prototyping', 'Service Design', 'CRO', 'Stakeholder Alignment', 'Discovery'],
-    description: 'Rediseño estratégico del flujo de reserva en tienda: equilibrando el lenguaje visual editorial de una marca premium con la eficiencia transaccional.',
+    description: 'Rediseño estratégico del flujo de reserva en tienda: arquitectura de Design Tokens y heurísticas de conversión para una experiencia omnicanal escalable.',
     longDescription: 'Massimo Dutti ofrece una funcionalidad de **"Reserva en tienda"** que permite al usuario separar un producto online para probarlo y comprarlo en tienda física, **sin cargo previo**. Sobre el papel, es una **solución omnicanal potente**. En la práctica, el flujo actual presenta fricciones que provocan abandono: la acción de reservar está escondida, el proceso requiere **demasiados pasos**, el seguimiento es opaco y las dudas sobre caducidad generan **incertidumbre**.\n\nEste proyecto propone un rediseño completo del flujo centrado en tres pilares: **claridad** (que el usuario entienda exactamente qué está haciendo), **velocidad** (que reservar sea tan directo como añadir a la cesta) y **diseño para la confianza** (que sepa que no hay cargo online y que tiene 24 horas para decidir).',
     challenge: 'El usuario confunde **"Click & Collect"** con **"Reserva en Tienda"**. La acción de reservar está **enterrada en la ficha de producto**, el flujo obliga a **loguearse antes de completar la reserva**, la selección de tienda carece de información sobre **disponibilidad real**, y la confirmación se limita a un **email sin seguimiento in-app**. Cada paso extra es una **oportunidad perdida de conversión**. El resultado: usuarios que abandonan el flujo antes de completarlo y una **tasa de recogida en tienda por debajo del potencial**.',
     solution: 'Se rediseñó el flujo completo con un enfoque de **diseño orientado a la conversión** en 6 fases: ficha de producto con **CTA dual visible**, selección de tienda con **favorita preseleccionada**, resumen de reserva **sin registro obligatorio**, **confirmación inmediata** con QR y wallet, **tracking in-app** con estados claros y venta cruzada contextual, más una propuesta de **Service Design** para la recogida física con **poste QR automatizado**.',
@@ -287,6 +291,8 @@ export const projects: Project[] = [
     client: 'MoveFast',
     year: '2021',
     category: 'UX/UI Design',
+    type: 'Electric Mobility',
+    brandColor: '#0f172a',
     tags: ['UX/UI', 'UX Research', 'Interaction Design', 'Design System', 'Mobile Design', 'Prototyping', 'User Persona', 'Benchmarking', 'Electric Mobility', 'Discovery', 'Facilitation'],
     description: 'Diseño de la experiencia de usuario para una app móvil de un fabricante de coches eléctricos que entra en el mercado español, con un servicio innovador de cambio de baterías.',
     longDescription: 'España se sitúa a la cola de Europa en **adopción del vehículo eléctrico**. El precio, la **autonomía limitada** y la **escasez de infraestructura de recarga** frenan a los consumidores. MoveFast nace como respuesta a este problema real: diseñar la experiencia de una app móvil para un fabricante internacional que quiere entrar en el mercado español con una **propuesta de valor inexistente en la competencia** - el **cambio de baterías bajo demanda**.',
@@ -425,6 +431,8 @@ export const projects: Project[] = [
     client: 'Global Helping',
     year: '2021',
     category: 'Design Thinking',
+    type: 'Social Impact',
+    brandColor: '#065f46',
     tags: ['Design Thinking', 'Social Impact', 'NGO', 'UX Research'],
     description: 'Plataforma web que reúne donaciones, voluntariado y crowdfunding en un solo lugar para dar visibilidad a ONGs locales frente a las grandes organizaciones internacionales.',
     longDescription: 'Vivimos en un mundo con **10 grandes problemáticas** identificadas por 15.000 científicos de 184 países: escasez de agua, sobrepesca, crecimiento demográfico, degradación del suelo, contaminación, extinción de especies y escasez alimentaria. A partir de la pregunta "¿Cómo podemos **mejorar la calidad de vida** de los más desfavorecidos?" nació Global Helping - una plataforma web que conecta personas solidarias con ONGs y causas sociales a través de **donaciones, voluntariado y crowdfunding**.',
@@ -545,8 +553,10 @@ export const projects: Project[] = [
     client: 'Banco Sabadell',
     year: '2022',
     category: 'Design Systems & UX Engineering',
+    type: 'Design System',
+    brandColor: '#006DFF',
     tags: ['Design Systems', 'Design Tokens', 'Component Library', 'UX Bancaria', 'Documentation', 'Accessibility', 'Design Governance', 'Cross-team Alignment'],
-    description: 'Creación y documentación técnica del Design System del Banco Sabadell, construyendo una biblioteca de componentes escalable y una arquitectura de Design Tokens como única fuente de verdad para los equipos de producto e ingeniería. Proyecto liderado en coordinación con equipos de producto e ingeniería distribuidos.',
+    description: 'Arquitectura de Design Tokens y librería de componentes escalable como fuente única de verdad, con gobernanza cross-team y documentación técnica para equipos de producto e ingeniería distribuidos.',
     longDescription: 'Lideré la creación y **documentación técnica** del Design System del Banco Sabadell, enfocado en la **escalabilidad** y la **coherencia visual** de sus productos digitales. El proyecto se centró en construir una base sólida de **Design Tokens** que permitiera a los equipos de producto e ingeniería trabajar de forma sincronizada bajo una única fuente de verdad.\n\nEl ecosistema digital de un banco opera sobre múltiples plataformas — web pública, banca online, app móvil y canales internos — con equipos independientes que tomaban decisiones visuales de forma aislada. Sin un sistema centralizado, cada producto acumulaba deuda de diseño: colores ligeramente distintos, tipografías inconsistentes, componentes duplicados y patrones de interacción divergentes.',
     challenge: 'La **UX bancaria** del ecosistema digital presentaba una fragmentación severa. Múltiples equipos trabajaban con estilos inconsistentes, generando deuda de diseño y fricción en el desarrollo. No existía una fuente única de verdad para la **biblioteca de componentes** ni patrones de interacción. Los **Design Tokens** no estaban definidos como concepto unificado: cada plataforma mantenía sus propios valores de color, tipografía y spacing. La **documentación técnica** era inexistente, lo que provocaba implementaciones dispares entre diseño y código.',
     solution: 'Se diseñó un sistema modular basado en **Design Tokens** como única fuente de verdad para Color (Azul Sabadell #006DFF, Neutros), Spacing (escala de 4px) y Tipografía. Se construyó una **biblioteca de componentes** basada en Átomos y Moléculas, garantizando la **coherencia visual** y la **escalabilidad** entre todas las plataformas. La **documentación técnica** se centralizó en Zeroheight con sincronización directa a Storybook para maximizar la eficiencia en desarrollo.',
@@ -759,8 +769,10 @@ export const projects: Project[] = [
     client: 'CaixaBank (Imaginbank)',
     year: '2021',
     category: 'UX Audit',
+    type: 'Fintech',
+    brandColor: '#e31937',
     tags: ['Heuristic Evaluation', 'Nielsen', 'Usability Audit', 'Fintech', 'Mobile UX', 'Severity Analysis', 'Research Synthesis', 'Heuristic Facilitation'],
-    description: 'Auditoría de usabilidad de la app móvil de **Imaginbank (CaixaBank)** aplicando las **10 Heurísticas de Jakob Nielsen** para identificar fallos, clasificarlos por severidad y proponer optimizaciones con **impacto medible en ROI**.',
+    description: 'Auditoría heurística aplicando las 10 reglas de Nielsen para clasificar fallos por severidad y proponer optimizaciones de usabilidad con impacto medible en ROI.',
     longDescription: 'Imaginbank es el **banco 100% digital de CaixaBank**, lanzado en 2016 para operar exclusivamente en dispositivos móviles. Su misión: captar al **público joven y nativo digital** con servicios financieros ágiles y sin sucursales. Sin embargo, el mercado ha cambiado radicalmente desde su lanzamiento - neobancos como **Revolut, N26 y Bnext** han redefinido las expectativas de la Gen Z con **interfaces limpias**, onboardings de 5 minutos y experiencias que se sienten más como **apps de consumo** que como banca.',
     challenge: 'Como parte de un ejercicio de **evaluación experta**, realicé un **análisis heurístico** de la aplicación móvil de Imaginbank con el objetivo de identificar **oportunidades de mejora** en su experiencia de usuario. A través de los **principios de usabilidad de Nielsen**, examiné la interfaz y los flujos clave desde una perspectiva crítica, prestando especial atención a aspectos como la **visibilidad del estado del sistema**, la **consistencia**, el **control del usuario** y la **prevención de errores**.',
     solution: 'Durante el análisis surgieron **hallazgos significativos** relacionados con la **nomenclatura de ciertas funciones**, la **falta de flexibilidad en la navegación** y la **visibilidad limitada de opciones secundarias**. Además, se identificaron puntos de mejora en los **mensajes de error** y en la **retroalimentación de acciones críticas**. Este caso práctico resume los principales problemas detectados y propone **recomendaciones concretas** para optimizar la experiencia, con especial énfasis en **accesibilidad cognitiva**, **claridad de los flujos** y **soporte contextual**.',
@@ -972,8 +984,10 @@ export const projects: Project[] = [
     client: 'Iberia',
     year: '2023',
     category: 'Digital Product Design & Design Systems',
+    type: 'Design System',
+    brandColor: '#E62232',
     tags: ['Design Systems', 'Design Tokens', 'Component Library', 'Cross-Platform Consistency', 'Information Architecture', 'Digital Product Design', 'Cross-Platform Governance', 'Accessibility Strategy'],
-    description: 'Creación de un Sistema de Diseño unificado para el ecosistema digital de Iberia (Web/App), implementando una arquitectura de Design Tokens y una Librería de Componentes escalable para eliminar la fragmentación visual entre plataformas. Trabajo transversal con múltiples squads para garantizar la adopción del sistema a escala.',
+    description: 'Sistema de Diseño unificado con arquitectura de Design Tokens escalable, eliminando la fragmentación visual entre Web y App mediante gobernanza cross-platform y librería de componentes.',
     longDescription: 'El núcleo de este proyecto fue la creación de un Sistema de Diseño unificado para el ecosistema digital de Iberia. Implementé una arquitectura de **Design Tokens** y una **Librería de Componentes** escalable, eliminando la fragmentación visual entre la Web y la App para optimizar tanto la experiencia de usuario como la **Eficiencia en Desarrollo**.\n\nEl ecosistema digital de una aerolínea opera sobre múltiples plataformas con equipos independientes. Sin una fuente de verdad compartida, cada equipo tomaba decisiones visuales de forma aislada: colores ligeramente distintos, espaciados inconsistentes y componentes duplicados. La **Arquitectura de Información** debía unificarse bajo un sistema coherente que garantizara la **Consistencia Multiplataforma** en cada punto de contacto digital.\n\nEl objetivo: diseñar un sistema basado en **Átomos y Moléculas** que permitiera escalar el producto digital sin perder coherencia visual, con **Design Tokens** como única fuente de verdad y una **Librería de Componentes** reactivos y accesibles.',
     challenge: 'El ecosistema digital existente presentaba fragmentación visual severa entre Web y App. Los **Design Tokens** no existían como concepto unificado: cada plataforma mantenía sus propios valores de color, tipografía y spacing. La **Librería de Componentes** estaba duplicada con variantes inconsistentes, lo que generaba deuda de diseño y ralentizaba la **Eficiencia en Desarrollo**. La **Arquitectura de Información** difería entre canales, creando una experiencia desconectada para el usuario.',
     solution: 'Se diseñó un sistema de **Design Tokens** como única fuente de verdad para Color (Rojo Iberia, Neutros), Spacing y Tipografía. Se construyó una **Librería de Componentes** basada en **Átomos y Moléculas**, garantizando la **Consistencia Multiplataforma** entre Web y App. La **Arquitectura de Información** se redefinió para unificar flujos digitales, y se documentó todo el sistema para maximizar la **Eficiencia en Desarrollo** en la implementación.',
@@ -1210,6 +1224,8 @@ export const projects: Project[] = [
     client: 'SoloTemazos',
     year: '2024',
     category: 'Frontend & UX Engineering',
+    type: 'Product Design',
+    brandColor: '#18181b',
     tags: ['Product Strategy', 'UX/UI Design', 'Design Systems', 'Prototyping', 'UX Research', 'Visual Design', 'End-to-End Ownership'],
     description: 'Plataforma de descubrimiento musical y curación de contenido centrada en la experiencia de usuario y el rendimiento.',
     longDescription: 'SoloTemazos nace como respuesta a la saturación de algoritmos en plataformas de streaming. Mientras Spotify, Apple Music o YouTube Music priorizan la retención mediante loops algorítmicos, SoloTemazos apuesta por una curación más humana y directa: contenido seleccionado a mano, categorizado por estado de ánimo y contexto, con una interfaz que elimina la fricción entre descubrir y escuchar. El proyecto es un ejercicio completo de UX Engineering - desde la estrategia de producto y el prototipado, hasta el diseño visual y las especificaciones técnicas para implementación.',
