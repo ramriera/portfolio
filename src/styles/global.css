@@ -455,6 +455,12 @@ main {
   gap: 2rem;
 }
 
+/* Equal-width stat items on mobile so all three columns balance */
+.hero-stat-item {
+  flex: 1;
+  min-width: 0;
+}
+
 /* Horizontal divider: visible only on xl */
 .hero-stats-divider-h {
   display: none;
@@ -486,6 +492,11 @@ main {
   .hero-stats-inner {
     flex-direction: column;
     gap: 2.5rem;
+  }
+
+  .hero-stat-item {
+    flex: none;
+    min-width: auto;
   }
 
   .hero-stats-divider-h {
