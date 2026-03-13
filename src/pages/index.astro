@@ -72,12 +72,12 @@ const featuredProjects = projects
       </div>
 
       <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8"
         data-component="ProjectGrid"
-        data-token="$grid-cols: 1 → 2 (md)|$spacing-gap: 1.5rem → 2rem (md)">
+        data-token="$grid-cols: 1 → 2 (md)|$spacing-gap: 2rem / 32px">
         {featuredProjects.map((project, i) => {
-          const variant = i === 0 ? 'featured' : 'default';
-          const classes = i === 0 ? 'md:col-span-2' : '';
+          const variant = i === 0 ? 'featured' : i === 2 ? 'tall' : 'default';
+          const classes = i === 0 ? 'md:col-span-2' : i === 2 ? 'md:row-span-2 [&_.project-card]:h-full' : '';
           return (
             <div data-reveal data-delay={String(i * 100)} class={classes}>
               <ProjectCard {...project} variant={variant} />

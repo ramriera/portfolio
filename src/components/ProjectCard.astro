@@ -5,8 +5,6 @@ interface Props {
   client: string;
   year: string;
   category: string;
-  type: string;
-  brandColor: string;
   tags: string[];
   description: string;
   cover: string;
@@ -14,7 +12,7 @@ interface Props {
   variant?: 'default' | 'featured' | 'tall';
 }
 
-const { slug, title, client, year, category, type, brandColor, tags, description, cover, featured, variant = 'default' } = Astro.props;
+const { slug, title, client, year, category, tags, description, cover, featured, variant = 'default' } = Astro.props;
 const isFeatured = variant === 'featured';
 const isTall = variant === 'tall';
 ---
@@ -22,62 +20,64 @@ const isTall = variant === 'tall';
 <a
   href={`/projects/${slug}`}
   class:list={[
-    'project-card group relative block cursor-pointer',
+    'project-card group relative block rounded-2xl overflow-hidden cursor-pointer',
     isTall ? 'h-full' : '',
     featured ? 'md:col-span-2' : '',
   ]}
   data-component="ProjectCard"
+  data-token="$radius-2xl: 1rem / 16px|$spacing-padding: 1.5rem → 2rem (md)"
 >
-  <div class:list={['card-wrapper rounded-[32px] overflow-hidden h-full flex flex-col', isTall ? 'min-h-[520px]' : '']}>
-    <!-- Top: Brand color background with centered mockup -->
-    <div
-      class:list={[
-        'card-image-area relative overflow-hidden flex items-center justify-center',
-        isFeatured ? 'p-8 md:p-12' : 'p-6 md:p-10',
-        isTall ? 'flex-1' : '',
-      ]}
-      style={`background-color: ${brandColor};`}
-    >
-      <img
-        src={cover}
-        alt={title}
-        class:list={[
-          'card-mockup relative z-10 w-full rounded-lg object-cover',
-          isFeatured ? 'max-h-[400px]' : isTall ? 'max-h-[340px]' : 'max-h-[280px]',
-        ]}
-        loading="lazy"
-        decoding="async"
-        width="800"
-        height="450"
-        style="filter: drop-shadow(0 25px 50px rgba(0,0,0,0.35));"
-      />
-    </div>
+  <div class:list={['relative aspect-[4/3]', isTall ? 'md:aspect-auto md:h-full md:min-h-[400px]' : isFeatured ? 'md:aspect-[16/9]' : '']}>
+    <!-- Image mockup -->
+    <img
+      src={cover}
+      alt={title}
+      class="card-mockup w-full h-full object-cover"
+      loading="lazy"
+      data-token="$filter-saturate: 1.1|$filter-brightness: 1.05|$aspect-ratio: 4/3|$object-fit: cover"
+    />
 
-    <!-- Bottom: White content area -->
-    <div class="card-content bg-white p-6 md:p-8 lg:p-10 flex flex-col gap-4">
-      <!-- Type pill + Year -->
-      <div class="flex items-center gap-3">
-        <span class="card-type-pill">{type}</span>
-        <span class="text-xs text-dark-400 font-medium">{year}</span>
-      </div>
+    <!-- Gradient overlay -->
+    <div class="card-gradient absolute inset-0"
+      data-token="$color-gradient-start: rgba(0,0,0,0.92)|$color-gradient-end: rgba(0,0,0,0.05)|$gradient-direction: to top"></div>
 
-      <!-- Title -->
+    <!-- Inset shadow for depth -->
+    <div class="absolute inset-0 rounded-2xl card-inset-shadow pointer-events-none"></div>
+
+    <!-- Bottom content -->
+    <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+      <!-- Title - always visible -->
       <h3 class:list={[
-          'font-semibold tracking-tight text-dark-900 leading-tight',
-          isFeatured ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl',
-        ]}>
+          'font-semibold tracking-tight text-white mb-1',
+          isFeatured ? 'text-xl sm:text-2xl md:text-3xl lg:text-4xl' : 'text-xl sm:text-2xl',
+        ]}
+        data-token="$font-size-heading-sm: 1.25rem → 1.5rem|$font-weight: 600 (semibold)|$color-text: #ffffff">
         {title}
       </h3>
 
-      <!-- Description -->
-      <p class="text-sm leading-relaxed text-dark-500 line-clamp-2">
-        {description}
-      </p>
+      <!-- Description - hidden, reveals on hover -->
+      <div class="card-desc-reveal">
+        <p class="card-description text-sm leading-relaxed line-clamp-2"
+          data-token="$font-size-sm: 0.875rem / 14px|$color-text: #F8FAFC|$line-height: 1.6">
+          {description}
+        </p>
+      </div>
 
-      <!-- Tags -->
-      <div class="flex flex-wrap items-center gap-2 mt-auto pt-2">
-        {tags.slice(0, 3).map((tag) => (
-          <span class="card-tag-pill">{tag}</span>
+      <!-- Spacer -->
+      <div class="h-3"></div>
+
+      <!-- Tags - first always visible, rest reveal on hover -->
+      <div class="flex flex-wrap items-center gap-2" data-component="TagGroup" data-token="$spacing-gap: 0.5rem / 8px">
+        {tags.slice(0, 4).map((tag, i) => (
+          <span
+            class:list={[
+              'card-tag',
+              i > 0 ? 'card-tag-hidden' : '',
+            ]}
+            style={i > 0 ? `transition-delay: ${i * 60}ms` : ''}
+          >
+            {tag}
+          </span>
         ))}
       </div>
     </div>
@@ -85,57 +85,126 @@ const isTall = variant === 'tall';
 </a>
 
 <style>
-  /* Card wrapper */
-  .card-wrapper {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Card base */
+  .project-card {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .project-card:hover .card-wrapper {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12),
-                0 8px 24px rgba(0, 0, 0, 0.06);
+  .project-card:hover {
+    transform: scale(1.02);
   }
 
-  /* Image area */
-  .card-image-area {
-    min-height: 220px;
+  /* Gradient background */
+  .card-gradient {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.6) 40%,
+      rgba(0, 0, 0, 0.15) 70%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+    transition: background 0.4s ease;
   }
 
-  /* Mockup hover effect */
+  .project-card:hover .card-gradient {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.65) 40%,
+      rgba(0, 0, 0, 0.2) 70%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+  }
+
+  /* Inset shadow for depth/relief */
+  .card-inset-shadow {
+    box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.3),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Image/Mockup */
   .card-mockup {
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    filter: saturate(1.1) brightness(1.05);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.5s ease;
   }
 
   .project-card:hover .card-mockup {
-    transform: scale(1.03) translateY(-4px);
+    transform: translateY(-5px) scale(1.02);
+    filter: saturate(1.25) brightness(1.1);
   }
 
-  /* Type pill */
-  .card-type-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.2rem 0.65rem;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    border-radius: 6px;
-    background: #fdf6f3;
-    color: #D97757;
+  /* Description - slides down on hover */
+  .card-desc-reveal {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-4px);
+    transition:
+      max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s,
+      opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.08s,
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
   }
 
-  /* Tag pills */
-  .card-tag-pill {
+  .project-card:hover .card-desc-reveal {
+    max-height: 5rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .card-description {
+    color: #F8FAFC;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+
+  /* Tags */
+  .card-tag {
     display: inline-flex;
     align-items: center;
-    padding: 0.2rem 0.6rem;
-    font-size: 0.7rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    border-radius: 6px;
-    background: #faf9f7;
-    color: #7c766c;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(4px);
     white-space: nowrap;
+    transition: background 0.25s ease,
+                color 0.25s ease,
+                border-color 0.25s ease;
+  }
+
+  .card-tag:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Hidden tags - slide in on hover */
+  .card-tag-hidden {
+    max-width: 0;
+    opacity: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: -0.5rem;
+    border-width: 0;
+    transition:
+      max-width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      margin 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      border-width 0.3s ease;
+  }
+
+  .project-card:hover .card-tag-hidden {
+    max-width: 12rem;
+    opacity: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-left: 0;
+    border-width: 1px;
   }
 </style>
