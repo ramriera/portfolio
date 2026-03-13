@@ -26,13 +26,13 @@ const isWide = gridSpan === 3;
 >
   <!-- Image container -->
   <div
-    class="card-image-wrap relative overflow-hidden rounded-2xl"
+    class:list={['card-image-wrap relative overflow-hidden rounded-2xl', slug === 'massimo-dutti-conversion' && 'card-image-wrap--editorial']}
     style={brandColor ? `background-color: ${brandColor}` : ''}
   >
     <img
       src={cover}
       alt={title}
-      class="card-mockup w-full h-full object-cover"
+      class:list={['card-mockup w-full h-full object-cover', slug === 'massimo-dutti-conversion' && 'card-mockup--elevated']}
       loading="lazy"
       data-token="$object-fit: cover"
     />
@@ -107,5 +107,18 @@ const isWide = gridSpan === 3;
   .project-card:hover .card-tag {
     background: rgba(0, 0, 0, 0.05);
     color: theme('colors.dark.500');
+  }
+
+  /* Massimo Dutti — editorial luxury feel */
+  .card-image-wrap--editorial {
+    background: radial-gradient(ellipse at 50% 40%, #FAF9F6 0%, #F0EFEB 60%, #E8E6E1 100%) !important;
+  }
+
+  .card-mockup--elevated {
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.12)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.06));
+  }
+
+  .project-card:hover .card-mockup--elevated {
+    filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.15)) drop-shadow(0 12px 20px rgba(0, 0, 0, 0.08));
   }
 </style>
