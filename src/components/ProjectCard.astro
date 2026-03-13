@@ -9,32 +9,35 @@ interface Props {
   description: string;
   cover: string;
   featured?: boolean;
+  brandColor?: string;
+  gridSpan?: 3 | 2;
   variant?: 'default' | 'featured' | 'tall';
 }
 
-const { slug, title, client, year, category, tags, description, cover, featured, variant = 'default' } = Astro.props;
-const isFeatured = variant === 'featured';
-const isTall = variant === 'tall';
+const { slug, title, client, year, category, tags, description, cover, featured, brandColor, gridSpan = 2, variant = 'default' } = Astro.props;
+const isWide = gridSpan === 3;
 ---
 
 <a
   href={`/projects/${slug}`}
-  class:list={[
-    'project-card group relative block rounded-2xl overflow-hidden cursor-pointer',
-    isTall ? 'h-full' : '',
-    featured ? 'md:col-span-2' : '',
-  ]}
+  class="project-card group relative block rounded-3xl overflow-hidden cursor-pointer"
   data-component="ProjectCard"
-  data-token="$radius-2xl: 1rem / 16px|$spacing-padding: 1.5rem → 2rem (md)"
+  data-token="$radius-3xl: 1.5rem / 24px|$spacing-padding: 1.5rem → 2rem (md)"
 >
-  <div class:list={['relative aspect-[4/3]', isTall ? 'md:aspect-auto md:h-full md:min-h-[400px]' : isFeatured ? 'md:aspect-[16/9]' : '']}>
+  <div
+    class:list={[
+      'relative',
+      isWide ? 'aspect-[4/3] md:aspect-[16/9]' : 'aspect-[4/3]',
+    ]}
+    style={brandColor ? `background-color: ${brandColor}` : ''}
+  >
     <!-- Image mockup -->
     <img
       src={cover}
       alt={title}
       class="card-mockup w-full h-full object-cover"
       loading="lazy"
-      data-token="$filter-saturate: 1.1|$filter-brightness: 1.05|$aspect-ratio: 4/3|$object-fit: cover"
+      data-token="$filter-saturate: 1.1|$filter-brightness: 1.05|$object-fit: cover"
     />
 
     <!-- Gradient overlay -->
@@ -42,14 +45,14 @@ const isTall = variant === 'tall';
       data-token="$color-gradient-start: rgba(0,0,0,0.92)|$color-gradient-end: rgba(0,0,0,0.05)|$gradient-direction: to top"></div>
 
     <!-- Inset shadow for depth -->
-    <div class="absolute inset-0 rounded-2xl card-inset-shadow pointer-events-none"></div>
+    <div class="absolute inset-0 rounded-3xl card-inset-shadow pointer-events-none"></div>
 
     <!-- Bottom content -->
     <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
       <!-- Title - always visible -->
       <h3 class:list={[
           'font-semibold tracking-tight text-white mb-1',
-          isFeatured ? 'text-xl sm:text-2xl md:text-3xl lg:text-4xl' : 'text-xl sm:text-2xl',
+          isWide ? 'text-xl sm:text-2xl md:text-3xl' : 'text-xl sm:text-2xl',
         ]}
         data-token="$font-size-heading-sm: 1.25rem → 1.5rem|$font-weight: 600 (semibold)|$color-text: #ffffff">
         {title}

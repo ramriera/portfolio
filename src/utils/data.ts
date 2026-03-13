@@ -67,6 +67,8 @@ export interface Project {
   cover: string;
   githubUrl?: string;
   featured: boolean;
+  brandColor?: string;
+  gridSpan?: 3 | 2;
   projectMeta?: ProjectMeta;
   caseSections?: CaseSection[];
   checks?: string[];
@@ -95,6 +97,8 @@ export const projects: Project[] = [
     stack: ['UX Strategy', 'Service Design', 'Research', 'Service Blueprint', 'Prototyping'],
     cover: '/assets/projects/massimo-dutti/massimo-header-big-1920x1080.jpg',
     featured: true,
+    brandColor: '#1a1a1a',
+    gridSpan: 3,
     projectMeta: {
       role: 'UX Strategist & Service Designer',
       industry: 'Fashion Retail',
@@ -288,7 +292,7 @@ export const projects: Project[] = [
     year: '2021',
     category: 'UX/UI Design',
     tags: ['UX/UI', 'UX Research', 'Interaction Design', 'Design System', 'Mobile Design', 'Prototyping', 'User Persona', 'Benchmarking', 'Electric Mobility', 'Discovery', 'Facilitation'],
-    description: 'Diseño de la experiencia de usuario para una app móvil de un fabricante de coches eléctricos que entra en el mercado español, con un servicio innovador de cambio de baterías.',
+    description: 'De cero a MVP en 2 semanas: diseño de producto para una app de movilidad eléctrica con un modelo de cambio de baterías sin precedentes en el mercado.',
     longDescription: 'España se sitúa a la cola de Europa en **adopción del vehículo eléctrico**. El precio, la **autonomía limitada** y la **escasez de infraestructura de recarga** frenan a los consumidores. MoveFast nace como respuesta a este problema real: diseñar la experiencia de una app móvil para un fabricante internacional que quiere entrar en el mercado español con una **propuesta de valor inexistente en la competencia** - el **cambio de baterías bajo demanda**.',
     challenge: 'Los datos del mercado español son contundentes: las matriculaciones de vehículos eléctricos apenas representan una **fracción mínima del total europeo**. Las tres barreras principales son la **escasez de puntos de carga**, el **precio elevado** frente al vehículo convencional, y la **autonomía limitada** (muchos modelos por debajo de 300 km). A esto se suman **tiempos de carga superiores a 45 minutos**. El usuario reconoce las ventajas - menos contaminación, ahorro en combustible, acceso a zonas restringidas - pero las **barreras pesan más que los beneficios**.',
     solution: 'Tras analizar el mercado y la competencia, se proponen dos conceptos innovadores: un **servicio de cambio de batería bajo demanda** donde personal de la empresa acude a tu ubicación (10 cambios gratuitos al año para compradores, 59€ cada cambio adicional), y **puntos dinámicos de intercambio modulares** en ubicaciones estratégicas de la ciudad que cambian semanalmente con posibilidad de **reserva anticipada**. Ninguna app competidora ofrece este modelo de servicio.',
@@ -301,6 +305,8 @@ export const projects: Project[] = [
     stack: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
     cover: '/assets/projects/movefast/movefast-header.png',
     featured: true,
+    brandColor: '#00C7B7',
+    gridSpan: 2,
     projectMeta: {
       role: 'Product Designer',
       industry: 'Mobility',
@@ -558,6 +564,8 @@ export const projects: Project[] = [
     ],
     stack: ['Figma', 'Zeroheight', 'Storybook', 'React'],
     cover: '/assets/projects/sabadell/banc-sabadell-header.png',
+    brandColor: '#006DFF',
+    gridSpan: 2,
     gallery: [
       '/assets/projects/sabadell/banc-sabadell-header.png',
       '/assets/projects/sabadell/sabadell-components-16.png',
@@ -773,6 +781,8 @@ export const projects: Project[] = [
     stack: ['Figma', 'Chrome'],
     cover: '/assets/projects/imaginbank/imaginbank-header.png',
     featured: true,
+    brandColor: '#FF6200',
+    gridSpan: 3,
     projectMeta: {
       role: 'UX Auditor / Heuristic Evaluator',
       industry: 'Fintech',
@@ -985,6 +995,8 @@ export const projects: Project[] = [
     ],
     stack: ['Figma', 'Storybook', 'Zeroheight', 'Swift UI'],
     cover: '/assets/projects/iberia/iberia-header.png',
+    brandColor: '#E62232',
+    gridSpan: 2,
     gallery: [
       '/assets/projects/iberia/iberia-header.png',
       '/assets/projects/iberia/iberia-iconos.png',
@@ -1211,7 +1223,7 @@ export const projects: Project[] = [
     year: '2024',
     category: 'Frontend & UX Engineering',
     tags: ['Product Strategy', 'UX/UI Design', 'Design Systems', 'Prototyping', 'UX Research', 'Visual Design', 'End-to-End Ownership'],
-    description: 'Plataforma de descubrimiento musical y curación de contenido centrada en la experiencia de usuario y el rendimiento.',
+    description: 'Producto digital de descubrimiento musical con curación humana: una alternativa a los algoritmos que conecta comunidad y contenido sin fricción.',
     longDescription: 'SoloTemazos nace como respuesta a la saturación de algoritmos en plataformas de streaming. Mientras Spotify, Apple Music o YouTube Music priorizan la retención mediante loops algorítmicos, SoloTemazos apuesta por una curación más humana y directa: contenido seleccionado a mano, categorizado por estado de ánimo y contexto, con una interfaz que elimina la fricción entre descubrir y escuchar. El proyecto es un ejercicio completo de UX Engineering - desde la estrategia de producto y el prototipado, hasta el diseño visual y las especificaciones técnicas para implementación.',
     challenge: 'El mercado del streaming musical está dominado por plataformas con recursos ilimitados. Competir en catálogo es imposible. La oportunidad está en la experiencia: los usuarios sufren "fatiga de decisión" ante millones de canciones y playlists generadas por IA. SoloTemazos necesitaba ofrecer un descubrimiento de un solo clic - abrir la plataforma, ver lo que hay, escuchar. Sin búsquedas complejas, sin algoritmos opacos, sin frustración.',
     solution: 'Se diseñó el producto completo partiendo de una estrategia clara (Lean Canvas, User Personas, KPIs), pasando por wireframes y prototipos iterativos, hasta un sistema de diseño con componentes reutilizables y un prototipo interactivo en Figma. La estética dark mode evoca la cultura de club, y cada decisión - de negocio, de diseño, de especificación técnica - está al servicio de una sola cosa: que el usuario descubra música sin fricción.',
@@ -1226,6 +1238,8 @@ export const projects: Project[] = [
     stack: ['Figma', 'React', 'Tailwind CSS', 'Whimsical', 'Miro', 'Google Analytics'],
     cover: '/assets/projects/solotemazos/solotemazos-header.png',
     featured: true,
+    brandColor: '#1DB954',
+    gridSpan: 3,
     projectMeta: {
       role: 'UX Engineer & Product Designer',
       industry: 'Music & Entertainment',

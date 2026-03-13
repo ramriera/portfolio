@@ -5,17 +5,18 @@ import AboutSection from '@/components/AboutSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { projects, siteConfig } from '@/utils/data';
 
-const projectOrder = ['massimo-dutti-conversion', 'banco-sabadell-design-system', 'imaginbank-digital-banking', 'movefast-startup-platform', 'solotemazos-music-platform', 'iberia-flight-experience'];
-const featuredProjects = projects
-  .filter((p) => p.featured)
-  .sort((a, b) => {
-    const aIdx = projectOrder.indexOf(a.slug);
-    const bIdx = projectOrder.indexOf(b.slug);
-    if (aIdx === -1 && bIdx === -1) return 0;
-    if (aIdx === -1) return 1;
-    if (bIdx === -1) return 1;
-    return aIdx - bIdx;
-  });
+// 3-row editorial grid: 60/40, 40/60, 60/40
+const projectOrder = [
+  'massimo-dutti-conversion',   // Row 1: 60% (col-span-3)
+  'iberia-flight-experience',   // Row 1: 40% (col-span-2)
+  'banco-sabadell-design-system', // Row 2: 40% (col-span-2)
+  'imaginbank-digital-banking', // Row 2: 60% (col-span-3)
+  'solotemazos-music-platform', // Row 3: 60% (col-span-3)
+  'movefast-startup-platform',  // Row 3: 40% (col-span-2)
+];
+const featuredProjects = projectOrder
+  .map((slug) => projects.find((p) => p.slug === slug))
+  .filter((p): p is NonNullable<typeof p> => p != null);
 ---
 
 <BaseLayout title="Home ⚡ Ramon Riera">
@@ -71,16 +72,16 @@ const featuredProjects = projects
         </a>
       </div>
 
-      <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8"
+      <!-- Projects Grid — 3 rows, alternating 60/40 rhythm -->
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8"
         data-component="ProjectGrid"
-        data-token="$grid-cols: 1 → 2 (md)|$spacing-gap: 2rem / 32px">
+        data-token="$grid-cols: 1 → 5 (md)|$spacing-gap: 1.5rem → 2rem (md)">
         {featuredProjects.map((project, i) => {
-          const variant = i === 0 ? 'featured' : i === 2 ? 'tall' : 'default';
-          const classes = i === 0 ? 'md:col-span-2' : i === 2 ? 'md:row-span-2 [&_.project-card]:h-full' : '';
+          const span = project.gridSpan ?? 2;
+          const colClass = span === 3 ? 'md:col-span-3' : 'md:col-span-2';
           return (
-            <div data-reveal data-delay={String(i * 100)} class={classes}>
-              <ProjectCard {...project} variant={variant} />
+            <div data-reveal data-delay={String(i * 100)} class={colClass}>
+              <ProjectCard {...project} />
             </div>
           );
         })}
