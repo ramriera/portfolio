@@ -580,31 +580,48 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     </script>
 
     <script>
-      // Timeline line scroll-reveal animation
+      // Timeline line scroll-driven reveal
       const timeline = document.querySelector('[data-timeline-reveal]');
       if (timeline) {
         const tl = timeline as HTMLElement;
-        const tlObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              let progress = 0;
-              const step = () => {
-                progress += 0.02;
-                if (progress >= 1) {
-                  progress = 1;
-                  tl.classList.add('timeline-revealed');
-                }
-                tl.style.setProperty('--timeline-progress', String(progress));
-                if (progress < 1) requestAnimationFrame(step);
-              };
-              requestAnimationFrame(step);
-              tlObserver.unobserve(tl);
+
+        // Add overlay divs on each border-l segment to mask the line
+        const segments = tl.querySelectorAll<HTMLElement>('.border-l-2, [class*="border-l-"]');
+        segments.forEach((seg) => {
+          if (!seg.querySelector('.timeline-line-overlay')) {
+            const overlay = document.createElement('div');
+            overlay.className = 'timeline-line-overlay';
+            seg.style.position = 'relative';
+            seg.appendChild(overlay);
+          }
+        });
+
+        function updateTimeline() {
+          const rect = tl.getBoundingClientRect();
+          const windowH = window.innerHeight;
+          // Progress from 0 (top enters viewport) to 1 (bottom fully visible)
+          const start = windowH * 0.85;
+          const raw = (start - rect.top) / (rect.height + start - windowH * 0.3);
+          const progress = Math.min(1, Math.max(0, raw));
+          tl.style.setProperty('--timeline-progress', String(1 - progress));
+          if (progress >= 1 && !tl.classList.contains('timeline-revealed')) {
+            tl.classList.add('timeline-revealed');
+          }
+        }
+
+        let ticking = false;
+        function onScroll() {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+              updateTimeline();
+              ticking = false;
             });
-          },
-          { threshold: 0.2 }
-        );
-        tlObserver.observe(tl);
+          }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        updateTimeline(); // initial check
       }
     </script>
 
