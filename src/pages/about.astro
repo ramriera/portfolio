@@ -75,7 +75,7 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
               <img
                 src="/assets/shared/foto-perfil.png"
                 alt="Ramon Riera"
-                class="w-full aspect-[4/5] object-cover"
+                class="w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-[filter] duration-700"
               />
             </div>
 
@@ -186,7 +186,7 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
             <h2 class="heading-md mb-8">Trayectoria</h2>
 
             <!-- Normal mode: hybrid timeline -->
-            <div class="timeline-cards ml-4 sm:ml-0">
+            <div class="timeline-cards ml-4 sm:ml-0" data-timeline-reveal>
               {/* --- Hito Principal 1: Doctori (actual) --- */}
               {(() => {
                 const doctori = mainTimeline[0];
@@ -218,9 +218,9 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
                   {consultingBlock.label} <span class="normal-case tracking-normal font-normal">(Vía {consultingBlock.via})</span>
                 </p>
 
-                <div class="space-y-6">
+                <div class="consulting-list space-y-6">
                   {consultingBlock.projects.map((project) => (
-                    <div class="ml-0 sm:ml-1 group/item hover:opacity-100 transition-opacity duration-200">
+                    <div class="consulting-item ml-0 sm:ml-1 transition-opacity duration-300">
                       <div class="flex items-baseline gap-2 mb-1">
                         <span class="font-bold text-dark-900 text-sm">{project.client}</span>
                         <span class="text-[10px] sm:text-xs text-gray-300 font-medium">{project.period}</span>

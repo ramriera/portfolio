@@ -1787,6 +1787,37 @@ body.code-mode .btn-cv-code:hover {
   pointer-events: none;
 }
 
+/* ── Timeline scroll-reveal animation ── */
+.timeline-cards[data-timeline-reveal] {
+  --timeline-progress: 0;
+}
+.timeline-cards[data-timeline-reveal] > div {
+  border-image: linear-gradient(
+    to bottom,
+    #f4b89d calc(var(--timeline-progress) * 100%),
+    #e8e4dd calc(var(--timeline-progress) * 100%)
+  ) 1;
+}
+.timeline-cards[data-timeline-reveal].timeline-revealed > div {
+  border-image: none;
+  border-left-color: #f4b89d;
+}
+.timeline-cards[data-timeline-reveal] > .border-dashed {
+  border-left-style: dashed;
+}
+.timeline-cards[data-timeline-reveal].timeline-revealed > .border-dashed {
+  border-left-style: dashed;
+  border-left-color: #f9d5c5;
+}
+
+/* ── Consulting hover dimming ── */
+.consulting-list:hover .consulting-item {
+  opacity: 0.4;
+}
+.consulting-list:hover .consulting-item:hover {
+  opacity: 1;
+}
+
 .parallax-cover-img {
   will-change: transform;
   transition: transform 0.1s linear;
