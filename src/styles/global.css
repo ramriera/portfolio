@@ -1818,6 +1818,37 @@ body.code-mode .btn-cv-code:hover {
   opacity: 1;
 }
 
+/* ── Project filter: accent underline cursor ── */
+.filter-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.filter-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #D97757;
+  border-radius: 1px;
+}
+
+/* Hide scrollbar for filter row on mobile */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Project items filter transition */
+.project-item {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
 .parallax-cover-img {
   will-change: transform;
   transition: transform 0.1s linear;
