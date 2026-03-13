@@ -10,13 +10,11 @@ interface Props {
   cover: string;
   featured?: boolean;
   brandColor?: string;
-  coverFit?: 'contain' | 'cover';
   gridSpan?: 3 | 2;
   variant?: 'default' | 'featured' | 'tall';
 }
 
-const { slug, title, client, year, category, tags, description, cover, featured, brandColor, coverFit = 'cover', gridSpan = 2, variant = 'default' } = Astro.props;
-const isMockup = coverFit === 'contain';
+const { slug, title, client, year, category, tags, description, cover, featured, brandColor, gridSpan = 2, variant = 'default' } = Astro.props;
 const isWide = gridSpan === 3;
 ---
 
@@ -34,13 +32,9 @@ const isWide = gridSpan === 3;
     <img
       src={cover}
       alt={title}
-      class:list={[
-        'card-mockup w-full h-full',
-        isMockup
-          ? 'object-contain p-6 md:p-8 drop-shadow-[0_8px_20px_rgba(0,0,0,0.12)]'
-          : 'object-cover',
-      ]}
+      class="card-mockup w-full h-full object-cover"
       loading="lazy"
+      data-token="$object-fit: cover"
     />
   </div>
 
