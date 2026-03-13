@@ -25,7 +25,55 @@ export const navLinks = [
 
 ];
 
+// --- Career Timeline Data ---
 
+export interface ConsultingProject {
+  client: string;
+  description: string;
+}
+
+export interface TimelineEntry {
+  year: string;
+  role: string;
+  company: string;
+  description: string;
+  gitMsg: string;
+  current?: boolean;
+}
+
+export interface ConsultingBlock {
+  label: string;
+  via: string;
+  projects: ConsultingProject[];
+}
+
+export const mainTimeline: TimelineEntry[] = [
+  {
+    year: '2021 — Presente',
+    role: 'UX Lead, Design Ops & Product Designer',
+    company: 'Doctori.com',
+    description: 'Liderando Design Ops y el Design System para la plataforma de salud digital.',
+    gitMsg: 'feat(design-ops): implement token architecture & system analytics',
+    current: true,
+  },
+  {
+    year: '2017 — 2021',
+    role: 'Junior Designer',
+    company: 'JBM',
+    description: 'Inicio de carrera profesional con proyectos de branding y web design.',
+    gitMsg: 'init: first_commit — branding & web_design projects',
+  },
+];
+
+export const consultingBlock: ConsultingBlock = {
+  label: 'Proyectos de Consultoría Senior',
+  via: 'Lead-it',
+  projects: [
+    { client: 'Lemoons', description: 'UI Estratégica para plataforma educativa.' },
+    { client: 'Iberia', description: 'Arquitectura de Design Tokens y Sistema Global.' },
+    { client: 'Banco Sabadell', description: 'Componentes modulares y documentación técnica.' },
+  ],
+};
 
 export interface CaseSection {
   label: string;
