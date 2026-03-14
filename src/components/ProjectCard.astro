@@ -53,8 +53,8 @@ const isWide = gridSpan === 3;
       {description}
     </p>
 
-    <div class="flex flex-wrap items-center gap-2 mt-4" data-component="TagGroup" data-token="$spacing-gap: 0.5rem / 8px">
-      {tags.slice(0, 4).map((tag) => (
+    <div class="flex flex-wrap items-center gap-2.5 mt-5" data-component="TagGroup" data-token="$spacing-gap: 0.625rem / 10px">
+      {tags.slice(0, 3).map((tag) => (
         <span class="card-tag">
           {tag}
         </span>
@@ -92,7 +92,7 @@ const isWide = gridSpan === 3;
   .card-tag {
     display: inline-flex;
     align-items: center;
-    padding: 0.25rem 0.65rem;
+    padding: 0.3rem 0.75rem;
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.01em;
