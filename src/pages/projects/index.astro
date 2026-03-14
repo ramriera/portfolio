@@ -12,7 +12,7 @@ const sortedProjects = [...projects].sort((a, b) => {
   if (bIdx === -1) return 1;
   return aIdx - bIdx;
 });
-const filterCategories = ['Todas', 'Product Design', 'UX/UI', 'Design Systems', 'Strategy'];
+const filterCategories = ['Todas', 'Product Design', 'UX/UI', 'Design Systems', 'Strategy', 'Research', 'Prototyping'];
 
 // Map tags → filter categories
 const tagToFilters: Record<string, string[]> = {
@@ -20,12 +20,18 @@ const tagToFilters: Record<string, string[]> = {
   'UX Design': ['UX/UI'],
   'UI Design': ['UX/UI'],
   'App Design': ['UX/UI'],
-  'Interface Design': ['UX/UI'],
+  'Visual Design': ['UX/UI'],
   'Design Systems': ['Design Systems'],
   'Design Ops': ['Design Systems'],
   'E-commerce': ['Strategy'],
-  'Digital Transformation': ['Strategy'],
-  'Scalability': ['Strategy'],
+  'Enterprise': ['Strategy'],
+  'Social Impact': ['Strategy'],
+  'Heuristic Evaluation': ['Research'],
+  'Design Thinking': ['Research'],
+  'Fintech': ['Research'],
+  'High-fidelity Prototyping': ['Prototyping'],
+  'B2B Product': ['Prototyping'],
+  'Music Tech': ['Prototyping'],
 };
 
 function getProjectFilters(tags: string[]): string[] {
@@ -177,6 +183,15 @@ function getProjectFilters(tags: string[]): string[] {
       });
       btn.classList.remove('bg-dark-100', 'text-dark-600');
       btn.classList.add('bg-primary-500/10', 'text-primary-500');
+
+      // Scroll filters into view to prevent page jump
+      const filtersEl = document.getElementById('project-filters');
+      if (filtersEl) {
+        const rect = filtersEl.getBoundingClientRect();
+        if (rect.top < 0) {
+          filtersEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
 
       // Filter projects
       projectItems.forEach((item) => {
