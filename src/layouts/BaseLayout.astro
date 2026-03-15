@@ -579,34 +579,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
       revealElements.forEach((el) => observer.observe(el));
     </script>
 
-    <script>
-      // Timeline line scroll-reveal animation
-      const timeline = document.querySelector('[data-timeline-reveal]');
-      if (timeline) {
-        const tl = timeline as HTMLElement;
-        const tlObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              let progress = 0;
-              const step = () => {
-                progress += 0.02;
-                if (progress >= 1) {
-                  progress = 1;
-                  tl.classList.add('timeline-revealed');
-                }
-                tl.style.setProperty('--timeline-progress', String(progress));
-                if (progress < 1) requestAnimationFrame(step);
-              };
-              requestAnimationFrame(step);
-              tlObserver.unobserve(tl);
-            });
-          },
-          { threshold: 0.2 }
-        );
-        tlObserver.observe(tl);
-      }
-    </script>
 
     <!-- Golden Polish: Performance, Micro-copy, Dynamic Favicon & Signature -->
     <script>

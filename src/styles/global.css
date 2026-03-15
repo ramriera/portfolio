@@ -1314,10 +1314,6 @@ body.code-mode aside:hover {
 .tool-list {
   max-width: 42rem;
   margin: 0 auto;
-  position: relative;
-  border-left: 2px solid transparent;
-  border-image: linear-gradient(to bottom, #f4b89d 0%, #f9d5c5 40%, transparent 100%) 1;
-  padding-left: 1.5rem;
 }
 
 .tool-list-section {
@@ -1352,7 +1348,7 @@ body.code-mode aside:hover {
   padding: 0.625rem 0;
   padding-left: 0;
   border-bottom: 1px solid #f3f4f6;
-  transition: padding-left 0.3s ease, border-color 0.25s ease;
+  transition: padding-left 0.3s ease;
   cursor: default;
 }
 
@@ -1389,10 +1385,9 @@ body.code-mode aside:hover {
   transition: color 0.25s ease;
 }
 
-/* Hover: slide right, text to black, bottom border to accent */
+/* Hover: slide right, text to black */
 .tool-list-item:hover {
   padding-left: 0.5rem;
-  border-bottom-color: var(--color-primary-500, #D97757);
 }
 
 .tool-list-item:hover .tool-list-name {
@@ -1872,25 +1867,11 @@ body.code-mode .btn-cv-code:hover {
   pointer-events: none;
 }
 
-/* ── Timeline scroll-reveal animation ── */
-.timeline-cards[data-timeline-reveal] {
-  --timeline-progress: 0;
-}
+/* ── Timeline scroll-reveal: static, no animation ── */
 .timeline-cards[data-timeline-reveal] > div {
-  border-image: linear-gradient(
-    to bottom,
-    #f4b89d calc(var(--timeline-progress) * 100%),
-    #e8e4dd calc(var(--timeline-progress) * 100%)
-  ) 1;
-}
-.timeline-cards[data-timeline-reveal].timeline-revealed > div {
-  border-image: none;
   border-left-color: #f4b89d;
 }
 .timeline-cards[data-timeline-reveal] > .border-dashed {
-  border-left-style: dashed;
-}
-.timeline-cards[data-timeline-reveal].timeline-revealed > .border-dashed {
   border-left-style: dashed;
   border-left-color: #f9d5c5;
 }
@@ -2157,11 +2138,6 @@ body.code-mode .tool-list-item:hover .tool-list-desc {
 
 body.code-mode .tool-list-item:hover {
   padding-left: 0.5rem;
-  border-bottom-color: var(--cm-accent, #50fa7b);
-}
-
-body.code-mode .tool-list {
-  border-image: linear-gradient(to bottom, var(--cm-accent, #50fa7b) 0%, rgba(80, 250, 123, 0.3) 40%, transparent 100%) 1;
 }
 
 /* ═══════════════════════════════════════════════════════════
