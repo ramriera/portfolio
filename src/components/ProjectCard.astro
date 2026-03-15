@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import { resolveImage } from '@/utils/images';
+
 interface Props {
   slug: string;
   title: string;
@@ -16,6 +19,7 @@ interface Props {
 
 const { slug, title, client, year, category, tags, description, cover, featured, brandColor, gridSpan = 2, variant = 'default' } = Astro.props;
 const isWide = gridSpan === 3;
+const coverImage = resolveImage(cover);
 ---
 
 <a
@@ -29,14 +33,27 @@ const isWide = gridSpan === 3;
     class="card-image-wrap relative overflow-hidden rounded-2xl border border-dark-200"
     style={brandColor ? `background-color: ${brandColor}` : ''}
   >
-    <img
-      src={cover}
-      alt={title}
-      class="card-mockup w-full h-full object-cover"
-      loading="lazy"
-      decoding="async"
-      data-token="$object-fit: cover"
-    />
+    {coverImage ? (
+      <Image
+        src={coverImage}
+        alt={title}
+        class="card-mockup w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
+        data-token="$object-fit: cover"
+        widths={[400, 800, 1200]}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+      />
+    ) : (
+      <img
+        src={cover}
+        alt={title}
+        class="card-mockup w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
+        data-token="$object-fit: cover"
+      />
+    )}
   </div>
 
   <!-- Text content — outside the image -->

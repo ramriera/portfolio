@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Tag from '@/components/Tag.astro';
+import OptImage from '@/components/OptImage.astro';
 import { projects } from '@/utils/data';
 import type { CaseSection } from '@/utils/data';
 
@@ -67,12 +68,13 @@ function md(text: string): string {
     <div class="container-custom">
       <div data-reveal class="rounded-2xl overflow-hidden dashed-border">
         <div class="parallax-cover-wrapper">
-          <img
+          <OptImage
             src={project.cover}
             alt={project.title}
             class="parallax-cover-img w-full h-auto object-cover"
             loading="eager"
-            decoding="async"
+            widths={[800, 1200, 1600]}
+            sizes="100vw"
           />
         </div>
       </div>
@@ -280,7 +282,7 @@ function md(text: string): string {
               <div data-reveal class="mb-10 space-y-6">
                 {section.images.map((img: string, i: number) => (
                   <figure class="rounded-xl overflow-hidden max-w-full md:max-w-3xl mx-auto">
-                    <img src={img} alt={section.title} class="lightbox-trigger block w-full h-auto cursor-zoom-in" loading="lazy" decoding="async" />
+                    <OptImage src={img} alt={section.title} class="lightbox-trigger block w-full h-auto cursor-zoom-in" />
                     {section.captions?.[i] && (
                       <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                     )}
@@ -306,12 +308,10 @@ function md(text: string): string {
                     {section.bulletEvidence?.[bIdx] && (
                       <li class="list-none ml-8">
                         <figure class="relative rounded-xl overflow-hidden my-4 max-w-full md:max-w-2xl mx-auto">
-                          <img
+                          <OptImage
                             src={section.bulletEvidence[bIdx].image}
                             alt={`Evidencia: ${section.bulletEvidence[bIdx].caption}`}
                             class="block w-full h-auto lightbox-trigger cursor-zoom-in"
-                            loading="lazy"
-                            decoding="async"
                           />
                           <figcaption class="text-sm text-dark-400 mt-3 text-center italic">
                             {section.bulletEvidence[bIdx].caption}
@@ -340,7 +340,7 @@ function md(text: string): string {
             <div class="lg:col-span-2 space-y-4">
               {section.images?.map((img: string) => (
                 <div data-reveal class="rounded-xl overflow-hidden">
-                  <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" decoding="async" />
+                  <OptImage src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" />
                 </div>
               ))}
             </div>
@@ -383,7 +383,7 @@ function md(text: string): string {
             <div class="space-y-4">
               {section.images?.map((img: string) => (
                 <div data-reveal class="rounded-xl overflow-hidden">
-                  <img src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" loading="lazy" decoding="async" />
+                  <OptImage src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" />
                 </div>
               ))}
             </div>
@@ -403,7 +403,7 @@ function md(text: string): string {
             <div class={`space-y-6 ${section.images?.length === 1 && !section.images[0].endsWith('.svg') ? 'max-w-3xl mx-auto' : ''}`}>
               {section.images?.map((img: string, i: number) => (
                 <figure data-reveal class="rounded-xl overflow-hidden max-w-full md:max-w-3xl mx-auto">
-                  <img src={img} alt={section.captions?.[i] || section.title} class={`block w-full h-auto ${img.endsWith('.svg') ? '' : 'lightbox-trigger object-cover cursor-zoom-in'}`} loading="lazy" decoding="async" />
+                  <OptImage src={img} alt={section.captions?.[i] || section.title} class={`block w-full h-auto ${img.endsWith('.svg') ? '' : 'lightbox-trigger object-cover cursor-zoom-in'}`} />
                   <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                   {section.captions?.[i] && (
                     <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
@@ -439,7 +439,7 @@ function md(text: string): string {
             <div class={`grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto ${!section.highlight ? 'mt-10' : ''}`}>
               {section.images?.map((img: string, i: number) => (
                 <figure data-reveal data-delay={String(i * 80)} class="rounded-xl overflow-hidden">
-                  <img src={img} alt={section.captions?.[i] || `${section.title} ${i + 1}`} class="lightbox-trigger block w-full h-auto object-cover cursor-zoom-in" loading="lazy" decoding="async" />
+                  <OptImage src={img} alt={section.captions?.[i] || `${section.title} ${i + 1}`} class="lightbox-trigger block w-full h-auto object-cover cursor-zoom-in" />
                   <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                   {section.captions?.[i] && (
                     <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
@@ -461,7 +461,7 @@ function md(text: string): string {
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto">
               {section.images?.map((img: string, i: number) => (
                 <div data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden relative max-w-[300px] mx-auto">
-                  <img src={img} alt={`Slide ${i + 1} del audit`} class="lightbox-trigger block w-full h-auto object-cover cursor-zoom-in" loading="lazy" decoding="async" />
+                  <OptImage src={img} alt={`Slide ${i + 1} del audit`} class="lightbox-trigger block w-full h-auto object-cover cursor-zoom-in" />
                   <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                 </div>
               ))}
@@ -586,12 +586,10 @@ function md(text: string): string {
               {section.images?.map((img: string, i: number) => (
                 <figure data-reveal data-delay={String(i * 60)} class="audit-deck-item">
                   <div class="audit-deck-thumb">
-                    <img
+                    <OptImage
                       src={img}
                       alt={section.captions?.[i] || `Slide ${i + 1} del audit`}
                       class="lightbox-trigger cursor-zoom-in"
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
                   {section.captions?.[i] && (
@@ -654,7 +652,7 @@ function md(text: string): string {
           <div data-reveal data-delay={String(i * 150)}>
             <a href={`/projects/${p.slug}`} class="project-card group block rounded-2xl overflow-hidden dashed-border card-hover bg-white">
               <div class="relative overflow-hidden aspect-[16/10]">
-                <img src={p.cover} alt={p.title} class="project-card-image w-full h-full object-cover" loading="lazy" decoding="async" />
+                <OptImage src={p.cover} alt={p.title} class="project-card-image w-full h-full object-cover" widths={[400, 800]} sizes="(max-width: 768px) 100vw, 50vw" />
                 <div class="absolute top-4 left-4">
                   <span class="px-3 py-1.5 text-xs font-semibold rounded-full bg-white/90 backdrop-blur-sm">{p.category}</span>
                 </div>

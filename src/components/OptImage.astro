@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import { resolveImage } from '@/utils/images';
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  widths?: number[];
+  sizes?: string;
+  [key: string]: any;
+}
+
+const { src, alt, class: className, loading = 'lazy', widths = [400, 800, 1200], sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px', ...rest } = Astro.props;
+
+const resolved = resolveImage(src);
+const isSvg = src.endsWith('.svg');
+---
+
+{resolved && !isSvg ? (
+  <Image
+    src={resolved}
+    alt={alt}
+    class={className}
+    loading={loading}
+    decoding="async"
+    widths={widths}
+    sizes={sizes}
+    {...rest}
+  />
+) : (
+  <img
+    src={src}
+    alt={alt}
+    class={className}
+    loading={loading}
+    decoding="async"
+    {...rest}
+  />
+)}
