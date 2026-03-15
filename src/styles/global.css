@@ -1314,6 +1314,10 @@ body.code-mode aside:hover {
 .tool-list {
   max-width: 42rem;
   margin: 0 auto;
+  position: relative;
+  border-left: 2px solid transparent;
+  border-image: linear-gradient(to bottom, #f4b89d 0%, #f9d5c5 40%, transparent 100%) 1;
+  padding-left: 1.5rem;
 }
 
 .tool-list-section {
@@ -1327,9 +1331,9 @@ body.code-mode aside:hover {
 }
 
 .tool-list-label {
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-primary-500, #D97757);
   margin-bottom: 1rem;
@@ -1344,10 +1348,11 @@ body.code-mode aside:hover {
 .tool-list-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   padding: 0.625rem 0;
+  padding-left: 0;
   border-bottom: 1px solid #f3f4f6;
-  transition: border-color 0.25s ease;
+  transition: padding-left 0.3s ease, border-color 0.25s ease;
   cursor: default;
 }
 
@@ -1384,21 +1389,22 @@ body.code-mode aside:hover {
   transition: color 0.25s ease;
 }
 
-/* Hover: text to black, bottom border to accent */
+/* Hover: slide right, text to black, bottom border to accent */
+.tool-list-item:hover {
+  padding-left: 0.5rem;
+  border-bottom-color: var(--color-primary-500, #D97757);
+}
+
 .tool-list-item:hover .tool-list-name {
   color: #111827;
 }
 
 .tool-list-item:hover .tool-list-desc {
-  color: #6b7280;
+  color: #1f2937;
 }
 
 .tool-list-item:hover .tool-list-icon {
   color: #6b7280;
-}
-
-.tool-list-item:hover {
-  border-bottom-color: var(--color-primary-500, #D97757);
 }
 
 /* Brand icon colors on hover */
@@ -2150,7 +2156,12 @@ body.code-mode .tool-list-item:hover .tool-list-desc {
 }
 
 body.code-mode .tool-list-item:hover {
+  padding-left: 0.5rem;
   border-bottom-color: var(--cm-accent, #50fa7b);
+}
+
+body.code-mode .tool-list {
+  border-image: linear-gradient(to bottom, var(--cm-accent, #50fa7b) 0%, rgba(80, 250, 123, 0.3) 40%, transparent 100%) 1;
 }
 
 /* ═══════════════════════════════════════════════════════════
