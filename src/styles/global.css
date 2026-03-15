@@ -1579,12 +1579,77 @@ body.code-mode .json-tab-active {
   pointer-events: none;
 }
 
+/* ── Timeline Dual Layout ── */
+
+/* Mobile: single column, branch below main */
+.timeline-dual {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.timeline-main {
+  /* Main vertical line lives inside each child via border-l */
+}
+
+/* Branch: on mobile, stacked below with dashed left border */
+.timeline-branch {
+  margin-top: 0.5rem;
+}
+
+.timeline-branch-inner {
+  position: relative;
+  padding-left: 1.5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1rem;
+  border-left: 2px dashed #f9d5c5;
+}
+
+.timeline-branch-node {
+  position: absolute;
+  left: -5px;
+  top: 1.5rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+  border: 1.5px solid var(--color-primary-200, #f9d5c5);
+}
+
+/* Desktop (lg): two columns side by side */
+@media (min-width: 1024px) {
+  .timeline-dual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 3rem;
+    margin-left: 0;
+  }
+
+  .timeline-branch {
+    margin-top: 0;
+    position: relative;
+    padding-top: 0;
+  }
+
+  .timeline-branch-inner {
+    padding-top: 0.25rem;
+    height: 100%;
+  }
+}
+
+/* Tablet (sm): minor margin fix */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .timeline-dual {
+    margin-left: 0;
+  }
+}
+
 /* ── Timeline: Normal vs Code Mode ── */
 .timeline-gitlog {
   display: none;
 }
 
-body.code-mode .timeline-cards {
+body.code-mode .timeline-dual {
   display: none;
 }
 
@@ -1846,7 +1911,7 @@ body.code-mode .btn-cv-code:hover {
 }
 
 /* ── Timeline years: accent color ── */
-.timeline-cards .text-xs.text-primary-500 {
+.timeline-main .text-xs.text-primary-500 {
   color: #D97757 !important;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1867,13 +1932,9 @@ body.code-mode .btn-cv-code:hover {
   pointer-events: none;
 }
 
-/* ── Timeline scroll-reveal: static, no animation ── */
-.timeline-cards[data-timeline-reveal] > div {
+/* ── Timeline static border colors ── */
+.timeline-main > div {
   border-left-color: #f4b89d;
-}
-.timeline-cards[data-timeline-reveal] > .border-dashed {
-  border-left-style: dashed;
-  border-left-color: #f9d5c5;
 }
 
 /* ── Consulting hover dimming ── */
