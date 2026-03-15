@@ -1579,69 +1579,73 @@ body.code-mode .json-tab-active {
   pointer-events: none;
 }
 
-/* ── Timeline Dual Layout ── */
+/* ── Timeline Branch (second level, indented) ── */
 
-/* Mobile: single column, branch below main */
-.timeline-dual {
-  display: flex;
-  flex-direction: column;
-  margin-left: 1rem;
+/* The wrap keeps the main solid border-l going while hosting the branch */
+.timeline-branch-wrap {
+  position: relative;
 }
 
-.timeline-main {
-  /* Main vertical line lives inside each child via border-l */
+/* Horizontal fork line: connects main line to branch */
+.timeline-fork-line {
+  position: absolute;
+  top: 1rem;
+  left: -2px;
+  width: 2rem;
+  height: 0;
+  border-top: 2px dashed #f9d5c5;
 }
 
-/* Branch: on mobile, stacked below with dashed left border */
-.timeline-branch {
-  margin-top: 0.5rem;
+@media (min-width: 640px) {
+  .timeline-fork-line {
+    width: 2.5rem;
+  }
 }
 
+/* Offset container — pushes the branch to the right */
+.timeline-branch-offset {
+  margin-left: 2rem;
+  padding-top: 0;
+  padding-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .timeline-branch-offset {
+    margin-left: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .timeline-branch-offset {
+    margin-left: 3.5rem;
+  }
+}
+
+/* The inner branch with its own dashed vertical line */
 .timeline-branch-inner {
   position: relative;
   padding-left: 1.5rem;
-  padding-top: 1.25rem;
-  padding-bottom: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.5rem;
   border-left: 2px dashed #f9d5c5;
 }
 
+@media (min-width: 640px) {
+  .timeline-branch-inner {
+    padding-left: 2rem;
+  }
+}
+
+/* Node at the top of the branch line */
 .timeline-branch-node {
   position: absolute;
   left: -5px;
-  top: 1.5rem;
+  top: 1rem;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: white;
-  border: 1.5px solid var(--color-primary-200, #f9d5c5);
-}
-
-/* Desktop (lg): two columns side by side */
-@media (min-width: 1024px) {
-  .timeline-dual {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 3rem;
-    margin-left: 0;
-  }
-
-  .timeline-branch {
-    margin-top: 0;
-    position: relative;
-    padding-top: 0;
-  }
-
-  .timeline-branch-inner {
-    padding-top: 0.25rem;
-    height: 100%;
-  }
-}
-
-/* Tablet (sm): minor margin fix */
-@media (min-width: 640px) and (max-width: 1023px) {
-  .timeline-dual {
-    margin-left: 0;
-  }
+  border: 1.5px solid #f9d5c5;
 }
 
 /* ── Timeline: Normal vs Code Mode ── */
@@ -1649,7 +1653,7 @@ body.code-mode .json-tab-active {
   display: none;
 }
 
-body.code-mode .timeline-dual {
+body.code-mode .timeline-flow {
   display: none;
 }
 
@@ -1933,7 +1937,7 @@ body.code-mode .btn-cv-code:hover {
 }
 
 /* ── Timeline static border colors ── */
-.timeline-main > div {
+.timeline-flow > div {
   border-left-color: #f4b89d;
 }
 

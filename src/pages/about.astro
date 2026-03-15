@@ -190,71 +190,73 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
             <h2 class="heading-md mb-8">Trayectoria</h2>
 
             <!-- Normal mode: hybrid timeline -->
-            <div class="timeline-dual" data-timeline-reveal>
-              {/* ── Main column (Doctori → JBM) ── */}
-              <div class="timeline-main">
-                {/* --- Hito Principal 1: Doctori (actual) --- */}
-                {(() => {
-                  const doctori = mainTimeline[0];
-                  return (
-                    <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-primary-300">
-                      {/* Node — solid accent, current role */}
-                      <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300 animate-doctori-pulse"></div>
-                      <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
-                      <h3 class="font-bold text-lg mt-1 text-dark-900">{doctori.company}</h3>
-                      <p class="text-sm font-medium text-gray-500 mb-2">{doctori.role}</p>
-                      <p class="text-sm text-gray-400 leading-relaxed">{doctori.description}</p>
-                    </div>
-                  );
-                })()}
-
-                {/* --- Hito Principal 2: JBM (origen) --- */}
-                {(() => {
-                  const jbm = mainTimeline[1];
-                  return (
-                    <div class="timeline-origin relative pl-6 sm:pl-8 pb-6 border-l-2 border-primary-300">
-                      {/* Node — accent outline, end of path */}
-                      <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-white border-2 border-primary-500"></div>
-                      <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-gray-400">{jbm.year}</span>
-                      <h3 class="font-bold text-lg mt-1 text-dark-900">{jbm.company}</h3>
-                      <p class="text-sm font-medium text-gray-500 mb-2">{jbm.role}</p>
-                      <p class="text-sm text-gray-400 leading-relaxed">{jbm.description}</p>
-                    </div>
-                  );
-                })()}
-              </div>
-
-              {/* ── Consulting branch (right on desktop, below on mobile) ── */}
-              <div class="timeline-branch">
-                <div class="timeline-branch-inner">
-                  {/* Node — small, hollow, discrete */}
-                  <div class="timeline-branch-node"></div>
-
-                  {/* Pill tag */}
-                  <div class="mb-4">
-                    <span class="inline-block text-[9px] sm:text-[10px] font-bold tracking-[0.15em] uppercase text-primary-500 border border-primary-300 bg-transparent rounded-full px-3 py-1">
-                      En paralelo a Doctori.com
-                    </span>
+            <div class="timeline-flow ml-4 sm:ml-0" data-timeline-reveal>
+              {/* --- Hito Principal 1: Doctori (actual) --- */}
+              {(() => {
+                const doctori = mainTimeline[0];
+                return (
+                  <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-primary-300">
+                    {/* Node — solid accent, current role */}
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300 animate-doctori-pulse"></div>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{doctori.company}</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-2">{doctori.role}</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">{doctori.description}</p>
                   </div>
+                );
+              })()}
 
-                  <p class="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
-                    {consultingBlock.label} <span class="normal-case tracking-normal font-normal">(Vía {consultingBlock.via})</span>
-                  </p>
+              {/* --- Bloque de Consultoría (segundo nivel, indentado) --- */}
+              <div class="timeline-branch-wrap relative border-l-2 border-primary-300 pb-0">
+                {/* Horizontal fork connector */}
+                <div class="timeline-fork-line"></div>
 
-                  <div class="consulting-list space-y-6">
-                    {consultingBlock.projects.map((project) => (
-                      <div class="consulting-item ml-0 sm:ml-1 transition-opacity duration-300">
-                        <span class="text-[10px] sm:text-xs text-gray-300 font-medium">{project.period}</span>
-                        <div class="flex items-baseline gap-2 mb-1 mt-0.5">
-                          <span class="font-bold text-dark-900 text-sm">{project.client}</span>
+                <div class="timeline-branch-offset">
+                  <div class="timeline-branch-inner">
+                    {/* Node — small, hollow */}
+                    <div class="timeline-branch-node"></div>
+
+                    {/* Pill tag */}
+                    <div class="mb-4">
+                      <span class="inline-block text-[9px] sm:text-[10px] font-bold tracking-[0.15em] uppercase text-primary-500 border border-primary-300 bg-transparent rounded-full px-3 py-1">
+                        En paralelo a Doctori.com
+                      </span>
+                    </div>
+
+                    <p class="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
+                      {consultingBlock.label} <span class="normal-case tracking-normal font-normal">(Vía {consultingBlock.via})</span>
+                    </p>
+
+                    <div class="consulting-list space-y-6">
+                      {consultingBlock.projects.map((project) => (
+                        <div class="consulting-item ml-0 sm:ml-1 transition-opacity duration-300">
+                          <span class="text-[10px] sm:text-xs text-gray-300 font-medium">{project.period}</span>
+                          <div class="flex items-baseline gap-2 mb-1 mt-0.5">
+                            <span class="font-bold text-dark-900 text-sm">{project.client}</span>
+                          </div>
+                          <p class="text-xs text-gray-400 mb-1.5">{project.role}</p>
+                          <p class="text-sm text-gray-400 leading-relaxed">{project.description}</p>
                         </div>
-                        <p class="text-xs text-gray-400 mb-1.5">{project.role}</p>
-                        <p class="text-sm text-gray-400 leading-relaxed">{project.description}</p>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
+
+              {/* --- Hito Principal 2: JBM (origen) --- */}
+              {(() => {
+                const jbm = mainTimeline[1];
+                return (
+                  <div class="timeline-origin relative pl-6 sm:pl-8 pb-6 border-l-2 border-primary-300">
+                    {/* Node — accent outline, end of path */}
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-white border-2 border-primary-500"></div>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-gray-400">{jbm.year}</span>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{jbm.company}</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-2">{jbm.role}</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">{jbm.description}</p>
+                  </div>
+                );
+              })()}
             </div>
 
             <!-- Code mode: git log format -->
