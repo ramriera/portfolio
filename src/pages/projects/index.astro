@@ -194,20 +194,42 @@ function getProjectFilters(tags: string[]): string[] {
         }
       }
 
-      // Filter projects
+      // Filter projects — fade out first, then toggle visibility
+      const hiding: HTMLElement[] = [];
+      const showing: HTMLElement[] = [];
+
       projectItems.forEach((item) => {
-        const filters = JSON.parse(item.getAttribute('data-filters') || '[]');
+        const el = item as HTMLElement;
+        const filters = JSON.parse(el.getAttribute('data-filters') || '[]');
         if (filter === 'Todas' || filters.includes(filter)) {
-          (item as HTMLElement).style.display = '';
-          (item as HTMLElement).style.opacity = '0';
-          setTimeout(() => {
-            (item as HTMLElement).style.opacity = '1';
-            (item as HTMLElement).style.transition = 'opacity 0.3s ease';
-          }, 50);
+          showing.push(el);
         } else {
-          (item as HTMLElement).style.display = 'none';
+          hiding.push(el);
         }
       });
+
+      // Fade out items being hidden
+      hiding.forEach((el) => {
+        el.style.transition = 'opacity 0.2s ease';
+        el.style.opacity = '0';
+      });
+
+      // After fade-out completes, hide them and show matching items
+      setTimeout(() => {
+        hiding.forEach((el) => {
+          el.style.display = 'none';
+        });
+        showing.forEach((el) => {
+          el.style.display = '';
+          el.style.opacity = '0';
+        });
+        // Force reflow so the browser registers opacity:0 before transitioning
+        void document.body.offsetHeight;
+        showing.forEach((el, i) => {
+          el.style.transition = 'opacity 0.3s ease';
+          el.style.opacity = '1';
+        });
+      }, 200);
     });
   });
 </script>
