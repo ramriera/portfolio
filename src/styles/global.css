@@ -1406,13 +1406,18 @@ body.code-mode aside:hover {
 .tool-list-item[data-brand="figma"]:hover .tool-list-icon { color: #A259FF; }
 .tool-list-item[data-brand="figjam"]:hover .tool-list-icon { color: #F24E1E; }
 .tool-list-item[data-brand="framer"]:hover .tool-list-icon { color: #0055FF; }
+.tool-list-item[data-brand="protopie"]:hover .tool-list-icon { color: #FF6242; }
+.tool-list-item[data-brand="maze"]:hover .tool-list-icon { color: #6366F1; }
 .tool-list-item[data-brand="storybook"]:hover .tool-list-icon { color: #FF4785; }
 .tool-list-item[data-brand="style-dictionary"]:hover .tool-list-icon { color: #1BC7B6; }
 .tool-list-item[data-brand="zeroheight"]:hover .tool-list-icon { color: #1B1F3B; }
+.tool-list-item[data-brand="supernova"]:hover .tool-list-icon { color: #6C5CE7; }
+.tool-list-item[data-brand="lottie"]:hover .tool-list-icon { color: #00DDB3; }
 .tool-list-item[data-brand="vscode"]:hover .tool-list-icon { color: #007ACC; }
 .tool-list-item[data-brand="tailwind"]:hover .tool-list-icon { color: #06B6D4; }
-.tool-list-item[data-brand="git"]:hover .tool-list-icon { color: #F05032; }
 .tool-list-item[data-brand="astro"]:hover .tool-list-icon { color: #FF5D01; }
+.tool-list-item[data-brand="git"]:hover .tool-list-icon { color: #F05032; }
+.tool-list-item[data-brand="typescript"]:hover .tool-list-icon { color: #3178C6; }
 
 .tech-stack-json {
   display: none;
