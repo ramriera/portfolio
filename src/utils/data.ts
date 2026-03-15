@@ -1060,7 +1060,7 @@ export const projects: Project[] = [
       {
         label: '05. Galería',
         title: 'Capturas de la app',
-        layout: 'image-grid',
+        layout: 'screens-grid',
         content: 'Capturas reales de la interfaz de **Imaginbank**: las pantallas analizadas durante la auditoría, mostrando tanto vistas de detalle (zoom en componentes) como vistas de flujo completo.',
         images: [
           '/assets/projects/imaginbank/fotos/portada-ux.png',
