@@ -194,7 +194,7 @@ function getProjectFilters(tags: string[]): string[] {
         }
       }
 
-      // Filter projects — fade out first, then toggle visibility
+      // Filter projects — fade out briefly, then swap visibility
       const hiding: HTMLElement[] = [];
       const showing: HTMLElement[] = [];
 
@@ -208,28 +208,27 @@ function getProjectFilters(tags: string[]): string[] {
         }
       });
 
-      // Fade out items being hidden
+      // If nothing to hide, swap immediately
+      const fadeOutMs = hiding.length > 0 ? 120 : 0;
+
       hiding.forEach((el) => {
-        el.style.transition = 'opacity 0.2s ease';
+        el.style.transition = 'opacity 0.12s ease';
         el.style.opacity = '0';
       });
 
-      // After fade-out completes, hide them and show matching items
       setTimeout(() => {
-        hiding.forEach((el) => {
-          el.style.display = 'none';
-        });
+        hiding.forEach((el) => { el.style.display = 'none'; });
         showing.forEach((el) => {
           el.style.display = '';
+          el.style.transition = 'none';
           el.style.opacity = '0';
         });
-        // Force reflow so the browser registers opacity:0 before transitioning
         void document.body.offsetHeight;
-        showing.forEach((el, i) => {
-          el.style.transition = 'opacity 0.3s ease';
+        showing.forEach((el) => {
+          el.style.transition = 'opacity 0.2s ease';
           el.style.opacity = '1';
         });
-      }, 200);
+      }, fadeOutMs);
     });
   });
 </script>
