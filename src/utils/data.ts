@@ -160,7 +160,7 @@ export const projects: Project[] = [
       'Sistema de recuperación de abandonos con push notifications',
     ],
     stack: ['UX Strategy', 'Service Design', 'Research', 'Service Blueprint', 'Prototyping'],
-    cover: '/assets/projects/massimo-dutti/massimo-header-big-1920x1080.jpg',
+    cover: '/assets/projects/massimo-dutti/massimo-dutti-header-new.png',
     featured: true,
     brandColor: '#ffffff',
     gridSpan: 3,
