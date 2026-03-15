@@ -151,9 +151,6 @@
     @apply inline-flex items-center gap-2 px-7 py-3.5 border border-dark-300 text-dark-700 font-medium rounded-full transition-all duration-300 hover:bg-dark-100 hover:border-primary-400 hover:text-primary-600 active:scale-[0.97];
   }
 
-  .tag {
-    @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-primary-50 text-primary-600
-  }
 }
 
 
