@@ -436,9 +436,9 @@ function md(text: string): string {
                 </p>
               </blockquote>
             )}
-            <div class={`${section.images?.length === 1 ? 'flex justify-center' : 'grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6'} max-w-2xl mx-auto ${!section.highlight ? 'mt-10' : ''}`}>
+            <div class={`${section.images?.length === 1 ? 'flex justify-center' : 'grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6'} max-w-xl mx-auto ${!section.highlight ? 'mt-10' : ''}`}>
               {section.images?.map((img: string, i: number) => (
-                <figure data-reveal data-delay={String(i * 80)} class={`rounded-xl overflow-hidden ${section.images?.length === 1 ? 'max-w-sm w-full' : ''}`}>
+                <figure data-reveal data-delay={String(i * 80)} class={`rounded-xl overflow-hidden ${section.images?.length === 1 ? 'max-w-xs w-full' : ''}`}>
                   <OptImage src={img} alt={section.captions?.[i] || `${section.title} ${i + 1}`} class="lightbox-trigger block w-full h-auto object-cover cursor-zoom-in" />
                   <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                   {section.captions?.[i] && (
