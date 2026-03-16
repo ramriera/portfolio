@@ -948,7 +948,7 @@ export const projects: Project[] = [
       {
         label: '01. El Reto',
         title: 'Un ecosistema digital que no conecta con los jóvenes',
-        layout: 'center',
+        layout: 'image-grid',
         content: 'Imaginbank nació en 2016 como la apuesta de CaixaBank por captar al **público joven y nativo digital**. Banco **100% móvil**, sin sucursales, con servicios financieros diseñados para operar exclusivamente desde el smartphone. La propuesta era clara: competir con los **neobancos** que estaban redefiniendo la banca.\n\nPero el mercado evolucionó más rápido que el producto. **Revolut, N26 y Bnext** elevaron el estándar con **onboardings de 5 minutos**, interfaces ultra-limpias y experiencias que se sienten más como **apps de consumo** que como banca tradicional. La **Gen Z** espera ese nivel de calidad - y Imaginbank necesitaba entender por qué **no conectaba con ellos** a pesar de ser un producto digital-first.',
         images: ['/assets/projects/imaginbank/fotos/porcentaje-usuarios.png', '/assets/projects/imaginbank/fotos/porcentaje-uso-banca-electronica-2020.png'],
         captions: ['Evolución del porcentaje de usuarios de banca electrónica (2006-2020)', 'Uso de banca electrónica por franja de edad en 2020'],
@@ -977,7 +977,7 @@ export const projects: Project[] = [
       {
         label: '03. Diagnóstico',
         title: 'H1 - Visibilidad del estado del sistema',
-        layout: 'center',
+        layout: 'image-grid',
         content: 'El sistema debe mantener al usuario informado en todo momento sobre lo que está ocurriendo, mediante **feedback apropiado** y en un tiempo razonable.\n\nEn esta pantalla de la app, la **Heurística #1 falla** porque no existe ningún indicador visual que confirme al usuario que su transferencia se está procesando. La ausencia de un **spinner, barra de progreso o mensaje de estado** deja al usuario en la incertidumbre - un problema crítico cuando se trata de **dinero real**.\n\n**Hallazgo:** La app no proporciona feedback visual suficiente al realizar acciones críticas como transferencias o pagos. El usuario no sabe si una operación está en proceso, se ha completado o ha fallado.\n\n**Recomendación:** Implementar sistema de feedback con estados de progreso, confirmaciones visuales claras y notificaciones en tiempo real para todas las operaciones financieras.',
         highlight: 'La falta de feedback en **acciones financieras críticas** compromete la **confianza del usuario** en los momentos donde más la necesita.',
         images: ['/assets/projects/imaginbank/fotos/mostrar-estado.png'],
@@ -986,7 +986,7 @@ export const projects: Project[] = [
       {
         label: '03. Diagnóstico',
         title: 'H4 - Consistencia y estándares',
-        layout: 'center',
+        layout: 'image-grid',
         content: 'Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.\n\nEn estas pantallas se evidencia cómo la **Heurística #4 se incumple** de forma sistemática: la misma acción de enviar dinero aparece como "Transferir", "Enviar" y "Bizum" en diferentes secciones. La **iconografía** no sigue un **lenguaje visual coherente** y algunos **patrones de interacción** varían entre pantallas similares.\n\n**Hallazgo:** Inconsistencias en la nomenclatura de funciones: las mismas acciones reciben nombres diferentes según la sección. La iconografía no sigue un lenguaje visual coherente.\n\n**Recomendación:** Crear un sistema de design tokens unificado con nomenclatura consistente. Auditar todos los labels y unificar terminología en un glosario UX.',
         highlight: 'La **nomenclatura inconsistente** entre secciones genera **confusión cognitiva** - el usuario tiene que "reaprender" la interfaz en cada pantalla.',
         images: ['/assets/projects/imaginbank/fotos/consistencia-y-estandares.png', '/assets/projects/imaginbank/fotos/consistencia-y-estandares-2.png'],
@@ -995,7 +995,7 @@ export const projects: Project[] = [
       {
         label: '03. Diagnóstico',
         title: 'H3 - Control y libertad del usuario',
-        layout: 'center',
+        layout: 'image-grid',
         content: 'Los usuarios necesitan una **"salida de emergencia"** clara para abandonar estados no deseados sin tener que pasar por un proceso extenso.\n\nEn estas capturas se observa cómo la **Heurística #3 se vulnera** de forma crítica: la **falta de flexibilidad** impide al usuario **deshacer acciones**, volver atrás de forma intuitiva o acceder a **opciones secundarias** sin recorrer múltiples pantallas.\n\n**Hallazgo:** La navegación es rígida: no hay opción de deshacer acciones, volver atrás es confuso y las opciones secundarias están enterradas en submenús.\n\n**Recomendación:** Implementar acción "Undo" en el flujo de transacciones. Añadir accesos directos contextuales y simplificar la navegación de retorno.',
         images: ['/assets/projects/imaginbank/fotos/control-y-libertad-del-usuario.png'],
         captions: ['Control y libertad del usuario — Flujo de ahorro y pantalla de error'],
@@ -1003,7 +1003,7 @@ export const projects: Project[] = [
       {
         label: '03. Diagnóstico',
         title: 'H5 / H9 - Prevención de errores y recuperación',
-        layout: 'center',
+        layout: 'image-grid',
         content: 'Un diseño cuidadoso que **prevenga errores** es mejor que buenos mensajes de error. Y cuando los errores ocurren, el sistema debe expresarlos en **lenguaje claro** y ofrecer una **solución constructiva**.\n\nEn estas pantallas se identifica cómo las **Heurísticas #5 y #9 fallan simultáneamente**: los **mensajes de error son genéricos** ("Ha ocurrido un error") sin orientar al usuario hacia la solución.\n\n**Hallazgo:** Los mensajes de error son genéricos y no orientan al usuario hacia la solución. No existen confirmaciones claras ni mecanismos de "undo" en operaciones financieras.\n\n**Recomendación:** Rediseñar mensajes de error con lenguaje claro y accionable. Añadir confirmación previa en operaciones irreversibles y opción de cancelar/revertir.',
         highlight: 'Los **mensajes de error genéricos** en operaciones financieras no solo frustran - **erosionan activamente la confianza** en la plataforma.',
         images: ['/assets/projects/imaginbank/fotos/prevenir-errores.png', '/assets/projects/imaginbank/fotos/comunicar-errores-con-claridad.png'],
@@ -1012,7 +1012,7 @@ export const projects: Project[] = [
       {
         label: '03. Diagnóstico',
         title: 'H8 - Diseño estético y minimalista',
-        layout: 'center',
+        layout: 'image-grid',
         content: 'Cada unidad extra de información compite con las unidades relevantes y **disminuye su visibilidad relativa**.\n\nEn estas pantallas vemos cómo la **Heurística #8 presenta debilidades**: aunque la estética general era limpia, se detectaron áreas donde la **jerarquía visual era confusa** y **elementos decorativos competían** con la información funcional.\n\n**Hallazgo:** La jerarquía visual es confusa en algunas pantallas. Elementos decorativos compiten con información funcional. Bizum y transferencias rápidas no tienen la prominencia que su frecuencia de uso justifica.\n\n**Recomendación:** Aplicar progressive disclosure. Priorizar visualmente las 3-4 acciones más frecuentes. Reducir ruido visual en pantallas de información financiera.',
         images: ['/assets/projects/imaginbank/fotos/estetica-y-minimalismo.png'],
         captions: ['Diseño estético y minimalista — Home con jerarquía visual confusa'],
@@ -1039,7 +1039,7 @@ export const projects: Project[] = [
       {
         label: '04. Solución',
         title: 'Cambios arquitectónicos y visuales',
-        layout: 'center',
+        layout: 'image-grid',
         content: 'Las mejoras propuestas abarcan tanto la **arquitectura de información** como el **diseño visual**. A nivel arquitectónico: **simplificación de la navegación** principal a **4-5 secciones claras**, **accesos directos contextuales** y reducción de la profundidad de los flujos más frecuentes.\n\nA nivel visual: sistema de **feedback con micro-interacciones**, **jerarquía tipográfica revisada** para priorizar la información financiera clave, y un **lenguaje visual** más cercano al estándar de los neobancos. Cada pantalla respira el principio de **"menos es más"** - eliminar ruido para que el usuario se enfoque en lo que importa.',
         images: ['/assets/projects/imaginbank/fotos/mejoras-ux.png'],
         captions: ['Wireframes de mejoras UX propuestas'],
