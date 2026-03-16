@@ -634,37 +634,58 @@ function md(text: string): string {
     </div>
   </section>
 
-  <!-- Other projects -->
+  <!-- Other projects — File Explorer style -->
   <section class="section-padding" data-component="RelatedProjects">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
-      <div class="flex items-end justify-between mb-12">
-        <h2 data-reveal class="heading-lg">
-          Otros <span class="text-primary-500">proyectos</span>
-        </h2>
-        <a data-reveal href="/projects" class="btn-outline text-sm">
-          Ver todos
-        </a>
-      </div>
+        <div class="flex items-end justify-between mb-8">
+          <h2 data-reveal class="heading-lg">
+            Otros <span class="text-primary-500">proyectos</span>
+          </h2>
+          <a data-reveal href="/projects" class="btn-outline text-sm">
+            Ver todos
+          </a>
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {otherProjects.map((p, i) => (
-          <div data-reveal data-delay={String(i * 150)}>
-            <a href={`/projects/${p.slug}`} class="project-card group block rounded-2xl overflow-hidden dashed-border card-hover bg-white">
-              <div class="relative overflow-hidden aspect-[16/10]">
-                <OptImage src={p.cover} alt={p.title} class="project-card-image w-full h-full object-cover" widths={[400, 800]} sizes="(max-width: 768px) 100vw, 50vw" />
-                <div class="absolute top-4 left-4">
-                  <span class="px-3 py-1.5 text-xs font-semibold rounded-full bg-white/90 backdrop-blur-sm">{p.category}</span>
+        <div class="flex flex-col gap-3">
+          {otherProjects.map((p, i) => (
+            <a
+              data-reveal
+              data-delay={String(i * 100)}
+              href={`/projects/${p.slug}`}
+              class="file-explorer-card group flex items-center gap-5 p-4 rounded-2xl border border-[#e8e4dd] bg-white transition-all duration-300 hover:border-primary-500 hover:bg-[#faf8f6]"
+            >
+              {/* Thumbnail 1:1 */}
+              <div class="flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border border-[#e8e4dd]">
+                <OptImage
+                  src={p.cover}
+                  alt={p.title}
+                  class="w-full h-full object-cover"
+                  widths={[160]}
+                  sizes="80px"
+                />
+              </div>
+
+              {/* Text content */}
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-xs text-dark-400 flex-shrink-0">[{String(i + 1).padStart(2, '0')}]</span>
+                  <h3 class="font-mono text-base font-semibold text-dark-900 truncate group-hover:text-primary-500 transition-colors">
+                    {p.title}
+                  </h3>
                 </div>
+                <p class="font-mono text-xs text-dark-400 mt-1.5 truncate">
+                  {p.tags.slice(0, 3).join(' · ')} · {p.year}
+                </p>
               </div>
-              <div class="p-6">
-                <span class="text-xs font-medium text-primary-500 uppercase tracking-wider">{p.client}</span>
-                <h3 class="heading-sm mt-2 group-hover:text-primary-500 transition-colors">{p.title}</h3>
-              </div>
+
+              {/* Arrow indicator */}
+              <svg class="w-4 h-4 text-dark-300 flex-shrink-0 group-hover:text-primary-500 group-hover:translate-x-0.5 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </a>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
