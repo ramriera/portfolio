@@ -2623,8 +2623,8 @@ body.code-mode .principles-code { display: block; }
 .lint-badge--strategy,
 .lint-badge--engineering,
 .lint-badge--culture {
-  color: var(--color-primary-700, #b45309);
-  background: var(--color-primary-100, #fef3c7);
+  color: var(--color-primary-500, #D97757);
+  background: rgba(217, 119, 87, 0.1);
 }
 
 .lint-rule-desc {
