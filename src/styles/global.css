@@ -2609,12 +2609,8 @@ body.code-mode .principles-code { display: block; }
   text-transform: uppercase;
 }
 
-.lint-badge--engineering {
-  color: var(--color-primary-500, #D97757);
-  background: rgba(217, 119, 87, 0.1);
-}
-
 .lint-badge--strategy,
+.lint-badge--engineering,
 .lint-badge--culture {
   color: var(--color-dark-300, #a8a29e);
   background: rgba(168, 162, 150, 0.1);
@@ -2622,6 +2618,7 @@ body.code-mode .principles-code { display: block; }
 }
 
 .lint-rule:hover .lint-badge--strategy,
+.lint-rule:hover .lint-badge--engineering,
 .lint-rule:hover .lint-badge--culture {
   color: var(--accent-color, #D97757);
   background: rgba(217, 119, 87, 0.1);

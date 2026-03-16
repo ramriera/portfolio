@@ -335,6 +335,16 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <div data-reveal class="text-center mb-16">
+          <div class="methodology-lottie-wrapper">
+            <dotlottie-player
+              src="/assets/lottie/methodology-gear.json"
+              background="transparent"
+              speed="0.5"
+              style="width: 80px; height: 80px; margin: 0 auto 1rem;"
+              loop
+              autoplay>
+            </dotlottie-player>
+          </div>
           <h2 class="heading-lg mb-4">Metodología y <span class="text-primary-500">Stack</span></h2>
           <p class="text-body">Base teórica, proceso práctico y herramientas de ejecución.</p>
         </div>
@@ -629,7 +639,7 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
         </span>
       </div>
       <h2 data-reveal data-delay="100" class="heading-lg mb-6">
-        ¿Listo para empezar?
+        ¿Listo para <span class="text-primary-500">empezar</span>?
       </h2>
       <p data-reveal data-delay="100" class="text-body text-lg mb-10">
         Cuéntame sobre tu proyecto y veamos cómo puedo ayudarte a alcanzar tus objetivos de diseño.
@@ -663,4 +673,6 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
       </div>
     </div>
   </section>
+
+  <script is:inline src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 </BaseLayout>
