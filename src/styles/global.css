@@ -2620,19 +2620,11 @@ body.code-mode .principles-code { display: block; }
   text-transform: uppercase;
 }
 
-.lint-badge--strategy {
-  color: #b45309;
-  background: #fef3c7;
-}
-
-.lint-badge--engineering {
-  color: #1d4ed8;
-  background: #dbeafe;
-}
-
+.lint-badge--strategy,
+.lint-badge--engineering,
 .lint-badge--culture {
-  color: #7c3aed;
-  background: #ede9fe;
+  color: var(--color-primary-700, #b45309);
+  background: var(--color-primary-100, #fef3c7);
 }
 
 .lint-rule-desc {
@@ -2662,19 +2654,11 @@ body.code-mode .lint-rule-desc {
   color: var(--cm-text-muted, #7d8590);
 }
 
-body.code-mode .lint-badge--strategy {
-  color: #fbbf24;
-  background: rgba(251, 191, 36, 0.1);
-}
-
-body.code-mode .lint-badge--engineering {
-  color: #60a5fa;
-  background: rgba(96, 165, 250, 0.1);
-}
-
+body.code-mode .lint-badge--strategy,
+body.code-mode .lint-badge--engineering,
 body.code-mode .lint-badge--culture {
-  color: #c084fc;
-  background: rgba(192, 132, 252, 0.1);
+  color: var(--color-primary-500, #D97757);
+  background: rgba(217, 119, 87, 0.1);
 }
 
 body.code-mode [data-component="DesignPrinciples"] h3 {
