@@ -2543,10 +2543,113 @@ body.code-mode .principles-title-code { display: block; }
 body.code-mode .principles-normal { display: none; }
 body.code-mode .principles-code { display: block; }
 
-/* Principles: code mode cards */
-body.code-mode [data-component="DesignPrinciples"] .dashed-border {
-  background: var(--cm-bg-surface) !important;
-  border-color: var(--cm-border) !important;
+/* ── Lint Rule Cards (Design Principles) ── */
+.lint-rule {
+  padding: 1rem 1.25rem;
+  border: 1px dashed var(--color-dark-200, #d4cfc5);
+  border-radius: 0.75rem;
+  background: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.lint-rule:hover {
+  border-color: var(--color-primary-500, #D97757);
+  border-style: solid;
+  box-shadow: inset 3px 0 0 var(--color-primary-500, #D97757);
+  background: rgba(217, 119, 87, 0.02);
+}
+
+.lint-rule-header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 0.5rem;
+}
+
+.lint-rule-num {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-primary-500, #D97757);
+  opacity: 0.6;
+  flex-shrink: 0;
+  width: 1.5rem;
+}
+
+.lint-rule-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-dark-900, #1a1918);
+  flex: 1;
+  min-width: 0;
+}
+
+.lint-rule-badge {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.lint-badge--strategy {
+  color: #b45309;
+  background: #fef3c7;
+}
+
+.lint-badge--engineering {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.lint-badge--culture {
+  color: #7c3aed;
+  background: #ede9fe;
+}
+
+.lint-rule-desc {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-dark-400, #7c766c);
+  padding-left: 2.125rem;
+}
+
+/* Code mode: lint rules */
+body.code-mode .lint-rule {
+  background: var(--cm-bg-surface, #161b22);
+  border-color: var(--cm-border, #30363d);
+}
+
+body.code-mode .lint-rule:hover {
+  border-color: var(--cm-keyword, #bd93f9);
+  box-shadow: inset 3px 0 0 var(--cm-keyword, #bd93f9);
+  background: rgba(189, 147, 249, 0.03);
+}
+
+body.code-mode .lint-rule-name {
+  color: var(--cm-text-primary, #e6edf3);
+}
+
+body.code-mode .lint-rule-desc {
+  color: var(--cm-text-muted, #7d8590);
+}
+
+body.code-mode .lint-badge--strategy {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+}
+
+body.code-mode .lint-badge--engineering {
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.1);
+}
+
+body.code-mode .lint-badge--culture {
+  color: #c084fc;
+  background: rgba(192, 132, 252, 0.1);
 }
 
 body.code-mode [data-component="DesignPrinciples"] h3 {
