@@ -1307,7 +1307,7 @@ body.code-mode aside:hover {
 
 .eco-card {
   background: #fff;
-  border: 1px dashed var(--color-dark-200, #d4cfc5);
+  border: 1px solid var(--color-dark-200, #d4cfc5);
   border-radius: 1rem;
   padding: 1.5rem;
   display: flex;
@@ -1317,7 +1317,6 @@ body.code-mode aside:hover {
 
 .eco-card:hover {
   border-color: var(--color-primary-500, #D97757);
-  border-style: solid;
   box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
@@ -2558,7 +2557,7 @@ body.code-mode .principles-code { display: block; }
 /* ── Lint Rule Cards (Design Principles) ── */
 .lint-rule {
   padding: 1rem 1.25rem;
-  border: 1px dashed var(--color-dark-200, #d4cfc5);
+  border: 1px solid var(--color-dark-200, #d4cfc5);
   border-radius: 0.75rem;
   background: #fff;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
@@ -2566,7 +2565,6 @@ body.code-mode .principles-code { display: block; }
 
 .lint-rule:hover {
   border-color: var(--color-primary-500, #D97757);
-  border-style: solid;
   box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
@@ -2717,6 +2715,11 @@ body.code-mode .kpi-grid-code { display: block; }
   background: linear-gradient(90deg, #D97757, #D9775740);
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.kpi-card:hover {
+  border-color: var(--color-primary-500, #D97757) !important;
+  box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
 .kpi-card:hover::before {
