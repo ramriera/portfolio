@@ -458,9 +458,9 @@ function md(text: string): string {
             {section.content && (
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10" set:html={md(section.content)} />
             )}
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto mt-10">
               {section.images?.map((img: string, i: number) => (
-                <div data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden relative max-w-[300px] mx-auto">
+                <div data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden relative mx-auto">
                   <OptImage src={img} alt={`Slide ${i + 1} del audit`} class="lightbox-trigger block w-full h-auto object-cover cursor-zoom-in" />
                   <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                 </div>
