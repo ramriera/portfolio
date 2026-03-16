@@ -2580,8 +2580,7 @@ body.code-mode .principles-code { display: block; }
 .lint-rule:hover {
   border-color: var(--color-primary-500, #D97757);
   border-style: solid;
-  box-shadow: inset 3px 0 0 var(--color-primary-500, #D97757);
-  background: rgba(217, 119, 87, 0.02);
+  box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
 .lint-rule-header {
@@ -2642,8 +2641,7 @@ body.code-mode .lint-rule {
 
 body.code-mode .lint-rule:hover {
   border-color: var(--cm-keyword, #bd93f9);
-  box-shadow: inset 3px 0 0 var(--cm-keyword, #bd93f9);
-  background: rgba(189, 147, 249, 0.03);
+  box-shadow: 0 0 0 1px var(--cm-keyword, #bd93f9), 0 4px 20px rgba(189, 147, 249, 0.1);
 }
 
 body.code-mode .lint-rule-name {
