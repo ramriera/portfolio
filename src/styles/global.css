@@ -1307,7 +1307,7 @@ body.code-mode aside:hover {
 
 .eco-card {
   background: #fff;
-  border: 1px solid var(--color-dark-200, #d4cfc5);
+  border: 1px solid #e8e4dd;
   border-radius: 1rem;
   padding: 1.5rem;
   display: flex;
@@ -1336,6 +1336,11 @@ body.code-mode aside:hover {
   padding: 0.125rem 0.5rem;
   border-radius: 4px;
   letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.eco-card:hover .eco-card-version {
+  color: var(--accent-color, #D97757);
 }
 
 .eco-card-status {
@@ -2557,7 +2562,7 @@ body.code-mode .principles-code { display: block; }
 /* ── Lint Rule Cards (Design Principles) ── */
 .lint-rule {
   padding: 1rem 1.25rem;
-  border: 1px solid var(--color-dark-200, #d4cfc5);
+  border: 1px solid #e8e4dd;
   border-radius: 0.75rem;
   background: #fff;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
@@ -2604,10 +2609,21 @@ body.code-mode .principles-code { display: block; }
   text-transform: uppercase;
 }
 
-.lint-badge--strategy,
-.lint-badge--engineering,
-.lint-badge--culture {
+.lint-badge--engineering {
   color: var(--color-primary-500, #D97757);
+  background: rgba(217, 119, 87, 0.1);
+}
+
+.lint-badge--strategy,
+.lint-badge--culture {
+  color: var(--color-dark-300, #a8a29e);
+  background: rgba(168, 162, 150, 0.1);
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
+.lint-rule:hover .lint-badge--strategy,
+.lint-rule:hover .lint-badge--culture {
+  color: var(--accent-color, #D97757);
   background: rgba(217, 119, 87, 0.1);
 }
 
@@ -2703,27 +2719,12 @@ body.code-mode .kpi-grid-code { display: block; }
 .kpi-card {
   position: relative;
   overflow: hidden;
-}
-
-.kpi-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #D97757, #D9775740);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .kpi-card:hover {
   border-color: var(--color-primary-500, #D97757) !important;
   box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
-}
-
-.kpi-card:hover::before {
-  opacity: 1;
 }
 
 /* KPI code-mode: code mode card overrides */
