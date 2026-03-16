@@ -365,7 +365,7 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
             <h2 class="heading-md mb-8 principles-title-code"><span class="code-comment">// </span>design_principles</h2>
 
             <div class="principles-normal">
-              <div class="space-y-3">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <!-- 01 Sistemas sobre Pantallas -->
                 <div class="lint-rule group">
                   <div class="lint-rule-header">
@@ -411,6 +411,15 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
                   </div>
                   <p class="lint-rule-desc">Facilitar un lenguaje común y una colaboración fluida entre diseño e ingeniería.</p>
                 </div>
+                <!-- 06 Evidencia sobre Opinión -->
+                <div class="lint-rule group">
+                  <div class="lint-rule-header">
+                    <span class="lint-rule-num">06</span>
+                    <h3 class="lint-rule-name">Evidencia sobre Opinión</h3>
+                    <span class="lint-rule-badge lint-badge--product">PRODUCTO</span>
+                  </div>
+                  <p class="lint-rule-desc">Las decisiones de diseño se validan con datos y comportamiento real. Un sistema solo es exitoso si resuelve problemas del usuario de forma medible.</p>
+                </div>
               </div>
             </div>
 
@@ -444,7 +453,10 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
     <span class="pp-string">"eficiencia-mediante-ops"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"warn"</span><span class="pp-punct">,</span>  <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
 
     <span class="pp-comment">// [CULTURA] Naming compartido, specs legibles, handoff sin fricción</span>
-    <span class="pp-string">"puentes-no-muros"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span>
+    <span class="pp-string">"puentes-no-muros"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+
+    <span class="pp-comment">// [PRODUCTO] Validar con datos y comportamiento real</span>
+    <span class="pp-string">"evidencia-sobre-opinion"</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span>
 
   <span class="pp-bracket">{"}"}</span>
 <span class="pp-bracket">{"}"}</span> <span class="pp-keyword">satisfies</span> <span class="pp-fn">DesignLintConfig</span><span class="pp-punct">;</span></code></pre>

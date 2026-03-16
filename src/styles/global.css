@@ -2646,7 +2646,8 @@ body.code-mode .principles-code { display: block; }
 
 .lint-badge--strategy,
 .lint-badge--engineering,
-.lint-badge--culture {
+.lint-badge--culture,
+.lint-badge--product {
   color: var(--color-dark-300, #a8a29e);
   background: rgba(168, 162, 150, 0.1);
   transition: color 0.3s ease, background 0.3s ease;
@@ -2654,7 +2655,8 @@ body.code-mode .principles-code { display: block; }
 
 .lint-rule:hover .lint-badge--strategy,
 .lint-rule:hover .lint-badge--engineering,
-.lint-rule:hover .lint-badge--culture {
+.lint-rule:hover .lint-badge--culture,
+.lint-rule:hover .lint-badge--product {
   color: var(--accent-color, #D97757);
   background: rgba(217, 119, 87, 0.1);
 }
@@ -2687,7 +2689,8 @@ body.code-mode .lint-rule-desc {
 
 body.code-mode .lint-badge--strategy,
 body.code-mode .lint-badge--engineering,
-body.code-mode .lint-badge--culture {
+body.code-mode .lint-badge--culture,
+body.code-mode .lint-badge--product {
   color: var(--color-primary-500, #D97757);
   background: rgba(217, 119, 87, 0.1);
 }
