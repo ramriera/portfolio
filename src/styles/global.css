@@ -1632,7 +1632,7 @@ body.code-mode .json-tab-active {
   padding-left: 1.5rem;
   padding-top: 0.75rem;
   padding-bottom: 0.5rem;
-  border-left: 2px dashed #f9d5c5;
+  border-left: 2px dashed #d1d5db;
 }
 
 @media (min-width: 640px) {
@@ -1650,7 +1650,7 @@ body.code-mode .json-tab-active {
   height: 8px;
   border-radius: 50%;
   background: white;
-  border: 1.5px solid #f9d5c5;
+  border: 1.5px solid #d1d5db;
 }
 
 /* ── Timeline: Normal vs Code Mode ── */
