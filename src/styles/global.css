@@ -1432,6 +1432,7 @@ body.code-mode aside:hover {
 
 .eco-dep:hover {
   transform: translateY(-2px);
+  color: var(--accent-color, #D97757);
 }
 
 .eco-dep:hover svg {
@@ -1440,22 +1441,8 @@ body.code-mode aside:hover {
 }
 
 .eco-dep:hover .eco-dep-name {
-  color: var(--color-dark-700, #44403c);
+  color: var(--accent-color, #D97757);
 }
-
-/* Brand colors on hover */
-.eco-dep[data-brand="figma"]:hover { color: #A259FF; }
-.eco-dep[data-brand="figjam"]:hover { color: #F24E1E; }
-.eco-dep[data-brand="framer"]:hover { color: #0055FF; }
-.eco-dep[data-brand="maze"]:hover { color: #6366F1; }
-.eco-dep[data-brand="storybook"]:hover { color: #FF4785; }
-.eco-dep[data-brand="style-dictionary"]:hover { color: #1BC7B6; }
-.eco-dep[data-brand="zeroheight"]:hover { color: #1B1F3B; }
-.eco-dep[data-brand="supernova"]:hover { color: #6C5CE7; }
-.eco-dep[data-brand="astro"]:hover { color: #FF5D01; }
-.eco-dep[data-brand="tailwind"]:hover { color: #06B6D4; }
-.eco-dep[data-brand="typescript"]:hover { color: #3178C6; }
-.eco-dep[data-brand="github"]:hover { color: #181717; }
 
 /* Code mode: eco-cards */
 body.code-mode .eco-card {
