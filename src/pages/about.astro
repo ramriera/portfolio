@@ -162,6 +162,272 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
             </div>
           </div>
 
+          <!-- Timeline -->
+          <div data-reveal data-component="CareerTimeline">
+            <h2 class="heading-md mb-8">Trayectoria</h2>
+
+            <!-- Normal mode: hybrid timeline -->
+            <div class="timeline-flow ml-4 sm:ml-0" data-timeline-reveal>
+              {/* --- Hito Principal 1: Doctori (actual) --- */}
+              {(() => {
+                const doctori = mainTimeline[0];
+                return (
+                  <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-primary-300">
+                    {/* Node — solid accent, current role */}
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300 animate-doctori-pulse"></div>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{doctori.company}</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-2">{doctori.role}</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">{doctori.description}</p>
+                  </div>
+                );
+              })()}
+
+              {/* --- Bloque de Consultoría (segundo nivel, indentado) --- */}
+              <div class="timeline-branch-wrap relative border-l-2 border-gray-300 pb-0">
+                <div class="timeline-branch-offset">
+                  <div class="timeline-branch-inner">
+                    {/* Node — small, hollow */}
+                    <div class="timeline-branch-node"></div>
+
+                    {/* Pill tag */}
+                    <div class="mb-4">
+                      <span class="inline-block text-[9px] sm:text-[10px] font-bold tracking-[0.15em] uppercase text-gray-400 border border-gray-300 bg-transparent rounded-full px-3 py-1">
+                        En paralelo a Doctori.com
+                      </span>
+                    </div>
+
+                    <p class="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
+                      {consultingBlock.label}
+                    </p>
+
+                    <div class="consulting-list space-y-6">
+                      {consultingBlock.projects.map((project) => (
+                        <div class="consulting-item ml-0 sm:ml-1 transition-opacity duration-300">
+                          <span class="text-[10px] sm:text-xs text-gray-300 font-medium">{project.period}</span>
+                          <div class="flex items-baseline gap-2 mb-1 mt-0.5">
+                            <span class="font-bold text-dark-900 text-sm">{project.client}</span>
+                          </div>
+                          <p class="text-xs text-gray-400 mb-1.5">{project.role}</p>
+                          <p class="text-sm text-gray-400 leading-relaxed">{project.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* --- Hito Principal 2: JBM (origen) --- */}
+              {(() => {
+                const jbm = mainTimeline[1];
+                return (
+                  <div class="timeline-origin relative pl-6 sm:pl-8 pb-6 border-l-2 border-primary-300">
+                    {/* Node — accent outline, end of path */}
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-white border-2 border-primary-500"></div>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-gray-400">{jbm.year}</span>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{jbm.company}</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-2">{jbm.role}</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">{jbm.description}</p>
+                  </div>
+                );
+              })()}
+            </div>
+
+            <!-- Code mode: git log format -->
+            <div class="timeline-gitlog">
+              <div class="gitlog-pre">
+                <div class="gitlog-header">$ git log --oneline --graph --all</div>
+                {/* Main entries */}
+                {mainTimeline.map((item) => (
+                  <div class="gitlog-entry">
+                    <span class="gitlog-marker">*</span>{' '}
+                    <span class="gitlog-hash">{`${Math.random().toString(16).slice(2, 9)}`}</span>{' '}
+                    <span class="gitlog-date">({item.year})</span>{' '}
+                    <span class="gitlog-company">[{item.company}]</span>{' '}
+                    <span class="gitlog-role">{item.role}</span>
+                    <br />
+                    <span class="gitlog-indent">│</span>
+                    <span class="gitlog-message">{' '}{item.gitMsg}</span>
+                  </div>
+                ))}
+                {/* Consulting as merge commits */}
+                <div class="gitlog-entry" style="opacity: 0.6;">
+                  <span class="gitlog-marker">│</span>{' '}
+                  <span class="gitlog-date" style="color: var(--color-dark-400);">// consulting branch</span>
+                </div>
+                {consultingBlock.projects.map((p) => (
+                  <div class="gitlog-entry" style="opacity: 0.6;">
+                    <span class="gitlog-marker">├</span>{' '}
+                    <span class="gitlog-hash">{`${Math.random().toString(16).slice(2, 9)}`}</span>{' '}
+                    <span class="gitlog-date">({p.period})</span>{' '}
+                    <span class="gitlog-company">[{p.client}]</span>{' '}
+                    <span class="gitlog-message">{p.description}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI Stats Dashboard -->
+          <div data-reveal data-component="KPIDashboard">
+            <!-- Normal mode -->
+            <h2 class="heading-md mb-8 kpi-title-normal">Impacto en números</h2>
+            <h2 class="heading-md mb-8 kpi-title-code"><span class="code-comment">// </span>metrics.status<span class="code-punct">()</span></h2>
+
+            <div class="kpi-grid-normal grid grid-cols-1 sm:grid-cols-2 gap-4 mb-0">
+              <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark-400">Efficiency Boost</span>
+                </div>
+                <div class="font-mono text-4xl md:text-5xl font-bold text-dark-900 tracking-tight">+40<span class="text-primary-500">%</span></div>
+                <p class="text-body-sm mt-2">Mejora en velocidad de entrega de equipos de diseño tras implementación de Design Systems.</p>
+              </div>
+              <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark-400">Component Adoption</span>
+                </div>
+                <div class="font-mono text-4xl md:text-5xl font-bold text-dark-900 tracking-tight">95<span class="text-primary-500">%</span></div>
+                <p class="text-body-sm mt-2">Tasa de adopción de componentes del Design System en equipos de producto.</p>
+              </div>
+            </div>
+
+            <!-- Code mode: monitoring dashboard -->
+            <div class="kpi-grid-code">
+              <div class="kpi-monitor-window">
+                <div class="kpi-monitor-titlebar">
+                  <div class="json-dots">
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
+                  </div>
+                  <span class="kpi-monitor-filename">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+                    dashboard.metrics
+                  </span>
+                </div>
+                <div class="kpi-monitor-body">
+                  <div class="kpi-monitor-row">
+                    <span class="kpi-monitor-status kpi-monitor-status--up"></span>
+                    <span class="kpi-monitor-label">efficiency_boost</span>
+                    <span class="kpi-monitor-bar"><span class="kpi-monitor-fill" style="width: 80%"></span></span>
+                    <span class="kpi-monitor-value">+40%</span>
+                  </div>
+                  <div class="kpi-monitor-row">
+                    <span class="kpi-monitor-status kpi-monitor-status--up"></span>
+                    <span class="kpi-monitor-label">component_adoption</span>
+                    <span class="kpi-monitor-bar"><span class="kpi-monitor-fill" style="width: 95%"></span></span>
+                    <span class="kpi-monitor-value">95%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Metodología y Stack -->
+  <section class="section-padding methodology-stack-section" id="metodologia-stack" data-component="MethodologyStack">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div data-reveal class="text-center mb-16">
+          <h2 class="heading-lg mb-4">Metodología y <span class="text-primary-500">Stack</span></h2>
+          <p class="text-body">Base teórica, proceso práctico y herramientas de ejecución.</p>
+        </div>
+
+        <!-- ── 01. Principios de Diseño (base teórica) ── -->
+        <div class="methodology-block">
+          <!-- Design Principles -->
+          <div data-reveal data-component="DesignPrinciples">
+            <!-- Normal mode -->
+            <h2 class="heading-md mb-8 principles-title-normal">Principios de Diseño</h2>
+            <h2 class="heading-md mb-8 principles-title-code"><span class="code-comment">// </span>design_principles</h2>
+
+            <div class="principles-normal">
+              <div class="space-y-4">
+                <div class="group p-5 md:p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
+                  <div class="flex items-start gap-4">
+                    <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-500 font-mono text-sm font-bold">01</span>
+                    <div>
+                      <h3 class="font-bold text-lg mb-1">Systems over Screens</h3>
+                      <p class="text-body-sm">Diseño pensando en escalabilidad, no en casos aislados. Cada decisión de diseño debe funcionar como parte de un ecosistema coherente.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="group p-5 md:p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
+                  <div class="flex items-start gap-4">
+                    <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-500 font-mono text-sm font-bold">02</span>
+                    <div>
+                      <h3 class="font-bold text-lg mb-1">Documentation is a Product</h3>
+                      <p class="text-body-sm">Si no está documentado, no existe. La documentación es un producto en sí mismo que habilita la autonomía de los equipos.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="group p-5 md:p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
+                  <div class="flex items-start gap-4">
+                    <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-500 font-mono text-sm font-bold">03</span>
+                    <div>
+                      <h3 class="font-bold text-lg mb-1">Bridges, not Walls</h3>
+                      <p class="text-body-sm">El diseño debe facilitar el trabajo de ingeniería, no entorpecerlo. Construyo puentes entre disciplinas, no barreras.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Code mode: config file -->
+            <div class="principles-code">
+              <div class="principles-config-window">
+                <div class="principles-config-titlebar">
+                  <div class="json-dots">
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
+                  </div>
+                  <span class="principles-config-filename">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                    principles.config.ts
+                  </span>
+                </div>
+                <pre class="principles-config-body"><code><span class="pp-keyword">export const</span> <span class="pp-fn">principles</span> <span class="pp-punct">=</span> <span class="pp-bracket">[</span>
+  <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">id</span><span class="pp-punct">:</span> <span class="pp-string">"systems-over-screens"</span><span class="pp-punct">,</span>
+    <span class="pp-key">rule</span><span class="pp-punct">:</span> <span class="pp-string">"Systems over Screens"</span><span class="pp-punct">,</span>
+    <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span><span class="pp-punct">,</span>
+    <span class="pp-comment">// Diseño para escalabilidad, no casos aislados</span>
+  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
+  <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">id</span><span class="pp-punct">:</span> <span class="pp-string">"docs-as-product"</span><span class="pp-punct">,</span>
+    <span class="pp-key">rule</span><span class="pp-punct">:</span> <span class="pp-string">"Documentation is a Product"</span><span class="pp-punct">,</span>
+    <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span><span class="pp-punct">,</span>
+    <span class="pp-comment">// Si no está documentado, no existe</span>
+  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
+  <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">id</span><span class="pp-punct">:</span> <span class="pp-string">"bridges-not-walls"</span><span class="pp-punct">,</span>
+    <span class="pp-key">rule</span><span class="pp-punct">:</span> <span class="pp-string">"Bridges, not Walls"</span><span class="pp-punct">,</span>
+    <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span><span class="pp-punct">,</span>
+    <span class="pp-comment">// Design debe facilitar engineering, no entorpecerlo</span>
+  <span class="pp-bracket">{"}"}</span>
+<span class="pp-bracket">]</span> <span class="pp-keyword">as const</span><span class="pp-punct">;</span></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Separator -->
+        <div class="methodology-separator" aria-hidden="true">
+          <span class="methodology-separator-line"></span>
+          <span class="methodology-separator-label methodology-sep-normal">· · ·</span>
+          <span class="methodology-separator-label methodology-sep-code">// ---</span>
+          <span class="methodology-separator-line"></span>
+        </div>
+
+        <!-- ── 02. Cómo trabajo (proceso práctico) ── -->
+        <div class="methodology-block">
           <!-- Cómo trabajo — Visual Mode -->
           <div data-reveal data-component="ProcessSection">
             <h2 class="heading-md mb-8 process-title-normal">Cómo trabajo</h2>
@@ -290,255 +556,20 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
               </div>
             </div>
           </div>
-
-          <!-- Design Principles -->
-          <div data-reveal data-component="DesignPrinciples">
-            <!-- Normal mode -->
-            <h2 class="heading-md mb-8 principles-title-normal">Principios de Diseño</h2>
-            <h2 class="heading-md mb-8 principles-title-code"><span class="code-comment">// </span>design_principles</h2>
-
-            <div class="principles-normal">
-              <div class="space-y-4">
-                <div class="group p-5 md:p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
-                  <div class="flex items-start gap-4">
-                    <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-500 font-mono text-sm font-bold">01</span>
-                    <div>
-                      <h3 class="font-bold text-lg mb-1">Systems over Screens</h3>
-                      <p class="text-body-sm">Diseño pensando en escalabilidad, no en casos aislados. Cada decisión de diseño debe funcionar como parte de un ecosistema coherente.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="group p-5 md:p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
-                  <div class="flex items-start gap-4">
-                    <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-500 font-mono text-sm font-bold">02</span>
-                    <div>
-                      <h3 class="font-bold text-lg mb-1">Documentation is a Product</h3>
-                      <p class="text-body-sm">Si no está documentado, no existe. La documentación es un producto en sí mismo que habilita la autonomía de los equipos.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="group p-5 md:p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
-                  <div class="flex items-start gap-4">
-                    <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-500 font-mono text-sm font-bold">03</span>
-                    <div>
-                      <h3 class="font-bold text-lg mb-1">Bridges, not Walls</h3>
-                      <p class="text-body-sm">El diseño debe facilitar el trabajo de ingeniería, no entorpecerlo. Construyo puentes entre disciplinas, no barreras.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Code mode: config file -->
-            <div class="principles-code">
-              <div class="principles-config-window">
-                <div class="principles-config-titlebar">
-                  <div class="json-dots">
-                    <span class="json-dot json-dot--red"></span>
-                    <span class="json-dot json-dot--yellow"></span>
-                    <span class="json-dot json-dot--green"></span>
-                  </div>
-                  <span class="principles-config-filename">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                    principles.config.ts
-                  </span>
-                </div>
-                <pre class="principles-config-body"><code><span class="pp-keyword">export const</span> <span class="pp-fn">principles</span> <span class="pp-punct">=</span> <span class="pp-bracket">[</span>
-  <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">id</span><span class="pp-punct">:</span> <span class="pp-string">"systems-over-screens"</span><span class="pp-punct">,</span>
-    <span class="pp-key">rule</span><span class="pp-punct">:</span> <span class="pp-string">"Systems over Screens"</span><span class="pp-punct">,</span>
-    <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span><span class="pp-punct">,</span>
-    <span class="pp-comment">// Diseño para escalabilidad, no casos aislados</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-  <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">id</span><span class="pp-punct">:</span> <span class="pp-string">"docs-as-product"</span><span class="pp-punct">,</span>
-    <span class="pp-key">rule</span><span class="pp-punct">:</span> <span class="pp-string">"Documentation is a Product"</span><span class="pp-punct">,</span>
-    <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span><span class="pp-punct">,</span>
-    <span class="pp-comment">// Si no está documentado, no existe</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-  <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">id</span><span class="pp-punct">:</span> <span class="pp-string">"bridges-not-walls"</span><span class="pp-punct">,</span>
-    <span class="pp-key">rule</span><span class="pp-punct">:</span> <span class="pp-string">"Bridges, not Walls"</span><span class="pp-punct">,</span>
-    <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span><span class="pp-punct">,</span>
-    <span class="pp-comment">// Design debe facilitar engineering, no entorpecerlo</span>
-  <span class="pp-bracket">{"}"}</span>
-<span class="pp-bracket">]</span> <span class="pp-keyword">as const</span><span class="pp-punct">;</span></code></pre>
-              </div>
-            </div>
-          </div>
-
-          <!-- KPI Stats Dashboard -->
-          <div data-reveal data-component="KPIDashboard">
-            <!-- Normal mode -->
-            <h2 class="heading-md mb-8 kpi-title-normal">Impacto en números</h2>
-            <h2 class="heading-md mb-8 kpi-title-code"><span class="code-comment">// </span>metrics.status<span class="code-punct">()</span></h2>
-
-            <div class="kpi-grid-normal grid grid-cols-1 sm:grid-cols-2 gap-4 mb-0">
-              <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark-400">Efficiency Boost</span>
-                </div>
-                <div class="font-mono text-4xl md:text-5xl font-bold text-dark-900 tracking-tight">+40<span class="text-primary-500">%</span></div>
-                <p class="text-body-sm mt-2">Mejora en velocidad de entrega de equipos de diseño tras implementación de Design Systems.</p>
-              </div>
-              <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark-400">Component Adoption</span>
-                </div>
-                <div class="font-mono text-4xl md:text-5xl font-bold text-dark-900 tracking-tight">95<span class="text-primary-500">%</span></div>
-                <p class="text-body-sm mt-2">Tasa de adopción de componentes del Design System en equipos de producto.</p>
-              </div>
-            </div>
-
-            <!-- Code mode: monitoring dashboard -->
-            <div class="kpi-grid-code">
-              <div class="kpi-monitor-window">
-                <div class="kpi-monitor-titlebar">
-                  <div class="json-dots">
-                    <span class="json-dot json-dot--red"></span>
-                    <span class="json-dot json-dot--yellow"></span>
-                    <span class="json-dot json-dot--green"></span>
-                  </div>
-                  <span class="kpi-monitor-filename">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
-                    dashboard.metrics
-                  </span>
-                </div>
-                <div class="kpi-monitor-body">
-                  <div class="kpi-monitor-row">
-                    <span class="kpi-monitor-status kpi-monitor-status--up"></span>
-                    <span class="kpi-monitor-label">efficiency_boost</span>
-                    <span class="kpi-monitor-bar"><span class="kpi-monitor-fill" style="width: 80%"></span></span>
-                    <span class="kpi-monitor-value">+40%</span>
-                  </div>
-                  <div class="kpi-monitor-row">
-                    <span class="kpi-monitor-status kpi-monitor-status--up"></span>
-                    <span class="kpi-monitor-label">component_adoption</span>
-                    <span class="kpi-monitor-bar"><span class="kpi-monitor-fill" style="width: 95%"></span></span>
-                    <span class="kpi-monitor-value">95%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Timeline -->
-          <div data-reveal data-component="CareerTimeline">
-            <h2 class="heading-md mb-8">Trayectoria</h2>
-
-            <!-- Normal mode: hybrid timeline -->
-            <div class="timeline-flow ml-4 sm:ml-0" data-timeline-reveal>
-              {/* --- Hito Principal 1: Doctori (actual) --- */}
-              {(() => {
-                const doctori = mainTimeline[0];
-                return (
-                  <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-primary-300">
-                    {/* Node — solid accent, current role */}
-                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300 animate-doctori-pulse"></div>
-                    <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
-                    <h3 class="font-bold text-lg mt-1 text-dark-900">{doctori.company}</h3>
-                    <p class="text-sm font-medium text-gray-500 mb-2">{doctori.role}</p>
-                    <p class="text-sm text-gray-400 leading-relaxed">{doctori.description}</p>
-                  </div>
-                );
-              })()}
-
-              {/* --- Bloque de Consultoría (segundo nivel, indentado) --- */}
-              <div class="timeline-branch-wrap relative border-l-2 border-gray-300 pb-0">
-                <div class="timeline-branch-offset">
-                  <div class="timeline-branch-inner">
-                    {/* Node — small, hollow */}
-                    <div class="timeline-branch-node"></div>
-
-                    {/* Pill tag */}
-                    <div class="mb-4">
-                      <span class="inline-block text-[9px] sm:text-[10px] font-bold tracking-[0.15em] uppercase text-gray-400 border border-gray-300 bg-transparent rounded-full px-3 py-1">
-                        En paralelo a Doctori.com
-                      </span>
-                    </div>
-
-                    <p class="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
-                      {consultingBlock.label}
-                    </p>
-
-                    <div class="consulting-list space-y-6">
-                      {consultingBlock.projects.map((project) => (
-                        <div class="consulting-item ml-0 sm:ml-1 transition-opacity duration-300">
-                          <span class="text-[10px] sm:text-xs text-gray-300 font-medium">{project.period}</span>
-                          <div class="flex items-baseline gap-2 mb-1 mt-0.5">
-                            <span class="font-bold text-dark-900 text-sm">{project.client}</span>
-                          </div>
-                          <p class="text-xs text-gray-400 mb-1.5">{project.role}</p>
-                          <p class="text-sm text-gray-400 leading-relaxed">{project.description}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* --- Hito Principal 2: JBM (origen) --- */}
-              {(() => {
-                const jbm = mainTimeline[1];
-                return (
-                  <div class="timeline-origin relative pl-6 sm:pl-8 pb-6 border-l-2 border-primary-300">
-                    {/* Node — accent outline, end of path */}
-                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-white border-2 border-primary-500"></div>
-                    <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-gray-400">{jbm.year}</span>
-                    <h3 class="font-bold text-lg mt-1 text-dark-900">{jbm.company}</h3>
-                    <p class="text-sm font-medium text-gray-500 mb-2">{jbm.role}</p>
-                    <p class="text-sm text-gray-400 leading-relaxed">{jbm.description}</p>
-                  </div>
-                );
-              })()}
-            </div>
-
-            <!-- Code mode: git log format -->
-            <div class="timeline-gitlog">
-              <div class="gitlog-pre">
-                <div class="gitlog-header">$ git log --oneline --graph --all</div>
-                {/* Main entries */}
-                {mainTimeline.map((item) => (
-                  <div class="gitlog-entry">
-                    <span class="gitlog-marker">*</span>{' '}
-                    <span class="gitlog-hash">{`${Math.random().toString(16).slice(2, 9)}`}</span>{' '}
-                    <span class="gitlog-date">({item.year})</span>{' '}
-                    <span class="gitlog-company">[{item.company}]</span>{' '}
-                    <span class="gitlog-role">{item.role}</span>
-                    <br />
-                    <span class="gitlog-indent">│</span>
-                    <span class="gitlog-message">{' '}{item.gitMsg}</span>
-                  </div>
-                ))}
-                {/* Consulting as merge commits */}
-                <div class="gitlog-entry" style="opacity: 0.6;">
-                  <span class="gitlog-marker">│</span>{' '}
-                  <span class="gitlog-date" style="color: var(--color-dark-400);">// consulting branch</span>
-                </div>
-                {consultingBlock.projects.map((p) => (
-                  <div class="gitlog-entry" style="opacity: 0.6;">
-                    <span class="gitlog-marker">├</span>{' '}
-                    <span class="gitlog-hash">{`${Math.random().toString(16).slice(2, 9)}`}</span>{' '}
-                    <span class="gitlog-date">({p.period})</span>{' '}
-                    <span class="gitlog-company">[{p.client}]</span>{' '}
-                    <span class="gitlog-message">{p.description}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Tech Stack -->
-  <section class="section-padding" data-component="TechStackSection">
-    <div class="container-custom">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <div data-reveal class="mb-6 flex justify-center">
+        <!-- Separator -->
+        <div class="methodology-separator" aria-hidden="true">
+          <span class="methodology-separator-line"></span>
+          <span class="methodology-separator-label methodology-sep-normal">· · ·</span>
+          <span class="methodology-separator-label methodology-sep-code">// ---</span>
+          <span class="methodology-separator-line"></span>
+        </div>
+
+        <!-- ── 03. Herramientas que domino (ejecución técnica) ── -->
+        <div class="methodology-block" data-component="TechStackSection">
+          <div data-reveal class="text-center mb-12">
+            <div class="mb-6 flex justify-center">
           <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
               <!-- Bottom layer -->
@@ -554,18 +585,14 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
               <circle cx="8" cy="8" r="1" class="icon-accent-fill icon-bulb-ray-2" />
             </svg>
           </span>
-        </div>
-        <h2 data-reveal data-delay="100" class="heading-lg mb-4">
-          Herramientas que <span class="text-primary-500">domino</span>
-        </h2>
-        <p data-reveal data-delay="200" class="text-body">
-          Un ecosistema de herramientas que me permiten diseñar, desarrollar y escalar productos digitales.
-        </p>
-      </div>
+            </div>
+            <h2 class="heading-md mb-4">Herramientas que <span class="text-primary-500">domino</span></h2>
+            <p class="text-body">Un ecosistema de herramientas que me permiten diseñar, desarrollar y escalar productos digitales.</p>
+          </div>
 
-      <!-- Editorial Tool List -->
-      <div class="tech-stack-container" data-reveal data-delay="300">
-        <div class="tool-list" data-component="ToolList">
+          <!-- Editorial Tool List -->
+          <div class="tech-stack-container" data-reveal>
+            <div class="tool-list" data-component="ToolList">
 
           <!-- ═══ Design & UX Strategy ═══ -->
           <div class="tool-list-section">
@@ -702,6 +729,9 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
 <span class="json-line">  <span class="json-key">"principles"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Systems over Screens"</span><span class="json-comma">,</span> <span class="json-string">"Docs as Product"</span><span class="json-comma">,</span> <span class="json-string">"Bridges not Walls"</span><span class="json-bracket">]</span></span>
 <span class="json-line"><span class="json-bracket">}</span></span></code></pre>
           </div>
+        </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>

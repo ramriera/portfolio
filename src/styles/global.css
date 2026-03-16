@@ -1731,6 +1731,60 @@ body.code-mode .timeline-gitlog {
   color: #50fa7b;
 }
 
+/* ── Methodology & Stack section ── */
+.methodology-stack-section {
+  background: var(--color-dark-50, #f7f5f2);
+}
+
+body.code-mode .methodology-stack-section {
+  background: transparent;
+}
+
+.methodology-block {
+  margin-bottom: 3rem;
+}
+
+.methodology-block:last-child {
+  margin-bottom: 0;
+}
+
+.methodology-separator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem 0;
+}
+
+.methodology-separator-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-dark-200, #d4cfc5);
+}
+
+body.code-mode .methodology-separator-line {
+  background: var(--cm-border, #30363d);
+}
+
+.methodology-separator-label {
+  font-size: 0.75rem;
+  color: var(--color-dark-300, #a8a29e);
+  letter-spacing: 0.15em;
+}
+
+.methodology-sep-code {
+  display: none;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+body.code-mode .methodology-sep-normal {
+  display: none;
+}
+
+body.code-mode .methodology-sep-code {
+  display: inline;
+  color: #6c7086;
+}
+
 /* ── About page: "Soy" and section headings adopt code-mode colors ── */
 body.code-mode [data-component="AboutHero"] h1,
 body.code-mode [data-component="AboutHero"] .heading-xl,
@@ -1738,6 +1792,8 @@ body.code-mode [data-component="BiographySection"] .heading-md,
 body.code-mode [data-component="CareerTimeline"] .heading-md,
 body.code-mode [data-component="ValuesGrid"] .heading-md,
 body.code-mode [data-component="TechStackSection"] .heading-lg,
+body.code-mode [data-component="MethodologyStack"] .heading-lg,
+body.code-mode [data-component="MethodologyStack"] .heading-md,
 body.code-mode [data-component="WorkflowSection"] .heading-lg,
 body.code-mode [data-component="CallToAction"] .heading-lg {
   color: #e6edf3 !important;
@@ -1754,6 +1810,7 @@ body.code-mode .hero-main-content .text-dark-900 {
 
 /* Section labels (Stack, Workflow, etc.) in code mode */
 body.code-mode [data-component="TechStackSection"] .text-primary-500,
+body.code-mode [data-component="MethodologyStack"] .text-primary-500,
 body.code-mode [data-component="WorkflowSection"] .text-primary-500,
 body.code-mode [data-component="AboutHero"] .text-primary-500 {
   color: #50fa7b !important;
