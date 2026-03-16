@@ -1340,10 +1340,14 @@ body.code-mode aside:hover {
   background: #fff;
   border: 1px solid #e8e4dd;
   border-radius: 1rem;
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  .eco-card { padding: 1.125rem; }
 }
 
 .eco-card:hover {
@@ -1395,14 +1399,14 @@ body.code-mode aside:hover {
 }
 
 .eco-card-title {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--color-dark-900, #1a1918);
-  margin-bottom: 0.625rem;
+  margin-bottom: 0.5rem;
 }
 
 .eco-card-desc {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   line-height: 1.6;
   color: var(--color-dark-400, #7c766c);
   flex: 1;
