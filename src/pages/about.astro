@@ -335,16 +335,23 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <div data-reveal class="text-center mb-16">
-          <div class="methodology-lottie-wrapper">
-            <lottie-player
-              src="/assets/lottie/methodology-gear.json"
-              background="transparent"
-              speed="0.5"
-              style="width: 80px; height: 80px; margin: 0 auto 1rem;"
-              loop
-              autoplay>
-            </lottie-player>
-          </div>
+          <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+              <!-- Large gear -->
+              <g class="icon-gear-spin">
+                <circle cx="19" cy="22" r="4" class="icon-stroke icon-draw" />
+                <path d="M19 14v-2M19 32v-2M27 22h2M10 22h2M25.5 16.5l1.4-1.4M11.1 27.5l1.4-1.4M25.5 27.5l1.4 1.4M11.1 16.5l1.4 1.4" class="icon-stroke icon-draw-delay" />
+                <circle cx="19" cy="22" r="8.5" class="icon-accent icon-draw-delay" stroke-dasharray="2.5 3.8" />
+              </g>
+              <!-- Small gear -->
+              <g class="icon-gear-spin-reverse">
+                <circle cx="31" cy="12" r="2.5" class="icon-stroke icon-draw" />
+                <path d="M31 7v-1M31 18v-1M35 12h1M26 12h1M34 9l.7-.7M27.3 15l.7-.7M34 15l.7.7M27.3 9l.7.7" class="icon-accent icon-draw-delay" />
+              </g>
+              <!-- Accent dot -->
+              <circle cx="34" cy="34" r="1.5" class="icon-accent-fill icon-gear-dot" />
+            </svg>
+          </span>
           <h2 class="heading-lg mb-4">Metodología y <span class="text-primary-500">Stack</span></h2>
           <p class="text-body">Base teórica, proceso práctico y herramientas de ejecución.</p>
         </div>
@@ -674,5 +681,4 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
     </div>
   </section>
 
-  <script is:inline src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
 </BaseLayout>
