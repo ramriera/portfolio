@@ -2316,19 +2316,7 @@ body.code-mode .dashed-border:hover {
   box-shadow: var(--cm-glow) !important;
 }
 
-/* Process cards: consistent with Home card surfaces */
-body.code-mode [data-component="ProcessSection"] .dashed-border {
-  background: var(--cm-bg-surface) !important;
-  border-color: var(--cm-border) !important;
-}
-
-body.code-mode [data-component="ProcessSection"] .dashed-border h3 {
-  color: var(--cm-constant) !important; /* yellow — component names */
-}
-
-body.code-mode [data-component="ProcessSection"] .dashed-border p {
-  color: var(--cm-text-muted) !important;
-}
+/* Process cards: code-mode overrides handled in process-section block below */
 
 /* Social links on About */
 body.code-mode [data-component="SocialLinks"] a.dashed-border {
@@ -2405,6 +2393,282 @@ body.code-mode [data-component="AboutHero"] .about-desc-code {
 .about-desc-code .comment-highlight {
   color: var(--cm-constant, #f1fa8c);
   font-style: normal;
+}
+
+/* ── Process Section: dual mode titles ── */
+.process-title-code { display: none; }
+.process-title-code .code-comment { color: var(--cm-comment, #6272a4); }
+.process-title-code .code-punct { color: var(--cm-text-muted, #7d8590); }
+
+body.code-mode .process-title-normal { display: none; }
+body.code-mode .process-title-code { display: block; }
+
+/* Process grid: normal visible, code hidden by default */
+.process-grid-code { display: none; }
+body.code-mode .process-grid-normal { display: none; }
+body.code-mode .process-grid-code { display: block; }
+
+/* Process pipeline: code-mode window */
+.process-pipeline-window {
+  border: 1px solid var(--cm-border, #30363d);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--cm-bg-surface, #161b22);
+}
+
+.process-pipeline-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  background: var(--cm-bg-card, #1c2128);
+  border-bottom: 1px solid var(--cm-border, #30363d);
+  font-size: 0.75rem;
+}
+
+.process-pipeline-filename {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--cm-text-muted, #7d8590);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+}
+
+.process-pipeline-body {
+  padding: 1.25rem 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: var(--cm-text, #e6edf3);
+  overflow-x: auto;
+}
+
+/* Pipeline syntax colors */
+.pp-keyword { color: var(--cm-keyword, #bd93f9); }
+.pp-fn { color: var(--cm-function, #8be9fd); }
+.pp-punct { color: var(--cm-text-muted, #7d8590); }
+.pp-bracket { color: var(--cm-tag, #ff79c6); }
+.pp-key { color: var(--cm-constant, #f1fa8c); }
+.pp-string { color: var(--cm-string, #50fa7b); }
+.pp-comment { color: var(--cm-comment, #6272a4); font-style: italic; }
+.pp-constant { color: var(--cm-attr, #ffb86c); }
+
+/* Process cards: code mode override */
+body.code-mode [data-component="ProcessSection"] .process-card {
+  background: var(--cm-bg-surface) !important;
+  border-color: var(--cm-border) !important;
+}
+
+body.code-mode [data-component="ProcessSection"] .process-card h3 {
+  color: var(--cm-constant) !important;
+}
+
+body.code-mode [data-component="ProcessSection"] .process-card p {
+  color: var(--cm-text-muted) !important;
+}
+
+/* ── Design Principles: dual mode ── */
+.principles-title-code { display: none; }
+.principles-title-code .code-comment { color: var(--cm-comment, #6272a4); }
+.principles-code { display: none; }
+
+body.code-mode .principles-title-normal { display: none; }
+body.code-mode .principles-title-code { display: block; }
+body.code-mode .principles-normal { display: none; }
+body.code-mode .principles-code { display: block; }
+
+/* Principles: code mode cards */
+body.code-mode [data-component="DesignPrinciples"] .dashed-border {
+  background: var(--cm-bg-surface) !important;
+  border-color: var(--cm-border) !important;
+}
+
+body.code-mode [data-component="DesignPrinciples"] h3 {
+  color: var(--cm-constant) !important;
+}
+
+body.code-mode [data-component="DesignPrinciples"] p {
+  color: var(--cm-text-muted) !important;
+}
+
+/* Principles config window (code mode) */
+.principles-config-window {
+  border: 1px solid var(--cm-border, #30363d);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--cm-bg-surface, #161b22);
+}
+
+.principles-config-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  background: var(--cm-bg-card, #1c2128);
+  border-bottom: 1px solid var(--cm-border, #30363d);
+  font-size: 0.75rem;
+}
+
+.principles-config-filename {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--cm-text-muted, #7d8590);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+}
+
+.principles-config-body {
+  padding: 1.25rem 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: var(--cm-text, #e6edf3);
+  overflow-x: auto;
+}
+
+/* ── KPI Dashboard: dual mode ── */
+.kpi-title-code { display: none; }
+.kpi-title-code .code-comment { color: var(--cm-comment, #6272a4); }
+.kpi-title-code .code-punct { color: var(--cm-text-muted, #7d8590); }
+.kpi-grid-code { display: none; }
+
+body.code-mode .kpi-title-normal { display: none; }
+body.code-mode .kpi-title-code { display: block; }
+body.code-mode .kpi-grid-normal { display: none !important; }
+body.code-mode .kpi-grid-code { display: block; }
+
+/* KPI cards normal mode */
+.kpi-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #D97757, #D9775740);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.kpi-card:hover::before {
+  opacity: 1;
+}
+
+/* KPI code-mode: code mode card overrides */
+body.code-mode [data-component="KPIDashboard"] .kpi-card {
+  background: var(--cm-bg-surface) !important;
+  border-color: var(--cm-border) !important;
+}
+
+/* KPI Monitor window (code mode) */
+.kpi-monitor-window {
+  border: 1px solid var(--cm-border, #30363d);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--cm-bg-surface, #161b22);
+}
+
+.kpi-monitor-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  background: var(--cm-bg-card, #1c2128);
+  border-bottom: 1px solid var(--cm-border, #30363d);
+  font-size: 0.75rem;
+}
+
+.kpi-monitor-filename {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--cm-text-muted, #7d8590);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+}
+
+.kpi-monitor-body {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.kpi-monitor-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.kpi-monitor-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.kpi-monitor-status--up {
+  background: var(--cm-string, #50fa7b);
+  box-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
+  animation: kpi-pulse 2s ease-in-out infinite;
+}
+
+@keyframes kpi-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.kpi-monitor-label {
+  color: var(--cm-constant, #f1fa8c);
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.kpi-monitor-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--cm-bg-hover, #21262d);
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 60px;
+}
+
+.kpi-monitor-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cm-string, #50fa7b), var(--cm-function, #8be9fd));
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+.kpi-monitor-value {
+  color: var(--cm-string, #50fa7b);
+  font-weight: 700;
+  min-width: 48px;
+  text-align: right;
+}
+
+/* ── KPI Monitor responsive ── */
+@media (max-width: 640px) {
+  .kpi-monitor-row {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .kpi-monitor-label {
+    min-width: 100%;
+  }
+  .kpi-monitor-bar {
+    flex: 1;
+  }
 }
 
 /* ── Git Log: accent-colored hashes ── */

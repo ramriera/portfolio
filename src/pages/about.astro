@@ -162,25 +162,264 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
             </div>
           </div>
 
-          <!-- Cómo trabajo -->
+          <!-- Cómo trabajo — Visual Mode -->
           <div data-reveal data-component="ProcessSection">
-            <h2 class="heading-md mb-8">Cómo trabajo</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="p-5 md:p-6 rounded-2xl dashed-border bg-white">
-                <h3 class="font-bold text-lg mb-3">Discovery & Estrategia</h3>
-                <p class="text-body-sm">Antes de producir nada, enmarco el problema. Realizo entrevistas con stakeholders, analizo datos existentes y alineo las decisiones de diseño con los objetivos de negocio. El resultado es una dirección clara y compartida por todos los equipos.</p>
+            <h2 class="heading-md mb-8 process-title-normal">Cómo trabajo</h2>
+            <h2 class="heading-md mb-8 process-title-code"><span class="code-comment">// </span>how_i_work<span class="code-punct">()</span></h2>
+
+            <!-- Normal mode: 2×2 grid with SVG diagrams -->
+            <div class="process-grid-normal grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Discovery -->
+              <div class="process-card group p-5 md:p-6 rounded-2xl dashed-border bg-white">
+                <div class="flex items-start gap-4 mb-4">
+                  <div class="process-card-icon flex-shrink-0 w-12 h-12 rounded-xl dashed-border flex items-center justify-center bg-dark-50 group-hover:bg-primary-50 transition-colors duration-300">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" class="text-dark-400 group-hover:text-primary-500 transition-colors duration-300">
+                      <circle cx="9" cy="10" r="5" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/>
+                      <circle cx="19" cy="10" r="5" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/>
+                      <circle cx="14" cy="18" r="5" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/>
+                      <circle cx="14" cy="12.5" r="1.5" fill="currentColor" opacity="0.8"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="process-card-step text-[10px] font-semibold tracking-[0.2em] uppercase text-primary-500">01</span>
+                    <h3 class="font-bold text-lg">Discovery</h3>
+                  </div>
+                </div>
+                <p class="text-body-sm">Enmarco el problema antes de producir. Entrevistas con stakeholders, análisis de datos y alineación de diseño con objetivos de negocio.</p>
               </div>
-              <div class="p-5 md:p-6 rounded-2xl dashed-border bg-white">
-                <h3 class="font-bold text-lg mb-3">Diseño & Sistemas</h3>
-                <p class="text-body-sm">Traduzco la investigación en arquitectura: design tokens, librerías de componentes y patrones reutilizables. Las decisiones de diseño se convierten en sistemas escalables que mantienen la coherencia a través de múltiples productos y plataformas.</p>
+
+              <!-- Sistemas -->
+              <div class="process-card group p-5 md:p-6 rounded-2xl dashed-border bg-white">
+                <div class="flex items-start gap-4 mb-4">
+                  <div class="process-card-icon flex-shrink-0 w-12 h-12 rounded-xl dashed-border flex items-center justify-center bg-dark-50 group-hover:bg-primary-50 transition-colors duration-300">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" class="text-dark-400 group-hover:text-primary-500 transition-colors duration-300">
+                      <rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2" fill="none"/>
+                      <rect x="17" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                      <rect x="3" y="17" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                      <rect x="17" y="17" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2" fill="none"/>
+                      <line x1="11" y1="7" x2="17" y2="7" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                      <line x1="7" y1="15" x2="7" y2="17" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                      <line x1="21" y1="11" x2="21" y2="17" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="process-card-step text-[10px] font-semibold tracking-[0.2em] uppercase text-primary-500">02</span>
+                    <h3 class="font-bold text-lg">Sistemas</h3>
+                  </div>
+                </div>
+                <p class="text-body-sm">Traduzco investigación en arquitectura: design tokens, librerías de componentes y patrones reutilizables que escalan entre productos.</p>
               </div>
-              <div class="p-5 md:p-6 rounded-2xl dashed-border bg-white">
-                <h3 class="font-bold text-lg mb-3">Implementación & Entrega</h3>
-                <p class="text-body-sm">Trabajo codo a codo con los equipos de desarrollo. Gestiono el handoff, reviso la implementación y me aseguro de que la intención de diseño sobreviva al código. Mi perfil técnico me permite hablar el mismo idioma que ingeniería.</p>
+
+              <!-- Implementación -->
+              <div class="process-card group p-5 md:p-6 rounded-2xl dashed-border bg-white">
+                <div class="flex items-start gap-4 mb-4">
+                  <div class="process-card-icon flex-shrink-0 w-12 h-12 rounded-xl dashed-border flex items-center justify-center bg-dark-50 group-hover:bg-primary-50 transition-colors duration-300">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" class="text-dark-400 group-hover:text-primary-500 transition-colors duration-300">
+                      <path d="M8 8L3 14L8 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M20 8L25 14L20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="16" y1="5" x2="12" y2="23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="process-card-step text-[10px] font-semibold tracking-[0.2em] uppercase text-primary-500">03</span>
+                    <h3 class="font-bold text-lg">Implementación</h3>
+                  </div>
+                </div>
+                <p class="text-body-sm">Trabajo codo a codo con desarrollo. Gestiono handoff, reviso implementación y aseguro que la intención de diseño sobreviva al código.</p>
               </div>
-              <div class="p-5 md:p-6 rounded-2xl dashed-border bg-white">
-                <h3 class="font-bold text-lg mb-3">Iteración & Impacto</h3>
-                <p class="text-body-sm">Mido el éxito con métricas reales: adopción de componentes, reducción de inconsistencias, velocidad de entrega. Los feedback loops con usuarios y equipos internos definen cuándo un producto está realmente terminado.</p>
+
+              <!-- Iteración -->
+              <div class="process-card group p-5 md:p-6 rounded-2xl dashed-border bg-white">
+                <div class="flex items-start gap-4 mb-4">
+                  <div class="process-card-icon flex-shrink-0 w-12 h-12 rounded-xl dashed-border flex items-center justify-center bg-dark-50 group-hover:bg-primary-50 transition-colors duration-300">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" class="text-dark-400 group-hover:text-primary-500 transition-colors duration-300">
+                      <path d="M21 10C21 6.134 17.866 3 14 3C11.28 3 8.92 4.573 7.8 6.85" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                      <path d="M7 18C7 21.866 10.134 25 14 25C16.72 25 19.08 23.427 20.2 21.15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                      <path d="M5 7L7.8 6.85L8 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M23 21L20.2 21.15L20 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="14" cy="14" r="2" fill="currentColor" opacity="0.5"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="process-card-step text-[10px] font-semibold tracking-[0.2em] uppercase text-primary-500">04</span>
+                    <h3 class="font-bold text-lg">Iteración</h3>
+                  </div>
+                </div>
+                <p class="text-body-sm">Mido el éxito con métricas reales: adopción, consistencia, velocidad. Feedback loops con usuarios y equipos definen cuándo el producto está terminado.</p>
+              </div>
+            </div>
+
+            <!-- Code mode: pipeline flow -->
+            <div class="process-grid-code">
+              <div class="process-pipeline">
+                <div class="process-pipeline-window">
+                  <div class="process-pipeline-titlebar">
+                    <div class="json-dots">
+                      <span class="json-dot json-dot--red"></span>
+                      <span class="json-dot json-dot--yellow"></span>
+                      <span class="json-dot json-dot--green"></span>
+                    </div>
+                    <span class="process-pipeline-filename">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                      workflow.ts
+                    </span>
+                  </div>
+                  <pre class="process-pipeline-body"><code><span class="pp-keyword">const</span> <span class="pp-fn">designPipeline</span> <span class="pp-punct">=</span> <span class="pp-bracket">[</span>
+  <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">stage</span><span class="pp-punct">:</span> <span class="pp-string">"discovery"</span><span class="pp-punct">,</span>
+    <span class="pp-key">actions</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"stakeholder interviews"</span><span class="pp-punct">,</span> <span class="pp-string">"data analysis"</span><span class="pp-punct">,</span> <span class="pp-string">"goal alignment"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"shared direction"</span>
+  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
+  <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">stage</span><span class="pp-punct">:</span> <span class="pp-string">"systems"</span><span class="pp-punct">,</span>
+    <span class="pp-key">actions</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"tokens"</span><span class="pp-punct">,</span> <span class="pp-string">"components"</span><span class="pp-punct">,</span> <span class="pp-string">"patterns"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"scalable architecture"</span>
+  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
+  <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">stage</span><span class="pp-punct">:</span> <span class="pp-string">"implementation"</span><span class="pp-punct">,</span>
+    <span class="pp-key">actions</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"handoff"</span><span class="pp-punct">,</span> <span class="pp-string">"code review"</span><span class="pp-punct">,</span> <span class="pp-string">"QA"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"design-faithful code"</span>
+  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
+  <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">stage</span><span class="pp-punct">:</span> <span class="pp-string">"iteration"</span><span class="pp-punct">,</span>
+    <span class="pp-key">actions</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"metrics"</span><span class="pp-punct">,</span> <span class="pp-string">"feedback loops"</span><span class="pp-punct">,</span> <span class="pp-string">"adoption tracking"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"continuous improvement"</span>
+  <span class="pp-bracket">{"}"}</span>
+<span class="pp-bracket">]</span><span class="pp-punct">;</span></code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Design Principles -->
+          <div data-reveal data-component="DesignPrinciples">
+            <!-- Normal mode -->
+            <h2 class="heading-md mb-8 principles-title-normal">Principios de Diseño</h2>
+            <h2 class="heading-md mb-8 principles-title-code"><span class="code-comment">// </span>design_principles</h2>
+
+            <div class="principles-normal">
+              <div class="space-y-4">
+                <div class="group p-5 md:p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
+                  <div class="flex items-start gap-4">
+                    <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-500 font-mono text-sm font-bold">01</span>
+                    <div>
+                      <h3 class="font-bold text-lg mb-1">Systems over Screens</h3>
+                      <p class="text-body-sm">Diseño pensando en escalabilidad, no en casos aislados. Cada decisión de diseño debe funcionar como parte de un ecosistema coherente.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="group p-5 md:p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
+                  <div class="flex items-start gap-4">
+                    <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-500 font-mono text-sm font-bold">02</span>
+                    <div>
+                      <h3 class="font-bold text-lg mb-1">Documentation is a Product</h3>
+                      <p class="text-body-sm">Si no está documentado, no existe. La documentación es un producto en sí mismo que habilita la autonomía de los equipos.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="group p-5 md:p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
+                  <div class="flex items-start gap-4">
+                    <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-500 font-mono text-sm font-bold">03</span>
+                    <div>
+                      <h3 class="font-bold text-lg mb-1">Bridges, not Walls</h3>
+                      <p class="text-body-sm">El diseño debe facilitar el trabajo de ingeniería, no entorpecerlo. Construyo puentes entre disciplinas, no barreras.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Code mode: config file -->
+            <div class="principles-code">
+              <div class="principles-config-window">
+                <div class="principles-config-titlebar">
+                  <div class="json-dots">
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
+                  </div>
+                  <span class="principles-config-filename">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                    principles.config.ts
+                  </span>
+                </div>
+                <pre class="principles-config-body"><code><span class="pp-keyword">export const</span> <span class="pp-fn">principles</span> <span class="pp-punct">=</span> <span class="pp-bracket">[</span>
+  <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">id</span><span class="pp-punct">:</span> <span class="pp-string">"systems-over-screens"</span><span class="pp-punct">,</span>
+    <span class="pp-key">rule</span><span class="pp-punct">:</span> <span class="pp-string">"Systems over Screens"</span><span class="pp-punct">,</span>
+    <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span><span class="pp-punct">,</span>
+    <span class="pp-comment">// Diseño para escalabilidad, no casos aislados</span>
+  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
+  <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">id</span><span class="pp-punct">:</span> <span class="pp-string">"docs-as-product"</span><span class="pp-punct">,</span>
+    <span class="pp-key">rule</span><span class="pp-punct">:</span> <span class="pp-string">"Documentation is a Product"</span><span class="pp-punct">,</span>
+    <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span><span class="pp-punct">,</span>
+    <span class="pp-comment">// Si no está documentado, no existe</span>
+  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
+  <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">id</span><span class="pp-punct">:</span> <span class="pp-string">"bridges-not-walls"</span><span class="pp-punct">,</span>
+    <span class="pp-key">rule</span><span class="pp-punct">:</span> <span class="pp-string">"Bridges, not Walls"</span><span class="pp-punct">,</span>
+    <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span><span class="pp-punct">,</span>
+    <span class="pp-comment">// Design debe facilitar engineering, no entorpecerlo</span>
+  <span class="pp-bracket">{"}"}</span>
+<span class="pp-bracket">]</span> <span class="pp-keyword">as const</span><span class="pp-punct">;</span></code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI Stats Dashboard -->
+          <div data-reveal data-component="KPIDashboard">
+            <!-- Normal mode -->
+            <h2 class="heading-md mb-8 kpi-title-normal">Impacto en números</h2>
+            <h2 class="heading-md mb-8 kpi-title-code"><span class="code-comment">// </span>metrics.status<span class="code-punct">()</span></h2>
+
+            <div class="kpi-grid-normal grid grid-cols-1 sm:grid-cols-2 gap-4 mb-0">
+              <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark-400">Efficiency Boost</span>
+                </div>
+                <div class="font-mono text-4xl md:text-5xl font-bold text-dark-900 tracking-tight">+40<span class="text-primary-500">%</span></div>
+                <p class="text-body-sm mt-2">Mejora en velocidad de entrega de equipos de diseño tras implementación de Design Systems.</p>
+              </div>
+              <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white hover:border-primary-300 transition-all duration-300">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark-400">Component Adoption</span>
+                </div>
+                <div class="font-mono text-4xl md:text-5xl font-bold text-dark-900 tracking-tight">95<span class="text-primary-500">%</span></div>
+                <p class="text-body-sm mt-2">Tasa de adopción de componentes del Design System en equipos de producto.</p>
+              </div>
+            </div>
+
+            <!-- Code mode: monitoring dashboard -->
+            <div class="kpi-grid-code">
+              <div class="kpi-monitor-window">
+                <div class="kpi-monitor-titlebar">
+                  <div class="json-dots">
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
+                  </div>
+                  <span class="kpi-monitor-filename">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+                    dashboard.metrics
+                  </span>
+                </div>
+                <div class="kpi-monitor-body">
+                  <div class="kpi-monitor-row">
+                    <span class="kpi-monitor-status kpi-monitor-status--up"></span>
+                    <span class="kpi-monitor-label">efficiency_boost</span>
+                    <span class="kpi-monitor-bar"><span class="kpi-monitor-fill" style="width: 80%"></span></span>
+                    <span class="kpi-monitor-value">+40%</span>
+                  </div>
+                  <div class="kpi-monitor-row">
+                    <span class="kpi-monitor-status kpi-monitor-status--up"></span>
+                    <span class="kpi-monitor-label">component_adoption</span>
+                    <span class="kpi-monitor-bar"><span class="kpi-monitor-fill" style="width: 95%"></span></span>
+                    <span class="kpi-monitor-value">95%</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -463,10 +702,7 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
 <span class="json-line">  <span class="json-key">"design_ux"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Figma"</span><span class="json-comma">,</span> <span class="json-string">"FigJam"</span><span class="json-comma">,</span> <span class="json-string">"Framer"</span><span class="json-comma">,</span> <span class="json-string">"Protopie"</span><span class="json-comma">,</span> <span class="json-string">"Maze"</span><span class="json-bracket">]</span><span class="json-comma">,</span></span>
 <span class="json-line">  <span class="json-key">"design_ops"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Storybook"</span><span class="json-comma">,</span> <span class="json-string">"Style Dictionary"</span><span class="json-comma">,</span> <span class="json-string">"Zeroheight"</span><span class="json-comma">,</span> <span class="json-string">"Supernova"</span><span class="json-comma">,</span> <span class="json-string">"Lottie"</span><span class="json-bracket">]</span><span class="json-comma">,</span></span>
 <span class="json-line">  <span class="json-key">"engineering"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"VS Code"</span><span class="json-comma">,</span> <span class="json-string">"Tailwind CSS"</span><span class="json-comma">,</span> <span class="json-string">"Astro"</span><span class="json-comma">,</span> <span class="json-string">"Git"</span><span class="json-comma">,</span> <span class="json-string">"TypeScript"</span><span class="json-bracket">]</span><span class="json-comma">,</span></span>
-<span class="json-line">  <span class="json-key">"metrics"</span><span class="json-colon">:</span> <span class="json-bracket">{</span></span>
-<span class="json-line">    <span class="json-key">"efficiency_boost"</span><span class="json-colon">:</span> <span class="json-string">"<span class="json-number">+40%</span>"</span><span class="json-comma">,</span></span>
-<span class="json-line">    <span class="json-key">"component_adoption"</span><span class="json-colon">:</span> <span class="json-string">"<span class="json-number">95%</span>"</span></span>
-<span class="json-line">  <span class="json-bracket">}</span></span>
+<span class="json-line">  <span class="json-key">"principles"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Systems over Screens"</span><span class="json-comma">,</span> <span class="json-string">"Docs as Product"</span><span class="json-comma">,</span> <span class="json-string">"Bridges not Walls"</span><span class="json-bracket">]</span></span>
 <span class="json-line"><span class="json-bracket">}</span></span></code></pre>
           </div>
         </div>
