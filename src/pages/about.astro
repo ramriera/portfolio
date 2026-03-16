@@ -366,50 +366,50 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
 
             <div class="principles-normal">
               <div class="space-y-3">
-                <!-- 01 Systems over Screens -->
+                <!-- 01 Sistemas sobre Pantallas -->
                 <div class="lint-rule group">
                   <div class="lint-rule-header">
                     <span class="lint-rule-num">01</span>
-                    <h3 class="lint-rule-name">Systems over Screens</h3>
-                    <span class="lint-rule-badge lint-badge--strategy">STRATEGY</span>
+                    <h3 class="lint-rule-name">Sistemas sobre Pantallas</h3>
+                    <span class="lint-rule-badge lint-badge--strategy">ESTRATEGIA</span>
                   </div>
-                  <p class="lint-rule-desc">Diseñar infraestructuras escalables, no interfaces aisladas. Cada decisión debe funcionar como parte de un ecosistema coherente que crece con el producto.</p>
+                  <p class="lint-rule-desc">Diseñar infraestructuras escalables y consistentes, no solo interfaces aisladas.</p>
                 </div>
-                <!-- 02 Single Source of Truth -->
+                <!-- 02 Única Fuente de Verdad -->
                 <div class="lint-rule group">
                   <div class="lint-rule-header">
                     <span class="lint-rule-num">02</span>
-                    <h3 class="lint-rule-name">Single Source of Truth</h3>
-                    <span class="lint-rule-badge lint-badge--engineering">ENGINEERING</span>
+                    <h3 class="lint-rule-name">Única Fuente de Verdad</h3>
+                    <span class="lint-rule-badge lint-badge--engineering">INGENIERÍA</span>
                   </div>
-                  <p class="lint-rule-desc">Sincronización absoluta entre diseño y código mediante tokens y documentación activa. Si el token cambia en Figma, cambia en producción.</p>
+                  <p class="lint-rule-desc">Sincronización total entre diseño y código mediante tokens y documentación activa.</p>
                 </div>
-                <!-- 03 Accessibility by Default -->
+                <!-- 03 Accesibilidad por Defecto -->
                 <div class="lint-rule group">
                   <div class="lint-rule-header">
                     <span class="lint-rule-num">03</span>
-                    <h3 class="lint-rule-name">Accessibility by Default</h3>
-                    <span class="lint-rule-badge lint-badge--culture">CULTURE</span>
+                    <h3 class="lint-rule-name">Accesibilidad por Defecto</h3>
+                    <span class="lint-rule-badge lint-badge--culture">CULTURA</span>
                   </div>
-                  <p class="lint-rule-desc">La inclusividad es un requisito técnico básico, no una opción. WCAG AA como mínimo en cada componente del sistema, desde el primer commit.</p>
+                  <p class="lint-rule-desc">La inclusión es un requisito técnico fundamental desde el inicio, no una capa final.</p>
                 </div>
-                <!-- 04 Efficiency through Ops -->
+                <!-- 04 Eficiencia mediante Ops -->
                 <div class="lint-rule group">
                   <div class="lint-rule-header">
                     <span class="lint-rule-num">04</span>
-                    <h3 class="lint-rule-name">Efficiency through Ops</h3>
-                    <span class="lint-rule-badge lint-badge--strategy">STRATEGY</span>
+                    <h3 class="lint-rule-name">Eficiencia mediante Ops</h3>
+                    <span class="lint-rule-badge lint-badge--strategy">ESTRATEGIA</span>
                   </div>
-                  <p class="lint-rule-desc">Optimizar procesos para que el equipo dedique menos tiempo a tareas repetitivas y más a crear valor. Automatizar lo predecible, diseñar lo complejo.</p>
+                  <p class="lint-rule-desc">Optimizar procesos y herramientas para que el equipo se centre en crear valor, no en tareas repetitivas.</p>
                 </div>
-                <!-- 05 Bridges, not Walls -->
+                <!-- 05 Puentes, no Muros -->
                 <div class="lint-rule group">
                   <div class="lint-rule-header">
                     <span class="lint-rule-num">05</span>
-                    <h3 class="lint-rule-name">Bridges, not Walls</h3>
-                    <span class="lint-rule-badge lint-badge--culture">CULTURE</span>
+                    <h3 class="lint-rule-name">Puentes, no Muros</h3>
+                    <span class="lint-rule-badge lint-badge--culture">CULTURA</span>
                   </div>
-                  <p class="lint-rule-desc">Facilitar el lenguaje común entre diseño e ingeniería. Construyo puentes entre disciplinas: naming compartido, specs legibles, handoff sin fricción.</p>
+                  <p class="lint-rule-desc">Facilitar un lenguaje común y una colaboración fluida entre diseño e ingeniería.</p>
                 </div>
               </div>
             </div>
@@ -431,20 +431,20 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
                 <pre class="principles-config-body"><code><span class="pp-keyword">export default</span> <span class="pp-bracket">{"{"}</span>
   <span class="pp-key">rules</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
 
-    <span class="pp-comment">// [STRATEGY] Infraestructuras escalables, no interfaces aisladas</span>
-    <span class="pp-string">"systems-over-screens"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-comment">// [ESTRATEGIA] Infraestructuras escalables y consistentes</span>
+    <span class="pp-string">"sistemas-sobre-pantallas"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
 
-    <span class="pp-comment">// [ENGINEERING] Tokens synced: Figma &rarr; Code &rarr; Production</span>
-    <span class="pp-string">"single-source-of-truth"</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-comment">// [INGENIERÍA] Tokens sincronizados: Figma &rarr; Code &rarr; Producción</span>
+    <span class="pp-string">"unica-fuente-de-verdad"</span><span class="pp-punct">:</span>   <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
 
-    <span class="pp-comment">// [CULTURE] WCAG AA minimum on every component</span>
-    <span class="pp-string">"a11y-by-default"</span><span class="pp-punct">:</span>       <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">level</span><span class="pp-punct">:</span> <span class="pp-string">"AA"</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-comment">// [CULTURA] WCAG AA mínimo en cada componente</span>
+    <span class="pp-string">"a11y-por-defecto"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">level</span><span class="pp-punct">:</span> <span class="pp-string">"AA"</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
 
-    <span class="pp-comment">// [STRATEGY] Automate the predictable, design the complex</span>
-    <span class="pp-string">"efficiency-through-ops"</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"warn"</span><span class="pp-punct">,</span>  <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-comment">// [ESTRATEGIA] Automatizar lo predecible, diseñar lo complejo</span>
+    <span class="pp-string">"eficiencia-mediante-ops"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"warn"</span><span class="pp-punct">,</span>  <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
 
-    <span class="pp-comment">// [CULTURE] Shared naming, readable specs, frictionless handoff</span>
-    <span class="pp-string">"bridges-not-walls"</span><span class="pp-punct">:</span>     <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span>
+    <span class="pp-comment">// [CULTURA] Naming compartido, specs legibles, handoff sin fricción</span>
+    <span class="pp-string">"puentes-no-muros"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span>
 
   <span class="pp-bracket">{"}"}</span>
 <span class="pp-bracket">{"}"}</span> <span class="pp-keyword">satisfies</span> <span class="pp-fn">DesignLintConfig</span><span class="pp-punct">;</span></code></pre>
