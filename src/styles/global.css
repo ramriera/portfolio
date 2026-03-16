@@ -1343,7 +1343,7 @@ body.code-mode aside:hover {
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, border-left-width 0.15s ease;
 }
 
 @media (min-width: 1024px) {
@@ -1352,6 +1352,7 @@ body.code-mode aside:hover {
 
 .eco-card:hover {
   border-color: var(--color-primary-500, #D97757);
+  border-left-width: 3px;
   box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
@@ -2600,11 +2601,12 @@ body.code-mode .principles-code { display: block; }
   border: 1px solid #e8e4dd;
   border-radius: 0.75rem;
   background: #fff;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-left-width 0.15s ease;
 }
 
 .lint-rule:hover {
   border-color: var(--color-primary-500, #D97757);
+  border-left-width: 3px;
   box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
@@ -2751,11 +2753,12 @@ body.code-mode .kpi-grid-code { display: block; }
 .kpi-card {
   position: relative;
   overflow: hidden;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, border-left-width 0.15s ease;
 }
 
 .kpi-card:hover {
   border-color: var(--color-primary-500, #D97757) !important;
+  border-left-width: 3px !important;
   box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
