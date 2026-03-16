@@ -172,6 +172,7 @@ function getProjectFilters(tags: string[]): string[] {
 <script>
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectItems = document.querySelectorAll('.project-item');
+  const grid = document.getElementById('projects-grid') as HTMLElement;
 
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -194,7 +195,7 @@ function getProjectFilters(tags: string[]): string[] {
         }
       }
 
-      // Filter projects — fade out first, then toggle visibility
+      // Classify items into hiding / showing
       const hiding: HTMLElement[] = [];
       const showing: HTMLElement[] = [];
 
@@ -208,13 +209,19 @@ function getProjectFilters(tags: string[]): string[] {
         }
       });
 
-      // Fade out items being hidden
+      // 1. Lock the grid height to prevent layout shift
+      const startHeight = grid.offsetHeight;
+      grid.style.height = `${startHeight}px`;
+      grid.style.overflow = 'hidden';
+
+      // 2. Fade out + scale down items being hidden
       hiding.forEach((el) => {
-        el.style.transition = 'opacity 0.2s ease';
+        el.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
         el.style.opacity = '0';
+        el.style.transform = 'scale(0.95)';
       });
 
-      // After fade-out completes, hide them and show matching items
+      // 3. After fade-out, toggle visibility and animate to new height
       setTimeout(() => {
         hiding.forEach((el) => {
           el.style.display = 'none';
@@ -222,14 +229,39 @@ function getProjectFilters(tags: string[]): string[] {
         showing.forEach((el) => {
           el.style.display = '';
           el.style.opacity = '0';
+          el.style.transform = 'scale(0.97) translateY(8px)';
         });
-        // Force reflow so the browser registers opacity:0 before transitioning
-        void document.body.offsetHeight;
+
+        // Measure the target height
+        grid.style.height = 'auto';
+        const endHeight = grid.offsetHeight;
+
+        // Animate from startHeight → endHeight
+        grid.style.height = `${startHeight}px`;
+        void grid.offsetHeight; // force reflow
+        grid.style.transition = 'height 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+        grid.style.height = `${endHeight}px`;
+
+        // Staggered fade-in for showing items
         showing.forEach((el, i) => {
-          el.style.transition = 'opacity 0.3s ease';
+          el.style.transition = `opacity 0.35s ease ${i * 50}ms, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1) ${i * 50}ms`;
+          void el.offsetHeight; // force reflow per item
           el.style.opacity = '1';
+          el.style.transform = 'scale(1) translateY(0)';
         });
-      }, 200);
+
+        // Clean up inline styles after all animations complete
+        const cleanupDelay = 400 + showing.length * 50;
+        setTimeout(() => {
+          grid.style.height = '';
+          grid.style.overflow = '';
+          grid.style.transition = '';
+          showing.forEach((el) => {
+            el.style.transition = '';
+            el.style.transform = '';
+          });
+        }, cleanupDelay);
+      }, 250);
     });
   });
 </script>
