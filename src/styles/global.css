@@ -118,9 +118,9 @@
   }
 
   .meta-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-    border-color: rgba(217, 119, 87, 0.18);
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
   }
 
   .gradient-text {
