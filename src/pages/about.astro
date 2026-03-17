@@ -439,29 +439,35 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                     .designlintrc.ts
                   </span>
                 </div>
-                <pre class="principles-config-body"><code><span class="pp-keyword">export default</span> <span class="pp-bracket">{"{"}</span>
-  <span class="pp-key">rules</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-
-    <span class="pp-comment">// [ESTRATEGIA] Infraestructuras escalables y consistentes</span>
-    <span class="pp-string">"sistemas-sobre-pantallas"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-
-    <span class="pp-comment">// [INGENIERÍA] Tokens sincronizados: Figma &rarr; Code &rarr; Producción</span>
-    <span class="pp-string">"unica-fuente-de-verdad"</span><span class="pp-punct">:</span>   <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-
-    <span class="pp-comment">// [CULTURA] WCAG AA mínimo en cada componente</span>
-    <span class="pp-string">"a11y-por-defecto"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">level</span><span class="pp-punct">:</span> <span class="pp-string">"AA"</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-
-    <span class="pp-comment">// [ESTRATEGIA] Automatizar lo predecible, diseñar lo complejo</span>
-    <span class="pp-string">"eficiencia-mediante-ops"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"warn"</span><span class="pp-punct">,</span>  <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-
-    <span class="pp-comment">// [CULTURA] Naming compartido, specs legibles, handoff sin fricción</span>
-    <span class="pp-string">"puentes-no-muros"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-
-    <span class="pp-comment">// [PRODUCTO] Validar con datos y comportamiento real</span>
-    <span class="pp-string">"evidencia-sobre-opinion"</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span>
-
-  <span class="pp-bracket">{"}"}</span>
-<span class="pp-bracket">{"}"}</span> <span class="pp-keyword">satisfies</span> <span class="pp-fn">DesignLintConfig</span><span class="pp-punct">;</span></code></pre>
+                <button class="code-copy-btn" data-copy-btn aria-label="Copy code">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  <span class="code-copy-label">Copied!</span>
+                </button>
+                <div class="code-block-body principles-config-body" data-code-block>
+                  <div class="code-line"><span class="pp-keyword">export default</span> <span class="pp-bracket">{"{"}</span></div>
+                  <div class="code-line">  <span class="pp-key">rules</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span></div>
+                  <div class="code-line"></div>
+                  <div class="code-line">    <span class="pp-comment">// [ESTRATEGIA] Infraestructuras escalables y consistentes</span></div>
+                  <div class="code-line">    <span class="pp-string">"sistemas-sobre-pantallas"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span></div>
+                  <div class="code-line"></div>
+                  <div class="code-line">    <span class="pp-comment">// [INGENIERÍA] Tokens sincronizados: Figma &rarr; Code &rarr; Producción</span></div>
+                  <div class="code-line">    <span class="pp-string">"unica-fuente-de-verdad"</span><span class="pp-punct">:</span>   <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span></div>
+                  <div class="code-line"></div>
+                  <div class="code-line">    <span class="pp-comment">// [CULTURA] WCAG AA mínimo en cada componente</span></div>
+                  <div class="code-line">    <span class="pp-string">"a11y-por-defecto"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">level</span><span class="pp-punct">:</span> <span class="pp-string">"AA"</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span></div>
+                  <div class="code-line"></div>
+                  <div class="code-line">    <span class="pp-comment">// [ESTRATEGIA] Automatizar lo predecible, diseñar lo complejo</span></div>
+                  <div class="code-line">    <span class="pp-string">"eficiencia-mediante-ops"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"warn"</span><span class="pp-punct">,</span>  <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span></div>
+                  <div class="code-line"></div>
+                  <div class="code-line">    <span class="pp-comment">// [CULTURA] Naming compartido, specs legibles, handoff sin fricción</span></div>
+                  <div class="code-line">    <span class="pp-string">"puentes-no-muros"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span></div>
+                  <div class="code-line"></div>
+                  <div class="code-line">    <span class="pp-comment">// [PRODUCTO] Validar con datos y comportamiento real</span></div>
+                  <div class="code-line">    <span class="pp-string">"evidencia-sobre-opinion"</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span></div>
+                  <div class="code-line"></div>
+                  <div class="code-line">  <span class="pp-bracket">{"}"}</span></div>
+                  <div class="code-line"><span class="pp-bracket">{"}"}</span> <span class="pp-keyword">satisfies</span> <span class="pp-fn">DesignLintConfig</span><span class="pp-punct">;</span></div>
+                </div>
               </div>
             </div>
           </div>
@@ -634,33 +640,39 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                       ecosystem.config.ts
                     </span>
                   </div>
-                  <pre class="process-pipeline-body"><code><span class="pp-keyword">export const</span> <span class="pp-fn">ecosystem</span> <span class="pp-punct">=</span> <span class="pp-bracket">{"{"}</span>
-
-  <span class="pp-key">strategy</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"User Research &rarr; Data Analysis &rarr; Testing"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Maze"</span><span class="pp-punct">,</span> <span class="pp-string">"Hotjar"</span><span class="pp-punct">,</span> <span class="pp-string">"FigJam"</span><span class="pp-punct">,</span> <span class="pp-string">"Typeform"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"validated insights"</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-
-  <span class="pp-key">design</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Prototyping &rarr; Interactive Design &rarr; UI Kits"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Figma"</span><span class="pp-punct">,</span> <span class="pp-string">"Framer"</span><span class="pp-punct">,</span> <span class="pp-string">"Cursor"</span><span class="pp-punct">,</span> <span class="pp-string">"Lovable"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"hi-fi prototypes"</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-
-  <span class="pp-key">systems</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Governance &rarr; Design Tokens &rarr; Scalability"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Storybook"</span><span class="pp-punct">,</span> <span class="pp-string">"Token Studio"</span><span class="pp-punct">,</span> <span class="pp-string">"Supernova"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"scalable architecture"</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-
-  <span class="pp-key">engineering</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Frontend Architecture &rarr; UI Build &rarr; Git Flow"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"GitHub"</span><span class="pp-punct">,</span> <span class="pp-string">"JavaScript"</span><span class="pp-punct">,</span> <span class="pp-string">"TypeScript"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"design-faithful code"</span>
-  <span class="pp-bracket">{"}"}</span>
-
-<span class="pp-bracket">{"}"}</span> <span class="pp-keyword">as const</span><span class="pp-punct">;</span></code></pre>
+                  <button class="code-copy-btn" data-copy-btn aria-label="Copy code">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                    <span class="code-copy-label">Copied!</span>
+                  </button>
+                  <div class="code-block-body process-pipeline-body" data-code-block>
+                    <div class="code-line"><span class="pp-keyword">export const</span> <span class="pp-fn">ecosystem</span> <span class="pp-punct">=</span> <span class="pp-bracket">{"{"}</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line">  <span class="pp-key">strategy</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span></div>
+                    <div class="code-line">    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"User Research &rarr; Data Analysis &rarr; Testing"</span><span class="pp-punct">,</span></div>
+                    <div class="code-line">    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Maze"</span><span class="pp-punct">,</span> <span class="pp-string">"Hotjar"</span><span class="pp-punct">,</span> <span class="pp-string">"FigJam"</span><span class="pp-punct">,</span> <span class="pp-string">"Typeform"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span></div>
+                    <div class="code-line">    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"validated insights"</span></div>
+                    <div class="code-line">  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line">  <span class="pp-key">design</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span></div>
+                    <div class="code-line">    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Prototyping &rarr; Interactive Design &rarr; UI Kits"</span><span class="pp-punct">,</span></div>
+                    <div class="code-line">    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Figma"</span><span class="pp-punct">,</span> <span class="pp-string">"Framer"</span><span class="pp-punct">,</span> <span class="pp-string">"Cursor"</span><span class="pp-punct">,</span> <span class="pp-string">"Lovable"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span></div>
+                    <div class="code-line">    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"hi-fi prototypes"</span></div>
+                    <div class="code-line">  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line">  <span class="pp-key">systems</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span></div>
+                    <div class="code-line">    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Governance &rarr; Design Tokens &rarr; Scalability"</span><span class="pp-punct">,</span></div>
+                    <div class="code-line">    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Storybook"</span><span class="pp-punct">,</span> <span class="pp-string">"Token Studio"</span><span class="pp-punct">,</span> <span class="pp-string">"Supernova"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span></div>
+                    <div class="code-line">    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"scalable architecture"</span></div>
+                    <div class="code-line">  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line">  <span class="pp-key">engineering</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span></div>
+                    <div class="code-line">    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Frontend Architecture &rarr; UI Build &rarr; Git Flow"</span><span class="pp-punct">,</span></div>
+                    <div class="code-line">    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"GitHub"</span><span class="pp-punct">,</span> <span class="pp-string">"JavaScript"</span><span class="pp-punct">,</span> <span class="pp-string">"TypeScript"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span></div>
+                    <div class="code-line">    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"design-faithful code"</span></div>
+                    <div class="code-line">  <span class="pp-bracket">{"}"}</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="pp-bracket">{"}"}</span> <span class="pp-keyword">as const</span><span class="pp-punct">;</span></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -794,7 +806,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
   }
 
   .typewriter-slot--code {
-    color: var(--cm-tag, #ff79c6);
+    color: #3b82f6;
   }
 
   .typewriter-word {
@@ -808,7 +820,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
     animation: blink-cursor 0.7s step-end infinite;
     font-weight: 300;
     margin-left: 1px;
-    color: currentColor;
+    color: #3b82f6;
   }
 
   @keyframes blink-cursor {
@@ -816,5 +828,30 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
     50% { opacity: 0; }
   }
 </style>
+
+<script>
+  function initCodeCopyButtons() {
+    document.querySelectorAll('[data-copy-btn]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const window = btn.closest('.principles-config-window, .process-pipeline-window');
+        if (!window) return;
+        const block = window.querySelector('[data-code-block]');
+        if (!block) return;
+
+        const text = Array.from(block.querySelectorAll('.code-line'))
+          .map((line) => (line as HTMLElement).textContent || '')
+          .join('\n');
+
+        navigator.clipboard.writeText(text).then(() => {
+          btn.classList.add('copied');
+          setTimeout(() => btn.classList.remove('copied'), 2000);
+        });
+      });
+    });
+  }
+
+  initCodeCopyButtons();
+  document.addEventListener('astro:page-load', initCodeCopyButtons);
+</script>
 
 </BaseLayout>
