@@ -1,0 +1,230 @@
+---
+/**
+ * AboutTerminal.astro
+ * macOS-style terminal for the About hero (code mode only).
+ * Typewriter animation types a `const profile = { ... }` block.
+ */
+---
+
+<div class="about-terminal" data-component="AboutTerminal">
+  <!-- macOS window chrome -->
+  <div class="at-chrome">
+    <span class="at-dot at-dot--close"></span>
+    <span class="at-dot at-dot--minimize"></span>
+    <span class="at-dot at-dot--expand"></span>
+    <span class="at-chrome-title">profile.ts — ~/about</span>
+  </div>
+
+  <!-- Terminal body -->
+  <div class="at-body" data-at-body>
+    <span class="at-cursor" data-at-cursor>█</span>
+  </div>
+</div>
+
+<style>
+  /* ── Container: glassmorphism ── */
+  .about-terminal {
+    display: none;
+    width: 100%;
+    max-width: 540px;
+    border-radius: 12px;
+    border: 1px solid rgba(48, 54, 61, 0.6);
+    overflow: hidden;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: clamp(0.72rem, 1.4vw, 0.84rem);
+    letter-spacing: -0.02em;
+    line-height: 1.7;
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    background: rgba(13, 17, 23, 0.82);
+    box-shadow:
+      0 0 0 1px rgba(48, 54, 61, 0.3),
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    min-height: 280px;
+  }
+
+  body.code-mode .about-terminal {
+    display: block;
+  }
+
+  /* ── Hover glow ── */
+  .about-terminal:hover {
+    border-color: rgba(139, 233, 253, 0.3);
+    box-shadow:
+      0 0 0 1px rgba(139, 233, 253, 0.15),
+      0 0 30px rgba(139, 233, 253, 0.07),
+      0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .about-terminal:hover .at-cursor {
+    animation-duration: 0.35s;
+  }
+
+  /* ── Chrome bar ── */
+  .at-chrome {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 14px;
+    background: rgba(22, 27, 34, 0.95);
+    border-bottom: 1px solid rgba(48, 54, 61, 0.6);
+    user-select: none;
+  }
+
+  .at-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .at-dot--close    { background: #ff5f57; }
+  .at-dot--minimize { background: #febc2e; }
+  .at-dot--expand   { background: #28c840; }
+
+  .at-chrome-title {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.7rem;
+    color: var(--cm-text-muted, #7d8590);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Terminal body ── */
+  .at-body {
+    padding: 16px 18px 18px;
+    white-space: pre;
+    color: var(--cm-text, #e6edf3);
+    min-height: 220px;
+  }
+
+  /* ── Cursor ── */
+  .at-cursor {
+    color: #3b82f6;
+    animation: at-blink 0.7s step-end infinite;
+    font-weight: 300;
+  }
+
+  @keyframes at-blink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .about-terminal {
+      max-width: 100%;
+      font-size: 0.66rem;
+      min-height: 250px;
+    }
+  }
+</style>
+
+<script>
+  function initAboutTerminal() {
+    const terminal = document.querySelector('[data-component="AboutTerminal"]');
+    if (!terminal) return;
+
+    const body = terminal.querySelector('[data-at-body]') as HTMLElement;
+    const cursor = terminal.querySelector('[data-at-cursor]') as HTMLElement;
+    if (!body || !cursor) return;
+
+    // Syntax-colored code lines
+    const lines = [
+      { tokens: [{ text: 'const ', cls: 'at-keyword' }, { text: 'profile', cls: 'at-fn' }, { text: ' = {', cls: 'at-punct' }] },
+      { tokens: [{ text: '  name', cls: 'at-key' }, { text: ': ', cls: 'at-punct' }, { text: '"Ramon Riera"', cls: 'at-str' }, { text: ',', cls: 'at-punct' }] },
+      { tokens: [{ text: '  role', cls: 'at-key' }, { text: ': ', cls: 'at-punct' }, { text: '"UX Lead & Design Engineer"', cls: 'at-str' }, { text: ',', cls: 'at-punct' }] },
+      { tokens: [{ text: '  specialization', cls: 'at-key' }, { text: ': [', cls: 'at-punct' }, { text: '"Design Systems"', cls: 'at-str' }, { text: ', ', cls: 'at-punct' }, { text: '"Product Strategy"', cls: 'at-str' }, { text: '],', cls: 'at-punct' }] },
+      { tokens: [{ text: '  focus', cls: 'at-key' }, { text: ': ', cls: 'at-punct' }, { text: '"Simplifying complexity"', cls: 'at-str' }] },
+      { tokens: [{ text: '};', cls: 'at-punct' }] },
+    ];
+
+    let hasRun = false;
+
+    // Flatten all characters with their class for typewriter
+    type Char = { ch: string; cls: string };
+    const chars: Char[] = [];
+    lines.forEach((line, i) => {
+      line.tokens.forEach(tok => {
+        for (const ch of tok.text) {
+          chars.push({ ch, cls: tok.cls });
+        }
+      });
+      if (i < lines.length - 1) chars.push({ ch: '\n', cls: '' });
+    });
+
+    function typeCode() {
+      // Clear body, create a code container + cursor
+      body.innerHTML = '';
+      const codeEl = document.createElement('span');
+      codeEl.className = 'at-code';
+      body.appendChild(codeEl);
+      body.appendChild(cursor);
+
+      let idx = 0;
+      let currentSpan: HTMLSpanElement | null = null;
+      let currentCls = '';
+
+      function typeNext() {
+        if (idx >= chars.length) {
+          // Done typing — add final newline + new cursor line
+          codeEl.appendChild(document.createTextNode('\n'));
+          return;
+        }
+
+        const { ch, cls } = chars[idx];
+        idx++;
+
+        if (ch === '\n') {
+          codeEl.appendChild(document.createTextNode('\n'));
+          currentSpan = null;
+          currentCls = '';
+        } else {
+          if (cls !== currentCls || !currentSpan) {
+            currentSpan = document.createElement('span');
+            currentSpan.className = cls;
+            codeEl.appendChild(currentSpan);
+            currentCls = cls;
+          }
+          currentSpan.textContent += ch;
+        }
+
+        // Vary speed: faster for spaces/punctuation, slower for identifiers
+        const speed = (ch === ' ' || ch === '\n') ? 20 : 35 + Math.random() * 30;
+        setTimeout(typeNext, speed);
+      }
+
+      typeNext();
+    }
+
+    function startAnimation() {
+      if (hasRun) return;
+      if (!document.body.classList.contains('code-mode')) return;
+      hasRun = true;
+      setTimeout(typeCode, 400);
+    }
+
+    // Observe visibility
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && document.body.classList.contains('code-mode')) {
+          startAnimation();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(terminal);
+
+    // Trigger when code mode toggled on
+    const modeObserver = new MutationObserver(() => {
+      if (document.body.classList.contains('code-mode') && !hasRun) {
+        startAnimation();
+      }
+    });
+    modeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  initAboutTerminal();
+  document.addEventListener('astro:page-load', initAboutTerminal);
+</script>

@@ -2533,6 +2533,19 @@ body.code-mode [data-component="AboutHero"] .about-desc-code {
   font-style: normal;
 }
 
+/* ── AboutTerminal: syntax token colors ── */
+.at-keyword { color: var(--cm-keyword, #bd93f9); }
+.at-fn      { color: var(--cm-function, #8be9fd); }
+.at-punct   { color: var(--cm-text-muted, #7d8590); }
+.at-key     { color: var(--cm-constant, #f1fa8c); }
+.at-str     { color: var(--cm-string, #50fa7b); }
+
+/* Hide code-mode title/desc when terminal is present */
+body.code-mode [data-component="AboutHero"] .about-title-code,
+body.code-mode [data-component="AboutHero"] .about-desc-code {
+  display: none;
+}
+
 /* ── Process Section: dual mode titles ── */
 .process-title-code { display: none; }
 .process-title-code .code-comment { color: var(--cm-comment, #6272a4); }
