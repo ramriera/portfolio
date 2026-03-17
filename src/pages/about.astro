@@ -39,12 +39,13 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
         <h1 data-reveal data-delay="100" class="heading-xl mb-8 about-title-normal"
           data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2rem / 32px">
           Diseñador, pensador,
-          <span class="text-primary-500"
-            data-token="$color-primary-500: #D97757">creador</span>
+          <span class="typewriter-slot" data-typewriter='["creador","arquitecto","constructor"]'>
+            <span class="typewriter-word"></span><span class="typewriter-cursor">_</span>
+          </span>
         </h1>
         <!-- Code mode title: console.log -->
         <h1 data-reveal data-delay="100" class="heading-xl mb-8 about-title-code">
-          <span class="code-fn">console</span><span class="code-punct">.</span><span class="code-fn">log</span><span class="code-punct">(</span><span class="code-str">"Diseñador, pensador, </span><span class="code-accent">creador</span><span class="code-str">"</span><span class="code-punct">)</span>
+          <span class="code-fn">console</span><span class="code-punct">.</span><span class="code-fn">log</span><span class="code-punct">(</span><span class="code-str">"Diseñador, pensador, </span><span class="typewriter-slot typewriter-slot--code" data-typewriter='["creador","arquitecto","constructor"]'><span class="typewriter-word"></span><span class="typewriter-cursor">_</span></span><span class="code-str">"</span><span class="code-punct">)</span>
         </h1>
 
         <!-- Normal mode description -->
@@ -725,5 +726,104 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
       </div>
     </div>
   </section>
+
+<script>
+  class Typewriter {
+    private el: HTMLElement;
+    private words: string[];
+    private wordEl: HTMLElement;
+    private cursorEl: HTMLElement;
+    private current = 0;
+    private charIndex = 0;
+    private isDeleting = false;
+    private readonly typeSpeed = 80;
+    private readonly deleteSpeed = 50;
+    private readonly pauseBetween = 3000;
+
+    constructor(el: HTMLElement) {
+      this.el = el;
+      this.words = JSON.parse(el.dataset.typewriter || '[]');
+      this.wordEl = el.querySelector('.typewriter-word')!;
+      this.cursorEl = el.querySelector('.typewriter-cursor')!;
+      if (this.words.length) this.tick();
+    }
+
+    private tick() {
+      const word = this.words[this.current];
+
+      if (!this.isDeleting) {
+        this.charIndex++;
+        this.wordEl.textContent = word.slice(0, this.charIndex);
+
+        if (this.charIndex === word.length) {
+          this.isDeleting = false;
+          setTimeout(() => {
+            this.isDeleting = true;
+            this.tick();
+          }, this.pauseBetween);
+          return;
+        }
+        setTimeout(() => this.tick(), this.typeSpeed);
+      } else {
+        this.charIndex--;
+        this.wordEl.textContent = word.slice(0, this.charIndex);
+
+        if (this.charIndex === 0) {
+          this.isDeleting = false;
+          this.current = (this.current + 1) % this.words.length;
+          setTimeout(() => this.tick(), this.typeSpeed * 3);
+          return;
+        }
+        setTimeout(() => this.tick(), this.deleteSpeed);
+      }
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-typewriter]').forEach(el => new Typewriter(el));
+</script>
+
+<style>
+  /* ── Typewriter slot ── */
+  .typewriter-slot {
+    display: inline-flex;
+    align-items: baseline;
+    min-width: 5.5ch;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    color: var(--color-primary-500, #D97757);
+    position: relative;
+  }
+
+  .typewriter-word {
+    display: inline-block;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 2px;
+  }
+
+  .typewriter-cursor {
+    display: inline-block;
+    animation: blink-cursor 0.7s step-end infinite;
+    font-weight: 300;
+    margin-left: 1px;
+    color: currentColor;
+  }
+
+  @keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ── Code mode overrides ── */
+  .typewriter-slot--code {
+    color: var(--cm-tag, #ff79c6);
+  }
+
+  body.code-mode .typewriter-slot {
+    color: var(--cm-tag, #ff79c6);
+  }
+
+  body.code-mode .typewriter-word {
+    border-bottom-color: var(--cm-tag, #ff79c6);
+  }
+</style>
 
 </BaseLayout>
