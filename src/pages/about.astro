@@ -3,6 +3,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import profileImg from '@/assets/shared/foto-perfil.png';
 import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
+import WordsCarousel from '@/components/WordsCarousel.astro';
+
+const aboutWords = ['creador', 'arquitecto', 'constructor'];
 ---
 
 <BaseLayout
@@ -45,7 +48,7 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
         </h1>
         <!-- Code mode title: console.log -->
         <h1 data-reveal data-delay="100" class="heading-xl mb-8 about-title-code">
-          <span class="code-fn">console</span><span class="code-punct">.</span><span class="code-fn">log</span><span class="code-punct">(</span><span class="code-str">"Diseñador, pensador, </span><span class="typewriter-slot typewriter-slot--code" data-typewriter='["creador","arquitecto","constructor"]'><span class="typewriter-word"></span><span class="typewriter-cursor">_</span></span><span class="code-str">"</span><span class="code-punct">)</span>
+          <span class="code-fn">console</span><span class="code-punct">.</span><span class="code-fn">log</span><span class="code-punct">(</span><span class="code-str">"Diseñador, pensador, </span><span class="code-carousel-word"><WordsCarousel words={aboutWords} interval={3000} /></span><span class="code-str">"</span><span class="code-punct">)</span>
         </h1>
 
         <!-- Normal mode description -->
@@ -812,17 +815,22 @@ import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
     50% { opacity: 0; }
   }
 
-  /* ── Code mode overrides ── */
-  .typewriter-slot--code {
-    color: var(--cm-tag, #ff79c6);
-  }
-
+  /* ── Code mode: typewriter inherits code palette ── */
   body.code-mode .typewriter-slot {
     color: var(--cm-tag, #ff79c6);
   }
 
   body.code-mode .typewriter-word {
     border-bottom-color: var(--cm-tag, #ff79c6);
+  }
+
+  /* ── Code mode carousel word (horizontal slide, same as home) ── */
+  .code-carousel-word {
+    color: var(--cm-tag, #ff79c6);
+  }
+
+  .code-carousel-word .word-underline {
+    color: var(--cm-tag, #ff79c6);
   }
 </style>
 
