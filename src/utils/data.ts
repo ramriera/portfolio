@@ -326,6 +326,7 @@ export const projects: Project[] = [
   class F1,F2,F3,F4,F5,F6,F7 frontstage
   class B1,B2,B3,B4,B5,B6,B7 backstage
   class S1,S2,S3,S4,S5,S6 support`,
+        captions: ['Service Blueprint del flujo de reserva propuesto — De 8 pasos a 4'],
         highlight: 'De **8 pasos a 4**. La lógica del sistema está por encima de la decoración visual: cada nodo del diagrama justifica una decisión de producto.',
       },
       // ── 03. Estrategia de Producto ──

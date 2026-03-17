@@ -521,9 +521,14 @@ function md(text: string): string {
               <p data-reveal data-delay="200" class="text-body text-lg leading-relaxed mb-10" set:html={md(section.content)} />
             )}
             {section.mermaidCode && (
-              <div data-reveal data-delay="300" class="rounded-2xl overflow-hidden border border-dark-200 bg-white p-8 md:p-12">
-                <pre class="mermaid flex justify-center">{section.mermaidCode}</pre>
-              </div>
+              <figure data-reveal data-delay="300">
+                <div class="rounded-2xl overflow-hidden border border-dark-200 bg-white p-8 md:p-12">
+                  <pre class="mermaid flex justify-center">{section.mermaidCode}</pre>
+                </div>
+                {section.captions?.[0] && (
+                  <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[0]}</figcaption>
+                )}
+              </figure>
             )}
             {section.highlight && (
               <blockquote data-reveal data-delay="400" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
