@@ -1,0 +1,307 @@
+---
+/**
+ * HeroTerminal.astro
+ * Interactive macOS-style terminal for the Hero section (code mode only).
+ * Typewriter animation: prompt → whoami → JSON response with syntax colors.
+ */
+---
+
+<div class="hero-terminal" data-component="HeroTerminal">
+  <!-- macOS window chrome -->
+  <div class="ht-chrome">
+    <span class="ht-dot ht-dot--close"></span>
+    <span class="ht-dot ht-dot--minimize"></span>
+    <span class="ht-dot ht-dot--expand"></span>
+    <span class="ht-chrome-title">ramon — ~</span>
+  </div>
+
+  <!-- Terminal body -->
+  <div class="ht-body">
+    <!-- Line 1: prompt + command -->
+    <div class="ht-line">
+      <span class="ht-prompt" data-terminal-prompt>ramon<span class="ht-prompt-at">@</span>system<span class="ht-prompt-colon">:</span><span class="ht-prompt-path">~</span><span class="ht-prompt-dollar">$</span></span>
+      <span class="ht-typed" data-terminal-command></span>
+      <span class="ht-cursor" data-terminal-cursor>█</span>
+    </div>
+
+    <!-- Line 2+: JSON output (hidden until command typed) -->
+    <div class="ht-output" data-terminal-output>
+      <div class="ht-line"><span class="ht-json-brace">{"{"}</span></div>
+      <div class="ht-line ht-indent"><span class="ht-json-key">"nombre"</span><span class="ht-json-colon">:</span> <span class="ht-json-str">"Ramon Riera"</span><span class="ht-json-comma">,</span></div>
+      <div class="ht-line ht-indent"><span class="ht-json-key">"rol"</span><span class="ht-json-colon">:</span> <span class="ht-json-str">"UX Lead & Product Designer"</span><span class="ht-json-comma">,</span></div>
+      <div class="ht-line ht-indent"><span class="ht-json-key">"especialidad"</span><span class="ht-json-colon">:</span> <span class="ht-json-arr">[</span><span class="ht-json-str">"Design Systems"</span><span class="ht-json-comma">,</span> <span class="ht-json-str">"Product Strategy"</span><span class="ht-json-comma">,</span> <span class="ht-json-str">"UX Research"</span><span class="ht-json-arr">]</span><span class="ht-json-comma">,</span></div>
+      <div class="ht-line ht-indent"><span class="ht-json-key">"experiencia"</span><span class="ht-json-colon">:</span> <span class="ht-json-num">8</span><span class="ht-json-comma">,</span></div>
+      <div class="ht-line ht-indent"><span class="ht-json-key">"disponible"</span><span class="ht-json-colon">:</span> <span class="ht-json-bool">true</span></div>
+      <div class="ht-line"><span class="ht-json-brace">{"}"}</span></div>
+    </div>
+
+    <!-- New prompt after output -->
+    <div class="ht-newprompt" data-terminal-newprompt>
+      <div class="ht-line">
+        <span class="ht-prompt">ramon<span class="ht-prompt-at">@</span>system<span class="ht-prompt-colon">:</span><span class="ht-prompt-path">~</span><span class="ht-prompt-dollar">$</span></span>
+        <span class="ht-cursor ht-cursor--final" data-terminal-cursor-final>█</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Terminal container: glassmorphism ── */
+  .hero-terminal {
+    --ht-bg: rgba(13, 17, 23, 0.82);
+    --ht-border: rgba(48, 54, 61, 0.6);
+    --ht-chrome-bg: rgba(22, 27, 34, 0.95);
+    --ht-radius: 12px;
+
+    display: none; /* shown only in code mode */
+    width: 100%;
+    max-width: 560px;
+    border-radius: var(--ht-radius);
+    border: 1px solid var(--ht-border);
+    overflow: hidden;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: clamp(0.72rem, 1.4vw, 0.84rem);
+    letter-spacing: -0.03em;
+    line-height: 1.7;
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    background: var(--ht-bg);
+    box-shadow:
+      0 0 0 1px rgba(48, 54, 61, 0.3),
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    position: relative;
+  }
+
+  body.code-mode .hero-terminal {
+    display: block;
+  }
+
+  /* ── Hover glow ── */
+  .hero-terminal:hover {
+    border-color: rgba(139, 233, 253, 0.3);
+    box-shadow:
+      0 0 0 1px rgba(139, 233, 253, 0.15),
+      0 0 30px rgba(139, 233, 253, 0.07),
+      0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Accelerate cursor on hover */
+  .hero-terminal:hover .ht-cursor,
+  .hero-terminal:hover .ht-cursor--final {
+    animation-duration: 0.35s;
+  }
+
+  /* ── Chrome bar (macOS window buttons) ── */
+  .ht-chrome {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 14px;
+    background: var(--ht-chrome-bg);
+    border-bottom: 1px solid var(--ht-border);
+    user-select: none;
+  }
+
+  .ht-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .ht-dot--close    { background: #ff5f57; }
+  .ht-dot--minimize { background: #febc2e; }
+  .ht-dot--expand   { background: #28c840; }
+
+  .ht-chrome-title {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.7rem;
+    color: var(--cm-text-muted, #7d8590);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Terminal body ── */
+  .ht-body {
+    padding: 14px 16px 16px;
+  }
+
+  .ht-line {
+    white-space: pre;
+    min-height: 1.7em;
+  }
+
+  .ht-indent {
+    padding-left: 2ch;
+  }
+
+  /* ── Prompt styling ── */
+  .ht-prompt {
+    color: var(--cm-string, #50fa7b);
+    font-weight: 600;
+    margin-right: 0.6ch;
+  }
+
+  .ht-prompt-at     { color: var(--cm-text-muted, #7d8590); font-weight: 400; }
+  .ht-prompt-colon  { color: var(--cm-text-muted, #7d8590); font-weight: 400; }
+  .ht-prompt-path   { color: var(--cm-keyword, #bd93f9); font-weight: 400; }
+  .ht-prompt-dollar { color: var(--cm-text-muted, #7d8590); font-weight: 400; }
+
+  /* ── Typed command text ── */
+  .ht-typed {
+    color: var(--cm-text, #e6edf3);
+  }
+
+  /* ── Blinking cursor ── */
+  .ht-cursor {
+    color: var(--cm-text, #e6edf3);
+    animation: ht-blink 0.7s step-end infinite;
+    font-weight: 300;
+  }
+
+  .ht-cursor--final {
+    color: var(--cm-text, #e6edf3);
+    animation: ht-blink 0.7s step-end infinite;
+    font-weight: 300;
+  }
+
+  @keyframes ht-blink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0; }
+  }
+
+  /* ── JSON syntax highlighting ── */
+  .ht-json-brace { color: var(--cm-text, #e6edf3); }
+  .ht-json-key   { color: var(--cm-function, #8be9fd); }
+  .ht-json-colon { color: var(--cm-text-muted, #7d8590); }
+  .ht-json-str   { color: var(--cm-string, #50fa7b); }
+  .ht-json-num   { color: var(--cm-attr, #ffb86c); }
+  .ht-json-bool  { color: var(--cm-keyword, #bd93f9); }
+  .ht-json-comma { color: var(--cm-text-muted, #7d8590); }
+  .ht-json-arr   { color: var(--cm-tag, #ff79c6); }
+
+  /* ── Hidden until animation reveals ── */
+  .ht-output,
+  .ht-newprompt {
+    display: none;
+  }
+
+  .ht-output.visible,
+  .ht-newprompt.visible {
+    display: block;
+  }
+
+  /* JSON lines animate in with stagger */
+  .ht-output .ht-line {
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  .ht-output .ht-line.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .hero-terminal {
+      max-width: 100%;
+      font-size: 0.68rem;
+    }
+  }
+</style>
+
+<script>
+  function initHeroTerminal() {
+    const terminal = document.querySelector('[data-component="HeroTerminal"]');
+    if (!terminal) return;
+
+    const commandEl = terminal.querySelector('[data-terminal-command]') as HTMLElement;
+    const cursorEl = terminal.querySelector('[data-terminal-cursor]') as HTMLElement;
+    const outputEl = terminal.querySelector('[data-terminal-output]') as HTMLElement;
+    const newPromptEl = terminal.querySelector('[data-terminal-newprompt]') as HTMLElement;
+
+    if (!commandEl || !cursorEl || !outputEl || !newPromptEl) return;
+
+    const command = 'whoami';
+    let charIndex = 0;
+    let hasRun = false;
+
+    function typeCommand() {
+      if (charIndex < command.length) {
+        commandEl.textContent += command[charIndex];
+        charIndex++;
+        setTimeout(typeCommand, 70 + Math.random() * 60);
+      } else {
+        // Command typed — hide cursor briefly, then show output
+        setTimeout(() => {
+          cursorEl.style.display = 'none';
+          showOutput();
+        }, 400);
+      }
+    }
+
+    function showOutput() {
+      outputEl.classList.add('visible');
+      const lines = outputEl.querySelectorAll('.ht-line');
+      lines.forEach((line, i) => {
+        setTimeout(() => {
+          line.classList.add('revealed');
+        }, i * 60);
+      });
+
+      // Show new prompt after all lines
+      setTimeout(() => {
+        newPromptEl.classList.add('visible');
+      }, lines.length * 60 + 200);
+    }
+
+    function startAnimation() {
+      if (hasRun) return;
+      // Only animate if code mode is active
+      if (!document.body.classList.contains('code-mode')) return;
+      hasRun = true;
+
+      // Reset state
+      commandEl.textContent = '';
+      cursorEl.style.display = '';
+      outputEl.classList.remove('visible');
+      newPromptEl.classList.remove('visible');
+      outputEl.querySelectorAll('.ht-line').forEach(l => l.classList.remove('revealed'));
+
+      // Start typing after a brief delay
+      setTimeout(typeCommand, 600);
+    }
+
+    // Observe visibility
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && document.body.classList.contains('code-mode')) {
+          startAnimation();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(terminal);
+
+    // Also trigger when code mode is toggled on
+    const modeObserver = new MutationObserver(() => {
+      if (document.body.classList.contains('code-mode') && !hasRun) {
+        // Reset for fresh animation
+        hasRun = false;
+        startAnimation();
+      }
+    });
+
+    modeObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  }
+
+  initHeroTerminal();
+  document.addEventListener('astro:page-load', initHeroTerminal);
+</script>
