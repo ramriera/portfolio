@@ -637,10 +637,27 @@ function md(text: string): string {
   <!-- Other projects -->
   <section class="section-padding" data-component="RelatedProjects">
     <div class="container-custom">
-      <div class="flex items-end justify-between mb-14 md:mb-16">
-        <h2 data-reveal class="heading-lg">
-          Otros <span class="text-primary-500">proyectos</span>
-        </h2>
+      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-14 md:mb-16">
+        <div>
+          <div data-reveal class="mb-6 flex items-center gap-3">
+            <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+                <g class="icon-grid-idle">
+                  <!-- Grid squares -->
+                  <rect x="6" y="6" width="14" height="14" rx="2" class="icon-stroke icon-draw" />
+                  <rect x="24" y="6" width="14" height="14" rx="2" class="icon-stroke icon-draw" />
+                  <rect x="6" y="24" width="14" height="14" rx="2" class="icon-stroke icon-draw" />
+                  <rect x="24" y="24" width="14" height="14" rx="2" class="icon-accent icon-draw-delay" />
+                </g>
+                <!-- Arrow hint -->
+                <path d="M31 27L35 31L31 35" class="icon-accent icon-draw-delay" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </div>
+          <h2 data-reveal data-delay="100" class="heading-lg">
+            Otros <span class="text-primary-500">proyectos</span>
+          </h2>
+        </div>
         <a data-reveal href="/projects" class="btn-outline text-sm">
           Ver todos
         </a>
@@ -664,14 +681,9 @@ function md(text: string): string {
               </div>
 
               <div class="mt-5 md:mt-6">
-                <div class="flex items-center justify-between gap-4">
-                  <h3 class="text-xl md:text-2xl font-bold tracking-tight text-dark-900 group-hover:text-primary-600 transition-colors duration-300">
-                    {p.title}
-                  </h3>
-                  <svg class="related-card-arrow w-5 h-5 text-dark-300 group-hover:text-primary-500 shrink-0 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </div>
+                <h3 class="text-xl md:text-2xl font-bold tracking-tight text-dark-900 group-hover:text-primary-600 transition-colors duration-300">
+                  {p.title}
+                </h3>
                 <div class="flex flex-wrap items-center gap-2.5 mt-4">
                   {p.tags.slice(0, 3).map((tag: string) => (
                     <span class="related-card-tag">{tag}</span>
@@ -815,15 +827,6 @@ function md(text: string): string {
 
   .related-card:hover .related-card-img {
     transform: scale(1.05);
-  }
-
-  .related-card-arrow {
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-                color 0.3s ease;
-  }
-
-  .related-card:hover .related-card-arrow {
-    transform: translate(3px, -3px);
   }
 
   .related-card-tag {

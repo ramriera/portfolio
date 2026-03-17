@@ -235,14 +235,85 @@ export const projects: Project[] = [
       {
         label: '02. Flujo de Usuario y Conversión',
         title: 'Arquitectura del flujo propuesto',
-        layout: 'full-image',
+        layout: 'mermaid',
         content: 'Antes de diseñar una sola pantalla, se definió la lógica del sistema. Este diagrama es la pieza central del rediseño: mapea cada decisión del usuario, cada punto de bifurcación y cada **reducción de fricción** aplicada. La arquitectura demuestra que las decisiones de diseño no son estéticas - son estructurales. Se eliminaron **puntos de fricción** innecesarios, se redujo la **fricción cognitiva** con preselecciones inteligentes, y se priorizó la **confirmación inmediata** sobre validaciones manuales.',
-        images: [
-          '/assets/projects/massimo-dutti/mermaid-flujo-reserva.svg',
-        ],
-        captions: [
-          'Diagrama del flujo de reserva propuesto — De 8 pasos a 4',
-        ],
+        mermaidCode: `graph TB
+  subgraph EvidenciaFisica["🏷️ EVIDENCIA FÍSICA"]
+    EF1["📱 App/Web Massimo Dutti"]
+    EF2["📍 Mapa tiendas + stock"]
+    EF3["📩 Email confirmación"]
+    EF4["📱 Push 'Listo para recoger'"]
+    EF6["📲 QR en App"]
+    EF7["🏬 Mostrador tienda"]
+    EF8["🧾 Ticket + Encuesta"]
+  end
+  subgraph Cliente["👤 CLIENTE"]
+    C1["1️⃣ Busca producto"]
+    C2["2️⃣ Ve disponibilidad"]
+    C3["3️⃣ Selecciona talla y tienda"]
+    C4["4️⃣ Confirma reserva"]
+    C5["5️⃣ Recibe confirmación"]
+    C6["6️⃣ Ve 'Listo para recoger'"]
+    C7["7️⃣ Va a la tienda"]
+    C8["8️⃣ Recoge producto"]
+  end
+  subgraph Frontstage["💻 FRONTSTAGE - Lo que ve el usuario"]
+    F1["✅ Botón 'Reservar en tienda'"]
+    F2["✅ Selector tienda + stock live"]
+    F3["✅ Resumen — 3 taps máximo"]
+    F4["✅ Pantalla confirmación"]
+    F5["✅ Tracker: Reservado → Preparando → Listo"]
+    F6["✅ Empleado prepara producto"]
+    F7["✅ Empleado escanea QR"]
+  end
+  subgraph Backstage["⚙️ BACKSTAGE - Sistemas internos"]
+    B1["🔧 API Catálogo"]
+    B2["🔧 API Stock TIEMPO REAL"]
+    B3["🔧 Motor de reservas"]
+    B4["🔧 Notificaciones push+email"]
+    B5["🔧 Sistema tienda — orden"]
+    B6["🔧 Notif 'Listo'"]
+    B7["🔧 Validar QR → venta"]
+  end
+  subgraph Soporte["🗄️ SOPORTE - Base de datos"]
+    S1["💾 ERP/PIM: productos"]
+    S2["💾 WMS: stock omnicanal"]
+    S3["💾 CRM: clientes"]
+    S4["💾 Email/Push: templates"]
+    S5["💾 Analytics: conversión"]
+    S6["💾 Cron: expira reservas no recogidas"]
+  end
+  C1 --> F1
+  C2 --> F2
+  C3 --> F3
+  C4 --> F4
+  C5 --> F5
+  C6 --> F6
+  C7 --> F7
+  C8 --> EF8
+  F1 --> B1
+  F2 --> B2
+  F3 --> B3
+  F4 --> B4
+  F5 --> B5
+  F6 --> B6
+  F7 --> B7
+  B1 --> S1
+  B2 --> S2
+  B3 --> S3
+  B4 --> S4
+  B7 --> S5
+  B5 --> S6
+  classDef physical fill:#e94560,stroke:#fff,color:#fff,stroke-width:2px
+  classDef customer fill:#0f3460,stroke:#53d8fb,color:#fff,stroke-width:2px
+  classDef frontstage fill:#16213e,stroke:#e94560,color:#fff,stroke-width:2px
+  classDef backstage fill:#533483,stroke:#8d99ae,color:#fff,stroke-width:2px
+  classDef support fill:#2b2d42,stroke:#8d99ae,color:#edf2f4,stroke-width:2px
+  class EF1,EF2,EF3,EF4,EF6,EF7,EF8 physical
+  class C1,C2,C3,C4,C5,C6,C7,C8 customer
+  class F1,F2,F3,F4,F5,F6,F7 frontstage
+  class B1,B2,B3,B4,B5,B6,B7 backstage
+  class S1,S2,S3,S4,S5,S6 support`,
         highlight: 'De **8 pasos a 4**. La lógica del sistema está por encima de la decoración visual: cada nodo del diagrama justifica una decisión de producto.',
       },
       // ── 03. Estrategia de Producto ──
@@ -559,7 +630,7 @@ export const projects: Project[] = [
     client: 'Global Helping',
     year: '2021',
     category: 'Design Thinking',
-    tags: ['UX Design', 'Design Thinking', 'NGO & Nonprofits'],
+    tags: ['UX Design', 'Design Thinking', 'Nonprofit'],
     description: 'Plataforma web que reúne donaciones, voluntariado y crowdfunding en un solo lugar para dar visibilidad a ONGs locales frente a las grandes organizaciones internacionales.',
     longDescription: 'Vivimos en un mundo con **10 grandes problemáticas** identificadas por 15.000 científicos de 184 países: escasez de agua, sobrepesca, crecimiento demográfico, degradación del suelo, contaminación, extinción de especies y escasez alimentaria. A partir de la pregunta "¿Cómo podemos **mejorar la calidad de vida** de los más desfavorecidos?" nació Global Helping - una plataforma web que conecta personas solidarias con ONGs y causas sociales a través de **donaciones, voluntariado y crowdfunding**.',
     challenge: 'La investigación inicial reveló un problema inesperado: las **ONGs locales carecen de la capacidad y los recursos de comunicación** que tienen las grandes organizaciones internacionales. Tras encuestar a **48 personas**, el proyecto pivotó de un enfoque generalista a uno centrado en **dar visibilidad a estas organizaciones locales**. Además, **no existía ninguna plataforma** que reuniera donaciones, voluntariado y crowdfunding en un mismo sitio - cada servicio vivía aislado.',
