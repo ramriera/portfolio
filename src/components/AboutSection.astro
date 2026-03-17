@@ -64,7 +64,7 @@ import profileImg from '@/assets/shared/foto-perfil.png';
         </div>
 
         <div data-reveal data-delay="300" class="flex flex-wrap gap-4">
-          <a href="/about" class="btn-primary"
+          <a href="/about" class="btn-primary hero-cta-normal"
             data-component="ButtonPrimary"
             data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
             Conocer más
@@ -72,11 +72,14 @@ import profileImg from '@/assets/shared/foto-perfil.png';
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
+          <a href="/about" class="hero-cta-code" data-component="ButtonRunCmd">
+            <span class="hero-cta-prompt">&gt;</span> cat <span class="hero-cta-cmd">about.md</span><span class="hero-cta-cursor">_</span>
+          </a>
           <a
             href="/docs/CV-Ramon-Riera-Depares.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-outline"
+            class="btn-outline btn-cv-normal"
             data-component="ButtonOutline"
             data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px"
           >
@@ -85,6 +88,10 @@ import profileImg from '@/assets/shared/foto-perfil.png';
               <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" />
             </svg>
+          </a>
+          <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
+            class="btn-cv-code" data-component="ButtonCVCode">
+            <span class="btn-cv-prompt">&gt;</span> ramon-riera <span class="btn-cv-flag">--download-cv</span>
           </a>
         </div>
       </div>

@@ -977,7 +977,12 @@ body.code-mode .hero-cta-code:hover {
   color: var(--cm-function, #8be9fd);
 }
 
-body.code-mode .hero-cta-code:hover .hero-cta-cmd {
+.hero-cta-flag {
+  color: var(--cm-attr, #ffb86c);
+}
+
+body.code-mode .hero-cta-code:hover .hero-cta-cmd,
+body.code-mode .hero-cta-code:hover .hero-cta-flag {
   color: #fff;
 }
 
