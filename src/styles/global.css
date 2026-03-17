@@ -2492,7 +2492,6 @@ body.code-mode [data-component="AboutHero"] .about-title-code {
 .about-title-code {
   display: none;
   letter-spacing: -0.02em;
-  white-space: nowrap;
 }
 
 .about-title-code .code-fn {
@@ -2604,7 +2603,7 @@ body.code-mode .process-grid-code { display: block; }
   display: block;
   white-space: pre;
   counter-increment: code-line;
-  padding: 0 1.75rem 0 4rem;
+  padding: 0 1.75rem 0 3.5rem;
   position: relative;
   border-radius: 2px;
   transition: background-color 0.15s ease;
@@ -2615,9 +2614,9 @@ body.code-mode .process-grid-code { display: block; }
   content: counter(code-line);
   position: absolute;
   left: 0;
-  width: 3.25rem;
+  width: 2.75rem;
   text-align: right;
-  padding-right: 0.75rem;
+  padding-right: 1rem;
   color: var(--cm-comment, #6272a4);
   opacity: 0.35;
   font-size: 0.7rem;
