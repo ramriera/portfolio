@@ -237,8 +237,9 @@ export const projects: Project[] = [
         title: 'Arquitectura del flujo propuesto',
         layout: 'mermaid',
         content: 'Antes de diseñar una sola pantalla, se definió la lógica del sistema. Este diagrama es la pieza central del rediseño: mapea cada decisión del usuario, cada punto de bifurcación y cada **reducción de fricción** aplicada. La arquitectura demuestra que las decisiones de diseño no son estéticas - son estructurales. Se eliminaron **puntos de fricción** innecesarios, se redujo la **fricción cognitiva** con preselecciones inteligentes, y se priorizó la **confirmación inmediata** sobre validaciones manuales.',
-        mermaidCode: `graph TB
+        mermaidCode: `flowchart LR
   subgraph EvidenciaFisica["🏷️ EVIDENCIA FÍSICA"]
+    direction LR
     EF1["📱 App/Web Massimo Dutti"]
     EF2["📍 Mapa tiendas + stock"]
     EF3["📩 Email confirmación"]
@@ -248,6 +249,7 @@ export const projects: Project[] = [
     EF8["🧾 Ticket + Encuesta"]
   end
   subgraph Cliente["👤 CLIENTE"]
+    direction LR
     C1["1️⃣ Busca producto"]
     C2["2️⃣ Ve disponibilidad"]
     C3["3️⃣ Selecciona talla y tienda"]
@@ -257,25 +259,28 @@ export const projects: Project[] = [
     C7["7️⃣ Va a la tienda"]
     C8["8️⃣ Recoge producto"]
   end
-  subgraph Frontstage["💻 FRONTSTAGE - Lo que ve el usuario"]
+  subgraph Frontstage["💻 FRONTSTAGE - Lo que ve"]
+    direction LR
     F1["✅ Botón 'Reservar en tienda'"]
     F2["✅ Selector tienda + stock live"]
-    F3["✅ Resumen — 3 taps máximo"]
+    F3["✅ Resumen (3 taps máximo)"]
     F4["✅ Pantalla confirmación"]
     F5["✅ Tracker: Reservado → Preparando → Listo"]
     F6["✅ Empleado prepara producto"]
     F7["✅ Empleado escanea QR"]
   end
-  subgraph Backstage["⚙️ BACKSTAGE - Sistemas internos"]
+  subgraph Backstage["⚙️ BACKSTAGE - Sist. internos"]
+    direction LR
     B1["🔧 API Catálogo"]
     B2["🔧 API Stock TIEMPO REAL"]
     B3["🔧 Motor de reservas"]
     B4["🔧 Notificaciones push+email"]
-    B5["🔧 Sistema tienda — orden"]
+    B5["🔧 Sistema tienda (orden)"]
     B6["🔧 Notif 'Listo'"]
     B7["🔧 Validar QR → venta"]
   end
   subgraph Soporte["🗄️ SOPORTE - Base de datos"]
+    direction LR
     S1["💾 ERP/PIM: productos"]
     S2["💾 WMS: stock omnicanal"]
     S3["💾 CRM: clientes"]
@@ -284,26 +289,33 @@ export const projects: Project[] = [
     S6["💾 Cron: expira reservas no recogidas"]
   end
   C1 --> F1
-  C2 --> F2
-  C3 --> F3
-  C4 --> F4
-  C5 --> F5
-  C6 --> F6
-  C7 --> F7
-  C8 --> EF8
   F1 --> B1
-  F2 --> B2
-  F3 --> B3
-  F4 --> B4
-  F5 --> B5
-  F6 --> B6
-  F7 --> B7
   B1 --> S1
+  C2 --> F2
+  F2 --> B2
   B2 --> S2
+  C3 --> F3
+  F3 --> B3
   B3 --> S3
+  C4 --> F4
+  F4 --> B4
   B4 --> S4
-  B7 --> S5
+  C5 --> F5
+  F5 --> B5
   B5 --> S6
+  C6 --> F6
+  F6 --> B6
+  C7 --> F7
+  F7 --> B7
+  B7 --> S5
+  C8 --> B7
+  EF1 --> C1
+  EF2 --> C2
+  EF3 --> C5
+  EF4 --> C6
+  EF6 --> C7
+  EF7 --> C8
+  EF8 --> C8
   classDef physical fill:#e94560,stroke:#fff,color:#fff,stroke-width:2px
   classDef customer fill:#0f3460,stroke:#53d8fb,color:#fff,stroke-width:2px
   classDef frontstage fill:#16213e,stroke:#e94560,color:#fff,stroke-width:2px
