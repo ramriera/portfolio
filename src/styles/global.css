@@ -920,17 +920,76 @@ body.code-mode aside:hover {
 }
 
 /* ── 7. Buttons (Mirror Layout — identical box size in both modes) ── */
-.code-mode .btn-primary {
+.code-mode .btn-primary:not(.hero-cta-normal) {
   background: var(--cm-function) !important;
   color: var(--cm-bg) !important;
   border-color: var(--cm-function) !important;
   font-weight: 500 !important;
 }
 
-.code-mode .btn-primary:hover {
+.code-mode .btn-primary:not(.hero-cta-normal):hover {
   background: transparent !important;
   color: var(--cm-function) !important;
   box-shadow: 0 0 12px rgba(139, 233, 253, 0.25) !important;
+}
+
+/* ── Hero CTA: Terminal command style ── */
+.hero-cta-code {
+  display: none;
+}
+
+body.code-mode .hero-cta-normal {
+  display: none !important;
+}
+
+body.code-mode .hero-cta-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  color: var(--cm-text-secondary, #c9d1d9);
+  background: transparent;
+  border: 1px solid var(--cm-border, #30363d);
+  border-radius: 4px;
+  padding: 0.875rem 1.75rem;
+  min-width: 220px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+body.code-mode .hero-cta-code:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--cm-string, #50fa7b);
+  color: #fff;
+  text-shadow: 0 0 8px rgba(80, 250, 123, 0.25);
+  box-shadow: 0 0 12px rgba(80, 250, 123, 0.1);
+}
+
+.hero-cta-prompt {
+  color: var(--cm-string, #50fa7b);
+  font-weight: 700;
+}
+
+.hero-cta-cmd {
+  color: var(--cm-function, #8be9fd);
+}
+
+body.code-mode .hero-cta-code:hover .hero-cta-cmd {
+  color: #fff;
+}
+
+.hero-cta-cursor {
+  color: var(--cm-string, #50fa7b);
+  animation: cta-blink 1s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes cta-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .code-mode .btn-outline {
