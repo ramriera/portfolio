@@ -38,30 +38,18 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
             </svg>
           </span>
         </div>
-        <!-- Normal mode title -->
-        <h1 data-reveal data-delay="100" class="heading-xl mb-8 about-title-normal"
+        <!-- Title (same element for both modes, CSS handles skin) -->
+        <h1 data-reveal data-delay="100" class="heading-xl mb-8"
           data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2rem / 32px">
           Diseñador, pensador,
-          <span class="text-primary-500"><WordsCarousel words={aboutWords} interval={3000} /></span>
-        </h1>
-        <!-- Code mode title: console.log -->
-        <h1 data-reveal data-delay="100" class="heading-xl mb-8 about-title-code">
-          <span class="code-fn">console</span><span class="code-punct">.</span><span class="code-fn">log</span><span class="code-punct">(</span><span class="code-str">"Diseñador, pensador, </span><span class="typewriter-slot typewriter-slot--code" data-typewriter='["creador","arquitecto","constructor"]'><span class="typewriter-word"></span><span class="typewriter-cursor">_</span></span><span class="code-str">"</span><span class="code-punct">)</span>
+          <span class="text-primary-500"><WordsCarousel words={aboutWords} interval={2000} /></span>
         </h1>
 
-        <!-- Normal mode description -->
-        <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl about-desc-normal"
+        <!-- Subtitle (same element for both modes) -->
+        <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl"
           data-token="$font-family-sans: Inter|$color-text-muted: #7c766c">
           Con más de 8 años de experiencia, he dedicado mi carrera a crear productos digitales que combinan estética, usabilidad y estrategia de negocio.
         </p>
-        <!-- Code mode description: comment block -->
-        <div data-reveal data-delay="200" class="about-desc-code">
-          <span>/*</span><br/>
-          <span>&nbsp;* Con más de 8 años de experiencia, he dedicado mi carrera</span><br/>
-          <span>&nbsp;* a crear <span class="comment-highlight">productos digitales</span> que combinan estética,</span><br/>
-          <span>&nbsp;* <span class="comment-highlight">usabilidad</span> y <span class="comment-highlight">estrategia de negocio</span>.</span><br/>
-          <span>&nbsp;*/</span>
-        </div>
       </div>
     </div>
   </section>
@@ -728,93 +716,5 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
     </div>
   </section>
 
-<script>
-  class Typewriter {
-    private el: HTMLElement;
-    private words: string[];
-    private wordEl: HTMLElement;
-    private cursorEl: HTMLElement;
-    private current = 0;
-    private charIndex = 0;
-    private isDeleting = false;
-    private readonly typeSpeed = 80;
-    private readonly deleteSpeed = 50;
-    private readonly pauseBetween = 3000;
-
-    constructor(el: HTMLElement) {
-      this.el = el;
-      this.words = JSON.parse(el.dataset.typewriter || '[]');
-      this.wordEl = el.querySelector('.typewriter-word')!;
-      this.cursorEl = el.querySelector('.typewriter-cursor')!;
-      if (this.words.length) this.tick();
-    }
-
-    private tick() {
-      const word = this.words[this.current];
-
-      if (!this.isDeleting) {
-        this.charIndex++;
-        this.wordEl.textContent = word.slice(0, this.charIndex);
-
-        if (this.charIndex === word.length) {
-          this.isDeleting = false;
-          setTimeout(() => {
-            this.isDeleting = true;
-            this.tick();
-          }, this.pauseBetween);
-          return;
-        }
-        setTimeout(() => this.tick(), this.typeSpeed);
-      } else {
-        this.charIndex--;
-        this.wordEl.textContent = word.slice(0, this.charIndex);
-
-        if (this.charIndex === 0) {
-          this.isDeleting = false;
-          this.current = (this.current + 1) % this.words.length;
-          setTimeout(() => this.tick(), this.typeSpeed * 3);
-          return;
-        }
-        setTimeout(() => this.tick(), this.deleteSpeed);
-      }
-    }
-  }
-
-  document.querySelectorAll<HTMLElement>('[data-typewriter]').forEach(el => new Typewriter(el));
-</script>
-
-<style>
-  /* ── Typewriter slot (code mode only) ── */
-  .typewriter-slot {
-    display: inline-flex;
-    align-items: baseline;
-    min-width: 5.5ch;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    position: relative;
-  }
-
-  .typewriter-slot--code {
-    color: var(--cm-tag, #ff79c6);
-  }
-
-  .typewriter-word {
-    display: inline-block;
-    border-bottom: 2px solid currentColor;
-    padding-bottom: 2px;
-  }
-
-  .typewriter-cursor {
-    display: inline-block;
-    animation: blink-cursor 0.7s step-end infinite;
-    font-weight: 300;
-    margin-left: 1px;
-    color: currentColor;
-  }
-
-  @keyframes blink-cursor {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-</style>
 
 </BaseLayout>

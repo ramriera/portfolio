@@ -2480,57 +2480,14 @@ body.code-mode [data-component="BiographySection"] .dashed-border:has(img) {
   background: transparent !important;
 }
 
-/* ── Code Mode: Hero title as console.log ── */
-body.code-mode [data-component="AboutHero"] .about-title-normal {
-  display: none;
-}
-
-body.code-mode [data-component="AboutHero"] .about-title-code {
-  display: block;
-}
-
-.about-title-code {
-  display: none;
-}
-
-.about-title-code .code-fn {
-  color: var(--cm-function, #8be9fd);
-  font-weight: 600;
-}
-
-.about-title-code .code-punct {
-  color: var(--cm-text-muted, #7d8590);
-}
-
-.about-title-code .code-str {
-  color: var(--cm-string, #50fa7b);
-}
-
-.about-title-code .code-accent {
-  color: var(--cm-tag, #ff79c6);
-}
-
-/* ── Code Mode: Description as code comment block ── */
-body.code-mode [data-component="AboutHero"] .about-desc-normal {
-  display: none;
-}
-
-body.code-mode [data-component="AboutHero"] .about-desc-code {
-  display: block;
-}
-
-.about-desc-code {
-  display: none;
+/* ── About Hero: code mode inherits same skin as Home hero ── */
+/* Heading gets cyan color + mono font via existing .code-mode .heading-xl rules */
+/* Subtitle gets muted mono style */
+body.code-mode [data-component="AboutHero"] .text-body {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 0.85rem;
   line-height: 1.7;
-  color: var(--cm-comment, #6272a4);
-  max-width: 48rem;
-}
-
-.about-desc-code .comment-highlight {
-  color: var(--cm-constant, #f1fa8c);
-  font-style: normal;
+  color: var(--cm-text-muted, #7d8590);
 }
 
 /* ── Process Section: dual mode titles ── */
