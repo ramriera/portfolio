@@ -2123,6 +2123,13 @@ body.code-mode .stack-tool:hover::after {
   transform: translateY(-50%) translateX(12px);
 }
 
+/* ── Shared: Code-mode icon inside buttons ── */
+.btn-code-icon {
+  color: var(--cm-text-muted, #7d8590);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
 /* ── CV Button: Code mode function-call style ── */
 .btn-cv-code {
   display: none;
@@ -2135,7 +2142,7 @@ body.code-mode .btn-cv-normal {
 body.code-mode .btn-cv-code {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
@@ -2148,9 +2155,25 @@ body.code-mode .btn-cv-code {
   cursor: pointer;
 }
 
+body.code-mode .btn-cv-code .btn-code-icon {
+  color: #fff;
+  opacity: 0.6;
+}
+
 body.code-mode .btn-cv-code:hover {
+  background: rgba(255, 255, 255, 0.05);
   border-color: var(--cm-string, #50fa7b);
-  box-shadow: 0 0 12px rgba(80, 250, 123, 0.15);
+  box-shadow: 0 0 12px rgba(80, 250, 123, 0.12);
+}
+
+body.code-mode .btn-cv-code:hover .btn-code-icon {
+  opacity: 1;
+  color: #fff;
+}
+
+body.code-mode .btn-cv-code:hover .code-fn,
+body.code-mode .btn-cv-code:hover .code-parens {
+  color: #fff;
 }
 
 body.code-mode .btn-cv-code:hover .code-string {
@@ -2199,7 +2222,7 @@ body.code-mode .btn-viewall-normal {
 body.code-mode .btn-viewall-code {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 0.5rem;
   padding: 0.625rem 1.25rem;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
@@ -2212,23 +2235,26 @@ body.code-mode .btn-viewall-code {
   cursor: pointer;
 }
 
-body.code-mode .btn-viewall-code .code-method {
-  color: var(--cm-constant, #f1fa8c);
+body.code-mode .btn-viewall-code .btn-code-icon {
+  color: var(--cm-text-muted, #7d8590);
+  transition: all 0.3s ease;
 }
 
 body.code-mode .btn-viewall-code:hover {
   border-color: var(--cm-constant, #f1fa8c);
-  background: rgba(241, 250, 140, 0.06);
+  background: rgba(241, 250, 140, 0.05);
   box-shadow: 0 0 12px rgba(241, 250, 140, 0.1);
 }
 
-body.code-mode .btn-viewall-code::before {
-  content: '';
-  transition: all 0.3s ease;
+body.code-mode .btn-viewall-code:hover .btn-code-icon {
+  color: #fff;
+  transform: translateX(2px);
 }
 
-body.code-mode .btn-viewall-code:hover .code-fn {
-  color: var(--cm-text-secondary);
+body.code-mode .btn-viewall-code:hover .code-fn,
+body.code-mode .btn-viewall-code:hover .code-dot,
+body.code-mode .btn-viewall-code:hover .code-parens {
+  color: #fff;
 }
 
 body.code-mode .btn-viewall-code:hover .code-method::after {
@@ -2237,7 +2263,7 @@ body.code-mode .btn-viewall-code:hover .code-method::after {
   font-weight: 400;
 }
 
-/* ── Social links: Code mode (import syntax) ── */
+/* ── Social links: Code mode (import syntax with icons) ── */
 .social-code {
   display: none;
 }
@@ -2253,8 +2279,8 @@ body.code-mode .social-code {
 .social-import {
   display: inline-flex;
   align-items: center;
-  gap: 0;
-  padding: 0.5rem 0.75rem;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
   color: var(--cm-text-muted, #7d8590);
@@ -2267,9 +2293,29 @@ body.code-mode .social-code {
   white-space: nowrap;
 }
 
+.social-import-icon {
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
 .social-import:hover {
   border-color: var(--cm-border, #30363d);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.social-import:hover .social-import-icon {
+  opacity: 1;
+}
+
+/* LinkedIn: icon lights up in brand blue */
+.social-import--linkedin .social-import-icon {
+  color: var(--cm-text-muted, #7d8590);
+}
+
+.social-import--linkedin:hover .social-import-icon {
+  color: #0a66c2;
+  filter: drop-shadow(0 0 4px rgba(10, 102, 194, 0.4));
 }
 
 .social-import--linkedin:hover .code-import-name {
@@ -2277,18 +2323,48 @@ body.code-mode .social-code {
   text-shadow: 0 0 10px rgba(10, 102, 194, 0.4);
 }
 
+.social-import--linkedin:hover .code-keyword,
+.social-import--linkedin:hover .code-string {
+  color: var(--cm-text-secondary, #c9d1d9);
+}
+
+/* Medium: icon lights up in white */
+.social-import--medium .social-import-icon {
+  color: var(--cm-text-muted, #7d8590);
+}
+
+.social-import--medium:hover .social-import-icon {
+  color: #fff;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+}
+
 .social-import--medium:hover .code-import-name {
   color: #fff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-.social-import--cv:hover .code-string {
+.social-import--medium:hover .code-keyword,
+.social-import--medium:hover .code-string {
+  color: var(--cm-text-secondary, #c9d1d9);
+}
+
+/* CV (fetch): icon lights up in green */
+.social-import--cv .social-import-icon {
+  color: var(--cm-text-muted, #7d8590);
+}
+
+.social-import--cv:hover .social-import-icon {
   color: var(--cm-string, #50fa7b);
-  text-shadow: 0 0 8px rgba(80, 250, 123, 0.3);
+  filter: drop-shadow(0 0 4px rgba(80, 250, 123, 0.3));
 }
 
 .social-import--cv:hover .code-fn {
   color: #fff;
+}
+
+.social-import--cv:hover .code-string {
+  color: var(--cm-string, #50fa7b);
+  text-shadow: 0 0 8px rgba(80, 250, 123, 0.3);
 }
 
 /* ── Code mode: flatten border-radius on secondary buttons ── */
