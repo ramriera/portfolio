@@ -546,7 +546,7 @@ export const projects: Project[] = [
       {
         label: '01. Espacio del Problema',
         title: 'Un mercado con demanda latente y barreras reales',
-        layout: 'right-left',
+        layout: 'full-image',
         content: 'Antes de diseñar, necesitaba entender por qué España está a la cola de Europa en adopción del vehículo eléctrico. La respuesta no es falta de interés — el consumidor español conoce las ventajas (ahorro, acceso a zonas restringidas, beneficios fiscales). **El problema es que las barreras pesan más que los beneficios.**\n\nExisten dos categorías de vehículos eléctricos en el mercado: el **BEV** (100% eléctrico, batería recargable) y el **PHEV** (híbrido enchufable, ~40 km de autonomía eléctrica). En ambos casos, la infraestructura de recarga crece, pero no al ritmo necesario para generar confianza. Los datos de matriculaciones lo confirman: la cuota de mercado es mínima frente a Noruega, Países Bajos o Alemania.',
         images: ['/assets/projects/movefast/movefast-electric-passenger-cars-registrations-spain.png'],
         captions: ['Matriculaciones de vehículos eléctricos — España vs. Europa: una brecha que no se explica solo por precio'],
@@ -803,7 +803,7 @@ export const projects: Project[] = [
       {
         label: '04. Estrategia UX',
         title: 'El vacío competitivo que justifica la plataforma',
-        layout: 'left-right',
+        layout: 'image-grid',
         content: 'El benchmarking confirmó lo que las encuestas sugerían: existen plataformas de donaciones (Teaming, GoFundMe), plataformas de voluntariado (Hacesfalta.org) y plataformas de crowdfunding (Goteo, Verkami). **Pero ninguna reúne los tres servicios.**\n\nEsto importa porque el usuario no piensa en categorías de servicio — piensa en "quiero ayudar". Obligarle a elegir entre donar, ser voluntario o contribuir a crowdfunding antes de mostrarle las causas es una barrera artificial. **Global Helping elimina esa decisión**: el usuario explora causas, y cada causa le ofrece las formas de ayudar disponibles.\n\nLa estrategia UX se construye sobre cuatro principios:\n\n**1. Un punto de acceso, tres formas de actuar** — Sin fragmentación.\n**2. Confianza antes de conversión** — El usuario necesita creer antes de actuar.\n**3. Conexión emocional con storytelling** — Historias reales, no métricas frías.\n**4. Feedback post-acción** — Mostrar el impacto de la ayuda para generar recurrencia.',
         highlight: 'El usuario no piensa "quiero donar" o "quiero ser voluntario". Piensa **"quiero ayudar"**. La plataforma debe adaptarse a la intención, no obligar al usuario a adaptarse a la estructura.',
         images: ['/assets/projects/global-helping/gh-benchmarking.png'],
