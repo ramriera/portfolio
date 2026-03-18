@@ -623,6 +623,30 @@ body.code-mode {
   cursor: crosshair;
 }
 
+/* ── Anti-ghosting: ensure NO code-mode artifacts leak into visual mode ── */
+/* Heading pseudo-elements must not exist outside code mode */
+body:not(.code-mode) .heading-xl::after,
+body:not(.code-mode) .heading-lg::after,
+body:not(.code-mode) .heading-lg::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Animations must not run outside code mode */
+body:not(.code-mode) .hero-cta-cursor,
+body:not(.code-mode) .hero-cta-code,
+body:not(.code-mode) .btn-cv-code,
+body:not(.code-mode) .btn-viewall-code,
+body:not(.code-mode) .social-code {
+  display: none !important;
+  animation: none !important;
+}
+
+/* Ensure mono font doesn't persist after mode toggle (transition cleanup) */
+body:not(.code-mode) {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
 /* Inspectable elements: DevTools-style pointer cursor */
 body.code-mode [data-component],
 body.code-mode [data-token] {
@@ -933,6 +957,27 @@ body.code-mode aside:hover {
   box-shadow: 0 0 12px rgba(139, 233, 253, 0.25) !important;
 }
 
+/* ── Layout stability: prevent height shift on mode toggle ── */
+/* CTA button containers keep consistent min-height across modes */
+.code-mode [data-reveal] > .flex-wrap,
+.code-mode .flex-wrap:has(.hero-cta-code),
+.code-mode .flex-wrap:has(.btn-cv-code) {
+  min-height: 52px;
+  align-items: center;
+}
+
+/* Social links container: consistent height between icon row and import syntax */
+.social-normal,
+.social-code {
+  min-height: 52px;
+  align-items: center;
+}
+
+/* Section heading containers: compensate for mono font width difference */
+.code-mode .heading-lg {
+  min-height: 1.4em;
+}
+
 /* ── Hero CTA: Terminal command style ── */
 .hero-cta-code {
   display: none;
@@ -1016,19 +1061,52 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   border: 1px solid rgba(80, 250, 123, 0.2) !important;
 }
 
-/* ── 9. Images: B&W filter + overlay ── */
+/* ── 9. Images: B&W filter + blueprint overlay ── */
 .code-mode img:not([src*="svg"]) {
-  filter: grayscale(0.85) brightness(0.7) contrast(1.1) !important;
+  filter: grayscale(1) contrast(1.2) brightness(0.8) !important;
   transition: filter 0.5s ease !important;
 }
 
 .code-mode img:not([src*="svg"]):hover {
-  filter: grayscale(0.5) brightness(0.8) contrast(1.05) !important;
+  filter: grayscale(0.7) contrast(1.1) brightness(0.85) !important;
 }
 
-/* Project cards get a tech overlay effect */
-.code-mode .project-card-image {
+/* Project cards: blueprint-style blue overlay */
+.code-mode .card-image-wrap {
   position: relative;
+}
+
+.code-mode .card-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 40, 120, 0.12);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+  transition: background 0.4s ease;
+}
+
+.code-mode .card-image-wrap:hover::after {
+  background: rgba(0, 40, 120, 0.06);
+}
+
+/* Related project cards: same blueprint overlay */
+.code-mode .related-card-image-wrap {
+  position: relative;
+}
+
+.code-mode .related-card-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 40, 120, 0.12);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+  transition: background 0.4s ease;
 }
 
 /* ── 10. Scrollbar code theme ── */
@@ -1178,19 +1256,38 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 }
 
 
-/* ── 17. Cursor blink animation for code feel ── */
+/* ── 17. Heading syntax: object format for code feel ── */
 @keyframes codeBlink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
-.code-mode .heading-xl::after,
-.code-mode .heading-lg::after {
+/* heading-xl (h1, page titles): keep blinking cursor */
+.code-mode .heading-xl::after {
   content: '|';
   animation: codeBlink 1s step-end infinite;
   color: var(--cm-string);
   margin-left: 2px;
   font-weight: 300;
+}
+
+/* heading-lg (h2, section titles): const section = { "title" }; */
+.code-mode .heading-lg::before {
+  content: 'const section = { ';
+  color: var(--cm-comment, #6272a4);
+  font-size: 0.55em;
+  font-weight: 400;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.code-mode .heading-lg::after {
+  content: ' };';
+  color: var(--cm-comment, #6272a4);
+  font-size: 0.55em;
+  font-weight: 400;
+  letter-spacing: 0;
+  animation: none;
 }
 
 /* ── 18. Line numbers feel on body ── */
@@ -2280,9 +2377,9 @@ body.code-mode .social-code {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 0.875rem;
+  padding: 0.75rem 1rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: var(--cm-text-muted, #7d8590);
   background: transparent;
   border: 1px solid transparent;
@@ -2291,6 +2388,7 @@ body.code-mode .social-code {
   transition: all 0.3s ease;
   cursor: pointer;
   white-space: nowrap;
+  min-height: 44px; /* Touch target: WCAG 2.5.5 */
 }
 
 .social-import-icon {
