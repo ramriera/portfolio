@@ -1,5 +1,6 @@
 ---
-
+import { Image } from 'astro:assets';
+import profileImg from '@/assets/shared/foto-perfil.png';
 ---
 
 <section class="section-padding" data-component="AboutSection">
@@ -8,10 +9,14 @@
       <!-- Image side -->
       <div data-reveal="left" class="relative" data-component="ProfileImage">
         <div class="relative rounded-2xl overflow-hidden dashed-border">
-          <img
-            src="/assets/shared/foto-perfil.png"
+          <Image
+            src={profileImg}
             alt="Ramon Riera"
             class="w-full aspect-[3/4] lg:aspect-[4/5] object-cover"
+            loading="lazy"
+            decoding="async"
+            widths={[400, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
             data-token="$aspect-ratio: 4/3 → 4/5 (lg)|$radius-2xl: 1rem / 16px|$border: 1px solid $dark-200"
           />
         </div>
@@ -48,18 +53,18 @@
         <div data-reveal data-delay="200" class="space-y-5 text-body mb-10"
           data-token="$font-family-sans: Inter|$color-text-body: #7c766c|$spacing-gap: 1.25rem / 20px">
           <p>
-            Soy Ramon Riera, Senior UX/UI Designer con más de 6 años de experiencia creando productos digitales para empresas como Iberia, Banco Sabadell, Imaginbank y Massimo Dutti. Coordino equipos de producto e ingeniería para construir Design Systems y librerías de componentes que escalan a nivel global.
+            Soy Ramon Riera, <strong class="text-dark-900 font-semibold">UX y Product Designer</strong> especializado en <strong class="text-dark-900 font-semibold">estrategia de experiencia de usuario</strong> y <strong class="text-dark-900 font-semibold">Design Operations</strong>, con más de 8 años diseñando productos digitales para empresas como <strong class="text-dark-900 font-semibold">Iberia</strong> y <strong class="text-dark-900 font-semibold">Banco Sabadell</strong> o mejorando el flujo de <strong class="text-dark-900 font-semibold">ImaginBank</strong> y <strong class="text-dark-900 font-semibold">Massimo Dutti</strong>.
           </p>
           <p>
-            Actualmente trabajo como Senior Designer en Doctori.com, donde lidero Design Operations y el Design System. Facilito decisiones de diseño con stakeholders, alineando visión de negocio y experiencia de usuario. Mi stack combina React, TypeScript, Tailwind y herramientas como Figma y Storybook con metodologías como Design Thinking, Lean UX y Agile.
+            Trabajo en la intersección entre <strong class="text-dark-900 font-semibold">UX, estrategia y sistemas de diseño</strong>, ayudando a equipos de producto e ingeniería a crear experiencias consistentes. Actualmente soy <strong class="text-dark-900 font-semibold">UX Lead en Doctori.com</strong>, donde lidero <strong class="text-dark-900 font-semibold">Design Operations</strong> y el desarrollo del <strong class="text-dark-900 font-semibold">Design System</strong>.
           </p>
           <p>
-            Creo que el buen diseño es invisible - resuelve problemas sin que el usuario lo note, creando experiencias que simplemente funcionan.
+            Creo firmemente en un diseño que <strong class="text-dark-900 font-semibold">simplifica lo complejo</strong>, alineando las decisiones de negocio con las necesidades del usuario para crear experiencias que, simplemente, funcionan.
           </p>
         </div>
 
         <div data-reveal data-delay="300" class="flex flex-wrap gap-4">
-          <a href="/about" class="btn-primary"
+          <a href="/about" class="btn-primary hero-cta-normal"
             data-component="ButtonPrimary"
             data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
             Conocer más
@@ -67,11 +72,14 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
+          <a href="/about" class="hero-cta-code" data-component="ButtonRunCmd">
+            <span class="hero-cta-prompt">&gt;</span> cat <span class="hero-cta-cmd">about.md</span><span class="hero-cta-cursor">_</span>
+          </a>
           <a
             href="/docs/CV-Ramon-Riera-Depares.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-outline"
+            class="btn-outline btn-cv-normal"
             data-component="ButtonOutline"
             data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px"
           >
@@ -80,6 +88,14 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" />
             </svg>
+          </a>
+          <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
+            class="btn-cv-code" data-component="ButtonCVCode">
+            <svg class="btn-code-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" />
+            </svg>
+            <span class="code-fn">get</span><span class="code-parens">(</span><span class="code-string">'cv.pdf'</span><span class="code-parens">)</span>
           </a>
         </div>
       </div>

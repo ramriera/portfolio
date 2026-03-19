@@ -12,7 +12,36 @@ const sortedProjects = [...projects].sort((a, b) => {
   if (bIdx === -1) return 1;
   return aIdx - bIdx;
 });
-const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
+const filterCategories = ['Todas', 'Product Design', 'UX/UI', 'Design Systems', 'Strategy', 'Research', 'Prototyping'];
+
+// Map tags → filter categories
+const tagToFilters: Record<string, string[]> = {
+  'Product Design': ['Product Design'],
+  'UX Design': ['UX/UI'],
+  'UI Design': ['UX/UI'],
+  'App Design': ['UX/UI'],
+  'Mobile First': ['UX/UI'],
+  'Visual Design': ['UX/UI'],
+  'Design Systems': ['Design Systems'],
+  'Design Ops': ['Design Systems'],
+  'E-commerce': ['Strategy'],
+  'Enterprise': ['Strategy'],
+  'Social Impact': ['Strategy'],
+  'Heuristic Evaluation': ['Research'],
+  'Design Thinking': ['Research'],
+  'Fintech': ['Research'],
+  'High-fidelity Prototyping': ['Prototyping'],
+  'B2B Product': ['Prototyping'],
+  'Music Tech': ['Prototyping'],
+};
+
+function getProjectFilters(tags: string[]): string[] {
+  const filters = new Set<string>();
+  tags.forEach((tag) => {
+    (tagToFilters[tag] || []).forEach((f) => filters.add(f));
+  });
+  return [...filters];
+}
 ---
 
 <BaseLayout
@@ -49,7 +78,7 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
       <!-- Filters -->
       <div data-reveal data-delay="300" class="flex flex-wrap gap-2 mt-12" id="project-filters"
         data-component="FilterGroup" data-token="$spacing-gap: 0.5rem / 8px">
-        {categories.map((cat) => (
+        {filterCategories.map((cat) => (
           <button
             class:list={[
               'filter-btn px-5 py-2 text-sm font-medium rounded-full transition-all duration-300',
@@ -76,6 +105,7 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
             data-reveal
             data-delay={String(i * 100)}
             data-category={project.category}
+            data-filters={JSON.stringify(getProjectFilters(project.tags))}
             class="project-item"
           >
             <ProjectCard {...project} />
@@ -114,11 +144,14 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
         Me encantaría escuchar tu idea. Hablemos sobre cómo puedo ayudarte a crear algo extraordinario.
       </p>
       <div data-reveal data-delay="300" class="flex flex-wrap items-center justify-center gap-4">
-        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base">
+        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base hero-cta-normal">
           Contactar
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
+        </a>
+        <a href={`mailto:${siteConfig.email}`} class="hero-cta-code" data-component="ButtonRunCmd">
+          <span class="hero-cta-prompt">&gt;</span> sudo <span class="hero-cta-cmd">contact</span> <span class="hero-cta-flag">--now</span><span class="hero-cta-cursor">_</span>
         </a>
         <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
           class="btn-outline text-base btn-cv-normal"
@@ -132,7 +165,11 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
         <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
           class="btn-cv-code"
           data-component="ButtonCVCode">
-          <span class="btn-cv-prompt">&gt;</span> ramon-riera <span class="btn-cv-flag">--download-cv</span>
+          <svg class="btn-code-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" />
+          </svg>
+          <span class="code-fn">get</span><span class="code-parens">(</span><span class="code-string">'cv.pdf'</span><span class="code-parens">)</span>
         </a>
       </div>
     </div>
@@ -142,6 +179,7 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
 <script>
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectItems = document.querySelectorAll('.project-item');
+  const grid = document.getElementById('projects-grid') as HTMLElement;
 
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -155,20 +193,82 @@ const categories = ['Todas', ...new Set(projects.map((p) => p.category))];
       btn.classList.remove('bg-dark-100', 'text-dark-600');
       btn.classList.add('bg-primary-500/10', 'text-primary-500');
 
-      // Filter projects
+      // Scroll filters into view to prevent page jump
+      const filtersEl = document.getElementById('project-filters');
+      if (filtersEl) {
+        const rect = filtersEl.getBoundingClientRect();
+        if (rect.top < 0) {
+          filtersEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      // Classify items into hiding / showing
+      const hiding: HTMLElement[] = [];
+      const showing: HTMLElement[] = [];
+
       projectItems.forEach((item) => {
-        const category = item.getAttribute('data-category');
-        if (filter === 'Todas' || category === filter) {
-          (item as HTMLElement).style.display = '';
-          (item as HTMLElement).style.opacity = '0';
-          setTimeout(() => {
-            (item as HTMLElement).style.opacity = '1';
-            (item as HTMLElement).style.transition = 'opacity 0.3s ease';
-          }, 50);
+        const el = item as HTMLElement;
+        const filters = JSON.parse(el.getAttribute('data-filters') || '[]');
+        if (filter === 'Todas' || filters.includes(filter)) {
+          showing.push(el);
         } else {
-          (item as HTMLElement).style.display = 'none';
+          hiding.push(el);
         }
       });
+
+      // 1. Lock the grid height to prevent layout shift
+      const startHeight = grid.offsetHeight;
+      grid.style.height = `${startHeight}px`;
+      grid.style.overflow = 'hidden';
+
+      // 2. Fade out + scale down items being hidden
+      hiding.forEach((el) => {
+        el.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+        el.style.opacity = '0';
+        el.style.transform = 'scale(0.95)';
+      });
+
+      // 3. After fade-out, toggle visibility and animate to new height
+      setTimeout(() => {
+        hiding.forEach((el) => {
+          el.style.display = 'none';
+        });
+        showing.forEach((el) => {
+          el.style.display = '';
+          el.style.opacity = '0';
+          el.style.transform = 'scale(0.97) translateY(8px)';
+        });
+
+        // Measure the target height
+        grid.style.height = 'auto';
+        const endHeight = grid.offsetHeight;
+
+        // Animate from startHeight → endHeight
+        grid.style.height = `${startHeight}px`;
+        void grid.offsetHeight; // force reflow
+        grid.style.transition = 'height 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+        grid.style.height = `${endHeight}px`;
+
+        // Staggered fade-in for showing items
+        showing.forEach((el, i) => {
+          el.style.transition = `opacity 0.35s ease ${i * 50}ms, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1) ${i * 50}ms`;
+          void el.offsetHeight; // force reflow per item
+          el.style.opacity = '1';
+          el.style.transform = 'scale(1) translateY(0)';
+        });
+
+        // Clean up inline styles after all animations complete
+        const cleanupDelay = 400 + showing.length * 50;
+        setTimeout(() => {
+          grid.style.height = '';
+          grid.style.overflow = '';
+          grid.style.transition = '';
+          showing.forEach((el) => {
+            el.style.transition = '';
+            el.style.transform = '';
+          });
+        }, cleanupDelay);
+      }, 250);
     });
   });
 </script>

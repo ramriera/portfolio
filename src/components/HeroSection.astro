@@ -59,19 +59,23 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
         <!-- Subtitle -->
         <p data-reveal data-delay="200" class="text-body text-base md:text-xl max-w-2xl mx-auto xl:mx-0 mb-8 md:mb-14 leading-relaxed"
           data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$spacing-bottom: 3.5rem / 56px">
-          Especializado en Design Systems, Product Design y Design Operations.
-          Transformando ideas complejas en interfaces intuitivas y elegantes.
+          UX Lead con experiencia en estrategia de producto, investigación de usuario y diseño de interfaces. Trabajo ayudando a equipos a crear productos digitales que realmente resuelven problemas.
         </p>
 
         <!-- CTA buttons -->
         <div data-reveal data-delay="300" class="flex flex-wrap items-center justify-center xl:justify-start gap-4">
-          <a href="/projects" class="btn-primary text-base"
+          <!-- Normal mode button -->
+          <a href="/projects" class="btn-primary text-base hero-cta-normal"
             data-component="ButtonPrimary"
             data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
             Ver proyectos
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
+          </a>
+          <!-- Code mode: terminal command button -->
+          <a href="/projects" class="hero-cta-code" data-component="ButtonRunCmd">
+            <span class="hero-cta-prompt">&gt;</span> run <span class="hero-cta-cmd">open_projects.sh</span><span class="hero-cta-cursor">_</span>
           </a>
         </div>
       </div>
@@ -81,28 +85,28 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
         data-component="StatsBar"
         data-token="$spacing-gap: 2rem / 32px|$spacing-margin-top: 4rem / 64px">
         <div class="hero-stats-inner">
-          <div class="text-center">
+          <div class="hero-stat-item text-center">
             <div class="text-3xl font-semibold text-dark-900"
               data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
               <span class="count-up" data-target="6">0</span>+
             </div>
-            <div class="text-xs text-dark-400 tracking-wide mt-1">Años de experiencia</div>
+            <div class="text-xs text-dark-400 tracking-wide mt-1 whitespace-nowrap">Años exp.</div>
           </div>
           <div class="hero-stats-divider-h"></div>
           <div class="hero-stats-divider-v"></div>
-          <div class="text-center">
+          <div class="hero-stat-item text-center">
             <div class="text-3xl font-semibold text-dark-900"
               data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
-              <span class="count-up" data-target="25">0</span>+
+              <span class="count-up" data-target="35">0</span>+
             </div>
             <div class="text-xs text-dark-400 tracking-wide mt-1">Proyectos completados</div>
           </div>
           <div class="hero-stats-divider-h"></div>
           <div class="hero-stats-divider-v"></div>
-          <div class="text-center">
+          <div class="hero-stat-item text-center">
             <div class="text-3xl font-semibold text-dark-900"
               data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
-              <span class="count-up" data-target="10">0</span>+
+              <span class="count-up" data-target="12">0</span>+
             </div>
             <div class="text-xs text-dark-400 tracking-wide mt-1">Clientes corporativos</div>
           </div>

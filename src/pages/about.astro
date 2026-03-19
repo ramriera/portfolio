@@ -1,18 +1,11 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { siteConfig } from '@/utils/data';
+import { Image } from 'astro:assets';
+import profileImg from '@/assets/shared/foto-perfil.png';
+import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
+import WordsCarousel from '@/components/WordsCarousel.astro';
 
-
-const timeline = [
-  { year: '2023-2025', role: 'Design Systems & Strategy Lead', company: 'Doctori.com', description: 'Liderando Design Ops y el Design System para la plataforma de salud digital.', gitMsg: 'feat(design-ops): implement token architecture & system analytics' },
-  { year: '2021-2023', role: 'Senior Product Designer', company: 'Iberia', description: 'Rediseño de la experiencia digital de vuelo y sistemas de check-in.', gitMsg: 'refactor(ux): init global_experience_language across touchpoints' },
-  { year: '2019-2021', role: 'Design System Lead', company: 'Banco Sabadell', description: 'Creación e implementación del design system corporativo.', gitMsg: 'feat(ds): refactor core_components & scale design_system' },
-  { year: '2018-2019', role: 'UX Designer', company: 'iSalud Corporate', description: 'Rediseño del comparador de seguros y optimización de conversión.', gitMsg: 'fix(conversion): redesign insurance_comparator flow' },
-  { year: '2017-2018', role: 'UI Designer', company: 'Leemons', description: 'Diseño de interfaces para plataforma educativa innovadora.', gitMsg: 'feat(ui): create edu_platform interface_system' },
-  { year: '2016', role: 'Junior Designer', company: 'Freelance', description: 'Inicio de carrera profesional con proyectos de branding y web design.', gitMsg: 'init: first_commit — branding & web_design projects' },
-];
-
-
+const aboutWords = ['creador', 'arquitecto', 'constructor'];
 ---
 
 <BaseLayout
@@ -45,31 +38,18 @@ const timeline = [
             </svg>
           </span>
         </div>
-        <!-- Normal mode title -->
-        <h1 data-reveal data-delay="100" class="heading-xl mb-8 about-title-normal"
+        <!-- Title (same element for both modes, CSS handles skin) -->
+        <h1 data-reveal data-delay="100" class="heading-xl mb-8"
           data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2rem / 32px">
           Diseñador, pensador,
-          <span class="text-primary-500"
-            data-token="$color-primary-500: #D97757">creador</span>
-        </h1>
-        <!-- Code mode title: console.log -->
-        <h1 data-reveal data-delay="100" class="heading-xl mb-8 about-title-code">
-          <span class="code-fn">console</span><span class="code-punct">.</span><span class="code-fn">log</span><span class="code-punct">(</span><span class="code-str">"Diseñador, pensador, </span><span class="code-accent">creador</span><span class="code-str">"</span><span class="code-punct">)</span>
+          <span class="text-primary-500"><WordsCarousel words={aboutWords} interval={2000} /></span>
         </h1>
 
-        <!-- Normal mode description -->
-        <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl about-desc-normal"
+        <!-- Subtitle (same element for both modes) -->
+        <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl"
           data-token="$font-family-sans: Inter|$color-text-muted: #7c766c">
           Con más de 6 años de experiencia, he dedicado mi carrera a crear productos digitales que combinan estética, usabilidad y estrategia de negocio.
         </p>
-        <!-- Code mode description: comment block -->
-        <div data-reveal data-delay="200" class="about-desc-code">
-          <span>/*</span><br/>
-          <span>&nbsp;* Con más de 6 años de experiencia, he dedicado mi carrera</span><br/>
-          <span>&nbsp;* a crear <span class="comment-highlight">productos digitales</span> que combinan estética,</span><br/>
-          <span>&nbsp;* <span class="comment-highlight">usabilidad</span> y <span class="comment-highlight">estrategia de negocio</span>.</span><br/>
-          <span>&nbsp;*/</span>
-        </div>
       </div>
     </div>
   </section>
@@ -82,15 +62,19 @@ const timeline = [
         <div data-reveal="left" class="lg:col-span-2">
           <div class="lg:sticky lg:top-28">
             <div class="rounded-2xl overflow-hidden dashed-border mb-6">
-              <img
-                src="/assets/shared/foto-perfil.png"
+              <Image
+                src={profileImg}
                 alt="Ramon Riera"
-                class="w-full aspect-[4/5] object-cover"
+                class="w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-[filter] duration-700"
+                loading="lazy"
+                decoding="async"
+                widths={[400, 800]}
+                sizes="(max-width: 1024px) 100vw, 40vw"
               />
             </div>
 
-            <!-- Social links -->
-            <div class="flex items-center gap-4" data-component="SocialLinks" data-token="$spacing-gap: 1rem / 16px">
+            <!-- Social links: Normal mode -->
+            <div class="flex items-center gap-4 social-normal" data-component="SocialLinks" data-token="$spacing-gap: 1rem / 16px">
               <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               </a>
@@ -99,6 +83,21 @@ const timeline = [
               </a>
               <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" /></svg>
+              </a>
+            </div>
+            <!-- Social links: Code mode (import syntax with icons) -->
+            <div class="social-code flex flex-col gap-2">
+              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="social-import social-import--linkedin">
+                <svg class="social-import-icon w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <span class="code-keyword">import</span> {'{'} <span class="code-import-name">LinkedIn</span> {'}'} <span class="code-keyword">from</span> <span class="code-string">'@socials'</span>
+              </a>
+              <a href={siteConfig.social.medium} target="_blank" rel="noopener noreferrer" class="social-import social-import--medium">
+                <svg class="social-import-icon w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+                <span class="code-keyword">import</span> {'{'} <span class="code-import-name">Medium</span> {'}'} <span class="code-keyword">from</span> <span class="code-string">'@blog'</span>
+              </a>
+              <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer" class="social-import social-import--cv">
+                <svg class="social-import-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" /></svg>
+                <span class="code-fn">fetch</span><span class="code-parens">(</span><span class="code-string">'/cv_riera.pdf'</span><span class="code-parens">)</span>
               </a>
             </div>
           </div>
@@ -168,49 +167,83 @@ const timeline = [
             </div>
           </div>
 
-          <!-- Cómo trabajo -->
-          <div data-reveal data-component="ProcessSection">
-            <h2 class="heading-md mb-8">Cómo trabajo</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="p-5 md:p-6 rounded-2xl dashed-border bg-white">
-                <h3 class="font-bold text-lg mb-3">Discovery & Estrategia</h3>
-                <p class="text-body-sm">Antes de producir nada, enmarco el problema. Realizo entrevistas con stakeholders, analizo datos existentes y alineo las decisiones de diseño con los objetivos de negocio. El resultado es una dirección clara y compartida por todos los equipos.</p>
-              </div>
-              <div class="p-5 md:p-6 rounded-2xl dashed-border bg-white">
-                <h3 class="font-bold text-lg mb-3">Diseño & Sistemas</h3>
-                <p class="text-body-sm">Traduzco la investigación en arquitectura: design tokens, librerías de componentes y patrones reutilizables. Las decisiones de diseño se convierten en sistemas escalables que mantienen la coherencia a través de múltiples productos y plataformas.</p>
-              </div>
-              <div class="p-5 md:p-6 rounded-2xl dashed-border bg-white">
-                <h3 class="font-bold text-lg mb-3">Implementación & Entrega</h3>
-                <p class="text-body-sm">Trabajo codo a codo con los equipos de desarrollo. Gestiono el handoff, reviso la implementación y me aseguro de que la intención de diseño sobreviva al código. Mi perfil técnico me permite hablar el mismo idioma que ingeniería.</p>
-              </div>
-              <div class="p-5 md:p-6 rounded-2xl dashed-border bg-white">
-                <h3 class="font-bold text-lg mb-3">Iteración & Impacto</h3>
-                <p class="text-body-sm">Mido el éxito con métricas reales: adopción de componentes, reducción de inconsistencias, velocidad de entrega. Los feedback loops con usuarios y equipos internos definen cuándo un producto está realmente terminado.</p>
-              </div>
-            </div>
-          </div>
-
           <!-- Timeline -->
           <div data-reveal data-component="CareerTimeline">
             <h2 class="heading-md mb-8">Trayectoria</h2>
-            <!-- Normal mode: card timeline -->
-            <div class="timeline-cards space-y-0">
-              {timeline.map((item, i) => (
-                <div class="relative pl-8 pb-8 border-l-2 border-dark-200 last:pb-0 last:border-l-transparent group">
-                  <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-white border-2 border-primary-500 group-hover:bg-primary-500 transition-colors duration-300"></div>
-                  <span class="text-xs text-primary-500 font-semibold">{item.year}</span>
-                  <h3 class="font-bold text-lg mt-1">{item.role}</h3>
-                  <p class="text-sm font-medium text-dark-400 mb-2">{item.company}</p>
-                  <p class="text-body-sm">{item.description}</p>
+
+            <!-- Normal mode: hybrid timeline -->
+            <div class="timeline-flow ml-4 sm:ml-0" data-timeline-reveal>
+              {/* --- Hito Principal 1: Doctori (actual) --- */}
+              {(() => {
+                const doctori = mainTimeline[0];
+                return (
+                  <div class="relative pl-6 sm:pl-8 pb-10 border-l-2 border-primary-300">
+                    {/* Node — solid accent, current role */}
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300 animate-doctori-pulse"></div>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{doctori.company}</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-2">{doctori.role}</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">{doctori.description}</p>
+                  </div>
+                );
+              })()}
+
+              {/* --- Bloque de Consultoría (segundo nivel, indentado) --- */}
+              <div class="timeline-branch-wrap relative border-l-2 border-gray-300 pb-0">
+                <div class="timeline-branch-offset">
+                  <div class="timeline-branch-inner">
+                    {/* Node — small, hollow */}
+                    <div class="timeline-branch-node"></div>
+
+                    {/* Pill tag */}
+                    <div class="mb-4">
+                      <span class="inline-block text-[9px] sm:text-[10px] font-bold tracking-[0.15em] uppercase text-gray-400 border border-gray-300 bg-transparent rounded-full px-3 py-1">
+                        En paralelo a Doctori.com
+                      </span>
+                    </div>
+
+                    <p class="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
+                      {consultingBlock.label}
+                    </p>
+
+                    <div class="consulting-list space-y-6">
+                      {consultingBlock.projects.map((project) => (
+                        <div class="consulting-item ml-0 sm:ml-1 transition-opacity duration-300">
+                          <span class="text-[10px] sm:text-xs text-gray-300 font-medium">{project.period}</span>
+                          <div class="flex items-baseline gap-2 mb-1 mt-0.5">
+                            <span class="font-bold text-dark-900 text-sm">{project.client}</span>
+                          </div>
+                          <p class="text-xs text-gray-400 mb-1.5">{project.role}</p>
+                          <p class="text-sm text-gray-400 leading-relaxed">{project.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* --- Hito Principal 2: JBM (origen) --- */}
+              {(() => {
+                const jbm = mainTimeline[1];
+                return (
+                  <div class="timeline-origin relative pl-6 sm:pl-8 pb-6 border-l-2 border-primary-300">
+                    {/* Node — accent outline, end of path */}
+                    <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-white border-2 border-primary-500"></div>
+                    <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-gray-400">{jbm.year}</span>
+                    <h3 class="font-bold text-lg mt-1 text-dark-900">{jbm.company}</h3>
+                    <p class="text-sm font-medium text-gray-500 mb-2">{jbm.role}</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">{jbm.description}</p>
+                  </div>
+                );
+              })()}
             </div>
+
             <!-- Code mode: git log format -->
             <div class="timeline-gitlog">
               <div class="gitlog-pre">
                 <div class="gitlog-header">$ git log --oneline --graph --all</div>
-                {timeline.map((item, i) => (
+                {/* Main entries */}
+                {mainTimeline.map((item) => (
                   <div class="gitlog-entry">
                     <span class="gitlog-marker">*</span>{' '}
                     <span class="gitlog-hash">{`${Math.random().toString(16).slice(2, 9)}`}</span>{' '}
@@ -222,6 +255,77 @@ const timeline = [
                     <span class="gitlog-message">{' '}{item.gitMsg}</span>
                   </div>
                 ))}
+                {/* Consulting as merge commits */}
+                <div class="gitlog-entry" style="opacity: 0.6;">
+                  <span class="gitlog-marker">│</span>{' '}
+                  <span class="gitlog-date" style="color: var(--color-dark-400);">// consulting branch</span>
+                </div>
+                {consultingBlock.projects.map((p) => (
+                  <div class="gitlog-entry" style="opacity: 0.6;">
+                    <span class="gitlog-marker">├</span>{' '}
+                    <span class="gitlog-hash">{`${Math.random().toString(16).slice(2, 9)}`}</span>{' '}
+                    <span class="gitlog-date">({p.period})</span>{' '}
+                    <span class="gitlog-company">[{p.client}]</span>{' '}
+                    <span class="gitlog-message">{p.description}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI Stats Dashboard -->
+          <div data-reveal data-component="KPIDashboard">
+            <!-- Normal mode -->
+            <h2 class="heading-md mb-8 kpi-title-normal">Impacto en números</h2>
+            <h2 class="heading-md mb-8 kpi-title-code"><span class="code-comment">// </span>metrics.status<span class="code-punct">()</span></h2>
+
+            <div class="kpi-grid-normal grid grid-cols-1 sm:grid-cols-2 gap-4 mb-0">
+              <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white transition-all duration-300">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark-400">Ganancia de Eficiencia</span>
+                </div>
+                <div class="font-mono text-4xl md:text-5xl font-bold text-dark-900 tracking-tight">+40<span class="text-primary-500">%</span></div>
+                <p class="text-body-sm mt-2">Mejora en velocidad de entrega de equipos de diseño tras implementación de Design Systems.</p>
+              </div>
+              <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white transition-all duration-300">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark-400">Adopción de Componentes</span>
+                </div>
+                <div class="font-mono text-4xl md:text-5xl font-bold text-dark-900 tracking-tight">95<span class="text-primary-500">%</span></div>
+                <p class="text-body-sm mt-2">Tasa de adopción de componentes del Design System en equipos de producto.</p>
+              </div>
+            </div>
+
+            <!-- Code mode: monitoring dashboard -->
+            <div class="kpi-grid-code">
+              <div class="kpi-monitor-window">
+                <div class="kpi-monitor-titlebar">
+                  <div class="json-dots">
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
+                  </div>
+                  <span class="kpi-monitor-filename">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+                    dashboard.metrics
+                  </span>
+                </div>
+                <div class="kpi-monitor-body">
+                  <div class="kpi-monitor-row">
+                    <span class="kpi-monitor-status kpi-monitor-status--up"></span>
+                    <span class="kpi-monitor-label">efficiency_boost</span>
+                    <span class="kpi-monitor-bar"><span class="kpi-monitor-fill" style="width: 80%"></span></span>
+                    <span class="kpi-monitor-value">+40%</span>
+                  </div>
+                  <div class="kpi-monitor-row">
+                    <span class="kpi-monitor-status kpi-monitor-status--up"></span>
+                    <span class="kpi-monitor-label">component_adoption</span>
+                    <span class="kpi-monitor-bar"><span class="kpi-monitor-fill" style="width: 95%"></span></span>
+                    <span class="kpi-monitor-value">95%</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -230,208 +334,339 @@ const timeline = [
     </div>
   </section>
 
-  <!-- Tech Stack -->
-  <section class="section-padding" data-component="TechStackSection">
+
+  <!-- Metodología y Stack -->
+  <section class="section-padding methodology-stack-section" id="metodologia-stack" data-component="MethodologyStack">
     <div class="container-custom">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <div data-reveal class="mb-6 flex justify-center">
+      <div class="max-w-4xl mx-auto">
+        <div data-reveal class="text-center mb-16">
           <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
-              <!-- Bottom layer -->
-              <path d="M6 30L22 38L38 30" class="icon-stroke icon-draw" />
-              <!-- Middle layer -->
-              <path d="M6 22L22 30L38 22" class="icon-stroke icon-draw-delay" />
-              <!-- Top layer (accent) -->
-              <g class="icon-stack-float">
-                <path d="M6 14L22 22L38 14L22 6Z" class="icon-accent icon-draw-delay" />
+              <!-- Large gear -->
+              <g class="icon-gear-spin">
+                <circle cx="19" cy="22" r="4" class="icon-stroke icon-draw" />
+                <path d="M19 14v-2M19 32v-2M27 22h2M10 22h2M25.5 16.5l1.4-1.4M11.1 27.5l1.4-1.4M25.5 27.5l1.4 1.4M11.1 16.5l1.4 1.4" class="icon-stroke icon-draw-delay" />
+                <circle cx="19" cy="22" r="8.5" class="icon-accent icon-draw-delay" stroke-dasharray="2.5 3.8" />
               </g>
-              <!-- Sparkle -->
-              <circle cx="36" cy="8" r="1.2" class="icon-accent-fill icon-bulb-ray-1" />
-              <circle cx="8" cy="8" r="1" class="icon-accent-fill icon-bulb-ray-2" />
+              <!-- Small gear -->
+              <g class="icon-gear-spin-reverse">
+                <circle cx="31" cy="12" r="2.5" class="icon-stroke icon-draw" />
+                <path d="M31 7v-1M31 18v-1M35 12h1M26 12h1M34 9l.7-.7M27.3 15l.7-.7M34 15l.7.7M27.3 9l.7.7" class="icon-accent icon-draw-delay" />
+              </g>
+              <!-- Accent dot -->
+              <circle cx="34" cy="34" r="1.5" class="icon-accent-fill icon-gear-dot" />
             </svg>
           </span>
+          <h2 class="heading-lg mb-4">Metodología y <span class="text-primary-500">Stack</span></h2>
+          <p class="text-body">Base teórica, proceso práctico y herramientas de ejecución.</p>
         </div>
-        <h2 data-reveal data-delay="100" class="heading-lg mb-4">
-          Herramientas que <span class="text-primary-500">domino</span>
-        </h2>
-        <p data-reveal data-delay="200" class="text-body">
-          Un ecosistema de herramientas que me permiten diseñar, desarrollar y escalar productos digitales.
-        </p>
-      </div>
 
-      <!-- Stack container with fixed min-height to prevent layout shift -->
-      <div class="tech-stack-container" data-reveal data-delay="300">
-        <!-- Normal Mode: Icon Grid -->
-        <div class="tech-stack-grid" data-component="TechStackGrid" data-token="$grid-columns: 2|$gap: 2rem / 32px">
-          <!-- Design Column -->
-          <div class="p-5 md:p-8 rounded-2xl dashed-border bg-white" data-component="StackColumn">
-            <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">Design</h3>
-            <div class="space-y-5">
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v2024 · collaborative design">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-1 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9zM6.5 13c-.83 0-1.5-.67-1.5-1.5S5.67 10 6.5 10s1.5.67 1.5 1.5S7.33 13 6.5 13zm3-4C8.67 9 8 8.33 8 7.5S8.67 6 9.5 6s1.5.67 1.5 1.5S10.33 9 9.5 9zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 6 14.5 6s1.5.67 1.5 1.5S15.33 9 14.5 9zm3 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        <!-- ── 01. Principios de Diseño (base teórica) ── -->
+        <div class="methodology-block">
+          <!-- Design Principles -->
+          <div data-reveal data-component="DesignPrinciples">
+            <!-- Normal mode -->
+            <h2 class="heading-md mb-8 principles-title-normal">Principios de Diseño</h2>
+            <h2 class="heading-md mb-8 principles-title-code"><span class="code-comment">// </span>design_principles</h2>
+
+            <div class="principles-normal">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <!-- 01 Sistemas sobre Pantallas -->
+                <div class="lint-rule group">
+                  <div class="lint-rule-header">
+                    <span class="lint-rule-num">01</span>
+                    <h3 class="lint-rule-name">Sistemas sobre Pantallas</h3>
+                    <span class="lint-rule-badge lint-badge--strategy">ESTRATEGIA</span>
+                  </div>
+                  <p class="lint-rule-desc">Diseñar infraestructuras escalables y consistentes, no solo interfaces aisladas.</p>
                 </div>
-                <span class="text-sm font-medium text-dark-700">Figma</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="design tokens · modes">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.255 3C20.38 5.78 21 8.817 21 12s-.62 6.22-1.745 9m-13.51-9h12.51" /><circle cx="12" cy="12" r="3" /></svg>
+                <!-- 02 Única Fuente de Verdad -->
+                <div class="lint-rule group">
+                  <div class="lint-rule-header">
+                    <span class="lint-rule-num">02</span>
+                    <h3 class="lint-rule-name">Única Fuente de Verdad</h3>
+                    <span class="lint-rule-badge lint-badge--engineering">INGENIERÍA</span>
+                  </div>
+                  <p class="lint-rule-desc">Sincronización total entre diseño y código mediante tokens y documentación activa.</p>
                 </div>
-                <span class="text-sm font-medium text-dark-700">Variables</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="motion · no-code">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25z" /></svg>
+                <!-- 03 Accesibilidad por Defecto -->
+                <div class="lint-rule group">
+                  <div class="lint-rule-header">
+                    <span class="lint-rule-num">03</span>
+                    <h3 class="lint-rule-name">Accesibilidad por Defecto</h3>
+                    <span class="lint-rule-badge lint-badge--culture">CULTURA</span>
+                  </div>
+                  <p class="lint-rule-desc">La inclusión es un requisito técnico fundamental desde el inicio, no una capa final.</p>
                 </div>
-                <span class="text-sm font-medium text-dark-700">Framer</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="DS documentation">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                <!-- 04 Eficiencia mediante Ops -->
+                <div class="lint-rule group">
+                  <div class="lint-rule-header">
+                    <span class="lint-rule-num">04</span>
+                    <h3 class="lint-rule-name">Eficiencia mediante Ops</h3>
+                    <span class="lint-rule-badge lint-badge--strategy">ESTRATEGIA</span>
+                  </div>
+                  <p class="lint-rule-desc">Optimizar procesos y herramientas para que el equipo se centre en crear valor, no en tareas repetitivas.</p>
                 </div>
-                <span class="text-sm font-medium text-dark-700">Zeroheight</span>
+                <!-- 05 Puentes, no Muros -->
+                <div class="lint-rule group">
+                  <div class="lint-rule-header">
+                    <span class="lint-rule-num">05</span>
+                    <h3 class="lint-rule-name">Puentes, no Muros</h3>
+                    <span class="lint-rule-badge lint-badge--culture">CULTURA</span>
+                  </div>
+                  <p class="lint-rule-desc">Facilitar un lenguaje común y una colaboración fluida entre diseño e ingeniería.</p>
+                </div>
+                <!-- 06 Evidencia sobre Opinión -->
+                <div class="lint-rule group">
+                  <div class="lint-rule-header">
+                    <span class="lint-rule-num">06</span>
+                    <h3 class="lint-rule-name">Evidencia sobre Opinión</h3>
+                    <span class="lint-rule-badge lint-badge--product">PRODUCTO</span>
+                  </div>
+                  <p class="lint-rule-desc">Las decisiones de diseño se validan con datos y comportamiento real. Un sistema solo es exitoso si resuelve problemas del usuario de forma medible.</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- UX Strategy Column -->
-          <div class="p-5 md:p-8 rounded-2xl dashed-border bg-white" data-component="StackColumn">
-            <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">UX Strategy</h3>
-            <div class="space-y-5">
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="qualitative · quantitative">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+            <!-- Code mode: linting rules config -->
+            <div class="principles-code">
+              <div class="principles-config-window">
+                <div class="principles-config-titlebar">
+                  <div class="json-dots">
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
+                  </div>
+                  <span class="principles-config-filename">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                    .designlintrc.ts
+                  </span>
                 </div>
-                <span class="text-sm font-medium text-dark-700">User Research</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="sitemaps · taxonomies">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">Information Architecture</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="AA compliance · ARIA">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">WCAG 2.1 Accessibility</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="Nielsen's 10 heuristics">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">Heuristic Evaluation</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="discovery · validation">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">User Interviews</span>
-              </div>
-            </div>
-          </div>
+                <pre class="principles-config-body"><code><span class="pp-keyword">export default</span> <span class="pp-bracket">{"{"}</span>
+  <span class="pp-key">rules</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
 
-          <!-- Development Column -->
-          <div class="p-5 md:p-8 rounded-2xl dashed-border bg-white" data-component="StackColumn">
-            <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">Development</h3>
-            <div class="space-y-5">
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v18+ · hooks · SSR">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.31 0-.592.06-.846.18C4.803 2.18 4.157 4.16 4.59 7.068c-2.57.9-4.157 2.277-4.157 3.936 0 1.66 1.587 3.037 4.157 3.936-.433 2.908.213 4.889 1.667 5.555.254.12.536.18.846.18 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.604 4.887 2.604.31 0 .592-.06.846-.18 1.454-.666 2.1-2.647 1.667-5.555 2.57-.9 4.157-2.277 4.157-3.936 0-1.659-1.587-3.036-4.157-3.936.433-2.908-.213-4.889-1.667-5.555a1.986 1.986 0 0 0-.846-.18zM12 15.065a3.065 3.065 0 1 1 0-6.13 3.065 3.065 0 0 1 0 6.13z"/></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">React / Next.js</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v5+ · strict mode">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.677.12a6.988 6.988 0 011.427.375v3.067a5.42 5.42 0 00-.724-.39 4.958 4.958 0 00-1.036-.317 5.482 5.482 0 00-1.075-.106c-.377 0-.719.052-1.018.156a1.725 1.725 0 00-.69.421.887.887 0 00-.244.622c0 .229.078.426.233.59.156.168.39.31.7.424.312.117.694.232 1.15.347.636.166 1.192.365 1.664.596.476.232.848.536 1.114.916.267.38.4.854.4 1.424 0 .63-.167 1.163-.5 1.6-.334.434-.813.763-1.434.985-.623.222-1.368.332-2.235.332-.673 0-1.31-.057-1.91-.172a7.798 7.798 0 01-1.59-.49v-3.168c.3.217.636.406 1.01.567.378.164.778.29 1.2.379.424.09.822.135 1.198.135.377 0 .684-.049.917-.148a.978.978 0 00.486-.401.962.962 0 00.146-.51.755.755 0 00-.264-.587 2.487 2.487 0 00-.806-.419c-.342-.13-.775-.267-1.296-.414-.568-.16-1.076-.37-1.524-.629a3.045 3.045 0 01-1.072-.975c-.267-.398-.4-.891-.4-1.477 0-.616.158-1.145.476-1.59.318-.443.77-.785 1.358-1.023.588-.24 1.291-.36 2.108-.36zm-10.363.066h3.348L14.22 18h-3.375l-2.747-8.184z"/></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">TypeScript</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v3.4 · utility-first">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">Tailwind</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v8 · component docs">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.243 20.844l-.189-.09c-.395-.191-.587-.36-.587-.72v-.84c0-.54-.16-1.2-.9-1.2h-.28c-1.6 0-3.01-1.19-3.01-2.79v-.36c0-.26.22-.48.48-.48h.4c.28 0 .48.22.48.48v.36c0 .89.73 1.35 1.65 1.35h.28c1.16 0 2.34.77 2.34 2.64v.84c0 .36.1.42.19.48.42.21.48.78.09 1.07-.12.08-.33.21-.94.27zm3.576-.27c-.61-.06-.82-.19-.94-.27-.39-.29-.33-.86.09-1.07.09-.06.19-.12.19-.48v-.84c0-1.87 1.18-2.64 2.34-2.64h.28c.92 0 1.65-.46 1.65-1.35v-.36c0-.26.2-.48.48-.48h.4c.26 0 .48.22.48.48v.36c0 1.6-1.41 2.79-3.01 2.79h-.28c-.74 0-.9.66-.9 1.2v.84c0 .36-.192.529-.587.72l-.189.09z"/></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">Storybook</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="version control · CI/CD">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M11.998 0C5.373 0 0 5.373 0 12.002 0 17.302 3.438 21.8 8.207 23.387c.6.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12.002 24 5.373 18.627 0 11.998 0z"/></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">Git</span>
-              </div>
-            </div>
-          </div>
+    <span class="pp-comment">// [ESTRATEGIA] Infraestructuras escalables y consistentes</span>
+    <span class="pp-string">"sistemas-sobre-pantallas"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
 
-          <!-- DesignOps Column -->
-          <div class="p-5 md:p-8 rounded-2xl dashed-border bg-white" data-component="StackColumn">
-            <h3 class="text-xs font-semibold text-primary-500 tracking-widest uppercase mb-8">DesignOps</h3>
-            <div class="space-y-5">
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="contribution model">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">Design Governance</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="v4 · multi-platform tokens">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125V18a3.75 3.75 0 01-3.75 3.75zM13.5 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v9.375a3.75 3.75 0 11-7.5 0V8.625z" /></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">Style Dictionary</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="adoption · coverage KPIs">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">System Analytics</span>
-              </div>
-              <div class="flex items-center gap-4 group stack-tool" data-code-tooltip="Storybook · Zeroheight">
-                <div class="w-10 h-10 rounded-lg bg-dark-50 flex items-center justify-center group-hover:bg-primary-50 transition-colors stack-tool-icon">
-                  <svg class="w-5 h-5 text-dark-500 group-hover:text-primary-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                </div>
-                <span class="text-sm font-medium text-dark-700">Documentation</span>
+    <span class="pp-comment">// [INGENIERÍA] Tokens sincronizados: Figma &rarr; Code &rarr; Producción</span>
+    <span class="pp-string">"unica-fuente-de-verdad"</span><span class="pp-punct">:</span>   <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+
+    <span class="pp-comment">// [CULTURA] WCAG AA mínimo en cada componente</span>
+    <span class="pp-string">"a11y-por-defecto"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">level</span><span class="pp-punct">:</span> <span class="pp-string">"AA"</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+
+    <span class="pp-comment">// [ESTRATEGIA] Automatizar lo predecible, diseñar lo complejo</span>
+    <span class="pp-string">"eficiencia-mediante-ops"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"warn"</span><span class="pp-punct">,</span>  <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+
+    <span class="pp-comment">// [CULTURA] Naming compartido, specs legibles, handoff sin fricción</span>
+    <span class="pp-string">"puentes-no-muros"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+
+    <span class="pp-comment">// [PRODUCTO] Validar con datos y comportamiento real</span>
+    <span class="pp-string">"evidencia-sobre-opinion"</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span>
+
+  <span class="pp-bracket">{"}"}</span>
+<span class="pp-bracket">{"}"}</span> <span class="pp-keyword">satisfies</span> <span class="pp-fn">DesignLintConfig</span><span class="pp-punct">;</span></code></pre>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Code Mode: JSON Profile -->
-        <div class="tech-stack-json" data-component="JSONProfile">
-          <div class="json-window">
-            <div class="json-titlebar">
-              <div class="json-dots">
-                <span class="json-dot json-dot--red"></span>
-                <span class="json-dot json-dot--yellow"></span>
-                <span class="json-dot json-dot--green"></span>
+        <!-- Separator -->
+        <div class="methodology-separator" aria-hidden="true">
+          <span class="methodology-separator-line"></span>
+          <span class="methodology-separator-label methodology-sep-normal">· · ·</span>
+          <span class="methodology-separator-label methodology-sep-code">// ---</span>
+          <span class="methodology-separator-line"></span>
+        </div>
+
+        <!-- ── 02. Ecosistema Técnico (proceso + herramientas unificados) ── -->
+        <div class="methodology-block" data-component="TechEcosystem">
+          <div data-reveal data-component="ProcessSection">
+            <h2 class="heading-md mb-3 process-title-normal">Ecosistema Técnico</h2>
+            <h2 class="heading-md mb-3 process-title-code"><span class="code-comment">// </span>tech_ecosystem<span class="code-punct">()</span></h2>
+            <p class="text-body mb-10 process-title-normal">Proceso de trabajo y herramientas organizados como módulos de un sistema. Cada fase tiene su stack dedicado.</p>
+            <p class="text-body mb-10 process-title-code" style="color: var(--cm-comment, #6272a4); font-style: italic;">// Proceso de trabajo y herramientas organizados como módulos de un sistema</p>
+
+            <!-- Normal mode: 4 Stack Cards -->
+            <div class="process-grid-normal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+              <!-- Strategy & Research -->
+              <div class="eco-card group" data-module="strategy">
+                <div class="eco-card-header">
+                  <div class="eco-card-version">v1.0</div>
+                  <div class="eco-card-status">
+                    <span class="eco-status-dot"></span>
+                    active
+                  </div>
+                </div>
+                <h3 class="eco-card-title">Strategy & Research</h3>
+                <p class="eco-card-desc">User Research, Data Analysis, Testing. Detecto problemas reales antes de diseñar soluciones.</p>
+                <div class="eco-card-divider"></div>
+                <div class="eco-card-deps">
+                  <span class="eco-dep-label">dependencies</span>
+                  <div class="eco-dep-icons">
+                    <span class="eco-dep" data-brand="maze" title="Maze">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.126 16.547c-1.5013-1.4881-1.5013-3.9009 0-5.389l4.0778-4.042c1.2692-1.258 3.205-1.4525 4.6803-.5836.4564.2687.4524.8852.077 1.2573-.3753.372-.988.34-1.4975.1923-.6524-.1891-1.386-.0287-1.9006.4813l-4.0777 4.0419a1.8935 1.8935 0 0 0 0 2.6945c.7506.744 1.9678.744 2.7184 0l8.1555-8.0836c1.5014-1.4882 3.9355-1.4882 5.437 0l4.0778 4.0418c1.5013 1.4881 1.5013 3.901 0 5.389-1.5014 1.4882-3.9356 1.4882-5.437 0l-1.3593-1.3472-1.699 1.684c-1.2692 1.258-3.205 1.4526-4.6804.5837-.4563-.2687-.4523-.8852-.077-1.2573.3754-.372.988-.34 1.4975-.1923.6524.1892 1.386.0287 1.9006-.4813l1.7476-1.7322c.724-.7175 1.8975-.7175 2.6214 0l1.4078 1.3954c.7507.744 1.9678.744 2.7186 0a1.8936 1.8936 0 0 0 0-2.6945l-4.0779-4.0419c-.7507-.744-1.9678-.744-2.7185 0L6.563 16.5471c-1.5014 1.4882-3.9356 1.4881-5.437 0"/></svg>
+                      <span class="eco-dep-name">Maze</span>
+                    </span>
+                    <span class="eco-dep" data-brand="hotjar" title="Hotjar">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.119 9.814C12.899 8.27 16.704 6.155 16.704 0h-4.609c0 3.444-1.676 4.375-4.214 5.786C5.1 7.33 1.295 9.444 1.295 15.6h4.61c0-3.444 1.676-4.376 4.214-5.786zM18.096 8.4c0 3.444-1.677 4.376-4.215 5.785-2.778 1.544-6.585 3.66-6.585 9.815h4.609c0-3.444 1.676-4.376 4.214-5.786 2.78-1.544 6.586-3.658 6.586-9.814h-4.609z"/></svg>
+                      <span class="eco-dep-name">Hotjar</span>
+                    </span>
+                    <span class="eco-dep" data-brand="figjam" title="FigJam">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"/></svg>
+                      <span class="eco-dep-name">FigJam</span>
+                    </span>
+                    <span class="eco-dep" data-brand="typeform" title="Typeform">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 1h22v4.306H13.349V23h-4.64V5.306H1z"/></svg>
+                      <span class="eco-dep-name">Typeform</span>
+                    </span>
+                  </div>
+                </div>
               </div>
-              <span class="json-filename"><svg class="json-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>profile.json</span>
-              <span class="json-tab-active">profile.json</span>
+
+              <!-- Product & UI Design -->
+              <div class="eco-card group" data-module="design">
+                <div class="eco-card-header">
+                  <div class="eco-card-version">v2.0</div>
+                  <div class="eco-card-status">
+                    <span class="eco-status-dot"></span>
+                    active
+                  </div>
+                </div>
+                <h3 class="eco-card-title">Product & UI Design</h3>
+                <p class="eco-card-desc">Advanced Prototyping, Interactive Design, UI Kits. Del concepto al prototipo de alta fidelidad.</p>
+                <div class="eco-card-divider"></div>
+                <div class="eco-card-deps">
+                  <span class="eco-dep-label">dependencies</span>
+                  <div class="eco-dep-icons">
+                    <span class="eco-dep" data-brand="figma" title="Figma">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"/></svg>
+                      <span class="eco-dep-name">Figma</span>
+                    </span>
+                    <span class="eco-dep" data-brand="framer" title="Framer">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z"/></svg>
+                      <span class="eco-dep-name">Framer</span>
+                    </span>
+                    <span class="eco-dep" data-brand="cursor" title="Cursor">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.147 1.262 22.723 8.27a.78.78 0 0 1 .025 1.46l-8.47 3.39-3.39 8.47a.78.78 0 0 1-1.46-.025L2.42 1.99a.78.78 0 0 1 .727-1.09z"/></svg>
+                      <span class="eco-dep-name">Cursor</span>
+                    </span>
+                    <span class="eco-dep" data-brand="lovable" title="Lovable">
+                      <svg viewBox="0 0 121 122" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M36.069 0C55.989 0 72.137 16.155 72.137 36.084V49.798H84.141C104.061 49.798 120.21 65.953 120.21 85.881C120.21 105.809 104.061 121.964 84.141 121.964H0V36.084C0 16.155 16.149 0 36.069 0Z"/></svg>
+                      <span class="eco-dep-name">Lovable</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Design Ops & Systems -->
+              <div class="eco-card group" data-module="systems">
+                <div class="eco-card-header">
+                  <div class="eco-card-version">v3.0</div>
+                  <div class="eco-card-status">
+                    <span class="eco-status-dot"></span>
+                    active
+                  </div>
+                </div>
+                <h3 class="eco-card-title">Design Ops & Systems</h3>
+                <p class="eco-card-desc">Governance, Design Tokens, Scalability. Arquitectura que escala entre equipos y productos.</p>
+                <div class="eco-card-divider"></div>
+                <div class="eco-card-deps">
+                  <span class="eco-dep-label">dependencies</span>
+                  <div class="eco-dep-icons">
+                    <span class="eco-dep" data-brand="storybook" title="Storybook">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.71.243l-.12 2.71a.18.18 0 00.29.15l1.06-.8.9.7a.18.18 0 00.28-.14l-.1-2.76 1.33-.1a1.2 1.2 0 011.279 1.2v21.596a1.2 1.2 0 01-1.26 1.2l-16.096-.72a1.2 1.2 0 01-1.15-1.16l-.75-19.797a1.2 1.2 0 011.13-1.27L16.7.222zM13.64 9.3c0 .47 3.16.24 3.59-.08 0-3.2-1.72-4.89-4.859-4.89-3.15 0-4.899 1.72-4.899 4.29 0 4.45 5.999 4.53 5.999 6.959 0 .7-.32 1.1-1.05 1.1-.96 0-1.35-.49-1.3-2.16 0-.36-3.649-.48-3.769 0-.27 4.03 2.23 5.2 5.099 5.2 2.79 0 4.969-1.49 4.969-4.18 0-4.77-6.099-4.64-6.099-6.999 0-.97.72-1.1 1.13-1.1.45 0 1.25.07 1.19 1.87z"/></svg>
+                      <span class="eco-dep-name">Storybook</span>
+                    </span>
+                    <span class="eco-dep" data-brand="token-studio" title="Token Studio">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L2 6v12l10 6 10-6V6L12 0zm0 2.311L19.689 6.8 12 11.289 4.311 6.8 12 2.311zM3.5 7.964l8 4.8V21.2l-8-4.8V7.964zm17 0v8.436l-8 4.8v-8.436l8-4.8z"/></svg>
+                      <span class="eco-dep-name">Token Studio</span>
+                    </span>
+                    <span class="eco-dep" data-brand="supernova" title="Supernova">
+                      <svg viewBox="0 0 60 60" fill="currentColor"><path d="M29.41 0h2.6c7.93 1.26 12 9.45 13.15 16.65 6.6 1.38 13.84 5.43 14.84 12.76v2.6c-1.26 7.96-9.46 11.98-16.65 13.17-1.36 6.61-5.46 13.82-12.78 14.82h-2.58c-7.95-1.26-11.99-9.46-13.15-16.65-6.61-1.38-13.84-5.43-14.84-12.76v-2.6c1.26-7.94 9.45-11.99 16.64-13.15 1.37-6.62 5.46-13.83 12.77-14.84m-4.09 8.4c-3.64 4.59-4.03 10.87-2.97 16.43 4.1-5.12 10.37-8.16 16.88-8.58-.76-3.99-2.39-8.46-6.33-10.29-2.72-1.31-5.88.2-7.58 2.44m-19.38 18.74c-1.28 2.72.24 5.86 2.48 7.56 4.6 3.62 10.87 4 16.43 2.96-5.16-4.08-8.18-10.38-8.61-16.9-3.99.77-8.48 2.41-10.3 6.38m29.18-4.8c5.17 4.08 8.17 10.38 8.59 16.9 3.99-.75 8.47-2.37 10.32-6.31 1.45-2.99-.47-6.38-3.01-8.05-4.58-3.27-10.54-3.49-15.9-2.54m-6.89 3.88c-2.75 1.18-3.21 5.34-.73 7.04 2.5 2.2 6.76-.02 6.64-3.26.09-2.9-3.33-5.1-5.91-3.78m-7.46 17.53c.76 4.01 2.41 8.5 6.39 10.32 2.7 1.26 5.8-.23 7.49-2.44 3.67-4.61 4.06-10.92 2.99-16.51-4.06 5.19-10.35 8.18-16.87 8.63z"/></svg>
+                      <span class="eco-dep-name">Supernova</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Design Engineering -->
+              <div class="eco-card group" data-module="engineering">
+                <div class="eco-card-header">
+                  <div class="eco-card-version">v4.0</div>
+                  <div class="eco-card-status">
+                    <span class="eco-status-dot"></span>
+                    active
+                  </div>
+                </div>
+                <h3 class="eco-card-title">Design Engineering</h3>
+                <p class="eco-card-desc">Frontend Architecture, UI Build, Git Flow. Del token al componente en producción.</p>
+                <div class="eco-card-divider"></div>
+                <div class="eco-card-deps">
+                  <span class="eco-dep-label">dependencies</span>
+                  <div class="eco-dep-icons">
+                    <span class="eco-dep" data-brand="github" title="GitHub">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                      <span class="eco-dep-name">GitHub</span>
+                    </span>
+                    <span class="eco-dep" data-brand="javascript" title="JavaScript">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.405-.6-.586-.78-.63-.6-1.469-.915-2.834-.84l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/></svg>
+                      <span class="eco-dep-name">JavaScript</span>
+                    </span>
+                    <span class="eco-dep" data-brand="typescript" title="TypeScript">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 011.306.34v2.458a3.95 3.95 0 00-.643-.361 5.093 5.093 0 00-.717-.26 5.453 5.453 0 00-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 00-.623.242c-.17.104-.3.229-.393.374a.888.888 0 00-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 01-1.012 1.085 4.38 4.38 0 01-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 01-1.84-.164 5.544 5.544 0 01-1.512-.493v-2.63a5.033 5.033 0 003.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 00-.074-1.089 2.12 2.12 0 00-.537-.5 5.597 5.597 0 00-.807-.444 27.72 27.72 0 00-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 011.47-.629 7.536 7.536 0 011.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"/></svg>
+                      <span class="eco-dep-name">TypeScript</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="json-line-numbers" aria-hidden="true"></div>
-            <pre class="json-body"><code><span class="json-line"><span class="json-bracket">{</span></span>
-<span class="json-line">  <span class="json-key">"profile"</span><span class="json-colon">:</span> <span class="json-string">"Ramon Riera"</span><span class="json-comma">,</span></span>
-<span class="json-line">  <span class="json-key">"role"</span><span class="json-colon">:</span> <span class="json-string">"Design Systems &amp; Strategy Lead"</span><span class="json-comma">,</span></span>
-<span class="json-line">  <span class="json-key">"stack"</span><span class="json-colon">:</span> <span class="json-bracket">{</span></span>
-<span class="json-line">    <span class="json-key">"design"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Figma"</span><span class="json-comma">,</span> <span class="json-string">"Variables"</span><span class="json-comma">,</span> <span class="json-string">"Framer"</span><span class="json-comma">,</span> <span class="json-string">"Zeroheight"</span><span class="json-bracket">]</span><span class="json-comma">,</span></span>
-<span class="json-line">    <span class="json-key">"dev"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"React"</span><span class="json-comma">,</span> <span class="json-string">"TypeScript"</span><span class="json-comma">,</span> <span class="json-string">"Tailwind"</span><span class="json-comma">,</span> <span class="json-string">"Astro"</span><span class="json-comma">,</span> <span class="json-string">"Storybook"</span><span class="json-comma">,</span> <span class="json-string">"Git"</span><span class="json-bracket">]</span><span class="json-comma">,</span></span>
-<span class="json-line">    <span class="json-key">"designops"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Design Governance"</span><span class="json-comma">,</span> <span class="json-string">"Style Dictionary"</span><span class="json-comma">,</span> <span class="json-string">"System Analytics"</span><span class="json-bracket">]</span></span>
-<span class="json-line">  <span class="json-bracket">}</span><span class="json-comma">,</span></span>
-<span class="json-line">  <span class="json-key">"ux_strategy"</span><span class="json-colon">:</span> <span class="json-bracket">{</span></span>
-<span class="json-line">    <span class="json-key">"standards"</span><span class="json-colon">:</span> <span class="json-string">"WCAG_AA"</span><span class="json-comma">,</span></span>
-<span class="json-line">    <span class="json-key">"discovery"</span><span class="json-colon">:</span> <span class="json-bracket">[</span><span class="json-string">"Heuristic_Evaluation"</span><span class="json-comma">,</span> <span class="json-string">"User_Interviews"</span><span class="json-bracket">]</span><span class="json-comma">,</span></span>
-<span class="json-line">    <span class="json-key">"ops"</span><span class="json-colon">:</span> <span class="json-string">"Design_Tokens_Architecture"</span><span class="json-comma">,</span></span>
-<span class="json-line">    <span class="json-key">"metrics"</span><span class="json-colon">:</span> <span class="json-string">"Component_Adoption_Tracking"</span></span>
-<span class="json-line">  <span class="json-bracket">}</span><span class="json-comma">,</span></span>
-<span class="json-line">  <span class="json-key">"metrics"</span><span class="json-colon">:</span> <span class="json-bracket">{</span></span>
-<span class="json-line">    <span class="json-key">"efficiency_boost"</span><span class="json-colon">:</span> <span class="json-string">"<span class="json-number">+40%</span>"</span><span class="json-comma">,</span></span>
-<span class="json-line">    <span class="json-key">"component_adoption"</span><span class="json-colon">:</span> <span class="json-string">"<span class="json-number">95%</span>"</span></span>
-<span class="json-line">  <span class="json-bracket">}</span></span>
-<span class="json-line"><span class="json-bracket">}</span></span></code></pre>
+
+            <!-- Code mode: config object -->
+            <div class="process-grid-code">
+              <div class="process-pipeline">
+                <div class="process-pipeline-window">
+                  <div class="process-pipeline-titlebar">
+                    <div class="json-dots">
+                      <span class="json-dot json-dot--red"></span>
+                      <span class="json-dot json-dot--yellow"></span>
+                      <span class="json-dot json-dot--green"></span>
+                    </div>
+                    <span class="process-pipeline-filename">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                      ecosystem.config.ts
+                    </span>
+                  </div>
+                  <pre class="process-pipeline-body"><code><span class="pp-keyword">export const</span> <span class="pp-fn">ecosystem</span> <span class="pp-punct">=</span> <span class="pp-bracket">{"{"}</span>
+
+  <span class="pp-key">strategy</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"User Research &rarr; Data Analysis &rarr; Testing"</span><span class="pp-punct">,</span>
+    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Maze"</span><span class="pp-punct">,</span> <span class="pp-string">"Hotjar"</span><span class="pp-punct">,</span> <span class="pp-string">"FigJam"</span><span class="pp-punct">,</span> <span class="pp-string">"Typeform"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"validated insights"</span>
+  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
+
+  <span class="pp-key">design</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Prototyping &rarr; Interactive Design &rarr; UI Kits"</span><span class="pp-punct">,</span>
+    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Figma"</span><span class="pp-punct">,</span> <span class="pp-string">"Framer"</span><span class="pp-punct">,</span> <span class="pp-string">"Cursor"</span><span class="pp-punct">,</span> <span class="pp-string">"Lovable"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"hi-fi prototypes"</span>
+  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
+
+  <span class="pp-key">systems</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Governance &rarr; Design Tokens &rarr; Scalability"</span><span class="pp-punct">,</span>
+    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Storybook"</span><span class="pp-punct">,</span> <span class="pp-string">"Token Studio"</span><span class="pp-punct">,</span> <span class="pp-string">"Supernova"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"scalable architecture"</span>
+  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
+
+  <span class="pp-key">engineering</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
+    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Frontend Architecture &rarr; UI Build &rarr; Git Flow"</span><span class="pp-punct">,</span>
+    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"GitHub"</span><span class="pp-punct">,</span> <span class="pp-string">"JavaScript"</span><span class="pp-punct">,</span> <span class="pp-string">"TypeScript"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
+    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"design-faithful code"</span>
+  <span class="pp-bracket">{"}"}</span>
+
+<span class="pp-bracket">{"}"}</span> <span class="pp-keyword">as const</span><span class="pp-punct">;</span></code></pre>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -461,19 +696,22 @@ const timeline = [
         </span>
       </div>
       <h2 data-reveal data-delay="100" class="heading-lg mb-6">
-        ¿Listo para empezar?
+        ¿Listo para <span class="text-primary-500">empezar</span>?
       </h2>
       <p data-reveal data-delay="100" class="text-body text-lg mb-10">
         Cuéntame sobre tu proyecto y veamos cómo puedo ayudarte a alcanzar tus objetivos de diseño.
       </p>
       <div data-reveal data-delay="200" class="flex flex-wrap items-center justify-center gap-4">
-        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base"
+        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base hero-cta-normal"
           data-component="ButtonPrimary"
           data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
           Contactar
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
+        </a>
+        <a href={`mailto:${siteConfig.email}`} class="hero-cta-code" data-component="ButtonRunCmd">
+          <span class="hero-cta-prompt">&gt;</span> sudo <span class="hero-cta-cmd">contact</span> <span class="hero-cta-flag">--now</span><span class="hero-cta-cursor">_</span>
         </a>
         <!-- CV Button: Normal mode -->
         <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
@@ -490,9 +728,15 @@ const timeline = [
         <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
           class="btn-cv-code"
           data-component="ButtonCVCode">
-          <span class="btn-cv-prompt">&gt;</span> ramon-riera <span class="btn-cv-flag">--download-cv</span>
+          <svg class="btn-code-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" />
+          </svg>
+          <span class="code-fn">get</span><span class="code-parens">(</span><span class="code-string">'cv.pdf'</span><span class="code-parens">)</span>
         </a>
       </div>
     </div>
   </section>
+
+
 </BaseLayout>
