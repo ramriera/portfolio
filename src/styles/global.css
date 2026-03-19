@@ -3134,4 +3134,59 @@ body.code-mode [data-component="KPIDashboard"] .kpi-card {
   font-weight: 700;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   EDITORIAL GRID — 60/40 Alternating Rhythm (3 Rows)
+   Row 1: Massimo Dutti 60% + Iberia 40%
+   Row 2: Banc Sabadell 40% + Imaginbank 60%
+   Row 3: SoloTemazos 60% + MoveFast 40%
+   ═══════════════════════════════════════════════════════════ */
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .editorial-grid {
+    grid-template-columns: repeat(10, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Row 1: Massimo Dutti 60% (cols 1-6) + Iberia 40% (cols 7-10) */
+  .editorial-grid > div:nth-child(1) { grid-column: 1 / 7; }
+  .editorial-grid > div:nth-child(2) { grid-column: 7 / 11; }
+
+  /* Row 2: Banc Sabadell 40% (cols 1-4) + Imaginbank 60% (cols 5-10) */
+  .editorial-grid > div:nth-child(3) { grid-column: 1 / 5; }
+  .editorial-grid > div:nth-child(4) { grid-column: 5 / 11; }
+
+  /* Row 3: SoloTemazos 60% (cols 1-6) + MoveFast 40% (cols 7-10) */
+  .editorial-grid > div:nth-child(5) { grid-column: 1 / 7; }
+  .editorial-grid > div:nth-child(6) { grid-column: 7 / 11; }
+
+  /* Force same height per row — cards fill their cell */
+  .editorial-grid > div {
+    display: flex;
+  }
+
+  .editorial-grid > div > .project-card {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Override aspect-ratio: let height be driven by the row */
+  .editorial-grid .project-card > div {
+    aspect-ratio: unset !important;
+    height: 100%;
+    min-height: 340px;
+  }
+
+  .editorial-grid .project-card .card-mockup {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
 
