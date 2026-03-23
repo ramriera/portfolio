@@ -66,7 +66,7 @@
   }
 
   .heading-xl {
-    font-size: clamp(2.25rem, 5vw + 0.5rem, 4.5rem);
+    font-size: clamp(1.875rem, 5vw + 0.5rem, 4.5rem);
     @apply font-semibold tracking-tight leading-[1.08];
     letter-spacing: -0.02em;
   }
@@ -490,7 +490,7 @@ main {
 
 /* Stats column: horizontal on mobile, right-side on xl */
 .hero-stats-col {
-  margin-top: 2rem;
+  margin-top: 1.25rem;
   display: flex;
   justify-content: center;
   /* Pre-allocate border + padding so code mode toggle doesn't shift layout */
@@ -1239,6 +1239,12 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 
 /* CallToAction: no blinking cursor on CTA headings */
 .code-mode [data-component="CallToAction"] .heading-lg::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* MethodologyStack: no blinking cursor */
+.code-mode [data-component="MethodologyStack"] .heading-lg::after {
   content: none !important;
   display: none !important;
 }
@@ -2073,10 +2079,15 @@ body.code-mode .hero-main-content .text-dark-900 {
 
 /* Section labels (Stack, Workflow, etc.) in code mode */
 body.code-mode [data-component="TechEcosystem"] .text-primary-500,
-body.code-mode [data-component="MethodologyStack"] .text-primary-500,
 body.code-mode [data-component="WorkflowSection"] .text-primary-500,
 body.code-mode [data-component="AboutHero"] .text-primary-500 {
   color: #50fa7b !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+}
+
+/* MethodologyStack: "Stack" in pink (cm-tag) */
+body.code-mode [data-component="MethodologyStack"] .text-primary-500 {
+  color: var(--cm-tag, #ff79c6) !important;
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
 }
 
