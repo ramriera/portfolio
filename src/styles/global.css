@@ -1974,7 +1974,12 @@ body.code-mode .methodology-sep-code {
 
 /* ── About page: "Soy" and section headings adopt code-mode colors ── */
 body.code-mode [data-component="AboutHero"] h1,
-body.code-mode [data-component="AboutHero"] .heading-xl,
+body.code-mode [data-component="AboutHero"] .heading-xl {
+  color: var(--cm-function) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  text-shadow: none !important;
+}
+
 body.code-mode [data-component="BiographySection"] .heading-md,
 body.code-mode [data-component="CareerTimeline"] .heading-md,
 body.code-mode [data-component="ValuesGrid"] .heading-md,

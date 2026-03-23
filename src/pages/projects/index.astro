@@ -12,27 +12,25 @@ const sortedProjects = [...projects].sort((a, b) => {
   if (bIdx === -1) return 1;
   return aIdx - bIdx;
 });
-const filterCategories = ['Todas', 'Product Design', 'UX/UI', 'Design Systems', 'Strategy', 'Research', 'Prototyping'];
+const filterCategories = ['Todas', 'Product Design', 'UX Design', 'Design Systems', 'Service Design', 'Research'];
 
 // Map tags → filter categories
 const tagToFilters: Record<string, string[]> = {
   'Product Design': ['Product Design'],
-  'UX Design': ['UX/UI'],
-  'UI Design': ['UX/UI'],
-  'App Design': ['UX/UI'],
-  'Mobile First': ['UX/UI'],
-  'Visual Design': ['UX/UI'],
+  'UX Design': ['UX Design'],
+  'Visual Design': ['UX Design'],
+  'Mobile-First Design': ['UX Design'],
+  'Heuristic Analysis': ['UX Design'],
   'Design Systems': ['Design Systems'],
   'Design Ops': ['Design Systems'],
-  'E-commerce': ['Strategy'],
-  'Enterprise': ['Strategy'],
-  'Social Impact': ['Strategy'],
+  'Service Design': ['Service Design'],
+  'E-commerce': ['Service Design'],
+  'UX Research': ['Research'],
   'Heuristic Evaluation': ['Research'],
   'Design Thinking': ['Research'],
   'Fintech': ['Research'],
-  'High-fidelity Prototyping': ['Prototyping'],
-  'B2B Product': ['Prototyping'],
-  'Music Tech': ['Prototyping'],
+  'Nonprofit': ['Service Design'],
+  'Aviation': ['Design Systems'],
 };
 
 function getProjectFilters(tags: string[]): string[] {
@@ -151,7 +149,7 @@ function getProjectFilters(tags: string[]): string[] {
           </svg>
         </a>
         <a href={`mailto:${siteConfig.email}`} class="hero-cta-code" data-component="ButtonRunCmd">
-          <span class="hero-cta-prompt">&gt;</span> sudo <span class="hero-cta-cmd">contact</span> <span class="hero-cta-flag">--now</span><span class="hero-cta-cursor">_</span>
+          <span class="hero-cta-prompt">&gt;</span> run <span class="hero-cta-cmd">send_email.sh</span><span class="hero-cta-cursor">_</span>
         </a>
         <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
           class="btn-outline text-base btn-cv-normal"
