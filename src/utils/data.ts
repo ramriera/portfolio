@@ -512,17 +512,17 @@ export const projects: Project[] = [
     title: 'MoveFast',
     client: 'MoveFast',
     year: '2021',
-    category: 'UX/UI Design',
-    tags: ['UI Design', 'B2B Product', 'Fleet Management'],
-    description: 'De cero a MVP en 2 semanas: diseño de producto para una app de movilidad eléctrica que resuelve la "ansiedad de autonomía" con un modelo de servicio que ningún competidor ofrece — cambio de baterías bajo demanda.',
-    longDescription: 'El vehículo eléctrico tiene un problema de adopción en España. No es un problema técnico — es un problema de confianza. El consumidor reconoce las ventajas, pero tres barreras frenan la decisión de compra: **escasos puntos de carga**, **autonomía limitada** y **tiempos de recarga superiores a 45 minutos**. MoveFast nace para resolver la barrera más emocional de las tres — la "range anxiety" — con una propuesta de valor inexistente en el mercado: **cambio de baterías bajo demanda**, donde un técnico acude a tu ubicación y sustituye la batería en minutos.\n\nMi rol: diseñar la experiencia completa de la app móvil en **2 semanas**, desde la investigación de mercado hasta un prototipo interactivo con design system. El reto no era solo diseñar pantallas — era diseñar un modelo de servicio nuevo y hacerlo comprensible para un usuario que nunca ha usado nada parecido.',
-    challenge: 'España se sitúa a la cola de Europa en matriculaciones de vehículos eléctricos. Los datos son claros: **escasos puntos de carga** (concentrados en capitales, casi inexistentes en autopistas), **precio elevado** frente al vehículo convencional, y **autonomía real por debajo de 300 km** en la mayoría de modelos. Pero la barrera más determinante no es racional — es emocional: la **"range anxiety"**, el miedo a quedarse sin batería lejos de un punto de carga. A esto se suman tiempos de recarga de **más de 45 minutos**, que hacen inviable la recarga en ruta para viajes familiares o laborales.',
-    solution: 'Dos conceptos de servicio que ninguna app competidora ofrece: (1) **Cambio de batería a domicilio** — un técnico acude a tu ubicación con una batería cargada y realiza el intercambio en minutos (10 cambios gratuitos/año para compradores, 59€ cada adicional); (2) **Puntos de intercambio dinámicos** — ubicaciones modulares en la ciudad que cambian semanalmente, con reserva anticipada y operador in situ. **La app unifica ambos servicios en un mapa interactivo** con stock en tiempo real, ocupación, y sistema de reservas.',
+    category: 'Product Design',
+    tags: ['Product Design', 'Service Design', 'Mobility', 'Friction Reduction'],
+    description: 'Diseño de producto para una app de movilidad eléctrica que elimina la barrera más determinante para la adopción del EV en España: la range anxiety. Un modelo de servicio inexistente en el mercado — cambio de baterías bajo demanda — diseñado de research a prototipo en 2 semanas.',
+    longDescription: 'El vehículo eléctrico tiene un problema de adopción en España. No es técnico — es de confianza. El consumidor conoce las ventajas, pero tres barreras frenan la compra: infraestructura insuficiente, autonomía limitada y tiempos de recarga de 45+ minutos. MoveFast ataca la barrera más emocional — la range anxiety — con una propuesta que no existe en el mercado: cambio de baterías bajo demanda, donde un técnico acude a tu ubicación y sustituye la batería en minutos.\n\nEste caso documenta el diseño completo de la app en 2 semanas: de investigación de mercado a prototipo interactivo con design system. El reto no era diseñar pantallas — era diseñar un modelo de servicio nuevo y hacerlo comprensible para un usuario que nunca ha usado nada parecido. Cada decisión de producto busca lo mismo: reducir el tiempo entre "necesito batería" y "problema resuelto".',
+    challenge: 'España se sitúa a la cola de Europa en matriculaciones de vehículos eléctricos. Escasos puntos de carga (concentrados en capitales, casi inexistentes en autopistas), precio elevado frente al convencional, y autonomía real por debajo de 300 km. Pero la barrera más determinante no es racional — es emocional: la range anxiety, el miedo a quedarse sin batería lejos de un punto de carga. Y las apps existentes no resuelven el problema: todas asumen que el usuario tiene que ir a un punto de carga y esperar 45+ minutos. Ninguna cuestiona el modelo.',
+    solution: 'Dos modelos de servicio complementarios que ninguna app competidora ofrece: (1) cambio de batería a domicilio — un técnico acude con batería cargada y realiza el intercambio en minutos; (2) puntos de intercambio dinámicos — ubicaciones modulares en la ciudad con reserva anticipada y operador in situ. La app unifica ambos en un mapa interactivo con stock en tiempo real, ocupación y sistema de reservas. El flujo de reserva se completa en 3 taps. Cero fricción innecesaria.',
     results: [
-      'UX end-to-end definida en 2 semanas — de research a prototipo interactivo',
-      'Dos modelos de servicio validados con user flows y wireframes antes de diseñar una pantalla',
-      'Design system con componentes y variantes para escalar sin deuda visual',
-      'Propuesta de valor diferencial documentada: ningún competidor ofrece cambio de baterías',
+      'De research a prototipo interactivo en 2 semanas — UX completa con design system escalable',
+      'Modelo de servicio validado con user flows antes de diseñar una pantalla: dos conceptos complementarios que eliminan la espera',
+      'Flujo de reserva de 3 pasos sin registro obligatorio — fricción mínima en un mercado donde cada paso extra es abandono',
+      'Diferenciación total: ninguna app del mercado ofrece cambio de baterías — MoveFast entra en una categoría que no existe',
     ],
     stack: ['Figma', 'Whimsical', 'Adobe Illustrator', 'Adobe Photoshop', 'Miro', 'Google Forms'],
     cover: '/assets/projects/movefast/movefast-header.png',
@@ -530,32 +530,32 @@ export const projects: Project[] = [
     brandColor: '#00C7B7',
     gridSpan: 2,
     projectMeta: {
-      role: 'Product Designer',
-      industry: 'Mobility',
-      output: 'Mobile App Design',
+      role: 'Senior Product Designer',
+      industry: 'Mobility & CleanTech',
+      output: 'Service Design & Mobile Product — Research to Prototype',
       duration: '2 semanas',
-      skills: ['UX Research', 'Benchmarking', 'User Persona', 'Journey Mapping', 'Prototyping', 'Design System', 'Wireframing', 'Visual Design', 'Interaction Design', 'Information Architecture', 'Mobile Design', 'Competitive Analysis'],
+      skills: ['Product Strategy', 'Service Design', 'Friction Reduction', 'UX Research', 'Competitive Analysis', 'Information Architecture', 'Interaction Design', 'Design Systems', 'Prototyping', 'Mobile-First Design'],
     },
     checks: [
-      'España a la cola de Europa en adopción EV: infraestructura insuficiente y autonomía real por debajo de 300 km',
-      '45+ minutos de recarga generan "range anxiety" — la barrera más emocional y determinante para la compra',
-      'Ninguna app competidora ofrece cambio de baterías bajo demanda — vacío de mercado validado en benchmarking',
+      'España a la cola de Europa en adopción EV: infraestructura insuficiente y autonomía real <300 km generan desconfianza',
+      '45+ minutos de recarga convierten cada viaje en fuente de incertidumbre — la range anxiety frena más que el precio',
+      'Todas las apps del mercado resuelven "dónde cargar" pero ninguna resuelve "cómo cargar sin esperar" — vacío de categoría',
     ],
     caseSections: [
-      // ── 01. Espacio del Problema ──
+      // ── 01. Product Intent ──
       {
-        label: '01. Espacio del Problema',
-        title: 'Un mercado con demanda latente y barreras reales',
+        label: '01. Product Intent',
+        title: 'Un mercado con demanda latente y barreras que nadie resuelve',
         layout: 'full-image',
-        content: 'Antes de diseñar, necesitaba entender por qué España está a la cola de Europa en adopción del vehículo eléctrico. La respuesta no es falta de interés — el consumidor español conoce las ventajas (ahorro, acceso a zonas restringidas, beneficios fiscales). **El problema es que las barreras pesan más que los beneficios.**\n\nExisten dos categorías de vehículos eléctricos en el mercado: el **BEV** (100% eléctrico, batería recargable) y el **PHEV** (híbrido enchufable, ~40 km de autonomía eléctrica). En ambos casos, la infraestructura de recarga crece, pero no al ritmo necesario para generar confianza. Los datos de matriculaciones lo confirman: la cuota de mercado es mínima frente a Noruega, Países Bajos o Alemania.',
+        content: 'MoveFast existe porque el vehículo eléctrico tiene un problema de adopción que no es técnico — es de confianza. El consumidor español conoce las ventajas (ahorro, acceso a zonas restringidas, beneficios fiscales). **Pero las barreras pesan más que los beneficios.**\n\nExisten dos categorías de EVs: el **BEV** (100% eléctrico) y el **PHEV** (híbrido enchufable, ~40 km de autonomía eléctrica). En ambos casos, la infraestructura de recarga crece, pero no al ritmo necesario para generar confianza. Los datos de matriculaciones lo confirman: cuota de mercado mínima frente a Noruega, Países Bajos o Alemania. El éxito de MoveFast se mide con una métrica: **¿el usuario siente que siempre tiene una solución cerca cuando necesita batería?**',
         images: ['/assets/projects/movefast/movefast-electric-passenger-cars-registrations-spain.png'],
         captions: ['Matriculaciones de vehículos eléctricos — España vs. Europa: una brecha que no se explica solo por precio'],
       },
       {
-        label: '01. Espacio del Problema',
-        title: 'Tres barreras que frenan la adopción',
+        label: '01. Product Intent',
+        title: 'Tres barreras que frenan la adopción — y una oportunidad que nadie cubre',
         layout: 'image-grid',
-        content: 'La investigación de mercado reveló tres barreras principales. Aunque las tres son relevantes, cada una tiene un peso diferente en la decisión de compra:\n\n**1. Infraestructura insuficiente** — Puntos de carga concentrados en capitales, casi inexistentes en autopistas y zonas rurales. El usuario no puede planificar un viaje largo con confianza.\n\n**2. Precio elevado** — El coste de adquisición supera al vehículo convencional equivalente. Aunque el coste operativo es menor, la barrera de entrada frena al comprador.\n\n**3. Autonomía limitada + tiempo de recarga** — Muchos modelos por debajo de 300 km reales, y recargas de más de 45 minutos. Esta combinación genera **"range anxiety"**: el miedo a quedarse sin batería lejos de un punto de carga. **Es la barrera más emocional y la más determinante** — porque convierte cada viaje en una fuente de incertidumbre.',
+        content: 'La investigación reveló tres barreras con peso desigual en la decisión de compra:\n\n**1. Infraestructura insuficiente** — Puntos de carga concentrados en capitales, casi inexistentes en autopistas y zonas rurales. El usuario no puede planificar un viaje largo con confianza.\n\n**2. Precio elevado** — Coste de adquisición superior al vehículo convencional. Aunque el coste operativo es menor, la barrera de entrada frena al comprador.\n\n**3. Autonomía limitada + tiempo de recarga** — Modelos por debajo de 300 km reales, y recargas de 45+ minutos. Esta combinación genera **range anxiety**: el miedo a quedarse sin batería lejos de un punto de carga. **Es la barrera más emocional y la más determinante** — convierte cada viaje en fuente de incertidumbre.\n\nLa oportunidad de producto está en la tercera barrera: no es un problema de infraestructura (requiere inversión pública), ni de precio (requiere economías de escala). Es un problema de **modelo de servicio** — y se puede resolver con diseño.',
         images: [
           '/assets/projects/movefast/movefast-flota-vehiculos-electricos.png',
           '/assets/projects/movefast/movefast-evolucion-esp.png',
@@ -572,11 +572,11 @@ export const projects: Project[] = [
         ],
       },
       {
-        label: '01. Espacio del Problema',
-        title: 'Benchmarking — El vacío que justifica la propuesta',
+        label: '02. Differentiation',
+        title: 'Benchmarking — El vacío de categoría que justifica la propuesta',
         layout: 'image-grid',
-        content: 'Analicé las principales apps del sector para entender qué ofrecen y dónde fallan. Todas comparten las mismas funcionalidades: mapa de estaciones de carga, filtros por voltaje y conector, favoritos y pasarela de pago. La mayoría tienen una **usabilidad pobre y un diseño visual descuidado**. Iberdrola destaca visualmente pero es lenta y limitada en funcionalidad.\n\nEl hallazgo más relevante del benchmarking no es lo que estas apps hacen mal — es lo que **ninguna hace**: ofrecer un modelo alternativo a la recarga convencional. Todas asumen que el usuario tiene que ir a un punto de carga y esperar. **Ninguna cuestiona el modelo.**',
-        highlight: 'Ninguna app del mercado ofrece cambio de baterías. Todas resuelven "dónde cargar", pero ninguna resuelve "cómo cargar más rápido". **MoveFast entra en el espacio que nadie cubre.**',
+        content: 'El análisis competitivo reveló que todas las apps del sector comparten las mismas funcionalidades: mapa de estaciones de carga, filtros por voltaje y conector, favoritos y pasarela de pago. La mayoría tienen usabilidad pobre. Iberdrola destaca visualmente pero es lenta y limitada en funcionalidad.\n\nPero el hallazgo más relevante no es lo que hacen mal — es lo que **ninguna hace**: ofrecer un modelo alternativo a la recarga convencional. Todas asumen que el usuario tiene que ir a un punto de carga y esperar. **Ninguna cuestiona el modelo.** MoveFast no compite por features dentro de la misma categoría — entra en una categoría que no existe. Esto simplifica el posicionamiento y reduce el coste de adquisición: no compites por mapa, compites por modelo de servicio.',
+        highlight: 'Todas las apps resuelven "dónde cargar". Ninguna resuelve "cómo cargar sin esperar". **MoveFast entra en el espacio que nadie cubre.**',
         images: [
           '/assets/projects/movefast/movefast-benchmarking-apps.png',
           '/assets/projects/movefast/movefast-benchmarking.png',
@@ -586,9 +586,9 @@ export const projects: Project[] = [
           'Matriz de benchmarking — el vacío funcional del cambio de baterías',
         ],
       },
-      // ── 02. Job To Be Done ──
+      // ── 03. Core User Goal (JTBD) ──
       {
-        label: '02. Job To Be Done',
+        label: '03. Core User Goal',
         title: 'Quién es el usuario y qué necesita realmente',
         layout: 'full-image',
         content: 'Para diseñar la experiencia, definí a Oriol Vallmajor: arquitecto, ingresos por encima de la media, early adopter, comprometido con la sostenibilidad. Oriol quiere viajar por España con su familia en un vehículo eléctrico. Está dispuesto a pagar por la transición — pero **la incertidumbre le frena**.\n\nSu dolor principal no es técnico. Es emocional: **"¿Qué pasa si me quedo sin batería en medio de un viaje familiar?"** El Job To Be Done no es "recargar el coche" — es **"sentir que tengo el control de mi autonomía y que siempre hay una solución cerca"**. Ninguna app actual resuelve esa necesidad emocional.',
@@ -596,7 +596,7 @@ export const projects: Project[] = [
         captions: ['User Persona — Oriol Vallmajor: early adopter frenado por la incertidumbre, no por la tecnología'],
       },
       {
-        label: '02. Job To Be Done',
+        label: '03. Core User Goal',
         title: 'La barrera es emocional, no racional',
         layout: 'full-image',
         content: 'El mapa de empatía reveló el insight central del proyecto: Oriol sabe que el coche eléctrico le conviene económicamente. Sabe que contamina menos. Sabe que tiene beneficios fiscales. **Pero cuando piensa en un viaje largo, siente miedo.** ¿Y si el punto de carga más cercano está a 80 km? ¿Y si está ocupado cuando llegue? ¿Y si tengo que esperar 45 minutos con los niños en el coche?\n\nLa **"range anxiety" no es un problema de autonomía real — es un problema de autonomía percibida.** Y se resuelve dando al usuario una alternativa que elimine la espera, no solo una app que le muestre dónde esperar.',
@@ -604,50 +604,51 @@ export const projects: Project[] = [
         captions: ['Mapa de empatía — El miedo a quedarse tirado pesa más que cualquier ventaja racional'],
       },
       {
-        label: '02. Job To Be Done',
+        label: '03. Core User Goal',
         title: 'Tres picos de frustración que definen las oportunidades',
         layout: 'full-image',
         content: 'El customer journey map documentó la experiencia completa: desde la decisión de compra hasta el momento crítico de recargar en ruta. Los **picos de frustración** se concentran en tres puntos específicos:\n\n**1. Planificación del viaje** — Descubrir que no hay puntos de carga en la ruta habitual. La incertidumbre empieza antes de salir de casa.\n\n**2. Llegada al punto de carga** — Encontrarlo ocupado o fuera de servicio. La frustración es mayor porque el usuario ya ha planificado alrededor de ese punto.\n\n**3. Tiempo de espera** — Más de 45 minutos de recarga. Para un viaje familiar, es inaceptable.\n\nEstos tres momentos definen exactamente dónde MoveFast puede intervenir: no en el punto de carga, sino **antes de que el usuario necesite uno.**',
         images: ['/assets/projects/movefast/movefast-costumer-journey.png'],
         captions: ['Customer Journey — Los tres picos de frustración que la competencia ignora'],
       },
-      // ── 03. Hipótesis y Estrategia ──
+      // ── 04. UX Principles ──
       {
-        label: '03. Hipótesis y Estrategia',
-        title: 'Tres hipótesis de producto',
+        label: '04. UX Principles',
+        title: 'Principios de producto que restringen las decisiones de diseño',
         layout: 'center',
-        content: 'La investigación de mercado, el benchmarking y el análisis del usuario convergen en tres hipótesis que guían todas las decisiones de diseño:',
+        content: 'Estos principios no son aspiracionales — son restricciones. Cada decisión de diseño se evalúa contra ellos. Si una propuesta viola un principio, se descarta.',
         bullets: [
-          '**H1: El modelo de servicio importa más que la app.** Si ofrecemos cambio de batería en minutos (vs. 45+ min de recarga), eliminamos la barrera emocional que frena la adopción del vehículo eléctrico. La app es el canal — el servicio es la propuesta de valor',
-          '**H2: Dos modelos complementarios, no uno.** El cambio a domicilio resuelve la comodidad diaria. Los puntos de intercambio dinámicos resuelven la autonomía en ruta. Ambos son necesarios porque atacan momentos diferentes del journey del usuario',
-          '**H3: Reducir decisiones = reducir ansiedad.** Si preseleccionamos la opción más relevante (punto más cercano, franja horaria más próxima), el usuario pasa de "tengo que buscar dónde cargar" a "confirmo y listo". Menos carga cognitiva = mayor tasa de activación',
+          '**Reducir decisiones, no añadir opciones.** Preseleccionar la opción más relevante (punto más cercano, franja más próxima). El usuario pasa de "tengo que buscar dónde cargar" a "confirmo y listo". Menos carga cognitiva = mayor activación',
+          '**Optimizar para velocidad sobre flexibilidad.** El flujo de reserva se completa en 3 taps. Sin registro obligatorio en primer uso. Cada paso extra es una razón para abandonar en un mercado donde el usuario aún no confía en el modelo',
+          '**Guiar en lugar de exponer complejidad.** Dos modelos de servicio (domicilio + punto de intercambio) unificados en una sola interfaz. El usuario no elige "qué tipo de servicio quiero" antes de ver opciones — ve todas y elige según contexto',
+          '**El modelo de servicio importa más que la app.** La app es el canal, el servicio es la propuesta de valor. Si el cambio de batería en minutos funciona, la app se diseña sola. Si no funciona, ningún diseño lo salva',
         ],
         highlight: 'La estrategia UX de MoveFast no es "mejorar la experiencia de recarga". Es **eliminar la recarga como experiencia** y sustituirla por un intercambio que se siente como repostar gasolina: rápido, predecible y sin espera.',
       },
-      // ── 04. Decisiones de Producto ──
+      // ── 05. Key Product Decisions ──
       {
-        label: '04. Decisiones de Producto',
-        title: 'Arquitectura de flujos y wireframes',
+        label: '05. Key Product Decisions',
+        title: 'Arquitectura de flujos: cada decisión eliminada es fricción eliminada',
         layout: 'whimsical-embed',
-        content: 'Antes de diseñar una sola pantalla, definí la arquitectura de los dos flujos principales en Whimsical:\n\n**1. Cambio de batería a domicilio** — App → "Cambio a domicilio" → confirmar ubicación → elegir franja horaria → técnico acude con batería cargada → intercambio en minutos. **Decisión clave**: el flujo se completa en 3 taps. La ubicación se prelocaliza por GPS, la franja horaria muestra solo opciones disponibles. Sin pasos innecesarios.\n\n**2. Reserva en punto de intercambio dinámico** — Mapa → localizar punto más cercano → reservar fecha y hora → acudir → operador realiza el cambio. **Decisión clave**: los puntos cambian de ubicación semanalmente. Esto parece una complejidad, pero permite cobertura sin infraestructura fija — un trade-off deliberado entre previsibilidad y escalabilidad.\n\nAdemás, se añadieron funcionalidades que el brief no contemplaba: **favoritos** (reducir fricción para usuarios recurrentes), **filtros avanzados** (tipo de punto + disponibilidad) y **notificaciones** de nuevas ubicaciones (retención).',
+        content: 'Antes de diseñar una sola pantalla, definí la arquitectura de los dos flujos principales:\n\n**1. Cambio de batería a domicilio** — App → "Cambio a domicilio" → confirmar ubicación → elegir franja horaria → técnico acude → intercambio en minutos. **Decisión clave**: 3 taps. La ubicación se prelocaliza por GPS, la franja muestra solo opciones disponibles. Decisiones eliminadas: buscar dirección, comparar opciones, elegir método de pago en cada uso.\n\n**2. Reserva en punto de intercambio dinámico** — Mapa → punto más cercano → reservar fecha y hora → acudir → operador realiza el cambio. **Trade-off**: los puntos cambian de ubicación semanalmente. Permite cobertura sin infraestructura fija — flexibilidad sobre previsibilidad. Las notificaciones de nuevas ubicaciones mitigan el riesgo.\n\n**Funcionalidades añadidas sobre el brief**: favoritos (fricción cero para usuarios recurrentes), filtros avanzados (tipo de punto + disponibilidad) y notificaciones de nuevas ubicaciones (loop de retención que apps de recarga fija no tienen).',
         embeds: [
           'https://whimsical.com/embed/CdxiEyLfhbfFUfhdi1XRcH',
           'https://whimsical.com/embed/TDfQTWmva6ALGvJdkPEE5o',
         ],
       },
-      // ── 05. Flujo End-to-End ──
+      // ── 06. End-to-End Flow ──
       {
-        label: '05. Flujo End-to-End',
+        label: '06. End-to-End Flow',
         title: 'Prototipo interactivo',
         layout: 'figma-embed',
         content: 'El prototipo en Figma cubre el flujo completo del usuario: desde el onboarding hasta la confirmación de reserva. Incluye transiciones entre pantallas y estados de interacción que permiten evaluar la experiencia sin necesidad de código. **El objetivo del prototipo no era "mostrar pantallas bonitas" — era validar que el modelo de servicio es comprensible para un usuario que nunca ha cambiado una batería.**',
         figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FfAzRuKJicjcwgMw2u1sYiO%3Fcontent-scaling%3Dfixed%26kind%3Dproto%26node-id%3D531-71%26page-id%3D503%253A268%26scaling%3Dscale-down%26starting-point-node-id%3D582%253A4968',
       },
       {
-        label: '05. Flujo End-to-End',
-        title: 'Cómo se reduce la fricción en cada paso',
+        label: '07. Friction Reduction',
+        title: 'Cómo se reduce la fricción en cada paso del flujo',
         layout: 'screens-grid',
-        content: 'El flujo end-to-end está diseñado para reducir la carga cognitiva en cada pantalla:\n\n**Onboarding (4 pantallas)** — No explica "cómo funciona la app". Explica "qué puede hacer por ti": puntos de carga actualizados, ocupación en tiempo real, puntos de cambio de batería cercanos, y reserva anticipada. Cada pantalla responde una objeción, no describe una feature.\n\n**Mapa interactivo** — Pantalla principal. Unifica puntos de carga, talleres de intercambio y cambio a domicilio en una sola vista. El usuario no tiene que decidir "qué tipo de servicio quiero" antes de ver las opciones — las ve todas y elige según contexto.\n\n**Filtros + Favoritos** — Reducen el tiempo de decisión para usuarios recurrentes. Un usuario que ya sabe cuál es su taller preferido no debería pasar por el flujo de descubrimiento cada vez.\n\n**Reserva (3 pasos)** — Seleccionar ubicación → elegir fecha/hora → confirmar. Sin cuenta obligatoria para el primer uso. **La fricción mínima es deliberada**: en un mercado donde el usuario aún no confía en el modelo, cada paso extra es una razón para abandonar.',
+        content: 'Cada pantalla del flujo tiene un objetivo: eliminar una decisión o una fuente de incertidumbre.\n\n**Onboarding (4 pantallas)** — No explica "cómo funciona la app". Explica "qué puede hacer por ti". Cada pantalla responde una objeción del usuario, no describe una feature. Decisiones eliminadas: ninguna — el usuario solo avanza o salta.\n\n**Mapa interactivo** — Pantalla principal. Unifica puntos de carga, talleres de intercambio y cambio a domicilio en una sola vista. Decisión eliminada: "qué tipo de servicio quiero" — el usuario ve todas las opciones y elige según contexto.\n\n**Filtros + Favoritos** — Reducen el tiempo de decisión para usuarios recurrentes. Decisión eliminada: recorrer el flujo de descubrimiento cada vez que se abre la app.\n\n**Reserva (3 pasos)** — Seleccionar ubicación → fecha/hora → confirmar. Sin cuenta obligatoria en primer uso. Decisiones eliminadas: registro previo, selección de método de pago, comparación entre opciones. **En un mercado donde el usuario aún no confía en el modelo, cada paso extra es abandono.**',
         images: [
           '/assets/projects/movefast/movefast-pantalla-spinner-2.png',
           '/assets/projects/movefast/movefast-pantalla-spinner-1.png',
@@ -681,10 +682,10 @@ export const projects: Project[] = [
           'Confirmación — Reserva completada en 3 taps',
         ],
       },
-      // ── 06. Impacto Esperado ──
+      // ── 08. Expected Outcomes ──
       {
-        label: '06. Impacto Esperado',
-        title: 'Métricas hipotéticas y justificación',
+        label: '08. Expected Outcomes',
+        title: 'Métricas hipotéticas fundamentadas en research',
         layout: 'center',
         content: 'Al ser un proyecto de diseño de MVP (sin implementación), las métricas son hipotéticas. Pero cada estimación está fundamentada en el research y en benchmarks del sector de apps de movilidad:',
         bullets: [
@@ -695,10 +696,10 @@ export const projects: Project[] = [
         ],
         highlight: 'El impacto más importante de MoveFast no es una métrica de la app — es una métrica del mercado. Si el cambio de baterías en minutos es viable, **elimina la barrera más determinante para la adopción del vehículo eléctrico en España**.',
       },
-      // ── 07. Reflexión ──
+      // ── 09. Reflection ──
       {
-        label: '07. Reflexión',
-        title: 'Qué validaría primero y qué riesgos existen',
+        label: '09. Reflection',
+        title: 'Supuestos no validados, riesgos y límites del diseño',
         layout: 'center',
         content: 'Dos semanas de diseño no son suficientes para validar un modelo de servicio nuevo. Este proyecto entregó una UX completa con design system, pero queda trabajo crítico por hacer:',
         bullets: [
