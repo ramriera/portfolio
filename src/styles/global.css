@@ -2021,8 +2021,13 @@ body.code-mode [data-component="MethodologyStack"] .heading-lg,
 body.code-mode [data-component="MethodologyStack"] .heading-md,
 body.code-mode [data-component="WorkflowSection"] .heading-lg,
 body.code-mode [data-component="CallToAction"] .heading-lg {
-  color: #e6edf3 !important;
+  color: var(--cm-function) !important;
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  text-shadow: none !important;
+}
+
+body.code-mode [data-component="CallToAction"] .heading-lg .text-primary-500 {
+  color: var(--cm-tag) !important;
 }
 
 /* "Soy" text on hero and about sections */
@@ -2043,16 +2048,30 @@ body.code-mode [data-component="AboutHero"] .text-primary-500 {
 }
 
 /* ── Biography: Normal prose vs Code README toggle ── */
-.bio-readme {
+.bio-readme,
+.about-bio-readme {
   display: none;
 }
 
-body.code-mode .bio-prose {
+body.code-mode .bio-prose,
+body.code-mode .about-bio-prose {
   display: none;
 }
 
-body.code-mode .bio-readme {
+body.code-mode .bio-readme,
+body.code-mode .about-bio-readme {
   display: block;
+}
+
+/* ── AboutSection (Home): heading code-mode colors ── */
+body.code-mode [data-component="AboutSection"] .heading-lg {
+  color: var(--cm-function) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  text-shadow: none !important;
+}
+
+body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
+  color: var(--cm-tag) !important;
 }
 
 .readme-window {
@@ -2800,8 +2819,6 @@ body.code-mode [data-component="BiographySection"] .dashed-border:has(img) {
 /* Subtitle gets muted mono style */
 body.code-mode [data-component="AboutHero"] .text-body {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.85rem;
-  line-height: 1.7;
   color: var(--cm-text-muted, #7d8590);
 }
 
