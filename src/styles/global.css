@@ -1210,6 +1210,12 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   font-weight: 300;
 }
 
+/* ProjectsHero: no blinking cursor — the carousel already animates */
+.code-mode [data-component="ProjectsHero"] .heading-xl::after {
+  content: none !important;
+  display: none !important;
+}
+
 /* ── 18. Line numbers feel on body ── */
 .code-mode main {
   background-image:
