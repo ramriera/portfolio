@@ -2001,6 +2001,18 @@ body.code-mode [data-component="AboutHero"] .heading-xl .text-primary-500 {
   color: var(--cm-tag) !important;
 }
 
+/* ── Projects page: heading adopts code-mode colors ── */
+body.code-mode [data-component="ProjectsHero"] h1,
+body.code-mode [data-component="ProjectsHero"] .heading-xl {
+  color: var(--cm-function) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  text-shadow: none !important;
+}
+
+body.code-mode [data-component="ProjectsHero"] .heading-xl .text-primary-500 {
+  color: var(--cm-tag) !important;
+}
+
 body.code-mode [data-component="BiographySection"] .heading-md,
 body.code-mode [data-component="CareerTimeline"] .heading-md,
 body.code-mode [data-component="ValuesGrid"] .heading-md,
