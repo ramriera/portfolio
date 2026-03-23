@@ -855,6 +855,16 @@ body.code-mode aside:hover {
   letter-spacing: -0.02em !important;
 }
 
+/* Code mode mobile: monospace is wider than Inter — scale down to prevent overflow */
+@media (max-width: 639px) {
+  .code-mode .heading-xl {
+    font-size: clamp(1.75rem, 4.5vw + 0.25rem, 2.25rem) !important;
+  }
+  .code-mode .heading-lg {
+    font-size: clamp(1.5rem, 3.5vw + 0.25rem, 1.875rem) !important;
+  }
+}
+
 /* ── Hero "Soy" greeting — adopt heading color in Code Mode ── */
 .code-mode [data-component="HeroSection"] .hero-main-content > div:first-child .text-dark-900 {
   color: var(--cm-function) !important;  /* cyan — match h2 headings */
@@ -958,6 +968,15 @@ body.code-mode .hero-cta-code {
   cursor: pointer;
   transition: all 0.25s ease;
   text-decoration: none;
+}
+
+/* Code CTA: tighter on mobile */
+@media (max-width: 639px) {
+  body.code-mode .hero-cta-code {
+    font-size: 0.8rem;
+    min-width: auto;
+    padding: 0.75rem 1.25rem;
+  }
 }
 
 /* Navbar code CTA: hidden on mobile, smaller size */
