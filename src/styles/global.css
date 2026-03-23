@@ -1164,6 +1164,7 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 .code-mode .section-icon {
   background: rgba(139, 233, 253, 0.08) !important;
   border: 1px solid rgba(139, 233, 253, 0.15);
+  border-radius: 4px;
 }
 
 .code-mode .section-icon-svg .icon-stroke {
