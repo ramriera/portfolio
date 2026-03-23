@@ -1123,16 +1123,16 @@ export const projects: Project[] = [
     year: '2021',
     category: 'Product Design',
     tags: ['Product Design', 'Fintech Systems', 'Error Prevention', 'Trust Design'],
-    description: 'Rediseño sistémico de una app de banca móvil centrado en prevención de errores, claridad financiera y confianza del usuario. Documento de producto orientado a decisiones de sistema, no a pantallas.',
-    longDescription: 'Este documento reconstruye el pensamiento de producto detrás del rediseño de Imaginbank, la app de banca móvil de CaixaBank para usuarios jóvenes. No es un caso visual. Es un análisis de sistema: cómo se comporta el producto cuando hay dinero real en juego, dónde se rompe la confianza, y qué decisiones de diseño reducen el riesgo de error del usuario.\n\nEl punto de partida no fue "mejorar la experiencia" sino responder a una pregunta concreta: ¿por qué los usuarios cometen errores evitables y pierden confianza en la app durante acciones financieras críticas? Los neobancos (Revolut, N26) habían elevado el estándar de claridad y feedback. Imaginbank necesitaba cerrar esa brecha — no con estética, sino con comportamiento de sistema.',
-    challenge: 'Imaginbank operaba con tres fallos estructurales que generaban riesgo real para el usuario: (1) ausencia de feedback en operaciones financieras — el usuario no sabía si una transferencia estaba en proceso, completada o fallida; (2) nomenclatura inconsistente — la misma acción recibía nombres distintos en diferentes pantallas, generando confusión cognitiva en flujos donde la precisión es crítica; (3) mensajes de error genéricos sin orientación a la solución — en un contexto donde un error puede significar dinero enviado al destinatario equivocado. Estos no son problemas de usabilidad menor. Son fallos de sistema que erosionan la confianza y generan riesgo financiero.',
-    solution: 'Se abordó el rediseño desde la arquitectura de comportamiento del sistema, no desde la interfaz. Tres ejes: (1) diseño de estados explícitos para cada operación financiera (loading, pending, success, failure, timeout); (2) prevención de errores estructural — confirmaciones contextuales, validación en tiempo real, y eliminación de ambigüedad en flujos de dinero; (3) jerarquía de datos orientada a la decisión — lo más importante primero, siempre visible, sin ruido visual que compita con la información financiera.',
+    description: 'Rediseño de sistema de una app de banca móvil donde cada fallo de diseño tiene un coste financiero real. Análisis de estados, prevención de errores y construcción de confianza en operaciones con dinero.',
+    longDescription: 'Imaginbank es la app de banca móvil de CaixaBank para usuarios de 18-30 años. Este caso documenta el rediseño de sus flujos financieros críticos — no como ejercicio visual, sino como problema de sistema. Cuando hay dinero real en juego, un estado ambiguo no es un inconveniente de usabilidad: es pánico. Una transferencia sin confirmación no es mala UX: es riesgo financiero.\n\nLa pregunta que guía este trabajo es concreta: ¿por qué los usuarios cometen errores evitables y pierden confianza en la app al operar con su dinero? La respuesta está en el comportamiento del sistema, no en la interfaz. Revolut y N26 habían redefinido el estándar de claridad financiera. Imaginbank necesitaba cerrar esa brecha con decisiones de producto, no con rediseño visual.',
+    challenge: 'Imaginbank operaba con tres fallos estructurales que generaban riesgo financiero directo: (1) operaciones sin feedback — el usuario ejecutaba una transferencia y no sabía si estaba en proceso, completada o fallida; (2) nomenclatura inconsistente — "Transferir", "Enviar" y "Bizum" para la misma acción en distintas pantallas, multiplicando la carga cognitiva en flujos donde la precisión es crítica; (3) errores sin ruta de recuperación — mensajes genéricos ("Ha ocurrido un error") sin explicar qué falló, por qué, ni cómo resolverlo. En fintech, estos fallos no son deuda de diseño. Son vectores de pérdida de dinero, confianza y usuarios.',
+    solution: 'Rediseño desde la arquitectura de comportamiento del sistema, no desde la capa visual. Tres ejes: (1) máquina de estados explícita para cada operación financiera — idle, loading, pending, success, failure — sin estados silenciosos; (2) prevención de errores estructural — validación en tiempo real, confirmación pre-ejecución obligatoria, bloqueo de doble acción; (3) jerarquía de datos orientada a la decisión — saldo disponible primero, operaciones pendientes segundo, información contextual tercero. Cada decisión evaluada contra un criterio: ¿reduce el riesgo de que el usuario pierda dinero o confianza?',
     results: [
-      'Reducción estimada del 60% en errores de transferencia mediante validación en tiempo real y confirmación explícita',
-      'Eliminación de estados ambiguos: cada operación financiera tiene feedback visible en menos de 300ms',
-      'Reducción del -35% en llamadas a soporte por consultas tipo "¿qué ha pasado con mi transferencia?"',
-      'Unificación de nomenclatura: de 3 términos distintos para "enviar dinero" a 1 término consistente en toda la app',
-      'Tiempo medio de completar una transferencia reducido de 8 pasos a 4, sin sacrificar confirmaciones de seguridad',
+      'Reducción estimada del 60% en errores de transferencia: validación IBAN en tiempo real + confirmación pre-ejecución obligatoria',
+      'Máquina de 5 estados explícitos (idle → loading → pending → success/failure) elimina toda ambigüedad en operaciones financieras',
+      'Reducción estimada del 35% en llamadas a soporte: feedback preciso sustituye consultas de "¿qué ha pasado con mi transferencia?"',
+      'De 3 términos para "enviar dinero" a 1 — unificación terminológica que elimina confusión cognitiva en flujos críticos',
+      'Flujo de transferencia de 8 pasos a 4, manteniendo confirmación de seguridad y resumen pre-ejecución',
     ],
     stack: ['Figma', 'Chrome'],
     cover: '/assets/projects/imaginbank/imaginbank-header.png',
@@ -1147,34 +1147,34 @@ export const projects: Project[] = [
       skills: ['Product Thinking', 'System Design', 'Error Prevention', 'Trust Design', 'State Management', 'Fintech UX', 'Risk Mitigation', 'Heuristic Analysis', 'Data Hierarchy', 'Failure Mode Analysis'],
     },
     checks: [
-      'Ausencia de feedback en operaciones financieras: el usuario no sabe si su dinero se ha movido o no',
-      'Nomenclatura inconsistente en flujos críticos: la misma acción con 3 nombres distintos genera errores evitables',
-      'Mensajes de error genéricos sin ruta de recuperación: en fintech, un error sin solución clara es un riesgo de negocio',
+      'El usuario ejecuta una transferencia y no sabe si se ha procesado, está pendiente o ha fallado — riesgo financiero directo',
+      'Tres términos distintos para "enviar dinero" generan confusión cognitiva en flujos donde un error mueve dinero real',
+      'Mensajes de error genéricos sin causa ni recuperación: en fintech, "Ha ocurrido un error" equivale a pánico del usuario',
     ],
     caseSections: [
-      // ── 01. Product Intent ──
+      // ── 01. Overview ──
       {
-        label: '01. Product Intent',
-        title: 'Qué problema resuelve este producto y por qué importa',
+        label: '01. Overview',
+        title: 'Un producto financiero donde cada fallo de diseño cuesta dinero',
         layout: 'center',
-        content: 'Imaginbank es la app de banca móvil de CaixaBank dirigida a usuarios de 18-30 años. Su propuesta original — banco 100% móvil, sin sucursales — era competitiva en 2016. En 2021, ya no lo es. Revolut, N26 y Bnext redefinieron qué significa "claridad financiera" en una app.\n\nEl problema que resuelve este rediseño no es estético. Es estructural: los usuarios cometen errores evitables al operar con su dinero porque el sistema no les da la información correcta en el momento correcto. Envían transferencias sin saber si se han ejecutado. Leen balances que no reflejan operaciones pendientes. Reciben mensajes de error que no explican qué ha fallado ni cómo recuperarse.\n\nEn fintech, cada uno de estos fallos tiene un coste real: dinero mal enviado, confianza perdida, llamadas a soporte, y usuarios que migran a competidores donde se sienten más seguros.\n\nÉxito significa: (1) los usuarios completan transferencias sin errores evitables, (2) el sistema nunca deja al usuario en un estado ambiguo sobre el estado de su dinero, (3) la confianza percibida aumenta mediblemente — el usuario siente que controla su dinero, no que el banco lo controla por él.',
+        content: 'Imaginbank es la app de banca móvil de CaixaBank para usuarios de 18-30 años. Banco 100% móvil, sin sucursales. Su propuesta era competitiva en 2016. En 2021, Revolut, N26 y Bnext habían redefinido qué significa claridad financiera en una app — e Imaginbank se había quedado atrás.\n\nEste rediseño no es un proyecto visual. Es un análisis de sistema: dónde falla el producto cuando hay dinero real en juego, qué comportamientos generan riesgo para el usuario, y qué decisiones de diseño reducen ese riesgo de forma medible.\n\nEl objetivo de producto es concreto: (1) los usuarios completan transferencias sin errores evitables, (2) el sistema nunca deja al usuario sin saber qué ha pasado con su dinero, (3) la confianza percibida aumenta — el usuario siente que controla su dinero, no que el banco lo controla por él.\n\nEn fintech, cada fallo de claridad tiene un coste directo: dinero enviado al destinatario equivocado, llamadas a soporte, y usuarios que migran a competidores donde se sienten más seguros.',
         highlight: 'En banca móvil, "mejorar la experiencia" no es un objetivo válido. El objetivo es: reducir el riesgo de error del usuario cuando opera con dinero real.',
       },
-      // ── 02. Failure Modes ──
+      // ── 02. Problem Space ──
       {
-        label: '02. Failure Modes',
-        title: 'Empezar por lo que puede salir mal',
+        label: '02. Problem Space',
+        title: 'Tres categorías de fallo con impacto financiero directo',
         layout: 'image-grid',
-        content: 'Antes de proponer soluciones, es necesario mapear dónde falla el sistema actual. En fintech, los modos de fallo no son inconvenientes — son riesgos financieros.\n\nErrores del usuario: El usuario introduce un IBAN incorrecto y el sistema no valida en tiempo real. El usuario confunde "Transferir", "Enviar" y "Bizum" porque la app usa tres términos para la misma acción en diferentes pantallas. El usuario no distingue entre saldo disponible y saldo contable, lo que lleva a intentos de transferencia con fondos insuficientes.\n\nRoturas de confianza: El usuario ejecuta una transferencia y no recibe confirmación visual — no sabe si se ha procesado, está pendiente o ha fallado. Los estados de carga no comunican progreso; la pantalla se queda en blanco o muestra un spinner genérico sin contexto. Los mensajes de error dicen "Ha ocurrido un error" sin especificar qué, por qué, ni cómo resolverlo.\n\nFallos de sistema: Timeouts de red sin feedback — el usuario no sabe si la operación se ejecutó antes del corte. Inconsistencia entre el balance mostrado y las operaciones pendientes. Doble ejecución: el usuario toca "Enviar" dos veces porque no hubo feedback en el primer tap.\n\nEstos fallos son críticos porque en fintech la ambigüedad es inaceptable. Si un usuario no sabe si su transferencia de 500 euros se ha ejecutado, el coste no es frustración — es pánico.',
-        highlight: 'En fintech, cada estado ambiguo es un fallo de producto. El usuario nunca debería tener que preguntarse: "¿se ha movido mi dinero?"',
+        content: 'Antes de proponer soluciones, se mapearon los modos de fallo del sistema actual. En fintech, un fallo de diseño no es un inconveniente — es un riesgo financiero.\n\nErrores del usuario: IBAN introducido incorrectamente sin validación en tiempo real. Confusión entre "Transferir", "Enviar" y "Bizum" — tres términos para la misma acción en diferentes pantallas. Imposibilidad de distinguir saldo disponible de saldo contable, que lleva a intentos de transferencia con fondos insuficientes.\n\nRoturas de confianza: El usuario ejecuta una transferencia y no recibe confirmación — no sabe si se ha procesado, está pendiente o ha fallado. Los estados de carga muestran un spinner genérico sin contexto. Los mensajes de error dicen "Ha ocurrido un error" sin especificar qué, por qué, ni cómo resolverlo.\n\nFallos de sistema: Timeouts de red sin feedback — el usuario no sabe si la operación se ejecutó antes del corte de conexión. Inconsistencia entre el balance mostrado y las operaciones pendientes. Doble ejecución: el usuario toca "Enviar" dos veces porque no hubo feedback en el primer tap.\n\nEstos problemas son críticos porque la ambigüedad en fintech es inaceptable. Si un usuario no sabe si su transferencia de 500€ se ha ejecutado, el coste no es frustración — es pánico.',
+        highlight: 'En fintech, cada estado ambiguo es un fallo de producto. El usuario nunca debería preguntarse: "¿se ha movido mi dinero?"',
         images: ['/assets/projects/imaginbank/fotos/mostrar-estado.png', '/assets/projects/imaginbank/fotos/prevenir-errores.png'],
         captions: ['Ausencia de feedback de estado en operaciones financieras', 'Error IBAN genérico sin validación en tiempo real ni guía de recuperación'],
       },
       {
-        label: '02. Failure Modes',
-        title: 'Nomenclatura inconsistente como vector de error',
+        label: '02. Problem Space',
+        title: 'Nomenclatura inconsistente como vector de error financiero',
         layout: 'image-grid',
-        content: 'Un modo de fallo específico merece atención propia: la inconsistencia terminológica. La auditoría reveló que la acción de "enviar dinero" aparece con tres nombres distintos según la sección de la app: "Transferir", "Enviar" y "Bizum". Esto no es un problema de estilo — es un problema de seguridad cognitiva.\n\nCuando un usuario opera con dinero real, necesita certeza absoluta sobre qué acción está ejecutando. Si la misma operación cambia de nombre según el contexto, el usuario tiene que "reaprender" la interfaz en cada pantalla. En un flujo de transferencia, esa carga cognitiva adicional aumenta la probabilidad de error.\n\nEl mismo problema se extiende a la iconografía (iconos distintos para la misma función) y a los patrones de interacción (botones en posiciones diferentes para acciones equivalentes).',
+        content: 'Un modo de fallo merece análisis propio: la inconsistencia terminológica. La auditoría reveló que "enviar dinero" aparece con tres nombres según la sección: "Transferir", "Enviar" y "Bizum". Esto no es un problema de estilo — es un problema de seguridad cognitiva.\n\nCuando un usuario opera con dinero real, necesita certeza absoluta sobre qué acción está ejecutando. Si la misma operación cambia de nombre según el contexto, el usuario tiene que reaprender la interfaz en cada pantalla. En un flujo de transferencia, esa carga cognitiva adicional aumenta directamente la probabilidad de error.\n\nEl mismo problema se extiende a la iconografía (iconos distintos para la misma función) y a los patrones de interacción (botones en posiciones diferentes para acciones equivalentes). La inconsistencia no es deuda de diseño — es un multiplicador de riesgo.',
         images: ['/assets/projects/imaginbank/fotos/consistencia-y-estandares.png', '/assets/projects/imaginbank/fotos/consistencia-y-estandares-2.png'],
         captions: ['Misma acción, tres nombres distintos en diferentes secciones', 'Patrones de interacción inconsistentes entre pantallas equivalentes'],
       },
@@ -1191,10 +1191,10 @@ export const projects: Project[] = [
         ],
         highlight: 'Cada tarea crítica tiene una definición de "éxito seguro" que no es negociable. Si el usuario puede completar la tarea sin errores y sin incertidumbre, el diseño funciona.',
       },
-      // ── 04. Design Principles ──
+      // ── 04. UX Principles ──
       {
-        label: '04. Design Principles',
-        title: 'Principios no negociables para un producto financiero',
+        label: '04. UX Principles',
+        title: 'Restricciones de diseño, no aspiraciones',
         layout: 'center',
         content: 'Estos principios no son aspiracionales — son restricciones de diseño. Cada decisión de producto se evalúa contra ellos. Si una propuesta viola un principio, se descarta.',
         bullets: [
@@ -1205,9 +1205,9 @@ export const projects: Project[] = [
           'Feedback proporcional al riesgo — Las acciones de bajo riesgo (consultar movimientos) reciben feedback ligero. Las acciones de alto riesgo (enviar dinero) reciben confirmación explícita, resumen completo, y verificación de estado post-ejecución',
         ],
       },
-      // ── 05. System Design ──
+      // ── 05. System Thinking ──
       {
-        label: '05. System Design',
+        label: '05. System Thinking',
         title: 'Comportamiento del sistema, no diseño de pantallas',
         layout: 'image-grid',
         content: 'Este rediseño define cómo se comporta el sistema, no cómo se ve. La interfaz es una consecuencia del comportamiento, no al revés.\n\nGestión de estados: Cada operación financiera implementa una máquina de estados con 5 estados explícitos: idle (antes de la acción), loading (operación en curso — con indicador de progreso y tiempo estimado), pending (operación enviada al banco, esperando confirmación — con número de referencia provisional), success (operación confirmada — con recibo descargable), failure (operación fallida — con razón específica y ruta de recuperación). No existe un sexto estado. No existe un estado silencioso.\n\nBucles de feedback: El sistema responde en menos de 300ms a cualquier acción del usuario. Si la operación requiere más tiempo, se muestra progreso incremental (no un spinner genérico). Si la conexión se pierde durante una operación, el sistema informa del último estado conocido y ofrece verificación manual.\n\nJerarquía de datos: En cada pantalla, la información se ordena por criticidad para la decisión del usuario. En la pantalla de balance: saldo disponible primero, operaciones pendientes segundo, historial tercero. En la pantalla de transferencia: importe y destinatario primero, detalles secundarios después. Nunca se mezclan datos de decisión con datos informativos.',
@@ -1215,10 +1215,10 @@ export const projects: Project[] = [
         images: ['/assets/projects/imaginbank/fotos/mostrar-estado.png'],
         captions: ['Diagnóstico de estados: ausencia de máquina de estados explícita en operaciones financieras'],
       },
-      // ── 06. Key Decisions & Trade-offs ──
+      // ── 06. Key Design Decisions ──
       {
-        label: '06. Key Decisions & Trade-offs',
-        title: 'Decisiones de producto y sus compromisos',
+        label: '06. Key Design Decisions',
+        title: 'Cada decisión implicó rechazar una alternativa',
         layout: 'center',
         content: 'Cada decisión importante implicó rechazar una alternativa. Documentar el trade-off es tan importante como documentar la decisión.',
         bullets: [
@@ -1228,10 +1228,10 @@ export const projects: Project[] = [
           'Bloqueo de doble ejecución con feedback explícito — Problema: usuarios tocaban "Confirmar" dos veces porque no recibían feedback del primer tap. Alternativa rechazada: debounce silencioso (ignorar segundo tap sin avisar). Trade-off: el usuario ve un mensaje "Operación en curso" que ocupa espacio. Decisión: el debounce silencioso resuelve el problema técnico pero no el problema de confianza. El usuario necesita saber que el sistema ha registrado su acción',
         ],
       },
-      // ── 07. Error Prevention & Recovery ──
+      // ── 07. Error Prevention & Edge Cases ──
       {
-        label: '07. Error Prevention & Recovery',
-        title: 'Diseño explícito para fondos insuficientes, fallos y duplicados',
+        label: '07. Error Prevention & Edge Cases',
+        title: 'Diseño explícito para fondos insuficientes, fallos de red y duplicados',
         layout: 'image-grid',
         content: 'Cada escenario de error está diseñado con tres capas: prevención (evitar que ocurra), comunicación (explicar qué ha pasado), y recuperación (guiar hacia la solución).\n\nFondos insuficientes: Prevención — el campo de importe muestra el saldo disponible en tiempo real; si el usuario introduce un importe superior, el campo se marca antes de intentar enviar. Comunicación — "No tienes saldo suficiente. Tu saldo disponible es [X]. ¿Quieres enviar [X] en su lugar?" Recuperación — opción de modificar el importe sin salir del flujo.\n\nTransferencia fallida: Prevención — validación de IBAN en tiempo real con formato visual (agrupación de dígitos). Comunicación — mensaje específico: "La transferencia no se ha completado porque [razón concreta]. Tu dinero no se ha movido." Recuperación — botón de reintentar que mantiene todos los datos introducidos.\n\nDoble acción: Prevención — tras el primer tap en "Confirmar", el botón se desactiva y muestra estado "Procesando...". Comunicación — si el usuario intenta interactuar, mensaje: "Tu operación se está procesando. Te confirmaremos en unos segundos." Recuperación — no aplicable; la prevención es total.\n\nConectividad: Prevención — el sistema detecta conexión inestable antes de iniciar la operación y advierte. Comunicación — "Se ha perdido la conexión. Tu operación [se envió / no se envió]. Referencia: [X]." Recuperación — pantalla de verificación de estado accesible desde el historial.',
         highlight: 'La diferencia entre "Ha ocurrido un error" y "La transferencia no se ha completado porque el IBAN no existe. Tu dinero no se ha movido" es la diferencia entre pánico y control.',
