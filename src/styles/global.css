@@ -960,6 +960,23 @@ body.code-mode .hero-cta-code {
   text-decoration: none;
 }
 
+/* Navbar code CTA: hidden on mobile, smaller size */
+body.code-mode .navbar-cta-code {
+  min-width: auto;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+}
+
+.navbar-cta-code {
+  display: none !important;
+}
+
+@media (min-width: 640px) {
+  body.code-mode .navbar-cta-code {
+    display: inline-flex !important;
+  }
+}
+
 body.code-mode .hero-cta-code:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: var(--cm-string, #50fa7b);
