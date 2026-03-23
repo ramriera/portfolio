@@ -22,5 +22,8 @@ pnpm-debug.log*
 .vscode/
 .idea/
 
+# test artifacts
+test-results/
+
 # astro
 .astro/
