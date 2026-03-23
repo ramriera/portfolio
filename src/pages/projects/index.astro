@@ -12,7 +12,7 @@ const sortedProjects = [...projects].sort((a, b) => {
   if (bIdx === -1) return 1;
   return aIdx - bIdx;
 });
-const filterCategories = ['Todas', 'Product Design', 'UX Design', 'Design Systems', 'Service Design', 'Research'];
+const filterCategories = ['Todas', 'Product Design', 'UX Design', 'Design Systems', 'Service Design', 'UX Research'];
 
 // Map tags → filter categories
 const tagToFilters: Record<string, string[]> = {
@@ -23,14 +23,12 @@ const tagToFilters: Record<string, string[]> = {
   'Heuristic Analysis': ['UX Design'],
   'Design Systems': ['Design Systems'],
   'Design Ops': ['Design Systems'],
+  'Atomic Design': ['Design Systems'],
   'Service Design': ['Service Design'],
   'E-commerce': ['Service Design'],
-  'UX Research': ['Research'],
-  'Heuristic Evaluation': ['Research'],
-  'Design Thinking': ['Research'],
-  'Fintech': ['Research'],
   'Nonprofit': ['Service Design'],
-  'Aviation': ['Design Systems'],
+  'UX Research': ['UX Research'],
+  'Design Thinking': ['UX Research'],
 };
 
 function getProjectFilters(tags: string[]): string[] {

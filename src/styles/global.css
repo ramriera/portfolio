@@ -1980,6 +1980,10 @@ body.code-mode [data-component="AboutHero"] .heading-xl {
   text-shadow: none !important;
 }
 
+body.code-mode [data-component="AboutHero"] .heading-xl .text-primary-500 {
+  color: var(--cm-tag) !important;
+}
+
 body.code-mode [data-component="BiographySection"] .heading-md,
 body.code-mode [data-component="CareerTimeline"] .heading-md,
 body.code-mode [data-component="ValuesGrid"] .heading-md,
