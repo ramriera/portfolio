@@ -1237,6 +1237,12 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   display: none !important;
 }
 
+/* CallToAction: no blinking cursor on CTA headings */
+.code-mode [data-component="CallToAction"] .heading-lg::after {
+  content: none !important;
+  display: none !important;
+}
+
 /* ── 18. Line numbers feel on body ── */
 .code-mode main {
   background-image:
@@ -2850,14 +2856,6 @@ body.code-mode [data-component="AboutHero"] .text-body {
   color: var(--cm-text-muted, #7d8590);
 }
 
-/* ── Process Section: dual mode titles ── */
-.process-title-code { display: none; }
-.process-title-code .code-comment { color: var(--cm-comment, #6272a4); }
-.process-title-code .code-punct { color: var(--cm-text-muted, #7d8590); }
-
-body.code-mode .process-title-normal { display: none; }
-body.code-mode .process-title-code { display: block; }
-
 /* Process grid: normal visible, code hidden by default */
 .process-grid-code { display: none; }
 body.code-mode .process-grid-normal { display: none; }
@@ -2923,13 +2921,8 @@ body.code-mode [data-component="ProcessSection"] .process-card p {
   color: var(--cm-text-muted) !important;
 }
 
-/* ── Design Principles: dual mode ── */
-.principles-title-code { display: none; }
-.principles-title-code .code-comment { color: var(--cm-comment, #6272a4); }
 .principles-code { display: none; }
 
-body.code-mode .principles-title-normal { display: none; }
-body.code-mode .principles-title-code { display: block; }
 body.code-mode .principles-normal { display: none; }
 body.code-mode .principles-code { display: block; }
 
@@ -3079,13 +3072,8 @@ body.code-mode [data-component="DesignPrinciples"] p {
 }
 
 /* ── KPI Dashboard: dual mode ── */
-.kpi-title-code { display: none; }
-.kpi-title-code .code-comment { color: var(--cm-comment, #6272a4); }
-.kpi-title-code .code-punct { color: var(--cm-text-muted, #7d8590); }
 .kpi-grid-code { display: none; }
 
-body.code-mode .kpi-title-normal { display: none; }
-body.code-mode .kpi-title-code { display: block; }
 body.code-mode .kpi-grid-normal { display: none !important; }
 body.code-mode .kpi-grid-code { display: block; }
 
