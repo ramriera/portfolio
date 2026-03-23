@@ -137,6 +137,7 @@ export interface Project {
   projectMeta?: ProjectMeta;
   caseSections?: CaseSection[];
   checks?: string[];
+  gallery?: string[];
 }
 
 export const projects: Project[] = [
