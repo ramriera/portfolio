@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
-import ProjectsTypewriter from '@/components/ProjectsTypewriter.astro';
+import WordsCarousel from '@/components/WordsCarousel.astro';
+
+const projectWords = ['seleccionados', 'estratégicos', 'construidos', 'desplegados', 'destacados'];
 import { projects, siteConfig } from '@/utils/data';
 
 const projectOrder = ['massimo-dutti-conversion', 'banco-sabadell-design-system', 'imaginbank-digital-banking', 'movefast-startup-platform', 'solotemazos-music-platform', 'iberia-flight-experience'];
@@ -64,13 +66,8 @@ function getProjectFilters(tags: string[]): string[] {
             </svg>
           </span>
         </div>
-        <!-- Normal mode heading -->
-        <h1 data-reveal data-delay="100" class="heading-xl mb-8 projects-heading-normal" style="white-space: nowrap;">
-          Proyectos <span class="text-primary-500"><ProjectsTypewriter /></span>
-        </h1>
-        <!-- Code mode heading -->
-        <h1 data-reveal data-delay="100" class="heading-xl mb-8 projects-heading-code" style="white-space: nowrap;">
-          <span class="projects-code-comment">// </span>Proyectos <span class="text-primary-500"><ProjectsTypewriter /></span>
+        <h1 data-reveal data-delay="100" class="heading-xl mb-8" style="white-space: nowrap;">
+          Proyectos <span class="text-primary-500"><WordsCarousel words={projectWords} interval={2000} /></span>
         </h1>
         <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl">
           Una selección de proyectos que representan mi enfoque en diseño de experiencia de usuario, sistemas de diseño y producto digital.
@@ -274,23 +271,3 @@ function getProjectFilters(tags: string[]): string[] {
     });
   });
 </script>
-
-<style>
-  /* ── Projects heading: dual mode (normal / code) ── */
-  .projects-heading-code { display: none; }
-  :global(body.code-mode) .projects-heading-normal { display: none !important; }
-  :global(body.code-mode) .projects-heading-code { display: block !important; }
-
-  .projects-code-comment {
-    color: var(--cm-comment, #6272a4);
-    font-style: normal;
-  }
-
-  /* Suppress global code-mode ::after blinking cursor on these headings
-     since the typewriter component provides its own cursor */
-  :global(body.code-mode) .projects-heading-normal::after,
-  :global(body.code-mode) .projects-heading-code::after {
-    content: none !important;
-    display: none !important;
-  }
-</style>
