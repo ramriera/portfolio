@@ -431,7 +431,7 @@ export const projects: Project[] = [
       {
         label: '04. Decisiones de Diseño',
         title: 'Decisión #4 — Cross-selling contextual en el momento de mayor intención',
-        layout: 'right-left',
+        layout: 'full-image',
         content: '**Problema**: La reserva terminaba en la confirmación. No había mecanismo para incrementar el ticket medio de la visita a tienda.\n\n**Cambio**: Mientras el usuario consulta el tracking, el sistema sugiere productos complementarios del stock de la misma tienda bajo "Completa tu look en tienda". La sugerencia aparece después de toda la información funcional, usando el formato de "Looks" que el usuario ya conoce de la PDP.\n\n**Por qué es mejor**: El momento entre la reserva y la recogida es un espacio de alta receptividad: el usuario ya decidió ir a la tienda. Sugerir productos del stock de esa tienda específica convierte cada visita de recogida en una oportunidad de venta adicional sin fricción.\n\n**Impacto esperado**: Incremento del ticket medio por visita. Un cliente que va a recoger una reserva tiene mayor predisposición a comprar complementos — el cross-selling contextual capitaliza esa intención.',
         highlight: 'El cross-selling no es un añadido cosmético. Es una palanca de negocio: convierte una visita de recogida (coste operativo) en una oportunidad de venta adicional (revenue).',
         images: [
@@ -513,7 +513,7 @@ export const projects: Project[] = [
     client: 'MoveFast',
     year: '2021',
     category: 'Product Design',
-    tags: ['Product Design', 'Service Design', 'Mobility', 'Friction Reduction'],
+    tags: ['Product Design', 'Service Design', 'UX Research'],
     description: 'Diseño de producto para una app de movilidad eléctrica que elimina la barrera más determinante para la adopción del EV en España: la range anxiety. Un modelo de servicio inexistente en el mercado — cambio de baterías bajo demanda — diseñado de research a prototipo en 2 semanas.',
     longDescription: 'El vehículo eléctrico tiene un problema de adopción en España. **No es técnico — es de confianza.** El consumidor conoce las ventajas, pero tres barreras frenan la compra: **infraestructura insuficiente**, **autonomía limitada** y **tiempos de recarga de 45+ minutos**. MoveFast ataca la barrera más emocional — la **range anxiety** — con una propuesta que no existe en el mercado: **cambio de baterías bajo demanda**, donde un técnico acude a tu ubicación y sustituye la batería en minutos.\n\nEste caso documenta el diseño completo de la app en **2 semanas**: de investigación de mercado a prototipo interactivo con design system. El reto no era diseñar pantallas — era **diseñar un modelo de servicio nuevo** y hacerlo comprensible para un usuario que nunca ha usado nada parecido. Cada decisión de producto busca lo mismo: **reducir el tiempo entre "necesito batería" y "problema resuelto"**.',
     challenge: 'España se sitúa a la cola de Europa en matriculaciones de vehículos eléctricos. **Escasos puntos de carga** (concentrados en capitales, casi inexistentes en autopistas), **precio elevado** frente al convencional, y **autonomía real por debajo de 300 km**. Pero la barrera más determinante no es racional — es emocional: la **range anxiety**, el miedo a quedarse sin batería lejos de un punto de carga. Y las apps existentes no resuelven el problema: todas asumen que el usuario tiene que ir a un punto de carga y esperar 45+ minutos. **Ninguna cuestiona el modelo.**',
