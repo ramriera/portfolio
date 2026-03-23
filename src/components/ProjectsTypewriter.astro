@@ -1,0 +1,130 @@
+---
+interface Props {
+  words?: string[];
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  pauseDuration?: number;
+}
+
+const {
+  words = ['Seleccionados', 'Estratégicos', 'Construidos', 'Desplegados', 'Destacados'],
+  typingSpeed = 80,
+  deletingSpeed = 50,
+  pauseDuration = 2000,
+} = Astro.props;
+
+// Find the longest word for min-width sizing
+const longestWord = words.reduce((a, b) => (a.length > b.length ? a : b), '');
+---
+
+<span
+  class="projects-typewriter"
+  data-typewriter-words={JSON.stringify(words)}
+  data-typewriter-typing={typingSpeed}
+  data-typewriter-deleting={deletingSpeed}
+  data-typewriter-pause={pauseDuration}
+>
+  <!-- Invisible sizer: reserves width of the longest word -->
+  <span class="projects-typewriter-sizer" aria-hidden="true">{longestWord}</span>
+  <!-- Visible typed text -->
+  <span class="projects-typewriter-text">{words[0]}</span>
+  <span class="projects-typewriter-cursor" aria-hidden="true">|</span>
+</span>
+
+<style>
+  .projects-typewriter {
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  /* Sizer takes up the width of the longest word but stays invisible */
+  .projects-typewriter-sizer {
+    visibility: hidden;
+    display: inline-block;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .projects-typewriter-text {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+  }
+
+  .projects-typewriter-cursor {
+    font-weight: 300;
+    animation: twBlink 1s step-end infinite;
+    color: inherit;
+    margin-left: 1px;
+  }
+
+  @keyframes twBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+
+<script>
+  function initProjectsTypewriter() {
+    document.querySelectorAll('.projects-typewriter').forEach((wrapper) => {
+      const el = wrapper as HTMLElement;
+      if (el.dataset.twInitialized) return;
+      el.dataset.twInitialized = '1';
+
+      const words = JSON.parse(el.dataset.typewriterWords || '[]') as string[];
+      const typingSpeed = parseInt(el.dataset.typewriterTyping || '80', 10);
+      const deletingSpeed = parseInt(el.dataset.typewriterDeleting || '50', 10);
+      const pauseDuration = parseInt(el.dataset.typewriterPause || '2000', 10);
+
+      const textEl = el.querySelector('.projects-typewriter-text') as HTMLElement;
+      if (!textEl || words.length === 0) return;
+
+      let wordIndex = 0;
+      let charIndex = words[0].length; // Start fully typed
+      let isDeleting = false;
+
+      function tick() {
+        const currentWord = words[wordIndex];
+
+        if (!isDeleting) {
+          // Typing
+          charIndex++;
+          textEl.textContent = currentWord.slice(0, charIndex);
+
+          if (charIndex === currentWord.length) {
+            // Word fully typed — pause, then delete
+            isDeleting = true;
+            setTimeout(tick, pauseDuration);
+            return;
+          }
+          setTimeout(tick, typingSpeed);
+        } else {
+          // Deleting
+          charIndex--;
+          textEl.textContent = currentWord.slice(0, charIndex);
+
+          if (charIndex === 0) {
+            // Word fully deleted — move to next
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            setTimeout(tick, typingSpeed);
+            return;
+          }
+          setTimeout(tick, deletingSpeed);
+        }
+      }
+
+      // Start the cycle after initial pause
+      setTimeout(() => {
+        isDeleting = true;
+        tick();
+      }, pauseDuration);
+    });
+  }
+
+  initProjectsTypewriter();
+  document.addEventListener('astro:page-load', initProjectsTypewriter);
+</script>

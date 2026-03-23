@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroSection from '@/components/HeroSection.astro';
 import AboutSection from '@/components/AboutSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
+import ProjectsTypewriter from '@/components/ProjectsTypewriter.astro';
 import { projects, siteConfig } from '@/utils/data';
 
 // 3-row editorial grid: 60/40, 40/60, 60/40
@@ -52,10 +53,16 @@ const featuredProjects = projectOrder
               </svg>
             </span>
           </div>
-          <h2 data-reveal data-delay="100" class="heading-lg"
+          <!-- Normal mode heading -->
+          <h2 data-reveal data-delay="100" class="heading-lg projects-heading-normal"
             data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)">
-            Trabajo <span class="text-primary-500"
-              data-token="$color-primary-500: #D97757">destacado</span>
+            Proyectos <span class="text-primary-500"
+              data-token="$color-primary-500: #D97757"><ProjectsTypewriter /></span>
+          </h2>
+          <!-- Code mode heading -->
+          <h2 data-reveal data-delay="100" class="heading-lg projects-heading-code"
+            data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)">
+            <span class="code-comment">// </span>Proyectos <span class="text-primary-500"><ProjectsTypewriter /></span>
           </h2>
         </div>
         <a
@@ -180,6 +187,31 @@ const featuredProjects = projectOrder
     .project-grid-item :global(.card-image-wrap) {
       height: 340px;
     }
+  }
+
+  /* ── Projects heading: dual mode (normal / code) ── */
+  .projects-heading-code { display: none; }
+  :global(body.code-mode) .projects-heading-normal { display: none; }
+  :global(body.code-mode) .projects-heading-code { display: block; }
+
+  /* Code comment style */
+  .projects-heading-code :global(.code-comment) {
+    color: var(--cm-comment, #6272a4);
+    font-style: normal;
+  }
+
+  /* Prevent the global code-mode ::after cursor on projects headings
+     since the typewriter component has its own cursor */
+  :global(body.code-mode) .projects-heading-normal::after,
+  :global(body.code-mode) .projects-heading-code::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* Keep title on one line */
+  .projects-heading-normal,
+  .projects-heading-code {
+    white-space: nowrap;
   }
 </style>
 </BaseLayout>
