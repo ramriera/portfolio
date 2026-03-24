@@ -889,6 +889,11 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         });
       })();
     </script>
-
+  <script>
+    import { inject } from '@vercel/analytics';
+    import { injectSpeedInsights } from '@vercel/speed-insights';
+    inject();
+    injectSpeedInsights({ sampleRate: 1 });
+  </script>
   </body>
 </html>
