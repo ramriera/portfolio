@@ -121,7 +121,7 @@ Edita `src/utils/data.ts`:
 - **`projects`** — Proyectos del portfolio (ver tipo `Project`)
 - **`services`** — Servicios ofrecidos
 - **`skills`** — Habilidades y herramientas
-- **`testimonials`** — Testimonios
+
 
 ### Proyectos
 

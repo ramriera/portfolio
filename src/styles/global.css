@@ -13,7 +13,7 @@
   }
 
   body {
-    @apply bg-dark-50 text-dark-900 font-sans transition-colors duration-300;
+    @apply bg-neutral-50 text-neutral-900 font-sans transition-colors duration-300;
   }
 
   ::selection {
@@ -102,11 +102,11 @@
   }
 
   .text-body {
-    @apply text-base sm:text-lg text-dark-500 leading-relaxed;
+    @apply text-base sm:text-lg text-neutral-500 leading-relaxed;
   }
 
   .text-body-sm {
-    @apply text-sm sm:text-base text-dark-500 leading-relaxed;
+    @apply text-sm sm:text-base text-neutral-500 leading-relaxed;
   }
 
   .card-hover {
@@ -132,11 +132,11 @@
   }
 
   .dashed-border {
-    @apply border border-dark-200
+    @apply border border-neutral-200
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 bg-dark-900 text-white font-medium rounded-full transition-all duration-300 hover:bg-dark-800 active:scale-[0.98];
+    @apply inline-flex items-center gap-2 px-7 py-3.5 bg-neutral-900 text-white font-medium rounded-full transition-all duration-300 hover:bg-neutral-800 active:scale-[0.98];
     border: 1px solid transparent;
     box-sizing: border-box;
   }
@@ -152,7 +152,7 @@
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-dark-300 text-dark-700 font-medium rounded-full transition-all duration-300 hover:bg-dark-100 hover:border-primary-400 hover:text-primary-600 active:scale-[0.97];
+    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-neutral-300 text-neutral-700 font-medium rounded-full transition-all duration-300 hover:bg-neutral-100 hover:border-primary-400 hover:text-primary-600 active:scale-[0.97];
   }
 
 }
@@ -200,10 +200,10 @@
   @apply bg-transparent;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark-300 rounded-full;
+  @apply bg-neutral-300 rounded-full;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-dark-400
+  @apply bg-neutral-400
 }
 
 /* Wave animation for hand emoji */
@@ -246,7 +246,7 @@ main {
 
 .section-icon-svg .icon-stroke {
   fill: none;
-  stroke: var(--color-dark-600, #6b6a68);
+  stroke: var(--color-neutral-600, #6b6a68);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -534,7 +534,7 @@ main {
 .hero-stats-divider-v {
   width: 1px;
   height: 2rem;
-  background: var(--color-dark-200, #d4cfc5);
+  background: var(--color-neutral-200, #d4cfc5);
 }
 
 /* XL: two-column layout — intro left, stats right */
@@ -567,7 +567,7 @@ main {
     display: block;
     width: 1.5rem;
     height: 1px;
-    background: var(--color-dark-200, #d4cfc5);
+    background: var(--color-neutral-200, #d4cfc5);
     margin: 0 auto;
   }
 
@@ -889,7 +889,7 @@ body.code-mode aside:hover {
 }
 
 /* ── Hero "Soy" greeting — adopt heading color in Code Mode ── */
-.code-mode [data-component="HeroSection"] .hero-main-content > div:first-child .text-dark-900 {
+.code-mode [data-component="HeroSection"] .hero-main-content > div:first-child .text-neutral-900 {
   color: var(--cm-function) !important;  /* cyan — match h2 headings */
   text-shadow: none !important;          /* flat, no glow residuals */
 }
@@ -930,11 +930,11 @@ body.code-mode aside:hover {
 }
 
 /* Stats text colors */
-.code-mode .hero-stats-col .text-dark-900 {
+.code-mode .hero-stats-col .text-neutral-900 {
   color: var(--cm-attr) !important;
 }
 
-.code-mode .hero-stats-col .text-dark-400 {
+.code-mode .hero-stats-col .text-neutral-400 {
   color: var(--cm-comment) !important;
 }
 
@@ -1531,8 +1531,8 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.625rem;
   font-weight: 600;
-  color: var(--color-dark-300, #a8a29e);
-  background: var(--color-dark-50, #f5f0eb);
+  color: var(--color-neutral-300, #a8a29e);
+  background: var(--color-neutral-50, #f5f0eb);
   padding: 0.125rem 0.5rem;
   border-radius: 4px;
   letter-spacing: 0.05em;
@@ -1566,20 +1566,20 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 .eco-card-title {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-dark-900, #1a1918);
+  color: var(--color-neutral-900, #1a1918);
   margin-bottom: 0.5rem;
 }
 
 .eco-card-desc {
   font-size: 0.75rem;
   line-height: 1.6;
-  color: var(--color-dark-400, #7c766c);
+  color: var(--color-neutral-400, #7c766c);
   flex: 1;
 }
 
 .eco-card-divider {
   height: 1px;
-  background: var(--color-dark-100, #e5e0d8);
+  background: var(--color-neutral-100, #e5e0d8);
   margin: 1rem 0;
 }
 
@@ -1595,7 +1595,7 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--color-dark-300, #a8a29e);
+  color: var(--color-neutral-300, #a8a29e);
 }
 
 .eco-dep-icons {
@@ -1619,7 +1619,7 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   height: 1.75rem;
   padding: 0.375rem;
   border-radius: 6px;
-  background: var(--color-dark-50, #f5f0eb);
+  background: var(--color-neutral-50, #f5f0eb);
   transition: background 0.25s ease, box-shadow 0.2s ease;
 }
 
@@ -1628,7 +1628,7 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   font-size: 0.5rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: var(--color-dark-300, #a8a29e);
+  color: var(--color-neutral-300, #a8a29e);
   text-align: center;
   white-space: nowrap;
   transition: color 0.25s ease;
@@ -1999,7 +1999,7 @@ body.code-mode .timeline-gitlog {
 
 /* ── Methodology & Stack section ── */
 .methodology-stack-section {
-  background: var(--color-dark-50, #f7f5f2);
+  background: var(--color-neutral-50, #f7f5f2);
 }
 
 body.code-mode .methodology-stack-section {
@@ -2024,7 +2024,7 @@ body.code-mode .methodology-stack-section {
 .methodology-separator-line {
   flex: 1;
   height: 1px;
-  background: var(--color-dark-200, #d4cfc5);
+  background: var(--color-neutral-200, #d4cfc5);
 }
 
 body.code-mode .methodology-separator-line {
@@ -2033,7 +2033,7 @@ body.code-mode .methodology-separator-line {
 
 .methodology-separator-label {
   font-size: 0.75rem;
-  color: var(--color-dark-300, #a8a29e);
+  color: var(--color-neutral-300, #a8a29e);
   letter-spacing: 0.15em;
 }
 
@@ -2093,9 +2093,9 @@ body.code-mode [data-component="CallToAction"] .heading-lg .text-primary-500 {
 }
 
 /* "Soy" text on hero and about sections */
-body.code-mode [data-component="HeroSection"] .text-dark-900,
-body.code-mode [data-component="AboutHero"] .text-dark-900,
-body.code-mode .hero-main-content .text-dark-900 {
+body.code-mode [data-component="HeroSection"] .text-neutral-900,
+body.code-mode [data-component="AboutHero"] .text-neutral-900,
+body.code-mode .hero-main-content .text-neutral-900 {
   color: #e6edf3 !important;
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
 }
@@ -2992,7 +2992,7 @@ body.code-mode .principles-code { display: block; }
 .lint-rule-name {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-dark-900, #1a1918);
+  color: var(--color-neutral-900, #1a1918);
   flex: 1;
   min-width: 0;
 }
@@ -3012,7 +3012,7 @@ body.code-mode .principles-code { display: block; }
 .lint-badge--engineering,
 .lint-badge--culture,
 .lint-badge--product {
-  color: var(--color-dark-300, #a8a29e);
+  color: var(--color-neutral-300, #a8a29e);
   background: rgba(168, 162, 150, 0.1);
   transition: color 0.3s ease, background 0.3s ease;
 }
@@ -3028,7 +3028,7 @@ body.code-mode .principles-code { display: block; }
 .lint-rule-desc {
   font-size: 0.8125rem;
   line-height: 1.6;
-  color: var(--color-dark-400, #7c766c);
+  color: var(--color-neutral-400, #7c766c);
   padding-left: 2.125rem;
 }
 

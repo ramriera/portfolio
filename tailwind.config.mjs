@@ -16,7 +16,7 @@ export default {
           800: '#86412d',
           900: '#6f3828',
         },
-        dark: {
+        neutral: {
           50: '#faf9f7',
           100: '#f3f1ed',
           200: '#e8e4dd',

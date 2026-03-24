@@ -91,29 +91,29 @@ function md(text: string): string {
           <div data-reveal class="lg:col-span-1" data-component="ProjectSidebar" data-token="$spacing-gap: 1rem / 16px|$position: sticky top-8">
             <div class="flex flex-col gap-4 lg:sticky lg:top-8">
               <!-- Fecha -->
-              <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-dark-100/60"
+              <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-neutral-100/60"
                 data-component="MetaCard" data-token="$spacing-padding: 1.25rem / 20px|$radius-xl: 0.75rem / 12px|$color-bg-surface: rgba(243,241,237,0.6)">
-                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                  <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                   </svg>
                 </div>
                 <div>
-                  <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-1">Fecha</h4>
+                  <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1">Fecha</h4>
                   <p class="font-semibold text-sm">{project.year}</p>
                 </div>
               </div>
 
               {meta && (
                 <!-- Duración -->
-                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-dark-100/60">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-neutral-100/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-1">Duración</h4>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1">Duración</h4>
                     <p class="font-semibold text-sm">{meta.duration}</p>
                   </div>
                 </div>
@@ -121,14 +121,14 @@ function md(text: string): string {
 
               {meta && (
                 <!-- Rol -->
-                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-dark-100/60">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-neutral-100/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-1">Rol</h4>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1">Rol</h4>
                     <p class="font-semibold text-sm">{meta.role}</p>
                   </div>
                 </div>
@@ -136,14 +136,14 @@ function md(text: string): string {
 
               {meta && (
                 <!-- Industria -->
-                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-dark-100/60">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-neutral-100/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-1">Industria</h4>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1">Industria</h4>
                     <p class="font-semibold text-sm">{meta.industry}</p>
                   </div>
                 </div>
@@ -151,15 +151,15 @@ function md(text: string): string {
 
               <!-- Skills / Stack -->
               {meta && (
-                <div class="meta-card flex items-start gap-4 p-5 rounded-xl bg-dark-100/60"
+                <div class="meta-card flex items-start gap-4 p-5 rounded-xl bg-neutral-100/60"
                   data-component="SkillBadgeGroup" data-token="$spacing-gap: 0.5rem / 8px|$spacing-padding: 1.25rem / 20px">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-2">Skills</h4>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-2">Skills</h4>
                     <div class="flex flex-wrap gap-2">
                       {meta.skills.map((skill: string) => (
                         <Tag label={skill} />
@@ -170,14 +170,14 @@ function md(text: string): string {
               )}
 
               {!meta && (
-                <div class="meta-card flex items-start gap-4 p-5 rounded-xl bg-dark-100/60">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="meta-card flex items-start gap-4 p-5 rounded-xl bg-neutral-100/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-2">Stack</h4>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-2">Stack</h4>
                     <div class="flex flex-wrap gap-2">
                       {project.stack.map((tool: string) => (
                         <Tag label={tool} />
@@ -269,7 +269,7 @@ function md(text: string): string {
                   <figure class="rounded-xl overflow-hidden max-w-full md:max-w-3xl mx-auto">
                     <OptImage src={img} alt={section.title} class="lightbox-trigger block w-full h-auto cursor-zoom-in" />
                     {section.captions?.[i] && (
-                      <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
+                      <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                     )}
                   </figure>
                 ))}
@@ -298,7 +298,7 @@ function md(text: string): string {
                             alt={`Evidencia: ${section.bulletEvidence[bIdx].caption}`}
                             class="block w-full h-auto lightbox-trigger cursor-zoom-in"
                           />
-                          <figcaption class="text-sm text-dark-400 mt-3 text-center italic">
+                          <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">
                             {section.bulletEvidence[bIdx].caption}
                           </figcaption>
                         </figure>
@@ -310,7 +310,7 @@ function md(text: string): string {
             )}
             {section.highlight && (
               <blockquote data-reveal data-delay="400" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                   <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                 </p>
               </blockquote>
@@ -337,7 +337,7 @@ function md(text: string): string {
               ))}
               {section.highlight && (
                 <blockquote data-reveal data-delay="300" class="mt-6 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                  <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                  <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                     <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                   </p>
                 </blockquote>
@@ -359,7 +359,7 @@ function md(text: string): string {
               ))}
               {section.highlight && (
                 <blockquote data-reveal data-delay="300" class="mt-6 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                  <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                  <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                     <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                   </p>
                 </blockquote>
@@ -391,14 +391,14 @@ function md(text: string): string {
                   <OptImage src={img} alt={section.captions?.[i] || section.title} class={`block w-full h-auto ${img.endsWith('.svg') ? '' : 'lightbox-trigger object-cover cursor-zoom-in'}`} />
                   <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                   {section.captions?.[i] && (
-                    <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
+                    <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
                 </figure>
               ))}
             </div>
             {section.highlight && (
               <blockquote data-reveal data-delay="300" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                   <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                 </p>
               </blockquote>
@@ -416,7 +416,7 @@ function md(text: string): string {
             ))}
             {section.highlight && (
               <blockquote data-reveal data-delay="300" class="mt-6 mb-10 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                   <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                 </p>
               </blockquote>
@@ -427,7 +427,7 @@ function md(text: string): string {
                   <OptImage src={img} alt={section.captions?.[i] || `${section.title} ${i + 1}`} class="lightbox-trigger block w-full h-auto max-h-[500px] object-contain cursor-zoom-in" />
                   <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                   {section.captions?.[i] && (
-                    <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
+                    <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
                 </figure>
               ))}
@@ -449,7 +449,7 @@ function md(text: string): string {
                   <OptImage src={img} alt={section.captions?.[i] || `Slide ${i + 1}`} class="lightbox-trigger block w-full h-auto object-cover cursor-zoom-in" />
                   <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
                   {section.captions?.[i] && (
-                    <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
+                    <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
                 </figure>
               ))}
@@ -510,17 +510,17 @@ function md(text: string): string {
             )}
             {section.mermaidCode && (
               <figure data-reveal data-delay="300">
-                <div class="rounded-2xl overflow-hidden border border-dark-200 bg-white p-8 md:p-12">
+                <div class="rounded-2xl overflow-hidden border border-neutral-200 bg-white p-8 md:p-12">
                   <pre class="mermaid flex justify-center">{section.mermaidCode}</pre>
                 </div>
                 {section.captions?.[0] && (
-                  <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[0]}</figcaption>
+                  <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[0]}</figcaption>
                 )}
               </figure>
             )}
             {section.highlight && (
               <blockquote data-reveal data-delay="400" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                   <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                 </p>
               </blockquote>
@@ -542,15 +542,15 @@ function md(text: string): string {
                   <div data-reveal data-delay={String(300 + i * 120)} class={`relative flex gap-6 ${i < section.steps!.length - 1 ? 'pb-10' : ''}`}>
                     {/* Vertical line */}
                     {i < section.steps!.length - 1 && (
-                      <div class="absolute left-5 top-10 bottom-0 w-px bg-dark-200"></div>
+                      <div class="absolute left-5 top-10 bottom-0 w-px bg-neutral-200"></div>
                     )}
                     {/* Step indicator */}
-                    <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-dark-100 border-2 border-dark-300 flex items-center justify-center">
-                      <span class="text-sm font-bold text-dark-600">{i + 1}</span>
+                    <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-neutral-100 border-2 border-neutral-300 flex items-center justify-center">
+                      <span class="text-sm font-bold text-neutral-600">{i + 1}</span>
                     </div>
                     {/* Step content */}
                     <div class="pt-1">
-                      <h4 class="text-lg font-bold text-dark-900 mb-1">{step.title}</h4>
+                      <h4 class="text-lg font-bold text-neutral-900 mb-1">{step.title}</h4>
                       <p class="text-body text-base leading-relaxed" set:html={md(step.description)} />
                     </div>
                   </div>
@@ -559,7 +559,7 @@ function md(text: string): string {
             )}
             {section.highlight && (
               <blockquote data-reveal data-delay="400" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                   <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                 </p>
               </blockquote>
@@ -602,7 +602,7 @@ function md(text: string): string {
   <!-- Resultados -->
   <section class="case-section" data-component="ResultsShowcase">
     <div class="container-custom">
-      <div class="relative rounded-3xl bg-dark-900 p-12 md:p-20 overflow-hidden max-w-4xl mx-auto"
+      <div class="relative rounded-3xl bg-neutral-900 p-12 md:p-20 overflow-hidden max-w-4xl mx-auto"
         data-token="$radius-3xl: 1.5rem / 24px|$spacing-padding: 3rem → 5rem (md)|$color-bg-dark: #1a1918">
         <div class="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary-500/[0.07] blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-primary-500/[0.07] blur-3xl"></div>
@@ -658,7 +658,7 @@ function md(text: string): string {
           <div data-reveal data-delay={String(i * 100)} class="related-project-item">
             <a href={`/projects/${p.slug}`} class="related-card group block" >
               <div
-                class="related-card-image-wrap relative overflow-hidden rounded-2xl border border-dark-200"
+                class="related-card-image-wrap relative overflow-hidden rounded-2xl border border-neutral-200"
                 style={p.brandColor ? `background-color: ${p.brandColor}` : ''}
               >
                 <OptImage
@@ -671,7 +671,7 @@ function md(text: string): string {
               </div>
 
               <div class="mt-5 md:mt-6">
-                <h3 class="text-xl md:text-2xl font-bold tracking-tight text-dark-900 group-hover:text-primary-600 transition-colors duration-300">
+                <h3 class="text-xl md:text-2xl font-bold tracking-tight text-neutral-900 group-hover:text-primary-600 transition-colors duration-300">
                   {p.title}
                 </h3>
                 <div class="flex flex-wrap items-center gap-2.5 mt-4">
@@ -828,7 +828,7 @@ function md(text: string): string {
     letter-spacing: 0.01em;
     border-radius: 9999px;
     background: rgba(0, 0, 0, 0.03);
-    color: theme('colors.dark.400');
+    color: theme('colors.neutral.400');
     white-space: nowrap;
     transition: background 0.25s ease,
                 color 0.25s ease;
@@ -836,6 +836,6 @@ function md(text: string): string {
 
   .related-card:hover .related-card-tag {
     background: rgba(0, 0, 0, 0.05);
-    color: theme('colors.dark.500');
+    color: theme('colors.neutral.500');
   }
 </style>

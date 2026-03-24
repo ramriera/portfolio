@@ -83,7 +83,7 @@ function getProjectFilters(tags: string[]): string[] {
               'filter-btn px-5 py-2 text-sm font-medium rounded-full transition-all duration-300',
               cat === 'Todas'
                 ? 'bg-primary-500/10 text-primary-500'
-                : 'bg-dark-100 text-dark-600 hover:bg-dark-200',
+                : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200',
             ]}
             data-filter={cat}
           >
@@ -189,9 +189,9 @@ function getProjectFilters(tags: string[]): string[] {
       // Update active button
       filterBtns.forEach((b) => {
         b.classList.remove('bg-primary-500/10', 'text-primary-500');
-        b.classList.add('bg-dark-100', 'text-dark-600');
+        b.classList.add('bg-neutral-100', 'text-neutral-600');
       });
-      btn.classList.remove('bg-dark-100', 'text-dark-600');
+      btn.classList.remove('bg-neutral-100', 'text-neutral-600');
       btn.classList.add('bg-primary-500/10', 'text-primary-500');
 
       // Scroll filters into view to prevent page jump

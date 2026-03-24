@@ -28,7 +28,7 @@ const currentPath = Astro.url.pathname;
               'px-4 py-2 text-sm font-medium rounded-full transition-all duration-300',
               currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
                 ? 'text-primary-500 bg-primary-500/10'
-                : 'text-dark-500 hover:text-dark-900',
+                : 'text-neutral-500 hover:text-neutral-900',
             ]}
           >
             {link.label}
@@ -43,7 +43,7 @@ const currentPath = Astro.url.pathname;
         </div>
         <a
           href={`mailto:${siteConfig.email}`}
-          class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-dark-900 text-white text-sm font-medium rounded-full transition-all duration-300 hover:bg-dark-800 hover:shadow-md hover:shadow-dark-900/10 group/btn hero-cta-normal"
+          class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 text-white text-sm font-medium rounded-full transition-all duration-300 hover:bg-neutral-800 hover:shadow-md hover:shadow-neutral-900/10 group/btn hero-cta-normal"
         >
           Hablemos
           <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -57,13 +57,13 @@ const currentPath = Astro.url.pathname;
         <!-- Mobile menu button -->
         <button
           id="mobile-menu-btn"
-          class="lg:hidden relative z-10 p-2 rounded-lg hover:bg-dark-100 transition-colors"
+          class="lg:hidden relative z-10 p-2 rounded-lg hover:bg-neutral-100 transition-colors"
           aria-label="Abrir menú"
         >
           <div class="w-6 h-5 flex flex-col justify-between" id="hamburger">
-            <span class="block w-full h-0.5 bg-dark-900 transition-all duration-300 origin-left"></span>
-            <span class="block w-full h-0.5 bg-dark-900 transition-all duration-300"></span>
-            <span class="block w-3/4 h-0.5 bg-dark-900 transition-all duration-300 origin-left"></span>
+            <span class="block w-full h-0.5 bg-neutral-900 transition-all duration-300 origin-left"></span>
+            <span class="block w-full h-0.5 bg-neutral-900 transition-all duration-300"></span>
+            <span class="block w-3/4 h-0.5 bg-neutral-900 transition-all duration-300 origin-left"></span>
           </div>
         </button>
       </div>
@@ -79,10 +79,10 @@ const currentPath = Astro.url.pathname;
   <!-- Close button -->
   <button
     id="mobile-menu-close"
-    class="absolute top-6 right-6 p-2 rounded-lg hover:bg-dark-100 transition-colors z-10"
+    class="absolute top-6 right-6 p-2 rounded-lg hover:bg-neutral-100 transition-colors z-10"
     aria-label="Cerrar menú"
   >
-    <svg class="w-7 h-7 text-dark-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <svg class="w-7 h-7 text-neutral-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   </button>
@@ -94,7 +94,7 @@ const currentPath = Astro.url.pathname;
           'text-3xl font-bold tracking-tight transition-all duration-300 py-2',
           currentPath === link.href
             ? 'text-primary-500'
-            : 'text-dark-400 hover:text-dark-900',
+            : 'text-neutral-400 hover:text-neutral-900',
         ]}
         style={`transition-delay: ${i * 50}ms`}
       >

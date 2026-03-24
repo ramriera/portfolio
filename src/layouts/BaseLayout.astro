@@ -71,7 +71,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
   </head>
-  <body class="min-h-screen flex flex-col bg-dark-50 text-dark-900 transition-colors duration-300">
+  <body class="min-h-screen flex flex-col bg-neutral-50 text-neutral-900 transition-colors duration-300">
     <Navbar />
     <main class="flex-1">
       <slot />
@@ -172,12 +172,12 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
 
           const aliases: Record<string, string> = {
             '#D97757': '--color-primary-500',
-            '#FAF9F7': '--color-dark-50',   '#F3F1ED': '--color-dark-100',
-            '#E8E4DD': '--color-dark-200',   '#D4CFC5': '--color-dark-300',
-            '#A8A196': '--color-dark-400',   '#7C766C': '--color-dark-500',
-            '#5C574F': '--color-dark-600',   '#403D38': '--color-dark-700',
-            '#2A2825': '--color-dark-800',   '#1A1918': '--color-dark-900',
-            '#141413': '--color-dark-950',
+            '#FAF9F7': '--color-neutral-50',   '#F3F1ED': '--color-neutral-100',
+            '#E8E4DD': '--color-neutral-200',   '#D4CFC5': '--color-neutral-300',
+            '#A8A196': '--color-neutral-400',   '#7C766C': '--color-neutral-500',
+            '#5C574F': '--color-neutral-600',   '#403D38': '--color-neutral-700',
+            '#2A2825': '--color-neutral-800',   '#1A1918': '--color-neutral-900',
+            '#141413': '--color-neutral-950',
             '#FDF6F3': '--color-primary-50', '#FCEAE2': '--color-primary-100',
             '#F9D5C5': '--color-primary-200','#F4B89D': '--color-primary-300',
             '#EC9372': '--color-primary-400','#C4613F': '--color-primary-600',

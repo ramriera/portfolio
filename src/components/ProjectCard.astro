@@ -30,7 +30,7 @@ const coverImage = resolveImage(cover);
 >
   <!-- Image container -->
   <div
-    class="card-image-wrap relative overflow-hidden rounded-2xl border border-dark-200 aspect-video"
+    class="card-image-wrap relative overflow-hidden rounded-2xl border border-neutral-200 aspect-video"
     style={brandColor ? `background-color: ${brandColor}` : ''}
   >
     {coverImage ? (
@@ -59,15 +59,15 @@ const coverImage = resolveImage(cover);
   <!-- Text content — outside the image -->
   <div class="mt-5 md:mt-6">
     <h3 class:list={[
-        'font-bold tracking-tight text-dark-900 group-hover:text-primary-600 transition-colors duration-300',
+        'font-bold tracking-tight text-neutral-900 group-hover:text-primary-600 transition-colors duration-300',
         isWide ? 'text-xl md:text-2xl' : 'text-lg md:text-xl',
       ]}
-      data-token="$font-weight: 700 (bold)|$color-text: dark-900|$color-hover: primary-600">
+      data-token="$font-weight: 700 (bold)|$color-text: neutral-900|$color-hover: primary-600">
       {title}
     </h3>
 
-    <p class="mt-2.5 text-sm md:text-base leading-relaxed text-dark-400 line-clamp-2"
-      data-token="$font-size: 0.875rem → 1rem (md)|$color-text-muted: dark-400|$line-height: relaxed">
+    <p class="mt-2.5 text-sm md:text-base leading-relaxed text-neutral-400 line-clamp-2"
+      data-token="$font-size: 0.875rem → 1rem (md)|$color-text-muted: neutral-400|$line-height: relaxed">
       {description}
     </p>
 
@@ -116,7 +116,7 @@ const coverImage = resolveImage(cover);
     letter-spacing: 0.01em;
     border-radius: 9999px;
     background: rgba(0, 0, 0, 0.03);
-    color: theme('colors.dark.400');
+    color: theme('colors.neutral.400');
     white-space: nowrap;
     transition: background 0.25s ease,
                 color 0.25s ease;
@@ -124,6 +124,6 @@ const coverImage = resolveImage(cover);
 
   .project-card:hover .card-tag {
     background: rgba(0, 0, 0, 0.05);
-    color: theme('colors.dark.500');
+    color: theme('colors.neutral.500');
   }
 </style>
