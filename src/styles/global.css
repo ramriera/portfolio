@@ -350,26 +350,15 @@ main {
 
 .icon-ruler-pencil { animation: pencilDraw 3.5s ease-in-out infinite; }
 
-/* Grid icon - subtle shuffle */
-@keyframes gridShuffle {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(1px, -1px); }
-  50% { transform: translate(0, 1px); }
-  75% { transform: translate(-1px, 0); }
+/* Grid icon — accent square breathes */
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 
-@keyframes gridSparkle {
-  0%, 100% { opacity: 0; transform: scale(0.4); }
-  50% { opacity: 1; transform: scale(1.3); }
+.icon-grid-pulse {
+  animation: gridPulse 2.5s ease-in-out infinite;
 }
-
-.icon-grid-idle {
-  animation: gridShuffle 3s ease-in-out infinite;
-  transform-origin: center center;
-}
-
-.icon-grid-sparkle-1 { animation: gridSparkle 2.5s ease-in-out 0s infinite; }
-.icon-grid-sparkle-2 { animation: gridSparkle 2.5s ease-in-out 0.8s infinite; }
 
 /* Gear icon - spin */
 @keyframes gearSpin {
@@ -874,13 +863,24 @@ body.code-mode aside:hover {
   letter-spacing: -0.02em !important;
 }
 
-/* Code mode mobile: monospace is wider than Inter — scale down to prevent overflow */
+/* Code mode: monospace is wider than Inter — allow wrapping and scale down */
+.code-mode .sm\:whitespace-nowrap {
+  white-space: normal !important;
+}
+
 @media (max-width: 639px) {
   .code-mode .heading-xl {
     font-size: clamp(1.75rem, 4.5vw + 0.25rem, 2.25rem) !important;
   }
   .code-mode .heading-lg {
     font-size: clamp(1.5rem, 3.5vw + 0.25rem, 1.875rem) !important;
+  }
+}
+
+/* Code mode tablet: scale heading down to prevent overflow */
+@media (min-width: 640px) and (max-width: 1279px) {
+  .code-mode .heading-xl {
+    font-size: clamp(2rem, 4vw + 0.25rem, 3.25rem) !important;
   }
 }
 
