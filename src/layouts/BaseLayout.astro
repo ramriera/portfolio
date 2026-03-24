@@ -892,8 +892,19 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
   <script>
     import { inject } from '@vercel/analytics';
     import { injectSpeedInsights } from '@vercel/speed-insights';
-    inject();
-    injectSpeedInsights({ sampleRate: 1 });
+
+    // Flag yourself: visit any page with ?notrack to disable analytics
+    if (new URLSearchParams(window.location.search).has('notrack')) {
+      localStorage.setItem('notrack', '1');
+    }
+
+    const isOwner = localStorage.getItem('notrack') === '1';
+
+    inject({ beforeSend: (event) => isOwner ? null : event });
+    injectSpeedInsights({
+      sampleRate: 1,
+      beforeSend: (data) => isOwner ? null : data,
+    });
   </script>
   </body>
 </html>
