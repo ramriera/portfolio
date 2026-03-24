@@ -23,7 +23,7 @@ const { words, interval = 3000 } = Astro.props;
   {words.map((word, i) => (
     <span
       class:list={[
-        'words-carousel-word absolute inset-0 inline-flex items-baseline justify-center xl:justify-start',
+        'words-carousel-word absolute inset-0 inline-flex items-baseline justify-start',
         i === 0 ? 'active' : '',
       ]}
       data-index={i}
@@ -60,16 +60,10 @@ const { words, interval = 3000 } = Astro.props;
   .words-sizer {
     display: inline-flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     pointer-events: none;
     height: 1lh;
     overflow: hidden;
-  }
-
-  @media (min-width: 1280px) {
-    .words-sizer {
-      align-items: flex-start;
-    }
   }
 
   .words-carousel-word {
