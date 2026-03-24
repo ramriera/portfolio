@@ -118,14 +118,19 @@ const featuredProjects = projectOrder
           </svg>
         </span>
       </div>
-      <h2 data-reveal data-delay="100" class="heading-lg mb-6 sm:whitespace-nowrap">
+      <h2 data-reveal data-delay="100" class="heading-lg mb-6 sm:whitespace-nowrap"
+        data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)">
         ¿Tienes un <span class="text-primary-500">proyecto</span> en mente?
       </h2>
-      <p data-reveal data-delay="200" class="text-body text-lg mb-10">
+      <p data-reveal data-delay="200" class="text-body text-lg mb-10"
+        data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$font-size-lg: 1.125rem / 18px">
         Me encantaría escuchar tu idea. Hablemos sobre cómo puedo ayudarte a crear algo extraordinario.
       </p>
-      <div data-reveal data-delay="300" class="flex flex-wrap items-center justify-center gap-4">
-        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base hero-cta-normal">
+      <div data-reveal data-delay="300" class="flex flex-wrap items-center justify-center gap-4"
+        data-component="CTAButtons" data-token="$spacing-gap: 1rem / 16px">
+        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base hero-cta-normal"
+          data-component="ButtonContact"
+          data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$radius-full: 9999px">
           Contactar
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -136,7 +141,8 @@ const featuredProjects = projectOrder
         </a>
         <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
           class="btn-outline text-base btn-cv-normal"
-          data-component="ButtonCV">
+          data-component="ButtonCV"
+          data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px">
           Descargar CV
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />

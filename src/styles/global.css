@@ -358,9 +358,9 @@ main {
   75% { transform: translate(-1px, 0); }
 }
 
-@keyframes gridArrowBounce {
-  0%, 100% { transform: translate(0, 0); opacity: 0.5; }
-  50% { transform: translate(3px, -3px); opacity: 1; }
+@keyframes gridSparkle {
+  0%, 100% { opacity: 0; transform: scale(0.4); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
 
 .icon-grid-idle {
@@ -368,9 +368,8 @@ main {
   transform-origin: center center;
 }
 
-.icon-grid-idle + path {
-  animation: gridArrowBounce 2s ease-in-out infinite;
-}
+.icon-grid-sparkle-1 { animation: gridSparkle 2.5s ease-in-out 0s infinite; }
+.icon-grid-sparkle-2 { animation: gridSparkle 2.5s ease-in-out 0.8s infinite; }
 
 /* Gear icon - spin */
 @keyframes gearSpin {
@@ -491,32 +490,46 @@ main {
 
 /* Stats column: horizontal on mobile, right-side on xl */
 .hero-stats-col {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: flex;
   justify-content: center;
   /* Pre-allocate border + padding so code mode toggle doesn't shift layout */
   border: 1px solid transparent;
-  padding: 1rem 1.25rem;
+  padding: 0.625rem 1rem;
   border-radius: 4px;
 }
 
 .hero-stats-inner {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.25rem;
   justify-content: center;
-}
-
-@media (min-width: 640px) {
-  .hero-stats-inner {
-    gap: 2rem;
-  }
 }
 
 /* Equal-width stat items on mobile so all three columns balance */
 .hero-stat-item {
   flex: 1;
   min-width: 0;
+}
+
+/* Scale down stats on mobile so they don't overpower the hero */
+@media (max-width: 639px) {
+  .hero-stat-item .text-3xl {
+    font-size: 1.5rem;
+  }
+  .hero-stat-item .text-xs {
+    font-size: 0.65rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero-stats-col {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+  }
+  .hero-stats-inner {
+    gap: 2rem;
+  }
 }
 
 /* Horizontal divider: visible only on xl */
@@ -534,7 +547,7 @@ main {
 /* XL: two-column layout — intro left, stats right */
 @media (min-width: 1280px) {
   .hero-grid {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-rows: 1fr;
     gap: 3rem;
   }
@@ -837,10 +850,15 @@ body.code-mode aside:hover {
   outline-color: var(--cm-border-hover);
 }
 
-/* Hero grid columns: no extra border/padding to avoid layout shift */
-.code-mode .hero-grid > * {
+/* Hero grid columns: no extra border/padding on main content to avoid layout shift */
+.code-mode .hero-grid > .hero-main-content {
   border: none;
   padding: 0;
+}
+
+/* Stats panel keeps its pre-allocated border+padding so code mode skin applies cleanly */
+.code-mode .hero-grid > .hero-stats-col {
+  /* border-color & background are set below; keep structural padding */
 }
 
 /* ── Hero Data Reveal: grid persists, only skin changes ── */
@@ -889,7 +907,7 @@ body.code-mode aside:hover {
 /* Zero Shift: force hero-grid right column to stay pinned */
 @media (min-width: 1280px) {
   .code-mode .hero-grid {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
   .code-mode .hero-stats-col {
     position: relative;
@@ -2361,9 +2379,7 @@ body.code-mode .btn-viewall-code:hover .code-parens {
 }
 
 body.code-mode .btn-viewall-code:hover .code-method::after {
-  content: ' { }';
-  color: var(--cm-text-muted, #7d8590);
-  font-weight: 400;
+  content: none;
 }
 
 /* ── Social links: Code mode (import syntax with icons) ── */
