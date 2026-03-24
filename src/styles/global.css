@@ -91,6 +91,10 @@
       letter-spacing: -0.02em;
       line-height: 1.12;
     }
+    /* About heading: scale down so "Diseñador, pensador," fits on one line */
+    .about-heading {
+      font-size: clamp(1.65rem, 7.5vw, 2.25rem);
+    }
   }
 
   .heading-sm {
