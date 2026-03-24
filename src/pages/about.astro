@@ -39,10 +39,10 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
           </span>
         </div>
         <!-- Title (same element for both modes, CSS handles skin) -->
-        <h1 data-reveal data-delay="100" class="heading-xl mb-8"
+        <h1 data-reveal data-delay="100" class="heading-xl about-heading mb-8"
           data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2rem / 32px">
-          Diseñador, pensador,
-          <span class="text-primary-500"><WordsCarousel words={aboutWords} interval={2000} /></span>
+          <span class="whitespace-nowrap">Diseñador, pensador,</span><br />
+          <span class="text-primary-500"><WordsCarousel words={aboutWords} interval={3000} /></span>
         </h1>
 
         <!-- Subtitle (same element for both modes) -->
@@ -110,16 +110,16 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
             <!-- Normal mode: prose paragraphs -->
             <div class="bio-prose space-y-4 text-body">
               <p>
-                Empecé mi carrera como diseñador gráfico, pero rápidamente descubrí que mi verdadera pasión estaba en la intersección entre diseño y tecnología. El mundo digital me fascinó por su capacidad de crear experiencias que impactan a millones de personas.
+                Empecé mi carrera como <strong>diseñador gráfico</strong>, pero rápidamente descubrí que mi verdadera pasión estaba en la <strong>intersección entre diseño y tecnología</strong>. El mundo digital me fascinó por su capacidad de crear experiencias que impactan a millones de personas.
               </p>
               <p>
-                A lo largo de estos años he tenido el privilegio de trabajar con empresas como Banco Sabadell, Iberia, y Doctori, donde he podido aplicar mi experiencia en Design Systems, Product Design y Design Operations para transformar productos digitales complejos en experiencias intuitivas.
+                A lo largo de estos años he tenido el privilegio de trabajar con empresas como <strong>Banco Sabadell</strong>, <strong>Iberia</strong>, y <strong>Doctori</strong>, donde he podido aplicar mi experiencia en <strong>Design Systems</strong>, <strong>Product Design</strong> y <strong>Design Operations</strong> para transformar productos digitales complejos en experiencias intuitivas.
               </p>
               <p>
-                Mi enfoque combina metodologías como Design Thinking, Lean UX y Agile, siempre con el usuario en el centro. Creo firmemente que el diseño no es solo cómo se ve algo, sino cómo funciona, cómo se siente y qué problema resuelve.
+                Mi enfoque combina metodologías como <strong>Design Thinking</strong>, <strong>Lean UX</strong> y <strong>Agile</strong>, siempre con el usuario en el centro. Creo firmemente que el diseño no es solo cómo se ve algo, sino <strong>cómo funciona, cómo se siente y qué problema resuelve</strong>.
               </p>
               <p>
-                Cuando no estoy diseñando, probablemente estoy explorando nuevas herramientas, leyendo sobre psicología cognitiva o experimentando con código creativo.
+                Cuando no estoy diseñando, probablemente estoy explorando nuevas herramientas, leyendo sobre <strong>psicología cognitiva</strong> o experimentando con <strong>código creativo</strong>.
               </p>
             </div>
             <!-- Code mode: README / JSDoc comment block -->
@@ -150,11 +150,11 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
 <span class="readme-comment"> *</span>
 <span class="readme-comment"> * He tenido el privilegio de trabajar con empresas como</span>
 <span class="readme-comment"> * <span class="readme-highlight">Banco Sabadell</span>, <span class="readme-highlight">Iberia</span>, y <span class="readme-highlight">Doctori</span>, aplicando mi</span>
-<span class="readme-comment"> * experiencia en Design Systems, Product Design y Design</span>
-<span class="readme-comment"> * Operations para transformar productos digitales complejos</span>
+<span class="readme-comment"> * experiencia en <span class="readme-highlight">Design Systems</span>, <span class="readme-highlight">Product Design</span> y <span class="readme-highlight">Design</span></span>
+<span class="readme-comment"> * <span class="readme-highlight">Operations</span> para transformar productos digitales complejos</span>
 <span class="readme-comment"> * en experiencias intuitivas.</span>
 <span class="readme-comment"> *</span>
-<span class="readme-comment"> * <span class="readme-tag">@methodology</span> Design Thinking | Lean UX | Agile</span>
+<span class="readme-comment"> * <span class="readme-tag">@methodology</span> <span class="readme-highlight">Design Thinking</span> | <span class="readme-highlight">Lean UX</span> | <span class="readme-highlight">Agile</span></span>
 <span class="readme-comment"> * <span class="readme-tag">@philosophy</span> El diseño no es solo cómo se ve algo,</span>
 <span class="readme-comment"> *   sino cómo funciona, cómo se siente y qué problema resuelve.</span>
 <span class="readme-comment"> *</span>
@@ -275,9 +275,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
 
           <!-- KPI Stats Dashboard -->
           <div data-reveal data-component="KPIDashboard">
-            <!-- Normal mode -->
-            <h2 class="heading-md mb-8 kpi-title-normal">Impacto en números</h2>
-            <h2 class="heading-md mb-8 kpi-title-code"><span class="code-comment">// </span>metrics.status<span class="code-punct">()</span></h2>
+            <h2 class="heading-md mb-8">Impacto en números</h2>
 
             <div class="kpi-grid-normal grid grid-cols-1 sm:grid-cols-2 gap-4 mb-0">
               <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white transition-all duration-300">
@@ -365,9 +363,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
         <div class="methodology-block">
           <!-- Design Principles -->
           <div data-reveal data-component="DesignPrinciples">
-            <!-- Normal mode -->
-            <h2 class="heading-md mb-8 principles-title-normal">Principios de Diseño</h2>
-            <h2 class="heading-md mb-8 principles-title-code"><span class="code-comment">// </span>design_principles</h2>
+            <h2 class="heading-md mb-8">Principios de Diseño</h2>
 
             <div class="principles-normal">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -481,10 +477,8 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
         <!-- ── 02. Ecosistema Técnico (proceso + herramientas unificados) ── -->
         <div class="methodology-block" data-component="TechEcosystem">
           <div data-reveal data-component="ProcessSection">
-            <h2 class="heading-md mb-3 process-title-normal">Ecosistema Técnico</h2>
-            <h2 class="heading-md mb-3 process-title-code"><span class="code-comment">// </span>tech_ecosystem<span class="code-punct">()</span></h2>
-            <p class="text-body mb-10 process-title-normal">Proceso de trabajo y herramientas organizados como módulos de un sistema. Cada fase tiene su stack dedicado.</p>
-            <p class="text-body mb-10 process-title-code" style="color: var(--cm-comment, #6272a4); font-style: italic;">// Proceso de trabajo y herramientas organizados como módulos de un sistema</p>
+            <h2 class="heading-md mb-3">Ecosistema Técnico</h2>
+            <p class="text-body mb-10">Proceso de trabajo y herramientas organizados como módulos de un sistema. Cada fase tiene su stack dedicado.</p>
 
             <!-- Normal mode: 4 Stack Cards -->
             <div class="process-grid-normal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -675,7 +669,8 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
 
   <!-- CTA -->
   <section class="section-padding" data-component="CallToAction">
-    <div class="container-custom text-center max-w-3xl mx-auto">
+    <div class="container-custom text-center">
+      <div class="max-w-3xl mx-auto">
       <div data-reveal class="mb-6 flex justify-center">
         <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
           <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
@@ -711,7 +706,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
           </svg>
         </a>
         <a href={`mailto:${siteConfig.email}`} class="hero-cta-code" data-component="ButtonRunCmd">
-          <span class="hero-cta-prompt">&gt;</span> sudo <span class="hero-cta-cmd">contact</span> <span class="hero-cta-flag">--now</span><span class="hero-cta-cursor">_</span>
+          <span class="hero-cta-prompt">&gt;</span> run <span class="hero-cta-cmd">send_email.sh</span><span class="hero-cta-cursor">_</span>
         </a>
         <!-- CV Button: Normal mode -->
         <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
@@ -734,6 +729,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
           </svg>
           <span class="code-fn">get</span><span class="code-parens">(</span><span class="code-string">'cv.pdf'</span><span class="code-parens">)</span>
         </a>
+      </div>
       </div>
     </div>
   </section>

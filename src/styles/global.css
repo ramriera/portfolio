@@ -91,6 +91,10 @@
       letter-spacing: -0.02em;
       line-height: 1.12;
     }
+    /* About heading: scale down so "Diseñador, pensador," fits on one line */
+    .about-heading {
+      font-size: clamp(1.65rem, 7.5vw, 2.25rem);
+    }
   }
 
   .heading-sm {
@@ -350,26 +354,14 @@ main {
 
 .icon-ruler-pencil { animation: pencilDraw 3.5s ease-in-out infinite; }
 
-/* Grid icon - subtle shuffle */
-@keyframes gridShuffle {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(1px, -1px); }
-  50% { transform: translate(0, 1px); }
-  75% { transform: translate(-1px, 0); }
+/* Grid icon — accent square breathes */
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 
-@keyframes gridArrowBounce {
-  0%, 100% { transform: translate(0, 0); opacity: 0.5; }
-  50% { transform: translate(3px, -3px); opacity: 1; }
-}
-
-.icon-grid-idle {
-  animation: gridShuffle 3s ease-in-out infinite;
-  transform-origin: center center;
-}
-
-.icon-grid-idle + path {
-  animation: gridArrowBounce 2s ease-in-out infinite;
+.icon-grid-pulse {
+  animation: gridPulse 2.5s ease-in-out infinite;
 }
 
 /* Gear icon - spin */
@@ -462,6 +454,7 @@ main {
 /* Hero Consistency — fixed height so content below never shifts */
 .hero-main-content {
   min-height: auto;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -482,7 +475,7 @@ main {
 /* Mobile: single column, stats centered below */
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-items: center;
   gap: 0;
@@ -490,32 +483,46 @@ main {
 
 /* Stats column: horizontal on mobile, right-side on xl */
 .hero-stats-col {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: flex;
   justify-content: center;
   /* Pre-allocate border + padding so code mode toggle doesn't shift layout */
   border: 1px solid transparent;
-  padding: 1rem 1.25rem;
+  padding: 0.625rem 1rem;
   border-radius: 4px;
 }
 
 .hero-stats-inner {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.25rem;
   justify-content: center;
-}
-
-@media (min-width: 640px) {
-  .hero-stats-inner {
-    gap: 2rem;
-  }
 }
 
 /* Equal-width stat items on mobile so all three columns balance */
 .hero-stat-item {
   flex: 1;
   min-width: 0;
+}
+
+/* Scale down stats on mobile so they don't overpower the hero */
+@media (max-width: 639px) {
+  .hero-stat-item .text-3xl {
+    font-size: 1.5rem;
+  }
+  .hero-stat-item .text-xs {
+    font-size: 0.65rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero-stats-col {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+  }
+  .hero-stats-inner {
+    gap: 2rem;
+  }
 }
 
 /* Horizontal divider: visible only on xl */
@@ -533,7 +540,7 @@ main {
 /* XL: two-column layout — intro left, stats right */
 @media (min-width: 1280px) {
   .hero-grid {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-rows: 1fr;
     gap: 3rem;
   }
@@ -836,10 +843,15 @@ body.code-mode aside:hover {
   outline-color: var(--cm-border-hover);
 }
 
-/* Hero grid columns: no extra border/padding to avoid layout shift */
-.code-mode .hero-grid > * {
+/* Hero grid columns: no extra border/padding on main content to avoid layout shift */
+.code-mode .hero-grid > .hero-main-content {
   border: none;
   padding: 0;
+}
+
+/* Stats panel keeps its pre-allocated border+padding so code mode skin applies cleanly */
+.code-mode .hero-grid > .hero-stats-col {
+  /* border-color & background are set below; keep structural padding */
 }
 
 /* ── Hero Data Reveal: grid persists, only skin changes ── */
@@ -853,6 +865,27 @@ body.code-mode aside:hover {
 .code-mode .heading-lg {
   line-height: 1.12 !important;
   letter-spacing: -0.02em !important;
+}
+
+/* Code mode: monospace is wider than Inter — allow wrapping and scale down */
+.code-mode .sm\:whitespace-nowrap {
+  white-space: normal !important;
+}
+
+@media (max-width: 639px) {
+  .code-mode .heading-xl {
+    font-size: clamp(1.75rem, 4.5vw + 0.25rem, 2.25rem) !important;
+  }
+  .code-mode .heading-lg {
+    font-size: clamp(1.5rem, 3.5vw + 0.25rem, 1.875rem) !important;
+  }
+}
+
+/* Code mode tablet: scale heading down to prevent overflow */
+@media (min-width: 640px) and (max-width: 1279px) {
+  .code-mode .heading-xl {
+    font-size: clamp(2rem, 4vw + 0.25rem, 3.25rem) !important;
+  }
 }
 
 /* ── Hero "Soy" greeting — adopt heading color in Code Mode ── */
@@ -878,7 +911,7 @@ body.code-mode aside:hover {
 /* Zero Shift: force hero-grid right column to stay pinned */
 @media (min-width: 1280px) {
   .code-mode .hero-grid {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
   .code-mode .hero-stats-col {
     position: relative;
@@ -958,6 +991,33 @@ body.code-mode .hero-cta-code {
   cursor: pointer;
   transition: all 0.25s ease;
   text-decoration: none;
+}
+
+/* Code CTA: tighter on mobile */
+@media (max-width: 639px) {
+  body.code-mode .hero-cta-code,
+  body.code-mode .btn-cv-code {
+    font-size: 0.8rem;
+    min-width: auto;
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+/* Navbar code CTA: hidden on mobile, smaller size */
+body.code-mode .navbar-cta-code {
+  min-width: auto;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+}
+
+.navbar-cta-code {
+  display: none !important;
+}
+
+@media (min-width: 640px) {
+  body.code-mode .navbar-cta-code {
+    display: inline-flex !important;
+  }
 }
 
 body.code-mode .hero-cta-code:hover {
@@ -1128,6 +1188,7 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 .code-mode .section-icon {
   background: rgba(139, 233, 253, 0.08) !important;
   border: 1px solid rgba(139, 233, 253, 0.15);
+  border-radius: 4px;
 }
 
 .code-mode .section-icon-svg .icon-stroke {
@@ -1191,6 +1252,24 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   color: var(--cm-string);
   margin-left: 2px;
   font-weight: 300;
+}
+
+/* ProjectsHero: no blinking cursor — the carousel already animates */
+.code-mode [data-component="ProjectsHero"] .heading-xl::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* CallToAction: no blinking cursor on CTA headings */
+.code-mode [data-component="CallToAction"] .heading-lg::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* MethodologyStack: no blinking cursor */
+.code-mode [data-component="MethodologyStack"] .heading-lg::after {
+  content: none !important;
+  display: none !important;
 }
 
 /* ── 18. Line numbers feel on body ── */
@@ -1974,7 +2053,28 @@ body.code-mode .methodology-sep-code {
 
 /* ── About page: "Soy" and section headings adopt code-mode colors ── */
 body.code-mode [data-component="AboutHero"] h1,
-body.code-mode [data-component="AboutHero"] .heading-xl,
+body.code-mode [data-component="AboutHero"] .heading-xl {
+  color: var(--cm-function) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  text-shadow: none !important;
+}
+
+body.code-mode [data-component="AboutHero"] .heading-xl .text-primary-500 {
+  color: var(--cm-tag) !important;
+}
+
+/* ── Projects page: heading adopts code-mode colors ── */
+body.code-mode [data-component="ProjectsHero"] h1,
+body.code-mode [data-component="ProjectsHero"] .heading-xl {
+  color: var(--cm-function) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  text-shadow: none !important;
+}
+
+body.code-mode [data-component="ProjectsHero"] .heading-xl .text-primary-500 {
+  color: var(--cm-tag) !important;
+}
+
 body.code-mode [data-component="BiographySection"] .heading-md,
 body.code-mode [data-component="CareerTimeline"] .heading-md,
 body.code-mode [data-component="ValuesGrid"] .heading-md,
@@ -1983,8 +2083,13 @@ body.code-mode [data-component="MethodologyStack"] .heading-lg,
 body.code-mode [data-component="MethodologyStack"] .heading-md,
 body.code-mode [data-component="WorkflowSection"] .heading-lg,
 body.code-mode [data-component="CallToAction"] .heading-lg {
-  color: #e6edf3 !important;
+  color: var(--cm-function) !important;
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  text-shadow: none !important;
+}
+
+body.code-mode [data-component="CallToAction"] .heading-lg .text-primary-500 {
+  color: var(--cm-tag) !important;
 }
 
 /* "Soy" text on hero and about sections */
@@ -1997,24 +2102,43 @@ body.code-mode .hero-main-content .text-dark-900 {
 
 /* Section labels (Stack, Workflow, etc.) in code mode */
 body.code-mode [data-component="TechEcosystem"] .text-primary-500,
-body.code-mode [data-component="MethodologyStack"] .text-primary-500,
 body.code-mode [data-component="WorkflowSection"] .text-primary-500,
 body.code-mode [data-component="AboutHero"] .text-primary-500 {
   color: #50fa7b !important;
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
 }
 
+/* MethodologyStack: "Stack" in pink (cm-tag) */
+body.code-mode [data-component="MethodologyStack"] .text-primary-500 {
+  color: var(--cm-tag, #ff79c6) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+}
+
 /* ── Biography: Normal prose vs Code README toggle ── */
-.bio-readme {
+.bio-readme,
+.about-bio-readme {
   display: none;
 }
 
-body.code-mode .bio-prose {
+body.code-mode .bio-prose,
+body.code-mode .about-bio-prose {
   display: none;
 }
 
-body.code-mode .bio-readme {
+body.code-mode .bio-readme,
+body.code-mode .about-bio-readme {
   display: block;
+}
+
+/* ── AboutSection (Home): heading code-mode colors ── */
+body.code-mode [data-component="AboutSection"] .heading-lg {
+  color: var(--cm-function) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  text-shadow: none !important;
+}
+
+body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
+  color: var(--cm-tag) !important;
 }
 
 .readme-window {
@@ -2142,16 +2266,17 @@ body.code-mode .btn-cv-normal {
 body.code-mode .btn-cv-code {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  gap: 0.3rem;
+  padding: 0.875rem 1.75rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
   color: var(--cm-text-secondary, #c9d1d9);
   background: transparent;
   border: 1px solid var(--cm-border, #30363d);
   border-radius: 2px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   cursor: pointer;
 }
 
@@ -2258,9 +2383,7 @@ body.code-mode .btn-viewall-code:hover .code-parens {
 }
 
 body.code-mode .btn-viewall-code:hover .code-method::after {
-  content: ' { }';
-  color: var(--cm-text-muted, #7d8590);
-  font-weight: 400;
+  content: none;
 }
 
 /* ── Social links: Code mode (import syntax with icons) ── */
@@ -2762,18 +2885,8 @@ body.code-mode [data-component="BiographySection"] .dashed-border:has(img) {
 /* Subtitle gets muted mono style */
 body.code-mode [data-component="AboutHero"] .text-body {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.85rem;
-  line-height: 1.7;
   color: var(--cm-text-muted, #7d8590);
 }
-
-/* ── Process Section: dual mode titles ── */
-.process-title-code { display: none; }
-.process-title-code .code-comment { color: var(--cm-comment, #6272a4); }
-.process-title-code .code-punct { color: var(--cm-text-muted, #7d8590); }
-
-body.code-mode .process-title-normal { display: none; }
-body.code-mode .process-title-code { display: block; }
 
 /* Process grid: normal visible, code hidden by default */
 .process-grid-code { display: none; }
@@ -2840,13 +2953,8 @@ body.code-mode [data-component="ProcessSection"] .process-card p {
   color: var(--cm-text-muted) !important;
 }
 
-/* ── Design Principles: dual mode ── */
-.principles-title-code { display: none; }
-.principles-title-code .code-comment { color: var(--cm-comment, #6272a4); }
 .principles-code { display: none; }
 
-body.code-mode .principles-title-normal { display: none; }
-body.code-mode .principles-title-code { display: block; }
 body.code-mode .principles-normal { display: none; }
 body.code-mode .principles-code { display: block; }
 
@@ -2996,13 +3104,8 @@ body.code-mode [data-component="DesignPrinciples"] p {
 }
 
 /* ── KPI Dashboard: dual mode ── */
-.kpi-title-code { display: none; }
-.kpi-title-code .code-comment { color: var(--cm-comment, #6272a4); }
-.kpi-title-code .code-punct { color: var(--cm-text-muted, #7d8590); }
 .kpi-grid-code { display: none; }
 
-body.code-mode .kpi-title-normal { display: none; }
-body.code-mode .kpi-title-code { display: block; }
 body.code-mode .kpi-grid-normal { display: none !important; }
 body.code-mode .kpi-grid-code { display: block; }
 
