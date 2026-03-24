@@ -2,8 +2,6 @@
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
 import SystemConsole from '@/components/SystemConsole.astro';
-import { inject } from '@vercel/analytics';
-import SpeedInsights from '@vercel/speed-insights/astro';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
@@ -17,8 +15,6 @@ import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/600.css';
 import '@fontsource/space-grotesk/700.css';
 import '@/styles/global.css';
-
-inject();
 
 interface Props {
   title: string;
@@ -78,8 +74,6 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
       <slot />
     </main>
     <Footer />
-    <SpeedInsights />
-
     <script is:inline>
       // Code Mode: restore from localStorage (desktop only — lg breakpoint 1024px)
       (function() {
