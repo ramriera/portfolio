@@ -1239,115 +1239,14 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 }
 
 
-/* ── 17. Section headings as function declarations ── */
+/* ── 17. Cursor blink animation for code feel ── */
 @keyframes codeBlink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
-/* ── Base: function signature styles for section headings ── */
-
-/* JSDoc comment (::before) — shared styling */
-.code-mode .fn-heading::before {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
-  font-weight: 400;
-  font-style: italic;
-  color: var(--cm-comment);
-  margin-bottom: 4px;
-  letter-spacing: 0;
-  line-height: 1.5;
-}
-
-/* Function signature (::after) — shared styling */
-.code-mode .fn-heading::after {
-  display: inline;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6em;
-  font-weight: 400;
-  color: var(--cm-text-muted);
-  margin-left: 0.4em;
-  letter-spacing: 0;
-  white-space: nowrap;
-  vertical-align: baseline;
-}
-
-/* ── Per-section function declarations ── */
-
-/* FeaturedProjects */
-.code-mode [data-component="FeaturedProjects"] .fn-heading::before { content: '/** Renders featured case studies */'; }
-.code-mode [data-component="FeaturedProjects"] .fn-heading::after  { content: '→ renderFeatured()'; }
-
-/* AboutSection (Home) */
-.code-mode [data-component="AboutSection"] .fn-heading::before { content: '/** Loads the designer profile */'; }
-.code-mode [data-component="AboutSection"] .fn-heading::after  { content: '→ loadProfile()'; }
-
-/* CallToAction */
-.code-mode [data-component="CallToAction"] .fn-heading::before { content: '/** Initializes the contact module */'; }
-.code-mode [data-component="CallToAction"] .fn-heading::after  { content: '→ initContact()'; }
-
-/* ProjectsHero */
-.code-mode [data-component="ProjectsHero"] .fn-heading::before { content: '/** Lists all deployed projects */'; }
-.code-mode [data-component="ProjectsHero"] .fn-heading::after  { content: '→ listAll()'; }
-
-/* BiographySection */
-.code-mode [data-component="BiographySection"] .fn-heading::before { content: '/** Renders biography data */'; }
-.code-mode [data-component="BiographySection"] .fn-heading::after  { content: '→ renderBio()'; }
-
-/* MethodologyStack */
-.code-mode [data-component="MethodologyStack"] .fn-heading::before { content: '/** Loads design methodology */'; }
-.code-mode [data-component="MethodologyStack"] .fn-heading::after  { content: '→ loadStack()'; }
-
-/* ProcessSection / TechEcosystem */
-.code-mode [data-component="ProcessSection"] .fn-heading::before { content: '/** Loads the tech ecosystem */'; }
-.code-mode [data-component="ProcessSection"] .fn-heading::after  { content: '→ loadEcosystem()'; }
-
-/* WorkflowSection */
-.code-mode [data-component="WorkflowSection"] .fn-heading::before { content: '/** Renders the design workflow */'; }
-.code-mode [data-component="WorkflowSection"] .fn-heading::after  { content: '→ renderWorkflow()'; }
-
-/* ValuesGrid */
-.code-mode [data-component="ValuesGrid"] .fn-heading::before { content: '/** Computes impact metrics */'; }
-.code-mode [data-component="ValuesGrid"] .fn-heading::after  { content: '→ getMetrics()'; }
-
-/* CareerTimeline */
-.code-mode [data-component="CareerTimeline"] .fn-heading::before { content: '/** Fetches career timeline data */'; }
-.code-mode [data-component="CareerTimeline"] .fn-heading::after  { content: '→ getTimeline()'; }
-
-/* KPIDashboard (Impacto en números) */
-.code-mode [data-component="KPIDashboard"] .fn-heading::before { content: '/** Computes performance KPIs */'; }
-.code-mode [data-component="KPIDashboard"] .fn-heading::after  { content: '→ getMetrics()'; }
-
-/* DesignPrinciples */
-.code-mode [data-component="DesignPrinciples"] .fn-heading::before { content: '/** Loads core design principles */'; }
-.code-mode [data-component="DesignPrinciples"] .fn-heading::after  { content: '→ getPrinciples()'; }
-
-/* TechEcosystem */
-.code-mode [data-component="TechEcosystem"] .fn-heading::before { content: '/** Loads the tech ecosystem */'; }
-.code-mode [data-component="TechEcosystem"] .fn-heading::after  { content: '→ loadEcosystem()'; }
-
-/* ── Closing brace at section end ── */
-.code-mode [data-component="FeaturedProjects"]::after,
-.code-mode [data-component="AboutSection"]::after,
-.code-mode [data-component="CallToAction"]::after,
-.code-mode [data-component="BiographySection"]::after,
-.code-mode [data-component="MethodologyStack"]::after,
-.code-mode [data-component="ProcessSection"]::after,
-.code-mode [data-component="WorkflowSection"]::after,
-.code-mode [data-component="ValuesGrid"]::after,
-.code-mode [data-component="CareerTimeline"]::after {
-  content: '}';
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  color: var(--cm-text-muted);
-  opacity: 0.4;
-  margin-top: 12px;
-}
-
-/* ── H1 headings keep blinking cursor (no function wrapper) ── */
-.code-mode .heading-xl::after {
+.code-mode .heading-xl::after,
+.code-mode .heading-lg::after {
   content: '|';
   animation: codeBlink 1s step-end infinite;
   color: var(--cm-string);
@@ -1355,14 +1254,20 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   font-weight: 300;
 }
 
-/* ProjectsHero h1: no blinking cursor — the carousel already animates */
+/* ProjectsHero: no blinking cursor — the carousel already animates */
 .code-mode [data-component="ProjectsHero"] .heading-xl::after {
   content: none !important;
   display: none !important;
 }
 
-/* HeroSection h1: handled by its own code-view component */
-.code-mode [data-component="HeroSection"] .heading-xl::after {
+/* CallToAction: no blinking cursor on CTA headings */
+.code-mode [data-component="CallToAction"] .heading-lg::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* MethodologyStack: no blinking cursor */
+.code-mode [data-component="MethodologyStack"] .heading-lg::after {
   content: none !important;
   display: none !important;
 }
