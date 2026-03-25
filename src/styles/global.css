@@ -1239,38 +1239,69 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 }
 
 
-/* ── 17. Cursor blink animation for code feel ── */
+/* ── 17. Section headings as terminal commands ── */
 @keyframes codeBlink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
-.code-mode .heading-xl::after,
-.code-mode .heading-lg::after {
-  content: '|';
-  animation: codeBlink 1s step-end infinite;
-  color: var(--cm-string);
-  margin-left: 2px;
-  font-weight: 300;
+/* ── Terminal prompt prefix (::before) ── */
+.code-mode .heading-lg::before,
+.code-mode .heading-md::before {
+  content: '> ';
+  color: var(--cm-text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  font-size: 0.85em;
+  opacity: 0.6;
 }
 
-/* ProjectsHero: no blinking cursor — the carousel already animates */
+/* ── Blinking cursor suffix (::after) ── */
+.code-mode .heading-lg::after,
+.code-mode .heading-md::after {
+  content: '_';
+  animation: codeBlink 1s step-end infinite;
+  color: var(--cm-function);
+  margin-left: 4px;
+  font-weight: 300;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Subtle separator line below heading ── */
+.code-mode .heading-lg,
+.code-mode .heading-md {
+  padding-bottom: 0.6em;
+  border-bottom: 1px solid var(--cm-border);
+}
+
+/* h1 headings: same cursor but no prompt prefix or border */
+.code-mode .heading-xl::after {
+  content: '_';
+  animation: codeBlink 1s step-end infinite;
+  color: var(--cm-function);
+  margin-left: 4px;
+  font-weight: 300;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ProjectsHero h1: no cursor — the carousel already animates */
 .code-mode [data-component="ProjectsHero"] .heading-xl::after {
   content: none !important;
   display: none !important;
 }
 
-/* CallToAction: no blinking cursor on CTA headings */
-.code-mode [data-component="CallToAction"] .heading-lg::after {
+/* HeroSection h1: handled by its own code-view */
+.code-mode [data-component="HeroSection"] .heading-xl::after {
   content: none !important;
   display: none !important;
 }
 
-/* MethodologyStack: no blinking cursor */
-.code-mode [data-component="MethodologyStack"] .heading-lg::after {
-  content: none !important;
-  display: none !important;
+/* CallToAction: keep cursor but skip prompt on heading */
+.code-mode [data-component="CallToAction"] .heading-lg::before {
+  content: '> ';
 }
+
+/* MethodologyStack: keep prompt */
 
 /* ── 18. Line numbers feel on body ── */
 .code-mode main {
