@@ -1120,7 +1120,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'imaginbank-digital-banking',
-    title: 'Imaginbank: System-Level Redesign of a Mobile Banking Product',
+    title: 'Imaginbank',
     client: 'CaixaBank (Imaginbank)',
     year: '2021',
     category: 'Product Design',
