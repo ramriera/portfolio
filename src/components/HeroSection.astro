@@ -228,7 +228,9 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
       <div data-reveal data-delay="400" class="hero-stats-col"
         data-component="StatsBar"
         data-token="$spacing-gap: 2rem / 32px|$spacing-margin-top: 4rem / 64px">
-        <div class="hero-stats-inner">
+
+        <!-- ═══ Design mode: large numbers ═══ -->
+        <div class="hero-stats-inner hero-stats-design">
           <div class="hero-stat-item text-center">
             <div class="text-3xl font-semibold text-neutral-900"
               data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
@@ -253,6 +255,46 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
               <span class="count-up" data-target="12">0</span>+
             </div>
             <div class="text-xs text-neutral-400 tracking-wide mt-1">Clientes corporativos</div>
+          </div>
+        </div>
+
+        <!-- ═══ Code mode: Terminal Dashboard ═══ -->
+        <div class="hero-stats-terminal">
+          <div class="stats-terminal-header">
+            <span class="stats-terminal-dot stats-terminal-dot--red"></span>
+            <span class="stats-terminal-dot stats-terminal-dot--yellow"></span>
+            <span class="stats-terminal-dot stats-terminal-dot--green"></span>
+            <span class="stats-terminal-title">system_analytics.sh</span>
+          </div>
+          <div class="stats-terminal-body">
+            <div class="stats-terminal-comment">// System performance report</div>
+
+            <div class="stats-terminal-row">
+              <span class="stats-label">[EXP]</span>
+              <span class="stats-dots"></span>
+              <span class="stats-value"><span class="stats-ticker" data-target="6">00</span>Y</span>
+            </div>
+
+            <div class="stats-terminal-row">
+              <span class="stats-label">[PRJ]</span>
+              <span class="stats-dots"></span>
+              <span class="stats-value"><span class="stats-ticker" data-target="35">00</span>+</span>
+            </div>
+
+            <div class="stats-terminal-row">
+              <span class="stats-label">[CLI]</span>
+              <span class="stats-dots"></span>
+              <span class="stats-value"><span class="stats-ticker" data-target="12">00</span>+</span>
+            </div>
+
+            <div class="stats-terminal-divider"></div>
+
+            <div class="stats-terminal-row stats-terminal-row--status">
+              <span class="stats-label stats-label--status">[SYS]</span>
+              <span class="stats-dots"></span>
+              <span class="stats-status">Active</span>
+              <span class="stats-status-dot"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -456,9 +498,137 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     box-shadow: 0 0 20px rgba(139, 233, 253, 0.06);
   }
 
-  /* ── Stats in code mode: hide (data already in the code object) ── */
-  :global(.code-mode) .hero-stats-col {
-    /* keep visible — the stats panel complements the init block */
+  /* ── Stats: swap design ↔ terminal dashboard ── */
+  .hero-stats-terminal {
+    display: none;
+  }
+
+  :global(.code-mode) .hero-stats-design {
+    display: none !important;
+  }
+
+  :global(.code-mode) .hero-stats-terminal {
+    display: block;
+  }
+
+  /* ── Terminal Dashboard ── */
+  .stats-terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: var(--cm-bg, #0d1117);
+    border: 1px solid var(--cm-border);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    font-family: theme('fontFamily.mono');
+  }
+
+  .stats-terminal-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .stats-terminal-dot--red    { background: #ff5f57; }
+  .stats-terminal-dot--yellow { background: #febc2e; }
+  .stats-terminal-dot--green  { background: #28c840; }
+
+  .stats-terminal-title {
+    margin-left: 8px;
+    font-size: 0.62rem;
+    color: var(--cm-text-muted);
+  }
+
+  .stats-terminal-body {
+    background: var(--cm-bg-card);
+    border: 1px solid var(--cm-border);
+    border-radius: 0 0 8px 8px;
+    padding: 14px 16px;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.75rem;
+    line-height: 1.9;
+  }
+
+  .stats-terminal-comment {
+    color: var(--cm-comment);
+    font-style: italic;
+    font-size: 0.68rem;
+    margin-bottom: 8px;
+  }
+
+  .stats-terminal-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    white-space: nowrap;
+  }
+
+  .stats-label {
+    color: var(--cm-function);
+    font-weight: 600;
+    flex-shrink: 0;
+    min-width: 42px;
+  }
+
+  .stats-label--status {
+    color: var(--cm-string);
+  }
+
+  .stats-dots {
+    flex: 1;
+    overflow: hidden;
+    color: var(--cm-text-muted);
+    opacity: 0.25;
+    margin: 0 6px;
+  }
+
+  .stats-dots::before {
+    content: '························';
+    letter-spacing: 0.1em;
+  }
+
+  .stats-value {
+    color: var(--cm-attr);
+    font-weight: 600;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stats-ticker {
+    display: inline-block;
+    min-width: 1.6em;
+    text-align: right;
+  }
+
+  .stats-terminal-divider {
+    height: 1px;
+    background: var(--cm-border);
+    margin: 6px 0;
+    opacity: 0.5;
+  }
+
+  .stats-status {
+    color: var(--cm-string);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .stats-status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cm-string);
+    margin-left: 6px;
+    flex-shrink: 0;
+    animation: stats-pulse 2s ease-in-out infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes stats-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(80, 250, 123, 0.4); }
+    50%      { opacity: 0.6; box-shadow: 0 0 6px 2px rgba(80, 250, 123, 0.2); }
   }
 
   /* ── Responsive: smaller code on mobile ── */
@@ -482,6 +652,15 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
 
     .hero-file-badge {
       font-size: 0.6rem;
+    }
+
+    .stats-terminal-body {
+      font-size: 0.65rem;
+      padding: 10px 12px;
+    }
+
+    .stats-terminal-title {
+      font-size: 0.55rem;
     }
   }
 </style>
@@ -588,10 +767,46 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     setTimeout(deleteThenType, PAUSE + 1200);
   }
 
+  // ── Stats ticker: count up when code-mode is active ──
+  function initStatsTicker() {
+    const tickers = document.querySelectorAll<HTMLElement>('.stats-ticker');
+    if (!tickers.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        if (el.dataset.tickerDone) return;
+        el.dataset.tickerDone = '1';
+
+        const target = parseInt(el.dataset.target || '0', 10);
+        const duration = 1200;
+        const start = performance.now();
+
+        function tick(now: number) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // ease-out quart for satisfying deceleration
+          const eased = 1 - Math.pow(1 - progress, 4);
+          const current = Math.round(target * eased);
+          el.textContent = String(current).padStart(2, '0');
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        // Delay start slightly to sync with boot log
+        setTimeout(() => requestAnimationFrame(tick), 800);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.3 });
+
+    tickers.forEach((t) => observer.observe(t));
+  }
+
   // Init on load & Astro page transitions
   function initHeroCode() {
     initBootLog();
     initTypewriter();
+    initStatsTicker();
   }
 
   initHeroCode();
