@@ -533,7 +533,7 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     });
   }
 
-  // ── Typewriter effect for role field ──
+  // ── Typewriter effect for role field (humanized random delays) ──
   function initTypewriter() {
     const el = document.querySelector('.hero-role-typewriter') as HTMLElement | null;
     if (!el || el.dataset.twInit) return;
@@ -546,39 +546,46 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     if (!textEl) return;
 
     let roleIdx = 0;
-    const PAUSE   = 3000;  // time showing full word
-    const TYPE_MS = 70;    // ms per character typed
-    const DEL_MS  = 40;    // ms per character deleted
+    const PAUSE = 3000;
 
-    function deleteAndType() {
+    // Random delay to mimic human typing rhythm
+    function randType() { return 50 + Math.random() * 100; }   // 50–150ms
+    function randDel()  { return 25 + Math.random() * 45; }    // 25–70ms
+
+    function deleteThenType() {
       const current = textEl.textContent || '';
       let i = current.length;
 
-      // Delete phase
-      const delInterval = setInterval(() => {
-        i--;
-        textEl.textContent = current.slice(0, i);
+      // Delete phase — recursive setTimeout for random cadence
+      function deleteChar() {
         if (i <= 0) {
-          clearInterval(delInterval);
-          // Move to next role
+          // Switch to next role, start typing
           roleIdx = (roleIdx + 1) % roles.length;
           const next = roles[roleIdx];
           let j = 0;
-          // Type phase
-          const typeInterval = setInterval(() => {
+          function typeChar() {
             j++;
             textEl.textContent = next.slice(0, j);
-            if (j >= next.length) {
-              clearInterval(typeInterval);
-              setTimeout(deleteAndType, PAUSE);
+            if (j < next.length) {
+              setTimeout(typeChar, randType());
+            } else {
+              setTimeout(deleteThenType, PAUSE);
             }
-          }, TYPE_MS);
+          }
+          // Slight pause before typing starts (like a human thinking)
+          setTimeout(typeChar, 200 + Math.random() * 300);
+          return;
         }
-      }, DEL_MS);
+        i--;
+        textEl.textContent = current.slice(0, i);
+        setTimeout(deleteChar, randDel());
+      }
+
+      deleteChar();
     }
 
     // Start after initial pause
-    setTimeout(deleteAndType, PAUSE + 1200);
+    setTimeout(deleteThenType, PAUSE + 1200);
   }
 
   // Init on load & Astro page transitions

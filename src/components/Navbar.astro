@@ -113,6 +113,21 @@ const currentPath = Astro.url.pathname;
   </a>
 </div>
 
+<!-- Code Mode: IDE breadcrumb bar (below navbar) -->
+<div id="code-breadcrumb" class="code-breadcrumb" aria-hidden="true">
+  <div class="container-custom">
+    <div class="code-breadcrumb-inner">
+      <span class="crumb-muted">portfolio</span>
+      <span class="crumb-sep">&gt;</span>
+      <span class="crumb-muted">src</span>
+      <span class="crumb-sep">&gt;</span>
+      <span class="crumb-active" id="crumb-section">index</span>
+      <span class="crumb-sep crumb-node-sep">&gt;</span>
+      <span class="crumb-node" id="crumb-node"></span>
+    </div>
+  </div>
+</div>
+
 <!-- Spacer for fixed navbar -->
 <div class="h-20"></div>
 
@@ -176,6 +191,81 @@ const currentPath = Astro.url.pathname;
     letter-spacing: 0.05em;
     color: rgba(0, 0, 0, 0.45);
     white-space: nowrap;
+  }
+
+  /* ── Code breadcrumb bar ── */
+  .code-breadcrumb {
+    display: none;
+    position: fixed;
+    top: 80px; /* below navbar */
+    left: 0;
+    right: 0;
+    z-index: 49;
+    height: 28px;
+    background: var(--cm-bg, #0d1117);
+    border-bottom: 1px solid var(--cm-border, #30363d);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  :global(.code-mode) .code-breadcrumb {
+    display: block;
+  }
+
+  /* Hide when navbar is hidden */
+  :global(.code-mode) .navbar-hidden ~ .code-breadcrumb {
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+  }
+
+  .code-breadcrumb-inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .crumb-muted {
+    color: var(--cm-text-muted, #7d8590);
+  }
+
+  .crumb-sep {
+    color: var(--cm-text-muted, #7d8590);
+    opacity: 0.5;
+  }
+
+  .crumb-active {
+    color: var(--cm-text-secondary, #c9d1d9);
+    font-weight: 500;
+  }
+
+  .crumb-node-sep,
+  .crumb-node {
+    display: none;
+  }
+
+  .crumb-node.visible ~ .crumb-node-sep,
+  .crumb-node.visible {
+    display: inline;
+  }
+
+  /* Fix: reverse sibling order — sep appears before node */
+  .crumb-node-sep {
+    display: none;
+  }
+
+  .crumb-node.visible {
+    display: inline;
+    color: var(--cm-function, #8be9fd);
+  }
+
+  /* When node is visible, show its preceding separator */
+  :global(.code-mode) .code-breadcrumb:has(.crumb-node.visible) .crumb-node-sep {
+    display: inline;
   }
 </style>
 
@@ -324,4 +414,93 @@ const currentPath = Astro.url.pathname;
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMenu);
   });
+</script>
+
+<script>
+  // ── Code Mode: Dynamic breadcrumb from scroll ──
+  function initBreadcrumb() {
+    const sectionEl = document.getElementById('crumb-section');
+    const nodeEl = document.getElementById('crumb-node');
+    const breadcrumb = document.getElementById('code-breadcrumb');
+    if (!sectionEl || !nodeEl || !breadcrumb) return;
+
+    // Determine page-level section name from pathname
+    const path = window.location.pathname.replace(/\/$/, '') || '/';
+    const segments = path.split('/').filter(Boolean);
+
+    if (segments.length === 0) {
+      sectionEl.textContent = 'index';
+    } else if (segments[0] === 'projects' && segments[1]) {
+      sectionEl.textContent = 'projects';
+      nodeEl.textContent = `[${segments[1]}]`;
+      nodeEl.classList.add('visible');
+      return; // Static breadcrumb for project detail pages
+    } else if (segments[0] === 'projects') {
+      sectionEl.textContent = 'projects';
+    } else {
+      sectionEl.textContent = segments[0];
+    }
+
+    // On index/projects page: observe project cards to update active node
+    const cards = document.querySelectorAll<HTMLElement>('.project-card[data-slug]');
+    if (!cards.length) return;
+
+    let currentSlug = '';
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the most visible card
+        let best: IntersectionObserverEntry | null = null;
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!best || entry.intersectionRatio > best.intersectionRatio) {
+              best = entry;
+            }
+          }
+        });
+
+        if (best) {
+          const slug = (best.target as HTMLElement).dataset.slug || '';
+          if (slug !== currentSlug) {
+            currentSlug = slug;
+            nodeEl.textContent = `[${slug}]`;
+            nodeEl.classList.add('visible');
+          }
+        }
+      },
+      { threshold: [0.2, 0.5, 0.8], rootMargin: '-80px 0px -30% 0px' }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    // Clear node when scrolled to top (hero visible)
+    const hero = document.querySelector('[data-component="HeroSection"]');
+    if (hero) {
+      const heroObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            currentSlug = '';
+            nodeEl.textContent = '';
+            nodeEl.classList.remove('visible');
+          }
+        },
+        { threshold: 0.3 }
+      );
+      heroObserver.observe(hero);
+    }
+
+    // Sync breadcrumb visibility with navbar hide/show
+    const navbarEl = document.getElementById('navbar');
+    if (navbarEl) {
+      const navObserver = new MutationObserver(() => {
+        const hidden = navbarEl.classList.contains('navbar-hidden');
+        breadcrumb.style.opacity = hidden ? '0' : '1';
+        breadcrumb.style.transform = hidden ? 'translateY(-100%)' : 'translateY(0)';
+      });
+      navObserver.observe(navbarEl, { attributes: true, attributeFilter: ['class'] });
+    }
+  }
+
+  initBreadcrumb();
+  document.addEventListener('astro:page-load', initBreadcrumb);
 </script>
