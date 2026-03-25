@@ -884,7 +884,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
       })();
     </script>
   <script>
-    import { inject } from '@vercel/analytics';
+    import { inject, track } from '@vercel/analytics';
     import { injectSpeedInsights } from '@vercel/speed-insights';
 
     // Flag yourself: visit any page with ?notrack to disable analytics
@@ -898,6 +898,44 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     injectSpeedInsights({
       sampleRate: 1,
       beforeSend: (data) => isOwner ? null : data,
+    });
+
+    // ── Custom event tracking ──
+
+    // Code Mode toggle
+    document.getElementById('code-mode-toggle')?.addEventListener('click', () => {
+      const entering = !document.body.classList.contains('code-mode');
+      track('code_mode_toggle', { action: entering ? 'on' : 'off' });
+    });
+
+    // Contact CTA clicks (mailto links)
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:"]').forEach((link) => {
+      link.addEventListener('click', () => {
+        track('contact_click', { location: link.closest('nav') ? 'navbar' : link.closest('footer') ? 'footer' : 'page' });
+      });
+    });
+
+    // Project card clicks
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="/projects/"]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const slug = link.getAttribute('href')?.replace('/projects/', '') || '';
+        track('project_click', { project: slug });
+      });
+    });
+
+    // Project filter clicks
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter') || '';
+        track('filter_click', { category: filter });
+      });
+    });
+
+    // External link clicks (LinkedIn, GitHub, etc.)
+    document.querySelectorAll<HTMLAnchorElement>('a[target="_blank"]').forEach((link) => {
+      link.addEventListener('click', () => {
+        track('external_link', { url: link.href });
+      });
     });
   </script>
   </body>
