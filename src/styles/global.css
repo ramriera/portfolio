@@ -893,14 +893,26 @@ body.code-mode aside:hover {
   gap: 1.25rem !important;
 }
 
-/* Hero: reduce min-height so it doesn't float in empty space */
+/* Hero: match section-padding spacing instead of min-height centering */
 .code-mode [data-component="HeroSection"] {
-  min-height: 70svh !important;
+  min-height: auto !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
 }
 
 @media (min-width: 768px) {
   .code-mode [data-component="HeroSection"] {
-    min-height: 75vh !important;
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .code-mode [data-component="HeroSection"] {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
   }
 }
 
