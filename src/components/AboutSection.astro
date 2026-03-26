@@ -43,12 +43,26 @@ import profileImg from '@/assets/shared/foto-perfil.png';
           </span>
         </div>
 
-        <h2 data-reveal data-delay="100" class="heading-lg mb-6"
+        <h2 data-reveal data-delay="100" class="heading-lg mb-6 about-heading-design"
           data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)|$spacing-bottom: 1.5rem / 24px">
           Diseñador con visión
           <span class="text-primary-500"
             data-token="$color-primary-500: #D97757">estratégica</span>
         </h2>
+
+        <!-- Code mode: JSDoc block replaces heading -->
+        <div data-reveal data-delay="100" class="about-jsdoc mb-6" aria-hidden="true">
+          <div class="jsdoc-block">
+            <div class="jsdoc-line"><span class="jsdoc-delim">/**</span></div>
+            <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-desc">Diseñador con visión estratégica</span></div>
+            <div class="jsdoc-line"><span class="jsdoc-star"> *</span></div>
+            <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@role</span> <span class="jsdoc-value">UX Lead · Product Designer</span></div>
+            <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@vision</span> <span class="jsdoc-value">Strategic Product Design</span></div>
+            <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@method</span> <span class="jsdoc-value">Data-driven & User-centric</span></div>
+            <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@stack</span> <span class="jsdoc-value">Design Systems · DesignOps · UX Research</span></div>
+            <div class="jsdoc-line"><span class="jsdoc-delim"> */</span></div>
+          </div>
+        </div>
 
         <!-- Normal mode: prose paragraphs -->
         <div data-reveal data-delay="200" class="about-bio-prose space-y-5 text-body mb-10"
@@ -141,3 +155,51 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     </div>
   </div>
 </section>
+
+<style>
+  /* ═══ JSDoc heading — code mode only ═══ */
+  .about-jsdoc {
+    display: none;
+  }
+
+  :global(.code-mode) .about-heading-design {
+    display: none !important;
+  }
+
+  :global(.code-mode) .about-jsdoc {
+    display: block;
+  }
+
+  .jsdoc-block {
+    font-family: theme('fontFamily.mono');
+    font-size: clamp(0.72rem, 1.1vw, 0.85rem);
+    line-height: 1.75;
+  }
+
+  .jsdoc-line {
+    white-space: nowrap;
+  }
+
+  .jsdoc-delim {
+    color: var(--cm-comment);
+  }
+
+  .jsdoc-star {
+    color: var(--cm-comment);
+    opacity: 0.6;
+  }
+
+  .jsdoc-desc {
+    color: var(--cm-text-secondary);
+    font-weight: 500;
+    font-size: 1.15em;
+  }
+
+  .jsdoc-tag {
+    color: var(--cm-keyword);
+  }
+
+  .jsdoc-value {
+    color: var(--cm-text-muted);
+  }
+</style>
