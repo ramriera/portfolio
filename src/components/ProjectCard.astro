@@ -125,7 +125,7 @@ const codeLines = [
   <div class="ide-code-content">
     <div class="ide-code-block">
       {codeLines.map((line) => (
-        <div class="ide-line" data-line={line.num}>
+        <div class="ide-line gl" data-line={line.num}>
           <span class="ide-gutter">{line.num}</span>
           <span class="ide-code">
             {line.tokens.map((tok) => (
@@ -384,18 +384,9 @@ const codeLines = [
     box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
   }
 
+  /* Gutter numbers hidden — replaced by global .gl counter */
   :global(.code-mode) .ide-gutter {
-    display: inline-block;
-    width: 36px;
-    text-align: right;
-    padding-right: 12px;
-    color: var(--cm-text-muted);
-    opacity: 0.45;
-    user-select: none;
-    flex-shrink: 0;
-    font-size: inherit;
-    line-height: inherit;
-    transition: color 0.2s ease, opacity 0.2s ease;
+    display: none;
   }
 
   :global(.code-mode) .ide-line:hover .ide-gutter {

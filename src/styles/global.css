@@ -1360,15 +1360,96 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   display: none !important;
 }
 
-/* ── 18. Line numbers feel on body ── */
+/* ── 18. Global gutter line numbers ── */
+/* CSS counter that increments for every .gl element inside code-mode main */
 .code-mode main {
-  background-image:
-    repeating-linear-gradient(
-      transparent,
-      transparent 1.8rem,
-      rgba(98, 114, 164, 0.04) 1.8rem,
-      rgba(98, 114, 164, 0.04) 3.6rem
-    );
+  counter-reset: global-line;
+}
+
+.code-mode .gl {
+  counter-increment: global-line;
+  position: relative;
+  padding-left: 2.75rem;
+}
+
+.code-mode .gl::before {
+  content: counter(global-line);
+  position: absolute;
+  left: 0;
+  width: 2.25rem;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  line-height: inherit;
+  color: var(--cm-comment, #6272a4);
+  opacity: 0.3;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Lines inside window bodies — smaller indent since body has its own padding */
+.code-mode .jsdoc-body .gl,
+.code-mode .readme-body .gl,
+.code-mode .proj-window__body .gl,
+.code-mode .cta-console__body .gl {
+  padding-left: 2.25rem;
+}
+
+.code-mode .jsdoc-body .gl::before,
+.code-mode .readme-body .gl::before,
+.code-mode .proj-window__body .gl::before,
+.code-mode .cta-console__body .gl::before {
+  width: 1.75rem;
+}
+
+/* Spacer group: only visible in code-mode */
+.gl-spacer-group {
+  display: none;
+}
+
+.code-mode .gl-spacer-group {
+  display: block;
+  padding-left: var(--main-margin);
+}
+
+.code-mode .gl--spacer {
+  height: 1.3rem;
+}
+
+/* Blank spacer lines between sections — very dim numbers */
+.code-mode .gl--spacer::before {
+  opacity: 0.12;
+}
+
+/* Footer closing line — hidden by default */
+.footer-endline {
+  display: none;
+}
+
+.code-mode .footer-endline {
+  display: block;
+  counter-increment: global-line;
+  position: relative;
+  padding-left: 2.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--cm-comment, #6272a4);
+  opacity: 0.5;
+  margin-top: 0.5rem;
+}
+
+.code-mode .footer-endline::before {
+  content: counter(global-line);
+  position: absolute;
+  left: 0;
+  width: 2.25rem;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  line-height: inherit;
+  color: var(--cm-comment, #6272a4);
+  opacity: 0.3;
+  user-select: none;
 }
 
 /* ── 19. Token Inspector — hover tooltips for design tokens ── */
@@ -2286,7 +2367,10 @@ body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
   line-height: 1.6;
   overflow-x: auto;
   color: #cdd6f4;
-  white-space: pre-wrap;
+}
+
+.readme-line {
+  white-space: nowrap;
 }
 
 .readme-comment {
