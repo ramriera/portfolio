@@ -231,7 +231,9 @@ const featuredProjects = projectOrder
 
   .proj-window__action:hover {
     color: #e6edf3;
-    border-color: var(--cm-constant, #f1fa8c);
+    border-color: var(--cm-string, #50fa7b);
+    background: rgba(80, 250, 123, 0.06);
+    box-shadow: 0 0 12px rgba(80, 250, 123, 0.1);
   }
 
   .proj-window__action:hover .code-fn,
@@ -241,8 +243,8 @@ const featuredProjects = projectOrder
   }
 
   .proj-window__action:hover .code-method {
-    color: var(--cm-constant, #f1fa8c);
-    text-shadow: 0 0 8px rgba(241, 250, 140, 0.3);
+    color: var(--cm-string, #50fa7b);
+    text-shadow: 0 0 8px rgba(80, 250, 123, 0.3);
   }
 
   .proj-window__action-icon {
@@ -319,7 +321,16 @@ const featuredProjects = projectOrder
   /* Action line: gutter + empty code + button right-aligned */
   .proj-line--action {
     padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .proj-line--action:hover::before {
+    background: var(--cm-string, #50fa7b);
+    box-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
+  }
+
+  .proj-line--action:hover .proj-gutter {
+    color: var(--cm-string, #50fa7b);
   }
 
   .proj-tok--comment { color: var(--cm-comment, #6272a4); font-style: italic; }
