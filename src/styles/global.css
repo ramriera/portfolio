@@ -1239,14 +1239,74 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 }
 
 
-/* ── 17. Cursor blink animation for code feel ── */
+/* ── 17. Section headings as code file headers ── */
 @keyframes codeBlink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
-.code-mode .heading-xl::after,
-.code-mode .heading-lg::after {
+/* ── Section path + metadata per component ── */
+.code-mode [data-component="FeaturedProjects"]  { --sec-path: '/src/projects/featured'; --sec-meta: 'MODULE · 4.2KB'; }
+.code-mode [data-component="AboutSection"]      { --sec-path: '/src/components/about'; --sec-meta: 'COMPONENT · 2.8KB'; }
+.code-mode [data-component="CallToAction"]      { --sec-path: '/src/components/cta'; --sec-meta: 'MODULE · 1.1KB'; }
+.code-mode [data-component="ProjectsHero"]      { --sec-path: '/src/pages/projects'; --sec-meta: 'PAGE · 3.6KB'; }
+.code-mode [data-component="BiographySection"]  { --sec-path: '/src/views/biography'; --sec-meta: 'VIEW · 5.1KB'; }
+.code-mode [data-component="CareerTimeline"]    { --sec-path: '/src/data/timeline'; --sec-meta: 'DATA · 2.4KB'; }
+.code-mode [data-component="KPIDashboard"]      { --sec-path: '/src/analytics/kpis'; --sec-meta: 'METRICS · 1.8KB'; }
+.code-mode [data-component="DesignPrinciples"]  { --sec-path: '/src/config/principles'; --sec-meta: 'CONFIG · 1.5KB'; }
+.code-mode [data-component="MethodologyStack"]  { --sec-path: '/src/config/methodology'; --sec-meta: 'CONFIG · 3.2KB'; }
+.code-mode [data-component="ProcessSection"]    { --sec-path: '/src/config/ecosystem'; --sec-meta: 'CONFIG · 2.9KB'; }
+.code-mode [data-component="TechEcosystem"]     { --sec-path: '/src/config/techstack'; --sec-meta: 'CONFIG · 2.1KB'; }
+.code-mode [data-component="WorkflowSection"]   { --sec-path: '/src/views/workflow'; --sec-meta: 'VIEW · 1.7KB'; }
+
+/* ── Code header bar on h2/h3 headings ── */
+.code-mode .heading-lg,
+.code-mode .heading-md {
+  position: relative;
+  background: rgba(22, 27, 34, 0.6) !important;
+  border-left: 2px solid var(--cm-function) !important;
+  padding: 0.6em 1em !important;
+  margin-left: -1em;
+  margin-right: -1em;
+  border-radius: 0 4px 4px 0;
+  display: flex !important;
+  align-items: baseline;
+  gap: 0.6em;
+  flex-wrap: wrap;
+}
+
+/* Path prefix: // @section /src/... */
+.code-mode .heading-lg::before,
+.code-mode .heading-md::before {
+  content: '// @section ' var(--sec-path, '/src/module');
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55em;
+  font-weight: 400;
+  color: var(--cm-comment);
+  white-space: nowrap;
+  order: -1;
+  width: 100%;
+  display: block;
+  margin-bottom: -0.2em;
+  letter-spacing: 0;
+}
+
+/* Metadata suffix: [TYPE · SIZE] */
+.code-mode .heading-lg::after,
+.code-mode .heading-md::after {
+  content: '[' var(--sec-meta, 'MODULE') ']';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.42em;
+  font-weight: 400;
+  color: var(--cm-text-muted);
+  opacity: 0.5;
+  white-space: nowrap;
+  margin-left: auto;
+  letter-spacing: 0.02em;
+}
+
+/* ── h1 headings: blinking cursor only ── */
+.code-mode .heading-xl::after {
   content: '|';
   animation: codeBlink 1s step-end infinite;
   color: var(--cm-string);
@@ -1254,20 +1314,14 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   font-weight: 300;
 }
 
-/* ProjectsHero: no blinking cursor — the carousel already animates */
+/* ProjectsHero h1: no cursor — carousel animates */
 .code-mode [data-component="ProjectsHero"] .heading-xl::after {
   content: none !important;
   display: none !important;
 }
 
-/* CallToAction: no blinking cursor on CTA headings */
-.code-mode [data-component="CallToAction"] .heading-lg::after {
-  content: none !important;
-  display: none !important;
-}
-
-/* MethodologyStack: no blinking cursor */
-.code-mode [data-component="MethodologyStack"] .heading-lg::after {
+/* HeroSection h1: handled by code-view */
+.code-mode [data-component="HeroSection"] .heading-xl::after {
   content: none !important;
   display: none !important;
 }
