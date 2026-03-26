@@ -817,6 +817,93 @@ body.code-mode aside:hover {
 .code-mode section[data-component="ParallaxCover"] > .container-custom::before { content: '<ParallaxCover>'; }
 .code-mode section[data-component="ParallaxCover"] > .container-custom::after { content: '</ParallaxCover>'; }
 
+/* ── 5b. Code-mode compact spacing ── */
+/* Reduce vertical rhythm ~35% to feel like a single code file */
+.code-mode .section-padding {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .code-mode .section-padding {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .code-mode .section-padding {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+}
+
+/* Tighter gap between section header and project cards */
+.code-mode [data-component="FeaturedProjects"] .flex.flex-col {
+  margin-bottom: 1.5rem !important;
+}
+
+.code-mode [data-component="FeaturedProjects"] .mb-12 {
+  margin-bottom: 1.5rem !important;
+}
+
+.code-mode [data-component="FeaturedProjects"] .md\:mb-16 {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Reduce project grid vertical gaps */
+.code-mode [data-component="FeaturedProjects"] .gap-y-10 {
+  row-gap: 1.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .code-mode [data-component="FeaturedProjects"] .md\:gap-y-14 {
+    row-gap: 2rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .code-mode [data-component="FeaturedProjects"] .lg\:gap-y-16 {
+    row-gap: 2rem !important;
+  }
+}
+
+/* CTA section tighter spacing */
+.code-mode [data-component="CallToAction"] .mb-6 {
+  margin-bottom: 0.75rem !important;
+}
+
+.code-mode [data-component="CallToAction"] .mb-10 {
+  margin-bottom: 1.5rem !important;
+}
+
+/* About section grid gap reduction */
+.code-mode [data-component="AboutSection"] .gap-20 {
+  gap: 2.5rem !important;
+}
+
+@media (min-width: 1024px) {
+  .code-mode [data-component="AboutSection"] .gap-20 {
+    gap: 3rem !important;
+  }
+}
+
+/* Projects listing page: tighter grid */
+.code-mode [data-component="ProjectsListing"] .gap-8 {
+  gap: 1.25rem !important;
+}
+
+/* Hero: reduce min-height so it doesn't float in empty space */
+.code-mode [data-component="HeroSection"] {
+  min-height: 70svh !important;
+}
+
+@media (min-width: 768px) {
+  .code-mode [data-component="HeroSection"] {
+    min-height: 75vh !important;
+  }
+}
+
 /* ── 6. Container borders (box-model) ── */
 /* Use outline instead of border so padding/margin stays identical to normal mode */
 .code-mode .container-custom {
@@ -2177,11 +2264,11 @@ body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
 }
 
 .readme-body {
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.25rem;
   margin: 0;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 0.82rem;
-  line-height: 1.7;
+  line-height: 1.6;
   overflow-x: auto;
   color: #cdd6f4;
   white-space: pre-wrap;
