@@ -83,29 +83,39 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
 
         <!-- ═══ CODE MODE: System Initialization ═══ -->
         <div class="hero-code-view" aria-hidden="true">
-          <!-- File badge -->
-          <div class="hero-file-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-            </svg>
-            main.ts
-          </div>
+          <!-- Terminal window container -->
+          <div class="hero-window">
+            <!-- Titlebar -->
+            <div class="hero-window__titlebar">
+              <div class="hero-window__dots">
+                <span class="json-dot json-dot--red"></span>
+                <span class="json-dot json-dot--yellow"></span>
+                <span class="json-dot json-dot--green"></span>
+              </div>
+              <span class="hero-window__filename">
+                <svg class="hero-window__file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+                </svg>
+                main.ts
+              </span>
+              <span class="hero-window__tab">main.ts</span>
+            </div>
 
-          <!-- Boot log sequence -->
-          <div class="hero-boot-log" id="hero-boot-log">
-            <div class="hero-log-line" data-delay="200">
-              <span class="hero-log-ok">[OK]</span> Core modules loaded
+            <!-- Boot log sequence -->
+            <div class="hero-boot-log" id="hero-boot-log">
+              <div class="hero-log-line" data-delay="200">
+                <span class="hero-log-ok">[OK]</span> Core modules loaded
+              </div>
+              <div class="hero-log-line" data-delay="600">
+                <span class="hero-log-ok">[OK]</span> Strategy engine online
+              </div>
+              <div class="hero-log-line" data-delay="1000">
+                <span class="hero-log-ok">[OK]</span> Design system ready
+              </div>
             </div>
-            <div class="hero-log-line" data-delay="600">
-              <span class="hero-log-ok">[OK]</span> Strategy engine online
-            </div>
-            <div class="hero-log-line" data-delay="1000">
-              <span class="hero-log-ok">[OK]</span> Design system ready
-            </div>
-          </div>
 
-          <!-- Import statement -->
-          <div class="hero-code-block">
+            <!-- Import statement -->
+            <div class="hero-code-block">
             <div class="hero-code-line">
               <span class="hero-ln">1</span>
               <span class="hero-tok-keyword">import</span>
@@ -211,16 +221,17 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
             </div>
           </div>
 
-          <!-- Terminal prompt CTA -->
-          <div class="hero-code-terminal">
-            <a href="/projects" class="hero-code-terminal-link">
-              <span class="hero-tok-string">$</span>
-              <span class="hero-tok-plain"> </span>
-              <span class="hero-tok-fn">open_projects</span>
-              <span class="hero-tok-punct">.sh</span>
-              <span class="hero-cursor-blink"></span>
-            </a>
-          </div>
+            <!-- Terminal prompt CTA -->
+            <div class="hero-code-terminal">
+              <a href="/projects" class="hero-code-terminal-link">
+                <span class="hero-tok-string">$</span>
+                <span class="hero-tok-plain"> </span>
+                <span class="hero-tok-fn">open_projects</span>
+                <span class="hero-tok-punct">.sh</span>
+                <span class="hero-cursor-blink"></span>
+              </a>
+            </div>
+          </div><!-- /hero-window -->
         </div>
       </div>
 
@@ -338,28 +349,60 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     text-align: left;
   }
 
-  /* ── File badge (top-right corner) ── */
-  .hero-file-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 12px;
-    margin-bottom: 14px;
-    font-family: theme('fontFamily.mono');
-    font-size: 0.7rem;
-    color: var(--cm-text-muted);
-    background: var(--cm-bg-surface);
+  /* ── Hero window container ── */
+  .hero-window {
+    background: #1e1e2e;
+    border-radius: 8px;
     border: 1px solid var(--cm-border);
-    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   }
 
-  .hero-file-badge svg {
-    color: var(--cm-function);
+  .hero-window__titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    background: #181825;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .hero-window__dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .hero-window__filename {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #7d8590;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .hero-window__file-icon {
+    color: #7d8590;
+    flex-shrink: 0;
+  }
+
+  .hero-window__tab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #e6edf3;
+    background: #1e1e2e;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px 4px 0 0;
+    margin-left: auto;
+    border: 1px solid var(--cm-border, #30363d);
+    border-bottom: 1px solid #1e1e2e;
   }
 
   /* ── Boot log sequence ── */
   .hero-boot-log {
-    margin-bottom: 12px;
+    padding: 0.75rem 0.875rem 0;
+    margin-bottom: 0;
     font-family: theme('fontFamily.mono');
     font-size: 0.75rem;
     line-height: 1.8;
@@ -382,13 +425,9 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     font-weight: 600;
   }
 
-  /* ── Code block ── */
+  /* ── Code block (inside window) ── */
   .hero-code-block {
-    background: var(--cm-bg-card);
-    border: 1px solid var(--cm-border);
-    border-radius: 8px;
-    padding: 10px 0;
-    margin-bottom: 10px;
+    padding: 0.5rem 0;
     overflow-x: auto;
   }
 
@@ -474,18 +513,19 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     50%      { opacity: 0; }
   }
 
-  /* ── Terminal prompt CTA ── */
+  /* ── Terminal prompt CTA (inside window) ── */
   .hero-code-terminal {
-    display: inline-block;
+    padding: 0.5rem 0.875rem 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
   }
 
   .hero-code-terminal-link {
     display: inline-flex;
     align-items: center;
     gap: 0;
-    padding: 10px 20px;
+    padding: 8px 16px;
     font-family: theme('fontFamily.mono');
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     background: var(--cm-bg-surface);
     border: 1px solid var(--cm-border);
     border-radius: 6px;
@@ -636,7 +676,7 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
   /* ── Responsive: smaller code on mobile ── */
   @media (max-width: 639px) {
     .hero-code-block {
-      padding: 14px 0;
+      padding: 0.35rem 0;
     }
 
     .hero-code-line {
@@ -652,8 +692,8 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
       font-size: 0.65rem;
     }
 
-    .hero-file-badge {
-      font-size: 0.6rem;
+    .hero-window__tab {
+      display: none;
     }
 
     .stats-terminal-body {

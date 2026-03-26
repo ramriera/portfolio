@@ -80,13 +80,13 @@ import { siteConfig } from '@/utils/data';
         <div class="cta-console__body">
           <!-- JSDoc heading -->
           <div class="cta-console__jsdoc">
-            <div class="cta-console__line"><span class="cta-tok--comment">/**</span></div>
-            <div class="cta-console__line"><span class="cta-tok--comment"> *</span> <span class="cta-tok--desc">¿Tienes un </span><span class="cta-tok--highlight">proyecto</span><span class="cta-tok--desc"> en mente?</span></div>
-            <div class="cta-console__line"><span class="cta-tok--comment"> *</span></div>
-            <div class="cta-console__line"><span class="cta-tok--comment"> *</span> <span class="cta-tok--tag">@description</span> <span class="cta-tok--value">Me encantaría escuchar tu idea.</span></div>
-            <div class="cta-console__line"><span class="cta-tok--comment"> *</span> <span class="cta-tok--value">Hablemos sobre cómo puedo ayudarte</span></div>
-            <div class="cta-console__line"><span class="cta-tok--comment"> *</span> <span class="cta-tok--value">a crear algo extraordinario.</span></div>
-            <div class="cta-console__line"><span class="cta-tok--comment"> */</span></div>
+            <div class="cta-console__line"><span class="cta-gutter">1</span><span class="cta-code"><span class="cta-tok--comment">/**</span></span></div>
+            <div class="cta-console__line"><span class="cta-gutter">2</span><span class="cta-code"><span class="cta-tok--comment"> *</span> <span class="cta-tok--desc">¿Tienes un </span><span class="cta-tok--highlight">proyecto</span><span class="cta-tok--desc"> en mente?</span></span></div>
+            <div class="cta-console__line"><span class="cta-gutter">3</span><span class="cta-code"><span class="cta-tok--comment"> *</span></span></div>
+            <div class="cta-console__line"><span class="cta-gutter">4</span><span class="cta-code"><span class="cta-tok--comment"> *</span> <span class="cta-tok--tag">@description</span> <span class="cta-tok--value">Me encantaría escuchar tu idea.</span></span></div>
+            <div class="cta-console__line"><span class="cta-gutter">5</span><span class="cta-code"><span class="cta-tok--comment"> *</span> <span class="cta-tok--value">Hablemos sobre cómo puedo ayudarte</span></span></div>
+            <div class="cta-console__line"><span class="cta-gutter">6</span><span class="cta-code"><span class="cta-tok--comment"> *</span> <span class="cta-tok--value">a crear algo extraordinario.</span></span></div>
+            <div class="cta-console__line"><span class="cta-gutter">7</span><span class="cta-code"><span class="cta-tok--comment"> */</span></span></div>
           </div>
 
           <!-- Terminal output line (typewriter) -->
@@ -249,7 +249,7 @@ import { siteConfig } from '@/utils/data';
 
   /* ═══ Console body ═══ */
   .cta-console__body {
-    padding: 0.75rem 0.875rem;
+    padding: 0.5rem 0;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 0.78rem;
     line-height: 1.6;
@@ -261,7 +261,55 @@ import { siteConfig } from '@/utils/data';
   }
 
   .cta-console__line {
+    display: flex;
+    align-items: baseline;
     white-space: nowrap;
+    position: relative;
+    transition: background 0.15s ease;
+  }
+
+  .cta-console__line:hover {
+    background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
+  }
+
+  .cta-console__line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 2px;
+    background: transparent;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .cta-console__line:hover::before {
+    background: var(--cm-function, #8be9fd);
+    box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
+  }
+
+  .cta-gutter {
+    display: inline-block;
+    min-width: 36px;
+    text-align: right;
+    padding-right: 12px;
+    color: var(--cm-text-muted, #7d8590);
+    opacity: 0.45;
+    user-select: none;
+    flex-shrink: 0;
+    font-size: inherit;
+    line-height: inherit;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .cta-console__line:hover .cta-gutter {
+    color: var(--cm-function, #8be9fd);
+    opacity: 1;
+  }
+
+  .cta-code {
+    flex: 1;
+    min-width: 0;
   }
 
   .cta-tok--comment {
@@ -293,8 +341,8 @@ import { siteConfig } from '@/utils/data';
     display: flex;
     align-items: center;
     gap: 0;
-    padding: 0.5rem 0;
-    margin-bottom: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    margin-bottom: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     white-space: nowrap;
   }
@@ -327,7 +375,7 @@ import { siteConfig } from '@/utils/data';
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding-top: 0.5rem;
+    padding: 0.5rem 0.875rem 0.75rem;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
   }
 

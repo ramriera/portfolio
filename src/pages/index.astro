@@ -88,17 +88,21 @@ const featuredProjects = projectOrder
               </svg>
               projects_index.tsx
             </span>
-            <a href="/projects" class="proj-window__action" data-component="ButtonViewAllCode">
-              <span class="code-fn">projects</span><span class="code-dot">.</span><span class="code-method">listAll</span><span class="code-parens">()</span>
-              <svg class="proj-window__action-icon" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
+            <span class="proj-window__tab-label">projects_index.tsx</span>
           </div>
           <div class="proj-window__body">
-            <span class="proj-tok--comment">// &lt;FeaturedProjects /&gt;</span>
-            <br />
-            <span class="proj-tok--keyword">export</span> <span class="proj-tok--keyword">const</span> <span class="proj-tok--fn">featured</span> <span class="proj-tok--punct">=</span> <span class="proj-tok--fn">projects</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">filter</span><span class="proj-tok--punct">(</span><span class="proj-tok--fn">p</span> <span class="proj-tok--punct">=&gt;</span> <span class="proj-tok--fn">p</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">featured</span><span class="proj-tok--punct">)</span>
+            <div class="proj-line"><span class="proj-gutter">1</span><span class="proj-code"><span class="proj-tok--comment">// &lt;FeaturedProjects /&gt;</span></span></div>
+            <div class="proj-line"><span class="proj-gutter">2</span><span class="proj-code"><span class="proj-tok--keyword">export</span> <span class="proj-tok--keyword">const</span> <span class="proj-tok--fn">featured</span> <span class="proj-tok--punct">=</span> <span class="proj-tok--fn">projects</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">filter</span><span class="proj-tok--punct">(</span><span class="proj-tok--fn">p</span> <span class="proj-tok--punct">=&gt;</span> <span class="proj-tok--fn">p</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">featured</span><span class="proj-tok--punct">)</span></span></div>
+            <div class="proj-line proj-line--action">
+              <span class="proj-gutter">3</span>
+              <span class="proj-code"></span>
+              <a href="/projects" class="proj-window__action" data-component="ButtonViewAllCode">
+                <span class="code-fn">projects</span><span class="code-dot">.</span><span class="code-method">listAll</span><span class="code-parens">()</span>
+                <svg class="proj-window__action-icon" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -196,6 +200,18 @@ const featuredProjects = projectOrder
     flex-shrink: 0;
   }
 
+  .proj-window__tab-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #e6edf3;
+    background: #1e1e2e;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px 4px 0 0;
+    margin-left: auto;
+    border: 1px solid var(--cm-border, #30363d);
+    border-bottom: 1px solid #1e1e2e;
+  }
+
   .proj-window__action {
     display: inline-flex;
     align-items: center;
@@ -204,13 +220,12 @@ const featuredProjects = projectOrder
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
     color: var(--cm-text-muted, #7d8590);
-    background: #1e1e2e;
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px 4px 0 0;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
     border: 1px solid var(--cm-border, #30363d);
-    border-bottom: 1px solid #1e1e2e;
     text-decoration: none;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     cursor: pointer;
   }
 
@@ -241,10 +256,70 @@ const featuredProjects = projectOrder
   }
 
   .proj-window__body {
-    padding: 0.75rem 0.875rem;
+    padding: 0.5rem 0;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 0.78rem;
     line-height: 1.6;
+  }
+
+  /* ── Line + Gutter for projects window ── */
+  .proj-line {
+    display: flex;
+    align-items: baseline;
+    white-space: nowrap;
+    padding: 0 0.875rem 0 0;
+    position: relative;
+    transition: background 0.15s ease;
+  }
+
+  .proj-line:hover {
+    background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
+  }
+
+  .proj-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 2px;
+    background: transparent;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .proj-line:hover::before {
+    background: var(--cm-function, #8be9fd);
+    box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
+  }
+
+  .proj-gutter {
+    display: inline-block;
+    min-width: 36px;
+    text-align: right;
+    padding-right: 12px;
+    color: var(--cm-text-muted, #7d8590);
+    opacity: 0.45;
+    user-select: none;
+    flex-shrink: 0;
+    font-size: inherit;
+    line-height: inherit;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .proj-line:hover .proj-gutter {
+    color: var(--cm-function, #8be9fd);
+    opacity: 1;
+  }
+
+  .proj-code {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Action line: gutter + empty code + button right-aligned */
+  .proj-line--action {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
   }
 
   .proj-tok--comment { color: var(--cm-comment, #6272a4); font-style: italic; }
