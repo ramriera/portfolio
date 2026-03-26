@@ -24,22 +24,8 @@ const featuredProjects = projectOrder
   <!-- Hero -->
   <HeroSection />
 
-  <!-- Spacer lines (code-mode only) -->
-  <div class="gl-spacer-group" aria-hidden="true">
-    <div class="gl gl--spacer"></div>
-    <div class="gl gl--spacer"></div>
-    <div class="gl gl--spacer"></div>
-  </div>
-
   <!-- About -->
   <AboutSection />
-
-  <!-- Spacer lines (code-mode only) -->
-  <div class="gl-spacer-group" aria-hidden="true">
-    <div class="gl gl--spacer"></div>
-    <div class="gl gl--spacer"></div>
-    <div class="gl gl--spacer"></div>
-  </div>
 
   <!-- Featured Projects - Vertical Grid -->
   <section class="section-padding" data-component="FeaturedProjects">
@@ -102,17 +88,17 @@ const featuredProjects = projectOrder
               </svg>
               projects_index.tsx
             </span>
-            <span class="proj-window__tab">projects_index.tsx</span>
+            <a href="/projects" class="proj-window__action" data-component="ButtonViewAllCode">
+              <span class="code-fn">projects</span><span class="code-dot">.</span><span class="code-method">listAll</span><span class="code-parens">()</span>
+              <svg class="proj-window__action-icon" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
           </div>
           <div class="proj-window__body">
-            <div class="proj-window__line gl"><span class="proj-tok--comment">// &lt;FeaturedProjects /&gt;</span></div>
-            <div class="proj-window__line gl"><span class="proj-tok--keyword">export</span> <span class="proj-tok--keyword">const</span> <span class="proj-tok--fn">featured</span> <span class="proj-tok--punct">=</span> <span class="proj-tok--fn">projects</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">filter</span><span class="proj-tok--punct">(</span><span class="proj-tok--fn">p</span> <span class="proj-tok--punct">=&gt;</span> <span class="proj-tok--fn">p</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">featured</span><span class="proj-tok--punct">)</span></div>
-            <div class="proj-window__line gl">&nbsp;</div>
-            <div class="proj-window__line gl">
-              <a href="/projects" class="proj-window__inline-link">
-                <span class="proj-tok--fn">projects</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">listAll</span><span class="proj-tok--punct">()</span><span class="proj-tok--punct"> →</span>
-              </a>
-            </div>
+            <span class="proj-tok--comment">// &lt;FeaturedProjects /&gt;</span>
+            <br />
+            <span class="proj-tok--keyword">export</span> <span class="proj-tok--keyword">const</span> <span class="proj-tok--fn">featured</span> <span class="proj-tok--punct">=</span> <span class="proj-tok--fn">projects</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">filter</span><span class="proj-tok--punct">(</span><span class="proj-tok--fn">p</span> <span class="proj-tok--punct">=&gt;</span> <span class="proj-tok--fn">p</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">featured</span><span class="proj-tok--punct">)</span>
           </div>
         </div>
       </div>
@@ -133,13 +119,6 @@ const featuredProjects = projectOrder
       </div>
     </div>
   </section>
-
-  <!-- Spacer lines (code-mode only) -->
-  <div class="gl-spacer-group" aria-hidden="true">
-    <div class="gl gl--spacer"></div>
-    <div class="gl gl--spacer"></div>
-    <div class="gl gl--spacer"></div>
-  </div>
 
   <!-- CTA -->
   <ContactConsole />
@@ -217,16 +196,48 @@ const featuredProjects = projectOrder
     flex-shrink: 0;
   }
 
-  .proj-window__tab {
+  .proj-window__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
-    color: #e6edf3;
+    color: var(--cm-text-muted, #7d8590);
     background: #1e1e2e;
     padding: 0.25rem 0.75rem;
     border-radius: 4px 4px 0 0;
-    margin-left: auto;
     border: 1px solid var(--cm-border, #30363d);
     border-bottom: 1px solid #1e1e2e;
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+  }
+
+  .proj-window__action:hover {
+    color: #e6edf3;
+    border-color: var(--cm-constant, #f1fa8c);
+  }
+
+  .proj-window__action:hover .code-fn,
+  .proj-window__action:hover .code-dot,
+  .proj-window__action:hover .code-parens {
+    color: #fff;
+  }
+
+  .proj-window__action:hover .code-method {
+    color: var(--cm-constant, #f1fa8c);
+    text-shadow: 0 0 8px rgba(241, 250, 140, 0.3);
+  }
+
+  .proj-window__action-icon {
+    color: var(--cm-text-muted, #7d8590);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .proj-window__action:hover .proj-window__action-icon {
+    color: #fff;
+    transform: translateX(2px);
   }
 
   .proj-window__body {
@@ -234,37 +245,6 @@ const featuredProjects = projectOrder
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 0.78rem;
     line-height: 1.6;
-  }
-
-  .proj-window__line {
-    white-space: nowrap;
-  }
-
-  /* Inline executable link */
-  .proj-window__inline-link {
-    text-decoration: none;
-    color: var(--cm-function, #8be9fd);
-    transition: color 0.2s ease;
-    border-bottom: 1px dashed transparent;
-    cursor: pointer;
-  }
-
-  .proj-window__inline-link:hover {
-    color: var(--cm-constant, #f1fa8c);
-    border-bottom-color: var(--cm-constant, #f1fa8c);
-  }
-
-  .proj-window__inline-link:hover .proj-tok--fn {
-    color: var(--cm-constant, #f1fa8c);
-  }
-
-  .proj-window__inline-link:hover .proj-tok--method {
-    color: var(--cm-constant, #f1fa8c);
-    text-shadow: 0 0 8px rgba(241, 250, 140, 0.3);
-  }
-
-  .proj-window__inline-link:hover .proj-tok--punct {
-    color: var(--cm-constant, #f1fa8c);
   }
 
   .proj-tok--comment { color: var(--cm-comment, #6272a4); font-style: italic; }
@@ -276,10 +256,6 @@ const featuredProjects = projectOrder
   @media (max-width: 640px) {
     .proj-window__body {
       font-size: 0.7rem;
-    }
-
-    .proj-window__tab {
-      display: none;
     }
   }
 </style>
