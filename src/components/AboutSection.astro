@@ -50,17 +50,32 @@ import profileImg from '@/assets/shared/foto-perfil.png';
             data-token="$color-primary-500: #D97757">estratégica</span>
         </h2>
 
-        <!-- Code mode: JSDoc block replaces heading -->
+        <!-- Code mode: JSDoc block in window container -->
         <div data-reveal data-delay="100" class="about-jsdoc mb-6" aria-hidden="true">
-          <div class="jsdoc-block">
-            <div class="jsdoc-line"><span class="jsdoc-delim">/**</span></div>
-            <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-desc">Diseñador con visión estratégica</span></div>
-            <div class="jsdoc-line"><span class="jsdoc-star"> *</span></div>
-            <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@role</span> <span class="jsdoc-value">UX Lead · Product Designer</span></div>
-            <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@vision</span> <span class="jsdoc-value">Strategic Product Design</span></div>
-            <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@method</span> <span class="jsdoc-value">Data-driven & User-centric</span></div>
-            <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@stack</span> <span class="jsdoc-value">Design Systems · DesignOps · UX Research</span></div>
-            <div class="jsdoc-line"><span class="jsdoc-delim"> */</span></div>
+          <div class="jsdoc-window">
+            <div class="jsdoc-titlebar">
+              <div class="jsdoc-dots">
+                <span class="json-dot json-dot--red"></span>
+                <span class="json-dot json-dot--yellow"></span>
+                <span class="json-dot json-dot--green"></span>
+              </div>
+              <span class="jsdoc-filename">
+                <svg class="jsdoc-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+                </svg>
+                core.config.ts
+              </span>
+            </div>
+            <div class="jsdoc-body">
+              <div class="jsdoc-line"><span class="jsdoc-delim">/**</span></div>
+              <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-desc">Diseñador con visión estratégica</span></div>
+              <div class="jsdoc-line"><span class="jsdoc-star"> *</span></div>
+              <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@role</span> <span class="jsdoc-value">UX Lead · Product Designer</span></div>
+              <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@vision</span> <span class="jsdoc-value">Strategic Product Design</span></div>
+              <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@method</span> <span class="jsdoc-value">Data-driven & User-centric</span></div>
+              <div class="jsdoc-line"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@stack</span> <span class="jsdoc-value">Design Systems · DesignOps · UX Research</span></div>
+              <div class="jsdoc-line"><span class="jsdoc-delim"> */</span></div>
+            </div>
           </div>
         </div>
 
@@ -170,7 +185,47 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     display: block;
   }
 
-  .jsdoc-block {
+  /* ── Window container ── */
+  .jsdoc-window {
+    border: 1px solid var(--cm-border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--cm-bg-card);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  .jsdoc-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--cm-bg, #0d1117);
+    border-bottom: 1px solid var(--cm-border);
+  }
+
+  .jsdoc-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .jsdoc-filename {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 6px;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.68rem;
+    color: var(--cm-text-muted);
+  }
+
+  .jsdoc-file-icon {
+    color: var(--cm-function);
+    width: 12px;
+    height: 12px;
+  }
+
+  .jsdoc-body {
+    padding: 16px 18px;
     font-family: theme('fontFamily.mono');
     font-size: clamp(0.72rem, 1.1vw, 0.85rem);
     line-height: 1.75;
