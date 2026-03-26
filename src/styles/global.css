@@ -792,10 +792,7 @@ body.code-mode aside:hover {
 .code-mode section[data-component="HeroSection"] > .container-custom::after { content: '</HeroSection>'; }
 .code-mode section[data-component="AboutSection"] > .container-custom::before { content: '<AboutSection>'; }
 .code-mode section[data-component="AboutSection"] > .container-custom::after { content: '</AboutSection>'; }
-.code-mode section[data-component="FeaturedProjects"] > .container-custom::before { content: '<FeaturedProjects>'; }
-.code-mode section[data-component="FeaturedProjects"] > .container-custom::after { content: '</FeaturedProjects>'; }
-.code-mode section[data-component="CallToAction"] > .container-custom::before { content: '<CallToAction>'; }
-.code-mode section[data-component="CallToAction"] > .container-custom::after { content: '</CallToAction>'; }
+/* FeaturedProjects + CallToAction: tags removed — now inside window containers */
 .code-mode section[data-component="AboutHero"] > .container-custom::before { content: '<AboutHero>'; }
 .code-mode section[data-component="AboutHero"] > .container-custom::after { content: '</AboutHero>'; }
 .code-mode section[data-component="BiographySection"] > .container-custom::before { content: '<BiographySection>'; }
@@ -2426,66 +2423,20 @@ body.code-mode .btn-cv-code:hover .code-string {
   color: var(--cm-function, #8be9fd);
 }
 
-/* ── "Ver todos" → projects.listAll() ── */
-.btn-viewall-code {
-  display: none;
-}
-
+/* ── "Ver todos" button — hidden in code mode (replaced by proj-window__action) ── */
 body.code-mode .btn-viewall-normal {
   display: none !important;
 }
 
-body.code-mode .btn-viewall-code {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  color: var(--cm-text-secondary, #c9d1d9);
-  background: transparent;
-  border: 1px solid var(--cm-border, #30363d);
-  border-radius: 2px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-body.code-mode .btn-viewall-code .btn-code-icon {
-  color: var(--cm-text-muted, #7d8590);
-  transition: all 0.3s ease;
-}
-
-body.code-mode .btn-viewall-code:hover {
-  border-color: var(--cm-constant, #f1fa8c);
-  background: rgba(241, 250, 140, 0.05);
-  box-shadow: 0 0 12px rgba(241, 250, 140, 0.1);
-}
-
-body.code-mode .btn-viewall-code:hover .btn-code-icon {
-  color: #fff;
-  transform: translateX(2px);
-}
-
-body.code-mode .btn-viewall-code:hover .code-fn,
-body.code-mode .btn-viewall-code:hover .code-dot,
-body.code-mode .btn-viewall-code:hover .code-parens {
-  color: #fff;
-}
-
-body.code-mode .btn-viewall-code:hover .code-method::after {
-  content: none;
-}
-
 /* ── Section heading hover → first card glow connection ── */
-/* When hovering the section header, the first project card glows */
-body.code-mode [data-component="FeaturedProjects"] .container-custom:has(.btn-viewall-code:hover) > [data-component="ProjectGrid"] > :first-child {
+/* When hovering the projects window, the first project card glows */
+body.code-mode [data-component="FeaturedProjects"] .container-custom:has(.proj-window:hover) > [data-component="ProjectGrid"] > :first-child {
   outline-color: rgba(139, 233, 253, 0.4) !important;
   box-shadow: 0 0 16px rgba(139, 233, 253, 0.08);
   transition: outline-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-body.code-mode [data-component="FeaturedProjects"] .container-custom:has(.btn-viewall-code:hover) > [data-component="ProjectGrid"] > :first-child .project-card {
+body.code-mode [data-component="FeaturedProjects"] .container-custom:has(.proj-window:hover) > [data-component="ProjectGrid"] > :first-child .project-card {
   border-color: rgba(139, 233, 253, 0.35) !important;
   box-shadow: 0 0 20px rgba(139, 233, 253, 0.06);
 }

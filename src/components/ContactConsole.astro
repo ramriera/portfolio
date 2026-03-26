@@ -57,7 +57,7 @@ import { siteConfig } from '@/utils/data';
       </div>
     </div>
 
-    <!-- ═══ CODE MODE — contact_console.sh terminal ═══ -->
+    <!-- ═══ CODE MODE — contact_shell.sh terminal ═══ -->
     <div class="cta-code-view" id="cta-console">
       <div class="cta-console">
         <!-- Titlebar -->
@@ -71,9 +71,9 @@ import { siteConfig } from '@/utils/data';
             <svg class="cta-console__file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" />
             </svg>
-            contact_console.sh
+            contact_shell.sh
           </span>
-          <span class="cta-console__tab">contact_console.sh</span>
+          <span class="cta-console__tab">contact_shell.sh</span>
         </div>
 
         <!-- Body -->
@@ -81,7 +81,7 @@ import { siteConfig } from '@/utils/data';
           <!-- JSDoc heading -->
           <div class="cta-console__jsdoc">
             <div class="cta-console__line"><span class="cta-tok--comment">/**</span></div>
-            <div class="cta-console__line"><span class="cta-tok--comment"> *</span> <span class="cta-tok--desc">¿Tienes un proyecto en mente?</span></div>
+            <div class="cta-console__line"><span class="cta-tok--comment"> *</span> <span class="cta-tok--desc">¿Tienes un </span><span class="cta-tok--highlight">proyecto</span><span class="cta-tok--desc"> en mente?</span></div>
             <div class="cta-console__line"><span class="cta-tok--comment"> *</span></div>
             <div class="cta-console__line"><span class="cta-tok--comment"> *</span> <span class="cta-tok--tag">@description</span> <span class="cta-tok--value">Me encantaría escuchar tu idea.</span></div>
             <div class="cta-console__line"><span class="cta-tok--comment"> *</span> <span class="cta-tok--value">Hablemos sobre cómo puedo ayudarte</span></div>
@@ -274,6 +274,12 @@ import { siteConfig } from '@/utils/data';
     font-size: 1.1em;
   }
 
+  .cta-tok--highlight {
+    color: var(--cm-tag, #ff79c6);
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+
   .cta-tok--tag {
     color: var(--cm-keyword, #bd93f9);
   }
@@ -323,6 +329,14 @@ import { siteConfig } from '@/utils/data';
     gap: 0.75rem;
     padding-top: 0.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  /* Ensure symmetric padding/height for both buttons inside console */
+  .cta-console__commands :global(.hero-cta-code),
+  .cta-console__commands :global(.btn-cv-code) {
+    padding: 0.625rem 1.25rem !important;
+    font-size: 0.82rem !important;
+    height: auto;
   }
 
   /* ═══ Responsive ═══ */
