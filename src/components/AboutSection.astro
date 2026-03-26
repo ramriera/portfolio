@@ -65,6 +65,7 @@ import profileImg from '@/assets/shared/foto-perfil.png';
                 </svg>
                 core.config.ts
               </span>
+              <span class="jsdoc-tab-active">core.config.ts</span>
             </div>
             <div class="jsdoc-body">
               <div class="jsdoc-line"><span class="jsdoc-delim">/**</span></div>
@@ -185,50 +186,61 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     display: block;
   }
 
-  /* ── Window container ── */
+  /* ── Window container (matches readme-window) ── */
   .jsdoc-window {
-    border: 1px solid var(--cm-border);
-    border-radius: 8px;
+    background: #1e1e2e;
+    border-radius: 12px;
+    border: 1px solid var(--cm-border, #30363d);
     overflow: hidden;
-    background: var(--cm-bg-card);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   }
 
   .jsdoc-titlebar {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    background: var(--cm-bg, #0d1117);
-    border-bottom: 1px solid var(--cm-border);
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #181825;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .jsdoc-dots {
     display: flex;
-    gap: 5px;
+    gap: 6px;
   }
 
   .jsdoc-filename {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #7d8590;
+    letter-spacing: 0.02em;
     display: flex;
     align-items: center;
-    gap: 5px;
-    margin-left: 6px;
-    font-family: theme('fontFamily.mono');
-    font-size: 0.68rem;
-    color: var(--cm-text-muted);
+    gap: 0.4rem;
   }
 
   .jsdoc-file-icon {
-    color: var(--cm-function);
-    width: 12px;
-    height: 12px;
+    color: #7d8590;
+    flex-shrink: 0;
+  }
+
+  .jsdoc-tab-active {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #e6edf3;
+    background: #1e1e2e;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px 4px 0 0;
+    margin-left: auto;
+    border: 1px solid var(--cm-border, #30363d);
+    border-bottom: 1px solid #1e1e2e;
   }
 
   .jsdoc-body {
-    padding: 16px 18px;
-    font-family: theme('fontFamily.mono');
-    font-size: clamp(0.72rem, 1.1vw, 0.85rem);
-    line-height: 1.75;
+    padding: 1.5rem 2rem;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
   }
 
   .jsdoc-line {

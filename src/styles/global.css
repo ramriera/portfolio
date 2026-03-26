@@ -1186,21 +1186,7 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 
 /* ── 14. Section icons ── */
 .code-mode .section-icon {
-  background: rgba(139, 233, 253, 0.08) !important;
-  border: 1px solid rgba(139, 233, 253, 0.15);
-  border-radius: 4px;
-}
-
-.code-mode .section-icon-svg .icon-stroke {
-  stroke: var(--cm-text-muted) !important;
-}
-
-.code-mode .section-icon-svg .icon-accent {
-  stroke: var(--cm-function) !important;
-}
-
-.code-mode .section-icon-svg .icon-accent-fill {
-  fill: var(--cm-function) !important;
+  display: none !important;
 }
 
 /* ── 15. Mobile menu ── */
