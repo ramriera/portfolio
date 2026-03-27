@@ -816,9 +816,12 @@ body.code-mode aside:hover {
   text-decoration: none;
 }
 
-.code-mode [class*="cmd-line"]:hover {
+body.code-mode [class*="cmd-line"]:hover,
+body.code-mode [data-component][class*="cmd-line"]:hover {
   background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04)) !important;
+  background-color: var(--cm-bg-hover, rgba(255, 255, 255, 0.04)) !important;
   outline: none !important;
+  outline-offset: 0 !important;
   box-shadow: none !important;
 }
 
