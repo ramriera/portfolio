@@ -375,35 +375,13 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
   }
 
-  .readme-cmd-line::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    bottom: 2px;
-    width: 2px;
-    background: transparent;
-    transition: background 0.15s ease, box-shadow 0.15s ease;
-  }
-
-  .readme-cmd-line:hover::before {
-    background: var(--cm-string, #50fa7b);
-    box-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
-  }
-
   .readme-cmd-line:hover .readme-gutter {
-    color: var(--cm-string, #50fa7b);
-    opacity: 1;
+    color: var(--cm-text, #e6edf3);
+    opacity: 0.9;
   }
 
   .readme-cmd-prompt {
     color: var(--cm-text-muted, #7d8590);
-    transition: color 0.15s ease, text-shadow 0.15s ease;
-  }
-
-  .readme-cmd-line:hover .readme-cmd-prompt {
-    color: var(--cm-function, #8be9fd);
-    text-shadow: 0 0 8px rgba(139, 233, 253, 0.3);
   }
 
   .readme-cmd-text {
@@ -412,11 +390,6 @@ import profileImg from '@/assets/shared/foto-perfil.png';
 
   .readme-cmd-file {
     color: var(--cm-string, #50fa7b);
-    transition: text-shadow 0.15s ease;
-  }
-
-  .readme-cmd-line:hover .readme-cmd-file {
-    text-shadow: 0 0 8px rgba(80, 250, 123, 0.25);
   }
 
   .readme-cmd-cursor {
@@ -424,12 +397,6 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     animation: readmeCursorBlink 1s step-end infinite;
     font-weight: 700;
     margin-left: 1px;
-    opacity: 0;
-    transition: opacity 0.15s ease;
-  }
-
-  .readme-cmd-line:hover .readme-cmd-cursor {
-    opacity: 1;
   }
 
   @keyframes readmeCursorBlink {

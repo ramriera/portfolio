@@ -541,25 +541,9 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
   }
 
-  .hero-cmd-line::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    bottom: 2px;
-    width: 2px;
-    background: transparent;
-    transition: background 0.15s ease, box-shadow 0.15s ease;
-  }
-
-  .hero-cmd-line:hover::before {
-    background: var(--cm-string, #50fa7b);
-    box-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
-  }
-
   .hero-cmd-line:hover .hero-ln {
-    color: var(--cm-string, #50fa7b);
-    opacity: 1;
+    color: var(--cm-text, #e6edf3);
+    opacity: 0.9;
   }
 
   .hero-cmd-code {
@@ -572,22 +556,12 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     transition: color 0.15s ease, text-shadow 0.15s ease;
   }
 
-  .hero-cmd-line:hover .hero-cmd-prompt {
-    color: var(--cm-function, #8be9fd);
-    text-shadow: 0 0 8px rgba(139, 233, 253, 0.3);
-  }
-
   .hero-cmd-text {
     color: var(--cm-keyword, #bd93f9);
   }
 
   .hero-cmd-file {
     color: var(--cm-string, #50fa7b);
-    transition: text-shadow 0.15s ease;
-  }
-
-  .hero-cmd-line:hover .hero-cmd-file {
-    text-shadow: 0 0 8px rgba(80, 250, 123, 0.25);
   }
 
   .hero-cmd-cursor {
@@ -595,12 +569,6 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     animation: hero-cursor-blink 1s step-end infinite;
     font-weight: 700;
     margin-left: 1px;
-    opacity: 0;
-    transition: opacity 0.15s ease;
-  }
-
-  .hero-cmd-line:hover .hero-cmd-cursor {
-    opacity: 1;
   }
 
   /* ── Stats: swap design ↔ terminal dashboard ── */
