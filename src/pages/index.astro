@@ -251,36 +251,7 @@ const featuredProjects = projectOrder
 
   /* ── Project command line (terminal style) ── */
   .proj-cmd-line {
-    display: flex;
-    align-items: baseline;
-    white-space: nowrap;
-    position: relative;
-    text-decoration: none;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
-  }
-
-  .proj-cmd-prompt {
-    color: var(--cm-text-muted, #7d8590);
-  }
-
-  .proj-cmd-text {
-    color: var(--cm-keyword, #bd93f9);
-  }
-
-  .proj-cmd-file {
-    color: var(--cm-string, #50fa7b);
-  }
-
-  .proj-cmd-cursor {
-    color: var(--cm-string, #50fa7b);
-    animation: projCursorBlink 1s step-end infinite;
-    font-weight: 700;
-    margin-left: 1px;
-  }
-
-  @keyframes projCursorBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
   }
 
   @media (max-width: 640px) {

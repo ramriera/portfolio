@@ -804,8 +804,14 @@ body.code-mode aside:hover {
   opacity: 0.9 !important;
 }
 
-/* Command line pointer cursor + kill inspector glow */
+/* Command line unified styles + kill inspector glow */
 .code-mode [class*="cmd-line"] {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
   cursor: pointer;
   text-decoration: none;
   outline: none !important;
@@ -816,6 +822,22 @@ body.code-mode aside:hover {
   outline: none !important;
   background-color: var(--cm-bg-hover, rgba(255, 255, 255, 0.04)) !important;
   box-shadow: none !important;
+}
+
+/* Unified cmd-line syntax tokens */
+.code-mode [class*="cmd-prompt"] { color: var(--cm-text-muted, #7d8590); }
+.code-mode [class*="cmd-text"]   { color: var(--cm-keyword, #bd93f9); }
+.code-mode [class*="cmd-file"]   { color: var(--cm-string, #50fa7b); }
+.code-mode [class*="cmd-cursor"] {
+  color: var(--cm-string, #50fa7b);
+  font-weight: 700;
+  margin-left: 1px;
+  animation: cmdCursorBlink 1s step-end infinite;
+}
+
+@keyframes cmdCursorBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
 }
 
 /* Primary accent overrides */

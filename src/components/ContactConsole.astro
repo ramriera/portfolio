@@ -353,32 +353,7 @@ import { siteConfig } from '@/utils/data';
     padding: 0.5rem 0 0.75rem;
   }
 
-  .cta-console__cmd-line {
-    display: flex;
-    align-items: baseline;
-    white-space: nowrap;
-    position: relative;
-    text-decoration: none;
-  }
-
-  .cta-cmd-prompt {
-    color: var(--cm-text-muted, #7d8590);
-  }
-
-  .cta-cmd-text {
-    color: var(--cm-keyword, #bd93f9);
-  }
-
-  .cta-cmd-file {
-    color: var(--cm-string, #50fa7b);
-  }
-
-  .cta-cmd-cursor {
-    color: var(--cm-string, #50fa7b);
-    animation: ctaCursorBlink 1s step-end infinite;
-    font-weight: 700;
-    margin-left: 1px;
-  }
+  /* cmd-line base + tokens handled by global.css */
 
   /* ═══ Responsive ═══ */
   @media (max-width: 640px) {

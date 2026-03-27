@@ -12,12 +12,12 @@ import profileImg from '@/assets/shared/foto-perfil.png';
           <Image
             src={profileImg}
             alt="Ramon Riera"
-            class="w-full aspect-[3/4] lg:aspect-[4/5] object-cover"
+            class="w-full"
             loading="lazy"
             decoding="async"
             widths={[400, 800]}
             sizes="(max-width: 1024px) 100vw, 50vw"
-            data-token="$aspect-ratio: 4/3 → 4/5 (lg)|$radius-2xl: 1rem / 16px|$border: 1px solid $neutral-200"
+            data-token="$radius-2xl: 1rem / 16px|$border: 1px solid $neutral-200"
           />
         </div>
       </div>
@@ -332,40 +332,5 @@ import profileImg from '@/assets/shared/foto-perfil.png';
   .readme-cmds {
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     padding: 0.5rem 0 0.75rem;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 0.78rem;
-    line-height: 1.6;
-  }
-
-  .readme-cmd-line {
-    display: flex;
-    align-items: baseline;
-    white-space: nowrap;
-    position: relative;
-    text-decoration: none;
-  }
-
-  .readme-cmd-prompt {
-    color: var(--cm-text-muted, #7d8590);
-  }
-
-  .readme-cmd-text {
-    color: var(--cm-keyword, #bd93f9);
-  }
-
-  .readme-cmd-file {
-    color: var(--cm-string, #50fa7b);
-  }
-
-  .readme-cmd-cursor {
-    color: var(--cm-string, #50fa7b);
-    animation: readmeCursorBlink 1s step-end infinite;
-    font-weight: 700;
-    margin-left: 1px;
-  }
-
-  @keyframes readmeCursorBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
   }
 </style>
