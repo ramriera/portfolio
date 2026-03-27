@@ -443,11 +443,28 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     font-family: theme('fontFamily.mono');
     font-size: clamp(0.7rem, 1.2vw, 0.85rem);
     line-height: 1.75;
-    transition: background 0.15s ease;
+    position: relative;
+    transition: background 0.2s ease;
   }
 
   .hero-code-line:hover {
     background: var(--cm-bg-hover);
+  }
+
+  .hero-code-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 2px;
+    background: transparent;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hero-code-line:hover::before {
+    background: var(--cm-function, #8be9fd);
+    box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
   }
 
   .hero-code-line-empty {
@@ -466,11 +483,11 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     flex-shrink: 0;
     font-size: inherit;
     line-height: inherit;
-    transition: color 0.15s ease, opacity 0.15s ease;
+    transition: color 0.2s ease, opacity 0.2s ease;
   }
 
   .hero-code-line:hover .hero-ln {
-    color: var(--cm-text);
+    color: var(--cm-function, #8be9fd);
     opacity: 0.9;
   }
 
@@ -534,15 +551,31 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     position: relative;
     text-decoration: none;
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: background 0.2s ease;
   }
 
   .hero-cmd-line:hover {
     background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
   }
 
+  .hero-cmd-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 2px;
+    background: transparent;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hero-cmd-line:hover::before {
+    background: var(--cm-function, #8be9fd);
+    box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
+  }
+
   .hero-cmd-line:hover .hero-ln {
-    color: var(--cm-text, #e6edf3);
+    color: var(--cm-function, #8be9fd);
     opacity: 0.9;
   }
 

@@ -297,8 +297,9 @@ const sectionName = pathSegments.length === 0 ? 'index' : pathSegments[0];
   }
 
   .nct-tab:hover {
-    color: var(--cm-text-secondary, #c9d1d9);
+    color: var(--cm-function, #8be9fd);
     background: var(--cm-bg-card, rgba(255, 255, 255, 0.03));
+    border-top-color: rgba(139, 233, 253, 0.4);
   }
 
   .nct-tab--active {
@@ -320,7 +321,7 @@ const sectionName = pathSegments.length === 0 ? 'index' : pathSegments[0];
   }
 
   .nct-tab:hover .nct-icon {
-    color: var(--cm-text-secondary, #c9d1d9);
+    color: var(--cm-function, #8be9fd);
   }
 
   .nct-filename {
@@ -359,10 +360,10 @@ const sectionName = pathSegments.length === 0 ? 'index' : pathSegments[0];
   }
 
   :global(.code-mode) .nav-code-run-btn:hover {
-    color: var(--cm-string, #50fa7b);
-    border-color: var(--cm-string, #50fa7b);
-    background: rgba(80, 250, 123, 0.06);
-    box-shadow: 0 0 12px rgba(80, 250, 123, 0.1);
+    color: var(--cm-function, #8be9fd);
+    border-color: var(--cm-function, #8be9fd);
+    background: rgba(139, 233, 253, 0.06);
+    box-shadow: 0 0 15px rgba(139, 233, 253, 0.15);
   }
 
   .nav-run-icon {
@@ -372,8 +373,8 @@ const sectionName = pathSegments.length === 0 ? 'index' : pathSegments[0];
   }
 
   :global(.code-mode) .nav-code-run-btn:hover .nav-run-icon {
-    color: var(--cm-string, #50fa7b);
-    text-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
+    color: var(--cm-function, #8be9fd);
+    text-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
   }
 
   /* ── Code mode: hide hamburger, always show tabs ── */

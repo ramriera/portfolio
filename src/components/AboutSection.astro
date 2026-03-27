@@ -276,7 +276,7 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     align-items: baseline;
     white-space: nowrap;
     position: relative;
-    transition: background 0.15s ease;
+    transition: background 0.2s ease;
   }
 
   .jsdoc-line:hover {
@@ -291,7 +291,7 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     bottom: 2px;
     width: 2px;
     background: transparent;
-    transition: background 0.15s ease, box-shadow 0.15s ease;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
   }
 
   .jsdoc-line:hover::before {
@@ -368,15 +368,31 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     position: relative;
     text-decoration: none;
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: background 0.2s ease;
   }
 
   .readme-cmd-line:hover {
     background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
   }
 
+  .readme-cmd-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 2px;
+    background: transparent;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .readme-cmd-line:hover::before {
+    background: var(--cm-function, #8be9fd);
+    box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
+  }
+
   .readme-cmd-line:hover .readme-gutter {
-    color: var(--cm-text, #e6edf3);
+    color: var(--cm-function, #8be9fd);
     opacity: 0.9;
   }
 
