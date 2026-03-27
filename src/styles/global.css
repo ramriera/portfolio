@@ -886,6 +886,11 @@ body.code-mode aside:hover {
   margin-bottom: 1.5rem !important;
 }
 
+/* CTA section: full-width in code mode */
+.code-mode [data-component="CallToAction"] > .container-custom {
+  max-width: none !important;
+}
+
 /* About section grid gap reduction */
 .code-mode [data-component="AboutSection"] .gap-20 {
   gap: 2.5rem !important;

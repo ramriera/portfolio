@@ -75,9 +75,6 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
-            <a href="/projects" class="hero-cta-code" data-component="ButtonRunCmd">
-              <span class="hero-cta-prompt">&gt;</span> run <span class="hero-cta-cmd">open_projects.sh</span><span class="hero-cta-cursor">_</span>
-            </a>
           </div>
         </div>
 
@@ -221,14 +218,13 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
             </div>
           </div>
 
-            <!-- Terminal prompt CTA -->
-            <div class="hero-code-terminal">
-              <a href="/projects" class="hero-code-terminal-link">
-                <span class="hero-tok-string">$</span>
-                <span class="hero-tok-plain"> </span>
-                <span class="hero-tok-fn">open_projects</span>
-                <span class="hero-tok-punct">.sh</span>
-                <span class="hero-cursor-blink"></span>
+            <!-- Command line (terminal style, inside window) -->
+            <div class="hero-cmds">
+              <a href="/projects" class="hero-cmd-line">
+                <span class="hero-ln">14</span>
+                <span class="hero-cmd-code">
+                  <span class="hero-cmd-prompt">&gt;</span> <span class="hero-cmd-text">run</span> <span class="hero-cmd-file">open_projects.sh</span><span class="hero-cmd-cursor">_</span>
+                </span>
               </a>
             </div>
           </div><!-- /hero-window -->
@@ -522,31 +518,90 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
     50%      { opacity: 0; }
   }
 
-  /* ── Terminal prompt CTA (inside window) ── */
-  .hero-code-terminal {
-    padding: 0.5rem 0.875rem 0.75rem;
+  /* ── Command line (terminal style, inside window) ── */
+  .hero-cmds {
     border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.35rem 0 0.75rem;
   }
 
-  .hero-code-terminal-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0;
-    padding: 8px 16px;
+  .hero-cmd-line {
+    display: flex;
+    align-items: baseline;
+    white-space: nowrap;
+    padding: 1px 16px 1px 0;
     font-family: theme('fontFamily.mono');
-    font-size: 0.82rem;
-    background: var(--cm-bg-surface);
-    border: 1px solid var(--cm-border);
-    border-radius: 6px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+    line-height: 1.75;
+    position: relative;
     text-decoration: none;
     cursor: pointer;
+    transition: background 0.15s ease;
   }
 
-  .hero-code-terminal-link:hover {
-    border-color: rgba(139, 233, 253, 0.4);
-    background: rgba(139, 233, 253, 0.05);
-    box-shadow: 0 0 20px rgba(139, 233, 253, 0.06);
+  .hero-cmd-line:hover {
+    background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
+  }
+
+  .hero-cmd-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 2px;
+    background: transparent;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .hero-cmd-line:hover::before {
+    background: var(--cm-string, #50fa7b);
+    box-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
+  }
+
+  .hero-cmd-line:hover .hero-ln {
+    color: var(--cm-string, #50fa7b);
+    opacity: 1;
+  }
+
+  .hero-cmd-code {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hero-cmd-prompt {
+    color: var(--cm-text-muted, #7d8590);
+    transition: color 0.15s ease, text-shadow 0.15s ease;
+  }
+
+  .hero-cmd-line:hover .hero-cmd-prompt {
+    color: var(--cm-function, #8be9fd);
+    text-shadow: 0 0 8px rgba(139, 233, 253, 0.3);
+  }
+
+  .hero-cmd-text {
+    color: var(--cm-keyword, #bd93f9);
+  }
+
+  .hero-cmd-file {
+    color: var(--cm-string, #50fa7b);
+    transition: text-shadow 0.15s ease;
+  }
+
+  .hero-cmd-line:hover .hero-cmd-file {
+    text-shadow: 0 0 8px rgba(80, 250, 123, 0.25);
+  }
+
+  .hero-cmd-cursor {
+    color: var(--cm-string, #50fa7b);
+    animation: hero-cursor-blink 1s step-end infinite;
+    font-weight: 700;
+    margin-left: 1px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .hero-cmd-line:hover .hero-cmd-cursor {
+    opacity: 1;
   }
 
   /* ── Stats: swap design ↔ terminal dashboard ── */

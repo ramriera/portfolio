@@ -5,10 +5,10 @@ import profileImg from '@/assets/shared/foto-perfil.png';
 
 <section class="section-padding" data-component="AboutSection">
   <div class="container-custom">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center about-grid">
       <!-- Image side -->
-      <div data-reveal="left" class="relative" data-component="ProfileImage">
-        <div class="relative rounded-2xl overflow-hidden dashed-border">
+      <div data-reveal="left" class="relative about-image-col" data-component="ProfileImage">
+        <div class="relative rounded-2xl overflow-hidden dashed-border about-image-wrap">
           <Image
             src={profileImg}
             alt="Ramon Riera"
@@ -24,7 +24,7 @@ import profileImg from '@/assets/shared/foto-perfil.png';
 
       <!-- Content side -->
       <div>
-        <div data-reveal data-delay="0" class="mb-6 flex items-center gap-3">
+        <div data-reveal data-delay="0" class="mb-6 flex items-center gap-3 about-icon-badge">
           <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
               <g class="icon-eye-blink">
@@ -131,10 +131,27 @@ import profileImg from '@/assets/shared/foto-perfil.png';
               <div class="readme-line"><span class="readme-gutter">20</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-tag">@stack</span> <span class="readme-text"><span class="readme-highlight">Design Systems</span> | <span class="readme-highlight">Product Design</span> | <span class="readme-highlight">DesignOps</span></span></span></div>
               <div class="readme-line"><span class="readme-gutter">21</span><span class="readme-code"><span class="readme-delim"> */</span></span></div>
             </div>
+
+            <!-- Command lines (terminal style, inside window) -->
+            <div class="readme-cmds">
+              <a href="/about" class="readme-cmd-line" data-component="ButtonRunCmd">
+                <span class="readme-gutter">22</span>
+                <span class="readme-code">
+                  <span class="readme-cmd-prompt">&gt;</span> <span class="readme-cmd-text">cat</span> <span class="readme-cmd-file">about.md</span><span class="readme-cmd-cursor">_</span>
+                </span>
+              </a>
+              <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
+                class="readme-cmd-line" data-component="ButtonCVCode">
+                <span class="readme-gutter">23</span>
+                <span class="readme-code">
+                  <span class="readme-cmd-prompt">&gt;</span> <span class="readme-cmd-text">get</span> <span class="readme-cmd-file">cv.pdf</span><span class="readme-cmd-cursor">_</span>
+                </span>
+              </a>
+            </div>
           </div>
         </div>
 
-        <div data-reveal data-delay="300" class="flex flex-wrap gap-4">
+        <div data-reveal data-delay="300" class="flex flex-wrap gap-4 about-buttons-normal">
           <a href="/about" class="btn-primary hero-cta-normal"
             data-component="ButtonPrimary"
             data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
@@ -142,9 +159,6 @@ import profileImg from '@/assets/shared/foto-perfil.png';
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </a>
-          <a href="/about" class="hero-cta-code" data-component="ButtonRunCmd">
-            <span class="hero-cta-prompt">&gt;</span> cat <span class="hero-cta-cmd">about.md</span><span class="hero-cta-cursor">_</span>
           </a>
           <a
             href="/docs/CV-Ramon-Riera-Depares.pdf"
@@ -159,14 +173,6 @@ import profileImg from '@/assets/shared/foto-perfil.png';
               <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" />
             </svg>
-          </a>
-          <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
-            class="btn-cv-code" data-component="ButtonCVCode">
-            <svg class="btn-code-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" />
-            </svg>
-            <span class="code-fn">get</span><span class="code-parens">(</span><span class="code-string">'cv.pdf'</span><span class="code-parens">)</span>
           </a>
         </div>
       </div>
@@ -186,6 +192,33 @@ import profileImg from '@/assets/shared/foto-perfil.png';
 
   :global(.code-mode) .about-jsdoc {
     display: block;
+    margin-bottom: 0;
+  }
+
+  /* Hide icon badge + remove top space in code mode */
+  :global(.code-mode) .about-icon-badge {
+    display: none !important;
+  }
+
+  /* Photo: stretch to fill available vertical space in code mode */
+  :global(.code-mode) .about-grid {
+    align-items: stretch !important;
+  }
+
+  :global(.code-mode) .about-image-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  :global(.code-mode) .about-image-wrap {
+    flex: 1;
+    min-height: 0;
+  }
+
+  :global(.code-mode) .about-image-wrap :global(img) {
+    aspect-ratio: unset !important;
+    height: 100%;
+    object-fit: cover;
   }
 
   /* ── Window container (matches readme-window) ── */
@@ -319,5 +352,92 @@ import profileImg from '@/assets/shared/foto-perfil.png';
 
   .jsdoc-value {
     color: var(--cm-text-muted);
+  }
+
+  /* ── Hide design-mode buttons in code mode ── */
+  :global(.code-mode) .about-buttons-normal {
+    display: none !important;
+  }
+
+  /* ── Readme command lines (inside window) ── */
+  .readme-cmds {
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.5rem 0 0.75rem;
+  }
+
+  .readme-cmd-line {
+    display: flex;
+    align-items: baseline;
+    white-space: nowrap;
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .readme-cmd-line:hover {
+    background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
+  }
+
+  .readme-cmd-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 2px;
+    background: transparent;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .readme-cmd-line:hover::before {
+    background: var(--cm-string, #50fa7b);
+    box-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
+  }
+
+  .readme-cmd-line:hover .readme-gutter {
+    color: var(--cm-string, #50fa7b);
+    opacity: 1;
+  }
+
+  .readme-cmd-prompt {
+    color: var(--cm-text-muted, #7d8590);
+    transition: color 0.15s ease, text-shadow 0.15s ease;
+  }
+
+  .readme-cmd-line:hover .readme-cmd-prompt {
+    color: var(--cm-function, #8be9fd);
+    text-shadow: 0 0 8px rgba(139, 233, 253, 0.3);
+  }
+
+  .readme-cmd-text {
+    color: var(--cm-keyword, #bd93f9);
+  }
+
+  .readme-cmd-file {
+    color: var(--cm-string, #50fa7b);
+    transition: text-shadow 0.15s ease;
+  }
+
+  .readme-cmd-line:hover .readme-cmd-file {
+    text-shadow: 0 0 8px rgba(80, 250, 123, 0.25);
+  }
+
+  .readme-cmd-cursor {
+    color: var(--cm-string, #50fa7b);
+    animation: readmeCursorBlink 1s step-end infinite;
+    font-weight: 700;
+    margin-left: 1px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .readme-cmd-line:hover .readme-cmd-cursor {
+    opacity: 1;
+  }
+
+  @keyframes readmeCursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 </style>
