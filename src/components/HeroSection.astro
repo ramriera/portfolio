@@ -10,10 +10,10 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
 
 <section class="relative min-h-[85svh] md:min-h-[90vh] flex items-center justify-center overflow-hidden"
   data-component="HeroSection">
-  <!-- Background decoration (design mode) -->
-  <div class="hero-bg-design absolute inset-0 -z-10">
-    <div class="absolute top-1/4 -right-16 md:-right-32 w-[min(500px,80vw)] h-[min(500px,80vw)] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
-    <div class="absolute bottom-1/4 -left-16 md:-left-32 w-[min(500px,80vw)] h-[min(500px,80vw)] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
+  <!-- Background decoration (design mode) — PERF: contain + will-change isolates blur paint -->
+  <div class="hero-bg-design absolute inset-0 -z-10 contain-strict">
+    <div class="hero-blur-circle absolute top-1/4 -right-16 md:-right-32 w-[min(500px,80vw)] h-[min(500px,80vw)] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
+    <div class="hero-blur-circle absolute bottom-1/4 -left-16 md:-left-32 w-[min(500px,80vw)] h-[min(500px,80vw)] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
   </div>
 
   <!-- Blueprint grid background (code mode only) -->
@@ -317,6 +317,15 @@ const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
   /* ═══════════════════════════════════════
      CODE MODE — Hero as System Init
      ═══════════════════════════════════════ */
+
+  /* PERF: Isolate blur circles to their own compositing layer */
+  .contain-strict {
+    contain: layout style paint;
+  }
+  .hero-blur-circle {
+    will-change: transform;
+    contain: strict;
+  }
 
   /* Default: code view is hidden */
   .hero-code-view,

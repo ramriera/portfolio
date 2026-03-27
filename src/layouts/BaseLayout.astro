@@ -6,8 +6,7 @@ import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
-import '@fontsource/inter/800.css';
-import '@fontsource/inter/900.css';
+// PERF: Removed Inter 800/900 — unused (404 decorative text falls back to 700)
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/500.css';
 import '@fontsource/space-grotesk/400.css';
@@ -110,7 +109,16 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
 
     <script>
       // ── Advanced Technical Inspector: Layout, Architecture & Live Computed Styles ──
+      // PERF: Lazy-loaded — only initializes when code-mode is active
+      let inspectorInitialized = false;
+      let inspectorCleanup: (() => void) | null = null;
+
       function initTokenInspector() {
+        // Skip if already running or not in code-mode
+        if (inspectorInitialized) return;
+        if (!document.body.classList.contains('code-mode')) return;
+        inspectorInitialized = true;
+
         const tooltip = document.getElementById('token-inspector-tooltip');
         const overlay = document.getElementById('inspector-focus-overlay');
         const boxOverlay = document.getElementById('inspector-box-model-overlay');
@@ -118,7 +126,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         const boxBorder = document.getElementById('box-model-border');
         const boxPadding = document.getElementById('box-model-padding');
         const boxContent = document.getElementById('box-model-content');
-        if (!tooltip) return;
+        if (!tooltip) { inspectorInitialized = false; return; }
 
         let currentTarget: HTMLElement | null = null;
         let rafId: number | null = null;
@@ -552,10 +560,52 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
             currentTarget = null;
           }
         });
+
+        // Store cleanup for teardown when code-mode deactivates
+        inspectorCleanup = () => {
+          const elements = document.querySelectorAll<HTMLElement>('[data-token], [data-component]');
+          elements.forEach(el => {
+            el.removeEventListener('mouseenter', onMouseEnter);
+            el.removeEventListener('mousemove', onMouseMove);
+            el.removeEventListener('mouseleave', onMouseLeave);
+          });
+          window.removeEventListener('scroll', onScrollResize);
+          window.removeEventListener('resize', onScrollResize);
+          mapObserver.disconnect();
+          tooltip.classList.remove('visible');
+          overlay?.classList.remove('active');
+          hideBoxModel();
+          inspectorInitialized = false;
+        };
       }
 
-      initTokenInspector();
-      document.addEventListener('astro:page-load', initTokenInspector);
+      function teardownTokenInspector() {
+        if (inspectorCleanup) {
+          inspectorCleanup();
+          inspectorCleanup = null;
+        }
+      }
+
+      // PERF: Observe code-mode changes to lazy-init / teardown inspector
+      const inspectorModeObserver = new MutationObserver(() => {
+        if (document.body.classList.contains('code-mode')) {
+          initTokenInspector();
+        } else {
+          teardownTokenInspector();
+        }
+      });
+      inspectorModeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+      // Init if already in code-mode (e.g. restored from localStorage)
+      if (document.body.classList.contains('code-mode')) {
+        initTokenInspector();
+      }
+      document.addEventListener('astro:page-load', () => {
+        inspectorInitialized = false;
+        if (document.body.classList.contains('code-mode')) {
+          initTokenInspector();
+        }
+      });
     </script>
 
     <script>
@@ -784,16 +834,14 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         }
 
         // ═══════════════════════════════════════════════════════
-        // 3c. UNIFIED STATE SYNC — Favicon + Title on class change
+        // 3c. UNIFIED STATE SYNC — Single observer for all class mutations
+        // PERF: Consolidated from 2 separate MutationObservers into 1
         // ═══════════════════════════════════════════════════════
 
         function syncCodeModeTab() {
           syncFavicon();
           syncTitle();
         }
-
-        const codeModeTabObserver = new MutationObserver(() => syncCodeModeTab());
-        codeModeTabObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
         // Initial sync
         syncCodeModeTab();
@@ -851,16 +899,19 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           console.log('%c─────────────────────────────────────────────', accentStyle);
         }
 
-        // Listen for Code Mode activation via class mutation
-        const easterEggObserver = new MutationObserver(() => {
+        // PERF: Single consolidated MutationObserver for all code-mode reactions
+        const unifiedCodeModeObserver = new MutationObserver(() => {
           const isCode = document.documentElement.classList.contains('code-mode');
+          // Sync favicon + title
+          syncCodeModeTab();
+          // Easter egg
           if (isCode) {
             printCodeModeEasterEgg();
           } else {
             easterEggPrinted = false;
           }
         });
-        easterEggObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        unifiedCodeModeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
         // Print immediately if already in Code Mode
         if (document.documentElement.classList.contains('code-mode')) {
@@ -895,8 +946,9 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     const isOwner = localStorage.getItem('notrack') === '1';
 
     inject({ beforeSend: (event) => isOwner ? null : event });
+    // PERF: sampleRate 0.1 = 10% of traffic (valid metrics, less network overhead)
     injectSpeedInsights({
-      sampleRate: 1,
+      sampleRate: 0.1,
       beforeSend: (data) => isOwner ? null : data,
     });
 

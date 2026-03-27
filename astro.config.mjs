@@ -14,6 +14,11 @@ export default defineConfig({
     }),
   ],
   output: 'static',
+  // PERF: Prefetch visible links on hover for faster navigation
+  prefetch: {
+    prefetchAll: false,
+    defaultStrategy: 'hover',
+  },
   build: {
     inlineStylesheets: 'auto',
   },
