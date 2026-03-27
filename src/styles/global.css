@@ -768,45 +768,66 @@ body.code-mode aside:hover {
 }
 
 /* ── 5. Section pseudo-element code tags ── */
-/* Opening tags */
-.code-mode [data-component="HeroSection"]::before,
-.code-mode [data-component="AboutSection"]::before,
-.code-mode [data-component="FeaturedProjects"]::before,
-.code-mode [data-component="CallToAction"]::before {
-  display: block;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+/* position: relative already implicit, outline doesn't shift layout */
+
+.code-mode section > .container-custom::before,
+.code-mode section > .container-custom::after {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem;
-  letter-spacing: 0.03em;
-  color: var(--cm-comment, #6272a4);
-  opacity: 0.45;
-  padding: 0 var(--main-margin);
-  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--cm-comment);
+  opacity: 0.5;
+  pointer-events: none;
+  display: block;
+  line-height: 1;
+  /* Absolute positioning so pseudo-elements don't affect layout flow */
+  position: absolute;
+  left: var(--main-margin);
 }
 
-.code-mode [data-component="HeroSection"]::before   { content: '<HeroSection>'; }
-.code-mode [data-component="AboutSection"]::before   { content: '<AboutSection>'; }
-.code-mode [data-component="FeaturedProjects"]::before { content: '<FeaturedProjects>'; }
-.code-mode [data-component="CallToAction"]::before   { content: '<CallToAction>'; }
-
-/* Closing tags */
-.code-mode [data-component="HeroSection"]::after,
-.code-mode [data-component="AboutSection"]::after,
-.code-mode [data-component="FeaturedProjects"]::after,
-.code-mode [data-component="CallToAction"]::after {
-  display: block;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.03em;
-  color: var(--cm-comment, #6272a4);
-  opacity: 0.45;
-  padding: 0 var(--main-margin);
-  margin-top: 0.75rem;
+.code-mode section > .container-custom {
+  position: relative;
 }
 
-.code-mode [data-component="HeroSection"]::after   { content: '</HeroSection>'; }
-.code-mode [data-component="AboutSection"]::after   { content: '</AboutSection>'; }
-.code-mode [data-component="FeaturedProjects"]::after { content: '</FeaturedProjects>'; }
-.code-mode [data-component="CallToAction"]::after   { content: '</CallToAction>'; }
+.code-mode section > .container-custom::before {
+  content: '<section>';
+  top: -1.25rem;
+}
+
+.code-mode section > .container-custom::after {
+  content: '</section>';
+  bottom: -1.25rem;
+}
+
+/* Override with real component names when data-component is set */
+.code-mode section[data-component="HeroSection"] > .container-custom::before { content: '<HeroSection>'; }
+.code-mode section[data-component="HeroSection"] > .container-custom::after { content: '</HeroSection>'; }
+.code-mode section[data-component="AboutSection"] > .container-custom::before { content: '<AboutSection>'; }
+.code-mode section[data-component="AboutSection"] > .container-custom::after { content: '</AboutSection>'; }
+.code-mode section[data-component="FeaturedProjects"] > .container-custom::before { content: '<FeaturedProjects>'; }
+.code-mode section[data-component="FeaturedProjects"] > .container-custom::after { content: '</FeaturedProjects>'; }
+.code-mode section[data-component="CallToAction"] > .container-custom::before { content: '<CallToAction>'; }
+.code-mode section[data-component="CallToAction"] > .container-custom::after { content: '</CallToAction>'; }
+.code-mode section[data-component="AboutHero"] > .container-custom::before { content: '<AboutHero>'; }
+.code-mode section[data-component="AboutHero"] > .container-custom::after { content: '</AboutHero>'; }
+.code-mode section[data-component="BiographySection"] > .container-custom::before { content: '<BiographySection>'; }
+.code-mode section[data-component="BiographySection"] > .container-custom::after { content: '</BiographySection>'; }
+.code-mode section[data-component="SpecialtiesSection"] > .container-custom::before { content: '<SpecialtiesSection>'; }
+.code-mode section[data-component="SpecialtiesSection"] > .container-custom::after { content: '</SpecialtiesSection>'; }
+.code-mode section[data-component="ProcessSection"] > .container-custom::before { content: '<ProcessSection>'; }
+.code-mode section[data-component="ProcessSection"] > .container-custom::after { content: '</ProcessSection>'; }
+.code-mode section[data-component="ProjectHero"] > .container-custom::before { content: '<ProjectHero>'; }
+.code-mode section[data-component="ProjectHero"] > .container-custom::after { content: '</ProjectHero>'; }
+.code-mode section[data-component="ProjectsHero"] > .container-custom::before { content: '<ProjectsHero>'; }
+.code-mode section[data-component="ProjectsHero"] > .container-custom::after { content: '</ProjectsHero>'; }
+.code-mode section[data-component="ProjectsListing"] > .container-custom::before { content: '<ProjectsListing>'; }
+.code-mode section[data-component="ProjectsListing"] > .container-custom::after { content: '</ProjectsListing>'; }
+.code-mode section[data-component="ResultsShowcase"] > .container-custom::before { content: '<ResultsShowcase>'; }
+.code-mode section[data-component="ResultsShowcase"] > .container-custom::after { content: '</ResultsShowcase>'; }
+.code-mode section[data-component="RelatedProjects"] > .container-custom::before { content: '<RelatedProjects>'; }
+.code-mode section[data-component="RelatedProjects"] > .container-custom::after { content: '</RelatedProjects>'; }
+.code-mode section[data-component="ParallaxCover"] > .container-custom::before { content: '<ParallaxCover>'; }
+.code-mode section[data-component="ParallaxCover"] > .container-custom::after { content: '</ParallaxCover>'; }
 
 /* ── 5b. Code-mode compact spacing ── */
 /* Reduce vertical rhythm ~35% to feel like a single code file */
@@ -1212,6 +1233,11 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 .code-mode #navbar .container-custom {
   outline: none !important;
   box-shadow: none !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.code-mode footer .container-custom {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
