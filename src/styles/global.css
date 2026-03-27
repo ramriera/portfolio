@@ -741,6 +741,75 @@ body.code-mode aside:hover {
   text-shadow: 0 0 8px rgba(139, 233, 253, 0.3);
 }
 
+/* ── Unified Gutter-Hover System ── */
+/* All code lines & command lines: cyan ::before bar + cyan gutter on hover */
+
+/* Base: all interactive lines */
+.code-mode [class*="code-line"],
+.code-mode [class*="cmd-line"],
+.code-mode .jsdoc-line,
+.code-mode .cta-console__line,
+.code-mode .proj-line,
+.code-mode .readme-line {
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.code-mode [class*="code-line"]:hover,
+.code-mode [class*="cmd-line"]:hover,
+.code-mode .jsdoc-line:hover,
+.code-mode .cta-console__line:hover,
+.code-mode .proj-line:hover,
+.code-mode .readme-line:hover {
+  background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04)) !important;
+}
+
+/* Cyan left bar */
+.code-mode [class*="code-line"]::before,
+.code-mode [class*="cmd-line"]::before,
+.code-mode .jsdoc-line::before,
+.code-mode .cta-console__line::before,
+.code-mode .proj-line::before,
+.code-mode .readme-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 2px;
+  width: 2px;
+  background: transparent;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.code-mode [class*="code-line"]:hover::before,
+.code-mode [class*="cmd-line"]:hover::before,
+.code-mode .jsdoc-line:hover::before,
+.code-mode .cta-console__line:hover::before,
+.code-mode .proj-line:hover::before,
+.code-mode .readme-line:hover::before {
+  background: var(--cm-function, #8be9fd) !important;
+  box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
+}
+
+/* Cyan gutter numbers */
+.code-mode [class*="code-line"]:hover [class*="-ln"],
+.code-mode [class*="code-line"]:hover [class*="-gutter"],
+.code-mode [class*="cmd-line"]:hover [class*="-ln"],
+.code-mode [class*="cmd-line"]:hover [class*="-gutter"],
+.code-mode .jsdoc-line:hover .jsdoc-gutter,
+.code-mode .cta-console__line:hover .cta-gutter,
+.code-mode .proj-line:hover .proj-gutter,
+.code-mode .readme-line:hover .readme-gutter {
+  color: var(--cm-function, #8be9fd) !important;
+  opacity: 0.9 !important;
+}
+
+/* Command line pointer cursor */
+.code-mode [class*="cmd-line"] {
+  cursor: pointer;
+  text-decoration: none;
+}
+
 /* Primary accent overrides */
 .code-mode .text-primary-500,
 .code-mode .text-primary-400 {
@@ -2242,27 +2311,6 @@ body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
   white-space: nowrap;
   padding: 0 0.875rem 0 0;
   position: relative;
-  transition: background 0.15s ease;
-}
-
-.readme-line:hover {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.readme-line::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 2px;
-  bottom: 2px;
-  width: 2px;
-  background: transparent;
-  transition: background 0.15s ease, box-shadow 0.15s ease;
-}
-
-.readme-line:hover::before {
-  background: #8be9fd;
-  box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
 }
 
 .readme-gutter {
@@ -2277,11 +2325,6 @@ body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
   font-size: inherit;
   line-height: inherit;
   transition: color 0.2s ease, opacity 0.2s ease;
-}
-
-.readme-line:hover .readme-gutter {
-  color: #8be9fd;
-  opacity: 0.9;
 }
 
 .readme-code {

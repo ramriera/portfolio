@@ -222,27 +222,6 @@ const featuredProjects = projectOrder
     white-space: nowrap;
     padding: 0 0.875rem 0 0;
     position: relative;
-    transition: background 0.2s ease;
-  }
-
-  .proj-line:hover {
-    background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
-  }
-
-  .proj-line::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    bottom: 2px;
-    width: 2px;
-    background: transparent;
-    transition: background 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .proj-line:hover::before {
-    background: var(--cm-function, #8be9fd);
-    box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
   }
 
   .proj-gutter {
@@ -257,11 +236,6 @@ const featuredProjects = projectOrder
     font-size: inherit;
     line-height: inherit;
     transition: color 0.2s ease, opacity 0.2s ease;
-  }
-
-  .proj-line:hover .proj-gutter {
-    color: var(--cm-function, #8be9fd);
-    opacity: 0.9;
   }
 
   .proj-code {
@@ -282,34 +256,7 @@ const featuredProjects = projectOrder
     white-space: nowrap;
     position: relative;
     text-decoration: none;
-    cursor: pointer;
-    transition: background 0.2s ease;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
-  }
-
-  .proj-cmd-line:hover {
-    background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
-  }
-
-  .proj-cmd-line::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    bottom: 2px;
-    width: 2px;
-    background: transparent;
-    transition: background 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .proj-cmd-line:hover::before {
-    background: var(--cm-function, #8be9fd);
-    box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
-  }
-
-  .proj-cmd-line:hover .proj-gutter {
-    color: var(--cm-function, #8be9fd);
-    opacity: 0.9;
   }
 
   .proj-cmd-prompt {

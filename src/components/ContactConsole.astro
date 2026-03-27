@@ -267,27 +267,6 @@ import { siteConfig } from '@/utils/data';
     align-items: baseline;
     white-space: nowrap;
     position: relative;
-    transition: background 0.2s ease;
-  }
-
-  .cta-console__line:hover {
-    background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
-  }
-
-  .cta-console__line::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    bottom: 2px;
-    width: 2px;
-    background: transparent;
-    transition: background 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .cta-console__line:hover::before {
-    background: var(--cm-function, #8be9fd);
-    box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
   }
 
   .cta-gutter {
@@ -302,11 +281,6 @@ import { siteConfig } from '@/utils/data';
     font-size: inherit;
     line-height: inherit;
     transition: color 0.2s ease, opacity 0.2s ease;
-  }
-
-  .cta-console__line:hover .cta-gutter {
-    color: var(--cm-function, #8be9fd);
-    opacity: 0.9;
   }
 
   .cta-code {
@@ -385,33 +359,6 @@ import { siteConfig } from '@/utils/data';
     white-space: nowrap;
     position: relative;
     text-decoration: none;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  .cta-console__cmd-line:hover {
-    background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
-  }
-
-  .cta-console__cmd-line::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    bottom: 2px;
-    width: 2px;
-    background: transparent;
-    transition: background 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .cta-console__cmd-line:hover::before {
-    background: var(--cm-function, #8be9fd);
-    box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
-  }
-
-  .cta-console__cmd-line:hover .cta-gutter {
-    color: var(--cm-function, #8be9fd);
-    opacity: 0.9;
   }
 
   .cta-cmd-prompt {
