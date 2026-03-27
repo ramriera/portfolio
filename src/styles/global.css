@@ -731,12 +731,12 @@ body.code-mode aside:hover {
   letter-spacing: 0.01em !important;
 }
 
-.code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo) {
+.code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo):not([class*="cmd-line"]) {
   color: var(--cm-function) !important;        /* cyan — functions/links */
   text-decoration-color: rgba(139, 233, 253, 0.3);
 }
 
-.code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo):hover {
+.code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo):not([class*="cmd-line"]):hover {
   color: var(--cm-string) !important;          /* green — hover state */
   text-shadow: 0 0 8px rgba(80, 250, 123, 0.3);
 }
