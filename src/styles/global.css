@@ -649,8 +649,8 @@ body.code-mode [data-token] {
 }
 
 /* Neon highlight on hover — selection highlighter */
-body.code-mode [data-component]:hover,
-body.code-mode [data-token]:hover {
+body.code-mode [data-component]:not([class*="cmd-line"]):not([class*="code-line"]):hover,
+body.code-mode [data-token]:not([class*="cmd-line"]):not([class*="code-line"]):hover {
   outline: 1px solid var(--cm-inspector-glow) !important;
   outline-offset: 2px;
   background-color: rgba(80, 250, 123, 0.03) !important;
