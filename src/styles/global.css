@@ -767,7 +767,46 @@ body.code-mode aside:hover {
   box-shadow: var(--cm-glow) !important;
 }
 
-/* ── 5. Section pseudo-element code tags — REMOVED ── */
+/* ── 5. Section pseudo-element code tags ── */
+/* Opening tags */
+.code-mode [data-component="HeroSection"]::before,
+.code-mode [data-component="AboutSection"]::before,
+.code-mode [data-component="FeaturedProjects"]::before,
+.code-mode [data-component="CallToAction"]::before {
+  display: block;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: var(--cm-comment, #6272a4);
+  opacity: 0.45;
+  padding: 0 var(--main-margin);
+  margin-bottom: 0.75rem;
+}
+
+.code-mode [data-component="HeroSection"]::before   { content: '<HeroSection>'; }
+.code-mode [data-component="AboutSection"]::before   { content: '<AboutSection>'; }
+.code-mode [data-component="FeaturedProjects"]::before { content: '<FeaturedProjects>'; }
+.code-mode [data-component="CallToAction"]::before   { content: '<CallToAction>'; }
+
+/* Closing tags */
+.code-mode [data-component="HeroSection"]::after,
+.code-mode [data-component="AboutSection"]::after,
+.code-mode [data-component="FeaturedProjects"]::after,
+.code-mode [data-component="CallToAction"]::after {
+  display: block;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: var(--cm-comment, #6272a4);
+  opacity: 0.45;
+  padding: 0 var(--main-margin);
+  margin-top: 0.75rem;
+}
+
+.code-mode [data-component="HeroSection"]::after   { content: '</HeroSection>'; }
+.code-mode [data-component="AboutSection"]::after   { content: '</AboutSection>'; }
+.code-mode [data-component="FeaturedProjects"]::after { content: '</FeaturedProjects>'; }
+.code-mode [data-component="CallToAction"]::after   { content: '</CallToAction>'; }
 
 /* ── 5b. Code-mode compact spacing ── */
 /* Reduce vertical rhythm ~35% to feel like a single code file */
@@ -881,6 +920,8 @@ body.code-mode aside:hover {
   border-radius: 4px;
   box-shadow: var(--cm-glow);
   transition: outline-color 0.3s ease, box-shadow 0.3s ease;
+  padding-top: var(--main-margin);
+  padding-bottom: var(--main-margin);
 }
 
 .code-mode .container-custom:hover {
@@ -1171,6 +1212,8 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 .code-mode #navbar .container-custom {
   outline: none !important;
   box-shadow: none !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .code-mode .nav-scrolled {
