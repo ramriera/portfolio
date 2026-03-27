@@ -1421,14 +1421,14 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 }
 
 /* ── 19. Token Inspector — hover tooltips for design tokens ── */
-.code-mode [data-token],
-.code-mode [data-component] {
+.code-mode [data-token]:not([class*="cmd-line"]),
+.code-mode [data-component]:not([class*="cmd-line"]) {
   position: relative;
   cursor: crosshair;
 }
 
-.code-mode [data-token]::after,
-.code-mode [data-component]::after {
+.code-mode [data-token]:not([class*="cmd-line"])::after,
+.code-mode [data-component]:not([class*="cmd-line"])::after {
   content: '';
   position: absolute;
   inset: -2px;
@@ -1439,8 +1439,8 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   z-index: 40;
 }
 
-.code-mode [data-token]:hover::after,
-.code-mode [data-component]:hover::after {
+.code-mode [data-token]:not([class*="cmd-line"]):hover::after,
+.code-mode [data-component]:not([class*="cmd-line"]):hover::after {
   border-color: var(--cm-inspector-glow);
   box-shadow: 0 0 8px rgba(80, 250, 123, 0.2), inset 0 0 8px rgba(80, 250, 123, 0.05);
 }
@@ -1453,8 +1453,8 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   100% { top: calc(100% + 2px); opacity: 0; }
 }
 
-.code-mode [data-token]:hover::before,
-.code-mode [data-component]:hover::before {
+.code-mode [data-token]:not([class*="cmd-line"]):hover::before,
+.code-mode [data-component]:not([class*="cmd-line"]):hover::before {
   content: '';
   position: absolute;
   left: -2px;
