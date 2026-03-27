@@ -2353,21 +2353,28 @@ body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
   min-width: 0;
 }
 
-.readme-comment {
-  /* Dimmed base for asterisks and plain text (0.5 visual weight) */
-  color: rgba(98, 114, 164, 0.55);
+.readme-delim {
+  color: var(--cm-comment, #6272a4);
+  opacity: 0.5;
+}
+
+.readme-star {
+  color: var(--cm-comment, #6272a4);
+  opacity: 0.5;
+}
+
+.readme-text {
+  color: var(--cm-text-muted, #7d8590);
 }
 
 .readme-tag {
   color: #8be9fd;
   font-style: normal;
-  opacity: 1;
 }
 
 .readme-highlight {
   color: #f1fa8c;
   font-style: normal;
-  opacity: 1;
 }
 
 /* ── Tech Stack: Code mode tooltip on hover ── */
