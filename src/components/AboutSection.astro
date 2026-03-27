@@ -200,7 +200,7 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     display: none !important;
   }
 
-  /* Photo: stretch to fill available vertical space in code mode */
+  /* Photo container: stretch to fill vertical space, photo keeps its size */
   :global(.code-mode) .about-grid {
     align-items: stretch !important;
   }
@@ -213,12 +213,7 @@ import profileImg from '@/assets/shared/foto-perfil.png';
   :global(.code-mode) .about-image-wrap {
     flex: 1;
     min-height: 0;
-  }
-
-  :global(.code-mode) .about-image-wrap :global(img) {
-    aspect-ratio: unset !important;
-    height: 100%;
-    object-fit: cover;
+    background: #1e1e2e;
   }
 
   /* ── Window container (matches readme-window) ── */

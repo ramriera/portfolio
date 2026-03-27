@@ -886,8 +886,8 @@ body.code-mode aside:hover {
   margin-bottom: 1.5rem !important;
 }
 
-/* CTA section: full-width in code mode */
-.code-mode [data-component="CallToAction"] > .container-custom {
+/* CTA section: match other sections width in code mode (remove max-w-3xl) */
+.code-mode [data-component="CallToAction"] .max-w-3xl {
   max-width: none !important;
 }
 

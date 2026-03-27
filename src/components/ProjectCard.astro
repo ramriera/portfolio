@@ -136,13 +136,12 @@ const codeLines = [
       ))}
     </div>
 
-    <!-- Terminal log footer -->
+    <!-- Terminal log footer — navigable command line -->
     <div class="ide-terminal" data-slug={slug}>
-      <span class="ide-terminal-prompt">$</span>
-      <span class="ide-terminal-text">
-        <span class="ide-log-info">[INFO]</span> Module '<span class="ide-log-name">{fileName.replace('.tsx', '')}</span>' initialized
+      <span class="ide-gutter ide-terminal-gutter">10</span>
+      <span class="ide-terminal-code">
+        <span class="ide-cmd-prompt">&gt;</span> <span class="ide-cmd-text">open</span> <span class="ide-cmd-file">{fileName.replace('.tsx', '')}</span><span class="ide-cmd-cursor">_</span>
       </span>
-      <span class="ide-cursor" aria-hidden="true"></span>
     </div>
   </div>
 </a>
@@ -421,48 +420,91 @@ const codeLines = [
   :global(.code-mode) .ide-tok-comment  { color: var(--cm-comment); font-style: italic; opacity: 0.5; }
   :global(.code-mode) .ide-tok-plain    { color: var(--cm-text-secondary); }
 
-  /* ── Terminal footer ── */
+  /* ── Terminal footer — command line style ── */
   :global(.code-mode) .ide-terminal {
     display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
+    align-items: baseline;
+    white-space: nowrap;
     border-top: 1px solid var(--cm-border);
-    background: var(--cm-bg-surface);
     font-family: theme('fontFamily.mono');
-    font-size: 0.65rem;
+    font-size: 0.73rem;
+    line-height: 1.7;
     color: var(--cm-text-muted);
     border-radius: 0 0 8px 8px;
     overflow: hidden;
-    white-space: nowrap;
+    position: relative;
+    transition: background 0.15s ease;
   }
 
-  :global(.code-mode) .ide-terminal-prompt {
-    color: var(--cm-string);
-    font-weight: 600;
+  :global(.code-mode) .ide-terminal:hover {
+    background: var(--cm-bg-hover);
   }
 
-  :global(.code-mode) .ide-log-info {
-    color: var(--cm-function);
+  :global(.code-mode) .ide-terminal::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 2px;
+    background: transparent;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
   }
 
-  :global(.code-mode) .ide-log-name {
-    color: var(--cm-constant, #f1fa8c);
+  :global(.code-mode) .ide-terminal:hover::before {
+    background: var(--cm-string, #50fa7b);
+    box-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
   }
 
-  :global(.code-mode) .ide-log-action {
-    color: var(--cm-attr);
+  :global(.code-mode) .ide-terminal-gutter {
+    opacity: 0.3;
+    transition: color 0.2s ease, opacity 0.2s ease;
   }
 
-  :global(.code-mode) .ide-cursor {
-    display: inline-block;
-    width: 6px;
-    height: 13px;
-    background: var(--cm-string);
+  :global(.code-mode) .ide-terminal:hover .ide-terminal-gutter {
+    color: var(--cm-string, #50fa7b);
+    opacity: 1;
+  }
+
+  :global(.code-mode) .ide-terminal-code {
+    flex: 1;
+    min-width: 0;
+  }
+
+  :global(.code-mode) .ide-cmd-prompt {
+    color: var(--cm-text-muted, #7d8590);
+    transition: color 0.15s ease, text-shadow 0.15s ease;
+  }
+
+  :global(.code-mode) .ide-terminal:hover .ide-cmd-prompt {
+    color: var(--cm-function, #8be9fd);
+    text-shadow: 0 0 8px rgba(139, 233, 253, 0.3);
+  }
+
+  :global(.code-mode) .ide-cmd-text {
+    color: var(--cm-keyword, #bd93f9);
+  }
+
+  :global(.code-mode) .ide-cmd-file {
+    color: var(--cm-string, #50fa7b);
+    transition: text-shadow 0.15s ease;
+  }
+
+  :global(.code-mode) .ide-terminal:hover .ide-cmd-file {
+    text-shadow: 0 0 8px rgba(80, 250, 123, 0.25);
+  }
+
+  :global(.code-mode) .ide-cmd-cursor {
+    color: var(--cm-string, #50fa7b);
     animation: ide-blink 1s step-end infinite;
-    flex-shrink: 0;
-    vertical-align: middle;
-    opacity: 0.8;
+    font-weight: 700;
+    margin-left: 1px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  :global(.code-mode) .ide-terminal:hover .ide-cmd-cursor {
+    opacity: 1;
   }
 
   /* ── Card border in code mode ── */
@@ -506,12 +548,12 @@ const codeLines = [
     if (!card) return;
 
     const slug = terminal.dataset.slug || '';
-    const textEl = terminal.querySelector('.ide-terminal-text');
-    if (!textEl) return;
+    const codeEl = terminal.querySelector('.ide-terminal-code');
+    if (!codeEl) return;
 
     card.addEventListener('mousedown', () => {
-      textEl.innerHTML =
-        `<span class="ide-log-action">[ACTION]</span> Navigating to <span class="ide-log-name">/projects/${slug}</span>…`;
+      codeEl.innerHTML =
+        `<span class="ide-cmd-prompt">&gt;</span> <span class="ide-cmd-text">navigating</span> <span class="ide-cmd-file">/projects/${slug}</span><span class="ide-cmd-cursor">_</span>`;
     });
   });
 </script>
