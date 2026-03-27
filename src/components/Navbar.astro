@@ -3,6 +3,17 @@ import { navLinks, siteConfig } from '@/utils/data';
 import CodeModeToggle from '@/components/CodeModeToggle.astro';
 
 const currentPath = Astro.url.pathname;
+
+// Code mode: map nav links to filenames and icon types
+const fileMap: Record<string, { file: string; icon: 'ts' | 'md' | 'sh' }> = {
+  '/': { file: 'index.ts', icon: 'ts' },
+  '/about': { file: 'about.md', icon: 'md' },
+  '/projects': { file: 'projects.ts', icon: 'ts' },
+};
+
+// Breadcrumb section name from current path
+const pathSegments = currentPath.replace(/\/$/, '').split('/').filter(Boolean);
+const sectionName = pathSegments.length === 0 ? 'index' : pathSegments[0];
 ---
 
 <header
@@ -12,15 +23,27 @@ const currentPath = Astro.url.pathname;
 >
   <div class="container-custom">
     <nav class="flex items-center justify-between h-20">
-      <!-- Logo: static identity -->
-      <a href="/" id="logo" class="logo relative z-10 flex items-center gap-3" data-component="Logo">
+
+      <!-- ═══ DESIGN MODE: Logo ═══ -->
+      <a href="/" id="logo" class="logo relative z-10 flex items-center gap-3 nav-design-logo" data-component="Logo">
         <span class="logo-name">Ramon Riera</span>
         <span class="logo-divider"></span>
         <span class="logo-role">UX Lead</span>
       </a>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden lg:flex items-center gap-1">
+      <!-- ═══ CODE MODE: Breadcrumb path ═══ -->
+      <div class="nav-code-breadcrumb" aria-hidden="true">
+        <span class="ncb-segment">ramonriera</span>
+        <span class="ncb-sep">/</span>
+        <span class="ncb-segment">src</span>
+        <span class="ncb-sep">/</span>
+        <span class="ncb-segment">pages</span>
+        <span class="ncb-sep">/</span>
+        <span class="ncb-active" id="ncb-section">{sectionName}</span>
+      </div>
+
+      <!-- ═══ DESIGN MODE: Desktop Navigation ═══ -->
+      <div class="hidden lg:flex items-center gap-1 nav-design-links">
         {navLinks.map((link) => (
           <a
             href={link.href}
@@ -36,9 +59,37 @@ const currentPath = Astro.url.pathname;
         ))}
       </div>
 
-      <!-- Actions -->
+      <!-- ═══ CODE MODE: File tabs ═══ -->
+      <div class="nav-code-tabs" aria-hidden="true">
+        {navLinks.map((link) => {
+          const info = fileMap[link.href] || { file: link.label, icon: 'ts' };
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          return (
+            <a
+              href={link.href}
+              class:list={['nct-tab', isActive && 'nct-tab--active']}
+            >
+              {info.icon === 'ts' && (
+                <svg class="nct-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+                </svg>
+              )}
+              {info.icon === 'md' && (
+                <svg class="nct-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+              )}
+              <span class="nct-filename">{info.file}</span>
+              <span class="nct-modified"></span>
+            </a>
+          );
+        })}
+      </div>
+
+      <!-- ═══ Actions area ═══ -->
       <div class="flex items-center gap-5">
-        <div class="hidden lg:block">
+        <!-- Design mode: toggle + CTA -->
+        <div class="hidden lg:block nav-design-toggle">
           <CodeModeToggle />
         </div>
         <a
@@ -50,9 +101,12 @@ const currentPath = Astro.url.pathname;
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
-        <a href={`mailto:${siteConfig.email}`} class="hero-cta-code text-sm navbar-cta-code" data-component="ButtonRunCmd">
-          <span class="hero-cta-prompt">&gt;</span> run <span class="hero-cta-cmd">send_email.sh</span><span class="hero-cta-cursor">_</span>
-        </a>
+
+        <!-- Code mode: Visual Mode button (triggers toggle) -->
+        <button class="nav-code-run-btn" id="nav-visual-mode-btn" aria-label="Switch to Visual Mode">
+          <span class="nav-run-icon">&#9655;</span>
+          <span class="nav-run-label">Visual Mode</span>
+        </button>
 
         <!-- Mobile menu button -->
         <button
@@ -111,21 +165,6 @@ const currentPath = Astro.url.pathname;
   <a href={`mailto:${siteConfig.email}`} class="mt-6 hero-cta-code" data-component="ButtonRunCmd">
     <span class="hero-cta-prompt">&gt;</span> run <span class="hero-cta-cmd">send_email.sh</span><span class="hero-cta-cursor">_</span>
   </a>
-</div>
-
-<!-- Code Mode: IDE breadcrumb bar (below navbar) -->
-<div id="code-breadcrumb" class="code-breadcrumb" aria-hidden="true">
-  <div class="container-custom">
-    <div class="code-breadcrumb-inner">
-      <span class="crumb-muted">portfolio</span>
-      <span class="crumb-sep">&gt;</span>
-      <span class="crumb-muted">src</span>
-      <span class="crumb-sep">&gt;</span>
-      <span class="crumb-active" id="crumb-section">index</span>
-      <span class="crumb-sep crumb-node-sep">&gt;</span>
-      <span class="crumb-node" id="crumb-node"></span>
-    </div>
-  </div>
 </div>
 
 <!-- Spacer for fixed navbar -->
@@ -194,79 +233,183 @@ const currentPath = Astro.url.pathname;
     white-space: nowrap;
   }
 
-  /* ── Code breadcrumb bar ── */
-  .code-breadcrumb {
+  /* ═══ CODE MODE — IDE Header Transformation ═══ */
+
+  /* Hide design elements in code mode */
+  .nav-code-breadcrumb,
+  .nav-code-tabs,
+  .nav-code-run-btn {
     display: none;
-    position: fixed;
-    top: 80px; /* below navbar */
-    left: 0;
-    right: 0;
-    z-index: 49;
-    height: 28px;
-    background: var(--cm-bg, #0d1117);
-    border-bottom: 1px solid var(--cm-border, #30363d);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
-  :global(.code-mode) .code-breadcrumb {
-    display: block;
+  :global(.code-mode) .nav-design-logo,
+  :global(.code-mode) .nav-design-links,
+  :global(.code-mode) .nav-design-toggle,
+  :global(.code-mode) .hero-cta-normal {
+    display: none !important;
   }
 
-  /* Hide when navbar is hidden */
-  :global(.code-mode) .navbar-hidden ~ .code-breadcrumb {
-    opacity: 0;
-    transform: translateY(-100%);
-    pointer-events: none;
-  }
-
-  .code-breadcrumb-inner {
+  :global(.code-mode) .nav-code-breadcrumb {
     display: flex;
     align-items: center;
-    height: 100%;
     gap: 5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
     white-space: nowrap;
     overflow: hidden;
   }
 
-  .crumb-muted {
+  .ncb-segment {
     color: var(--cm-text-muted, #7d8590);
   }
 
-  .crumb-sep {
+  .ncb-sep {
     color: var(--cm-text-muted, #7d8590);
-    opacity: 0.5;
+    opacity: 0.4;
   }
 
-  .crumb-active {
+  .ncb-active {
     color: var(--cm-text-secondary, #c9d1d9);
     font-weight: 500;
   }
 
-  .crumb-node-sep,
-  .crumb-node {
-    display: none;
+  /* ── File tabs ── */
+  :global(.code-mode) .nav-code-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 100%;
   }
 
-  .crumb-node.visible ~ .crumb-node-sep,
-  .crumb-node.visible {
-    display: inline;
+  .nct-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--cm-text-muted, #7d8590);
+    text-decoration: none;
+    border-top: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+    position: relative;
   }
 
-  /* Fix: reverse sibling order — sep appears before node */
-  .crumb-node-sep {
-    display: none;
+  .nct-tab:hover {
+    color: var(--cm-text-secondary, #c9d1d9);
+    background: var(--cm-bg-card, rgba(255, 255, 255, 0.03));
   }
 
-  .crumb-node.visible {
-    display: inline;
+  .nct-tab--active {
+    color: var(--cm-text, #e6edf3);
+    border-top-color: var(--cm-function, #8be9fd);
+    background: var(--cm-bg-surface, rgba(255, 255, 255, 0.04));
+  }
+
+  .nct-tab--active .nct-icon {
     color: var(--cm-function, #8be9fd);
   }
 
-  /* When node is visible, show its preceding separator */
-  :global(.code-mode) .code-breadcrumb:has(.crumb-node.visible) .crumb-node-sep {
-    display: inline;
+  .nct-icon {
+    width: 13px;
+    height: 13px;
+    color: var(--cm-text-muted, #7d8590);
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+  }
+
+  .nct-tab:hover .nct-icon {
+    color: var(--cm-text-secondary, #c9d1d9);
+  }
+
+  .nct-filename {
+    line-height: 1;
+  }
+
+  .nct-modified {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: transparent;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .nct-tab--active .nct-modified {
+    background: var(--cm-string, #50fa7b);
+    box-shadow: 0 0 4px rgba(80, 250, 123, 0.4);
+  }
+
+  /* ── Visual Mode run button ── */
+  :global(.code-mode) .nav-code-run-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.4rem 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    color: var(--cm-text-muted, #7d8590);
+    background: transparent;
+    border: 1px solid var(--cm-border, #30363d);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  :global(.code-mode) .nav-code-run-btn:hover {
+    color: var(--cm-string, #50fa7b);
+    border-color: var(--cm-string, #50fa7b);
+    background: rgba(80, 250, 123, 0.06);
+    box-shadow: 0 0 12px rgba(80, 250, 123, 0.1);
+  }
+
+  .nav-run-icon {
+    font-size: 0.6rem;
+    line-height: 1;
+    transition: color 0.2s ease;
+  }
+
+  :global(.code-mode) .nav-code-run-btn:hover .nav-run-icon {
+    color: var(--cm-string, #50fa7b);
+    text-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
+  }
+
+  /* ── Code mode: hide hamburger, always show tabs ── */
+  :global(.code-mode) #mobile-menu-btn {
+    display: none !important;
+  }
+
+  /* ── Responsive: compact tabs on smaller screens ── */
+  @media (max-width: 768px) {
+    .nct-tab {
+      padding: 0.35rem 0.6rem;
+      font-size: 0.62rem;
+      gap: 4px;
+    }
+
+    .nct-icon {
+      width: 11px;
+      height: 11px;
+    }
+
+    .nct-modified {
+      display: none;
+    }
+
+    :global(.code-mode) .nav-code-breadcrumb {
+      font-size: 0.62rem;
+    }
+
+    :global(.code-mode) .nav-code-run-btn {
+      font-size: 0.6rem;
+      padding: 0.3rem 0.6rem;
+    }
+
+    .nav-run-label {
+      display: none;
+    }
   }
 </style>
 
@@ -415,93 +558,11 @@ const currentPath = Astro.url.pathname;
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMenu);
   });
-</script>
 
-<script>
-  // ── Code Mode: Dynamic breadcrumb from scroll ──
-  function initBreadcrumb() {
-    const sectionEl = document.getElementById('crumb-section');
-    const nodeEl = document.getElementById('crumb-node');
-    const breadcrumb = document.getElementById('code-breadcrumb');
-    if (!sectionEl || !nodeEl || !breadcrumb) return;
-
-    // Determine page-level section name from pathname
-    const path = window.location.pathname.replace(/\/$/, '') || '/';
-    const segments = path.split('/').filter(Boolean);
-
-    if (segments.length === 0) {
-      sectionEl.textContent = 'index';
-    } else if (segments[0] === 'projects' && segments[1]) {
-      sectionEl.textContent = 'projects';
-      nodeEl.textContent = `[${segments[1]}]`;
-      nodeEl.classList.add('visible');
-      return; // Static breadcrumb for project detail pages
-    } else if (segments[0] === 'projects') {
-      sectionEl.textContent = 'projects';
-    } else {
-      sectionEl.textContent = segments[0];
-    }
-
-    // On index/projects page: observe project cards to update active node
-    const cards = document.querySelectorAll<HTMLElement>('.project-card[data-slug]');
-    if (!cards.length) return;
-
-    let currentSlug = '';
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Find the most visible card
-        let best: IntersectionObserverEntry | null = null;
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (!best || entry.intersectionRatio > best.intersectionRatio) {
-              best = entry;
-            }
-          }
-        });
-
-        if (best) {
-          const slug = (best.target as HTMLElement).dataset.slug || '';
-          if (slug !== currentSlug) {
-            currentSlug = slug;
-            nodeEl.textContent = `[${slug}]`;
-            nodeEl.classList.add('visible');
-          }
-        }
-      },
-      { threshold: [0.2, 0.5, 0.8], rootMargin: '-80px 0px -30% 0px' }
-    );
-
-    cards.forEach((card) => observer.observe(card));
-
-    // Clear node when scrolled to top (hero visible)
-    const hero = document.querySelector('[data-component="HeroSection"]');
-    if (hero) {
-      const heroObserver = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting) {
-            currentSlug = '';
-            nodeEl.textContent = '';
-            nodeEl.classList.remove('visible');
-          }
-        },
-        { threshold: 0.3 }
-      );
-      heroObserver.observe(hero);
-    }
-
-    // Sync breadcrumb visibility with navbar hide/show
-    const navbarEl = document.getElementById('navbar');
-    if (navbarEl) {
-      const navObserver = new MutationObserver(() => {
-        const hidden = navbarEl.classList.contains('navbar-hidden');
-        breadcrumb.style.opacity = hidden ? '0' : '1';
-        breadcrumb.style.transform = hidden ? 'translateY(-100%)' : 'translateY(0)';
-      });
-      navObserver.observe(navbarEl, { attributes: true, attributeFilter: ['class'] });
-    }
-  }
-
-  initBreadcrumb();
-  document.addEventListener('astro:page-load', initBreadcrumb);
+  // ── Visual Mode button triggers the existing CodeModeToggle ──
+  const visualModeBtn = document.getElementById('nav-visual-mode-btn');
+  visualModeBtn?.addEventListener('click', () => {
+    const toggle = document.getElementById('code-mode-toggle');
+    if (toggle) toggle.click();
+  });
 </script>
