@@ -804,10 +804,18 @@ body.code-mode aside:hover {
   opacity: 0.9 !important;
 }
 
-/* Command line pointer cursor */
+/* Command line pointer cursor + kill inspector glow */
 .code-mode [class*="cmd-line"] {
   cursor: pointer;
   text-decoration: none;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.code-mode [class*="cmd-line"]:hover {
+  outline: none !important;
+  background-color: var(--cm-bg-hover, rgba(255, 255, 255, 0.04)) !important;
+  box-shadow: none !important;
 }
 
 /* Primary accent overrides */
