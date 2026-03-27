@@ -192,7 +192,6 @@ import profileImg from '@/assets/shared/foto-perfil.png';
 
   :global(.code-mode) .about-jsdoc {
     display: block;
-    margin-bottom: 0;
   }
 
   /* Hide icon badge + remove top space in code mode */
@@ -200,7 +199,7 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     display: none !important;
   }
 
-  /* Photo container: stretch to fill vertical space, photo keeps its size */
+  /* Photo container: stretch column, center image vertically */
   :global(.code-mode) .about-grid {
     align-items: stretch !important;
   }
@@ -208,11 +207,10 @@ import profileImg from '@/assets/shared/foto-perfil.png';
   :global(.code-mode) .about-image-col {
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
 
   :global(.code-mode) .about-image-wrap {
-    flex: 1;
-    min-height: 0;
     background: #1e1e2e;
   }
 
@@ -358,6 +356,9 @@ import profileImg from '@/assets/shared/foto-perfil.png';
   .readme-cmds {
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     padding: 0.5rem 0 0.75rem;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
   }
 
   .readme-cmd-line {

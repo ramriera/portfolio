@@ -767,64 +767,7 @@ body.code-mode aside:hover {
   box-shadow: var(--cm-glow) !important;
 }
 
-/* ── 5. Section pseudo-element code tags ── */
-/* position: relative already implicit, outline doesn't shift layout */
-
-.code-mode section > .container-custom::before,
-.code-mode section > .container-custom::after {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-  color: var(--cm-comment);
-  opacity: 0.5;
-  pointer-events: none;
-  display: block;
-  line-height: 1;
-  /* Absolute positioning so pseudo-elements don't affect layout flow */
-  position: absolute;
-  left: var(--main-margin);
-}
-
-.code-mode section > .container-custom {
-  position: relative;
-}
-
-.code-mode section > .container-custom::before {
-  content: '<section>';
-  top: -1.25rem;
-}
-
-.code-mode section > .container-custom::after {
-  content: '</section>';
-  bottom: -1.25rem;
-}
-
-/* Override with real component names when data-component is set */
-.code-mode section[data-component="HeroSection"] > .container-custom::before { content: '<HeroSection>'; }
-.code-mode section[data-component="HeroSection"] > .container-custom::after { content: '</HeroSection>'; }
-.code-mode section[data-component="AboutSection"] > .container-custom::before { content: '<AboutSection>'; }
-.code-mode section[data-component="AboutSection"] > .container-custom::after { content: '</AboutSection>'; }
-/* FeaturedProjects + CallToAction: tags removed — now inside window containers */
-.code-mode section[data-component="AboutHero"] > .container-custom::before { content: '<AboutHero>'; }
-.code-mode section[data-component="AboutHero"] > .container-custom::after { content: '</AboutHero>'; }
-.code-mode section[data-component="BiographySection"] > .container-custom::before { content: '<BiographySection>'; }
-.code-mode section[data-component="BiographySection"] > .container-custom::after { content: '</BiographySection>'; }
-.code-mode section[data-component="SpecialtiesSection"] > .container-custom::before { content: '<SpecialtiesSection>'; }
-.code-mode section[data-component="SpecialtiesSection"] > .container-custom::after { content: '</SpecialtiesSection>'; }
-.code-mode section[data-component="ProcessSection"] > .container-custom::before { content: '<ProcessSection>'; }
-.code-mode section[data-component="ProcessSection"] > .container-custom::after { content: '</ProcessSection>'; }
-.code-mode section[data-component="ProjectHero"] > .container-custom::before { content: '<ProjectHero>'; }
-.code-mode section[data-component="ProjectHero"] > .container-custom::after { content: '</ProjectHero>'; }
-.code-mode section[data-component="ProjectsHero"] > .container-custom::before { content: '<ProjectsHero>'; }
-.code-mode section[data-component="ProjectsHero"] > .container-custom::after { content: '</ProjectsHero>'; }
-.code-mode section[data-component="ProjectsListing"] > .container-custom::before { content: '<ProjectsListing>'; }
-.code-mode section[data-component="ProjectsListing"] > .container-custom::after { content: '</ProjectsListing>'; }
-.code-mode section[data-component="ResultsShowcase"] > .container-custom::before { content: '<ResultsShowcase>'; }
-.code-mode section[data-component="ResultsShowcase"] > .container-custom::after { content: '</ResultsShowcase>'; }
-.code-mode section[data-component="RelatedProjects"] > .container-custom::before { content: '<RelatedProjects>'; }
-.code-mode section[data-component="RelatedProjects"] > .container-custom::after { content: '</RelatedProjects>'; }
-.code-mode section[data-component="ParallaxCover"] > .container-custom::before { content: '<ParallaxCover>'; }
-.code-mode section[data-component="ParallaxCover"] > .container-custom::after { content: '</ParallaxCover>'; }
+/* ── 5. Section pseudo-element code tags — REMOVED ── */
 
 /* ── 5b. Code-mode compact spacing ── */
 /* Reduce vertical rhythm ~35% to feel like a single code file */
@@ -886,9 +829,9 @@ body.code-mode aside:hover {
   margin-bottom: 1.5rem !important;
 }
 
-/* CTA section: match other sections width in code mode (remove max-w-3xl) */
+/* CTA section: match other sections width in code mode (override max-w-3xl → max-w-6xl) */
 .code-mode [data-component="CallToAction"] .max-w-3xl {
-  max-width: none !important;
+  max-width: 72rem !important;
 }
 
 /* About section grid gap reduction */
