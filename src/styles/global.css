@@ -2335,7 +2335,7 @@ body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
   text-align: right;
   padding-right: 12px;
   color: #7d8590;
-  opacity: 0.45;
+  opacity: 0.3;
   user-select: none;
   flex-shrink: 0;
   font-size: inherit;
@@ -2345,7 +2345,7 @@ body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
 
 .readme-line:hover .readme-gutter {
   color: #8be9fd;
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .readme-code {
@@ -2354,17 +2354,20 @@ body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
 }
 
 .readme-comment {
-  color: #6272a4;
+  /* Dimmed base for asterisks and plain text (0.5 visual weight) */
+  color: rgba(98, 114, 164, 0.55);
 }
 
 .readme-tag {
   color: #8be9fd;
   font-style: normal;
+  opacity: 1;
 }
 
 .readme-highlight {
   color: #f1fa8c;
   font-style: normal;
+  opacity: 1;
 }
 
 /* ── Tech Stack: Code mode tooltip on hover ── */

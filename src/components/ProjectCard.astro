@@ -390,7 +390,7 @@ const codeLines = [
     text-align: right;
     padding-right: 12px;
     color: var(--cm-text-muted);
-    opacity: 0.45;
+    opacity: 0.3;
     user-select: none;
     flex-shrink: 0;
     font-size: inherit;
@@ -400,7 +400,7 @@ const codeLines = [
 
   :global(.code-mode) .ide-line:hover .ide-gutter {
     color: var(--cm-function);
-    opacity: 1;
+    opacity: 0.9;
   }
 
   :global(.code-mode) .ide-code {
@@ -418,7 +418,7 @@ const codeLines = [
   :global(.code-mode) .ide-tok-number   { color: var(--cm-attr); }
   :global(.code-mode) .ide-tok-key      { color: var(--cm-function); }
   :global(.code-mode) .ide-tok-punct    { color: var(--cm-text-muted); }
-  :global(.code-mode) .ide-tok-comment  { color: var(--cm-comment); font-style: italic; }
+  :global(.code-mode) .ide-tok-comment  { color: var(--cm-comment); font-style: italic; opacity: 0.5; }
   :global(.code-mode) .ide-tok-plain    { color: var(--cm-text-secondary); }
 
   /* ── Terminal footer ── */
