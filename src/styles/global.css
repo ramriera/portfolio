@@ -806,7 +806,9 @@ body.code-mode aside:hover {
 }
 
 /* ── Command line base styles ── */
-.code-mode [class*="cmd-line"] {
+/* body.code-mode matches inspector cursor specificity */
+body.code-mode [class*="cmd-line"],
+body.code-mode [data-component][class*="cmd-line"] {
   display: flex;
   align-items: baseline;
   white-space: nowrap;
@@ -819,7 +821,6 @@ body.code-mode aside:hover {
   box-shadow: none;
 }
 
-/* Override inspector glow on cmd-lines that also have data-component */
 body.code-mode [data-component][class*="cmd-line"]:hover {
   outline: none;
   box-shadow: none;
