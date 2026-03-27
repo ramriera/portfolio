@@ -651,9 +651,9 @@ body.code-mode [data-token] {
 /* Neon highlight on hover — selection highlighter */
 body.code-mode [data-component]:not([class*="cmd-line"]):not([class*="code-line"]):hover,
 body.code-mode [data-token]:not([class*="cmd-line"]):not([class*="code-line"]):hover {
-  outline: 1px solid var(--cm-inspector-glow) !important;
+  outline: 1px solid var(--cm-inspector-glow);
   outline-offset: 2px;
-  background-color: rgba(80, 250, 123, 0.03) !important;
+  background-color: rgba(80, 250, 123, 0.03);
   box-shadow: 0 0 12px rgba(80, 250, 123, 0.08), inset 0 0 20px rgba(80, 250, 123, 0.02);
   transition: outline-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 }
@@ -742,9 +742,10 @@ body.code-mode aside:hover {
 }
 
 /* ── Unified Gutter-Hover System ── */
-/* All code lines & command lines: cyan ::before bar + cyan gutter on hover */
+/* ── Unified line hover system ──
+   Single source of truth for all code/cmd lines.
+   No !important needed — component duplicates were removed. */
 
-/* Base: all interactive lines */
 .code-mode [class*="code-line"],
 .code-mode [class*="cmd-line"],
 .code-mode .jsdoc-line,
@@ -761,7 +762,7 @@ body.code-mode aside:hover {
 .code-mode .cta-console__line:hover,
 .code-mode .proj-line:hover,
 .code-mode .readme-line:hover {
-  background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04)) !important;
+  background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
 }
 
 /* Cyan left bar */
@@ -787,7 +788,7 @@ body.code-mode aside:hover {
 .code-mode .cta-console__line:hover::before,
 .code-mode .proj-line:hover::before,
 .code-mode .readme-line:hover::before {
-  background: var(--cm-function, #8be9fd) !important;
+  background: var(--cm-function, #8be9fd);
   box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
 }
 
@@ -800,11 +801,11 @@ body.code-mode aside:hover {
 .code-mode .cta-console__line:hover .cta-gutter,
 .code-mode .proj-line:hover .proj-gutter,
 .code-mode .readme-line:hover .readme-gutter {
-  color: var(--cm-function, #8be9fd) !important;
-  opacity: 0.9 !important;
+  color: var(--cm-function, #8be9fd);
+  opacity: 0.9;
 }
 
-/* Command line unified styles */
+/* ── Command line base styles ── */
 .code-mode [class*="cmd-line"] {
   display: flex;
   align-items: baseline;
@@ -814,15 +815,14 @@ body.code-mode aside:hover {
   line-height: 1.6;
   cursor: pointer;
   text-decoration: none;
+  outline: none;
+  box-shadow: none;
 }
 
-body.code-mode [class*="cmd-line"]:hover,
+/* Override inspector glow on cmd-lines that also have data-component */
 body.code-mode [data-component][class*="cmd-line"]:hover {
-  background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04)) !important;
-  background-color: var(--cm-bg-hover, rgba(255, 255, 255, 0.04)) !important;
-  outline: none !important;
-  outline-offset: 0 !important;
-  box-shadow: none !important;
+  outline: none;
+  box-shadow: none;
 }
 
 /* Unified cmd-line syntax tokens */
