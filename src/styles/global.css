@@ -2267,6 +2267,41 @@ body.code-mode .about-bio-readme {
   display: block;
 }
 
+/* ── About page: 3 file-block windows (bio.md / experience.ts / stack.json) ── */
+.about-code-block {
+  display: none;
+}
+
+body.code-mode .about-code-block {
+  display: block;
+}
+
+/* Hide design-mode headings above the code-mode file-blocks */
+body.code-mode [data-component="BiographySection"] .heading-md,
+body.code-mode [data-component="CareerTimeline"] .heading-md,
+body.code-mode [data-component="KPIDashboard"] .heading-md {
+  display: none;
+}
+
+/* Hide normal-mode KPI cards, timeline, and bio prose in code mode */
+body.code-mode .kpi-grid-normal {
+  display: none !important;
+}
+
+body.code-mode .timeline-flow {
+  display: none;
+}
+
+body.code-mode .bio-prose {
+  display: none;
+}
+
+/* Spacing between the file-block windows */
+body.code-mode .about-code-block + .about-code-block,
+body.code-mode .about-code-block {
+  margin-bottom: 1.5rem;
+}
+
 /* ── AboutSection (Home): heading code-mode colors ── */
 body.code-mode [data-component="AboutSection"] .heading-lg {
   color: var(--cm-function) !important;
