@@ -17,6 +17,14 @@ const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 2
 const hasCaseStudy = !!project.caseSections?.length;
 const meta = project.projectMeta;
 
+// Code mode: slug to filename
+const projectFileName = project.slug.replace(/-/g, '_') + '.tsx';
+
+// Code mode: next/prev project navigation
+const projectIndex = projects.findIndex((p) => p.slug === project.slug);
+const nextProject = projects[(projectIndex + 1) % projects.length];
+const prevProject = projects[(projectIndex - 1 + projects.length) % projects.length];
+
 function md(text: string): string {
   return text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 }
@@ -63,8 +71,46 @@ function md(text: string): string {
     </div>
   </section>
 
-  <!-- Hero Image - parallax zoom -->
-  <section class="case-section" data-component="ParallaxCover">
+  <!-- ═══ CODE MODE: Project Metadata Window ═══ -->
+  <section class="section-padding pb-12 cm-project-hero" data-component="ProjectMetaWindow">
+    <div class="container-custom">
+      <div class="max-w-4xl">
+        <div class="pmd-window">
+          <div class="pmd-titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="pmd-filename">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+              </svg>
+              {projectFileName}
+            </span>
+          </div>
+          <div class="pmd-body">
+            <div class="pmd-line"><span class="pmd-gutter">1</span><span class="pmd-code"><span class="pmd-keyword">export</span> <span class="pmd-keyword">const</span> <span class="pmd-fn">projectMetadata</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{'{'}</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">2</span><span class="pmd-code">  <span class="pmd-key">client</span><span class="pmd-punct">:</span> <span class="pmd-string">"{project.client}"</span><span class="pmd-punct">,</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">3</span><span class="pmd-code">  <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta?.role || project.category}"</span><span class="pmd-punct">,</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">4</span><span class="pmd-code">  <span class="pmd-key">year</span><span class="pmd-punct">:</span> <span class="pmd-number">{project.year}</span><span class="pmd-punct">,</span></span></div>
+            {meta?.industry && (
+              <div class="pmd-line"><span class="pmd-gutter">5</span><span class="pmd-code">  <span class="pmd-key">industry</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.industry}"</span><span class="pmd-punct">,</span></span></div>
+            )}
+            {meta?.duration && (
+              <div class="pmd-line"><span class="pmd-gutter">{meta?.industry ? '6' : '5'}</span><span class="pmd-code">  <span class="pmd-key">duration</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.duration}"</span><span class="pmd-punct">,</span></span></div>
+            )}
+            <div class="pmd-line"><span class="pmd-gutter">{(meta?.industry ? 2 : 0) + (meta?.duration ? 1 : 0) + 5}</span><span class="pmd-code">  <span class="pmd-key">stack</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">{project.stack.map((s: string) => `"${s}"`).join(', ')}</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">{(meta?.industry ? 2 : 0) + (meta?.duration ? 1 : 0) + 6}</span><span class="pmd-code">  <span class="pmd-key">tags</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">{project.tags.map((t: string) => `"${t}"`).join(', ')}</span><span class="pmd-bracket">]</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">{(meta?.industry ? 2 : 0) + (meta?.duration ? 1 : 0) + 7}</span><span class="pmd-code"><span class="pmd-bracket">{'}'}</span><span class="pmd-punct">;</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero Image - parallax zoom (design mode) -->
+  <section class="case-section cm-project-cover-design" data-component="ParallaxCover">
     <div class="container-custom">
       <div data-reveal class="rounded-2xl overflow-hidden dashed-border">
         <div class="parallax-cover-wrapper">
@@ -81,8 +127,48 @@ function md(text: string): string {
     </div>
   </section>
 
-  <!-- Project metadata sidebar + About content -->
-  <section class="case-section">
+  <!-- Hero Image - Asset Preview (code mode) -->
+  <section class="case-section cm-project-cover-code" data-component="AssetPreview">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="asset-preview">
+          <div class="asset-preview__titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="asset-preview__filename">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+              </svg>
+              {project.slug}_cover.png
+            </span>
+          </div>
+          <div class="asset-preview__canvas">
+            <OptImage
+              src={project.cover}
+              alt={project.title}
+              class="asset-preview__img"
+              loading="eager"
+              widths={[800, 1200, 1600]}
+              sizes="100vw"
+            />
+          </div>
+          <div class="asset-preview__meta">
+            <span class="asset-preview__meta-item">Format: PNG</span>
+            <span class="asset-preview__meta-sep">|</span>
+            <span class="asset-preview__meta-item">Layer: Hero Cover</span>
+            <span class="asset-preview__meta-sep">|</span>
+            <span class="asset-preview__meta-item">Status: Production</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project metadata sidebar + About content (design mode) -->
+  <section class="case-section cm-project-sidebar-design">
     <div class="container-custom">
       <div class="max-w-5xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
@@ -248,6 +334,91 @@ function md(text: string): string {
           </div>
 
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CODE MODE: Content as File Blocks ═══ -->
+  <section class="case-section cm-project-content-code" data-component="ProjectFileBlocks">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto space-y-8">
+
+        <!-- context.md — About the project -->
+        <div class="file-block">
+          <div class="file-block__titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="file-block__filename">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+              </svg>
+              context.md
+            </span>
+          </div>
+          <div class="file-block__body">
+            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment"># Sobre el proyecto</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+            {project.longDescription.split('\n\n').map((paragraph: string, i: number) => (
+              <div class="file-block__line"><span class="file-block__gutter">{i + 3}</span><span class="file-block__code file-block__text" set:html={md(paragraph)} /></div>
+            ))}
+          </div>
+        </div>
+
+        <!-- challenge.md — The problem -->
+        <div class="file-block">
+          <div class="file-block__titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="file-block__filename">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" />
+              </svg>
+              challenge.md
+            </span>
+          </div>
+          <div class="file-block__body">
+            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment"># El reto</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code file-block__text" set:html={md(project.challenge)} /></div>
+            {project.checks && project.checks.length > 0 && (
+              <>
+                <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"></span></div>
+                {project.checks.map((check: string, i: number) => (
+                  <div class="file-block__line"><span class="file-block__gutter">{i + 5}</span><span class="file-block__code"><span class="pmd-string">  ✓</span> <span class="file-block__text">{check}</span></span></div>
+                ))}
+              </>
+            )}
+          </div>
+        </div>
+
+        <!-- solution.ts — The solution -->
+        <div class="file-block">
+          <div class="file-block__titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="file-block__filename">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+              </svg>
+              solution.ts
+            </span>
+          </div>
+          <div class="file-block__body">
+            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">// Solución propuesta</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code file-block__text" set:html={md(project.solution)} /></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -599,8 +770,8 @@ function md(text: string): string {
     );
   })}
 
-  <!-- Resultados -->
-  <section class="case-section" data-component="ResultsShowcase">
+  <!-- Resultados (design mode) -->
+  <section class="case-section cm-project-results-design" data-component="ResultsShowcase">
     <div class="container-custom">
       <div class="relative rounded-3xl bg-neutral-900 p-12 md:p-20 overflow-hidden max-w-4xl mx-auto"
         data-token="$radius-3xl: 1.5rem / 24px|$spacing-padding: 3rem → 5rem (md)|$color-bg-dark: #1a1918">
@@ -627,8 +798,43 @@ function md(text: string): string {
     </div>
   </section>
 
-  <!-- Other projects -->
-  <section class="section-padding" data-component="RelatedProjects">
+  <!-- ═══ CODE MODE: results.json ═══ -->
+  <section class="case-section cm-project-results-code" data-component="ResultsFile">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="file-block">
+          <div class="file-block__titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="file-block__filename">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+              </svg>
+              results.json
+            </span>
+          </div>
+          <div class="file-block__body">
+            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-bracket">{'{'}</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code">  <span class="pmd-key">"impact"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span></span></div>
+            {project.results.map((result: string, i: number) => (
+              <div class="file-block__line">
+                <span class="file-block__gutter">{i + 3}</span>
+                <span class="file-block__code">    <span class="pmd-string">"{result}"</span>{i < project.results.length - 1 ? <span class="pmd-punct">,</span> : ''}</span>
+              </div>
+            ))}
+            <div class="file-block__line"><span class="file-block__gutter">{project.results.length + 3}</span><span class="file-block__code">  <span class="pmd-bracket">]</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">{project.results.length + 4}</span><span class="file-block__code"><span class="pmd-bracket">{'}'}</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other projects (design mode) -->
+  <section class="section-padding cm-project-related-design" data-component="RelatedProjects">
     <div class="container-custom">
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-14 md:mb-16">
         <div>
@@ -683,6 +889,49 @@ function md(text: string): string {
             </a>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CODE MODE: Terminal Navigation Between Projects ═══ -->
+  <section class="section-padding cm-project-nav-code" data-component="ProjectTerminalNav">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="file-block">
+          <div class="file-block__titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="file-block__filename">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+              </svg>
+              terminal
+            </span>
+          </div>
+          <div class="file-block__body file-block__body--terminal">
+            <a href="/projects" class="proj-nav-cmd" data-component="NavCmd">
+              <span class="proj-nav-prompt">$</span>
+              <span class="proj-nav-text">cd</span>
+              <span class="proj-nav-path">../projects</span>
+              <span class="proj-nav-comment"># volver al índice</span>
+            </a>
+            <a href={`/projects/${prevProject.slug}`} class="proj-nav-cmd" data-component="NavCmd">
+              <span class="proj-nav-prompt">$</span>
+              <span class="proj-nav-text">./prev_project.sh</span>
+              <span class="proj-nav-path">{prevProject.slug.replace(/-/g, '_')}.tsx</span>
+              <span class="proj-nav-comment"># {prevProject.title}</span>
+            </a>
+            <a href={`/projects/${nextProject.slug}`} class="proj-nav-cmd" data-component="NavCmd">
+              <span class="proj-nav-prompt">$</span>
+              <span class="proj-nav-text">./next_project.sh</span>
+              <span class="proj-nav-path">{nextProject.slug.replace(/-/g, '_')}.tsx</span>
+              <span class="proj-nav-comment"># {nextProject.title}</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
