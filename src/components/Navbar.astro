@@ -78,7 +78,7 @@ const sectionName = pathSegments.length === 0 ? 'index' : pathSegments[0];
       <div class="nav-code-tabs" aria-hidden="true">
         {navLinks.map((link) => {
           const info = fileMap[link.href] || { file: link.label, icon: 'ts' };
-          const isActive = !isProjectDetail && (currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)));
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
           return (
             <a
               href={link.href}
@@ -99,18 +99,6 @@ const sectionName = pathSegments.length === 0 ? 'index' : pathSegments[0];
             </a>
           );
         })}
-        {isProjectDetail && (
-          <a
-            href={currentPath}
-            class="nct-tab nct-tab--active"
-          >
-            <svg class="nct-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-            </svg>
-            <span class="nct-filename">{projectFileName}</span>
-            <span class="nct-modified"></span>
-          </a>
-        )}
       </div>
 
       <!-- ═══ Actions area ═══ -->

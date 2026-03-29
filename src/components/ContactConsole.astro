@@ -82,9 +82,9 @@ const {
         <!-- Titlebar -->
         <div class="cta-console__titlebar">
           <div class="cta-console__dots">
-            <span class="json-dot json-dot--red"></span>
-            <span class="json-dot json-dot--yellow"></span>
-            <span class="json-dot json-dot--green"></span>
+            <span class="cta-dot" style="background:#ff5f57"></span>
+            <span class="cta-dot" style="background:#febc2e"></span>
+            <span class="cta-dot" style="background:#28c840"></span>
           </div>
           <span class="cta-console__filename">
             <svg class="cta-console__file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -245,6 +245,12 @@ const {
   .cta-console__dots {
     display: flex;
     gap: 6px;
+  }
+
+  .cta-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
   }
 
   .cta-console__filename {

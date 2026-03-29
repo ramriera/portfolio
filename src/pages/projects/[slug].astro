@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Tag from '@/components/Tag.astro';
 import OptImage from '@/components/OptImage.astro';
+import ContactConsole from '@/components/ContactConsole.astro';
 import { projects } from '@/utils/data';
 import type { CaseSection } from '@/utils/data';
 
@@ -892,6 +893,9 @@ function md(text: string): string {
       </div>
     </div>
   </section>
+
+  <!-- CTA — Contact Console -->
+  <ContactConsole />
 
   <!-- ═══ CODE MODE: Terminal Navigation Between Projects ═══ -->
   <section class="section-padding cm-project-nav-code" data-component="ProjectTerminalNav">
