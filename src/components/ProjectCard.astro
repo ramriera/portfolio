@@ -65,6 +65,18 @@ const codeLines = [
 
   <!-- ═══ Image container ═══ -->
   <div class="ide-preview-wrap">
+    <!-- Asset viewer toolbar (code-mode only) -->
+    <div class="ide-asset-toolbar" aria-hidden="true">
+      <div class="ide-asset-path">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+        </svg>
+        <span class="ide-asset-dir">assets</span>
+        <span class="ide-asset-sep">&gt;</span>
+        <span class="ide-asset-file">{slug}_cover.png</span>
+      </div>
+      <span class="ide-asset-dims">PNG</span>
+    </div>
     <div
       class="card-image-wrap relative overflow-hidden rounded-2xl border border-neutral-200 aspect-video"
       style={brandColor ? `background-color: ${brandColor}` : ''}
@@ -197,7 +209,8 @@ const codeLines = [
   .ide-tab-bar,
   .ide-code-content,
   .ide-grid-overlay,
-  .ide-scanline {
+  .ide-scanline,
+  .ide-asset-toolbar {
     display: none;
   }
 
@@ -281,11 +294,59 @@ const codeLines = [
     opacity: 0.7;
   }
 
+  /* ── Asset toolbar (code mode) ── */
+  :global(.code-mode) .ide-asset-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    background: #181825;
+    border: 1px solid var(--cm-border);
+    border-top: none;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.62rem;
+  }
+
+  :global(.code-mode) .ide-asset-path {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #7d8590;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  :global(.code-mode) .ide-asset-dir {
+    color: #7d8590;
+    white-space: nowrap;
+  }
+
+  :global(.code-mode) .ide-asset-sep {
+    color: #7d8590;
+    opacity: 0.35;
+  }
+
+  :global(.code-mode) .ide-asset-file {
+    color: var(--cm-function, #8be9fd);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :global(.code-mode) .ide-asset-dims {
+    color: #7d8590;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 0.6rem;
+  }
+
   /* ── Image container in code mode — Preview panel ── */
   :global(.code-mode) .ide-preview-wrap .card-image-wrap {
     border-radius: 0;
     border: 1px solid var(--cm-border);
     border-top: none;
+    background-color: #0d1117;
   }
 
   :global(.code-mode) .ide-grid-overlay {
@@ -293,9 +354,9 @@ const codeLines = [
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(139, 233, 253, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(139, 233, 253, 0.04) 1px, transparent 1px);
-    background-size: 20px 20px;
+      linear-gradient(rgba(139, 233, 253, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139, 233, 253, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
     pointer-events: none;
     z-index: 2;
   }

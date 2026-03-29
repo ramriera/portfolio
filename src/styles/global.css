@@ -3833,6 +3833,19 @@ body.code-mode [data-component="ProjectHero"] { display: none !important; }
   box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
 }
 
+/* ── About page: profile photo asset viewer toggle ── */
+.about-pg-photo-code {
+  display: none;
+}
+
+body.code-mode .about-pg-photo-design {
+  display: none !important;
+}
+
+body.code-mode .about-pg-photo-code {
+  display: block;
+}
+
 /* ── Case study sections: code-mode figure → asset viewer ── */
 body.code-mode .case-section figure,
 body.code-mode .case-section-new-group figure {
