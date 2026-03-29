@@ -112,12 +112,12 @@ function getProjectFilters(tags: string[]): string[] {
             <ProjectCard {...project} />
           </div>
         ))}
+        <div class="md:col-span-2 mt-8">
+          <ContactConsole />
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- CTA -->
-  <ContactConsole />
 </BaseLayout>
 
 <script>

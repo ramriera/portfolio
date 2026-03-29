@@ -55,7 +55,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
     </div>
   </section>
 
-  <!-- Hero (code mode): personal.config.ts -->
+  <!-- Hero (code mode): about.ts -->
   <section class="section-padding about-hero-code" data-component="AboutHeroCode">
     <div class="container-custom">
       <div class="max-w-4xl">
@@ -70,7 +70,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6">
                 <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
               </svg>
-              personal.config.ts
+              about.ts
             </span>
             <span class="file-block__tab">
               <span class="file-block__tab-branch">main*</span>
@@ -450,16 +450,9 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-
-  <!-- Metodología y Stack -->
-  <section class="section-padding methodology-stack-section" id="metodologia-stack" data-component="MethodologyStack">
-    <div class="container-custom">
-      <div class="max-w-4xl mx-auto">
+          <!-- Metodología y Stack (inside grid, right column) -->
+          <div id="metodologia-stack" data-component="MethodologyStack" class="methodology-stack-section mt-16">
         <div data-reveal class="text-center mb-16">
           <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
@@ -604,7 +597,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
             <p class="text-body mb-10">Proceso de trabajo y herramientas organizados como módulos de un sistema. Cada fase tiene su stack dedicado.</p>
 
             <!-- Normal mode: 4 Stack Cards -->
-            <div class="process-grid-normal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="process-grid-normal grid grid-cols-1 md:grid-cols-2 gap-4">
 
               <!-- Strategy & Research -->
               <div class="eco-card group" data-module="strategy">
@@ -786,22 +779,26 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
             </div>
           </div>
         </div>
+          </div>
+
+          <!-- CTA (inside grid, right column) -->
+          <div class="mt-16">
+            <ContactConsole
+              headingHtml='¿Listo para <span class="text-primary-500">empezar</span>?'
+              description="Cuéntame sobre tu proyecto y veamos cómo puedo ayudarte a alcanzar tus objetivos de diseño."
+              jsdocTitle="¿Listo para "
+              jsdocHighlight="empezar"
+              jsdocDesc={[
+                'Cuéntame sobre tu proyecto y veamos',
+                'cómo puedo ayudarte a alcanzar tus',
+                'objetivos de diseño.',
+              ]}
+            />
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- CTA -->
-  <ContactConsole
-    headingHtml='¿Listo para <span class="text-primary-500">empezar</span>?'
-    description="Cuéntame sobre tu proyecto y veamos cómo puedo ayudarte a alcanzar tus objetivos de diseño."
-    jsdocTitle="¿Listo para "
-    jsdocHighlight="empezar"
-    jsdocDesc={[
-      'Cuéntame sobre tu proyecto y veamos',
-      'cómo puedo ayudarte a alcanzar tus',
-      'objetivos de diseño.',
-    ]}
-  />
-
 
 </BaseLayout>
