@@ -169,35 +169,44 @@ function md(text: string): string {
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <div class="asset-preview">
-          <div class="asset-preview__titlebar">
-            <div class="pmd-dots">
-              <span class="pmd-dot" style="background:#ff5f57"></span>
-              <span class="pmd-dot" style="background:#febc2e"></span>
-              <span class="pmd-dot" style="background:#28c840"></span>
-            </div>
-            <span class="asset-preview__filename">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+          <!-- Toolbar: path + dimensions -->
+          <div class="asset-preview__toolbar">
+            <div class="asset-preview__path">
+              <svg class="asset-preview__path-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
               </svg>
-              {project.slug}_cover.png
-            </span>
+              <span class="asset-preview__path-dir">assets</span>
+              <span class="asset-preview__path-sep">&gt;</span>
+              <span class="asset-preview__path-dir">projects</span>
+              <span class="asset-preview__path-sep">&gt;</span>
+              <span class="asset-preview__path-file">{project.slug}_cover.png</span>
+            </div>
+            <div class="asset-preview__dims">
+              <span>1600 × 900</span>
+              <span class="asset-preview__dims-sep">|</span>
+              <span>PNG</span>
+            </div>
           </div>
+          <!-- Canvas: grid bg + image + cyan glow -->
           <div class="asset-preview__canvas">
-            <OptImage
-              src={project.cover}
-              alt={project.title}
-              class="asset-preview__img"
-              loading="eager"
-              widths={[800, 1200, 1600]}
-              sizes="100vw"
-            />
+            <div class="asset-preview__img-wrap">
+              <OptImage
+                src={project.cover}
+                alt={project.title}
+                class="asset-preview__img"
+                loading="eager"
+                widths={[800, 1200, 1600]}
+                sizes="100vw"
+              />
+            </div>
           </div>
-          <div class="asset-preview__meta">
-            <span class="asset-preview__meta-item">Format: PNG</span>
-            <span class="asset-preview__meta-sep">|</span>
-            <span class="asset-preview__meta-item">Layer: Hero Cover</span>
-            <span class="asset-preview__meta-sep">|</span>
-            <span class="asset-preview__meta-item">Status: Production</span>
+          <!-- Status bar -->
+          <div class="asset-preview__status">
+            <span class="asset-preview__status-item">Layer: Hero Cover</span>
+            <span class="asset-preview__status-sep">|</span>
+            <span class="asset-preview__status-item">Status: Production</span>
+            <span class="asset-preview__status-sep">|</span>
+            <span class="asset-preview__status-item">High Fidelity</span>
           </div>
         </div>
       </div>
