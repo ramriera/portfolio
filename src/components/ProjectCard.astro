@@ -73,9 +73,15 @@ const codeLines = [
         </svg>
         <span class="ide-asset-dir">assets</span>
         <span class="ide-asset-sep">&gt;</span>
+        <span class="ide-asset-dir">projects</span>
+        <span class="ide-asset-sep">&gt;</span>
         <span class="ide-asset-file">{slug}_cover.png</span>
       </div>
-      <span class="ide-asset-dims">PNG</span>
+      <div class="ide-asset-meta">
+        <span>1200 × 675</span>
+        <span class="ide-asset-meta-sep">|</span>
+        <span>PNG</span>
+      </div>
     </div>
     <div
       class="card-image-wrap relative overflow-hidden rounded-2xl border border-neutral-200 aspect-video"
@@ -106,6 +112,14 @@ const codeLines = [
       <div class="ide-grid-overlay" aria-hidden="true"></div>
       <!-- Scan line effect on hover (code-mode only) -->
       <div class="ide-scanline" aria-hidden="true"></div>
+    </div>
+    <!-- Status bar (code-mode only) -->
+    <div class="ide-asset-status" aria-hidden="true">
+      <span>Layer: Cover</span>
+      <span class="ide-asset-meta-sep">|</span>
+      <span>Status: Production</span>
+      <span class="ide-asset-meta-sep">|</span>
+      <span>High Fidelity</span>
     </div>
   </div>
 
@@ -210,7 +224,8 @@ const codeLines = [
   .ide-code-content,
   .ide-grid-overlay,
   .ide-scanline,
-  .ide-asset-toolbar {
+  .ide-asset-toolbar,
+  .ide-asset-status {
     display: none;
   }
 
@@ -300,9 +315,10 @@ const codeLines = [
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    padding: 0.35rem 0.75rem;
+    padding: 0.4rem 0.75rem;
     background: #181825;
-    border: 1px solid var(--cm-border);
+    border: 1px solid rgba(139, 233, 253, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     border-top: none;
     font-family: theme('fontFamily.mono');
     font-size: 0.62rem;
@@ -334,17 +350,40 @@ const codeLines = [
     text-overflow: ellipsis;
   }
 
-  :global(.code-mode) .ide-asset-dims {
+  :global(.code-mode) .ide-asset-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     color: #7d8590;
     white-space: nowrap;
     flex-shrink: 0;
     font-size: 0.6rem;
   }
 
+  :global(.code-mode) .ide-asset-meta-sep {
+    opacity: 0.3;
+  }
+
+  /* ── Status bar (code mode) ── */
+  :global(.code-mode) .ide-asset-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.75rem;
+    background: #181825;
+    border: 1px solid var(--cm-border);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 0 0 8px 8px;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.55rem;
+    color: #7d8590;
+    white-space: nowrap;
+  }
+
   /* ── Image container in code mode — Preview panel ── */
   :global(.code-mode) .ide-preview-wrap .card-image-wrap {
     border-radius: 0;
-    border: 1px solid var(--cm-border);
+    border: 1px solid rgba(139, 233, 253, 0.08);
     border-top: none;
     background-color: #0d1117;
   }

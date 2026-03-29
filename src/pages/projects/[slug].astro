@@ -483,8 +483,10 @@ function md(text: string): string {
             {section.images && (
               <div data-reveal class="mb-10 space-y-6">
                 {section.images.map((img: string, i: number) => (
-                  <figure class="rounded-xl overflow-hidden max-w-full md:max-w-3xl mx-auto">
+                  <figure class="rounded-xl overflow-hidden max-w-full md:max-w-3xl mx-auto cs-figure">
+                    <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                     <OptImage src={img} alt={section.title} class="lightbox-trigger block w-full h-auto cursor-zoom-in" />
+                    <div class="cs-fig-status"><span>Layer: {section.label || 'Content'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
                     {section.captions?.[i] && (
                       <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                     )}
@@ -509,12 +511,14 @@ function md(text: string): string {
                     </li>
                     {section.bulletEvidence?.[bIdx] && (
                       <li class="list-none ml-8">
-                        <figure class="relative rounded-xl overflow-hidden my-4 max-w-full md:max-w-sm mx-auto">
+                        <figure class="relative rounded-xl overflow-hidden my-4 max-w-full md:max-w-sm mx-auto cs-figure">
+                          <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{section.bulletEvidence[bIdx].image.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                           <OptImage
                             src={section.bulletEvidence[bIdx].image}
                             alt={`Evidencia: ${section.bulletEvidence[bIdx].caption}`}
                             class="block w-full h-auto lightbox-trigger cursor-zoom-in"
                           />
+                          <div class="cs-fig-status"><span>Layer: Evidence</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
                           <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">
                             {section.bulletEvidence[bIdx].caption}
                           </figcaption>
@@ -540,10 +544,12 @@ function md(text: string): string {
           <div class="max-w-4xl mx-auto" data-component="SectionSplitView">
           <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 items-center">
             <div class="lg:col-span-2 space-y-4">
-              {section.images?.map((img: string) => (
-                <div data-reveal class="rounded-xl overflow-hidden">
+              {section.images?.map((img: string, i: number) => (
+                <figure data-reveal class="rounded-xl overflow-hidden cs-figure">
+                  <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                   <OptImage src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" />
-                </div>
+                  <div class="cs-fig-status"><span>Layer: {section.label || 'Content'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
+                </figure>
               ))}
             </div>
             <div class="lg:col-span-3">
@@ -583,10 +589,12 @@ function md(text: string): string {
               )}
             </div>
             <div class="space-y-4">
-              {section.images?.map((img: string) => (
-                <div data-reveal class="rounded-xl overflow-hidden">
+              {section.images?.map((img: string, i: number) => (
+                <figure data-reveal class="rounded-xl overflow-hidden cs-figure">
+                  <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                   <OptImage src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" />
-                </div>
+                  <div class="cs-fig-status"><span>Layer: {section.label || 'Content'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
+                </figure>
               ))}
             </div>
           </div>
@@ -604,9 +612,10 @@ function md(text: string): string {
             )}
             <div class={`space-y-6 ${section.images?.length === 1 && !section.images[0].endsWith('.svg') ? 'max-w-3xl mx-auto' : ''}`}>
               {section.images?.map((img: string, i: number) => (
-                <figure data-reveal class="rounded-xl overflow-hidden max-w-full md:max-w-3xl mx-auto">
+                <figure data-reveal class="rounded-xl overflow-hidden max-w-full md:max-w-3xl mx-auto cs-figure">
+                  <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                   <OptImage src={img} alt={section.captions?.[i] || section.title} class={`block w-full h-auto ${img.endsWith('.svg') ? '' : 'lightbox-trigger object-cover cursor-zoom-in'}`} />
-                  <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
+                  <div class="cs-fig-status"><span>Layer: {section.label || 'Content'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
                   {section.captions?.[i] && (
                     <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
@@ -640,9 +649,10 @@ function md(text: string): string {
             )}
             <div class={`${section.images?.length === 1 ? 'flex justify-center max-w-xl mx-auto' : 'grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8'} ${!section.highlight ? 'mt-10' : ''}`}>
               {section.images?.map((img: string, i: number) => (
-                <figure data-reveal data-delay={String(i * 80)} class={`rounded-xl overflow-hidden ${section.images?.length === 1 ? 'max-w-md w-full' : ''}`}>
+                <figure data-reveal data-delay={String(i * 80)} class={`rounded-xl overflow-hidden cs-figure ${section.images?.length === 1 ? 'max-w-md w-full' : ''}`}>
+                  <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                   <OptImage src={img} alt={section.captions?.[i] || `${section.title} ${i + 1}`} class="lightbox-trigger block w-full h-auto max-h-[500px] object-contain cursor-zoom-in" />
-                  <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
+                  <div class="cs-fig-status"><span>Layer: {section.label || 'Content'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
                   {section.captions?.[i] && (
                     <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
@@ -662,9 +672,10 @@ function md(text: string): string {
             )}
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto mt-10">
               {section.images?.map((img: string, i: number) => (
-                <figure data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden relative mx-auto">
+                <figure data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden relative mx-auto cs-figure">
+                  <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                   <OptImage src={img} alt={section.captions?.[i] || `Slide ${i + 1}`} class="lightbox-trigger block w-full h-auto object-cover cursor-zoom-in" />
-                  <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
+                  <div class="cs-fig-status"><span>Layer: {section.label || 'Screens'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
                   {section.captions?.[i] && (
                     <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
@@ -794,7 +805,8 @@ function md(text: string): string {
             )}
             <div class="audit-deck-gallery grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {section.images?.map((img: string, i: number) => (
-                <figure data-reveal data-delay={String(i * 60)} class="audit-deck-item">
+                <figure data-reveal data-delay={String(i * 60)} class="audit-deck-item cs-figure">
+                  <div class="cs-fig-toolbar cs-fig-toolbar--compact"><div class="cs-fig-path"><svg class="cs-fig-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-file">{img.split('/').pop()}</span></div></div>
                   <div class="audit-deck-thumb">
                     <OptImage
                       src={img}
@@ -802,6 +814,7 @@ function md(text: string): string {
                       class="lightbox-trigger cursor-zoom-in"
                     />
                   </div>
+                  <div class="cs-fig-status cs-fig-status--compact"><span>Slide {i + 1}</span></div>
                   {section.captions?.[i] && (
                     <figcaption class="audit-deck-caption">{section.captions[i]}</figcaption>
                   )}

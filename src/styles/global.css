@@ -3894,6 +3894,94 @@ body.code-mode .case-section-new-group .cm-image-path {
   color: var(--cm-function, #8be9fd);
 }
 
+/* ── cs-fig-* : Case Study Figure Asset Viewer (toolbar + status) ── */
+/* Hidden in design mode, shown in code mode */
+.cs-fig-toolbar,
+.cs-fig-status {
+  display: none;
+}
+
+body.code-mode .cs-fig-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.45rem 0.75rem;
+  background: #181825;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+}
+
+body.code-mode .cs-fig-toolbar--compact {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.55rem;
+}
+
+.cs-fig-path {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cs-fig-icon {
+  flex-shrink: 0;
+  color: #7d8590;
+}
+
+.cs-fig-dir {
+  color: #7d8590;
+  white-space: nowrap;
+}
+
+.cs-fig-sep {
+  color: #7d8590;
+  opacity: 0.35;
+}
+
+.cs-fig-file {
+  color: var(--cm-function, #8be9fd);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cs-fig-dims {
+  color: #7d8590;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 0.6rem;
+}
+
+body.code-mode .cs-fig-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  background: #181825;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: #7d8590;
+}
+
+body.code-mode .cs-fig-status--compact {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.5rem;
+}
+
+.cs-fig-status-sep {
+  opacity: 0.3;
+}
+
+/* Hide old cm-image-path spans in code mode (replaced by cs-fig-toolbar) */
+body.code-mode .case-section .cm-image-path,
+body.code-mode .case-section-new-group .cm-image-path {
+  display: none !important;
+}
+
 /* Case study section headings in code mode */
 body.code-mode .case-section .heading-md,
 body.code-mode .case-section-new-group .heading-md {
