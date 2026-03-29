@@ -13,8 +13,8 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
   title="About ⚡ Ramon Riera"
   description="Conoce a Ramon Riera, Design Systems & Strategy Lead especializado en UX Strategy, DesignOps y Product Design."
 >
-  <!-- Hero -->
-  <section class="section-padding" data-component="AboutHero">
+  <!-- Hero (design mode) -->
+  <section class="section-padding about-hero-design" data-component="AboutHero">
     <div class="container-custom">
       <div class="max-w-4xl">
         <div data-reveal class="mb-8">
@@ -51,6 +51,54 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
           data-token="$font-family-sans: Inter|$color-text-muted: #7c766c">
           Con más de 6 años de experiencia, he dedicado mi carrera a crear productos digitales que combinan estética, usabilidad y estrategia de negocio.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero (code mode): personal.config.ts -->
+  <section class="section-padding about-hero-code" data-component="AboutHeroCode">
+    <div class="container-custom">
+      <div class="max-w-4xl">
+        <div class="file-block about-hero-window">
+          <div class="file-block__titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="file-block__filename">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
+              </svg>
+              personal.config.ts
+            </span>
+            <span class="file-block__tab">
+              <span class="file-block__tab-branch">main*</span>
+            </span>
+          </div>
+          <div class="file-block__body">
+            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-keyword">import type</span> <span class="pmd-bracket">{`{`}</span> <span class="pmd-fn">Profile</span> <span class="pmd-bracket">{`}`}</span> <span class="pmd-keyword">from</span> <span class="pmd-string">'@types'</span><span class="pmd-punct">;</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">personalProfile</span><span class="pmd-punct">:</span> <span class="pmd-fn">Profile</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{`{`}</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">  <span class="pmd-key">name</span><span class="pmd-punct">:</span> <span class="pmd-string">"Ramón Riera"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">  <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"UX Lead & Product Designer"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">  <span class="pmd-key">experience</span><span class="pmd-punct">:</span> <span class="pmd-string">"8+ years"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code">  <span class="pmd-key">status</span><span class="pmd-punct">:</span> <span class="pmd-impact">"available_for_new_projects"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code">  <span class="pmd-key">specialties</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code">    <span class="pmd-string">"Design Systems"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code">    <span class="pmd-string">"Product Strategy"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code">    <span class="pmd-string">"UX Operations"</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code">  <span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code"></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code">  <span class="pmd-key">vision</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code">    <span class="pmd-key">data_driven</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code">    <span class="pmd-key">user_centric</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">18</span><span class="file-block__code">    <span class="pmd-key">outcome_focused</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">19</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">20</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span><span class="pmd-punct">;</span></span></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

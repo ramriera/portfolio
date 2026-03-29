@@ -3880,6 +3880,45 @@ body.code-mode [data-component="ProjectHero"] { display: none !important; }
   box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
 }
 
+/* ── About page: Hero toggle (design ↔ code) ── */
+.about-hero-code {
+  display: none;
+}
+
+body.code-mode .about-hero-design {
+  display: none !important;
+}
+
+body.code-mode .about-hero-code {
+  display: block;
+}
+
+/* Hero code window: subtle cyan glow on hover */
+.about-hero-window {
+  transition: box-shadow 0.2s ease;
+}
+
+.about-hero-window:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 30px rgba(139, 233, 253, 0.06);
+}
+
+/* Git branch tab variant */
+.file-block__tab-branch {
+  color: #7d8590;
+  font-size: 0.65rem;
+}
+
+.file-block__tab-branch::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  border-radius: 50%;
+  border: 1.5px solid #50fa7b;
+  vertical-align: -1px;
+}
+
 /* ── About page: profile photo asset viewer toggle ── */
 .about-pg-photo-code {
   display: none;
