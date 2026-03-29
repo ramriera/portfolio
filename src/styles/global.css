@@ -2573,98 +2573,68 @@ body.code-mode .social-normal {
 }
 
 body.code-mode .social-code {
-  display: flex !important;
+  display: block !important;
 }
 
-.social-import {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 0.875rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  color: var(--cm-text-muted, #7d8590);
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 2px;
+/* ── social_links.sh command lines ── */
+.social-cmd {
+  display: flex;
+  align-items: baseline;
+  padding: 0 0.875rem 0 0;
+  position: relative;
   text-decoration: none;
-  transition: all 0.3s ease;
   cursor: pointer;
-  white-space: nowrap;
+  transition: background 0.2s ease;
 }
 
-.social-import-icon {
-  flex-shrink: 0;
-  opacity: 0.5;
-  transition: all 0.3s ease;
+.social-cmd:hover {
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.social-import:hover {
-  border-color: var(--cm-border, #30363d);
-  background: rgba(255, 255, 255, 0.05);
+.social-cmd::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: transparent;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
-.social-import:hover .social-import-icon {
-  opacity: 1;
+.social-cmd:hover::before {
+  background: var(--cm-function, #8be9fd);
+  box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
 }
 
-/* LinkedIn: icon lights up in brand blue */
-.social-import--linkedin .social-import-icon {
-  color: var(--cm-text-muted, #7d8590);
+.social-cmd .file-block__gutter {
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-.social-import--linkedin:hover .social-import-icon {
-  color: #0a66c2;
-  filter: drop-shadow(0 0 4px rgba(10, 102, 194, 0.4));
+.social-cmd:hover .file-block__gutter {
+  color: var(--cm-function, #8be9fd);
+  opacity: 0.9;
 }
 
-.social-import--linkedin:hover .code-import-name {
-  color: #0a66c2;
-  text-shadow: 0 0 10px rgba(10, 102, 194, 0.4);
+.social-cmd__prompt {
+  color: var(--cm-function, #8be9fd);
 }
 
-.social-import--linkedin:hover .code-keyword,
-.social-import--linkedin:hover .code-string {
-  color: var(--cm-text-secondary, #c9d1d9);
+.social-cmd__run {
+  color: var(--cm-keyword, #bd93f9);
 }
 
-/* Medium: icon lights up in white */
-.social-import--medium .social-import-icon {
-  color: var(--cm-text-muted, #7d8590);
+.social-cmd__file {
+  color: var(--cm-constant, #f1fa8c);
 }
 
-.social-import--medium:hover .social-import-icon {
-  color: #fff;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+.social-cmd:hover .social-cmd__file {
+  color: var(--cm-function, #8be9fd);
+  text-shadow: 0 0 8px rgba(139, 233, 253, 0.4);
 }
 
-.social-import--medium:hover .code-import-name {
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-.social-import--medium:hover .code-keyword,
-.social-import--medium:hover .code-string {
-  color: var(--cm-text-secondary, #c9d1d9);
-}
-
-/* CV (fetch): icon lights up in green */
-.social-import--cv .social-import-icon {
-  color: var(--cm-text-muted, #7d8590);
-}
-
-.social-import--cv:hover .social-import-icon {
-  color: var(--cm-string, #50fa7b);
-  filter: drop-shadow(0 0 4px rgba(80, 250, 123, 0.3));
-}
-
-.social-import--cv:hover .code-fn {
-  color: #fff;
-}
-
-.social-import--cv:hover .code-string {
-  color: var(--cm-string, #50fa7b);
-  text-shadow: 0 0 8px rgba(80, 250, 123, 0.3);
+.social-cmd:hover .social-cmd__prompt {
+  text-shadow: 0 0 8px rgba(139, 233, 253, 0.4);
 }
 
 /* ── Code mode: flatten border-radius on secondary buttons ── */
