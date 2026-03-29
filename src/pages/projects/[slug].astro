@@ -19,7 +19,7 @@ const hasCaseStudy = !!project.caseSections?.length;
 const meta = project.projectMeta;
 
 // Code mode: slug to filename
-const projectFileName = project.slug.replace(/-/g, '_') + '.tsx';
+const projectFileName = project.slug.replace(/-/g, '_') + '.config.ts';
 
 // Code mode: next/prev project navigation
 const projectIndex = projects.findIndex((p) => p.slug === project.slug);
@@ -91,19 +91,55 @@ function md(text: string): string {
             </span>
           </div>
           <div class="pmd-body">
-            <div class="pmd-line"><span class="pmd-gutter">1</span><span class="pmd-code"><span class="pmd-keyword">export</span> <span class="pmd-keyword">const</span> <span class="pmd-fn">projectMetadata</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{'{'}</span></span></div>
-            <div class="pmd-line"><span class="pmd-gutter">2</span><span class="pmd-code">  <span class="pmd-key">client</span><span class="pmd-punct">:</span> <span class="pmd-string">"{project.client}"</span><span class="pmd-punct">,</span></span></div>
-            <div class="pmd-line"><span class="pmd-gutter">3</span><span class="pmd-code">  <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta?.role || project.category}"</span><span class="pmd-punct">,</span></span></div>
-            <div class="pmd-line"><span class="pmd-gutter">4</span><span class="pmd-code">  <span class="pmd-key">year</span><span class="pmd-punct">:</span> <span class="pmd-number">{project.year}</span><span class="pmd-punct">,</span></span></div>
+            {/* ── Line 1: export const ── */}
+            <div class="pmd-line"><span class="pmd-gutter">1</span><span class="pmd-code"><span class="pmd-comment">// {project.title} — Project Configuration</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">2</span><span class="pmd-code"></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">3</span><span class="pmd-code"><span class="pmd-keyword">export</span> <span class="pmd-keyword">const</span> <span class="pmd-fn">{project.slug.replace(/-/g, '_')}</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{'{'}</span></span></div>
+            {/* ── Core metadata ── */}
+            <div class="pmd-line"><span class="pmd-gutter">4</span><span class="pmd-code">  <span class="pmd-key">client</span><span class="pmd-punct">:</span> <span class="pmd-string">"{project.client}"</span><span class="pmd-punct">,</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">5</span><span class="pmd-code">  <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta?.role || project.category}"</span><span class="pmd-punct">,</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">6</span><span class="pmd-code">  <span class="pmd-key">year</span><span class="pmd-punct">:</span> <span class="pmd-number">{project.year}</span><span class="pmd-punct">,</span></span></div>
             {meta?.industry && (
-              <div class="pmd-line"><span class="pmd-gutter">5</span><span class="pmd-code">  <span class="pmd-key">industry</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.industry}"</span><span class="pmd-punct">,</span></span></div>
+              <div class="pmd-line"><span class="pmd-gutter">7</span><span class="pmd-code">  <span class="pmd-key">industry</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.industry}"</span><span class="pmd-punct">,</span></span></div>
             )}
             {meta?.duration && (
-              <div class="pmd-line"><span class="pmd-gutter">{meta?.industry ? '6' : '5'}</span><span class="pmd-code">  <span class="pmd-key">duration</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.duration}"</span><span class="pmd-punct">,</span></span></div>
+              <div class="pmd-line"><span class="pmd-gutter">{meta?.industry ? 8 : 7}</span><span class="pmd-code">  <span class="pmd-key">duration</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.duration}"</span><span class="pmd-punct">,</span></span></div>
             )}
-            <div class="pmd-line"><span class="pmd-gutter">{(meta?.industry ? 2 : 0) + (meta?.duration ? 1 : 0) + 5}</span><span class="pmd-code">  <span class="pmd-key">stack</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">{project.stack.map((s: string) => `"${s}"`).join(', ')}</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-            <div class="pmd-line"><span class="pmd-gutter">{(meta?.industry ? 2 : 0) + (meta?.duration ? 1 : 0) + 6}</span><span class="pmd-code">  <span class="pmd-key">tags</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">{project.tags.map((t: string) => `"${t}"`).join(', ')}</span><span class="pmd-bracket">]</span></span></div>
-            <div class="pmd-line"><span class="pmd-gutter">{(meta?.industry ? 2 : 0) + (meta?.duration ? 1 : 0) + 7}</span><span class="pmd-code"><span class="pmd-bracket">{'}'}</span><span class="pmd-punct">;</span></span></div>
+            {meta?.output && (
+              <div class="pmd-line"><span class="pmd-gutter">{(meta?.industry ? 1 : 0) + (meta?.duration ? 1 : 0) + 7}</span><span class="pmd-code">  <span class="pmd-key">output</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.output}"</span><span class="pmd-punct">,</span></span></div>
+            )}
+            {/* ── Blank line separator ── */}
+            {(() => {
+              let ln = 7 + (meta?.industry ? 1 : 0) + (meta?.duration ? 1 : 0) + (meta?.output ? 1 : 0);
+              const blankLn = ln++;
+              const stackLn = ln++;
+              const tagsLn = ln++;
+              const emptyLn = ln++;
+              const commentLn = ln++;
+              const impactOpenLn = ln++;
+              const impactLines = project.results.map((_: string, i: number) => ln + i);
+              ln += project.results.length;
+              const impactCloseLn = ln++;
+              const closeLn = ln++;
+              return (
+                <>
+                  <div class="pmd-line"><span class="pmd-gutter">{blankLn}</span><span class="pmd-code"></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{stackLn}</span><span class="pmd-code">  <span class="pmd-key">stack</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span>{project.stack.map((s: string, i: number) => <><span class="pmd-string">"{s}"</span>{i < project.stack.length - 1 ? <span class="pmd-punct">, </span> : ''}</>)}<span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{tagsLn}</span><span class="pmd-code">  <span class="pmd-key">tags</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span>{project.tags.map((t: string, i: number) => <><span class="pmd-string">"{t}"</span>{i < project.tags.length - 1 ? <span class="pmd-punct">, </span> : ''}</>)}<span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{emptyLn}</span><span class="pmd-code"></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{commentLn}</span><span class="pmd-code">  <span class="pmd-comment">// Impact & Results</span></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{impactOpenLn}</span><span class="pmd-code">  <span class="pmd-key">impact</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span></span></div>
+                  {project.results.map((result: string, i: number) => (
+                    <div class="pmd-line pmd-line--impact">
+                      <span class="pmd-gutter">{impactLines[i]}</span>
+                      <span class="pmd-code">    <span class="pmd-impact">"{result}"</span>{i < project.results.length - 1 ? <span class="pmd-punct">,</span> : ''}</span>
+                    </div>
+                  ))}
+                  <div class="pmd-line"><span class="pmd-gutter">{impactCloseLn}</span><span class="pmd-code">  <span class="pmd-bracket">]</span></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{closeLn}</span><span class="pmd-code"><span class="pmd-bracket">{'}'}</span><span class="pmd-punct">;</span></span></div>
+                </>
+              );
+            })()}
           </div>
         </div>
       </div>
@@ -925,13 +961,13 @@ function md(text: string): string {
             <a href={`/projects/${prevProject.slug}`} class="proj-nav-cmd" data-component="NavCmd">
               <span class="proj-nav-prompt">$</span>
               <span class="proj-nav-text">./prev_project.sh</span>
-              <span class="proj-nav-path">{prevProject.slug.replace(/-/g, '_')}.tsx</span>
+              <span class="proj-nav-path">{prevProject.slug.replace(/-/g, '_')}.config.ts</span>
               <span class="proj-nav-comment"># {prevProject.title}</span>
             </a>
             <a href={`/projects/${nextProject.slug}`} class="proj-nav-cmd" data-component="NavCmd">
               <span class="proj-nav-prompt">$</span>
               <span class="proj-nav-text">./next_project.sh</span>
-              <span class="proj-nav-path">{nextProject.slug.replace(/-/g, '_')}.tsx</span>
+              <span class="proj-nav-path">{nextProject.slug.replace(/-/g, '_')}.config.ts</span>
               <span class="proj-nav-comment"># {nextProject.title}</span>
             </a>
           </div>

@@ -3544,14 +3544,20 @@ body.code-mode [data-component="ProjectHero"] { display: none !important; }
 }
 
 /* Syntax tokens */
-.pmd-keyword { color: var(--cm-keyword, #bd93f9); }
-.pmd-fn { color: var(--cm-function, #8be9fd); }
-.pmd-punct { color: var(--cm-text-muted, #7d8590); }
-.pmd-bracket { color: var(--cm-tag, #ff79c6); }
-.pmd-key { color: var(--cm-constant, #f1fa8c); }
-.pmd-string { color: var(--cm-string, #50fa7b); }
-.pmd-number { color: var(--cm-attr, #ffb86c); }
+/* Syntax tokens — IDE color mapping */
+.pmd-keyword { color: var(--cm-keyword, #bd93f9); }           /* export, const → purple */
+.pmd-fn { color: var(--cm-function, #8be9fd); }               /* function names → cyan */
+.pmd-punct { color: var(--cm-text-muted, #7d8590); }          /* : , ; → muted */
+.pmd-bracket { color: var(--cm-tag, #ff79c6); }               /* { } [ ] → pink */
+.pmd-key { color: var(--cm-function, #8be9fd); }              /* object keys → cyan */
+.pmd-string { color: var(--cm-constant, #f1fa8c); }           /* string values → yellow */
+.pmd-number { color: var(--cm-attr, #ffb86c); }               /* numbers → orange */
 .pmd-comment { color: var(--cm-comment, #6272a4); font-style: italic; }
+.pmd-impact {
+  color: var(--cm-string, #50fa7b);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(80, 250, 123, 0.4);
+}
 
 /* ── File Block Windows ── */
 .file-block {

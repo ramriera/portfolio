@@ -16,7 +16,7 @@ const pathSegments = currentPath.replace(/\/$/, '').split('/').filter(Boolean);
 const isProjectDetail = pathSegments[0] === 'projects' && pathSegments.length >= 2;
 const projectSlug = isProjectDetail ? pathSegments[1] : '';
 const projectFileName = isProjectDetail
-  ? projectSlug.replace(/-/g, '_') + '.tsx'
+  ? projectSlug.replace(/-/g, '_') + '.config.ts'
   : '';
 const sectionName = pathSegments.length === 0 ? 'index' : pathSegments[0];
 ---
