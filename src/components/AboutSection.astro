@@ -7,8 +7,8 @@ import profileImg from '@/assets/shared/foto-perfil.png';
   <div class="container-custom">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center about-grid">
       <!-- Image side -->
-      <div data-reveal="left" class="relative about-image-col" data-component="ProfileImage">
-        <div class="relative rounded-2xl overflow-hidden dashed-border about-image-wrap">
+      <div data-reveal="left" class="relative about-image-col flex justify-center" data-component="ProfileImage">
+        <div class="relative rounded-2xl overflow-hidden dashed-border about-image-wrap max-w-sm">
           <Image
             src={profileImg}
             alt="Ramon Riera"
@@ -16,7 +16,7 @@ import profileImg from '@/assets/shared/foto-perfil.png';
             loading="lazy"
             decoding="async"
             widths={[400, 800]}
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="(max-width: 1024px) 100vw, 384px"
             data-token="$radius-2xl: 1rem / 16px|$border: 1px solid $neutral-200"
           />
         </div>
