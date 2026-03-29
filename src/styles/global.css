@@ -2072,12 +2072,12 @@ body.code-mode .timeline-gitlog {
 .gitlog-pre {
   background: #1e1e2e;
   border: 1px solid var(--cm-border, #30363d);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1.5rem 2rem;
   margin: 0;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.85rem;
-  line-height: 1.7;
+  font-size: 0.78rem;
+  line-height: 1.6;
   overflow-x: auto;
   color: #cdd6f4;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
@@ -2089,7 +2089,7 @@ body.code-mode .timeline-gitlog {
   margin-bottom: 1.25rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(108, 112, 134, 0.2);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .gitlog-entry {
@@ -3038,16 +3038,17 @@ body.code-mode .process-grid-code { display: block; }
   border: 1px solid var(--cm-border, #30363d);
   border-radius: 8px;
   overflow: hidden;
-  background: var(--cm-bg-surface, #161b22);
+  background: #1e1e2e;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 .process-pipeline-titlebar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.625rem 1rem;
-  background: var(--cm-bg-card, #1c2128);
-  border-bottom: 1px solid var(--cm-border, #30363d);
+  padding: 0.5rem 0.875rem;
+  background: #181825;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   font-size: 0.75rem;
 }
 
@@ -3061,10 +3062,10 @@ body.code-mode .process-grid-code { display: block; }
 }
 
 .process-pipeline-body {
-  padding: 1.25rem 1.5rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  line-height: 1.8;
+  padding: 1rem 1.5rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
   color: var(--cm-text, #e6edf3);
   overflow-x: auto;
 }
@@ -3212,16 +3213,17 @@ body.code-mode [data-component="DesignPrinciples"] p {
   border: 1px solid var(--cm-border, #30363d);
   border-radius: 8px;
   overflow: hidden;
-  background: var(--cm-bg-surface, #161b22);
+  background: #1e1e2e;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 .principles-config-titlebar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.625rem 1rem;
-  background: var(--cm-bg-card, #1c2128);
-  border-bottom: 1px solid var(--cm-border, #30363d);
+  padding: 0.5rem 0.875rem;
+  background: #181825;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   font-size: 0.75rem;
 }
 
@@ -3235,10 +3237,10 @@ body.code-mode [data-component="DesignPrinciples"] p {
 }
 
 .principles-config-body {
-  padding: 1.25rem 1.5rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  line-height: 1.8;
+  padding: 1rem 1.5rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
   color: var(--cm-text, #e6edf3);
   overflow-x: auto;
 }
@@ -3272,16 +3274,17 @@ body.code-mode [data-component="KPIDashboard"] .kpi-card {
   border: 1px solid var(--cm-border, #30363d);
   border-radius: 8px;
   overflow: hidden;
-  background: var(--cm-bg-surface, #161b22);
+  background: #1e1e2e;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 .kpi-monitor-titlebar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.625rem 1rem;
-  background: var(--cm-bg-card, #1c2128);
-  border-bottom: 1px solid var(--cm-border, #30363d);
+  padding: 0.5rem 0.875rem;
+  background: #181825;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   font-size: 0.75rem;
 }
 
@@ -3305,8 +3308,8 @@ body.code-mode [data-component="KPIDashboard"] .kpi-card {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
 }
 
 .kpi-monitor-status {
