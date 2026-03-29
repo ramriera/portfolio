@@ -3619,6 +3619,18 @@ body.code-mode [data-component="ProjectHero"] { display: none !important; }
   letter-spacing: 0.02em;
 }
 
+.file-block__tab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #e6edf3;
+  background: #1e1e2e;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px 4px 0 0;
+  margin-left: auto;
+  border: 1px solid var(--cm-border, #30363d);
+  border-bottom: 1px solid #1e1e2e;
+}
+
 .file-block__body {
   padding: 0.75rem 0;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
