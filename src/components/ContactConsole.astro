@@ -4,11 +4,21 @@ import { siteConfig } from '@/utils/data';
 interface Props {
   headingHtml?: string;
   description?: string;
+  jsdocTitle?: string;
+  jsdocHighlight?: string;
+  jsdocDesc?: string[];
 }
 
 const {
   headingHtml = '¿Tienes un <span class="text-primary-500">proyecto</span> en mente?',
   description = 'Me encantaría escuchar tu idea. Hablemos sobre cómo puedo ayudarte a crear algo extraordinario.',
+  jsdocTitle = '¿Tienes un ',
+  jsdocHighlight = 'proyecto',
+  jsdocDesc = [
+    'Me encantaría escuchar tu idea.',
+    'Hablemos sobre cómo puedo ayudarte',
+    'a crear algo extraordinario.',
+  ],
 } = Astro.props;
 ---
 
@@ -90,12 +100,18 @@ const {
           <!-- JSDoc heading -->
           <div class="cta-console__jsdoc">
             <div class="cta-console__line"><span class="cta-gutter">1</span><span class="cta-code"><span class="cta-tok--comment">/**</span></span></div>
-            <div class="cta-console__line"><span class="cta-gutter">2</span><span class="cta-code"><span class="cta-tok--comment"> *</span> <span class="cta-tok--desc">¿Tienes un </span><span class="cta-tok--highlight">proyecto</span><span class="cta-tok--desc"> en mente?</span></span></div>
+            <div class="cta-console__line"><span class="cta-gutter">2</span><span class="cta-code"><span class="cta-tok--comment"> *</span> <span class="cta-tok--desc">{jsdocTitle}</span><span class="cta-tok--highlight">{jsdocHighlight}</span><span class="cta-tok--desc"> en mente?</span></span></div>
             <div class="cta-console__line"><span class="cta-gutter">3</span><span class="cta-code"><span class="cta-tok--comment"> *</span></span></div>
-            <div class="cta-console__line"><span class="cta-gutter">4</span><span class="cta-code"><span class="cta-tok--comment"> *</span> <span class="cta-tok--tag">@description</span> <span class="cta-tok--value">Me encantaría escuchar tu idea.</span></span></div>
-            <div class="cta-console__line"><span class="cta-gutter">5</span><span class="cta-code"><span class="cta-tok--comment"> *</span> <span class="cta-tok--value">Hablemos sobre cómo puedo ayudarte</span></span></div>
-            <div class="cta-console__line"><span class="cta-gutter">6</span><span class="cta-code"><span class="cta-tok--comment"> *</span> <span class="cta-tok--value">a crear algo extraordinario.</span></span></div>
-            <div class="cta-console__line"><span class="cta-gutter">7</span><span class="cta-code"><span class="cta-tok--comment"> */</span></span></div>
+            {jsdocDesc.map((line, i) => (
+              <div class="cta-console__line">
+                <span class="cta-gutter">{4 + i}</span>
+                <span class="cta-code">
+                  <span class="cta-tok--comment"> *</span>
+                  {i === 0 ? <><span class="cta-tok--tag"> @description</span> <span class="cta-tok--value">{line}</span></> : <span class="cta-tok--value"> {line}</span>}
+                </span>
+              </div>
+            ))}
+            <div class="cta-console__line"><span class="cta-gutter">{4 + jsdocDesc.length}</span><span class="cta-code"><span class="cta-tok--comment"> */</span></span></div>
           </div>
 
           <!-- Terminal output line (typewriter) -->
@@ -108,14 +124,14 @@ const {
           <!-- Command lines (terminal style) -->
           <div class="cta-console__cmds">
             <a href={`mailto:${siteConfig.email}`} class="cta-console__cmd-line" data-component="ButtonRunCmd">
-              <span class="cta-gutter">8</span>
+              <span class="cta-gutter">{5 + jsdocDesc.length}</span>
               <span class="cta-code">
                 <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">run</span> <span class="cta-cmd-file">send_email.sh</span><span class="cta-cmd-cursor">_</span>
               </span>
             </a>
             <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
               class="cta-console__cmd-line" data-component="ButtonCVCode">
-              <span class="cta-gutter">9</span>
+              <span class="cta-gutter">{6 + jsdocDesc.length}</span>
               <span class="cta-code">
                 <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">get</span> <span class="cta-cmd-file">cv.pdf</span><span class="cta-cmd-cursor">_</span>
               </span>
