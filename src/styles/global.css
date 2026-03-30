@@ -1022,12 +1022,12 @@ body.code-mode [data-component][class*="cmd-line"]:hover {
 }
 
 /* About section grid gap reduction */
-.code-mode [data-component="AboutSection"] .gap-20 {
+.code-mode [data-component="AboutSection"] .about-grid {
   gap: 2.5rem !important;
 }
 
 @media (min-width: 1024px) {
-  .code-mode [data-component="AboutSection"] .gap-20 {
+  .code-mode [data-component="AboutSection"] .about-grid {
     gap: 3rem !important;
   }
 }
@@ -2500,6 +2500,7 @@ body.code-mode .about-bio-prose {
 body.code-mode .bio-readme,
 body.code-mode .about-bio-readme {
   display: block;
+  margin-bottom: 0;
 }
 
 /* ── About page: 3 file-block windows (bio.md / experience.ts / stack.json) ── */
