@@ -2185,6 +2185,11 @@ body.code-mode .methodology-sep-normal {
   display: none;
 }
 
+body.code-mode .methodology-header,
+body.code-mode .methodology-heading {
+  display: none;
+}
+
 body.code-mode .methodology-sep-code {
   display: inline;
   color: #6c7086;
