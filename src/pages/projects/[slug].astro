@@ -346,7 +346,7 @@ function md(text: string): string {
                 </div>
                 <div data-reveal>
                   <h2 class="heading-md mb-6">La solución</h2>
-                  <p class="text-body max-w-prose">{project.solution}</p>
+                  <p class="text-body">{project.solution}</p>
                 </div>
               </>
             )}
@@ -374,7 +374,7 @@ function md(text: string): string {
                 </div>
                 <div data-reveal>
                   <h2 class="heading-md mb-6">Solución propuesta</h2>
-                  <p class="text-body max-w-prose" set:html={md(project.solution)} />
+                  <p class="text-body" set:html={md(project.solution)} />
                 </div>
               </>
             )}
