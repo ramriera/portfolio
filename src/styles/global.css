@@ -934,6 +934,18 @@ body.code-mode [data-component][class*="cmd-line"]:hover {
 .code-mode section[data-component="ParallaxCover"] > .container-custom::before { content: '<ParallaxCover>'; }
 .code-mode section[data-component="ParallaxCover"] > .container-custom::after { content: '</ParallaxCover>'; }
 
+.code-mode section[data-component="ProjectMetaWindow"] > .container-custom::after { content: '</ProjectMetaWindow>'; }
+
+.code-mode section[data-component="AssetPreview"] > .container-custom::after { content: '</AssetPreview>'; }
+
+.code-mode section[data-component="ProjectFileBlocks"] > .container-custom::after { content: '</ProjectFileBlocks>'; }
+
+.code-mode section[data-component="ResultsFile"] > .container-custom::after { content: '</ResultsFile>'; }
+
+.code-mode section[data-component="ProjectTerminalNav"] > .container-custom::after { content: '</ProjectTerminalNav>'; }
+
+.code-mode section[data-component="ProjectsHeroCode"] > .container-custom::after { content: '</ProjectsHeroCode>'; }
+
 /* ── 5b. Code-mode compact spacing ── */
 /* Reduce vertical rhythm ~35% to feel like a single code file */
 .code-mode .section-padding {
@@ -3534,6 +3546,18 @@ body.code-mode [data-component="ProjectHero"] { display: none !important; }
   font-size: 0.75rem;
   color: #7d8590;
   letter-spacing: 0.02em;
+}
+
+.pmd-tab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #e6edf3;
+  background: #1e1e2e;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px 4px 0 0;
+  margin-left: auto;
+  border: 1px solid var(--cm-border, #30363d);
+  border-bottom: none;
 }
 
 .pmd-body {
