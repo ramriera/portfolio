@@ -911,6 +911,10 @@ body.code-mode [data-component][class*="cmd-line"]:hover {
 .code-mode section[data-component="CallToAction"] > .container-custom::after { content: '</CallToAction>'; }
 .code-mode section[data-component="AboutHero"] > .container-custom::before { content: '<AboutHero>'; }
 .code-mode section[data-component="AboutHero"] > .container-custom::after { content: '</AboutHero>'; }
+
+.code-mode section[data-component="AboutHeroCode"] > .container-custom::after { content: '</AboutHeroCode>'; }
+
+.code-mode section[data-component="MethodologyStack"] > .container-custom::after { content: '</MethodologyStack>'; }
 .code-mode section[data-component="BiographySection"] > .container-custom::before { content: '<BiographySection>'; }
 .code-mode section[data-component="BiographySection"] > .container-custom::after { content: '</BiographySection>'; }
 .code-mode section[data-component="SpecialtiesSection"] > .container-custom::before { content: '<SpecialtiesSection>'; }
