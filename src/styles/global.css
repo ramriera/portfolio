@@ -3585,6 +3585,11 @@ body.code-mode [data-component="ProjectHero"] { display: none !important; }
 .pmd-impact {
   color: var(--cm-string, #50fa7b);
 }
+.pmd-metric {
+  color: #ff9e64;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(255, 158, 100, 0.4);
+}
 
 /* ── File Block Windows ── */
 .file-block {
