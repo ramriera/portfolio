@@ -115,37 +115,44 @@ function getProjectFilters(tags: string[]): string[] {
           <span class="file-block__tab">projects.config.ts</span>
         </div>
         <div class="file-block__body">
-          <!-- Line 1: comment -->
-          <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">// -- Define Project Filter --</span></span></div>
-          <!-- Line 2: empty -->
-          <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
-          <!-- Line 3: interface -->
-          <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-keyword">interface</span> <span class="pmd-fn">ProjectFilter</span> <span class="pmd-bracket">{`{`}</span></span></div>
-          <!-- Line 4: type definition -->
-          <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">  <span class="pmd-key">type</span><span class="pmd-punct">:</span> {filterCategories.map((cat, i) => (
+          <!-- JSDoc header -->
+          <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">/**</span></span></div>
+          <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@module</span> Projects</span></span></div>
+          <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@description</span></span></span></div>
+          <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"><span class="pmd-comment"> *   Selección de proyectos que representan mi enfoque en</span></span></div>
+          <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-comment"> *   diseño de experiencia, sistemas de diseño y producto digital.</span></span></div>
+          <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code"><span class="pmd-comment"> *</span></span></div>
+          <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@stack</span> UX Research · Product Design · Design Systems · DesignOps</span></span></div>
+          <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@author</span> Ramon Riera</span></span></div>
+          <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-comment"> */</span></span></div>
+          <!-- Empty -->
+          <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code"></span></div>
+          <!-- Interface -->
+          <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code"><span class="pmd-keyword">interface</span> <span class="pmd-fn">ProjectFilter</span> <span class="pmd-bracket">{`{`}</span></span></div>
+          <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code">  <span class="pmd-key">type</span><span class="pmd-punct">:</span> {filterCategories.map((cat, i) => (
             <><span class="pmd-string">"{cat}"</span>{i < filterCategories.length - 1 && <span class="pf-filter-sep"> | </span>}</>
           ))}<span class="pmd-punct">;</span></span></div>
-          <!-- Line 5: close interface -->
-          <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
-          <!-- Line 6: empty -->
-          <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code"></span></div>
-          <!-- Line 7: export const -->
-          <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">currentFilter</span><span class="pmd-punct">:</span> <span class="pmd-fn">ProjectFilter</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{`{`}</span></span></div>
-          <!-- Line 8: type value — interactive filter buttons -->
-          <div class="file-block__line pf-filter-line"><span class="file-block__gutter">8</span><span class="file-block__code">  <span class="pmd-key">type</span><span class="pmd-punct">:</span> <span class="pf-filter-options">{filterCategories.map((cat, i) => (
+          <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
+          <!-- Empty -->
+          <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code"></span></div>
+          <!-- Interaction hint -->
+          <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code"><span class="pmd-comment">// Click on a type to filter the project gallery</span></span></div>
+          <!-- Empty -->
+          <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code"></span></div>
+          <!-- Export const with interactive filters -->
+          <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">currentFilter</span><span class="pmd-punct">:</span> <span class="pmd-fn">ProjectFilter</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{`{`}</span></span></div>
+          <div class="file-block__line pf-filter-line"><span class="file-block__gutter">18</span><span class="file-block__code">  <span class="pmd-key">type</span><span class="pmd-punct">:</span> <span class="pf-filter-options">{filterCategories.map((cat, i) => (
             <><button class:list={['pf-filter-btn filter-btn', cat === 'Todas' && 'pf-filter-btn--active']} data-filter={cat}><span class="pf-filter-quote">"</span>{cat}<span class="pf-filter-quote">"</span></button>{i < filterCategories.length - 1 && <span class="pf-filter-sep"> | </span>}</>
           ))}</span></span></div>
-          <!-- Line 9: close object -->
-          <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span><span class="pmd-punct">;</span></span></div>
-          <!-- Line 10: empty -->
-          <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code"></span></div>
-          <!-- Line 11: comment -->
-          <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code"><span class="pmd-comment">// -- Execute query --</span></span></div>
-          <!-- Line 12: empty -->
-          <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code"></span></div>
-          <!-- Line 13: run command (dynamic) -->
+          <div class="file-block__line"><span class="file-block__gutter">19</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span><span class="pmd-punct">;</span></span></div>
+          <!-- Empty -->
+          <div class="file-block__line"><span class="file-block__gutter">20</span><span class="file-block__code"></span></div>
+          <!-- Execute section -->
+          <div class="file-block__line"><span class="file-block__gutter">21</span><span class="file-block__code"><span class="pmd-comment">// -- Execute query --</span></span></div>
+          <div class="file-block__line"><span class="file-block__gutter">22</span><span class="file-block__code"></span></div>
+          <!-- Run command (dynamic) -->
           <a class="pf-run-line file-block__line" id="pf-run-cmd" href="#projects-grid">
-            <span class="file-block__gutter">13</span>
+            <span class="file-block__gutter">23</span>
             <span class="file-block__code">
               <span class="pmd-fn">&gt;</span> <span class="pmd-bracket">run</span> <span class="pmd-fn">projects</span><span class="pmd-punct">.</span><span class="pmd-string">applyFilter</span><span class="pmd-punct">(</span><span class="pmd-constant" id="pf-active-filter">"Todas"</span><span class="pmd-punct">)</span>
             </span>
