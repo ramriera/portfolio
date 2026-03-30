@@ -2324,6 +2324,11 @@ body.code-mode .methodology-inner {
 /* Code-mode: reduce padding on BiographySection */
 body.code-mode [data-component="BiographySection"] {
   padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+body.code-mode [data-component="BiographySection"] > .container-custom > .grid {
+  gap: 1.5rem !important;
 }
 
 body.code-mode [data-component="BiographySection"] .space-y-12 > * + * {
