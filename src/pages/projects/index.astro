@@ -123,7 +123,7 @@ function getProjectFilters(tags: string[]): string[] {
           <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-keyword">interface</span> <span class="pmd-fn">ProjectFilter</span> <span class="pmd-bracket">{`{`}</span></span></div>
           <!-- Line 4: type definition -->
           <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">  <span class="pmd-key">type</span><span class="pmd-punct">:</span> {filterCategories.map((cat, i) => (
-            <><span class="pmd-string">"{cat}"</span>{i < filterCategories.length - 1 && <span class="pmd-punct"> | </span>}</>
+            <><span class="pmd-string">"{cat}"</span>{i < filterCategories.length - 1 && <span class="pf-filter-sep"> | </span>}</>
           ))}<span class="pmd-punct">;</span></span></div>
           <!-- Line 5: close interface -->
           <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
@@ -133,7 +133,7 @@ function getProjectFilters(tags: string[]): string[] {
           <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">currentFilter</span><span class="pmd-punct">:</span> <span class="pmd-fn">ProjectFilter</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{`{`}</span></span></div>
           <!-- Line 8: type value — interactive filter buttons -->
           <div class="file-block__line pf-filter-line"><span class="file-block__gutter">8</span><span class="file-block__code">  <span class="pmd-key">type</span><span class="pmd-punct">:</span> <span class="pf-filter-options">{filterCategories.map((cat, i) => (
-            <><button class:list={['pf-filter-btn filter-btn', cat === 'Todas' && 'pf-filter-btn--active']} data-filter={cat}><span class="pf-filter-quote">"</span>{cat}<span class="pf-filter-quote">"</span></button>{i < filterCategories.length - 1 && <span class="pmd-punct"> | </span>}</>
+            <><button class:list={['pf-filter-btn filter-btn', cat === 'Todas' && 'pf-filter-btn--active']} data-filter={cat}><span class="pf-filter-quote">"</span>{cat}<span class="pf-filter-quote">"</span></button>{i < filterCategories.length - 1 && <span class="pf-filter-sep"> | </span>}</>
           ))}</span></span></div>
           <!-- Line 9: close object -->
           <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span><span class="pmd-punct">;</span></span></div>
@@ -143,11 +143,11 @@ function getProjectFilters(tags: string[]): string[] {
           <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code"><span class="pmd-comment">// -- Execute query --</span></span></div>
           <!-- Line 12: empty -->
           <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code"></span></div>
-          <!-- Line 13: run command -->
+          <!-- Line 13: run command (dynamic) -->
           <a class="pf-run-line file-block__line" id="pf-run-cmd" href="#projects-grid">
             <span class="file-block__gutter">13</span>
             <span class="file-block__code">
-              <span class="pmd-fn">&gt;</span> <span class="pmd-bracket">run</span> <span class="pmd-fn">projects</span><span class="pmd-punct">.</span><span class="pmd-string">listAll</span><span class="pmd-punct">(</span><span class="pmd-fn">currentFilter</span><span class="pmd-punct">)</span>
+              <span class="pmd-fn">&gt;</span> <span class="pmd-bracket">run</span> <span class="pmd-fn">projects</span><span class="pmd-punct">.</span><span class="pmd-string">applyFilter</span><span class="pmd-punct">(</span><span class="pmd-constant" id="pf-active-filter">"Todas"</span><span class="pmd-punct">)</span>
             </span>
           </a>
         </div>
@@ -206,6 +206,20 @@ function getProjectFilters(tags: string[]): string[] {
     document.querySelectorAll(`.pf-filter-btn[data-filter="${filter}"]`).forEach((b) => {
       b.classList.add('pf-filter-btn--active');
     });
+
+    // Update dynamic run line: applyFilter("activeCategory")
+    const activeFilterEl = document.getElementById('pf-active-filter');
+    if (activeFilterEl) {
+      activeFilterEl.textContent = `"${filter}"`;
+    }
+
+    // Flash grid opacity to simulate console processing
+    grid.style.transition = 'opacity 0.15s ease';
+    grid.style.opacity = '0.4';
+    setTimeout(() => {
+      grid.style.transition = 'opacity 0.3s ease';
+      grid.style.opacity = '1';
+    }, 150);
 
     // Classify items into hiding / showing
     const hiding: HTMLElement[] = [];

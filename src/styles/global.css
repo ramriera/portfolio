@@ -2224,40 +2224,41 @@ body.code-mode .projects-hero-code { display: block; }
   display: inline;
 }
 
+.pf-filter-sep {
+  color: #475569;
+}
+
 .pf-filter-btn {
   all: unset;
   cursor: pointer;
   font-family: 'JetBrains Mono', monospace;
   font-size: inherit;
-  color: var(--cm-constant, #f1fa8c);
+  color: #64748b;
   transition: color 0.2s ease, text-shadow 0.2s ease;
   position: relative;
 }
 
 .pf-filter-btn .pf-filter-quote {
-  color: var(--cm-constant, #f1fa8c);
+  color: inherit;
   transition: color 0.2s ease;
 }
 
 .pf-filter-btn:hover {
-  color: var(--cm-function, #8be9fd);
-  text-shadow: 0 0 8px rgba(139, 233, 253, 0.4);
-}
-
-.pf-filter-btn:hover .pf-filter-quote {
-  color: var(--cm-function, #8be9fd);
+  color: #e2e8f0;
+  text-shadow: 0 0 6px rgba(139, 233, 253, 0.15);
 }
 
 .pf-filter-btn--active {
-  color: var(--cm-function, #8be9fd);
-  text-shadow: 0 0 10px rgba(139, 233, 253, 0.5);
+  color: #22d3ee;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(139, 233, 253, 0.5);
+  text-decoration-color: rgba(34, 211, 238, 0.4);
 }
 
-.pf-filter-btn--active .pf-filter-quote {
-  color: var(--cm-function, #8be9fd);
+/* Dynamic filter value in run command */
+.pmd-constant {
+  color: var(--cm-constant, #f1fa8c);
 }
 
 /* ── Projects code-mode run command line ── */
