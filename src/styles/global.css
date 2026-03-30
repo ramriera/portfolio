@@ -912,6 +912,7 @@ body.code-mode [data-component][class*="cmd-line"]:hover {
 .code-mode section[data-component="AboutHero"] > .container-custom::before { content: '<AboutHero>'; }
 .code-mode section[data-component="AboutHero"] > .container-custom::after { content: '</AboutHero>'; }
 
+.code-mode section[data-component="AboutHeroCode"] > .container-custom::before { content: '<AboutHeroCode>'; }
 .code-mode section[data-component="AboutHeroCode"] > .container-custom::after { content: '</AboutHeroCode>'; }
 
 .code-mode section[data-component="MethodologyStack"] > .container-custom::before { content: '<MethodologyStack>'; }
@@ -935,16 +936,22 @@ body.code-mode [data-component][class*="cmd-line"]:hover {
 .code-mode section[data-component="ParallaxCover"] > .container-custom::before { content: '<ParallaxCover>'; }
 .code-mode section[data-component="ParallaxCover"] > .container-custom::after { content: '</ParallaxCover>'; }
 
+.code-mode section[data-component="ProjectMetaWindow"] > .container-custom::before { content: '<ProjectMetaWindow>'; }
 .code-mode section[data-component="ProjectMetaWindow"] > .container-custom::after { content: '</ProjectMetaWindow>'; }
 
+.code-mode section[data-component="AssetPreview"] > .container-custom::before { content: '<AssetPreview>'; }
 .code-mode section[data-component="AssetPreview"] > .container-custom::after { content: '</AssetPreview>'; }
 
+.code-mode section[data-component="ProjectFileBlocks"] > .container-custom::before { content: '<ProjectFileBlocks>'; }
 .code-mode section[data-component="ProjectFileBlocks"] > .container-custom::after { content: '</ProjectFileBlocks>'; }
 
+.code-mode section[data-component="ResultsFile"] > .container-custom::before { content: '<ResultsFile>'; }
 .code-mode section[data-component="ResultsFile"] > .container-custom::after { content: '</ResultsFile>'; }
 
+.code-mode section[data-component="ProjectTerminalNav"] > .container-custom::before { content: '<ProjectTerminalNav>'; }
 .code-mode section[data-component="ProjectTerminalNav"] > .container-custom::after { content: '</ProjectTerminalNav>'; }
 
+.code-mode section[data-component="ProjectsHeroCode"] > .container-custom::before { content: '<ProjectsHeroCode>'; }
 .code-mode section[data-component="ProjectsHeroCode"] > .container-custom::after { content: '</ProjectsHeroCode>'; }
 
 /* ── 5b. Code-mode compact spacing ── */
@@ -2125,8 +2132,8 @@ body.code-mode .timeline-gitlog {
 }
 
 .gitlog-hash {
-  color: #f9e2af;
-  font-weight: 600;
+  color: var(--accent-color, #D97757);
+  font-weight: 700;
 }
 
 .gitlog-date {
@@ -3444,11 +3451,7 @@ body.code-mode [data-component="KPIDashboard"] .kpi-card {
   }
 }
 
-/* ── Git Log: accent-colored hashes ── */
-.gitlog-hash {
-  color: #D97757 !important;
-  font-weight: 700;
-}
+/* gitlog-hash color unified in main definition above */
 
 /* ═══════════════════════════════════════════════════════════
    EDITORIAL GRID — 60/40 Alternating Rhythm (3 Rows)

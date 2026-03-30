@@ -78,9 +78,9 @@ const featuredProjects = projectOrder
         <div class="proj-window">
           <div class="proj-window__titlebar">
             <div class="proj-window__dots">
-              <span class="json-dot json-dot--red"></span>
-              <span class="json-dot json-dot--yellow"></span>
-              <span class="json-dot json-dot--green"></span>
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
             </div>
             <span class="proj-window__filename">
               <svg class="proj-window__file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#3178c6">
@@ -88,7 +88,7 @@ const featuredProjects = projectOrder
               </svg>
               projects_index.tsx
             </span>
-            <span class="proj-window__tab-label">projects_index.tsx</span>
+            <span class="proj-window__tab">projects_index.tsx</span>
           </div>
           <div class="proj-window__body">
             <div class="proj-line"><span class="proj-gutter">1</span><span class="proj-code"><span class="proj-tok--comment">// &lt;FeaturedProjects /&gt;</span></span></div>
@@ -196,7 +196,7 @@ const featuredProjects = projectOrder
     flex-shrink: 0;
   }
 
-  .proj-window__tab-label {
+  .proj-window__tab {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
     color: #e6edf3;
