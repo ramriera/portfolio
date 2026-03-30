@@ -914,6 +914,7 @@ body.code-mode [data-component][class*="cmd-line"]:hover {
 
 .code-mode section[data-component="AboutHeroCode"] > .container-custom::after { content: '</AboutHeroCode>'; }
 
+.code-mode section[data-component="MethodologyStack"] > .container-custom::before { content: '<MethodologyStack>'; }
 .code-mode section[data-component="MethodologyStack"] > .container-custom::after { content: '</MethodologyStack>'; }
 .code-mode section[data-component="BiographySection"] > .container-custom::before { content: '<BiographySection>'; }
 .code-mode section[data-component="BiographySection"] > .container-custom::after { content: '</BiographySection>'; }
@@ -2206,18 +2207,6 @@ body.code-mode .methodology-heading {
   display: none;
 }
 
-/* Code-mode methodology section title */
-.methodology-code-title {
-  display: none;
-}
-
-body.code-mode .methodology-code-title {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  margin-bottom: 1.5rem;
-}
-
 /* Remove max-w constraint in code mode so methodology matches other sections */
 body.code-mode .methodology-inner {
   max-width: none;
@@ -2226,6 +2215,10 @@ body.code-mode .methodology-inner {
 /* Code-mode: reduce padding on BiographySection */
 body.code-mode [data-component="BiographySection"] {
   padding-bottom: 0 !important;
+}
+
+body.code-mode [data-component="BiographySection"] .space-y-12 > * + * {
+  margin-top: 1.5rem !important;
 }
 
 body.code-mode .methodology-sep-code {
