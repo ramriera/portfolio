@@ -760,61 +760,12 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                     <span class="file-block__tab">workflow.sh</span>
                   </div>
                   <div class="file-block__body file-block__body--terminal">
-                    <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment"># Fase 1: Investigación</span></span></div>
-                    <a href="#metodologia-stack" class="social-cmd-line">
-                      <span class="cta-gutter">2</span>
-                      <span class="cta-code">
-                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">run</span> <span class="cta-cmd-file">research_and_discovery.sh</span>
-                      </span>
-                    </a>
-                    <a href="#metodologia-stack" class="social-cmd-line">
-                      <span class="cta-gutter">3</span>
-                      <span class="cta-code">
-                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">execute</span> <span class="cta-cmd-file">user_testing.bin</span>
-                      </span>
-                    </a>
-                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-comment"># Fase 2: Diseño</span></span></div>
-                    <a href="#metodologia-stack" class="social-cmd-line">
-                      <span class="cta-gutter">6</span>
-                      <span class="cta-code">
-                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">run</span> <span class="cta-cmd-file">prototype_hifi.sh</span>
-                      </span>
-                    </a>
-                    <a href="#metodologia-stack" class="social-cmd-line">
-                      <span class="cta-gutter">7</span>
-                      <span class="cta-code">
-                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">execute</span> <span class="cta-cmd-file">design_review.bin</span>
-                      </span>
-                    </a>
-                    <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-comment"># Fase 3: Sistemas</span></span></div>
-                    <a href="#metodologia-stack" class="social-cmd-line">
-                      <span class="cta-gutter">10</span>
-                      <span class="cta-code">
-                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">deploy</span> <span class="cta-cmd-file">design_system.v2</span>
-                      </span>
-                    </a>
-                    <a href="#metodologia-stack" class="social-cmd-line">
-                      <span class="cta-gutter">11</span>
-                      <span class="cta-code">
-                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">run</span> <span class="cta-cmd-file">token_sync --all</span>
-                      </span>
-                    </a>
-                    <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code"></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code"><span class="pmd-comment"># Fase 4: Ingeniería</span></span></div>
-                    <a href="#metodologia-stack" class="social-cmd-line">
-                      <span class="cta-gutter">14</span>
-                      <span class="cta-code">
-                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">build</span> <span class="cta-cmd-file">frontend_components.ts</span>
-                      </span>
-                    </a>
-                    <a href="#metodologia-stack" class="social-cmd-line">
-                      <span class="cta-gutter">15</span>
-                      <span class="cta-code">
-                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">deploy</span> <span class="cta-cmd-file">production --verify</span>
-                      </span>
-                    </a>
+                    <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">#!/bin/bash</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">run</span> <span class="pmd-string">research_and_discovery.sh</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">execute</span> <span class="pmd-string">user_centric_testing.bin</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">deploy</span> <span class="pmd-string">scalable_design_system.v2</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">monitor</span> <span class="pmd-string">conversion_rate_optimization.sh</span></span></div>
                   </div>
                 </div>
 
@@ -832,15 +783,21 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                   <div class="file-block__body">
                     <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-bracket">{`{`}</span></span></div>
                     <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code">  <span class="pmd-key">"dependencies"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">    <span class="pmd-key">"design"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Figma"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Framer"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Cursor"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Lovable"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">    <span class="pmd-key">"frontend"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"TypeScript"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Astro"</span><span class="pmd-punct">,</span> <span class="pmd-string">"TailwindCSS"</span><span class="pmd-punct">,</span> <span class="pmd-string">"React"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">    <span class="pmd-key">"ux_research"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Maze"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Hotjar"</span><span class="pmd-punct">,</span> <span class="pmd-string">"FigJam"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Typeform"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code">    <span class="pmd-key">"design_ops"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Storybook"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Token Studio"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Supernova"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code">    <span class="pmd-key">"engineering"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"GitHub"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Git"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Vercel"</span><span class="pmd-bracket">]</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code">    <span class="pmd-key">"figma"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^latest"</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">    <span class="pmd-key">"react"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^18.0.0"</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">    <span class="pmd-key">"tailwindcss"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^4.0.0"</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">    <span class="pmd-key">"typescript"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^5.0.0"</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code">    <span class="pmd-key">"framer"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^latest"</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
                     <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code">  <span class="pmd-key">"devDependencies"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code">    <span class="pmd-key">"notion"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^latest"</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code">    <span class="pmd-key">"jira"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^latest"</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code">    <span class="pmd-key">"hotjar"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^latest"</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code">    <span class="pmd-key">"mixpanel"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^latest"</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code">    <span class="pmd-key">"slack"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^latest"</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
                   </div>
                 </div>
 
