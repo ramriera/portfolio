@@ -744,49 +744,106 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               </div>
             </div>
 
-            <!-- Code mode: config object -->
+            <!-- Code mode: workflow.sh + package.json -->
             <div class="process-grid-code">
-              <div class="process-pipeline">
-                <div class="process-pipeline-window">
-                  <div class="process-pipeline-titlebar">
-                    <div class="json-dots">
+              <div class="space-y-6">
+
+                <!-- workflow.sh -->
+                <div class="file-block">
+                  <div class="file-block__titlebar">
+                    <div class="pmd-dots">
                       <span class="json-dot json-dot--red"></span>
                       <span class="json-dot json-dot--yellow"></span>
                       <span class="json-dot json-dot--green"></span>
                     </div>
-                    <span class="process-pipeline-filename">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                      ecosystem.config.ts
-                    </span>
+                    <span class="file-block__filename">workflow.sh</span>
+                    <span class="file-block__tab">workflow.sh</span>
                   </div>
-                  <pre class="process-pipeline-body"><code><span class="pp-keyword">export const</span> <span class="pp-fn">ecosystem</span> <span class="pp-punct">=</span> <span class="pp-bracket">{"{"}</span>
-
-  <span class="pp-key">strategy</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"User Research &rarr; Data Analysis &rarr; Testing"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Maze"</span><span class="pp-punct">,</span> <span class="pp-string">"Hotjar"</span><span class="pp-punct">,</span> <span class="pp-string">"FigJam"</span><span class="pp-punct">,</span> <span class="pp-string">"Typeform"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"validated insights"</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-
-  <span class="pp-key">design</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Prototyping &rarr; Interactive Design &rarr; UI Kits"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Figma"</span><span class="pp-punct">,</span> <span class="pp-string">"Framer"</span><span class="pp-punct">,</span> <span class="pp-string">"Cursor"</span><span class="pp-punct">,</span> <span class="pp-string">"Lovable"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"hi-fi prototypes"</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-
-  <span class="pp-key">systems</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Governance &rarr; Design Tokens &rarr; Scalability"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Storybook"</span><span class="pp-punct">,</span> <span class="pp-string">"Token Studio"</span><span class="pp-punct">,</span> <span class="pp-string">"Supernova"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"scalable architecture"</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-
-  <span class="pp-key">engineering</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Frontend Architecture &rarr; UI Build &rarr; Git Flow"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"GitHub"</span><span class="pp-punct">,</span> <span class="pp-string">"JavaScript"</span><span class="pp-punct">,</span> <span class="pp-string">"TypeScript"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"design-faithful code"</span>
-  <span class="pp-bracket">{"}"}</span>
-
-<span class="pp-bracket">{"}"}</span> <span class="pp-keyword">as const</span><span class="pp-punct">;</span></code></pre>
+                  <div class="file-block__body file-block__body--terminal">
+                    <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment"># Fase 1: Investigación</span></span></div>
+                    <a href="#metodologia-stack" class="social-cmd-line">
+                      <span class="cta-gutter">2</span>
+                      <span class="cta-code">
+                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">run</span> <span class="cta-cmd-file">research_and_discovery.sh</span>
+                      </span>
+                    </a>
+                    <a href="#metodologia-stack" class="social-cmd-line">
+                      <span class="cta-gutter">3</span>
+                      <span class="cta-code">
+                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">execute</span> <span class="cta-cmd-file">user_testing.bin</span>
+                      </span>
+                    </a>
+                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-comment"># Fase 2: Diseño</span></span></div>
+                    <a href="#metodologia-stack" class="social-cmd-line">
+                      <span class="cta-gutter">6</span>
+                      <span class="cta-code">
+                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">run</span> <span class="cta-cmd-file">prototype_hifi.sh</span>
+                      </span>
+                    </a>
+                    <a href="#metodologia-stack" class="social-cmd-line">
+                      <span class="cta-gutter">7</span>
+                      <span class="cta-code">
+                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">execute</span> <span class="cta-cmd-file">design_review.bin</span>
+                      </span>
+                    </a>
+                    <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-comment"># Fase 3: Sistemas</span></span></div>
+                    <a href="#metodologia-stack" class="social-cmd-line">
+                      <span class="cta-gutter">10</span>
+                      <span class="cta-code">
+                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">deploy</span> <span class="cta-cmd-file">design_system.v2</span>
+                      </span>
+                    </a>
+                    <a href="#metodologia-stack" class="social-cmd-line">
+                      <span class="cta-gutter">11</span>
+                      <span class="cta-code">
+                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">run</span> <span class="cta-cmd-file">token_sync --all</span>
+                      </span>
+                    </a>
+                    <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code"></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code"><span class="pmd-comment"># Fase 4: Ingeniería</span></span></div>
+                    <a href="#metodologia-stack" class="social-cmd-line">
+                      <span class="cta-gutter">14</span>
+                      <span class="cta-code">
+                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">build</span> <span class="cta-cmd-file">frontend_components.ts</span>
+                      </span>
+                    </a>
+                    <a href="#metodologia-stack" class="social-cmd-line">
+                      <span class="cta-gutter">15</span>
+                      <span class="cta-code">
+                        <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">deploy</span> <span class="cta-cmd-file">production --verify</span>
+                      </span>
+                    </a>
+                  </div>
                 </div>
+
+                <!-- package.json -->
+                <div class="file-block">
+                  <div class="file-block__titlebar">
+                    <div class="pmd-dots">
+                      <span class="json-dot json-dot--red"></span>
+                      <span class="json-dot json-dot--yellow"></span>
+                      <span class="json-dot json-dot--green"></span>
+                    </div>
+                    <span class="file-block__filename">package.json</span>
+                    <span class="file-block__tab">package.json</span>
+                  </div>
+                  <div class="file-block__body">
+                    <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-bracket">{`{`}</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code">  <span class="pmd-key">"dependencies"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">    <span class="pmd-key">"design"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Figma"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Framer"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Cursor"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Lovable"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">    <span class="pmd-key">"frontend"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"TypeScript"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Astro"</span><span class="pmd-punct">,</span> <span class="pmd-string">"TailwindCSS"</span><span class="pmd-punct">,</span> <span class="pmd-string">"React"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">    <span class="pmd-key">"ux_research"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Maze"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Hotjar"</span><span class="pmd-punct">,</span> <span class="pmd-string">"FigJam"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Typeform"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code">    <span class="pmd-key">"design_ops"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Storybook"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Token Studio"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Supernova"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code">    <span class="pmd-key">"engineering"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"GitHub"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Git"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Vercel"</span><span class="pmd-bracket">]</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
