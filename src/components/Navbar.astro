@@ -8,12 +8,13 @@ const currentPath = Astro.url.pathname;
 const fileMap: Record<string, { file: string; icon: 'ts' | 'md' | 'sh' }> = {
   '/': { file: 'index.ts', icon: 'ts' },
   '/about': { file: 'about.ts', icon: 'ts' },
-  '/projects': { file: 'projects.ts', icon: 'ts' },
+  '/projects': { file: 'projects.config.ts', icon: 'ts' },
 };
 
 // Breadcrumb section name from current path
 const pathSegments = currentPath.replace(/\/$/, '').split('/').filter(Boolean);
 const isProjectDetail = pathSegments[0] === 'projects' && pathSegments.length >= 2;
+const isProjectsListing = pathSegments[0] === 'projects' && pathSegments.length === 1;
 const projectSlug = isProjectDetail ? pathSegments[1] : '';
 const projectFileName = isProjectDetail
   ? projectSlug.replace(/-/g, '_') + '.config.ts'
@@ -48,6 +49,12 @@ const sectionName = fileMap[rawSection]?.file || (pathSegments.length === 0 ? 'i
             <span class="ncb-segment">projects</span>
             <span class="ncb-sep">/</span>
             <span class="ncb-active" id="ncb-section">{projectFileName}</span>
+          </>
+        ) : isProjectsListing ? (
+          <>
+            <span class="ncb-segment">projects</span>
+            <span class="ncb-sep">/</span>
+            <span class="ncb-active" id="ncb-section">{sectionName}</span>
           </>
         ) : (
           <>

@@ -2214,6 +2214,88 @@ body.code-mode [data-component="ProjectsHero"] .heading-xl .text-primary-500 {
   color: var(--cm-tag) !important;
 }
 
+/* ── Projects Hero: design/code toggle ── */
+.projects-hero-code { display: none; }
+body.code-mode .projects-hero-design { display: none !important; }
+body.code-mode .projects-hero-code { display: block; }
+
+/* ── Projects code-mode filter buttons ── */
+.pf-filter-options {
+  display: inline;
+}
+
+.pf-filter-btn {
+  all: unset;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: inherit;
+  color: var(--cm-constant, #f1fa8c);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  position: relative;
+}
+
+.pf-filter-btn .pf-filter-quote {
+  color: var(--cm-constant, #f1fa8c);
+  transition: color 0.2s ease;
+}
+
+.pf-filter-btn:hover {
+  color: var(--cm-function, #8be9fd);
+  text-shadow: 0 0 8px rgba(139, 233, 253, 0.4);
+}
+
+.pf-filter-btn:hover .pf-filter-quote {
+  color: var(--cm-function, #8be9fd);
+}
+
+.pf-filter-btn--active {
+  color: var(--cm-function, #8be9fd);
+  text-shadow: 0 0 10px rgba(139, 233, 253, 0.5);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(139, 233, 253, 0.5);
+}
+
+.pf-filter-btn--active .pf-filter-quote {
+  color: var(--cm-function, #8be9fd);
+}
+
+/* ── Projects code-mode run command line ── */
+.pf-run-line {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0 0.875rem 0 0;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.pf-run-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: transparent;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pf-run-line:hover {
+  background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
+}
+
+.pf-run-line:hover::before {
+  background: var(--cm-function, #8be9fd);
+  box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
+}
+
+.pf-run-line:hover .file-block__gutter {
+  color: var(--cm-function, #8be9fd) !important;
+  opacity: 0.9 !important;
+}
+
 body.code-mode [data-component="BiographySection"] .heading-md,
 body.code-mode [data-component="CareerTimeline"] .heading-md,
 body.code-mode [data-component="ValuesGrid"] .heading-md,
