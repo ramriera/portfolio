@@ -61,9 +61,9 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
         <div class="file-block about-hero-window">
           <div class="file-block__titlebar">
             <div class="pmd-dots">
-              <span class="pmd-dot" style="background:#ff5f57"></span>
-              <span class="pmd-dot" style="background:#febc2e"></span>
-              <span class="pmd-dot" style="background:#28c840"></span>
+              <span class="json-dot json-dot--red"></span>
+              <span class="json-dot json-dot--yellow"></span>
+              <span class="json-dot json-dot--green"></span>
             </div>
             <span class="file-block__filename">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6">
@@ -162,15 +162,18 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
             </div>
 
             <!-- Social links: Normal mode -->
-            <div class="flex items-center gap-4 social-normal" data-component="SocialLinks" data-token="$spacing-gap: 1rem / 16px">
-              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <div class="grid grid-cols-3 gap-3 social-normal" data-component="SocialLinks" data-token="$spacing-gap: 1rem / 16px">
+              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <span class="text-sm font-medium text-neutral-700">LinkedIn</span>
               </a>
-              <a href={siteConfig.social.medium} target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+              <a href={siteConfig.social.medium} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+                <span class="text-sm font-medium text-neutral-700">Medium</span>
               </a>
-              <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" /></svg>
+              <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
+                <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" /></svg>
+                <span class="text-sm font-medium text-neutral-700">CV</span>
               </a>
             </div>
             <!-- Social links: Code mode — social_links.sh console -->
@@ -178,9 +181,9 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               <div class="file-block">
                 <div class="file-block__titlebar">
                   <div class="pmd-dots">
-                    <span class="pmd-dot" style="background:#ff5f57"></span>
-                    <span class="pmd-dot" style="background:#febc2e"></span>
-                    <span class="pmd-dot" style="background:#28c840"></span>
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
                   </div>
                   <span class="file-block__filename">social_links.sh</span>
                   <span class="file-block__tab">social_links.sh</span>
@@ -234,9 +237,9 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               <div class="file-block">
                 <div class="file-block__titlebar">
                   <div class="pmd-dots">
-                    <span class="pmd-dot" style="background:#ff5f57"></span>
-                    <span class="pmd-dot" style="background:#febc2e"></span>
-                    <span class="pmd-dot" style="background:#28c840"></span>
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
                   </div>
                   <span class="file-block__filename">bio.md</span>
                   <span class="file-block__tab">bio.md</span>
@@ -346,9 +349,9 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               <div class="file-block">
                 <div class="file-block__titlebar">
                   <div class="pmd-dots">
-                    <span class="pmd-dot" style="background:#ff5f57"></span>
-                    <span class="pmd-dot" style="background:#febc2e"></span>
-                    <span class="pmd-dot" style="background:#28c840"></span>
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
                   </div>
                   <span class="file-block__filename">experience.ts</span>
                   <span class="file-block__tab">experience.ts</span>
@@ -408,7 +411,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                   <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                   <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400">Ganancia de Eficiencia</span>
                 </div>
-                <div class="font-mono text-4xl md:text-5xl font-bold text-neutral-900 tracking-tight">+40<span class="text-primary-500">%</span></div>
+                <div class="font-mono text-4xl md:text-5xl font-bold text-neutral-900 tracking-tight">+40%</div>
                 <p class="text-body-sm mt-2">Mejora en velocidad de entrega de equipos de diseño tras implementación de Design Systems.</p>
               </div>
               <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white transition-all duration-300">
@@ -416,7 +419,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                   <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                   <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400">Adopción de Componentes</span>
                 </div>
-                <div class="font-mono text-4xl md:text-5xl font-bold text-neutral-900 tracking-tight">95<span class="text-primary-500">%</span></div>
+                <div class="font-mono text-4xl md:text-5xl font-bold text-neutral-900 tracking-tight">95%</div>
                 <p class="text-body-sm mt-2">Tasa de adopción de componentes del Design System en equipos de producto.</p>
               </div>
             </div>
@@ -426,9 +429,9 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               <div class="file-block">
                 <div class="file-block__titlebar">
                   <div class="pmd-dots">
-                    <span class="pmd-dot" style="background:#ff5f57"></span>
-                    <span class="pmd-dot" style="background:#febc2e"></span>
-                    <span class="pmd-dot" style="background:#28c840"></span>
+                    <span class="json-dot json-dot--red"></span>
+                    <span class="json-dot json-dot--yellow"></span>
+                    <span class="json-dot json-dot--green"></span>
                   </div>
                   <span class="file-block__filename">stack.json</span>
                   <span class="file-block__tab">stack.json</span>
