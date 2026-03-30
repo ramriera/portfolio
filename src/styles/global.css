@@ -2532,9 +2532,8 @@ body.code-mode .bio-prose {
 }
 
 /* Spacing between the file-block windows */
-body.code-mode .about-code-block + .about-code-block,
-body.code-mode .about-code-block {
-  margin-bottom: 1.5rem;
+body.code-mode .about-code-block + .about-code-block {
+  margin-top: 1.5rem;
 }
 
 /* ── AboutSection (Home): reduce bottom padding in code mode ── */
