@@ -2206,6 +2206,28 @@ body.code-mode .methodology-heading {
   display: none;
 }
 
+/* Code-mode methodology section title */
+.methodology-code-title {
+  display: none;
+}
+
+body.code-mode .methodology-code-title {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Remove max-w constraint in code mode so methodology matches other sections */
+body.code-mode .methodology-inner {
+  max-width: none;
+}
+
+/* Code-mode: reduce padding on BiographySection */
+body.code-mode [data-component="BiographySection"] {
+  padding-bottom: 0 !important;
+}
+
 body.code-mode .methodology-sep-code {
   display: inline;
   color: #6c7086;
@@ -2406,6 +2428,11 @@ body.code-mode .bio-prose {
 body.code-mode .about-code-block + .about-code-block,
 body.code-mode .about-code-block {
   margin-bottom: 1.5rem;
+}
+
+/* ── AboutSection (Home): reduce bottom padding in code mode ── */
+body.code-mode [data-component="AboutSection"] {
+  padding-bottom: 1rem !important;
 }
 
 /* ── AboutSection (Home): heading code-mode colors ── */

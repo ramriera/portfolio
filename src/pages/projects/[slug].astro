@@ -75,7 +75,6 @@ function md(text: string): string {
   <!-- ═══ CODE MODE: Project Metadata Window ═══ -->
   <section class="section-padding pb-12 cm-project-hero" data-component="ProjectMetaWindow">
     <div class="container-custom">
-      <div class="max-w-4xl mx-auto">
         <div class="pmd-window">
           <div class="pmd-titlebar">
             <div class="pmd-dots">
@@ -143,7 +142,6 @@ function md(text: string): string {
             })()}
           </div>
         </div>
-      </div>
     </div>
   </section>
 
@@ -168,7 +166,6 @@ function md(text: string): string {
   <!-- Hero Image - Asset Preview (code mode) -->
   <section class="case-section cm-project-cover-code" data-component="AssetPreview">
     <div class="container-custom">
-      <div class="max-w-4xl mx-auto">
         <div class="asset-preview">
           <!-- Toolbar: path + dimensions -->
           <div class="asset-preview__toolbar">
@@ -210,14 +207,12 @@ function md(text: string): string {
             <span class="asset-preview__status-item">High Fidelity</span>
           </div>
         </div>
-      </div>
     </div>
   </section>
 
   <!-- Project metadata sidebar + About content (design mode) -->
   <section class="case-section cm-project-sidebar-design">
     <div class="container-custom">
-      <div class="max-w-5xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
 
           <!-- Sidebar (1/3): Metadata stacked vertically -->
@@ -381,14 +376,12 @@ function md(text: string): string {
           </div>
 
         </div>
-      </div>
     </div>
   </section>
 
   <!-- ═══ CODE MODE: Content as File Blocks + Sidebar ═══ -->
   <section class="case-section cm-project-content-code" data-component="ProjectFileBlocks">
     <div class="container-custom">
-      <div class="max-w-5xl mx-auto">
         <div class="cm-project-grid">
 
           <!-- Sidebar (1/3): Inspector Panel -->
@@ -559,7 +552,6 @@ function md(text: string): string {
 
           </div>
         </div>
-      </div>
     </div>
   </section>
 
@@ -573,7 +565,7 @@ function md(text: string): string {
 
         {/* Center layout */}
         {section.layout === 'center' && (
-          <div class="max-w-4xl mx-auto" data-component="SectionCenter">
+          <div data-component="SectionCenter">
             {section.images && (
               <div data-reveal class="mb-10 space-y-6">
                 {section.images.map((img: string, i: number) => (
@@ -635,7 +627,7 @@ function md(text: string): string {
 
         {/* Left-right: image left, text right */}
         {section.layout === 'left-right' && (
-          <div class="max-w-4xl mx-auto" data-component="SectionSplitView">
+          <div data-component="SectionSplitView">
           <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 items-center">
             <div class="lg:col-span-2 space-y-4">
               {section.images?.map((img: string, i: number) => (
@@ -666,7 +658,7 @@ function md(text: string): string {
 
         {/* Right-left: text left, image right */}
         {section.layout === 'right-left' && (
-          <div class="max-w-4xl mx-auto">
+          <div>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             <div>
               {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
@@ -698,7 +690,7 @@ function md(text: string): string {
 
         {/* Full image */}
         {section.layout === 'full-image' && (
-          <div class="max-w-4xl mx-auto" data-component="SolutionShowcase">
+          <div data-component="SolutionShowcase">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
@@ -728,7 +720,7 @@ function md(text: string): string {
 
         {/* Image grid */}
         {section.layout === 'image-grid' && (
-          <div class="max-w-4xl mx-auto" data-component="ImageGrid">
+          <div data-component="ImageGrid">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content?.split('\n\n').map((paragraph: string) => (
@@ -758,7 +750,7 @@ function md(text: string): string {
 
         {/* Screens grid - mobile mockups */}
         {section.layout === 'screens-grid' && (
-          <div class="max-w-4xl mx-auto" data-component="ScreensGallery">
+          <div data-component="ScreensGallery">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
@@ -781,7 +773,7 @@ function md(text: string): string {
 
         {/* Figma embed */}
         {section.layout === 'figma-embed' && (
-          <div class="max-w-4xl mx-auto" data-component="FigmaEmbed">
+          <div data-component="FigmaEmbed">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
@@ -802,7 +794,7 @@ function md(text: string): string {
 
         {/* Whimsical embed */}
         {section.layout === 'whimsical-embed' && (
-          <div class="max-w-4xl mx-auto">
+          <div>
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content?.split('\n\n').map((paragraph: string) => (
@@ -824,7 +816,7 @@ function md(text: string): string {
 
         {/* Mermaid diagram */}
         {section.layout === 'mermaid' && (
-          <div class="max-w-4xl mx-auto">
+          <div>
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
@@ -852,7 +844,7 @@ function md(text: string): string {
 
         {/* Stepper vertical */}
         {section.layout === 'stepper' && (
-          <div class="max-w-4xl mx-auto" data-component="MethodologyStepper" data-token="$spacing-gap-stack: 2.5rem / 40px|$color-border-line: #e8e4dd">
+          <div data-component="MethodologyStepper" data-token="$spacing-gap-stack: 2.5rem / 40px|$color-border-line: #e8e4dd">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
@@ -891,7 +883,7 @@ function md(text: string): string {
 
         {/* Audit deck grid - full presentation gallery with lightbox */}
         {section.layout === 'audit-deck-grid' && (
-          <div class="max-w-4xl mx-auto" data-component="AuditDeckGrid">
+          <div data-component="AuditDeckGrid">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
@@ -926,7 +918,7 @@ function md(text: string): string {
   <!-- Resultados (design mode) -->
   <section class="case-section cm-project-results-design" data-component="ResultsShowcase">
     <div class="container-custom">
-      <div class="relative rounded-3xl bg-neutral-900 p-12 md:p-20 overflow-hidden max-w-4xl mx-auto"
+      <div class="relative rounded-3xl bg-neutral-900 p-12 md:p-20 overflow-hidden"
         data-token="$radius-3xl: 1.5rem / 24px|$spacing-padding: 3rem → 5rem (md)|$color-bg-dark: #1a1918">
         <div class="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary-500/[0.07] blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-primary-500/[0.07] blur-3xl"></div>
@@ -954,7 +946,6 @@ function md(text: string): string {
   <!-- ═══ CODE MODE: results.json ═══ -->
   <section class="case-section cm-project-results-code" data-component="ResultsFile">
     <div class="container-custom">
-      <div class="max-w-4xl mx-auto">
         <div class="file-block">
           <div class="file-block__titlebar">
             <div class="pmd-dots">
@@ -983,7 +974,6 @@ function md(text: string): string {
             <div class="file-block__line"><span class="file-block__gutter">{project.results.length + 4}</span><span class="file-block__code"><span class="pmd-bracket">{'}'}</span></span></div>
           </div>
         </div>
-      </div>
     </div>
   </section>
 
@@ -1053,7 +1043,6 @@ function md(text: string): string {
   <!-- ═══ CODE MODE: Terminal Navigation Between Projects ═══ -->
   <section class="section-padding cm-project-nav-code" data-component="ProjectTerminalNav">
     <div class="container-custom">
-      <div class="max-w-4xl mx-auto">
         <div class="file-block">
           <div class="file-block__titlebar">
             <div class="pmd-dots">
@@ -1090,7 +1079,6 @@ function md(text: string): string {
             </a>
           </div>
         </div>
-      </div>
     </div>
   </section>
 
