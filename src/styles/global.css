@@ -3722,6 +3722,80 @@ body.code-mode [data-component="ProjectHero"] { display: none !important; }
   font-weight: 600;
 }
 
+/* ── Code Mode: Project Sidebar Grid ── */
+.cm-project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .cm-project-grid {
+    grid-template-columns: 260px 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.cm-sidebar__sticky {
+  position: sticky;
+  top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cm-sidebar__panel {
+  background: #1e1e2e;
+  border: 1px solid var(--cm-border, #30363d);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.cm-sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #181825;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #7d8590;
+  text-transform: uppercase;
+}
+
+.cm-sidebar__body {
+  padding: 0.5rem 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  line-height: 1.7;
+  color: #cdd6f4;
+}
+
+.cm-sidebar__row {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cm-sidebar__link {
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.cm-sidebar__link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+  text-decoration-color: var(--cm-constant, #f1fa8c);
+  text-underline-offset: 2px;
+}
+
+.cm-content {
+  min-width: 0;
+}
+
 /* ── Asset Preview (design file viewer) ── */
 .asset-preview {
   border-radius: 8px;

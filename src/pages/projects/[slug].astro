@@ -385,90 +385,180 @@ function md(text: string): string {
     </div>
   </section>
 
-  <!-- ═══ CODE MODE: Content as File Blocks ═══ -->
+  <!-- ═══ CODE MODE: Content as File Blocks + Sidebar ═══ -->
   <section class="case-section cm-project-content-code" data-component="ProjectFileBlocks">
     <div class="container-custom">
-      <div class="max-w-4xl mx-auto space-y-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="cm-project-grid">
 
-        <!-- context.md — About the project -->
-        <div class="file-block">
-          <div class="file-block__titlebar">
-            <div class="pmd-dots">
-              <span class="pmd-dot" style="background:#ff5f57"></span>
-              <span class="pmd-dot" style="background:#febc2e"></span>
-              <span class="pmd-dot" style="background:#28c840"></span>
-            </div>
-            <span class="file-block__filename">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-              </svg>
-              context.md
-            </span>
-            <span class="file-block__tab">context.md</span>
-          </div>
-          <div class="file-block__body">
-            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment"># Sobre el proyecto</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
-            {project.longDescription.split('\n\n').map((paragraph: string, i: number) => (
-              <div class="file-block__line"><span class="file-block__gutter">{i + 3}</span><span class="file-block__code file-block__text" set:html={md(paragraph)} /></div>
-            ))}
-          </div>
-        </div>
+          <!-- Sidebar (1/3): Inspector Panel -->
+          <aside class="cm-sidebar">
+            <div class="cm-sidebar__sticky">
+              <!-- PROJECT_INFO -->
+              <div class="cm-sidebar__panel">
+                <div class="cm-sidebar__header">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#8be9fd">
+                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                  PROJECT_INFO
+                </div>
+                <div class="cm-sidebar__body">
+                  <div class="cm-sidebar__row">
+                    <span class="pmd-key">client</span><span class="pmd-punct">:</span> <span class="pmd-string">"{project.client}"</span>
+                  </div>
+                  <div class="cm-sidebar__row">
+                    <span class="pmd-key">year</span><span class="pmd-punct">:</span> <span class="pmd-number">{project.year}</span>
+                  </div>
+                  <div class="cm-sidebar__row">
+                    <span class="pmd-key">status</span><span class="pmd-punct">:</span> <span class="pmd-impact">"Deployed"</span>
+                  </div>
+                  <div class="cm-sidebar__row">
+                    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta?.role || project.category}"</span>
+                  </div>
+                  {meta?.industry && (
+                    <div class="cm-sidebar__row">
+                      <span class="pmd-key">industry</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.industry}"</span>
+                    </div>
+                  )}
+                  {meta?.duration && (
+                    <div class="cm-sidebar__row">
+                      <span class="pmd-key">duration</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.duration}"</span>
+                    </div>
+                  )}
+                </div>
+              </div>
 
-        <!-- challenge.md — The problem -->
-        <div class="file-block">
-          <div class="file-block__titlebar">
-            <div class="pmd-dots">
-              <span class="pmd-dot" style="background:#ff5f57"></span>
-              <span class="pmd-dot" style="background:#febc2e"></span>
-              <span class="pmd-dot" style="background:#28c840"></span>
+              <!-- TECH_STACK -->
+              <div class="cm-sidebar__panel">
+                <div class="cm-sidebar__header">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#bd93f9">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                  TECH_STACK
+                </div>
+                <div class="cm-sidebar__body">
+                  {project.stack.map((tech: string) => (
+                    <div class="cm-sidebar__row">
+                      <span class="pmd-string">"{tech.toLowerCase().replace(/\s+/g, '-')}"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^latest"</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- SKILLS -->
+              <div class="cm-sidebar__panel">
+                <div class="cm-sidebar__header">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#50fa7b">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                  </svg>
+                  SKILLS
+                </div>
+                <div class="cm-sidebar__body">
+                  {(meta?.skills || project.stack).map((skill: string, i: number) => (
+                    <div class="cm-sidebar__row">
+                      <span class="pmd-punct">{i === 0 ? '[' : ' '}</span> <span class="pmd-string">"{skill}"</span>{i < (meta?.skills || project.stack).length - 1 ? <span class="pmd-punct">,</span> : <span class="pmd-punct"> ]</span>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- GitHub link -->
+              {project.githubUrl && (
+                <div class="cm-sidebar__panel">
+                  <div class="cm-sidebar__body">
+                    <div class="cm-sidebar__row">
+                      <span class="pmd-key">repo</span><span class="pmd-punct">:</span> <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="pmd-string cm-sidebar__link">"GitHub ↗"</a>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-            <span class="file-block__filename">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" />
-              </svg>
-              challenge.md
-            </span>
-            <span class="file-block__tab">challenge.md</span>
-          </div>
-          <div class="file-block__body">
-            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment"># El reto</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code file-block__text" set:html={md(project.challenge)} /></div>
-            {project.checks && project.checks.length > 0 && (
-              <>
-                <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"></span></div>
-                {project.checks.map((check: string, i: number) => (
-                  <div class="file-block__line"><span class="file-block__gutter">{i + 5}</span><span class="file-block__code"><span class="pmd-string">  ✓</span> <span class="file-block__text">{check}</span></span></div>
+          </aside>
+
+          <!-- Main content (2/3): File Blocks -->
+          <div class="cm-content space-y-8">
+
+            <!-- context.md — About the project -->
+            <div class="file-block">
+              <div class="file-block__titlebar">
+                <div class="pmd-dots">
+                  <span class="pmd-dot" style="background:#ff5f57"></span>
+                  <span class="pmd-dot" style="background:#febc2e"></span>
+                  <span class="pmd-dot" style="background:#28c840"></span>
+                </div>
+                <span class="file-block__filename">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                  context.md
+                </span>
+                <span class="file-block__tab">context.md</span>
+              </div>
+              <div class="file-block__body">
+                <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment"># Sobre el proyecto</span></span></div>
+                <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+                {project.longDescription.split('\n\n').map((paragraph: string, i: number) => (
+                  <div class="file-block__line"><span class="file-block__gutter">{i + 3}</span><span class="file-block__code file-block__text" set:html={md(paragraph)} /></div>
                 ))}
-              </>
-            )}
-          </div>
-        </div>
-
-        <!-- solution.ts — The solution -->
-        <div class="file-block">
-          <div class="file-block__titlebar">
-            <div class="pmd-dots">
-              <span class="pmd-dot" style="background:#ff5f57"></span>
-              <span class="pmd-dot" style="background:#febc2e"></span>
-              <span class="pmd-dot" style="background:#28c840"></span>
+              </div>
             </div>
-            <span class="file-block__filename">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
-              </svg>
-              solution.ts
-            </span>
-            <span class="file-block__tab">solution.ts</span>
-          </div>
-          <div class="file-block__body">
-            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">// Solución propuesta</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code file-block__text" set:html={md(project.solution)} /></div>
+
+            <!-- challenge.md — The problem -->
+            <div class="file-block">
+              <div class="file-block__titlebar">
+                <div class="pmd-dots">
+                  <span class="pmd-dot" style="background:#ff5f57"></span>
+                  <span class="pmd-dot" style="background:#febc2e"></span>
+                  <span class="pmd-dot" style="background:#28c840"></span>
+                </div>
+                <span class="file-block__filename">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" />
+                  </svg>
+                  challenge.md
+                </span>
+                <span class="file-block__tab">challenge.md</span>
+              </div>
+              <div class="file-block__body">
+                <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment"># El reto</span></span></div>
+                <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+                <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code file-block__text" set:html={md(project.challenge)} /></div>
+                {project.checks && project.checks.length > 0 && (
+                  <>
+                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"></span></div>
+                    {project.checks.map((check: string, i: number) => (
+                      <div class="file-block__line"><span class="file-block__gutter">{i + 5}</span><span class="file-block__code"><span class="pmd-string">  ✓</span> <span class="file-block__text">{check}</span></span></div>
+                    ))}
+                  </>
+                )}
+              </div>
+            </div>
+
+            <!-- solution.ts — The solution -->
+            <div class="file-block">
+              <div class="file-block__titlebar">
+                <div class="pmd-dots">
+                  <span class="pmd-dot" style="background:#ff5f57"></span>
+                  <span class="pmd-dot" style="background:#febc2e"></span>
+                  <span class="pmd-dot" style="background:#28c840"></span>
+                </div>
+                <span class="file-block__filename">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
+                  </svg>
+                  solution.ts
+                </span>
+                <span class="file-block__tab">solution.ts</span>
+              </div>
+              <div class="file-block__body">
+                <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">// Solución propuesta</span></span></div>
+                <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+                <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code file-block__text" set:html={md(project.solution)} /></div>
+              </div>
+            </div>
+
           </div>
         </div>
-
       </div>
     </div>
   </section>
