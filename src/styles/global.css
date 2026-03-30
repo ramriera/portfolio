@@ -3579,7 +3579,7 @@ body.code-mode [data-component="ProjectHero"] { display: none !important; }
 .pmd-punct { color: var(--cm-text-muted, #7d8590); }          /* : , ; → muted */
 .pmd-bracket { color: var(--cm-tag, #ff79c6); }               /* { } [ ] → pink */
 .pmd-key { color: var(--cm-function, #8be9fd); }              /* object keys → cyan */
-.pmd-string { color: var(--cm-constant, #f1fa8c); }           /* string values → yellow */
+.pmd-string { color: var(--cm-string, #50fa7b); }             /* string values → green */
 .pmd-number { color: var(--cm-attr, #ffb86c); }               /* numbers → orange */
 .pmd-comment { color: var(--cm-comment, #6272a4); font-style: italic; }
 .pmd-impact {
