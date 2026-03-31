@@ -203,65 +203,24 @@ function initInteractiveTerminal() {
     typewriterQueue = typewriterQueue.then(() => typewriteLines(lines, delay));
   }
 
-  // ── MOTD (Message of the Day) — neofetch style ──
+  // ── MOTD (Message of the Day) ──
   function printMotd() {
-    const logo = [
-      ' ____   ____  ',
-      '|  _ \\ |  _ \\ ',
-      '| |_) || |_) |',
-      '|  _ &lt; |  _ &lt; ',
-      '|_| \\_\\|_| \\_\\',
-      '              ',
-      ' ramon riera  ',
+    const asciiArt = [
+      '&nbsp;',
+      `<span class="t-accent">  ____                                  ____  _                </span>`,
+      `<span class="t-accent"> |  _ \\ __ _ _ __ ___   ___  _ __      |  _ \\(_) ___ _ __ __ _ </span>`,
+      `<span class="t-accent"> | |_) / _\` | '_ \` _ \\ / _ \\| '_ \\     | |_) | |/ _ \\ '__/ _\` |</span>`,
+      `<span class="t-accent"> |  _ &lt; (_| | | | | | | (_) | | | |    |  _ &lt;| |  __/ | | (_| |</span>`,
+      `<span class="t-accent"> |_| \\_\\__,_|_| |_| |_|\\___/|_| |_|    |_| \\_\\_|\\___|_|  \\__,_|</span>`,
+      '&nbsp;',
+      `${span('muted', 'UX Lead & Product Designer')} ${span('comment', '// ramonriera.design')}`,
+      `${span('muted', 'Design Systems | DesignOps | Product Strategy')}`,
+      '&nbsp;',
+      `${span('string', 'Bienvenido a la consola interactiva.')} Escribe ${span('keyword', 'help')} para ver los comandos disponibles.`,
+      `${span('comment', '\u2500'.repeat(60))}`,
+      '&nbsp;',
     ];
-
-    const ua = navigator.userAgent;
-    let browser = 'Unknown';
-    if (ua.includes('Firefox')) browser = 'Firefox';
-    else if (ua.includes('Edg/')) browser = 'Edge';
-    else if (ua.includes('Chrome')) browser = 'Chrome';
-    else if (ua.includes('Safari')) browser = 'Safari';
-
-    const info = [
-      [`${span('keyword', 'ramon')}${span('muted', '@')}${span('keyword', 'portfolio')}`, ''],
-      [`${span('comment', '\u2500'.repeat(22))}`, ''],
-      [`${span('keyword', 'OS')}`,           `Astro 5.17 + Tailwind 3.4`],
-      [`${span('keyword', 'Host')}`,          `ramonriera.design`],
-      [`${span('keyword', 'Kernel')}`,        `Vercel Edge Network`],
-      [`${span('keyword', 'Shell')}`,         `InteractiveTerminal v2.0`],
-      [`${span('keyword', 'Browser')}`,       `${browser}`],
-      [`${span('keyword', 'Resolution')}`,    `${window.innerWidth}x${window.innerHeight}`],
-      [`${span('keyword', 'Theme')}`,         `Dracula (Code Mode)`],
-      [`${span('keyword', 'Font')}`,          `JetBrains Mono, Inter`],
-      [`${span('keyword', 'Uptime')}`,        `${new Date().getFullYear() - 2017} years designing`],
-    ];
-
-    const pad = 18; // width of logo column
-    const maxLen = Math.max(logo.length, info.length);
-    const lines = ['&nbsp;'];
-
-    for (let i = 0; i < maxLen; i++) {
-      const art = i < logo.length
-        ? `<span class="t-accent">${logo[i]}</span>`
-        : ' '.repeat(14);
-      let infoStr = '';
-      if (i < info.length) {
-        const [label, val] = info[i];
-        infoStr = val ? `${label}${span('muted', ':')} ${val}` : label;
-      }
-      lines.push(`  ${art}    ${infoStr}`);
-    }
-
-    // Color blocks row
-    const colorRow = ['#D97757', '#EC9372', '#F4B89D', '#D4CFC5', '#E8E4DB', '#FAF9F7', '#403D38', '#2A2825']
-      .map(c => `<span style="background:${c};color:${c};">\u2588\u2588</span>`).join('');
-    lines.push(`  ${' '.repeat(14)}    ${colorRow}`);
-    lines.push('&nbsp;');
-    lines.push(`  ${span('string', 'Bienvenido a la consola interactiva.')} Escribe ${span('keyword', 'help')} para ver los comandos disponibles.`);
-    lines.push(`  ${span('comment', '\u2500'.repeat(56))}`);
-    lines.push('&nbsp;');
-
-    enqueueTypewriter(lines, 25);
+    enqueueTypewriter(asciiArt, 25);
   }
 
   // ── Command processor ──
