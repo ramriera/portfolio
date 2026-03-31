@@ -4,6 +4,9 @@
 
 <!-- Interactive Terminal — fullscreen overlay when Code Mode is active on Home -->
 <div id="interactive-terminal" class="interactive-terminal">
+  <!-- CRT scanlines overlay -->
+  <div class="crt-overlay" aria-hidden="true"></div>
+
   <div class="term-window">
     <!-- Title bar -->
     <div class="term-titlebar">
@@ -34,6 +37,7 @@
         spellcheck="false"
         aria-label="Terminal input"
       />
+      <span class="term-cursor" id="term-cursor">&#9608;</span>
     </div>
   </div>
 </div>
@@ -44,6 +48,7 @@ function initInteractiveTerminal() {
   const output = document.getElementById('term-output');
   const input = document.getElementById('term-input') as HTMLInputElement | null;
   const minimizeBtn = document.getElementById('term-minimize');
+  const cursor = document.getElementById('term-cursor');
   if (!terminal || !output || !input) return;
 
   // Guard against double-init
@@ -63,12 +68,12 @@ function initInteractiveTerminal() {
   };
 
   const projectList = [
-    { slug: 'massimo-dutti-conversion',      name: 'Massimo Dutti',  tag: 'E-commerce',      desc: 'Optimizacion de conversion' },
-    { slug: 'iberia-flight-experience',       name: 'Iberia',         tag: 'Travel',           desc: 'Experiencia de vuelo digital' },
-    { slug: 'banco-sabadell-design-system',   name: 'Banco Sabadell', tag: 'Design System',    desc: 'Sistema de diseno enterprise' },
-    { slug: 'imaginbank-digital-banking',     name: 'imaginBank',     tag: 'Fintech',          desc: 'Banca digital mobile-first' },
-    { slug: 'solotemazos-music-platform',     name: 'Solotemazos',    tag: 'Entertainment',    desc: 'Plataforma de musica urbana' },
-    { slug: 'movefast-startup-platform',      name: 'MoveFast',       tag: 'SaaS',             desc: 'Plataforma startup builder' },
+    { id: 1, slug: 'massimo-dutti-conversion',      name: 'Massimo Dutti',  tag: 'E-commerce',      tech: 'Figma, React',       desc: 'Optimizacion de conversion' },
+    { id: 2, slug: 'iberia-flight-experience',       name: 'Iberia',         tag: 'Travel',           tech: 'Figma, iOS',         desc: 'Experiencia de vuelo digital' },
+    { id: 3, slug: 'banco-sabadell-design-system',   name: 'Banco Sabadell', tag: 'Design System',    tech: 'Figma, Tokens',      desc: 'Sistema de diseno enterprise' },
+    { id: 4, slug: 'imaginbank-digital-banking',     name: 'imaginBank',     tag: 'Fintech',          tech: 'Figma, Mobile',      desc: 'Banca digital mobile-first' },
+    { id: 5, slug: 'solotemazos-music-platform',     name: 'Solotemazos',    tag: 'Entertainment',    tech: 'Figma, Web',         desc: 'Plataforma de musica urbana' },
+    { id: 6, slug: 'movefast-startup-platform',      name: 'MoveFast',       tag: 'SaaS',             tech: 'Figma, React',       desc: 'Plataforma startup builder' },
   ];
 
   // ── Helpers ──
@@ -150,7 +155,7 @@ function initInteractiveTerminal() {
         `  ${span('function', 'ls'.padEnd(14))} ${span('muted', 'Lista secciones de la web')}`,
         `  ${span('function', 'ls projects'.padEnd(14))} ${span('muted', 'Lista proyectos destacados')}`,
         `  ${span('function', 'cd [seccion]'.padEnd(14))} ${span('muted', 'Navega a una seccion (about, projects, contact)')}`,
-        `  ${span('function', 'open [slug]'.padEnd(14))} ${span('muted', 'Abre un proyecto por su slug')}`,
+        `  ${span('function', 'open [ID]'.padEnd(14))} ${span('muted', 'Abre un proyecto por ID o nombre')}`,
         `  ${span('function', 'skills'.padEnd(14))} ${span('muted', 'Muestra habilidades tecnicas')}`,
         `  ${span('function', 'social'.padEnd(14))} ${span('muted', 'Muestra links de redes sociales')}`,
         `  ${span('function', 'cv'.padEnd(14))} ${span('muted', 'Descarga el CV')}`,
@@ -190,15 +195,15 @@ function initInteractiveTerminal() {
       if (target === 'projects' || target === 'proyectos') {
         const lines = [
           '&nbsp;',
-          `  ${span('muted', '#'.padEnd(5))} ${span('muted', 'Proyecto'.padEnd(18))} ${span('muted', 'Categoria'.padEnd(16))} ${span('muted', 'Descripcion')}`,
-          `  ${span('comment', '\u2500'.repeat(70))}`,
+          `  ${span('muted', 'ID'.padEnd(6))}${span('muted', 'Proyecto'.padEnd(18))}${span('muted', 'Sector'.padEnd(16))}${span('muted', 'Tech'.padEnd(16))}${span('muted', 'Descripcion')}`,
+          `  ${span('comment', '\u2500'.repeat(78))}`,
         ];
-        projectList.forEach((p, i) => {
-          const num = `[${String(i + 1).padStart(2, '0')}]`;
-          lines.push(`  ${span('constant', num.padEnd(5))} ${span('string', p.name.padEnd(18))} ${span('keyword', p.tag.padEnd(16))} ${span('muted', p.desc)}`);
+        projectList.forEach(p => {
+          const num = `[${String(p.id).padStart(2, '0')}]`;
+          lines.push(`  ${span('constant', num.padEnd(6))}${span('string', p.name.padEnd(18))}${span('keyword', p.tag.padEnd(16))}${span('accent', p.tech.padEnd(16))}${span('muted', p.desc)}`);
         });
         lines.push('&nbsp;');
-        lines.push(`${span('comment', `Total: ${projectList.length} proyectos`)} ${span('muted', '|')} ${span('comment', 'Usa')} ${span('keyword', 'open <nombre>')} ${span('comment', 'para abrir')}`);
+        lines.push(`${span('comment', `Total: ${projectList.length} proyectos`)} ${span('muted', '|')} ${span('comment', 'Usa')} ${span('keyword', 'open <ID|nombre>')} ${span('comment', 'para abrir')}`);
         lines.push('&nbsp;');
         enqueueTypewriter(lines);
         return;
@@ -249,19 +254,23 @@ function initInteractiveTerminal() {
     open(args) {
       const query = args.join(' ').toLowerCase();
       if (!query) {
-        appendLine(`${span('error', 'Uso:')} open &lt;nombre-proyecto&gt;`);
-        appendLine(`${span('muted', 'Escribe')} ${span('keyword', 'ls projects')} ${span('muted', 'para ver los disponibles.')}`);
+        appendLine(`${span('error', 'Uso:')} open &lt;ID | nombre&gt;`);
+        appendLine(`${span('muted', 'Escribe')} ${span('keyword', 'ls projects')} ${span('muted', 'para ver IDs y nombres.')}`);
         scrollToBottom();
         return;
       }
 
-      const project = projectList.find(p =>
-        p.name.toLowerCase().includes(query) ||
-        p.slug.includes(query)
-      );
+      // Match by numeric ID or name/slug
+      const numId = parseInt(query, 10);
+      const project = !isNaN(numId)
+        ? projectList.find(p => p.id === numId)
+        : projectList.find(p =>
+            p.name.toLowerCase().includes(query) ||
+            p.slug.includes(query)
+          );
 
       if (project) {
-        appendLine(`${span('string', `Abriendo ${project.name}...`)}`);
+        appendLine(`${span('string', `Abriendo [${String(project.id).padStart(2, '0')}] ${project.name}...`)}`);
         scrollToBottom();
         setTimeout(() => {
           window.location.href = `/projects/${project.slug}`;
@@ -269,7 +278,7 @@ function initInteractiveTerminal() {
       } else {
         appendLine(`${span('error', `No se encontro un proyecto con "${escHtml(query)}"`)}`);
         projectList.forEach(p => {
-          appendLine(`  ${span('string', p.name)}`);
+          appendLine(`  ${span('constant', `[${String(p.id).padStart(2, '0')}]`)} ${span('string', p.name)}`);
         });
         scrollToBottom();
       }
@@ -464,9 +473,15 @@ function initInteractiveTerminal() {
     }
   });
 
-  // ── Global focus: any click on the fullscreen terminal focuses input ──
+  // ── Global focus: any click anywhere on the document focuses the terminal input ──
   terminal.addEventListener('click', () => {
     input.focus();
+  });
+
+  document.addEventListener('click', () => {
+    if (terminal.classList.contains('term-active')) {
+      input.focus();
+    }
   });
 
   // Minimize/restore
@@ -709,6 +724,62 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
   :global(.t-muted)     { color: var(--cm-text-muted, #7d8590); }
   :global(.t-accent)    { color: var(--accent-color, #D97757); }
   :global(.t-error)     { color: #ff5555; }
+
+  /* ── Blinking Cursor ── */
+  .term-cursor {
+    color: var(--accent-color, #D97757);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1;
+    animation: cursor-blink 1s step-end infinite;
+    user-select: none;
+    pointer-events: none;
+    margin-left: -2px;
+  }
+
+  /* Hide the block cursor when input is focused (native caret takes over) */
+  .term-input:focus ~ .term-cursor {
+    display: none;
+  }
+
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  /* ── CRT Scanlines Overlay ── */
+  .crt-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.06) 2px,
+      rgba(0, 0, 0, 0.06) 4px
+    );
+    mix-blend-mode: multiply;
+  }
+
+  /* Subtle vignette at edges */
+  .crt-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 60%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+  }
+
+  /* Ensure term-window content is above CRT overlay interaction-wise */
+  .term-window {
+    position: relative;
+    z-index: 20;
+  }
 
   /* ── Fullscreen body lock ── */
   :global(body.terminal-fullscreen) {
