@@ -203,24 +203,65 @@ function initInteractiveTerminal() {
     typewriterQueue = typewriterQueue.then(() => typewriteLines(lines, delay));
   }
 
-  // ── MOTD (Message of the Day) ──
+  // ── MOTD (Message of the Day) — neofetch style ──
   function printMotd() {
-    const asciiArt = [
-      '&nbsp;',
-      `<span class="t-accent">  ____                                  ____  _                </span>`,
-      `<span class="t-accent"> |  _ \\ __ _ _ __ ___   ___  _ __      |  _ \\(_) ___ _ __ __ _ </span>`,
-      `<span class="t-accent"> | |_) / _\` | '_ \` _ \\ / _ \\| '_ \\     | |_) | |/ _ \\ '__/ _\` |</span>`,
-      `<span class="t-accent"> |  _ &lt; (_| | | | | | | (_) | | | |    |  _ &lt;| |  __/ | | (_| |</span>`,
-      `<span class="t-accent"> |_| \\_\\__,_|_| |_| |_|\\___/|_| |_|    |_| \\_\\_|\\___|_|  \\__,_|</span>`,
-      '&nbsp;',
-      `${span('muted', 'UX Lead & Product Designer')} ${span('comment', '// ramonriera.design')}`,
-      `${span('muted', 'Design Systems | DesignOps | Product Strategy')}`,
-      '&nbsp;',
-      `${span('string', 'Bienvenido a la consola interactiva.')} Escribe ${span('keyword', 'help')} para ver los comandos disponibles.`,
-      `${span('comment', '\u2500'.repeat(60))}`,
-      '&nbsp;',
+    const logo = [
+      ' ____   ____  ',
+      '|  _ \\ |  _ \\ ',
+      '| |_) || |_) |',
+      '|  _ &lt; |  _ &lt; ',
+      '|_| \\_\\|_| \\_\\',
+      '              ',
+      ' ramon riera  ',
     ];
-    enqueueTypewriter(asciiArt, 25);
+
+    const ua = navigator.userAgent;
+    let browser = 'Unknown';
+    if (ua.includes('Firefox')) browser = 'Firefox';
+    else if (ua.includes('Edg/')) browser = 'Edge';
+    else if (ua.includes('Chrome')) browser = 'Chrome';
+    else if (ua.includes('Safari')) browser = 'Safari';
+
+    const info = [
+      [`${span('keyword', 'ramon')}${span('muted', '@')}${span('keyword', 'portfolio')}`, ''],
+      [`${span('comment', '\u2500'.repeat(22))}`, ''],
+      [`${span('keyword', 'OS')}`,           `Astro 5.17 + Tailwind 3.4`],
+      [`${span('keyword', 'Host')}`,          `ramonriera.design`],
+      [`${span('keyword', 'Kernel')}`,        `Vercel Edge Network`],
+      [`${span('keyword', 'Shell')}`,         `InteractiveTerminal v2.0`],
+      [`${span('keyword', 'Browser')}`,       `${browser}`],
+      [`${span('keyword', 'Resolution')}`,    `${window.innerWidth}x${window.innerHeight}`],
+      [`${span('keyword', 'Theme')}`,         `Dracula (Code Mode)`],
+      [`${span('keyword', 'Font')}`,          `JetBrains Mono, Inter`],
+      [`${span('keyword', 'Uptime')}`,        `${new Date().getFullYear() - 2017} years designing`],
+    ];
+
+    const pad = 18; // width of logo column
+    const maxLen = Math.max(logo.length, info.length);
+    const lines = ['&nbsp;'];
+
+    for (let i = 0; i < maxLen; i++) {
+      const art = i < logo.length
+        ? `<span class="t-accent">${logo[i]}</span>`
+        : ' '.repeat(14);
+      let infoStr = '';
+      if (i < info.length) {
+        const [label, val] = info[i];
+        infoStr = val ? `${label}${span('muted', ':')} ${val}` : label;
+      }
+      lines.push(`  ${art}    ${infoStr}`);
+    }
+
+    // Color blocks row
+    const colorRow = ['#D97757', '#EC9372', '#F4B89D', '#D4CFC5', '#E8E4DB', '#FAF9F7', '#403D38', '#2A2825']
+      .map(c => `<span style="background:${c};color:${c};">\u2588\u2588</span>`).join('');
+    lines.push(`  ${' '.repeat(14)}    ${colorRow}`);
+    lines.push('&nbsp;');
+    lines.push(`  ${span('string', 'Bienvenido a la consola interactiva.')} Escribe ${span('keyword', 'help')} para ver los comandos disponibles.`);
+    lines.push(`  ${span('comment', '\u2500'.repeat(56))}`);
+    lines.push('&nbsp;');
+
+    enqueueTypewriter(lines, 25);
   }
 
   // ── Command processor ──
@@ -238,6 +279,7 @@ function initInteractiveTerminal() {
         `  ${span('function', 'open [ID]'.padEnd(14))} ${span('muted', 'Abre un proyecto por ID o nombre')}`,
         `  ${span('function', 'skills'.padEnd(14))} ${span('muted', 'Muestra habilidades tecnicas')}`,
         `  ${span('function', 'social'.padEnd(14))} ${span('muted', 'Muestra links de redes sociales')}`,
+        `  ${span('function', 'colors'.padEnd(14))} ${span('muted', 'Paleta de colores del design system')}`,
         `  ${span('function', 'cv'.padEnd(14))} ${span('muted', 'Descarga el CV')}`,
         `  ${span('function', 'clear'.padEnd(14))} ${span('muted', 'Limpia la terminal')}`,
         `  ${span('function', 'history'.padEnd(14))} ${span('muted', 'Muestra historial de comandos')}`,
@@ -384,13 +426,54 @@ function initInteractiveTerminal() {
     social(_args) {
       const lines = [
         '&nbsp;',
-        `  ${span('function', 'LinkedIn')}   ${span('string', 'linkedin.com/in/ramonrieradepares')}`,
-        `  ${span('function', 'Medium')}     ${span('string', 'medium.com/@ramriera')}`,
-        `  ${span('function', 'Email')}      ${span('string', 'hello@ramonriera.design')}`,
-        `  ${span('function', 'Web')}        ${span('string', 'ramonriera.design')}`,
+        `  <span class="t-function">  ╦  ╦╔╗╗</span>   ${span('keyword', 'LinkedIn')}`,
+        `  <span class="t-function">  ║  ║║║║</span>   ${span('string', 'linkedin.com/in/ramonrieradepares')}`,
+        `  <span class="t-function">  ╩═╝╩╝╚╝</span>`,
+        '&nbsp;',
+        `  <span class="t-accent">  ╔╦╗</span>       ${span('keyword', 'Medium')}`,
+        `  <span class="t-accent">  ║║║</span>       ${span('string', 'medium.com/@ramriera')}`,
+        `  <span class="t-accent">  ╩ ╩</span>`,
+        '&nbsp;',
+        `  <span class="t-string">  ┌─@─┐</span>    ${span('keyword', 'Email')}`,
+        `  <span class="t-string">  └───┘</span>    ${span('string', 'hello@ramonriera.design')}`,
+        '&nbsp;',
+        `  <span class="t-constant">  ╦ ╦╔═╗</span>   ${span('keyword', 'Web')}`,
+        `  <span class="t-constant">  ║║║║╣</span>    ${span('string', 'ramonriera.design')}`,
+        `  <span class="t-constant">  ╚╩╝╚═╝</span>`,
         '&nbsp;',
       ];
       enqueueTypewriter(lines);
+    },
+
+    colors(_args) {
+      const palette = [
+        { name: 'Primary 500',  hex: '#D97757', css: '--color-primary-500' },
+        { name: 'Primary 400',  hex: '#EC9372', css: '--color-primary-400' },
+        { name: 'Primary 300',  hex: '#F4B89D', css: '--color-primary-300' },
+        { name: 'Neutral 900',  hex: '#1A1918', css: '--color-neutral-900' },
+        { name: 'Neutral 800',  hex: '#2A2825', css: '--color-neutral-800' },
+        { name: 'Neutral 700',  hex: '#403D38', css: '--color-neutral-700' },
+        { name: 'Neutral 200',  hex: '#D4CFC5', css: '--color-neutral-200' },
+        { name: 'Neutral 100',  hex: '#E8E4DB', css: '--color-neutral-100' },
+        { name: 'Neutral 50',   hex: '#FAF9F7', css: '--color-neutral-50' },
+      ];
+
+      const lines = [
+        '&nbsp;',
+        `${span('keyword', '  Design System Palette')}`,
+        `  ${span('comment', '\u2500'.repeat(50))}`,
+        '&nbsp;',
+      ];
+
+      palette.forEach(c => {
+        const block = `<span style="background:${c.hex};color:${c.hex};">\u2588\u2588\u2588\u2588</span>`;
+        lines.push(`  ${block}  ${span('string', c.hex.padEnd(10))} ${span('muted', c.name.padEnd(16))} ${span('comment', c.css)}`);
+      });
+
+      lines.push('&nbsp;');
+      lines.push(`  ${span('comment', `${palette.length} tokens | Terracotta + Warm Neutral`)}`);
+      lines.push('&nbsp;');
+      enqueueTypewriter(lines, 20);
     },
 
     cv(_args) {
@@ -465,6 +548,10 @@ function initInteractiveTerminal() {
       }
       lines.push('&nbsp;');
       enqueueTypewriter(lines, 30);
+    },
+
+    view(args) {
+      commands.open(args);
     },
 
     clear(_args) {
@@ -740,7 +827,7 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
   /* ── Output Area — fills remaining space, no visible scrollbar ── */
   .term-output {
     flex: 1;
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 2rem 3rem;
     overflow-y: auto;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 0.85rem;
