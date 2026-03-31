@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection.astro';
 import AboutSection from '@/components/AboutSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import ContactConsole from '@/components/ContactConsole.astro';
+import InteractiveTerminal from '@/components/InteractiveTerminal.astro';
 import { projects } from '@/utils/data';
 
 // 3-row editorial grid: 60/40, 40/60, 60/40
@@ -21,6 +22,13 @@ const featuredProjects = projectOrder
 ---
 
 <BaseLayout title="Home ⚡ Ramon Riera">
+  <!-- Interactive Terminal (Code Mode) -->
+  <section class="terminal-section section-padding" data-component="InteractiveTerminal">
+    <div class="container-custom">
+      <InteractiveTerminal />
+    </div>
+  </section>
+
   <!-- Hero -->
   <HeroSection />
 
@@ -123,6 +131,17 @@ const featuredProjects = projectOrder
   <!-- CTA -->
   <ContactConsole />
 <style>
+  /* ═══ Interactive Terminal: only visible in Code Mode ═══ */
+  .terminal-section {
+    display: none;
+  }
+
+  :global(.code-mode) .terminal-section {
+    display: block;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
   /* Force uniform image height within grid rows so text aligns horizontally */
   .project-grid-item :global(.card-image-wrap) {
     aspect-ratio: 4 / 3;

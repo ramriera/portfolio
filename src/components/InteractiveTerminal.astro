@@ -1,0 +1,625 @@
+---
+
+---
+
+<!-- Interactive Terminal — replaces visual content when Code Mode is active on Home -->
+<div id="interactive-terminal" class="interactive-terminal">
+  <div class="term-window">
+    <!-- Title bar -->
+    <div class="term-titlebar">
+      <div class="term-dots">
+        <span style="background:#ff5f57"></span>
+        <span style="background:#febc2e"></span>
+        <span style="background:#28c840"></span>
+      </div>
+      <span class="term-title">ramon@portfolio:~</span>
+      <button id="term-close" class="term-close" aria-label="Minimizar terminal" title="Minimizar">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+    </div>
+
+    <!-- Output area -->
+    <div id="term-output" class="term-output" tabindex="-1"></div>
+
+    <!-- Input line -->
+    <div class="term-input-row">
+      <span class="term-prompt"><span class="term-prompt-user">ramon</span><span class="term-prompt-at">@</span><span class="term-prompt-host">portfolio</span><span class="term-prompt-colon">:</span><span class="term-prompt-path">~</span><span class="term-prompt-dollar">$</span></span>
+      <input
+        id="term-input"
+        class="term-input"
+        type="text"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-label="Terminal input"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+function initInteractiveTerminal() {
+  const terminal = document.getElementById('interactive-terminal');
+  const output = document.getElementById('term-output');
+  const input = document.getElementById('term-input') as HTMLInputElement | null;
+  const closeBtn = document.getElementById('term-close');
+  if (!terminal || !output || !input) return;
+
+  let history: string[] = [];
+  let historyIndex = -1;
+  let isMinimized = false;
+
+  // ── Section & project data ──
+  const sections: Record<string, { desc: string; path: string }> = {
+    about:    { desc: 'Sobre mi — Experiencia y trayectoria', path: '/about' },
+    projects: { desc: 'Proyectos — Casos de estudio destacados', path: '/projects' },
+    contact:  { desc: 'Contacto — Hablemos de tu proyecto', path: '/#contact' },
+  };
+
+  const projectList = [
+    { slug: 'massimo-dutti-conversion',      name: 'Massimo Dutti',  desc: 'Optimizacion de conversion e-commerce' },
+    { slug: 'iberia-flight-experience',       name: 'Iberia',         desc: 'Experiencia de vuelo digital' },
+    { slug: 'banco-sabadell-design-system',   name: 'Banco Sabadell', desc: 'Design System enterprise' },
+    { slug: 'imaginbank-digital-banking',     name: 'imaginBank',     desc: 'Banca digital mobile-first' },
+    { slug: 'solotemazos-music-platform',     name: 'Solotemazos',    desc: 'Plataforma de musica urbana' },
+    { slug: 'movefast-startup-platform',      name: 'MoveFast',       desc: 'Plataforma startup builder' },
+  ];
+
+  // ── Helpers ──
+  function span(cls: string, text: string): string {
+    return `<span class="t-${cls}">${escHtml(text)}</span>`;
+  }
+
+  function escHtml(s: string): string {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function appendLine(html: string) {
+    const div = document.createElement('div');
+    div.className = 'term-line';
+    div.innerHTML = html;
+    output.appendChild(div);
+  }
+
+  function appendBlock(lines: string[]) {
+    lines.forEach(l => appendLine(l));
+  }
+
+  function scrollToBottom() {
+    output.scrollTop = output.scrollHeight;
+  }
+
+  // ── MOTD (Message of the Day) ──
+  function printMotd() {
+    const asciiArt = [
+      '  ____                                  ____  _                ',
+      ' |  _ \\ __ _ _ __ ___   ___  _ __      |  _ \\(_) ___ _ __ __ _ ',
+      ' | |_) / _` | \'_ ` _ \\ / _ \\| \'_ \\     | |_) | |/ _ \\ \'__/ _` |',
+      ' |  _ < (_| | | | | | | (_) | | | |    |  _ <| |  __/ | | (_| |',
+      ' |_| \\_\\__,_|_| |_| |_|\\___/|_| |_|    |_| \\_\\_|\\___|_|  \\__,_|',
+    ];
+
+    asciiArt.forEach(line => {
+      appendLine(`<span class="t-accent">${escHtml(line)}</span>`);
+    });
+
+    appendLine('');
+    appendLine(`${span('muted', 'UX Lead & Product Designer')} ${span('comment', '// ramonriera.design')}`);
+    appendLine(`${span('muted', 'Design Systems | DesignOps | Product Strategy')}`);
+    appendLine('');
+    appendLine(`${span('string', 'Bienvenido a la consola interactiva.')} Escribe ${span('keyword', 'help')} para ver los comandos disponibles.`);
+    appendLine(`${span('comment', '─'.repeat(60))}`);
+    appendLine('');
+  }
+
+  // ── Command processor ──
+  const commands: Record<string, (args: string[]) => void> = {
+    help(_args) {
+      appendLine(`${span('keyword', 'Comandos disponibles:')}`);
+      appendLine('');
+      const cmds = [
+        ['help',             'Muestra esta ayuda'],
+        ['ls',               'Lista las secciones de la web'],
+        ['ls projects',      'Lista los proyectos destacados'],
+        ['cd <seccion>',     'Navega a una seccion (about, projects, contact)'],
+        ['open <proyecto>',  'Abre un caso de estudio por nombre'],
+        ['whoami',           'Resumen de perfil profesional'],
+        ['skills',           'Stack tecnologico y habilidades'],
+        ['experience',       'Trayectoria profesional'],
+        ['social',           'Links a redes profesionales'],
+        ['clear',            'Limpia la terminal'],
+        ['exit',             'Vuelve al modo visual'],
+      ];
+      cmds.forEach(([cmd, desc]) => {
+        appendLine(`  ${span('function', cmd.padEnd(20))} ${span('muted', desc)}`);
+      });
+      appendLine('');
+    },
+
+    ls(args) {
+      const target = args[0]?.toLowerCase();
+
+      if (target === 'projects' || target === 'proyectos') {
+        appendLine(`${span('keyword', 'drwxr-xr-x')}  ${span('function', 'projects/')}`);
+        appendLine('');
+        projectList.forEach(p => {
+          appendLine(`  ${span('string', p.name.padEnd(18))} ${span('muted', p.desc)}`);
+        });
+        appendLine('');
+        appendLine(`${span('comment', `Total: ${projectList.length} proyectos`)}`);
+        appendLine('');
+        return;
+      }
+
+      appendLine(`${span('keyword', 'drwxr-xr-x')}  ${span('function', '.')}`);
+      appendLine('');
+      Object.entries(sections).forEach(([key, val]) => {
+        appendLine(`  ${span('function', key.padEnd(14))} ${span('muted', val.desc)}`);
+      });
+      appendLine('');
+      appendLine(`${span('comment', 'Usa')} ${span('keyword', 'cd <seccion>')} ${span('comment', 'para navegar o')} ${span('keyword', 'ls projects')} ${span('comment', 'para ver proyectos.')}`);
+      appendLine('');
+    },
+
+    cd(args) {
+      const target = args[0]?.toLowerCase();
+
+      if (!target) {
+        appendLine(`${span('error', 'Uso:')} cd <seccion>`);
+        appendLine(`${span('muted', 'Secciones:')} ${Object.keys(sections).join(', ')}`);
+        return;
+      }
+
+      if (target === '~' || target === 'home' || target === '/') {
+        appendLine(`${span('muted', 'Ya estas en ~/')}`);
+        return;
+      }
+
+      const section = sections[target];
+      if (section) {
+        appendLine(`${span('string', `Navegando a ${section.path}...`)}`);
+        setTimeout(() => {
+          window.location.href = section.path;
+        }, 400);
+      } else {
+        appendLine(`${span('error', `cd: ${target}: No existe esa seccion`)}`);
+        appendLine(`${span('muted', 'Secciones disponibles:')} ${Object.keys(sections).join(', ')}`);
+      }
+    },
+
+    open(args) {
+      const query = args.join(' ').toLowerCase();
+      if (!query) {
+        appendLine(`${span('error', 'Uso:')} open <nombre-proyecto>`);
+        appendLine(`${span('muted', 'Escribe')} ${span('keyword', 'ls projects')} ${span('muted', 'para ver los disponibles.')}`);
+        return;
+      }
+
+      const project = projectList.find(p =>
+        p.name.toLowerCase().includes(query) ||
+        p.slug.includes(query)
+      );
+
+      if (project) {
+        appendLine(`${span('string', `Abriendo ${project.name}...`)}`);
+        setTimeout(() => {
+          window.location.href = `/projects/${project.slug}`;
+        }, 400);
+      } else {
+        appendLine(`${span('error', `No se encontro un proyecto con "${escHtml(query)}"`)}`);
+        appendLine(`${span('muted', 'Proyectos disponibles:')}`);
+        projectList.forEach(p => {
+          appendLine(`  ${span('string', p.name)}`);
+        });
+      }
+    },
+
+    whoami(_args) {
+      appendLine('');
+      appendLine(`${span('keyword', 'Ramon Riera')}`);
+      appendLine(`${span('function', 'UX Lead & Senior Product Designer')}`);
+      appendLine('');
+      appendLine(`${span('muted', 'Ubicacion:')}     Barcelona, ES`);
+      appendLine(`${span('muted', 'Empresa:')}       Doctori.com (2021-presente)`);
+      appendLine(`${span('muted', 'Especialidad:')}  Design Systems, DesignOps, Product Strategy`);
+      appendLine(`${span('muted', 'Email:')}         hello@ramonriera.design`);
+      appendLine(`${span('muted', 'Web:')}           ramonriera.design`);
+      appendLine('');
+      appendLine(`${span('comment', '// Puente entre diseno y frontend escalable')}`);
+      appendLine('');
+    },
+
+    skills(_args) {
+      appendLine('');
+      appendLine(`${span('keyword', 'Design')}`);
+      appendLine(`  ${span('function', 'Figma')} ${span('muted', '|')} ${span('function', 'Design Systems')} ${span('muted', '|')} ${span('function', 'Prototyping')} ${span('muted', '|')} ${span('function', 'User Research')}`);
+      appendLine('');
+      appendLine(`${span('keyword', 'Frontend')}`);
+      appendLine(`  ${span('string', 'HTML/CSS')} ${span('muted', '|')} ${span('string', 'Tailwind')} ${span('muted', '|')} ${span('string', 'Astro')} ${span('muted', '|')} ${span('string', 'React')} ${span('muted', '|')} ${span('string', 'TypeScript')}`);
+      appendLine('');
+      appendLine(`${span('keyword', 'Operations')}`);
+      appendLine(`  ${span('constant', 'DesignOps')} ${span('muted', '|')} ${span('constant', 'Design Tokens')} ${span('muted', '|')} ${span('constant', 'CI/CD')} ${span('muted', '|')} ${span('constant', 'Storybook')}`);
+      appendLine('');
+    },
+
+    experience(_args) {
+      appendLine('');
+      appendLine(`${span('keyword', 'git log --oneline --graph')}`);
+      appendLine('');
+      appendLine(`${span('string', '* ')}${span('constant', '2021-present')}  ${span('function', 'Senior Product Designer & DesignOps')} @ ${span('keyword', 'Doctori.com')}`);
+      appendLine(`${span('muted', '|')}                  Design System, token architecture, product leadership`);
+      appendLine(`${span('string', '* ')}${span('constant', '2023-2024')}     ${span('function', 'Product & UI Consultant')} @ ${span('keyword', 'Leemons')} ${span('muted', '(via Lead-it)')}`);
+      appendLine(`${span('muted', '|')}                  Producto y UI estrategica para ed-tech`);
+      appendLine(`${span('string', '* ')}${span('constant', '2017-2021')}     ${span('function', 'Junior Designer')} @ ${span('keyword', 'JBM')}`);
+      appendLine(`${span('muted', '|')}                  Branding, web design, primeros proyectos`);
+      appendLine('');
+    },
+
+    social(_args) {
+      appendLine('');
+      appendLine(`  ${span('function', 'LinkedIn')}   ${span('string', 'linkedin.com/in/ramonrieradepares')}`);
+      appendLine(`  ${span('function', 'Medium')}     ${span('string', 'medium.com/@ramriera')}`);
+      appendLine(`  ${span('function', 'Email')}      ${span('string', 'hello@ramonriera.design')}`);
+      appendLine(`  ${span('function', 'Web')}        ${span('string', 'ramonriera.design')}`);
+      appendLine('');
+    },
+
+    clear(_args) {
+      output.innerHTML = '';
+    },
+
+    exit(_args) {
+      appendLine(`${span('string', 'Switching to Visual Mode...')}`);
+      setTimeout(() => {
+        const toggle = document.getElementById('code-mode-toggle');
+        if (toggle) toggle.click();
+      }, 300);
+    },
+  };
+
+  // ── Process input ──
+  function processCommand(raw: string) {
+    const trimmed = raw.trim();
+    if (!trimmed) return;
+
+    // Echo the command
+    appendLine(
+      `<span class="term-prompt-echo">` +
+        `<span class="t-accent">ramon</span>` +
+        `<span class="t-muted">@</span>` +
+        `<span class="t-accent">portfolio</span>` +
+        `<span class="t-muted">:~$</span>` +
+      `</span> ${escHtml(trimmed)}`
+    );
+
+    // Parse
+    const parts = trimmed.split(/\s+/);
+    const cmd = parts[0].toLowerCase();
+    const args = parts.slice(1);
+
+    // Add to history
+    history.push(trimmed);
+    historyIndex = history.length;
+
+    // Execute
+    const handler = commands[cmd];
+    if (handler) {
+      handler(args);
+    } else {
+      appendLine(`${span('error', `comando no encontrado: ${escHtml(cmd)}`)}`);
+      appendLine(`${span('muted', 'Escribe')} ${span('keyword', 'help')} ${span('muted', 'para ver los comandos disponibles.')}`);
+    }
+
+    scrollToBottom();
+  }
+
+  // ── Input events ──
+  input.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      processCommand(input.value);
+      input.value = '';
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        historyIndex--;
+        input.value = history[historyIndex];
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex < history.length - 1) {
+        historyIndex++;
+        input.value = history[historyIndex];
+      } else {
+        historyIndex = history.length;
+        input.value = '';
+      }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      const partial = input.value.trim().toLowerCase();
+      const allCmds = Object.keys(commands);
+      const matches = allCmds.filter(c => c.startsWith(partial));
+      if (matches.length === 1) {
+        input.value = matches[0] + ' ';
+      } else if (matches.length > 1) {
+        appendLine(`${span('muted', matches.join('  '))}`);
+        scrollToBottom();
+      }
+    } else if (e.key === 'l' && e.ctrlKey) {
+      e.preventDefault();
+      commands.clear([]);
+    }
+  });
+
+  // Focus input when clicking terminal area
+  terminal.addEventListener('click', () => {
+    input.focus();
+  });
+
+  // Minimize/restore
+  closeBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    isMinimized = !isMinimized;
+    terminal.classList.toggle('term-minimized', isMinimized);
+  });
+
+  // ── Code mode visibility ──
+  function updateVisibility() {
+    const isCodeMode = document.body.classList.contains('code-mode');
+    const isHome = window.location.pathname.replace(/\/$/, '') === '' ||
+                   window.location.pathname === '/';
+    terminal.classList.toggle('term-active', isCodeMode && isHome);
+
+    if (isCodeMode && isHome) {
+      // Print MOTD on first activation
+      if (output.children.length === 0) {
+        printMotd();
+      }
+      setTimeout(() => input.focus(), 100);
+    }
+  }
+
+  updateVisibility();
+
+  // Listen for code mode toggle
+  const codeToggle = document.getElementById('code-mode-toggle');
+  codeToggle?.addEventListener('click', () => {
+    setTimeout(updateVisibility, 100);
+  });
+
+  // Re-init on Astro navigation
+  document.addEventListener('astro:page-load', updateVisibility);
+}
+
+initInteractiveTerminal();
+document.addEventListener('astro:page-load', initInteractiveTerminal);
+</script>
+
+<style>
+  /* ── Interactive Terminal Container ── */
+  .interactive-terminal {
+    display: none;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    z-index: 40;
+  }
+
+  .interactive-terminal.term-active {
+    display: block;
+  }
+
+  .interactive-terminal.term-minimized .term-output,
+  .interactive-terminal.term-minimized .term-input-row {
+    display: none;
+  }
+
+  /* ── Terminal Window ── */
+  .term-window {
+    background: #1e1e2e;
+    border: 1px solid var(--cm-border, #30363d);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  /* ── Title Bar ── */
+  .term-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1rem;
+    background: #181825;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .term-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .term-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .term-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--cm-text-muted, #7d8590);
+    letter-spacing: 0.02em;
+    flex: 1;
+  }
+
+  .term-close {
+    background: none;
+    border: none;
+    color: var(--cm-text-muted, #7d8590);
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .term-close:hover {
+    color: var(--cm-text, #e6edf3);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* ── Output Area ── */
+  .term-output {
+    padding: 1rem 1.25rem;
+    min-height: 280px;
+    max-height: 55vh;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--cm-text, #e6edf3);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+
+  .term-output::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .term-output::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .term-output::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  /* ── Input Row ── */
+  .term-input-row {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.25rem 0.875rem;
+    gap: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .term-prompt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .term-prompt-user,
+  .term-prompt-host {
+    color: var(--cm-string, #50fa7b);
+  }
+
+  .term-prompt-at,
+  .term-prompt-colon {
+    color: var(--cm-text-muted, #7d8590);
+  }
+
+  .term-prompt-path {
+    color: var(--cm-function, #8be9fd);
+  }
+
+  .term-prompt-dollar {
+    color: var(--cm-text-muted, #7d8590);
+    margin-right: 0.25rem;
+  }
+
+  .term-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--cm-text, #e6edf3);
+    caret-color: var(--accent-color, #D97757);
+    line-height: 1.5;
+  }
+
+  .term-input::placeholder {
+    color: rgba(125, 133, 144, 0.4);
+  }
+
+  /* ── Output Lines ── */
+  .term-line {
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 1.3em;
+  }
+
+  /* ── Prompt echo in output ── */
+  :global(.term-prompt-echo) {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* ── Syntax Token Colors (Dracula) ── */
+  :global(.t-keyword)  { color: var(--cm-keyword, #bd93f9); }
+  :global(.t-function)  { color: var(--cm-function, #8be9fd); }
+  :global(.t-string)    { color: var(--cm-string, #50fa7b); }
+  :global(.t-constant)  { color: var(--cm-constant, #f1fa8c); }
+  :global(.t-comment)   { color: var(--cm-comment, #6272a4); font-style: italic; }
+  :global(.t-muted)     { color: var(--cm-text-muted, #7d8590); }
+  :global(.t-accent)    { color: var(--accent-color, #D97757); }
+  :global(.t-error)     { color: #ff5555; }
+
+  /* ── Blinking cursor effect on input ── */
+  .term-input {
+    animation: none;
+  }
+
+  /* Caret blink via CSS */
+  @keyframes caret-blink {
+    0%, 70% { opacity: 1; }
+    71%, 100% { opacity: 0; }
+  }
+
+  /* ── Glow effect on the terminal window ── */
+  .term-window {
+    transition: box-shadow 0.4s ease;
+  }
+
+  .term-window:focus-within {
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(217, 119, 87, 0.15),
+      0 0 40px rgba(217, 119, 87, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .term-output {
+      font-size: 0.7rem;
+      min-height: 200px;
+      max-height: 45vh;
+      padding: 0.75rem 1rem;
+    }
+
+    .term-input-row {
+      padding: 0.5rem 1rem 0.75rem;
+    }
+
+    .term-prompt,
+    .term-input {
+      font-size: 0.7rem;
+    }
+  }
+</style>
