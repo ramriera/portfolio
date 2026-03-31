@@ -654,8 +654,8 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: #1a1918;
-    padding: 0;
+    background: transparent;
+    padding: 2rem 1.5rem 2rem;
     overflow: hidden;
   }
 
@@ -670,7 +670,7 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
     display: none;
   }
 
-  /* ── Terminal Window — fills the overlay ── */
+  /* ── Terminal Window ── */
   .term-window {
     width: 100%;
     max-width: 1200px;
@@ -679,6 +679,11 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--cm-border, #30363d);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.03);
   }
 
   /* ── Title Bar ── */
@@ -732,7 +737,7 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
     background: rgba(255, 255, 255, 0.08);
   }
 
-  /* ── Output Area — fills remaining space ── */
+  /* ── Output Area — fills remaining space, no visible scrollbar ── */
   .term-output {
     flex: 1;
     padding: 1.5rem 2rem;
@@ -741,21 +746,11 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
     font-size: 0.85rem;
     line-height: 1.75;
     color: var(--cm-text, #e6edf3);
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    scrollbar-width: none;
   }
 
   .term-output::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .term-output::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .term-output::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
+    display: none;
   }
 
   /* ── Input Row ── */
