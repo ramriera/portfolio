@@ -100,20 +100,100 @@ function initInteractiveTerminal() {
     output.scrollTop = output.scrollHeight;
   }
 
-  // ── Typewriter effect ──
-  function typewriteLines(lines: string[], baseDelay = 18): Promise<void> {
+  // ── Typewriter effect — character by character ──
+  let typewriterActive = false;
+
+  function typewriteChars(html: string, container: HTMLElement, charDelay = 16): Promise<void> {
     return new Promise<void>((resolve) => {
+      // Create a temp element to parse HTML into text nodes + tags
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      const raw = temp.innerHTML;
+
+      const target = document.createElement('div');
+      target.className = 'term-line';
+      container.appendChild(target);
+
       let i = 0;
-      function nextLine() {
-        if (i >= lines.length) {
+      typewriterActive = true;
+
+      function nextChar() {
+        if (i >= raw.length) {
+          typewriterActive = false;
           scrollToBottom();
           resolve();
           return;
         }
-        appendLine(lines[i]);
-        scrollToBottom();
+
+        // If we hit a '<', write the entire tag at once
+        if (raw[i] === '<') {
+          const closeIdx = raw.indexOf('>', i);
+          if (closeIdx !== -1) {
+            i = closeIdx + 1;
+            target.innerHTML = raw.substring(0, i);
+            scrollToBottom();
+            setTimeout(nextChar, 0);
+            return;
+          }
+        }
+
+        // If we hit '&', write the entire entity at once (e.g. &nbsp;)
+        if (raw[i] === '&') {
+          const semiIdx = raw.indexOf(';', i);
+          if (semiIdx !== -1 && semiIdx - i < 10) {
+            i = semiIdx + 1;
+            target.innerHTML = raw.substring(0, i);
+            scrollToBottom();
+            setTimeout(nextChar, charDelay);
+            return;
+          }
+        }
+
         i++;
-        setTimeout(nextLine, baseDelay + Math.random() * 12);
+        target.innerHTML = raw.substring(0, i);
+        scrollToBottom();
+        setTimeout(nextChar, charDelay + Math.random() * 8);
+      }
+      nextChar();
+    });
+  }
+
+  function typewriteLines(lines: string[], baseDelay = 18): Promise<void> {
+    return new Promise<void>((resolve) => {
+      let i = 0;
+      typewriterActive = true;
+
+      function nextLine() {
+        if (i >= lines.length) {
+          typewriterActive = false;
+          scrollToBottom();
+          resolve();
+          return;
+        }
+        const line = lines[i];
+        i++;
+
+        // Empty lines / spacers: append instantly
+        if (line === '&nbsp;' || line.trim() === '') {
+          appendLine(line);
+          scrollToBottom();
+          setTimeout(nextLine, 4);
+          return;
+        }
+
+        // Short lines (ASCII art, separators): char-by-char is too slow, use line-by-line
+        const textLen = line.replace(/<[^>]*>/g, '').length;
+        if (textLen > 60) {
+          appendLine(line);
+          scrollToBottom();
+          setTimeout(nextLine, baseDelay + Math.random() * 12);
+          return;
+        }
+
+        // Regular lines: character by character
+        typewriteChars(line, output, 14).then(() => {
+          setTimeout(nextLine, 6);
+        });
       }
       nextLine();
     });
@@ -193,17 +273,18 @@ function initInteractiveTerminal() {
       const target = args[0]?.toLowerCase();
 
       if (target === 'projects' || target === 'proyectos') {
+        const sep = `${span('muted', ' | ')}`;
         const lines = [
           '&nbsp;',
-          `  ${span('muted', 'ID'.padEnd(6))}${span('muted', 'Proyecto'.padEnd(18))}${span('muted', 'Sector'.padEnd(16))}${span('muted', 'Tech'.padEnd(16))}${span('muted', 'Descripcion')}`,
-          `  ${span('comment', '\u2500'.repeat(78))}`,
+          `  ${span('muted', 'ID'.padEnd(4))}${sep}${span('muted', 'PROYECTO'.padEnd(18))}${sep}${span('muted', 'SECTOR'.padEnd(14))}${sep}${span('muted', 'TECH STACK')}`,
+          `  ${span('comment', '\u2500'.repeat(4) + '\u2500+\u2500' + '\u2500'.repeat(18) + '\u2500+\u2500' + '\u2500'.repeat(14) + '\u2500+\u2500' + '\u2500'.repeat(16))}`,
         ];
         projectList.forEach(p => {
-          const num = `[${String(p.id).padStart(2, '0')}]`;
-          lines.push(`  ${span('constant', num.padEnd(6))}${span('string', p.name.padEnd(18))}${span('keyword', p.tag.padEnd(16))}${span('accent', p.tech.padEnd(16))}${span('muted', p.desc)}`);
+          const num = String(p.id).padStart(2, '0');
+          lines.push(`  ${span('constant', num.padEnd(4))}${sep}${span('string', p.name.padEnd(18))}${sep}${span('keyword', p.tag.padEnd(14))}${sep}${span('accent', p.tech)}`);
         });
-        lines.push('&nbsp;');
-        lines.push(`${span('comment', `Total: ${projectList.length} proyectos`)} ${span('muted', '|')} ${span('comment', 'Usa')} ${span('keyword', 'open <ID|nombre>')} ${span('comment', 'para abrir')}`);
+        lines.push(`  ${span('comment', '\u2500'.repeat(4) + '\u2500+\u2500' + '\u2500'.repeat(18) + '\u2500+\u2500' + '\u2500'.repeat(14) + '\u2500+\u2500' + '\u2500'.repeat(16))}`);
+        lines.push(`  ${span('comment', `${projectList.length} proyectos`)} ${span('muted', '|')} ${span('comment', 'Usa')} ${span('keyword', 'open <ID>')} ${span('comment', 'para abrir')}`);
         lines.push('&nbsp;');
         enqueueTypewriter(lines);
         return;
@@ -484,6 +565,34 @@ function initInteractiveTerminal() {
     }
   });
 
+  // ── Idle hint: nudge the user after 5s of inactivity ──
+  let idleTimer: ReturnType<typeof setTimeout> | null = null;
+  let idleHintShown = false;
+
+  function resetIdleTimer() {
+    if (idleTimer) clearTimeout(idleTimer);
+    if (idleHintShown) return; // Only show once per session
+
+    idleTimer = setTimeout(() => {
+      if (history.length > 0 || idleHintShown) return;
+      idleHintShown = true;
+
+      const hint = document.createElement('div');
+      hint.className = 'term-line term-idle-hint';
+      hint.innerHTML = `${span('comment', "Type 'help' to start...")}`;
+      output.appendChild(hint);
+      scrollToBottom();
+    }, 5000);
+  }
+
+  input.addEventListener('input', resetIdleTimer);
+  input.addEventListener('keydown', () => {
+    // Any keypress dismisses the idle hint
+    const existing = output.querySelector('.term-idle-hint');
+    if (existing) existing.remove();
+    if (idleTimer) clearTimeout(idleTimer);
+  });
+
   // Minimize/restore
   minimizeBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -514,6 +623,7 @@ function initInteractiveTerminal() {
         printMotd();
       }
       setTimeout(() => input.focus(), 100);
+      resetIdleTimer();
     } else {
       exitFullscreen();
     }
@@ -707,6 +817,17 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
     white-space: pre-wrap;
     word-break: break-word;
     min-height: 1.5em;
+  }
+
+  /* ── Idle Hint ── */
+  :global(.term-idle-hint) {
+    animation: idle-fade-in 1.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes idle-fade-in {
+    0% { opacity: 0; transform: translateY(4px); }
+    100% { opacity: 0.7; transform: translateY(0); }
   }
 
   /* ── Prompt echo in output ── */
