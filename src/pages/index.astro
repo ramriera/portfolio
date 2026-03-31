@@ -22,12 +22,8 @@ const featuredProjects = projectOrder
 ---
 
 <BaseLayout title="Home ⚡ Ramon Riera">
-  <!-- Interactive Terminal (Code Mode) -->
-  <section class="terminal-section section-padding" data-component="InteractiveTerminal">
-    <div class="container-custom">
-      <InteractiveTerminal />
-    </div>
-  </section>
+  <!-- Interactive Terminal (Code Mode) — fullscreen overlay -->
+  <InteractiveTerminal />
 
   <!-- Hero -->
   <HeroSection />
@@ -131,17 +127,6 @@ const featuredProjects = projectOrder
   <!-- CTA -->
   <ContactConsole />
 <style>
-  /* ═══ Interactive Terminal: only visible in Code Mode ═══ */
-  .terminal-section {
-    display: none;
-  }
-
-  :global(.code-mode) .terminal-section {
-    display: block;
-    padding-top: 2rem;
-    padding-bottom: 3rem;
-  }
-
   /* Force uniform image height within grid rows so text aligns horizontally */
   .project-grid-item :global(.card-image-wrap) {
     aspect-ratio: 4 / 3;

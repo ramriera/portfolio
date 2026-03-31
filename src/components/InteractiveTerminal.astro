@@ -2,7 +2,7 @@
 
 ---
 
-<!-- Interactive Terminal — replaces visual content when Code Mode is active on Home -->
+<!-- Interactive Terminal — fullscreen overlay when Code Mode is active on Home -->
 <div id="interactive-terminal" class="interactive-terminal">
   <div class="term-window">
     <!-- Title bar -->
@@ -46,9 +46,14 @@ function initInteractiveTerminal() {
   const minimizeBtn = document.getElementById('term-minimize');
   if (!terminal || !output || !input) return;
 
+  // Guard against double-init
+  if ((terminal as any).__initialized) return;
+  (terminal as any).__initialized = true;
+
   let history: string[] = [];
   let historyIndex = -1;
   let isMinimized = false;
+  let typewriterQueue: Promise<void> = Promise.resolve();
 
   // ── Section & project data ──
   const sections: Record<string, { desc: string; path: string }> = {
@@ -58,12 +63,12 @@ function initInteractiveTerminal() {
   };
 
   const projectList = [
-    { slug: 'massimo-dutti-conversion',      name: 'Massimo Dutti',  desc: 'Optimizacion de conversion e-commerce' },
-    { slug: 'iberia-flight-experience',       name: 'Iberia',         desc: 'Experiencia de vuelo digital' },
-    { slug: 'banco-sabadell-design-system',   name: 'Banco Sabadell', desc: 'Design System enterprise' },
-    { slug: 'imaginbank-digital-banking',     name: 'imaginBank',     desc: 'Banca digital mobile-first' },
-    { slug: 'solotemazos-music-platform',     name: 'Solotemazos',    desc: 'Plataforma de musica urbana' },
-    { slug: 'movefast-startup-platform',      name: 'MoveFast',       desc: 'Plataforma startup builder' },
+    { slug: 'massimo-dutti-conversion',      name: 'Massimo Dutti',  tag: 'E-commerce',      desc: 'Optimizacion de conversion' },
+    { slug: 'iberia-flight-experience',       name: 'Iberia',         tag: 'Travel',           desc: 'Experiencia de vuelo digital' },
+    { slug: 'banco-sabadell-design-system',   name: 'Banco Sabadell', tag: 'Design System',    desc: 'Sistema de diseno enterprise' },
+    { slug: 'imaginbank-digital-banking',     name: 'imaginBank',     tag: 'Fintech',          desc: 'Banca digital mobile-first' },
+    { slug: 'solotemazos-music-platform',     name: 'Solotemazos',    tag: 'Entertainment',    desc: 'Plataforma de musica urbana' },
+    { slug: 'movefast-startup-platform',      name: 'MoveFast',       tag: 'SaaS',             desc: 'Plataforma startup builder' },
   ];
 
   // ── Helpers ──
@@ -90,125 +95,163 @@ function initInteractiveTerminal() {
     output.scrollTop = output.scrollHeight;
   }
 
+  // ── Typewriter effect ──
+  function typewriteLines(lines: string[], baseDelay = 18): Promise<void> {
+    return new Promise<void>((resolve) => {
+      let i = 0;
+      function nextLine() {
+        if (i >= lines.length) {
+          scrollToBottom();
+          resolve();
+          return;
+        }
+        appendLine(lines[i]);
+        scrollToBottom();
+        i++;
+        setTimeout(nextLine, baseDelay + Math.random() * 12);
+      }
+      nextLine();
+    });
+  }
+
+  function enqueueTypewriter(lines: string[], delay = 18) {
+    typewriterQueue = typewriterQueue.then(() => typewriteLines(lines, delay));
+  }
+
   // ── MOTD (Message of the Day) ──
   function printMotd() {
-    appendEmpty();
     const asciiArt = [
-      '  ____                                  ____  _                ',
-      ' |  _ \\ __ _ _ __ ___   ___  _ __      |  _ \\(_) ___ _ __ __ _ ',
-      ' | |_) / _` | \'_ ` _ \\ / _ \\| \'_ \\     | |_) | |/ _ \\ \'__/ _` |',
-      ' |  _ < (_| | | | | | | (_) | | | |    |  _ <| |  __/ | | (_| |',
-      ' |_| \\_\\__,_|_| |_| |_|\\___/|_| |_|    |_| \\_\\_|\\___|_|  \\__,_|',
+      '&nbsp;',
+      `<span class="t-accent">  ____                                  ____  _                </span>`,
+      `<span class="t-accent"> |  _ \\ __ _ _ __ ___   ___  _ __      |  _ \\(_) ___ _ __ __ _ </span>`,
+      `<span class="t-accent"> | |_) / _\` | '_ \` _ \\ / _ \\| '_ \\     | |_) | |/ _ \\ '__/ _\` |</span>`,
+      `<span class="t-accent"> |  _ &lt; (_| | | | | | | (_) | | | |    |  _ &lt;| |  __/ | | (_| |</span>`,
+      `<span class="t-accent"> |_| \\_\\__,_|_| |_| |_|\\___/|_| |_|    |_| \\_\\_|\\___|_|  \\__,_|</span>`,
+      '&nbsp;',
+      `${span('muted', 'UX Lead & Product Designer')} ${span('comment', '// ramonriera.design')}`,
+      `${span('muted', 'Design Systems | DesignOps | Product Strategy')}`,
+      '&nbsp;',
+      `${span('string', 'Bienvenido a la consola interactiva.')} Escribe ${span('keyword', 'help')} para ver los comandos disponibles.`,
+      `${span('comment', '\u2500'.repeat(60))}`,
+      '&nbsp;',
     ];
-    asciiArt.forEach(line => {
-      appendLine(`<span class="t-accent">${escHtml(line)}</span>`);
-    });
-    appendEmpty();
-    appendLine(`${span('muted', 'UX Lead & Product Designer')} ${span('comment', '// ramonriera.design')}`);
-    appendLine(`${span('muted', 'Design Systems | DesignOps | Product Strategy')}`);
-    appendEmpty();
-    appendLine(`${span('string', 'Bienvenido a la consola interactiva.')} Escribe ${span('keyword', 'help')} para ver los comandos disponibles.`);
-    appendLine(`${span('comment', '\u2500'.repeat(60))}`);
-    appendEmpty();
+    enqueueTypewriter(asciiArt, 25);
   }
 
   // ── Command processor ──
   const commands: Record<string, (args: string[]) => void> = {
     help(_args) {
-      appendEmpty();
-      appendLine(`${span('keyword', 'Comandos disponibles:')}`);
-      appendEmpty();
-      const cmds = [
-        ['help',             'Muestra esta ayuda'],
-        ['whoami',           'Sobre Ramon Riera'],
-        ['ls',               'Lista secciones de la web'],
-        ['ls projects',      'Lista proyectos destacados'],
-        ['cd [seccion]',     'Navega a una seccion (about, projects, contact)'],
-        ['open [slug]',      'Abre un proyecto por su slug'],
-        ['skills',           'Muestra habilidades tecnicas'],
-        ['social',           'Muestra links de redes sociales'],
-        ['cv',               'Descarga el CV'],
-        ['clear',            'Limpia la terminal'],
-        ['history',          'Muestra historial de comandos'],
-        ['date',             'Fecha y hora actual'],
-        ['neofetch',         'Informacion del sistema'],
-        ['exit',             'Volver al modo visual'],
+      const lines = [
+        '&nbsp;',
+        `${span('keyword', 'Comandos disponibles:')}`,
+        '&nbsp;',
+        `  ${span('function', 'help'.padEnd(14))} ${span('muted', 'Muestra esta ayuda')}`,
+        `  ${span('function', 'whoami'.padEnd(14))} ${span('muted', 'Sobre Ramon Riera')}`,
+        `  ${span('function', 'ls'.padEnd(14))} ${span('muted', 'Lista secciones de la web')}`,
+        `  ${span('function', 'ls projects'.padEnd(14))} ${span('muted', 'Lista proyectos destacados')}`,
+        `  ${span('function', 'cd [seccion]'.padEnd(14))} ${span('muted', 'Navega a una seccion (about, projects, contact)')}`,
+        `  ${span('function', 'open [slug]'.padEnd(14))} ${span('muted', 'Abre un proyecto por su slug')}`,
+        `  ${span('function', 'skills'.padEnd(14))} ${span('muted', 'Muestra habilidades tecnicas')}`,
+        `  ${span('function', 'social'.padEnd(14))} ${span('muted', 'Muestra links de redes sociales')}`,
+        `  ${span('function', 'cv'.padEnd(14))} ${span('muted', 'Descarga el CV')}`,
+        `  ${span('function', 'clear'.padEnd(14))} ${span('muted', 'Limpia la terminal')}`,
+        `  ${span('function', 'history'.padEnd(14))} ${span('muted', 'Muestra historial de comandos')}`,
+        `  ${span('function', 'date'.padEnd(14))} ${span('muted', 'Fecha y hora actual')}`,
+        `  ${span('function', 'neofetch'.padEnd(14))} ${span('muted', 'Informacion del sistema')}`,
+        `  ${span('function', 'exit'.padEnd(14))} ${span('muted', 'Volver al modo visual')}`,
+        '&nbsp;',
+        `${span('comment', 'Tip: Usa \u2191\u2193 para navegar el historial de comandos.')}`,
+        '&nbsp;',
       ];
-      cmds.forEach(([cmd, desc]) => {
-        appendLine(`  ${span('function', cmd.padEnd(14))} ${span('muted', desc)}`);
-      });
-      appendEmpty();
-      appendLine(`${span('comment', 'Tip: Usa \u2191\u2193 para navegar el historial de comandos.')}`);
-      appendEmpty();
+      enqueueTypewriter(lines);
     },
 
     whoami(_args) {
-      appendEmpty();
-      appendLine(`${span('keyword', 'Ramon Riera')}`);
-      appendLine(`${span('function', 'UX Lead & Senior Product Designer')}`);
-      appendEmpty();
-      appendLine(`${span('muted', 'Ubicacion:')}     Barcelona, ES`);
-      appendLine(`${span('muted', 'Empresa:')}       Doctori.com (2021-presente)`);
-      appendLine(`${span('muted', 'Especialidad:')}  Design Systems, DesignOps, Product Strategy`);
-      appendLine(`${span('muted', 'Email:')}         hello@ramonriera.design`);
-      appendLine(`${span('muted', 'Web:')}           ramonriera.design`);
-      appendEmpty();
-      appendLine(`${span('comment', '// Puente entre diseno y frontend escalable')}`);
-      appendEmpty();
+      const lines = [
+        '&nbsp;',
+        `${span('keyword', 'Ramon Riera')}`,
+        `${span('function', 'UX Lead & Senior Product Designer')}`,
+        '&nbsp;',
+        `${span('muted', 'Ubicacion:')}     Barcelona, ES`,
+        `${span('muted', 'Empresa:')}       Doctori.com (2021-presente)`,
+        `${span('muted', 'Especialidad:')}  Design Systems, DesignOps, Product Strategy`,
+        `${span('muted', 'Email:')}         hello@ramonriera.design`,
+        `${span('muted', 'Web:')}           ramonriera.design`,
+        '&nbsp;',
+        `${span('comment', '// Puente entre diseno y frontend escalable')}`,
+        '&nbsp;',
+      ];
+      enqueueTypewriter(lines);
     },
 
     ls(args) {
       const target = args[0]?.toLowerCase();
 
       if (target === 'projects' || target === 'proyectos') {
-        appendEmpty();
-        projectList.forEach(p => {
-          appendLine(`  ${span('string', p.name.padEnd(18))} ${span('muted', p.desc)}`);
+        const lines = [
+          '&nbsp;',
+          `  ${span('muted', '#'.padEnd(5))} ${span('muted', 'Proyecto'.padEnd(18))} ${span('muted', 'Categoria'.padEnd(16))} ${span('muted', 'Descripcion')}`,
+          `  ${span('comment', '\u2500'.repeat(70))}`,
+        ];
+        projectList.forEach((p, i) => {
+          const num = `[${String(i + 1).padStart(2, '0')}]`;
+          lines.push(`  ${span('constant', num.padEnd(5))} ${span('string', p.name.padEnd(18))} ${span('keyword', p.tag.padEnd(16))} ${span('muted', p.desc)}`);
         });
-        appendEmpty();
-        appendLine(`${span('comment', `Total: ${projectList.length} proyectos`)}`);
-        appendEmpty();
+        lines.push('&nbsp;');
+        lines.push(`${span('comment', `Total: ${projectList.length} proyectos`)} ${span('muted', '|')} ${span('comment', 'Usa')} ${span('keyword', 'open <nombre>')} ${span('comment', 'para abrir')}`);
+        lines.push('&nbsp;');
+        enqueueTypewriter(lines);
         return;
       }
 
-      appendEmpty();
+      const lines = [
+        '&nbsp;',
+        `  ${span('muted', 'Seccion'.padEnd(14))} ${span('muted', 'Descripcion')}`,
+        `  ${span('comment', '\u2500'.repeat(50))}`,
+      ];
       Object.entries(sections).forEach(([key, val]) => {
-        appendLine(`  ${span('function', key.padEnd(14))} ${span('muted', val.desc)}`);
+        lines.push(`  ${span('function', key.padEnd(14))} ${span('muted', val.desc)}`);
       });
-      appendEmpty();
+      lines.push('&nbsp;');
+      enqueueTypewriter(lines);
     },
 
     cd(args) {
       const target = args[0]?.toLowerCase();
 
       if (!target) {
-        appendLine(`${span('error', 'Uso:')} cd <seccion>`);
+        appendLine(`${span('error', 'Uso:')} cd &lt;seccion&gt;`);
         appendLine(`${span('muted', 'Secciones:')} ${Object.keys(sections).join(', ')}`);
+        scrollToBottom();
         return;
       }
 
       if (target === '~' || target === 'home' || target === '/') {
         appendLine(`${span('muted', 'Ya estas en ~/')}`);
+        scrollToBottom();
         return;
       }
 
       const section = sections[target];
       if (section) {
         appendLine(`${span('string', `Navegando a ${section.path}...`)}`);
+        scrollToBottom();
         setTimeout(() => {
           window.location.href = section.path;
         }, 400);
       } else {
         appendLine(`${span('error', `cd: ${target}: No existe esa seccion`)}`);
         appendLine(`${span('muted', 'Secciones disponibles:')} ${Object.keys(sections).join(', ')}`);
+        scrollToBottom();
       }
     },
 
     open(args) {
       const query = args.join(' ').toLowerCase();
       if (!query) {
-        appendLine(`${span('error', 'Uso:')} open <nombre-proyecto>`);
+        appendLine(`${span('error', 'Uso:')} open &lt;nombre-proyecto&gt;`);
         appendLine(`${span('muted', 'Escribe')} ${span('keyword', 'ls projects')} ${span('muted', 'para ver los disponibles.')}`);
+        scrollToBottom();
         return;
       }
 
@@ -219,59 +262,72 @@ function initInteractiveTerminal() {
 
       if (project) {
         appendLine(`${span('string', `Abriendo ${project.name}...`)}`);
+        scrollToBottom();
         setTimeout(() => {
           window.location.href = `/projects/${project.slug}`;
         }, 400);
       } else {
         appendLine(`${span('error', `No se encontro un proyecto con "${escHtml(query)}"`)}`);
-        appendLine(`${span('muted', 'Proyectos disponibles:')}`);
         projectList.forEach(p => {
           appendLine(`  ${span('string', p.name)}`);
         });
+        scrollToBottom();
       }
     },
 
     skills(_args) {
-      appendEmpty();
-      appendLine(`${span('keyword', 'Design')}`);
-      appendLine(`  ${span('function', 'Figma')} ${span('muted', '|')} ${span('function', 'Design Systems')} ${span('muted', '|')} ${span('function', 'Prototyping')} ${span('muted', '|')} ${span('function', 'User Research')}`);
-      appendEmpty();
-      appendLine(`${span('keyword', 'Frontend')}`);
-      appendLine(`  ${span('string', 'HTML/CSS')} ${span('muted', '|')} ${span('string', 'Tailwind')} ${span('muted', '|')} ${span('string', 'Astro')} ${span('muted', '|')} ${span('string', 'React')} ${span('muted', '|')} ${span('string', 'TypeScript')}`);
-      appendEmpty();
-      appendLine(`${span('keyword', 'Operations')}`);
-      appendLine(`  ${span('constant', 'DesignOps')} ${span('muted', '|')} ${span('constant', 'Design Tokens')} ${span('muted', '|')} ${span('constant', 'CI/CD')} ${span('muted', '|')} ${span('constant', 'Storybook')}`);
-      appendEmpty();
+      const lines = [
+        '&nbsp;',
+        `${span('keyword', 'Design')}`,
+        `  ${span('function', 'Figma')} ${span('muted', '|')} ${span('function', 'Design Systems')} ${span('muted', '|')} ${span('function', 'Prototyping')} ${span('muted', '|')} ${span('function', 'User Research')}`,
+        '&nbsp;',
+        `${span('keyword', 'Frontend')}`,
+        `  ${span('string', 'HTML/CSS')} ${span('muted', '|')} ${span('string', 'Tailwind')} ${span('muted', '|')} ${span('string', 'Astro')} ${span('muted', '|')} ${span('string', 'React')} ${span('muted', '|')} ${span('string', 'TypeScript')}`,
+        '&nbsp;',
+        `${span('keyword', 'Operations')}`,
+        `  ${span('constant', 'DesignOps')} ${span('muted', '|')} ${span('constant', 'Design Tokens')} ${span('muted', '|')} ${span('constant', 'CI/CD')} ${span('muted', '|')} ${span('constant', 'Storybook')}`,
+        '&nbsp;',
+      ];
+      enqueueTypewriter(lines);
     },
 
     social(_args) {
-      appendEmpty();
-      appendLine(`  ${span('function', 'LinkedIn')}   ${span('string', 'linkedin.com/in/ramonrieradepares')}`);
-      appendLine(`  ${span('function', 'Medium')}     ${span('string', 'medium.com/@ramriera')}`);
-      appendLine(`  ${span('function', 'Email')}      ${span('string', 'hello@ramonriera.design')}`);
-      appendLine(`  ${span('function', 'Web')}        ${span('string', 'ramonriera.design')}`);
-      appendEmpty();
+      const lines = [
+        '&nbsp;',
+        `  ${span('function', 'LinkedIn')}   ${span('string', 'linkedin.com/in/ramonrieradepares')}`,
+        `  ${span('function', 'Medium')}     ${span('string', 'medium.com/@ramriera')}`,
+        `  ${span('function', 'Email')}      ${span('string', 'hello@ramonriera.design')}`,
+        `  ${span('function', 'Web')}        ${span('string', 'ramonriera.design')}`,
+        '&nbsp;',
+      ];
+      enqueueTypewriter(lines);
     },
 
     cv(_args) {
-      appendLine(`${span('string', 'Descargando CV...')}`);
-      appendEmpty();
-      appendLine(`${span('muted', 'Abriendo enlace de descarga...')}`);
-      setTimeout(() => {
-        window.open('/assets/shared/ramon-riera-cv.pdf', '_blank');
-      }, 400);
+      const lines = [
+        `${span('string', 'Descargando CV...')}`,
+        '&nbsp;',
+        `${span('muted', 'Abriendo CV-Ramon-Riera-Depares.pdf en nueva pestana...')}`,
+      ];
+      enqueueTypewriter(lines, 30);
+      typewriterQueue = typewriterQueue.then(() => {
+        setTimeout(() => {
+          window.open('/docs/CV-Ramon-Riera-Depares.pdf', '_blank');
+        }, 300);
+      });
     },
 
     history(_args) {
-      appendEmpty();
+      const lines = ['&nbsp;'];
       if (history.length === 0) {
-        appendLine(`${span('muted', 'Historial vacio.')}`);
+        lines.push(`${span('muted', 'Historial vacio.')}`);
       } else {
         history.forEach((cmd, i) => {
-          appendLine(`  ${span('muted', String(i + 1).padStart(4))}  ${escHtml(cmd)}`);
+          lines.push(`  ${span('muted', String(i + 1).padStart(4))}  ${escHtml(cmd)}`);
         });
       }
-      appendEmpty();
+      lines.push('&nbsp;');
+      enqueueTypewriter(lines);
     },
 
     date(_args) {
@@ -284,15 +340,15 @@ function initInteractiveTerminal() {
       });
       const time = now.toLocaleTimeString('es-ES');
       appendLine(`${span('string', `${formatted}, ${time}`)}`);
+      scrollToBottom();
     },
 
     neofetch(_args) {
-      appendEmpty();
-      const lines = [
+      const infoLines = [
         [`${span('keyword', 'OS')}`,          `Astro 5.17 + Tailwind 3.4`],
         [`${span('keyword', 'Host')}`,         `ramonriera.design`],
         [`${span('keyword', 'Kernel')}`,       `Vercel Edge Network`],
-        [`${span('keyword', 'Shell')}`,        `InteractiveTerminal v1.0`],
+        [`${span('keyword', 'Shell')}`,        `InteractiveTerminal v2.0`],
         [`${span('keyword', 'Resolution')}`,   `${window.innerWidth}x${window.innerHeight}`],
         [`${span('keyword', 'Theme')}`,        `Dracula (Code Mode)`],
         [`${span('keyword', 'Icons')}`,        `Custom SVG`],
@@ -309,15 +365,16 @@ function initInteractiveTerminal() {
         '                ',
       ];
 
-      const maxAscii = asciiLogo.length;
-      const maxLines = Math.max(maxAscii, lines.length);
+      const lines = ['&nbsp;'];
+      const maxLen = Math.max(asciiLogo.length, infoLines.length);
 
-      for (let i = 0; i < maxLines; i++) {
-        const art = i < maxAscii ? `<span class="t-accent">${escHtml(asciiLogo[i])}</span>` : ' '.repeat(16);
-        const info = i < lines.length ? `${lines[i][0].padEnd(40)}  ${lines[i][1]}` : '';
-        appendLine(`${art}   ${info}`);
+      for (let i = 0; i < maxLen; i++) {
+        const art = i < asciiLogo.length ? `<span class="t-accent">${escHtml(asciiLogo[i])}</span>` : ' '.repeat(16);
+        const info = i < infoLines.length ? `${infoLines[i][0].padEnd(40)}  ${infoLines[i][1]}` : '';
+        lines.push(`${art}   ${info}`);
       }
-      appendEmpty();
+      lines.push('&nbsp;');
+      enqueueTypewriter(lines, 30);
     },
 
     clear(_args) {
@@ -326,6 +383,7 @@ function initInteractiveTerminal() {
 
     exit(_args) {
       appendLine(`${span('string', 'Switching to Visual Mode...')}`);
+      scrollToBottom();
       setTimeout(() => {
         const toggle = document.getElementById('code-mode-toggle');
         if (toggle) toggle.click();
@@ -406,7 +464,7 @@ function initInteractiveTerminal() {
     }
   });
 
-  // Focus input when clicking terminal area
+  // ── Global focus: any click on the fullscreen terminal focuses input ──
   terminal.addEventListener('click', () => {
     input.focus();
   });
@@ -418,19 +476,31 @@ function initInteractiveTerminal() {
     terminal.classList.toggle('term-minimized', isMinimized);
   });
 
+  // ── Fullscreen: hide everything else, lock body scroll ──
+  function enterFullscreen() {
+    document.body.classList.add('terminal-fullscreen');
+  }
+
+  function exitFullscreen() {
+    document.body.classList.remove('terminal-fullscreen');
+  }
+
   // ── Code mode visibility ──
   function updateVisibility() {
     const isCodeMode = document.body.classList.contains('code-mode');
     const isHome = window.location.pathname.replace(/\/$/, '') === '' ||
                    window.location.pathname === '/';
-    terminal.classList.toggle('term-active', isCodeMode && isHome);
+    const shouldShow = isCodeMode && isHome;
+    terminal.classList.toggle('term-active', shouldShow);
 
-    if (isCodeMode && isHome) {
-      // Print MOTD on first activation
+    if (shouldShow) {
+      enterFullscreen();
       if (output.children.length === 0) {
         printMotd();
       }
       setTimeout(() => input.focus(), 100);
+    } else {
+      exitFullscreen();
     }
   }
 
@@ -443,7 +513,9 @@ function initInteractiveTerminal() {
   });
 
   // Re-init on Astro navigation
-  document.addEventListener('astro:page-load', updateVisibility);
+  document.addEventListener('astro:page-load', () => {
+    (terminal as any).__initialized = false;
+  });
 }
 
 initInteractiveTerminal();
@@ -451,18 +523,21 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
 </script>
 
 <style>
-  /* ── Interactive Terminal Container ── */
+  /* ── Interactive Terminal — Fullscreen Overlay ── */
   .interactive-terminal {
     display: none;
-    position: relative;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    z-index: 40;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #1a1918;
+    padding: 0;
+    overflow: hidden;
   }
 
   .interactive-terminal.term-active {
-    display: block;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
   }
 
   .interactive-terminal.term-minimized .term-output,
@@ -470,16 +545,28 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
     display: none;
   }
 
+  /* ── Terminal Window — fills the overlay ── */
+  .term-window {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #1e1e2e;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
   /* ── Title Bar ── */
   .term-titlebar {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem 1.25rem;
+    padding: 0.75rem 1.5rem;
     background: #181825;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     user-select: none;
     -webkit-user-select: none;
+    flex-shrink: 0;
   }
 
   .term-dots {
@@ -520,32 +607,10 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
     background: rgba(255, 255, 255, 0.08);
   }
 
-  /* ── Terminal Window ── */
-  .term-window {
-    background: #1e1e2e;
-    border: 1px solid var(--cm-border, #30363d);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(255, 255, 255, 0.03),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    transition: box-shadow 0.4s ease;
-  }
-
-  .term-window:focus-within {
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(217, 119, 87, 0.15),
-      0 0 40px rgba(217, 119, 87, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  }
-
-  /* ── Output Area ── */
+  /* ── Output Area — fills remaining space ── */
   .term-output {
+    flex: 1;
     padding: 1.5rem 2rem;
-    min-height: 50vh;
-    max-height: 70vh;
     overflow-y: auto;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 0.85rem;
@@ -574,8 +639,9 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
     align-items: center;
     padding: 0.75rem 2rem 1.25rem;
     gap: 0.625rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-    background: rgba(0, 0, 0, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
   }
 
   .term-prompt {
@@ -644,12 +710,28 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
   :global(.t-accent)    { color: var(--accent-color, #D97757); }
   :global(.t-error)     { color: #ff5555; }
 
+  /* ── Fullscreen body lock ── */
+  :global(body.terminal-fullscreen) {
+    overflow: hidden !important;
+  }
+
+  :global(body.terminal-fullscreen) :global(nav),
+  :global(body.terminal-fullscreen) :global(footer),
+  :global(body.terminal-fullscreen) :global(main) {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* The terminal itself stays visible above everything */
+  :global(body.terminal-fullscreen) .interactive-terminal {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
   /* ── Responsive ── */
   @media (max-width: 640px) {
     .term-output {
       font-size: 0.72rem;
-      min-height: 40vh;
-      max-height: 60vh;
       padding: 1rem 1.25rem;
     }
 
@@ -660,6 +742,10 @@ document.addEventListener('astro:page-load', initInteractiveTerminal);
     .term-prompt,
     .term-input {
       font-size: 0.72rem;
+    }
+
+    .term-titlebar {
+      padding: 0.625rem 1rem;
     }
   }
 </style>
