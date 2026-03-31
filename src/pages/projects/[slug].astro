@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Tag from '@/components/Tag.astro';
 import OptImage from '@/components/OptImage.astro';
+import ContactConsole from '@/components/ContactConsole.astro';
 import { projects } from '@/utils/data';
 import type { CaseSection } from '@/utils/data';
 
@@ -16,6 +17,14 @@ const { project } = Astro.props;
 const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 2);
 const hasCaseStudy = !!project.caseSections?.length;
 const meta = project.projectMeta;
+
+// Code mode: slug to filename
+const projectFileName = project.slug.replace(/-/g, '_') + '.config.ts';
+
+// Code mode: next/prev project navigation
+const projectIndex = projects.findIndex((p) => p.slug === project.slug);
+const nextProject = projects[(projectIndex + 1) % projects.length];
+const prevProject = projects[(projectIndex - 1 + projects.length) % projects.length];
 
 function md(text: string): string {
   return text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
@@ -63,8 +72,81 @@ function md(text: string): string {
     </div>
   </section>
 
-  <!-- Hero Image - parallax zoom -->
-  <section class="case-section" data-component="ParallaxCover">
+  <!-- ═══ CODE MODE: Project Metadata Window ═══ -->
+  <section class="section-padding pb-12 cm-project-hero" data-component="ProjectMetaWindow">
+    <div class="container-custom">
+        <div class="pmd-window">
+          <div class="pmd-titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="pmd-filename">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
+              </svg>
+              {projectFileName}
+            </span>
+            <span class="pmd-tab">{projectFileName}</span>
+          </div>
+          <div class="pmd-body">
+            {/* ── Line 1: export const ── */}
+            <div class="pmd-line"><span class="pmd-gutter">1</span><span class="pmd-code"><span class="pmd-comment">// {project.title} — Project Configuration</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">2</span><span class="pmd-code"></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">3</span><span class="pmd-code"><span class="pmd-keyword">export</span> <span class="pmd-keyword">const</span> <span class="pmd-fn">{project.slug.replace(/-/g, '_')}</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{'{'}</span></span></div>
+            {/* ── Core metadata ── */}
+            <div class="pmd-line"><span class="pmd-gutter">4</span><span class="pmd-code">  <span class="pmd-key">client</span><span class="pmd-punct">:</span> <span class="pmd-string">"{project.client}"</span><span class="pmd-punct">,</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">5</span><span class="pmd-code">  <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta?.role || project.category}"</span><span class="pmd-punct">,</span></span></div>
+            <div class="pmd-line"><span class="pmd-gutter">6</span><span class="pmd-code">  <span class="pmd-key">year</span><span class="pmd-punct">:</span> <span class="pmd-number">{project.year}</span><span class="pmd-punct">,</span></span></div>
+            {meta?.industry && (
+              <div class="pmd-line"><span class="pmd-gutter">7</span><span class="pmd-code">  <span class="pmd-key">industry</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.industry}"</span><span class="pmd-punct">,</span></span></div>
+            )}
+            {meta?.duration && (
+              <div class="pmd-line"><span class="pmd-gutter">{meta?.industry ? 8 : 7}</span><span class="pmd-code">  <span class="pmd-key">duration</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.duration}"</span><span class="pmd-punct">,</span></span></div>
+            )}
+            {meta?.output && (
+              <div class="pmd-line"><span class="pmd-gutter">{(meta?.industry ? 1 : 0) + (meta?.duration ? 1 : 0) + 7}</span><span class="pmd-code">  <span class="pmd-key">output</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.output}"</span><span class="pmd-punct">,</span></span></div>
+            )}
+            {/* ── Blank line separator ── */}
+            {(() => {
+              let ln = 7 + (meta?.industry ? 1 : 0) + (meta?.duration ? 1 : 0) + (meta?.output ? 1 : 0);
+              const blankLn = ln++;
+              const stackLn = ln++;
+              const tagsLn = ln++;
+              const emptyLn = ln++;
+              const commentLn = ln++;
+              const impactOpenLn = ln++;
+              const impactLines = project.results.map((_: string, i: number) => ln + i);
+              ln += project.results.length;
+              const impactCloseLn = ln++;
+              const closeLn = ln++;
+              return (
+                <>
+                  <div class="pmd-line"><span class="pmd-gutter">{blankLn}</span><span class="pmd-code"></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{stackLn}</span><span class="pmd-code">  <span class="pmd-key">stack</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span>{project.stack.map((s: string, i: number) => <><span class="pmd-string">"{s}"</span>{i < project.stack.length - 1 ? <span class="pmd-punct">, </span> : ''}</>)}<span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{tagsLn}</span><span class="pmd-code">  <span class="pmd-key">tags</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span>{project.tags.map((t: string, i: number) => <><span class="pmd-string">"{t}"</span>{i < project.tags.length - 1 ? <span class="pmd-punct">, </span> : ''}</>)}<span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{emptyLn}</span><span class="pmd-code"></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{commentLn}</span><span class="pmd-code">  <span class="pmd-comment">// Impact & Results</span></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{impactOpenLn}</span><span class="pmd-code">  <span class="pmd-key">impact</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span></span></div>
+                  {project.results.map((result: string, i: number) => (
+                    <div class="pmd-line pmd-line--impact">
+                      <span class="pmd-gutter">{impactLines[i]}</span>
+                      <span class="pmd-code">    <span class="pmd-impact">"{result}"</span>{i < project.results.length - 1 ? <span class="pmd-punct">,</span> : ''}</span>
+                    </div>
+                  ))}
+                  <div class="pmd-line"><span class="pmd-gutter">{impactCloseLn}</span><span class="pmd-code">  <span class="pmd-bracket">]</span></span></div>
+                  <div class="pmd-line"><span class="pmd-gutter">{closeLn}</span><span class="pmd-code"><span class="pmd-bracket">{'}'}</span><span class="pmd-punct">;</span></span></div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Hero Image - parallax zoom (design mode) -->
+  <section class="case-section cm-project-cover-design" data-component="ParallaxCover">
     <div class="container-custom">
       <div data-reveal class="rounded-2xl overflow-hidden dashed-border">
         <div class="parallax-cover-wrapper">
@@ -81,39 +163,85 @@ function md(text: string): string {
     </div>
   </section>
 
-  <!-- Project metadata sidebar + About content -->
-  <section class="case-section">
+  <!-- Hero Image - Asset Preview (code mode) -->
+  <section class="case-section cm-project-cover-code" data-component="AssetPreview">
     <div class="container-custom">
-      <div class="max-w-5xl mx-auto">
+        <div class="asset-preview">
+          <!-- Toolbar: path + dimensions -->
+          <div class="asset-preview__toolbar">
+            <div class="asset-preview__path">
+              <svg class="asset-preview__path-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+              </svg>
+              <span class="asset-preview__path-dir">assets</span>
+              <span class="asset-preview__path-sep">&gt;</span>
+              <span class="asset-preview__path-dir">projects</span>
+              <span class="asset-preview__path-sep">&gt;</span>
+              <span class="asset-preview__path-file">{project.slug}_cover.png</span>
+            </div>
+            <div class="asset-preview__dims">
+              <span>1600 × 900</span>
+              <span class="asset-preview__dims-sep">|</span>
+              <span>PNG</span>
+            </div>
+          </div>
+          <!-- Canvas: grid bg + image + cyan glow -->
+          <div class="asset-preview__canvas">
+            <div class="asset-preview__img-wrap">
+              <OptImage
+                src={project.cover}
+                alt={project.title}
+                class="asset-preview__img"
+                loading="eager"
+                widths={[800, 1200, 1600]}
+                sizes="100vw"
+              />
+            </div>
+          </div>
+          <!-- Status bar -->
+          <div class="asset-preview__status">
+            <span class="asset-preview__status-item">Layer: Hero Cover</span>
+            <span class="asset-preview__status-sep">|</span>
+            <span class="asset-preview__status-item">Status: Production</span>
+            <span class="asset-preview__status-sep">|</span>
+            <span class="asset-preview__status-item">High Fidelity</span>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Project metadata sidebar + About content (design mode) -->
+  <section class="case-section cm-project-sidebar-design">
+    <div class="container-custom">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
 
           <!-- Sidebar (1/3): Metadata stacked vertically -->
           <div data-reveal class="lg:col-span-1" data-component="ProjectSidebar" data-token="$spacing-gap: 1rem / 16px|$position: sticky top-8">
             <div class="flex flex-col gap-4 lg:sticky lg:top-8">
               <!-- Fecha -->
-              <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-dark-100/60"
+              <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-neutral-100/60"
                 data-component="MetaCard" data-token="$spacing-padding: 1.25rem / 20px|$radius-xl: 0.75rem / 12px|$color-bg-surface: rgba(243,241,237,0.6)">
-                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                  <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                   </svg>
                 </div>
                 <div>
-                  <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-1">Fecha</h4>
+                  <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1">Fecha</h4>
                   <p class="font-semibold text-sm">{project.year}</p>
                 </div>
               </div>
 
               {meta && (
                 <!-- Duración -->
-                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-dark-100/60">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-neutral-100/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-1">Duración</h4>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1">Duración</h4>
                     <p class="font-semibold text-sm">{meta.duration}</p>
                   </div>
                 </div>
@@ -121,14 +249,14 @@ function md(text: string): string {
 
               {meta && (
                 <!-- Rol -->
-                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-dark-100/60">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-neutral-100/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-1">Rol</h4>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1">Rol</h4>
                     <p class="font-semibold text-sm">{meta.role}</p>
                   </div>
                 </div>
@@ -136,14 +264,14 @@ function md(text: string): string {
 
               {meta && (
                 <!-- Industria -->
-                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-dark-100/60">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="meta-card flex items-start gap-3 p-5 rounded-xl bg-neutral-100/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-1">Industria</h4>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1">Industria</h4>
                     <p class="font-semibold text-sm">{meta.industry}</p>
                   </div>
                 </div>
@@ -151,15 +279,15 @@ function md(text: string): string {
 
               <!-- Skills / Stack -->
               {meta && (
-                <div class="meta-card flex items-start gap-4 p-5 rounded-xl bg-dark-100/60"
+                <div class="meta-card flex items-start gap-4 p-5 rounded-xl bg-neutral-100/60"
                   data-component="SkillBadgeGroup" data-token="$spacing-gap: 0.5rem / 8px|$spacing-padding: 1.25rem / 20px">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-2">Skills</h4>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-2">Skills</h4>
                     <div class="flex flex-wrap gap-2">
                       {meta.skills.map((skill: string) => (
                         <Tag label={skill} />
@@ -170,14 +298,14 @@ function md(text: string): string {
               )}
 
               {!meta && (
-                <div class="meta-card flex items-start gap-4 p-5 rounded-xl bg-dark-100/60">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-dark-200/80 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="meta-card flex items-start gap-4 p-5 rounded-xl bg-neutral-100/60">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-200/80 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 class="text-xs font-medium uppercase tracking-wider text-dark-400 mb-2">Stack</h4>
+                    <h4 class="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-2">Stack</h4>
                     <div class="flex flex-wrap gap-2">
                       {project.stack.map((tool: string) => (
                         <Tag label={tool} />
@@ -205,15 +333,15 @@ function md(text: string): string {
               <>
                 <div data-reveal>
                   <h2 class="heading-md mb-6">Sobre el proyecto</h2>
-                  <p class="text-body max-w-prose">{project.longDescription}</p>
+                  <p class="text-body">{project.longDescription}</p>
                 </div>
                 <div data-reveal>
                   <h2 class="heading-md mb-6">El reto</h2>
-                  <p class="text-body max-w-prose">{project.challenge}</p>
+                  <p class="text-body">{project.challenge}</p>
                 </div>
                 <div data-reveal>
                   <h2 class="heading-md mb-6">La solución</h2>
-                  <p class="text-body max-w-prose">{project.solution}</p>
+                  <p class="text-body">{project.solution}</p>
                 </div>
               </>
             )}
@@ -223,9 +351,9 @@ function md(text: string): string {
                 <div data-reveal>
                   <h2 class="heading-md mb-6">Sobre el proyecto</h2>
                   {project.longDescription.split('\n\n').map((paragraph: string) => (
-                    <p class="text-body mb-6 max-w-prose" set:html={md(paragraph)} />
+                    <p class="text-body mb-6" set:html={md(paragraph)} />
                   ))}
-                  <p class="text-body mb-8 max-w-prose" set:html={md(project.challenge)} />
+                  <p class="text-body mb-8" set:html={md(project.challenge)} />
                   {project.checks && project.checks.length > 0 && (
                     <ul class="space-y-3">
                       {project.checks.map((check: string) => (
@@ -241,14 +369,189 @@ function md(text: string): string {
                 </div>
                 <div data-reveal>
                   <h2 class="heading-md mb-6">Solución propuesta</h2>
-                  <p class="text-body max-w-prose" set:html={md(project.solution)} />
+                  <p class="text-body" set:html={md(project.solution)} />
                 </div>
               </>
             )}
           </div>
 
         </div>
-      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CODE MODE: Content as File Blocks + Sidebar ═══ -->
+  <section class="case-section cm-project-content-code" data-component="ProjectFileBlocks">
+    <div class="container-custom">
+        <div class="cm-project-grid">
+
+          <!-- Sidebar (1/3): Inspector Panel -->
+          <aside class="cm-sidebar">
+            <div class="cm-sidebar__sticky">
+              <!-- PROJECT_INFO -->
+              <div class="cm-sidebar__panel">
+                <div class="cm-sidebar__header">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#8be9fd">
+                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                  PROJECT_INFO
+                </div>
+                <div class="cm-sidebar__body">
+                  <div class="cm-sidebar__row">
+                    <span class="pmd-key">client</span><span class="pmd-punct">:</span> <span class="pmd-string">"{project.client}"</span>
+                  </div>
+                  <div class="cm-sidebar__row">
+                    <span class="pmd-key">year</span><span class="pmd-punct">:</span> <span class="pmd-number">{project.year}</span>
+                  </div>
+                  <div class="cm-sidebar__row">
+                    <span class="pmd-key">status</span><span class="pmd-punct">:</span> <span class="pmd-impact">"Deployed"</span>
+                  </div>
+                  <div class="cm-sidebar__row">
+                    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta?.role || project.category}"</span>
+                  </div>
+                  {meta?.industry && (
+                    <div class="cm-sidebar__row">
+                      <span class="pmd-key">industry</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.industry}"</span>
+                    </div>
+                  )}
+                  {meta?.duration && (
+                    <div class="cm-sidebar__row">
+                      <span class="pmd-key">duration</span><span class="pmd-punct">:</span> <span class="pmd-string">"{meta.duration}"</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <!-- TECH_STACK -->
+              <div class="cm-sidebar__panel">
+                <div class="cm-sidebar__header">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#bd93f9">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                  TECH_STACK
+                </div>
+                <div class="cm-sidebar__body">
+                  {project.stack.map((tech: string) => (
+                    <div class="cm-sidebar__row">
+                      <span class="pmd-string">"{tech.toLowerCase().replace(/\s+/g, '-')}"</span><span class="pmd-punct">:</span> <span class="pmd-string">"^latest"</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- SKILLS -->
+              <div class="cm-sidebar__panel">
+                <div class="cm-sidebar__header">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#50fa7b">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+                  </svg>
+                  SKILLS
+                </div>
+                <div class="cm-sidebar__body">
+                  {(meta?.skills || project.stack).map((skill: string, i: number) => (
+                    <div class="cm-sidebar__row">
+                      <span class="pmd-punct">{i === 0 ? '[' : ' '}</span> <span class="pmd-string">"{skill}"</span>{i < (meta?.skills || project.stack).length - 1 ? <span class="pmd-punct">,</span> : <span class="pmd-punct"> ]</span>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- GitHub link -->
+              {project.githubUrl && (
+                <div class="cm-sidebar__panel">
+                  <div class="cm-sidebar__body">
+                    <div class="cm-sidebar__row">
+                      <span class="pmd-key">repo</span><span class="pmd-punct">:</span> <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="pmd-string cm-sidebar__link">"GitHub ↗"</a>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </aside>
+
+          <!-- Main content (2/3): File Blocks -->
+          <div class="cm-content space-y-8">
+
+            <!-- context.md — About the project -->
+            <div class="file-block">
+              <div class="file-block__titlebar">
+                <div class="pmd-dots">
+                  <span class="pmd-dot" style="background:#ff5f57"></span>
+                  <span class="pmd-dot" style="background:#febc2e"></span>
+                  <span class="pmd-dot" style="background:#28c840"></span>
+                </div>
+                <span class="file-block__filename">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                  context.md
+                </span>
+                <span class="file-block__tab">context.md</span>
+              </div>
+              <div class="file-block__body">
+                <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment"># Sobre el proyecto</span></span></div>
+                <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+                {project.longDescription.split('\n\n').map((paragraph: string, i: number) => (
+                  <div class="file-block__line"><span class="file-block__gutter">{i + 3}</span><span class="file-block__code file-block__text" set:html={md(paragraph)} /></div>
+                ))}
+              </div>
+            </div>
+
+            <!-- challenge.md — The problem -->
+            <div class="file-block">
+              <div class="file-block__titlebar">
+                <div class="pmd-dots">
+                  <span class="pmd-dot" style="background:#ff5f57"></span>
+                  <span class="pmd-dot" style="background:#febc2e"></span>
+                  <span class="pmd-dot" style="background:#28c840"></span>
+                </div>
+                <span class="file-block__filename">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" />
+                  </svg>
+                  challenge.md
+                </span>
+                <span class="file-block__tab">challenge.md</span>
+              </div>
+              <div class="file-block__body">
+                <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment"># El reto</span></span></div>
+                <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+                <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code file-block__text" set:html={md(project.challenge)} /></div>
+                {project.checks && project.checks.length > 0 && (
+                  <>
+                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"></span></div>
+                    {project.checks.map((check: string, i: number) => (
+                      <div class="file-block__line"><span class="file-block__gutter">{i + 5}</span><span class="file-block__code"><span class="pmd-string">  ✓</span> <span class="file-block__text">{check}</span></span></div>
+                    ))}
+                  </>
+                )}
+              </div>
+            </div>
+
+            <!-- solution.ts — The solution -->
+            <div class="file-block">
+              <div class="file-block__titlebar">
+                <div class="pmd-dots">
+                  <span class="pmd-dot" style="background:#ff5f57"></span>
+                  <span class="pmd-dot" style="background:#febc2e"></span>
+                  <span class="pmd-dot" style="background:#28c840"></span>
+                </div>
+                <span class="file-block__filename">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
+                  </svg>
+                  solution.ts
+                </span>
+                <span class="file-block__tab">solution.ts</span>
+              </div>
+              <div class="file-block__body">
+                <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">// Solución propuesta</span></span></div>
+                <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+                <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code file-block__text" set:html={md(project.solution)} /></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
     </div>
   </section>
 
@@ -262,14 +565,16 @@ function md(text: string): string {
 
         {/* Center layout */}
         {section.layout === 'center' && (
-          <div class="max-w-4xl mx-auto" data-component="SectionCenter">
+          <div data-component="SectionCenter">
             {section.images && (
               <div data-reveal class="mb-10 space-y-6">
                 {section.images.map((img: string, i: number) => (
-                  <figure class="rounded-xl overflow-hidden max-w-full md:max-w-3xl mx-auto">
+                  <figure class="rounded-xl overflow-hidden max-w-full md:max-w-3xl mx-auto cs-figure">
+                    <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                     <OptImage src={img} alt={section.title} class="lightbox-trigger block w-full h-auto cursor-zoom-in" />
+                    <div class="cs-fig-status"><span>Layer: {section.label || 'Content'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
                     {section.captions?.[i] && (
-                      <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
+                      <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                     )}
                   </figure>
                 ))}
@@ -278,7 +583,7 @@ function md(text: string): string {
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
-              <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose" set:html={md(section.content)} />
+              <p data-reveal data-delay="200" class="text-body leading-relaxed" set:html={md(section.content)} />
             )}
             {section.bullets && (
               <ul data-reveal data-delay="300" class="mt-6 space-y-3">
@@ -292,13 +597,15 @@ function md(text: string): string {
                     </li>
                     {section.bulletEvidence?.[bIdx] && (
                       <li class="list-none ml-8">
-                        <figure class="relative rounded-xl overflow-hidden my-4 max-w-full md:max-w-sm mx-auto">
+                        <figure class="relative rounded-xl overflow-hidden my-4 max-w-full md:max-w-sm mx-auto cs-figure">
+                          <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{section.bulletEvidence[bIdx].image.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                           <OptImage
                             src={section.bulletEvidence[bIdx].image}
                             alt={`Evidencia: ${section.bulletEvidence[bIdx].caption}`}
                             class="block w-full h-auto lightbox-trigger cursor-zoom-in"
                           />
-                          <figcaption class="text-sm text-dark-400 mt-3 text-center italic">
+                          <div class="cs-fig-status"><span>Layer: Evidence</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
+                          <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">
                             {section.bulletEvidence[bIdx].caption}
                           </figcaption>
                         </figure>
@@ -310,7 +617,7 @@ function md(text: string): string {
             )}
             {section.highlight && (
               <blockquote data-reveal data-delay="400" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                   <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                 </p>
               </blockquote>
@@ -320,24 +627,26 @@ function md(text: string): string {
 
         {/* Left-right: image left, text right */}
         {section.layout === 'left-right' && (
-          <div class="max-w-4xl mx-auto" data-component="SectionSplitView">
+          <div data-component="SectionSplitView">
           <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 items-center">
             <div class="lg:col-span-2 space-y-4">
-              {section.images?.map((img: string) => (
-                <div data-reveal class="rounded-xl overflow-hidden">
+              {section.images?.map((img: string, i: number) => (
+                <figure data-reveal class="rounded-xl overflow-hidden cs-figure">
+                  <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                   <OptImage src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" />
-                </div>
+                  <div class="cs-fig-status"><span>Layer: {section.label || 'Content'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
+                </figure>
               ))}
             </div>
             <div class="lg:col-span-3">
               {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
               <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
               {section.content?.split('\n\n').map((paragraph: string) => (
-                <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose mb-4" set:html={md(paragraph)} />
+                <p data-reveal data-delay="200" class="text-body leading-relaxed mb-4" set:html={md(paragraph)} />
               ))}
               {section.highlight && (
                 <blockquote data-reveal data-delay="300" class="mt-6 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                  <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                  <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                     <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                   </p>
                 </blockquote>
@@ -349,27 +658,29 @@ function md(text: string): string {
 
         {/* Right-left: text left, image right */}
         {section.layout === 'right-left' && (
-          <div class="max-w-4xl mx-auto">
+          <div>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             <div>
               {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
               <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
               {section.content?.split('\n\n').map((paragraph: string) => (
-                <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose mb-4" set:html={md(paragraph)} />
+                <p data-reveal data-delay="200" class="text-body leading-relaxed mb-4" set:html={md(paragraph)} />
               ))}
               {section.highlight && (
                 <blockquote data-reveal data-delay="300" class="mt-6 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                  <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                  <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                     <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                   </p>
                 </blockquote>
               )}
             </div>
             <div class="space-y-4">
-              {section.images?.map((img: string) => (
-                <div data-reveal class="rounded-xl overflow-hidden">
+              {section.images?.map((img: string, i: number) => (
+                <figure data-reveal class="rounded-xl overflow-hidden cs-figure">
+                  <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                   <OptImage src={img} alt={section.title} class="lightbox-trigger w-full h-auto object-cover cursor-zoom-in" />
-                </div>
+                  <div class="cs-fig-status"><span>Layer: {section.label || 'Content'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
+                </figure>
               ))}
             </div>
           </div>
@@ -379,26 +690,27 @@ function md(text: string): string {
 
         {/* Full image */}
         {section.layout === 'full-image' && (
-          <div class="max-w-4xl mx-auto" data-component="SolutionShowcase">
+          <div data-component="SolutionShowcase">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
-              <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose mb-10" set:html={md(section.content)} />
+              <p data-reveal data-delay="200" class="text-body leading-relaxed mb-10" set:html={md(section.content)} />
             )}
-            <div class={`space-y-6 ${section.images?.length === 1 && !section.images[0].endsWith('.svg') ? 'max-w-3xl mx-auto' : ''}`}>
+            <div class={`space-y-6 ${section.images?.length === 1 && !section.images[0].endsWith('.svg') ? 'max-w-2xl mx-auto' : ''}`}>
               {section.images?.map((img: string, i: number) => (
-                <figure data-reveal class="rounded-xl overflow-hidden max-w-full md:max-w-3xl mx-auto">
+                <figure data-reveal class="rounded-xl overflow-hidden max-w-full md:max-w-2xl mx-auto cs-figure">
+                  <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                   <OptImage src={img} alt={section.captions?.[i] || section.title} class={`block w-full h-auto ${img.endsWith('.svg') ? '' : 'lightbox-trigger object-cover cursor-zoom-in'}`} />
-                  <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
+                  <div class="cs-fig-status"><span>Layer: {section.label || 'Content'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
                   {section.captions?.[i] && (
-                    <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
+                    <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
                 </figure>
               ))}
             </div>
             {section.highlight && (
               <blockquote data-reveal data-delay="300" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                   <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                 </p>
               </blockquote>
@@ -408,26 +720,27 @@ function md(text: string): string {
 
         {/* Image grid */}
         {section.layout === 'image-grid' && (
-          <div class="max-w-4xl mx-auto" data-component="ImageGrid">
+          <div data-component="ImageGrid">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content?.split('\n\n').map((paragraph: string) => (
-              <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose mb-4" set:html={md(paragraph)} />
+              <p data-reveal data-delay="200" class="text-body leading-relaxed mb-4" set:html={md(paragraph)} />
             ))}
             {section.highlight && (
               <blockquote data-reveal data-delay="300" class="mt-6 mb-10 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                   <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                 </p>
               </blockquote>
             )}
             <div class={`${section.images?.length === 1 ? 'flex justify-center max-w-xl mx-auto' : 'grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8'} ${!section.highlight ? 'mt-10' : ''}`}>
               {section.images?.map((img: string, i: number) => (
-                <figure data-reveal data-delay={String(i * 80)} class={`rounded-xl overflow-hidden ${section.images?.length === 1 ? 'max-w-md w-full' : ''}`}>
+                <figure data-reveal data-delay={String(i * 80)} class={`rounded-xl overflow-hidden cs-figure ${section.images?.length === 1 ? 'max-w-md w-full' : ''}`}>
+                  <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                   <OptImage src={img} alt={section.captions?.[i] || `${section.title} ${i + 1}`} class="lightbox-trigger block w-full h-auto max-h-[500px] object-contain cursor-zoom-in" />
-                  <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
+                  <div class="cs-fig-status"><span>Layer: {section.label || 'Content'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
                   {section.captions?.[i] && (
-                    <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
+                    <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
                 </figure>
               ))}
@@ -437,19 +750,20 @@ function md(text: string): string {
 
         {/* Screens grid - mobile mockups */}
         {section.layout === 'screens-grid' && (
-          <div class="max-w-4xl mx-auto" data-component="ScreensGallery">
+          <div data-component="ScreensGallery">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
-              <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose mb-10" set:html={md(section.content)} />
+              <p data-reveal data-delay="200" class="text-body leading-relaxed mb-10" set:html={md(section.content)} />
             )}
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto mt-10">
               {section.images?.map((img: string, i: number) => (
-                <figure data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden relative mx-auto">
+                <figure data-reveal data-delay={String(i * 60)} class="rounded-xl overflow-hidden relative mx-auto cs-figure">
+                  <div class="cs-fig-toolbar"><div class="cs-fig-path"><svg class="cs-fig-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-dir">assets</span><span class="cs-fig-sep">&gt;</span><span class="cs-fig-file">{img.split('/').pop()}</span></div><span class="cs-fig-dims">PNG</span></div>
                   <OptImage src={img} alt={section.captions?.[i] || `Slide ${i + 1}`} class="lightbox-trigger block w-full h-auto object-cover cursor-zoom-in" />
-                  <span class="cm-image-path hidden" data-cm-path>{`src: '${img}'`}</span>
+                  <div class="cs-fig-status"><span>Layer: {section.label || 'Screens'}</span><span class="cs-fig-status-sep">|</span><span>High Fidelity</span></div>
                   {section.captions?.[i] && (
-                    <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
+                    <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[i]}</figcaption>
                   )}
                 </figure>
               ))}
@@ -459,11 +773,11 @@ function md(text: string): string {
 
         {/* Figma embed */}
         {section.layout === 'figma-embed' && (
-          <div class="max-w-4xl mx-auto" data-component="FigmaEmbed">
+          <div data-component="FigmaEmbed">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
-              <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose mb-10" set:html={md(section.content)} />
+              <p data-reveal data-delay="200" class="text-body leading-relaxed mb-10" set:html={md(section.content)} />
             )}
             {section.figmaUrl && (
               <div data-reveal class="rounded-2xl overflow-hidden border border-[#3f3f46]">
@@ -480,11 +794,11 @@ function md(text: string): string {
 
         {/* Whimsical embed */}
         {section.layout === 'whimsical-embed' && (
-          <div class="max-w-4xl mx-auto">
+          <div>
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content?.split('\n\n').map((paragraph: string) => (
-              <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose mb-4" set:html={md(paragraph)} />
+              <p data-reveal data-delay="200" class="text-body leading-relaxed mb-4" set:html={md(paragraph)} />
             ))}
             <div class="space-y-8 mt-10">
               {section.embeds?.map((url: string, i: number) => (
@@ -502,25 +816,25 @@ function md(text: string): string {
 
         {/* Mermaid diagram */}
         {section.layout === 'mermaid' && (
-          <div class="max-w-4xl mx-auto">
+          <div>
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
-              <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose mb-10" set:html={md(section.content)} />
+              <p data-reveal data-delay="200" class="text-body leading-relaxed mb-10" set:html={md(section.content)} />
             )}
             {section.mermaidCode && (
               <figure data-reveal data-delay="300">
-                <div class="rounded-2xl overflow-hidden border border-dark-200 bg-white p-8 md:p-12">
+                <div class="rounded-2xl overflow-hidden border border-neutral-200 bg-white p-8 md:p-12">
                   <pre class="mermaid flex justify-center">{section.mermaidCode}</pre>
                 </div>
                 {section.captions?.[0] && (
-                  <figcaption class="text-sm text-dark-400 mt-3 text-center italic">{section.captions[0]}</figcaption>
+                  <figcaption class="text-sm text-neutral-400 mt-3 text-center italic">{section.captions[0]}</figcaption>
                 )}
               </figure>
             )}
             {section.highlight && (
               <blockquote data-reveal data-delay="400" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                   <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                 </p>
               </blockquote>
@@ -530,11 +844,11 @@ function md(text: string): string {
 
         {/* Stepper vertical */}
         {section.layout === 'stepper' && (
-          <div class="max-w-4xl mx-auto" data-component="MethodologyStepper" data-token="$spacing-gap-stack: 2.5rem / 40px|$color-border-line: #e8e4dd">
+          <div data-component="MethodologyStepper" data-token="$spacing-gap-stack: 2.5rem / 40px|$color-border-line: #e8e4dd">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
-              <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose mb-10" set:html={md(section.content)} />
+              <p data-reveal data-delay="200" class="text-body leading-relaxed mb-10" set:html={md(section.content)} />
             )}
             {section.steps && (
               <div class="relative ml-4 md:ml-6">
@@ -542,15 +856,15 @@ function md(text: string): string {
                   <div data-reveal data-delay={String(300 + i * 120)} class={`relative flex gap-6 ${i < section.steps!.length - 1 ? 'pb-10' : ''}`}>
                     {/* Vertical line */}
                     {i < section.steps!.length - 1 && (
-                      <div class="absolute left-5 top-10 bottom-0 w-px bg-dark-200"></div>
+                      <div class="absolute left-5 top-10 bottom-0 w-px bg-neutral-200"></div>
                     )}
                     {/* Step indicator */}
-                    <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-dark-100 border-2 border-dark-300 flex items-center justify-center">
-                      <span class="text-sm font-bold text-dark-600">{i + 1}</span>
+                    <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-neutral-100 border-2 border-neutral-300 flex items-center justify-center">
+                      <span class="text-sm font-bold text-neutral-600">{i + 1}</span>
                     </div>
                     {/* Step content */}
                     <div class="pt-1">
-                      <h4 class="text-lg font-bold text-dark-900 mb-1">{step.title}</h4>
+                      <h4 class="text-lg font-bold text-neutral-900 mb-1">{step.title}</h4>
                       <p class="text-body text-base leading-relaxed" set:html={md(step.description)} />
                     </div>
                   </div>
@@ -559,7 +873,7 @@ function md(text: string): string {
             )}
             {section.highlight && (
               <blockquote data-reveal data-delay="400" class="mt-8 pl-5 border-l-4 border-primary-500 bg-primary-500/5 rounded-r-xl py-4 pr-5">
-                <p class="text-base font-semibold text-dark-800 leading-relaxed">
+                <p class="text-base font-semibold text-neutral-800 leading-relaxed">
                   <span class="text-primary-500 font-bold">Insight Clave:</span> <span set:html={md(section.highlight)} />
                 </p>
               </blockquote>
@@ -569,15 +883,16 @@ function md(text: string): string {
 
         {/* Audit deck grid - full presentation gallery with lightbox */}
         {section.layout === 'audit-deck-grid' && (
-          <div class="max-w-4xl mx-auto" data-component="AuditDeckGrid">
+          <div data-component="AuditDeckGrid">
             {showLabel && <h2 data-reveal class="text-base font-semibold text-primary-500 tracking-wide">{section.label}</h2>}
             <h3 data-reveal data-delay="100" class="heading-md mt-1 mb-6">{section.title}</h3>
             {section.content && (
-              <p data-reveal data-delay="200" class="text-body leading-relaxed max-w-prose mb-10" set:html={md(section.content)} />
+              <p data-reveal data-delay="200" class="text-body leading-relaxed mb-10" set:html={md(section.content)} />
             )}
             <div class="audit-deck-gallery grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {section.images?.map((img: string, i: number) => (
-                <figure data-reveal data-delay={String(i * 60)} class="audit-deck-item">
+                <figure data-reveal data-delay={String(i * 60)} class="audit-deck-item cs-figure">
+                  <div class="cs-fig-toolbar cs-fig-toolbar--compact"><div class="cs-fig-path"><svg class="cs-fig-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="cs-fig-file">{img.split('/').pop()}</span></div></div>
                   <div class="audit-deck-thumb">
                     <OptImage
                       src={img}
@@ -585,6 +900,7 @@ function md(text: string): string {
                       class="lightbox-trigger cursor-zoom-in"
                     />
                   </div>
+                  <div class="cs-fig-status cs-fig-status--compact"><span>Slide {i + 1}</span></div>
                   {section.captions?.[i] && (
                     <figcaption class="audit-deck-caption">{section.captions[i]}</figcaption>
                   )}
@@ -599,10 +915,10 @@ function md(text: string): string {
     );
   })}
 
-  <!-- Resultados -->
-  <section class="case-section" data-component="ResultsShowcase">
+  <!-- Resultados (design mode) -->
+  <section class="case-section cm-project-results-design" data-component="ResultsShowcase">
     <div class="container-custom">
-      <div class="relative rounded-3xl bg-dark-900 p-12 md:p-20 overflow-hidden max-w-4xl mx-auto"
+      <div class="relative rounded-3xl bg-neutral-900 p-12 md:p-20 overflow-hidden"
         data-token="$radius-3xl: 1.5rem / 24px|$spacing-padding: 3rem → 5rem (md)|$color-bg-dark: #1a1918">
         <div class="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary-500/[0.07] blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-primary-500/[0.07] blur-3xl"></div>
@@ -627,8 +943,42 @@ function md(text: string): string {
     </div>
   </section>
 
-  <!-- Other projects -->
-  <section class="section-padding" data-component="RelatedProjects">
+  <!-- ═══ CODE MODE: results.json ═══ -->
+  <section class="case-section cm-project-results-code" data-component="ResultsFile">
+    <div class="container-custom">
+        <div class="file-block">
+          <div class="file-block__titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="file-block__filename">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+              </svg>
+              results.json
+            </span>
+            <span class="file-block__tab">results.json</span>
+          </div>
+          <div class="file-block__body">
+            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-bracket">{'{'}</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code">  <span class="pmd-key">"impact"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span></span></div>
+            {project.results.map((result: string, i: number) => (
+              <div class="file-block__line">
+                <span class="file-block__gutter">{i + 3}</span>
+                <span class="file-block__code">    <span class="pmd-string">"{result}"</span>{i < project.results.length - 1 ? <span class="pmd-punct">,</span> : ''}</span>
+              </div>
+            ))}
+            <div class="file-block__line"><span class="file-block__gutter">{project.results.length + 3}</span><span class="file-block__code">  <span class="pmd-bracket">]</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">{project.results.length + 4}</span><span class="file-block__code"><span class="pmd-bracket">{'}'}</span></span></div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Other projects (design mode) -->
+  <section class="section-padding cm-project-related-design" data-component="RelatedProjects">
     <div class="container-custom">
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-14 md:mb-16">
         <div>
@@ -658,7 +1008,7 @@ function md(text: string): string {
           <div data-reveal data-delay={String(i * 100)} class="related-project-item">
             <a href={`/projects/${p.slug}`} class="related-card group block" >
               <div
-                class="related-card-image-wrap relative overflow-hidden rounded-2xl border border-dark-200"
+                class="related-card-image-wrap relative overflow-hidden rounded-2xl border border-neutral-200"
                 style={p.brandColor ? `background-color: ${p.brandColor}` : ''}
               >
                 <OptImage
@@ -671,7 +1021,7 @@ function md(text: string): string {
               </div>
 
               <div class="mt-5 md:mt-6">
-                <h3 class="text-xl md:text-2xl font-bold tracking-tight text-dark-900 group-hover:text-primary-600 transition-colors duration-300">
+                <h3 class="text-xl md:text-2xl font-bold tracking-tight text-neutral-900 group-hover:text-primary-600 transition-colors duration-300">
                   {p.title}
                 </h3>
                 <div class="flex flex-wrap items-center gap-2.5 mt-4">
@@ -684,6 +1034,51 @@ function md(text: string): string {
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- CTA — Contact Console -->
+  <ContactConsole />
+
+  <!-- ═══ CODE MODE: Terminal Navigation Between Projects ═══ -->
+  <section class="section-padding cm-project-nav-code" data-component="ProjectTerminalNav">
+    <div class="container-custom">
+        <div class="file-block">
+          <div class="file-block__titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="file-block__filename">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+              </svg>
+              terminal
+            </span>
+            <span class="file-block__tab">terminal</span>
+          </div>
+          <div class="file-block__body file-block__body--terminal">
+            <a href="/projects" class="proj-nav-cmd" data-component="NavCmd">
+              <span class="proj-nav-prompt">$</span>
+              <span class="proj-nav-text">cd</span>
+              <span class="proj-nav-path">../projects</span>
+              <span class="proj-nav-comment"># volver al índice</span>
+            </a>
+            <a href={`/projects/${prevProject.slug}`} class="proj-nav-cmd" data-component="NavCmd">
+              <span class="proj-nav-prompt">$</span>
+              <span class="proj-nav-text">./prev_project.sh</span>
+              <span class="proj-nav-path">{prevProject.slug.replace(/-/g, '_')}.config.ts</span>
+              <span class="proj-nav-comment"># {prevProject.title}</span>
+            </a>
+            <a href={`/projects/${nextProject.slug}`} class="proj-nav-cmd" data-component="NavCmd">
+              <span class="proj-nav-prompt">$</span>
+              <span class="proj-nav-text">./next_project.sh</span>
+              <span class="proj-nav-path">{nextProject.slug.replace(/-/g, '_')}.config.ts</span>
+              <span class="proj-nav-comment"># {nextProject.title}</span>
+            </a>
+          </div>
+        </div>
     </div>
   </section>
 
@@ -828,7 +1223,7 @@ function md(text: string): string {
     letter-spacing: 0.01em;
     border-radius: 9999px;
     background: rgba(0, 0, 0, 0.03);
-    color: theme('colors.dark.400');
+    color: theme('colors.neutral.400');
     white-space: nowrap;
     transition: background 0.25s ease,
                 color 0.25s ease;
@@ -836,6 +1231,6 @@ function md(text: string): string {
 
   .related-card:hover .related-card-tag {
     background: rgba(0, 0, 0, 0.05);
-    color: theme('colors.dark.500');
+    color: theme('colors.neutral.500');
   }
 </style>

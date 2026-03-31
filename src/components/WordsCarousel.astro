@@ -126,8 +126,9 @@ const { words, interval = 3000 } = Astro.props;
       const interval = parseInt(el.dataset.interval || '3000', 10);
       const wordEls = el.querySelectorAll('.words-carousel-word');
       let current = 0;
+      let timerId: ReturnType<typeof setInterval> | null = null;
 
-      setInterval(() => {
+      function rotate() {
         const prev = current;
         current = (current + 1) % words.length;
 
@@ -140,7 +141,28 @@ const { words, interval = 3000 } = Astro.props;
         setTimeout(() => {
           wordEls[prev].classList.remove('exiting');
         }, 300);
-      }, interval);
+      }
+
+      // PERF: Only run interval when element is visible (IntersectionObserver)
+      const visObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!timerId) timerId = setInterval(rotate, interval);
+          } else {
+            if (timerId) { clearInterval(timerId); timerId = null; }
+          }
+        });
+      }, { threshold: 0.1 });
+      visObs.observe(el);
+
+      // PERF: Pause when tab is hidden
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (timerId) { clearInterval(timerId); timerId = null; }
+        } else if (el.getBoundingClientRect().top < window.innerHeight) {
+          if (!timerId) timerId = setInterval(rotate, interval);
+        }
+      });
     });
   }
 

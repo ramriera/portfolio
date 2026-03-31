@@ -7,7 +7,7 @@ Portfolio profesional de **Ramon Riera**, UX Lead. Construido con **Astro** y **
 - [Astro](https://astro.build/) — Framework web estático
 - [TailwindCSS](https://tailwindcss.com/) — Utility-first CSS
 - [TypeScript](https://www.typescriptlang.org/) — Tipado estático
-- Desplegable en [Vercel](https://vercel.com/)
+- [Vercel](https://vercel.com/) — Deploy, Analytics y Speed Insights
 
 ## Inicio rápido
 
@@ -121,7 +121,7 @@ Edita `src/utils/data.ts`:
 - **`projects`** — Proyectos del portfolio (ver tipo `Project`)
 - **`services`** — Servicios ofrecidos
 - **`skills`** — Habilidades y herramientas
-- **`testimonials`** — Testimonios
+
 
 ### Proyectos
 
@@ -172,7 +172,27 @@ Edita `src/utils/data.ts`:
 Edita `tailwind.config.mjs`:
 
 - **`primary`** — Color principal (default: `#D97757`, terracota cálido)
-- **`dark`** — Escala de grises para texto
+- **`neutral`** — Escala de grises cálidos para texto, bordes y fondos
+
+## Analytics
+
+El sitio incluye [Vercel Analytics](https://vercel.com/docs/analytics) y [Vercel Speed Insights](https://vercel.com/docs/speed-insights) con sample rate al 100%.
+
+### Excluir tus propias visitas
+
+Para que tus visitas no contaminen las métricas, abre tu portfolio con `?notrack` en la URL:
+
+```
+https://tusitio.com?notrack
+```
+
+Esto guarda un flag en `localStorage` que desactiva ambos scripts. Hazlo una vez por navegador/dispositivo.
+
+Para reactivar el tracking, ejecuta en la consola del navegador:
+
+```js
+localStorage.removeItem('notrack')
+```
 
 ## Deploy
 

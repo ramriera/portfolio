@@ -6,8 +6,7 @@ import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
-import '@fontsource/inter/800.css';
-import '@fontsource/inter/900.css';
+// PERF: Removed Inter 800/900 — unused (404 decorative text falls back to 700)
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/500.css';
 import '@fontsource/space-grotesk/400.css';
@@ -68,13 +67,12 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
   </head>
-  <body class="min-h-screen flex flex-col bg-dark-50 text-dark-900 transition-colors duration-300">
+  <body class="min-h-screen flex flex-col bg-neutral-50 text-neutral-900 transition-colors duration-300">
     <Navbar />
     <main class="flex-1">
       <slot />
     </main>
     <Footer />
-
     <script is:inline>
       // Code Mode: restore from localStorage (desktop only — lg breakpoint 1024px)
       (function() {
@@ -111,7 +109,16 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
 
     <script>
       // ── Advanced Technical Inspector: Layout, Architecture & Live Computed Styles ──
+      // PERF: Lazy-loaded — only initializes when code-mode is active
+      let inspectorInitialized = false;
+      let inspectorCleanup: (() => void) | null = null;
+
       function initTokenInspector() {
+        // Skip if already running or not in code-mode
+        if (inspectorInitialized) return;
+        if (!document.body.classList.contains('code-mode')) return;
+        inspectorInitialized = true;
+
         const tooltip = document.getElementById('token-inspector-tooltip');
         const overlay = document.getElementById('inspector-focus-overlay');
         const boxOverlay = document.getElementById('inspector-box-model-overlay');
@@ -119,7 +126,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         const boxBorder = document.getElementById('box-model-border');
         const boxPadding = document.getElementById('box-model-padding');
         const boxContent = document.getElementById('box-model-content');
-        if (!tooltip) return;
+        if (!tooltip) { inspectorInitialized = false; return; }
 
         let currentTarget: HTMLElement | null = null;
         let rafId: number | null = null;
@@ -169,12 +176,12 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
 
           const aliases: Record<string, string> = {
             '#D97757': '--color-primary-500',
-            '#FAF9F7': '--color-dark-50',   '#F3F1ED': '--color-dark-100',
-            '#E8E4DD': '--color-dark-200',   '#D4CFC5': '--color-dark-300',
-            '#A8A196': '--color-dark-400',   '#7C766C': '--color-dark-500',
-            '#5C574F': '--color-dark-600',   '#403D38': '--color-dark-700',
-            '#2A2825': '--color-dark-800',   '#1A1918': '--color-dark-900',
-            '#141413': '--color-dark-950',
+            '#FAF9F7': '--color-neutral-50',   '#F3F1ED': '--color-neutral-100',
+            '#E8E4DD': '--color-neutral-200',   '#D4CFC5': '--color-neutral-300',
+            '#A8A196': '--color-neutral-400',   '#7C766C': '--color-neutral-500',
+            '#5C574F': '--color-neutral-600',   '#403D38': '--color-neutral-700',
+            '#2A2825': '--color-neutral-800',   '#1A1918': '--color-neutral-900',
+            '#141413': '--color-neutral-950',
             '#FDF6F3': '--color-primary-50', '#FCEAE2': '--color-primary-100',
             '#F9D5C5': '--color-primary-200','#F4B89D': '--color-primary-300',
             '#EC9372': '--color-primary-400','#C4613F': '--color-primary-600',
@@ -553,10 +560,52 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
             currentTarget = null;
           }
         });
+
+        // Store cleanup for teardown when code-mode deactivates
+        inspectorCleanup = () => {
+          const elements = document.querySelectorAll<HTMLElement>('[data-token], [data-component]');
+          elements.forEach(el => {
+            el.removeEventListener('mouseenter', onMouseEnter);
+            el.removeEventListener('mousemove', onMouseMove);
+            el.removeEventListener('mouseleave', onMouseLeave);
+          });
+          window.removeEventListener('scroll', onScrollResize);
+          window.removeEventListener('resize', onScrollResize);
+          mapObserver.disconnect();
+          tooltip.classList.remove('visible');
+          overlay?.classList.remove('active');
+          hideBoxModel();
+          inspectorInitialized = false;
+        };
       }
 
-      initTokenInspector();
-      document.addEventListener('astro:page-load', initTokenInspector);
+      function teardownTokenInspector() {
+        if (inspectorCleanup) {
+          inspectorCleanup();
+          inspectorCleanup = null;
+        }
+      }
+
+      // PERF: Observe code-mode changes to lazy-init / teardown inspector
+      const inspectorModeObserver = new MutationObserver(() => {
+        if (document.body.classList.contains('code-mode')) {
+          initTokenInspector();
+        } else {
+          teardownTokenInspector();
+        }
+      });
+      inspectorModeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+      // Init if already in code-mode (e.g. restored from localStorage)
+      if (document.body.classList.contains('code-mode')) {
+        initTokenInspector();
+      }
+      document.addEventListener('astro:page-load', () => {
+        inspectorInitialized = false;
+        if (document.body.classList.contains('code-mode')) {
+          initTokenInspector();
+        }
+      });
     </script>
 
     <script>
@@ -583,7 +632,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <!-- Golden Polish: Performance, Micro-copy, Dynamic Favicon & Signature -->
     <script>
       (function goldenPolish() {
-        // ═══════════════════════════════════════════════════════
+        // ═════════════════════���═════════════════════════════════
         // 1. PERFORMANCE CHECK — Console diagnostics on load
         // ═══════════════════════════════════════════════════════
         function printPerformanceDiag() {
@@ -785,16 +834,14 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         }
 
         // ═══════════════════════════════════════════════════════
-        // 3c. UNIFIED STATE SYNC — Favicon + Title on class change
+        // 3c. UNIFIED STATE SYNC — Single observer for all class mutations
+        // PERF: Consolidated from 2 separate MutationObservers into 1
         // ═══════════════════════════════════════════════════════
 
         function syncCodeModeTab() {
           syncFavicon();
           syncTitle();
         }
-
-        const codeModeTabObserver = new MutationObserver(() => syncCodeModeTab());
-        codeModeTabObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
         // Initial sync
         syncCodeModeTab();
@@ -835,7 +882,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
 
         // ═══════════════════════════════════════════════════════
         // 5. EASTER EGG — System log in DevTools on Code Mode activation
-        // ═══════════════════════════════════════════════════════
+        // ══════════════════════════════════��════════════════════
         let easterEggPrinted = false;
 
         function printCodeModeEasterEgg() {
@@ -852,16 +899,19 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           console.log('%c─────────────────────────────────────────────', accentStyle);
         }
 
-        // Listen for Code Mode activation via class mutation
-        const easterEggObserver = new MutationObserver(() => {
+        // PERF: Single consolidated MutationObserver for all code-mode reactions
+        const unifiedCodeModeObserver = new MutationObserver(() => {
           const isCode = document.documentElement.classList.contains('code-mode');
+          // Sync favicon + title
+          syncCodeModeTab();
+          // Easter egg
           if (isCode) {
             printCodeModeEasterEgg();
           } else {
             easterEggPrinted = false;
           }
         });
-        easterEggObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        unifiedCodeModeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
         // Print immediately if already in Code Mode
         if (document.documentElement.classList.contains('code-mode')) {
@@ -885,8 +935,60 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
       })();
     </script>
   <script>
-    import { inject } from '@vercel/analytics';
-    inject();
+    import { inject, track } from '@vercel/analytics';
+    import { injectSpeedInsights } from '@vercel/speed-insights';
+
+    // Flag yourself: visit any page with ?notrack to disable analytics
+    if (new URLSearchParams(window.location.search).has('notrack')) {
+      localStorage.setItem('notrack', '1');
+    }
+
+    const isOwner = localStorage.getItem('notrack') === '1';
+
+    inject({ beforeSend: (event) => isOwner ? null : event });
+    // PERF: sampleRate 0.1 = 10% of traffic (valid metrics, less network overhead)
+    injectSpeedInsights({
+      sampleRate: 0.1,
+      beforeSend: (data) => isOwner ? null : data,
+    });
+
+    // ── Custom event tracking ──
+
+    // Code Mode toggle
+    document.getElementById('code-mode-toggle')?.addEventListener('click', () => {
+      const entering = !document.body.classList.contains('code-mode');
+      track('code_mode_toggle', { action: entering ? 'on' : 'off' });
+    });
+
+    // Contact CTA clicks (mailto links)
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:"]').forEach((link) => {
+      link.addEventListener('click', () => {
+        track('contact_click', { location: link.closest('nav') ? 'navbar' : link.closest('footer') ? 'footer' : 'page' });
+      });
+    });
+
+    // Project card clicks
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="/projects/"]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const slug = link.getAttribute('href')?.replace('/projects/', '') || '';
+        track('project_click', { project: slug });
+      });
+    });
+
+    // Project filter clicks
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter') || '';
+        track('filter_click', { category: filter });
+      });
+    });
+
+    // External link clicks (LinkedIn, GitHub, etc.)
+    document.querySelectorAll<HTMLAnchorElement>('a[target="_blank"]').forEach((link) => {
+      link.addEventListener('click', () => {
+        track('external_link', { url: link.href });
+      });
+    });
   </script>
   </body>
 </html>

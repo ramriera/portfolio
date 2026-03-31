@@ -6,11 +6,11 @@ const year = new Date().getFullYear();
   <div class="container-custom footer-poly__inner">
     <!-- Normal mode content — two sides -->
     <div class="footer-poly__row footer-poly__text--normal">
-      <p class="footer-poly__text text-sm text-dark-400"
+      <p class="footer-poly__text text-sm text-neutral-400"
         data-token="$font-size-sm: 0.875rem / 14px|$color-text-muted: #a8a196">
         &copy; {year} Ramon Riera. Todos los derechos reservados.
       </p>
-      <p class="footer-poly__text text-sm text-dark-400"
+      <p class="footer-poly__text text-sm text-neutral-400"
         data-token="$font-size-sm: 0.875rem / 14px|$color-text-muted: #a8a196">
         Diseñado y desarrollado con
         <span class="text-primary-500">&hearts;</span>
@@ -18,29 +18,129 @@ const year = new Date().getFullYear();
       </p>
     </div>
 
-    <!-- Code mode content — two sides -->
+    <!-- Code mode content — live session log -->
     <div class="footer-poly__row footer-poly__text--code">
-      <p class="footer-poly__text text-sm">
-        <span class="footer-poly__led"></span>
-        <span>[STATUS: OK]</span>
-        <span class="footer-poly__sep">|</span>
-        <span>[ENV: PROD]</span>
-        <span class="footer-poly__sep">|</span>
-        <span>[STACK: ASTRO+TS]</span>
+      <p class="footer-session" id="footer-session">
+        <span class="footer-session__prompt">&#10148;</span>
+        <span class="footer-session__text" id="footer-session-text"></span>
+        <span class="footer-session__cursor" id="footer-session-cursor">_</span>
       </p>
-      <p class="footer-poly__text text-sm">
-        <span class="footer-poly__prompt">&gt;_</span>
-        <span>ready for deployment</span>
-        <span class="footer-poly__cursor">|</span>
+      <p class="footer-meta">
+        <span>[EXIT_CODE: 000]</span>
+        <span class="footer-meta__sep">|</span>
+        <span>[SECURED: YES]</span>
       </p>
     </div>
   </div>
 </footer>
 
+<script>
+  function initFooterTypewriter() {
+    const textEl = document.getElementById('footer-session-text');
+    const cursorEl = document.getElementById('footer-session-cursor');
+    const footer = document.getElementById('footer-session');
+    if (!textEl || !cursorEl || !footer) return;
+
+    // Only animate in code-mode
+    const isCodeMode = () => document.body.classList.contains('code-mode');
+
+    // Segments with their CSS classes
+    const segments: { text: string; cls: string }[] = [
+      { text: '[SYSTEM] ', cls: 'footer-tok--keyword' },
+      { text: 'Session ended. ', cls: 'footer-tok--muted' },
+      { text: '0 errors. ', cls: 'footer-tok--muted' },
+      { text: '1 connection established. ', cls: 'footer-tok--muted' },
+      { text: 'Status: ', cls: 'footer-tok--muted' },
+      { text: 'Active', cls: 'footer-tok--active' },
+    ];
+
+    let hasTyped = false;
+
+    function typeSegments() {
+      if (hasTyped) return;
+      hasTyped = true;
+      textEl!.innerHTML = '';
+
+      let segIndex = 0;
+      let charIndex = 0;
+      let currentSpan: HTMLSpanElement | null = null;
+
+      function typeNext() {
+        if (!isCodeMode()) {
+          // Reset if code mode is turned off mid-type
+          hasTyped = false;
+          textEl!.innerHTML = '';
+          return;
+        }
+
+        if (segIndex >= segments.length) return; // Done
+
+        const seg = segments[segIndex];
+
+        // Create span for new segment
+        if (charIndex === 0) {
+          currentSpan = document.createElement('span');
+          currentSpan.className = seg.cls;
+          textEl!.appendChild(currentSpan);
+        }
+
+        if (charIndex < seg.text.length) {
+          currentSpan!.textContent += seg.text[charIndex];
+          charIndex++;
+          const delay = 50 + Math.random() * 70;
+          setTimeout(typeNext, delay);
+        } else {
+          // Move to next segment
+          segIndex++;
+          charIndex = 0;
+          currentSpan = null;
+          const pause = 30 + Math.random() * 60;
+          setTimeout(typeNext, pause);
+        }
+      }
+
+      typeNext();
+    }
+
+    // Observe footer entering viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && isCodeMode() && !hasTyped) {
+            typeSegments();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(footer);
+
+    // Reset when code-mode is toggled off, so it re-types on next activation
+    const modeObserver = new MutationObserver(() => {
+      if (!isCodeMode()) {
+        hasTyped = false;
+        textEl.innerHTML = '';
+      } else if (footer.getBoundingClientRect().top < window.innerHeight) {
+        // If footer is already visible when code mode is toggled on
+        if (!hasTyped) typeSegments();
+      }
+    });
+
+    modeObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  }
+
+  // Init on DOMContentLoaded and Astro page transitions
+  document.addEventListener('DOMContentLoaded', initFooterTypewriter);
+  document.addEventListener('astro:page-load', initFooterTypewriter);
+</script>
+
 <style>
   /* ── Polymorphic Footer — fixed height, zero layout shift ── */
   .footer-poly {
-    /* Fixed dimensions: identical in both modes */
     height: 120px;
     display: flex;
     align-items: center;
@@ -78,7 +178,7 @@ const year = new Date().getFullYear();
     filter: blur(4px);
     position: absolute;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
     color: var(--cm-text-muted, #7d8590);
     pointer-events: none;
   }
@@ -97,38 +197,65 @@ const year = new Date().getFullYear();
     pointer-events: auto;
   }
 
-  /* ── LED indicator — pulsing accent dot ── */
-  .footer-poly__led {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-color, #D97757);
-    box-shadow: 0 0 6px var(--accent-color, #D97757), 0 0 12px rgba(217, 119, 87, 0.3);
-    animation: footerLedPulse 2s ease-in-out infinite;
+  /* ── Session log line ── */
+  .footer-session {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+
+  .footer-session__prompt {
+    color: var(--cm-string, #50fa7b);
+    margin-right: 0.5rem;
+    font-weight: 700;
     flex-shrink: 0;
   }
 
-  @keyframes footerLedPulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--accent-color, #D97757), 0 0 12px rgba(217, 119, 87, 0.3); }
-    50% { opacity: 0.4; box-shadow: 0 0 2px var(--accent-color, #D97757); }
+  .footer-session__text {
+    color: var(--cm-text-muted, #7d8590);
   }
 
-  /* ── Separator ── */
-  .footer-poly__sep {
-    color: var(--cm-border, #30363d);
-    margin: 0 0.25rem;
-  }
-
-  /* ── Prompt & cursor ── */
-  .footer-poly__prompt {
-    color: var(--accent-color, #D97757);
-    font-weight: 700;
-  }
-
-  .footer-poly__cursor {
-    color: var(--accent-color, #D97757);
+  .footer-session__cursor {
+    color: var(--cm-string, #50fa7b);
     animation: footerCursorBlink 1s step-end infinite;
+    font-weight: 700;
+    margin-left: 1px;
+  }
+
+  /* ── Typewriter token colors ── */
+  .footer-session__text :global(.footer-tok--keyword) {
+    color: var(--cm-function, #8be9fd);
+    font-weight: 600;
+  }
+
+  .footer-session__text :global(.footer-tok--muted) {
+    color: var(--cm-text-muted, #7d8590);
+  }
+
+  .footer-session__text :global(.footer-tok--active) {
+    color: var(--cm-string, #50fa7b);
+    font-weight: 600;
+  }
+
+  /* ── Metadata (right side) ── */
+  .footer-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.65rem;
+    color: var(--cm-comment, #6272a4);
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    opacity: 0.6;
+  }
+
+  .footer-meta__sep {
+    color: var(--cm-border, #30363d);
   }
 
   @keyframes footerCursorBlink {
@@ -155,9 +282,13 @@ const year = new Date().getFullYear();
       justify-content: center;
       font-size: 0.7rem;
     }
-    /* On mobile, hide code text entirely (no code mode on mobile) */
-    .footer-poly__text--code {
-      display: none;
+    .footer-session {
+      font-size: 0.68rem;
+      justify-content: center;
+    }
+    .footer-meta {
+      font-size: 0.58rem;
+      justify-content: center;
     }
   }
 </style>

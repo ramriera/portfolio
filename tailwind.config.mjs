@@ -16,7 +16,7 @@ export default {
           800: '#86412d',
           900: '#6f3828',
         },
-        dark: {
+        neutral: {
           50: '#faf9f7',
           100: '#f3f1ed',
           200: '#e8e4dd',
@@ -36,11 +36,22 @@ export default {
       },
       animation: {
         'doctori-pulse': 'doctoriPulse 2s ease-in-out infinite',
+        'ide-blink': 'ideBlink 1s step-end infinite',
+        'ide-scan': 'ideScan 2.5s ease-in-out infinite',
       },
       keyframes: {
         doctoriPulse: {
           '0%, 100%': { boxShadow: '0 0 0 0 rgba(217, 119, 87, 0.4)' },
           '50%': { boxShadow: '0 0 0 6px rgba(217, 119, 87, 0)' },
+        },
+        ideBlink: {
+          '0%, 100%': { opacity: '0.8' },
+          '50%': { opacity: '0' },
+        },
+        ideScan: {
+          '0%': { top: '0%' },
+          '50%': { top: 'calc(100% - 2px)' },
+          '100%': { top: '0%' },
         },
       },
       transitionTimingFunction: {

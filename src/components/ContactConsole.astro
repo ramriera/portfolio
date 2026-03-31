@@ -1,0 +1,399 @@
+---
+import { siteConfig } from '@/utils/data';
+
+interface Props {
+  headingHtml?: string;
+  description?: string;
+  jsdocTitle?: string;
+  jsdocHighlight?: string;
+  jsdocDesc?: string[];
+}
+
+const {
+  headingHtml = '¿Tienes un <span class="text-primary-500">proyecto</span> en mente?',
+  description = 'Me encantaría escuchar tu idea. Hablemos sobre cómo puedo ayudarte a crear algo extraordinario.',
+  jsdocTitle = '¿Tienes un ',
+  jsdocHighlight = 'proyecto',
+  jsdocDesc = [
+    'Me encantaría escuchar tu idea.',
+    'Hablemos sobre cómo puedo ayudarte',
+    'a crear algo extraordinario.',
+  ],
+} = Astro.props;
+---
+
+<section class="section-padding" data-component="CallToAction">
+  <div class="container-custom text-center">
+
+    <!-- ═══ DESIGN MODE (original CTA) ═══ -->
+    <div class="cta-design-view">
+      <div data-reveal class="mb-6 flex justify-center">
+        <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+            <g class="icon-ruler-idle">
+              <path d="M6 38L6 8L36 38H6Z" class="icon-stroke icon-draw" />
+              <path d="M12 38L12 20L24 38" class="icon-accent icon-draw-delay" />
+              <line x1="6" y1="14" x2="11" y2="14" class="icon-stroke icon-draw" />
+              <line x1="6" y1="20" x2="10" y2="20" class="icon-stroke icon-draw" />
+              <line x1="6" y1="26" x2="11" y2="26" class="icon-stroke icon-draw" />
+              <line x1="6" y1="32" x2="10" y2="32" class="icon-stroke icon-draw" />
+            </g>
+            <g class="icon-ruler-pencil">
+              <line x1="32" y1="4" x2="38" y2="10" class="icon-accent" />
+              <line x1="32" y1="4" x2="30" y2="2" class="icon-accent" />
+              <circle cx="38" cy="10" r="1.2" class="icon-accent-fill" />
+            </g>
+          </svg>
+        </span>
+      </div>
+      <h2 data-reveal data-delay="100" class="heading-lg mb-6 sm:whitespace-nowrap"
+        data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)"
+        set:html={headingHtml} />
+      <p data-reveal data-delay="200" class="text-body text-lg mb-10"
+        data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$font-size-lg: 1.125rem / 18px">
+        {description}
+      </p>
+      <div data-reveal data-delay="300" class="flex flex-wrap items-center justify-center gap-4"
+        data-component="CTAButtons" data-token="$spacing-gap: 1rem / 16px">
+        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base hero-cta-normal"
+          data-component="ButtonContact"
+          data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$radius-full: 9999px">
+          Contactar
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+        <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
+          class="btn-outline text-base btn-cv-normal"
+          data-component="ButtonCV"
+          data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px">
+          Descargar CV
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- ═══ CODE MODE — contact_shell.sh terminal ═══ -->
+    <div class="cta-code-view" id="cta-console">
+      <div class="cta-console">
+        <!-- Titlebar -->
+        <div class="cta-console__titlebar">
+          <div class="cta-console__dots">
+            <span class="cta-dot" style="background:#ff5f57"></span>
+            <span class="cta-dot" style="background:#febc2e"></span>
+            <span class="cta-dot" style="background:#28c840"></span>
+          </div>
+          <span class="cta-console__filename">
+            <svg class="cta-console__file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" />
+            </svg>
+            contact_shell.sh
+          </span>
+          <span class="cta-console__tab">contact_shell.sh</span>
+        </div>
+
+        <!-- Body -->
+        <div class="cta-console__body">
+          <!-- JSDoc heading -->
+          <div class="cta-console__jsdoc">
+            <div class="cta-console__line"><span class="cta-gutter">1</span><span class="cta-code"><span class="cta-tok--comment">/**</span></span></div>
+            <div class="cta-console__line"><span class="cta-gutter">2</span><span class="cta-code"><span class="cta-tok--comment"> *</span> <span class="cta-tok--desc">{jsdocTitle}</span><span class="cta-tok--highlight">{jsdocHighlight}</span><span class="cta-tok--desc"> en mente?</span></span></div>
+            <div class="cta-console__line"><span class="cta-gutter">3</span><span class="cta-code"><span class="cta-tok--comment"> *</span></span></div>
+            {jsdocDesc.map((line, i) => (
+              <div class="cta-console__line">
+                <span class="cta-gutter">{4 + i}</span>
+                <span class="cta-code">
+                  <span class="cta-tok--comment"> *</span>
+                  {i === 0 ? <><span class="cta-tok--tag"> @description</span> <span class="cta-tok--value">{line}</span></> : <span class="cta-tok--value"> {line}</span>}
+                </span>
+              </div>
+            ))}
+            <div class="cta-console__line"><span class="cta-gutter">{4 + jsdocDesc.length}</span><span class="cta-code"><span class="cta-tok--comment"> */</span></span></div>
+          </div>
+
+          <!-- Terminal output line (typewriter) -->
+          <div class="cta-console__output" id="cta-output">
+            <span class="cta-tok--prompt">&#10148;</span>
+            <span class="cta-console__typed" id="cta-typed-text"></span>
+            <span class="cta-console__cursor" id="cta-cursor">_</span>
+          </div>
+
+          <!-- Command lines (terminal style) -->
+          <div class="cta-console__cmds">
+            <a href={`mailto:${siteConfig.email}`} class="cta-console__cmd-line" data-component="ButtonRunCmd">
+              <span class="cta-gutter">{5 + jsdocDesc.length}</span>
+              <span class="cta-code">
+                <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">run</span> <span class="cta-cmd-file">send_email.sh</span><span class="cta-cmd-cursor">_</span>
+              </span>
+            </a>
+            <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
+              class="cta-console__cmd-line" data-component="ButtonCVCode">
+              <span class="cta-gutter">{6 + jsdocDesc.length}</span>
+              <span class="cta-code">
+                <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">get</span> <span class="cta-cmd-file">cv.pdf</span><span class="cta-cmd-cursor">_</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function initCtaTypewriter() {
+    const typedEl = document.getElementById('cta-typed-text');
+    const consoleEl = document.getElementById('cta-console');
+    if (!typedEl || !consoleEl) return;
+
+    const isCodeMode = () => document.body.classList.contains('code-mode');
+
+    const message = 'CONTACT_MODULE: IDLE... Type command to execute.';
+    let hasTyped = false;
+
+    function typeMessage() {
+      if (hasTyped) return;
+      hasTyped = true;
+      typedEl!.textContent = '';
+
+      let i = 0;
+      function typeNext() {
+        if (!isCodeMode()) {
+          hasTyped = false;
+          typedEl!.textContent = '';
+          return;
+        }
+        if (i < message.length) {
+          typedEl!.textContent += message[i];
+          i++;
+          const delay = 50 + Math.random() * 70;
+          setTimeout(typeNext, delay);
+        }
+      }
+      typeNext();
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && isCodeMode() && !hasTyped) {
+            typeMessage();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(consoleEl);
+
+    const modeObserver = new MutationObserver(() => {
+      if (!isCodeMode()) {
+        hasTyped = false;
+        typedEl.textContent = '';
+      } else if (consoleEl.getBoundingClientRect().top < window.innerHeight) {
+        if (!hasTyped) typeMessage();
+      }
+    });
+
+    modeObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initCtaTypewriter);
+  document.addEventListener('astro:page-load', initCtaTypewriter);
+</script>
+
+<style>
+  /* ═══ Design / Code mode swap ═══ */
+  .cta-code-view {
+    display: none;
+  }
+
+  :global(.code-mode) .cta-design-view {
+    display: none !important;
+  }
+
+  :global(.code-mode) .cta-code-view {
+    display: block;
+  }
+
+  /* ═══ Console window — matches jsdoc-window / readme-window ═══ */
+  .cta-console {
+    background: #1e1e2e;
+    border-radius: 8px;
+    border: 1px solid var(--cm-border, #30363d);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    text-align: left;
+  }
+
+  .cta-console__titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    background: #181825;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .cta-console__dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .cta-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .cta-console__filename {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #7d8590;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .cta-console__file-icon {
+    color: #7d8590;
+    flex-shrink: 0;
+  }
+
+  .cta-console__tab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #e6edf3;
+    background: #1e1e2e;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px 4px 0 0;
+    margin-left: auto;
+    border: 1px solid var(--cm-border, #30363d);
+    border-bottom: 1px solid #1e1e2e;
+  }
+
+  /* ═══ Console body ═══ */
+  .cta-console__body {
+    padding: 0.5rem 0;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  /* ── JSDoc block ── */
+  .cta-console__jsdoc {
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-console__line {
+    display: flex;
+    align-items: baseline;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .cta-gutter {
+    display: inline-block;
+    min-width: 36px;
+    text-align: right;
+    padding-right: 12px;
+    color: var(--cm-text-muted, #7d8590);
+    opacity: 0.3;
+    user-select: none;
+    flex-shrink: 0;
+    font-size: inherit;
+    line-height: inherit;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .cta-code {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cta-tok--comment {
+    color: var(--cm-comment, #6272a4);
+    opacity: 0.5;
+  }
+
+  .cta-tok--desc {
+    color: var(--cm-text-secondary, #c9d1d9);
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+
+  .cta-tok--highlight {
+    color: var(--cm-tag, #ff79c6);
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+
+  .cta-tok--tag {
+    color: var(--cm-keyword, #bd93f9);
+  }
+
+  .cta-tok--value {
+    color: var(--cm-text-muted, #7d8590);
+  }
+
+  /* ── Terminal output (typewriter) ── */
+  .cta-console__output {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0.5rem 0.875rem;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    white-space: nowrap;
+  }
+
+  .cta-tok--prompt {
+    color: var(--cm-string, #50fa7b);
+    margin-right: 0.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .cta-console__typed {
+    color: var(--cm-text-muted, #7d8590);
+  }
+
+  .cta-console__cursor {
+    color: var(--cm-string, #50fa7b);
+    animation: ctaCursorBlink 1s step-end infinite;
+    font-weight: 700;
+    margin-left: 1px;
+  }
+
+  @keyframes ctaCursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ── Command lines (terminal style) ── */
+  .cta-console__cmds {
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.5rem 0 0.75rem;
+  }
+
+  /* cmd-line base + tokens handled by global.css */
+
+  /* ═══ Responsive ═══ */
+  @media (max-width: 640px) {
+    .cta-console__body {
+      font-size: 0.7rem;
+    }
+
+    .cta-console__tab {
+      display: none;
+    }
+  }
+</style>

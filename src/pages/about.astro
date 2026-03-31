@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import profileImg from '@/assets/shared/foto-perfil.png';
 import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
+import ContactConsole from '@/components/ContactConsole.astro';
 import WordsCarousel from '@/components/WordsCarousel.astro';
 
 const aboutWords = ['creador', 'arquitecto', 'constructor'];
@@ -12,8 +13,8 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
   title="About ⚡ Ramon Riera"
   description="Conoce a Ramon Riera, Design Systems & Strategy Lead especializado en UX Strategy, DesignOps y Product Design."
 >
-  <!-- Hero -->
-  <section class="section-padding" data-component="AboutHero">
+  <!-- Hero (design mode) -->
+  <section class="section-padding about-hero-design" data-component="AboutHero">
     <div class="container-custom">
       <div class="max-w-4xl">
         <div data-reveal class="mb-8">
@@ -41,7 +42,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
         <!-- Title (same element for both modes, CSS handles skin) -->
         <h1 data-reveal data-delay="100" class="heading-xl about-heading mb-8"
           data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2rem / 32px">
-          <span class="whitespace-nowrap">Diseñador, pensador,</span><br />
+          <span class="sm:whitespace-nowrap">Diseñador, pensador,</span><br />
           <span class="text-primary-500"><WordsCarousel words={aboutWords} interval={3000} /></span>
         </h1>
 
@@ -54,6 +55,50 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
     </div>
   </section>
 
+  <!-- Hero (code mode): about.tsx -->
+  <section class="section-padding about-hero-code" data-component="AboutHeroCode">
+    <div class="container-custom">
+        <div class="file-block about-hero-window">
+          <div class="file-block__titlebar">
+            <div class="pmd-dots">
+              <span class="pmd-dot" style="background:#ff5f57"></span>
+              <span class="pmd-dot" style="background:#febc2e"></span>
+              <span class="pmd-dot" style="background:#28c840"></span>
+            </div>
+            <span class="file-block__filename">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
+              </svg>
+              about.tsx
+            </span>
+            <span class="file-block__tab">about.tsx</span>
+          </div>
+          <div class="file-block__body">
+            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-keyword">import type</span> <span class="pmd-bracket">{`{`}</span> <span class="pmd-fn">Profile</span> <span class="pmd-bracket">{`}`}</span> <span class="pmd-keyword">from</span> <span class="pmd-string">'@types'</span><span class="pmd-punct">;</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">personalProfile</span><span class="pmd-punct">:</span> <span class="pmd-fn">Profile</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{`{`}</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">  <span class="pmd-key">name</span><span class="pmd-punct">:</span> <span class="pmd-string">"Ramón Riera"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">  <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"UX Lead & Product Designer"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">  <span class="pmd-key">experience</span><span class="pmd-punct">:</span> <span class="pmd-string">"8+ years"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code">  <span class="pmd-key">status</span><span class="pmd-punct">:</span> <span class="pmd-impact">"available_for_new_projects"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code">  <span class="pmd-key">specialties</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code">    <span class="pmd-string">"Design Systems"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code">    <span class="pmd-string">"Product Strategy"</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code">    <span class="pmd-string">"UX Operations"</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code">  <span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code"></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code">  <span class="pmd-key">vision</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code">    <span class="pmd-key">data_driven</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code">    <span class="pmd-key">user_centric</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">18</span><span class="file-block__code">    <span class="pmd-key">outcome_focused</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">19</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span></span></div>
+            <div class="file-block__line"><span class="file-block__gutter">20</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span><span class="pmd-punct">;</span></span></div>
+          </div>
+        </div>
+    </div>
+  </section>
+
   <!-- Photo + Bio -->
   <section class="pb-20" data-component="BiographySection">
     <div class="container-custom">
@@ -61,44 +106,110 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
         <!-- Photo -->
         <div data-reveal="left" class="lg:col-span-2">
           <div class="lg:sticky lg:top-28">
-            <div class="rounded-2xl overflow-hidden dashed-border mb-6">
+            <!-- Design mode photo -->
+            <div class="rounded-2xl overflow-hidden dashed-border mb-6 about-pg-photo-design">
               <Image
                 src={profileImg}
                 alt="Ramon Riera"
-                class="w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-[filter] duration-700"
+                class="w-full h-auto grayscale hover:grayscale-0 transition-[filter] duration-700"
                 loading="lazy"
                 decoding="async"
                 widths={[400, 800]}
                 sizes="(max-width: 1024px) 100vw, 40vw"
               />
             </div>
+            <!-- Code mode photo: Asset Viewer -->
+            <div class="mb-6 about-pg-photo-code">
+              <div class="asset-preview">
+                <div class="asset-preview__toolbar">
+                  <div class="asset-preview__path">
+                    <svg class="asset-preview__path-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span class="asset-preview__path-dir">assets</span>
+                    <span class="asset-preview__path-sep">&gt;</span>
+                    <span class="asset-preview__path-dir">shared</span>
+                    <span class="asset-preview__path-sep">&gt;</span>
+                    <span class="asset-preview__path-file">foto_perfil.png</span>
+                  </div>
+                  <div class="asset-preview__dims">
+                    <span>800 × 1000</span>
+                    <span class="asset-preview__dims-sep">|</span>
+                    <span>PNG</span>
+                  </div>
+                </div>
+                <div class="asset-preview__canvas">
+                  <div class="asset-preview__img-wrap">
+                    <Image
+                      src={profileImg}
+                      alt="Ramon Riera"
+                      class="asset-preview__img"
+                      loading="lazy"
+                      decoding="async"
+                      widths={[400, 800]}
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
+                  </div>
+                </div>
+                <div class="asset-preview__status">
+                  <span class="asset-preview__status-item">Layer: Profile</span>
+                  <span class="asset-preview__status-sep">|</span>
+                  <span class="asset-preview__status-item">Format: PNG</span>
+                </div>
+              </div>
+            </div>
 
             <!-- Social links: Normal mode -->
-            <div class="flex items-center gap-4 social-normal" data-component="SocialLinks" data-token="$spacing-gap: 1rem / 16px">
-              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <div class="grid grid-cols-3 gap-3 social-normal" data-component="SocialLinks" data-token="$spacing-gap: 1rem / 16px">
+              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <span class="text-sm font-medium text-neutral-700">LinkedIn</span>
               </a>
-              <a href={siteConfig.social.medium} target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+              <a href={siteConfig.social.medium} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+                <span class="text-sm font-medium text-neutral-700">Medium</span>
               </a>
-              <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer" class="p-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" /></svg>
+              <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
+                <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" /></svg>
+                <span class="text-sm font-medium text-neutral-700">CV</span>
               </a>
             </div>
-            <!-- Social links: Code mode (import syntax with icons) -->
-            <div class="social-code flex flex-col gap-2">
-              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="social-import social-import--linkedin">
-                <svg class="social-import-icon w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                <span class="code-keyword">import</span> {'{'} <span class="code-import-name">LinkedIn</span> {'}'} <span class="code-keyword">from</span> <span class="code-string">'@socials'</span>
-              </a>
-              <a href={siteConfig.social.medium} target="_blank" rel="noopener noreferrer" class="social-import social-import--medium">
-                <svg class="social-import-icon w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
-                <span class="code-keyword">import</span> {'{'} <span class="code-import-name">Medium</span> {'}'} <span class="code-keyword">from</span> <span class="code-string">'@blog'</span>
-              </a>
-              <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer" class="social-import social-import--cv">
-                <svg class="social-import-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" /></svg>
-                <span class="code-fn">fetch</span><span class="code-parens">(</span><span class="code-string">'/cv_riera.pdf'</span><span class="code-parens">)</span>
-              </a>
+            <!-- Social links: Code mode — social_links.sh console -->
+            <div class="social-code">
+              <div class="file-block">
+                <div class="file-block__titlebar">
+                  <div class="pmd-dots">
+                    <span class="pmd-dot" style="background:#ff5f57"></span>
+                    <span class="pmd-dot" style="background:#febc2e"></span>
+                    <span class="pmd-dot" style="background:#28c840"></span>
+                  </div>
+                  <span class="file-block__filename">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                    social_links.sh
+                  </span>
+                  <span class="file-block__tab">social_links.sh</span>
+                </div>
+                <div class="file-block__body file-block__body--terminal">
+                  <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="social-cmd-line">
+                    <span class="cta-gutter">1</span>
+                    <span class="cta-code">
+                      <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">run</span> <span class="cta-cmd-file">open_linkedin.sh</span><span class="cta-cmd-cursor">_</span>
+                    </span>
+                  </a>
+                  <a href={siteConfig.social.medium} target="_blank" rel="noopener noreferrer" class="social-cmd-line">
+                    <span class="cta-gutter">2</span>
+                    <span class="cta-code">
+                      <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">read</span> <span class="cta-cmd-file">medium_articles.log</span><span class="cta-cmd-cursor">_</span>
+                    </span>
+                  </a>
+                  <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer" class="social-cmd-line">
+                    <span class="cta-gutter">3</span>
+                    <span class="cta-code">
+                      <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">get</span> <span class="cta-cmd-file">curriculum_vitae.pdf</span><span class="cta-cmd-cursor">_</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -122,47 +233,41 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                 Cuando no estoy diseñando, probablemente estoy explorando nuevas herramientas, leyendo sobre <strong>psicología cognitiva</strong> o experimentando con <strong>código creativo</strong>.
               </p>
             </div>
-            <!-- Code mode: README / JSDoc comment block -->
-            <div class="bio-readme">
-              <div class="readme-window">
-                <div class="readme-titlebar">
-                  <div class="readme-dots">
-                    <span class="json-dot json-dot--red"></span>
-                    <span class="json-dot json-dot--yellow"></span>
-                    <span class="json-dot json-dot--green"></span>
+            <!-- Code mode: bio.md file-block -->
+            <div class="about-code-block about-bio-code">
+              <div class="file-block">
+                <div class="file-block__titlebar">
+                  <div class="pmd-dots">
+                    <span class="pmd-dot" style="background:#ff5f57"></span>
+                    <span class="pmd-dot" style="background:#febc2e"></span>
+                    <span class="pmd-dot" style="background:#28c840"></span>
                   </div>
-                  <span class="readme-filename">
-                    <svg class="readme-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                    README.md
+                  <span class="file-block__filename">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                    bio.md
                   </span>
-                  <span class="readme-tab-active">README.md</span>
+                  <span class="file-block__tab">bio.md</span>
                 </div>
-                <pre class="readme-body"><code><span class="readme-comment">/**</span>
-<span class="readme-comment"> * <span class="readme-tag">@module</span> ramon-riera</span>
-<span class="readme-comment"> * <span class="readme-tag">@version</span> 8.0.0</span>
-<span class="readme-comment"> * <span class="readme-tag">@description</span></span>
-<span class="readme-comment"> *</span>
-<span class="readme-comment"> * Empecé mi carrera como diseñador gráfico, pero rápidamente</span>
-<span class="readme-comment"> * descubrí que mi verdadera pasión estaba en la intersección</span>
-<span class="readme-comment"> * entre <span class="readme-highlight">diseño</span> y <span class="readme-highlight">tecnología</span>. El mundo digital me fascinó</span>
-<span class="readme-comment"> * por su capacidad de crear experiencias que impactan a</span>
-<span class="readme-comment"> * millones de personas.</span>
-<span class="readme-comment"> *</span>
-<span class="readme-comment"> * He tenido el privilegio de trabajar con empresas como</span>
-<span class="readme-comment"> * <span class="readme-highlight">Banco Sabadell</span>, <span class="readme-highlight">Iberia</span>, y <span class="readme-highlight">Doctori</span>, aplicando mi</span>
-<span class="readme-comment"> * experiencia en <span class="readme-highlight">Design Systems</span>, <span class="readme-highlight">Product Design</span> y <span class="readme-highlight">Design</span></span>
-<span class="readme-comment"> * <span class="readme-highlight">Operations</span> para transformar productos digitales complejos</span>
-<span class="readme-comment"> * en experiencias intuitivas.</span>
-<span class="readme-comment"> *</span>
-<span class="readme-comment"> * <span class="readme-tag">@methodology</span> <span class="readme-highlight">Design Thinking</span> | <span class="readme-highlight">Lean UX</span> | <span class="readme-highlight">Agile</span></span>
-<span class="readme-comment"> * <span class="readme-tag">@philosophy</span> El diseño no es solo cómo se ve algo,</span>
-<span class="readme-comment"> *   sino cómo funciona, cómo se siente y qué problema resuelve.</span>
-<span class="readme-comment"> *</span>
-<span class="readme-comment"> * <span class="readme-tag">@idle</span> Explorando herramientas, leyendo sobre psicología</span>
-<span class="readme-comment"> *   cognitiva o experimentando con código creativo.</span>
-<span class="readme-comment"> *</span>
-<span class="readme-comment"> * <span class="readme-tag">@license</span> MIT</span>
-<span class="readme-comment"> */</span></code></pre>
+                <div class="file-block__body">
+                  <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">/**</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@module</span> ramon-riera</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@version</span> 8.0.0</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@description</span></span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-comment"> *</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code"><span class="pmd-comment"> * Uno <span class="pmd-impact">diseño</span> e <span class="pmd-impact">ingeniería</span> para crear productos digitales</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"><span class="pmd-comment"> * que convierten. De la investigación de usuario al token</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"><span class="pmd-comment"> * de diseño desplegado en producción.</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-comment"> *</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code"><span class="pmd-comment"> * He trabajado con <span class="pmd-impact">Banco Sabadell</span>, <span class="pmd-impact">Iberia</span> y <span class="pmd-impact">Doctori</span></span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code"><span class="pmd-comment"> * construyendo <span class="pmd-impact">Design Systems</span> y procesos de <span class="pmd-impact">DesignOps</span></span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code"><span class="pmd-comment"> * que escalan equipos y aceleran entregas.</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code"><span class="pmd-comment"> *</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@methodology</span> Design Thinking · Lean UX · Agile</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@philosophy</span> El diseño no es solo cómo se ve algo,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code"><span class="pmd-comment"> *   sino cómo funciona, cómo se siente y qué problema resuelve.</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@license</span> MIT</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">18</span><span class="file-block__code"><span class="pmd-comment"> */</span></span></div>
+                </div>
               </div>
             </div>
           </div>
@@ -181,7 +286,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                     {/* Node — solid accent, current role */}
                     <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-primary-500 border-2 border-primary-300 animate-doctori-pulse"></div>
                     <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary-500">{doctori.year}</span>
-                    <h3 class="font-bold text-lg mt-1 text-dark-900">{doctori.company}</h3>
+                    <h3 class="font-bold text-lg mt-1 text-neutral-900">{doctori.company}</h3>
                     <p class="text-sm font-medium text-gray-500 mb-2">{doctori.role}</p>
                     <p class="text-sm text-gray-400 leading-relaxed">{doctori.description}</p>
                   </div>
@@ -211,7 +316,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                         <div class="consulting-item ml-0 sm:ml-1 transition-opacity duration-300">
                           <span class="text-[10px] sm:text-xs text-gray-300 font-medium">{project.period}</span>
                           <div class="flex items-baseline gap-2 mb-1 mt-0.5">
-                            <span class="font-bold text-dark-900 text-sm">{project.client}</span>
+                            <span class="font-bold text-neutral-900 text-sm">{project.client}</span>
                           </div>
                           <p class="text-xs text-gray-400 mb-1.5">{project.role}</p>
                           <p class="text-sm text-gray-400 leading-relaxed">{project.description}</p>
@@ -230,7 +335,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                     {/* Node — accent outline, end of path */}
                     <div class="absolute left-[-7px] top-[2px] w-3 h-3 rounded-full bg-white border-2 border-primary-500"></div>
                     <span class="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-gray-400">{jbm.year}</span>
-                    <h3 class="font-bold text-lg mt-1 text-dark-900">{jbm.company}</h3>
+                    <h3 class="font-bold text-lg mt-1 text-neutral-900">{jbm.company}</h3>
                     <p class="text-sm font-medium text-gray-500 mb-2">{jbm.role}</p>
                     <p class="text-sm text-gray-400 leading-relaxed">{jbm.description}</p>
                   </div>
@@ -238,37 +343,62 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               })()}
             </div>
 
-            <!-- Code mode: git log format -->
-            <div class="timeline-gitlog">
-              <div class="gitlog-pre">
-                <div class="gitlog-header">$ git log --oneline --graph --all</div>
-                {/* Main entries */}
-                {mainTimeline.map((item) => (
-                  <div class="gitlog-entry">
-                    <span class="gitlog-marker">*</span>{' '}
-                    <span class="gitlog-hash">{`${Math.random().toString(16).slice(2, 9)}`}</span>{' '}
-                    <span class="gitlog-date">({item.year})</span>{' '}
-                    <span class="gitlog-company">[{item.company}]</span>{' '}
-                    <span class="gitlog-role">{item.role}</span>
-                    <br />
-                    <span class="gitlog-indent">│</span>
-                    <span class="gitlog-message">{' '}{item.gitMsg}</span>
+            <!-- Code mode: experience.ts file-block -->
+            <div class="about-code-block about-experience-code">
+              <div class="file-block">
+                <div class="file-block__titlebar">
+                  <div class="pmd-dots">
+                    <span class="pmd-dot" style="background:#ff5f57"></span>
+                    <span class="pmd-dot" style="background:#febc2e"></span>
+                    <span class="pmd-dot" style="background:#28c840"></span>
                   </div>
-                ))}
-                {/* Consulting as merge commits */}
-                <div class="gitlog-entry" style="opacity: 0.6;">
-                  <span class="gitlog-marker">│</span>{' '}
-                  <span class="gitlog-date" style="color: var(--color-dark-400);">// consulting branch</span>
+                  <span class="file-block__filename">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/></svg>
+                    experience.ts
+                  </span>
+                  <span class="file-block__tab">experience.ts</span>
                 </div>
-                {consultingBlock.projects.map((p) => (
-                  <div class="gitlog-entry" style="opacity: 0.6;">
-                    <span class="gitlog-marker">├</span>{' '}
-                    <span class="gitlog-hash">{`${Math.random().toString(16).slice(2, 9)}`}</span>{' '}
-                    <span class="gitlog-date">({p.period})</span>{' '}
-                    <span class="gitlog-company">[{p.client}]</span>{' '}
-                    <span class="gitlog-message">{p.description}</span>
-                  </div>
-                ))}
+                <div class="file-block__body">
+                  <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-keyword">import type</span> <span class="pmd-bracket">{`{`}</span> <span class="pmd-fn">CareerEntry</span> <span class="pmd-bracket">{`}`}</span> <span class="pmd-keyword">from</span> <span class="pmd-string">'@types'</span><span class="pmd-punct">;</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">experience</span><span class="pmd-punct">:</span> <span class="pmd-fn">CareerEntry</span><span class="pmd-bracket">[]</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">[</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">  <span class="pmd-bracket">{`{`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">    <span class="pmd-key">company</span><span class="pmd-punct">:</span> <span class="pmd-string">"Doctori.com"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"Senior Product Designer & Design Ops"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code">    <span class="pmd-key">period</span><span class="pmd-punct">:</span> <span class="pmd-string">"2021 — Presente"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code">    <span class="pmd-key">current</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code">    <span class="pmd-keyword">@impact</span><span class="pmd-punct">:</span> <span class="pmd-string">"<span class="pmd-metric">+40%</span> velocidad de entrega con Design System"</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code"></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code">  <span class="pmd-comment">// Consultoría Senior (en paralelo)</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code">  <span class="pmd-bracket">{`{`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code">    <span class="pmd-key">company</span><span class="pmd-punct">:</span> <span class="pmd-string">"Leemons"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code">    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"Product & UI Consultant"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code">    <span class="pmd-key">period</span><span class="pmd-punct">:</span> <span class="pmd-string">"2023 — 2024"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code">    <span class="pmd-keyword">@impact</span><span class="pmd-punct">:</span> <span class="pmd-string">"UI estratégica para nuevos modelos de negocio"</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">18</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">19</span><span class="file-block__code">  <span class="pmd-bracket">{`{`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">20</span><span class="file-block__code">    <span class="pmd-key">company</span><span class="pmd-punct">:</span> <span class="pmd-string">"Iberia (IAG)"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">21</span><span class="file-block__code">    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"Design Systems Consultant"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">22</span><span class="file-block__code">    <span class="pmd-key">period</span><span class="pmd-punct">:</span> <span class="pmd-string">"2022 — 2023"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">23</span><span class="file-block__code">    <span class="pmd-keyword">@impact</span><span class="pmd-punct">:</span> <span class="pmd-string">"Tokens multi-plataforma Web + App"</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">24</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">25</span><span class="file-block__code">  <span class="pmd-bracket">{`{`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">26</span><span class="file-block__code">    <span class="pmd-key">company</span><span class="pmd-punct">:</span> <span class="pmd-string">"Banco Sabadell"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">27</span><span class="file-block__code">    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"Design Systems Consultant"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">28</span><span class="file-block__code">    <span class="pmd-key">period</span><span class="pmd-punct">:</span> <span class="pmd-string">"2021 — 2022"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">29</span><span class="file-block__code">    <span class="pmd-keyword">@impact</span><span class="pmd-punct">:</span> <span class="pmd-string">"<span class="pmd-metric">95%</span> adopción de componentes en banca digital"</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">30</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">31</span><span class="file-block__code"></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">32</span><span class="file-block__code">  <span class="pmd-comment">// Origen</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">33</span><span class="file-block__code">  <span class="pmd-bracket">{`{`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">34</span><span class="file-block__code">    <span class="pmd-key">company</span><span class="pmd-punct">:</span> <span class="pmd-string">"JBM"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">35</span><span class="file-block__code">    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"Junior Designer"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">36</span><span class="file-block__code">    <span class="pmd-key">period</span><span class="pmd-punct">:</span> <span class="pmd-string">"2017 — 2021"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">37</span><span class="file-block__code">    <span class="pmd-keyword">@impact</span><span class="pmd-punct">:</span> <span class="pmd-string">"Branding &amp; web design projects"</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">38</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">39</span><span class="file-block__code"><span class="pmd-bracket">]</span><span class="pmd-punct">;</span></span></div>
+                </div>
               </div>
             </div>
           </div>
@@ -281,52 +411,60 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white transition-all duration-300">
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark-400">Ganancia de Eficiencia</span>
+                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400">Ganancia de Eficiencia</span>
                 </div>
-                <div class="font-mono text-4xl md:text-5xl font-bold text-dark-900 tracking-tight">+40<span class="text-primary-500">%</span></div>
+                <div class="font-mono text-4xl md:text-5xl font-bold text-neutral-900 tracking-tight">+40%</div>
                 <p class="text-body-sm mt-2">Mejora en velocidad de entrega de equipos de diseño tras implementación de Design Systems.</p>
               </div>
               <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white transition-all duration-300">
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark-400">Adopción de Componentes</span>
+                  <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400">Adopción de Componentes</span>
                 </div>
-                <div class="font-mono text-4xl md:text-5xl font-bold text-dark-900 tracking-tight">95<span class="text-primary-500">%</span></div>
+                <div class="font-mono text-4xl md:text-5xl font-bold text-neutral-900 tracking-tight">95%</div>
                 <p class="text-body-sm mt-2">Tasa de adopción de componentes del Design System en equipos de producto.</p>
               </div>
             </div>
 
-            <!-- Code mode: monitoring dashboard -->
-            <div class="kpi-grid-code">
-              <div class="kpi-monitor-window">
-                <div class="kpi-monitor-titlebar">
-                  <div class="json-dots">
-                    <span class="json-dot json-dot--red"></span>
-                    <span class="json-dot json-dot--yellow"></span>
-                    <span class="json-dot json-dot--green"></span>
+            <!-- Code mode: stack.json file-block -->
+            <div class="about-code-block about-stack-code">
+              <div class="file-block">
+                <div class="file-block__titlebar">
+                  <div class="pmd-dots">
+                    <span class="pmd-dot" style="background:#ff5f57"></span>
+                    <span class="pmd-dot" style="background:#febc2e"></span>
+                    <span class="pmd-dot" style="background:#28c840"></span>
                   </div>
-                  <span class="kpi-monitor-filename">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
-                    dashboard.metrics
+                  <span class="file-block__filename">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                    stack.json
                   </span>
+                  <span class="file-block__tab">stack.json</span>
                 </div>
-                <div class="kpi-monitor-body">
-                  <div class="kpi-monitor-row">
-                    <span class="kpi-monitor-status kpi-monitor-status--up"></span>
-                    <span class="kpi-monitor-label">efficiency_boost</span>
-                    <span class="kpi-monitor-bar"><span class="kpi-monitor-fill" style="width: 80%"></span></span>
-                    <span class="kpi-monitor-value">+40%</span>
-                  </div>
-                  <div class="kpi-monitor-row">
-                    <span class="kpi-monitor-status kpi-monitor-status--up"></span>
-                    <span class="kpi-monitor-label">component_adoption</span>
-                    <span class="kpi-monitor-bar"><span class="kpi-monitor-fill" style="width: 95%"></span></span>
-                    <span class="kpi-monitor-value">95%</span>
-                  </div>
+                <div class="file-block__body">
+                  <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-bracket">{`{`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code">  <span class="pmd-key">"design_systems"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code">    <span class="pmd-key">"tokens"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Token Studio"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Style Dictionary"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Supernova"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">    <span class="pmd-key">"components"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Storybook"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Figma Libraries"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Atomic Design"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">    <span class="pmd-key">"governance"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Contribution Model"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Changelog"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Adoption Metrics"</span><span class="pmd-bracket">]</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code">  <span class="pmd-key">"frontend_stack"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code">    <span class="pmd-key">"design"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Figma"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Framer"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Cursor"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Lovable"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code">    <span class="pmd-key">"code"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"TypeScript"</span><span class="pmd-punct">,</span> <span class="pmd-string">"JavaScript"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Astro"</span><span class="pmd-punct">,</span> <span class="pmd-string">"TailwindCSS"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code">    <span class="pmd-key">"ops"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"GitHub"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Git"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Vercel"</span><span class="pmd-bracket">]</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code"></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code">  <span class="pmd-key">"product_strategy"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code">    <span class="pmd-key">"research"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Maze"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Hotjar"</span><span class="pmd-punct">,</span> <span class="pmd-string">"FigJam"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Typeform"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code">    <span class="pmd-key">"methodology"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Design Thinking"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Lean UX"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Data-Driven"</span><span class="pmd-bracket">]</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">18</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -336,8 +474,8 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
   <!-- Metodología y Stack -->
   <section class="section-padding methodology-stack-section" id="metodologia-stack" data-component="MethodologyStack">
     <div class="container-custom">
-      <div class="max-w-4xl mx-auto">
-        <div data-reveal class="text-center mb-16">
+      <div class="max-w-5xl mx-auto methodology-inner">
+        <div data-reveal class="text-center mb-16 methodology-header">
           <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
               <!-- Large gear -->
@@ -363,10 +501,10 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
         <div class="methodology-block">
           <!-- Design Principles -->
           <div data-reveal data-component="DesignPrinciples">
-            <h2 class="heading-md mb-8">Principios de Diseño</h2>
+            <h2 class="heading-md mb-8 methodology-heading">Principios de Diseño</h2>
 
             <div class="principles-normal">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- 01 Sistemas sobre Pantallas -->
                 <div class="lint-rule group">
                   <div class="lint-rule-header">
@@ -424,43 +562,31 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               </div>
             </div>
 
-            <!-- Code mode: linting rules config -->
+            <!-- Code mode: design principles -->
             <div class="principles-code">
-              <div class="principles-config-window">
-                <div class="principles-config-titlebar">
-                  <div class="json-dots">
-                    <span class="json-dot json-dot--red"></span>
-                    <span class="json-dot json-dot--yellow"></span>
-                    <span class="json-dot json-dot--green"></span>
+              <div class="file-block">
+                <div class="file-block__titlebar">
+                  <div class="pmd-dots">
+                    <span class="pmd-dot" style="background:#ff5f57"></span>
+                    <span class="pmd-dot" style="background:#febc2e"></span>
+                    <span class="pmd-dot" style="background:#28c840"></span>
                   </div>
-                  <span class="principles-config-filename">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                    .designlintrc.ts
+                  <span class="file-block__filename">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/></svg>
+                    design_principles.ts
                   </span>
+                  <span class="file-block__tab">design_principles.ts</span>
                 </div>
-                <pre class="principles-config-body"><code><span class="pp-keyword">export default</span> <span class="pp-bracket">{"{"}</span>
-  <span class="pp-key">rules</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-
-    <span class="pp-comment">// [ESTRATEGIA] Infraestructuras escalables y consistentes</span>
-    <span class="pp-string">"sistemas-sobre-pantallas"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-
-    <span class="pp-comment">// [INGENIERÍA] Tokens sincronizados: Figma &rarr; Code &rarr; Producción</span>
-    <span class="pp-string">"unica-fuente-de-verdad"</span><span class="pp-punct">:</span>   <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-
-    <span class="pp-comment">// [CULTURA] WCAG AA mínimo en cada componente</span>
-    <span class="pp-string">"a11y-por-defecto"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">level</span><span class="pp-punct">:</span> <span class="pp-string">"AA"</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-
-    <span class="pp-comment">// [ESTRATEGIA] Automatizar lo predecible, diseñar lo complejo</span>
-    <span class="pp-string">"eficiencia-mediante-ops"</span><span class="pp-punct">:</span>  <span class="pp-bracket">[</span><span class="pp-string">"warn"</span><span class="pp-punct">,</span>  <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-
-    <span class="pp-comment">// [CULTURA] Naming compartido, specs legibles, handoff sin fricción</span>
-    <span class="pp-string">"puentes-no-muros"</span><span class="pp-punct">:</span>         <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-
-    <span class="pp-comment">// [PRODUCTO] Validar con datos y comportamiento real</span>
-    <span class="pp-string">"evidencia-sobre-opinion"</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"error"</span><span class="pp-punct">,</span> <span class="pp-bracket">{"{"}</span> <span class="pp-key">enforce</span><span class="pp-punct">:</span> <span class="pp-constant">true</span> <span class="pp-bracket">{"}"}</span><span class="pp-bracket">]</span>
-
-  <span class="pp-bracket">{"}"}</span>
-<span class="pp-bracket">{"}"}</span> <span class="pp-keyword">satisfies</span> <span class="pp-fn">DesignLintConfig</span><span class="pp-punct">;</span></code></pre>
+                <div class="file-block__body">
+                  <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">designPrinciples</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{`{`}</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code">  <span class="pmd-key">userCentric</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code">  <span class="pmd-key">dataInformed</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">  <span class="pmd-key">scalability</span><span class="pmd-punct">:</span> <span class="pmd-string">"Design Systems first"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">  <span class="pmd-key">accessibility</span><span class="pmd-punct">:</span> <span class="pmd-string">"AA/AAA Standard"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">  <span class="pmd-key">collaboration</span><span class="pmd-punct">:</span> <span class="pmd-string">"Puentes, no muros"</span><span class="pmd-punct">,</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code">  <span class="pmd-key">validation</span><span class="pmd-punct">:</span> <span class="pmd-string">"Evidencia sobre opinión"</span></span></div>
+                  <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span><span class="pmd-punct">;</span></span></div>
+                </div>
               </div>
             </div>
           </div>
@@ -477,8 +603,8 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
         <!-- ── 02. Ecosistema Técnico (proceso + herramientas unificados) ── -->
         <div class="methodology-block" data-component="TechEcosystem">
           <div data-reveal data-component="ProcessSection">
-            <h2 class="heading-md mb-3">Ecosistema Técnico</h2>
-            <p class="text-body mb-10">Proceso de trabajo y herramientas organizados como módulos de un sistema. Cada fase tiene su stack dedicado.</p>
+            <h2 class="heading-md mb-3 methodology-heading">Ecosistema Técnico</h2>
+            <p class="text-body mb-10 methodology-heading">Proceso de trabajo y herramientas organizados como módulos de un sistema. Cada fase tiene su stack dedicado.</p>
 
             <!-- Normal mode: 4 Stack Cards -->
             <div class="process-grid-normal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -616,49 +742,64 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               </div>
             </div>
 
-            <!-- Code mode: config object -->
+            <!-- Code mode: workflow.sh + package.json -->
             <div class="process-grid-code">
-              <div class="process-pipeline">
-                <div class="process-pipeline-window">
-                  <div class="process-pipeline-titlebar">
-                    <div class="json-dots">
-                      <span class="json-dot json-dot--red"></span>
-                      <span class="json-dot json-dot--yellow"></span>
-                      <span class="json-dot json-dot--green"></span>
+              <div class="space-y-6">
+
+                <!-- workflow.sh -->
+                <div class="file-block">
+                  <div class="file-block__titlebar">
+                    <div class="pmd-dots">
+                      <span class="pmd-dot" style="background:#ff5f57"></span>
+                      <span class="pmd-dot" style="background:#febc2e"></span>
+                      <span class="pmd-dot" style="background:#28c840"></span>
                     </div>
-                    <span class="process-pipeline-filename">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                      ecosystem.config.ts
+                    <span class="file-block__filename">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                      workflow.sh
                     </span>
+                    <span class="file-block__tab">workflow.sh</span>
                   </div>
-                  <pre class="process-pipeline-body"><code><span class="pp-keyword">export const</span> <span class="pp-fn">ecosystem</span> <span class="pp-punct">=</span> <span class="pp-bracket">{"{"}</span>
-
-  <span class="pp-key">strategy</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"User Research &rarr; Data Analysis &rarr; Testing"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Maze"</span><span class="pp-punct">,</span> <span class="pp-string">"Hotjar"</span><span class="pp-punct">,</span> <span class="pp-string">"FigJam"</span><span class="pp-punct">,</span> <span class="pp-string">"Typeform"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"validated insights"</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-
-  <span class="pp-key">design</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Prototyping &rarr; Interactive Design &rarr; UI Kits"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Figma"</span><span class="pp-punct">,</span> <span class="pp-string">"Framer"</span><span class="pp-punct">,</span> <span class="pp-string">"Cursor"</span><span class="pp-punct">,</span> <span class="pp-string">"Lovable"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"hi-fi prototypes"</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-
-  <span class="pp-key">systems</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Governance &rarr; Design Tokens &rarr; Scalability"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"Storybook"</span><span class="pp-punct">,</span> <span class="pp-string">"Token Studio"</span><span class="pp-punct">,</span> <span class="pp-string">"Supernova"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"scalable architecture"</span>
-  <span class="pp-bracket">{"}"}</span><span class="pp-punct">,</span>
-
-  <span class="pp-key">engineering</span><span class="pp-punct">:</span> <span class="pp-bracket">{"{"}</span>
-    <span class="pp-key">focus</span><span class="pp-punct">:</span> <span class="pp-string">"Frontend Architecture &rarr; UI Build &rarr; Git Flow"</span><span class="pp-punct">,</span>
-    <span class="pp-key">tools</span><span class="pp-punct">:</span> <span class="pp-bracket">[</span><span class="pp-string">"GitHub"</span><span class="pp-punct">,</span> <span class="pp-string">"JavaScript"</span><span class="pp-punct">,</span> <span class="pp-string">"TypeScript"</span><span class="pp-bracket">]</span><span class="pp-punct">,</span>
-    <span class="pp-key">output</span><span class="pp-punct">:</span> <span class="pp-string">"design-faithful code"</span>
-  <span class="pp-bracket">{"}"}</span>
-
-<span class="pp-bracket">{"}"}</span> <span class="pp-keyword">as const</span><span class="pp-punct">;</span></code></pre>
+                  <div class="file-block__body file-block__body--terminal">
+                    <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">#!/bin/bash</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"><span class="pmd-comment"># <span class="pmd-keyword">@title</span>: METODOLOGÍA Y BASE TEÓRICA</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-comment"># <span class="pmd-keyword">@description</span>: Enfoque basado en DesignOps y optimización de conversión.</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">run</span> <span class="pmd-string">discovery_and_strategy.sh</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">execute</span> <span class="pmd-string">visual_architecture.bin</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">run</span> <span class="pmd-string">design_system_architecture.ts</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">deploy</span> <span class="pmd-string">usability_testing_v2.0</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">monitor</span> <span class="pmd-string">conversion_analytics.sh</span></span></div>
+                  </div>
                 </div>
+
+                <!-- package.json -->
+                <div class="file-block">
+                  <div class="file-block__titlebar">
+                    <div class="pmd-dots">
+                      <span class="pmd-dot" style="background:#ff5f57"></span>
+                      <span class="pmd-dot" style="background:#febc2e"></span>
+                      <span class="pmd-dot" style="background:#28c840"></span>
+                    </div>
+                    <span class="file-block__filename">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                      package.json
+                    </span>
+                    <span class="file-block__tab">package.json</span>
+                  </div>
+                  <div class="file-block__body">
+                    <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-bracket">{`{`}</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code">  <span class="pmd-key">"name"</span><span class="pmd-punct">:</span> <span class="pmd-string">"ramon-riera-ecosystem"</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code">  <span class="pmd-key">"version"</span><span class="pmd-punct">:</span> <span class="pmd-string">"2026.1.0"</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">  <span class="pmd-key">"dependencies"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Figma"</span><span class="pmd-punct">,</span> <span class="pmd-string">"React"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Tailwind"</span><span class="pmd-punct">,</span> <span class="pmd-string">"TypeScript"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Framer"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">  <span class="pmd-key">"devDependencies"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Notion"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Jira"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Hotjar"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Mixpanel"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Slack"</span><span class="pmd-bracket">]</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"></span></div>
+                    <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-impact">// Build successful: All systems operational.</span></span></div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -668,71 +809,16 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
   </section>
 
   <!-- CTA -->
-  <section class="section-padding" data-component="CallToAction">
-    <div class="container-custom text-center">
-      <div class="max-w-3xl mx-auto">
-      <div data-reveal class="mb-6 flex justify-center">
-        <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
-            <g class="icon-ruler-idle">
-              <path d="M6 38L6 8L36 38H6Z" class="icon-stroke icon-draw" />
-              <path d="M12 38L12 20L24 38" class="icon-accent icon-draw-delay" />
-              <line x1="6" y1="14" x2="11" y2="14" class="icon-stroke icon-draw" />
-              <line x1="6" y1="20" x2="10" y2="20" class="icon-stroke icon-draw" />
-              <line x1="6" y1="26" x2="11" y2="26" class="icon-stroke icon-draw" />
-              <line x1="6" y1="32" x2="10" y2="32" class="icon-stroke icon-draw" />
-            </g>
-            <g class="icon-ruler-pencil">
-              <line x1="32" y1="4" x2="38" y2="10" class="icon-accent" />
-              <line x1="32" y1="4" x2="30" y2="2" class="icon-accent" />
-              <circle cx="38" cy="10" r="1.2" class="icon-accent-fill" />
-            </g>
-          </svg>
-        </span>
-      </div>
-      <h2 data-reveal data-delay="100" class="heading-lg mb-6">
-        ¿Listo para <span class="text-primary-500">empezar</span>?
-      </h2>
-      <p data-reveal data-delay="100" class="text-body text-lg mb-10">
-        Cuéntame sobre tu proyecto y veamos cómo puedo ayudarte a alcanzar tus objetivos de diseño.
-      </p>
-      <div data-reveal data-delay="200" class="flex flex-wrap items-center justify-center gap-4">
-        <a href={`mailto:${siteConfig.email}`} class="btn-primary text-base hero-cta-normal"
-          data-component="ButtonPrimary"
-          data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
-          Contactar
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
-        <a href={`mailto:${siteConfig.email}`} class="hero-cta-code" data-component="ButtonRunCmd">
-          <span class="hero-cta-prompt">&gt;</span> run <span class="hero-cta-cmd">send_email.sh</span><span class="hero-cta-cursor">_</span>
-        </a>
-        <!-- CV Button: Normal mode -->
-        <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
-          class="btn-outline text-base btn-cv-normal"
-          data-component="ButtonCV"
-          data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px">
-          Descargar CV
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" />
-          </svg>
-        </a>
-        <!-- CV Button: Code mode terminal style -->
-        <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
-          class="btn-cv-code"
-          data-component="ButtonCVCode">
-          <svg class="btn-code-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 4h4" />
-          </svg>
-          <span class="code-fn">get</span><span class="code-parens">(</span><span class="code-string">'cv.pdf'</span><span class="code-parens">)</span>
-        </a>
-      </div>
-      </div>
-    </div>
-  </section>
-
+  <ContactConsole
+    headingHtml='¿Listo para <span class="text-primary-500">empezar</span>?'
+    description="Cuéntame sobre tu proyecto y veamos cómo puedo ayudarte a alcanzar tus objetivos de diseño."
+    jsdocTitle="¿Listo para "
+    jsdocHighlight="empezar"
+    jsdocDesc={[
+      'Cuéntame sobre tu proyecto y veamos',
+      'cómo puedo ayudarte a alcanzar tus',
+      'objetivos de diseño.',
+    ]}
+  />
 
 </BaseLayout>

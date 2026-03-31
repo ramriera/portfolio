@@ -3,80 +3,231 @@ import WordsCarousel from './WordsCarousel.astro';
 import { siteConfig } from '@/utils/data';
 
 const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brillan', 'impactan', 'perduran'];
+
+// Code-mode: rotating roles for the typewriter
+const codeRoles = ['UX Lead', 'Product Strategist', 'DesignOps'];
 ---
 
 <section class="relative min-h-[85svh] md:min-h-[90vh] flex items-center justify-center overflow-hidden"
   data-component="HeroSection">
-  <!-- Background decoration -->
-  <div class="absolute inset-0 -z-10">
-    <div class="absolute top-1/4 -right-16 md:-right-32 w-[min(500px,80vw)] h-[min(500px,80vw)] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
-    <div class="absolute bottom-1/4 -left-16 md:-left-32 w-[min(500px,80vw)] h-[min(500px,80vw)] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
+  <!-- Background decoration (design mode) — PERF: contain + will-change isolates blur paint -->
+  <div class="hero-bg-design absolute inset-0 -z-10 contain-strict">
+    <div class="hero-blur-circle absolute top-1/4 -right-16 md:-right-32 w-[min(500px,80vw)] h-[min(500px,80vw)] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
+    <div class="hero-blur-circle absolute bottom-1/4 -left-16 md:-left-32 w-[min(500px,80vw)] h-[min(500px,80vw)] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
   </div>
+
+  <!-- Blueprint grid background (code mode only) -->
+  <div class="hero-bg-grid absolute inset-0 -z-10" aria-hidden="true"></div>
 
   <div class="container-custom w-full">
     <!-- Persistent grid: intro left, stats right on xl -->
     <div class="hero-grid">
       <!-- Left: intro content -->
       <div class="hero-main-content max-w-4xl xl:max-w-none text-center xl:text-left">
-        <!-- Greeting line -->
-        <div data-reveal data-delay="0" class="mb-6 md:mb-10 flex flex-col items-center xl:items-start">
-          <div class="w-14 h-14 mb-4">
-            <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
-              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
-                <g class="icon-hand-wave">
-                  <!-- Wrist to palm -->
-                  <path d="M18 38C12 36 9 30 9 25L9 22" class="icon-stroke icon-draw" />
-                  <!-- Index finger (accent) -->
-                  <path d="M15 22V10C15 8 16.5 6 19 6C21.5 6 22 8 22 10V21" class="icon-accent icon-draw-delay" />
-                  <!-- Middle finger -->
-                  <path d="M22 21V7C22 5 23.5 3 26 3C28.5 3 29 5 29 7V21" class="icon-stroke icon-draw" />
-                  <!-- Ring finger -->
-                  <path d="M29 21V10C29 8 30.5 6 33 6C35.5 6 36 8 36 10V24C36 32 30 38 24 38" class="icon-stroke icon-draw" />
-                  <!-- Thumb -->
-                  <path d="M15 22C13 21 10 19 9 17C8 15 9.5 13 12 13C14 13 15 15 15 17" class="icon-stroke icon-draw" />
-                </g>
-                <!-- Sparkle near index finger tip -->
-                <circle cx="18" cy="3" r="1.2" class="icon-accent icon-wave-line-1" />
-                <path d="M5 10L3 8M3 12L1 12M5 14L3 16" class="icon-accent icon-wave-line-2" />
-              </svg>
+
+        <!-- ═══ DESIGN MODE content ═══ -->
+        <div class="hero-design-view">
+          <!-- Greeting line -->
+          <div data-reveal data-delay="0" class="mb-6 md:mb-10 flex flex-col items-center xl:items-start">
+            <div class="w-14 h-14 mb-4">
+              <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
+                  <g class="icon-hand-wave">
+                    <path d="M18 38C12 36 9 30 9 25L9 22" class="icon-stroke icon-draw" />
+                    <path d="M15 22V10C15 8 16.5 6 19 6C21.5 6 22 8 22 10V21" class="icon-accent icon-draw-delay" />
+                    <path d="M22 21V7C22 5 23.5 3 26 3C28.5 3 29 5 29 7V21" class="icon-stroke icon-draw" />
+                    <path d="M29 21V10C29 8 30.5 6 33 6C35.5 6 36 8 36 10V24C36 32 30 38 24 38" class="icon-stroke icon-draw" />
+                    <path d="M15 22C13 21 10 19 9 17C8 15 9.5 13 12 13C14 13 15 15 15 17" class="icon-stroke icon-draw" />
+                  </g>
+                  <circle cx="18" cy="3" r="1.2" class="icon-accent icon-wave-line-1" />
+                  <path d="M5 10L3 8M3 12L1 12M5 14L3 16" class="icon-accent icon-wave-line-2" />
+                </svg>
+              </span>
+            </div>
+            <span class="text-xl sm:text-2xl md:text-3xl font-medium text-neutral-900 tracking-wide"
+              data-token="$font-family-display: Space Grotesk|$font-size-2xl: 1.5rem / 24px">
+              Soy <span class="text-primary-500"
+                data-token="$color-primary-500: #D97757">Ramon Riera</span>
             </span>
           </div>
-          <span class="text-xl sm:text-2xl md:text-3xl font-medium text-dark-900 tracking-wide"
-            data-token="$font-family-display: Space Grotesk|$font-size-2xl: 1.5rem / 24px">
-            Soy <span class="text-primary-500"
-              data-token="$color-primary-500: #D97757">Ramon Riera</span>
-          </span>
+
+          <!-- Main heading -->
+          <h1 data-reveal data-delay="100" class="heading-xl mb-6 md:mb-10"
+            data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2.5rem / 40px">
+            Diseño experiencias<br />
+            <span class="sm:whitespace-nowrap">digitales que
+            <span class="text-primary-500"><WordsCarousel words={rotatingWords} interval={3000} /></span></span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p data-reveal data-delay="200" class="text-body text-base md:text-xl max-w-2xl mx-auto xl:mx-0 mb-8 md:mb-14 leading-relaxed"
+            data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$spacing-bottom: 3.5rem / 56px">
+            UX Lead con experiencia en estrategia de producto, investigación de usuario y diseño de interfaces. Trabajo ayudando a equipos a crear productos digitales que realmente resuelven problemas.
+          </p>
+
+          <!-- CTA buttons -->
+          <div data-reveal data-delay="300" class="flex flex-wrap items-center justify-center xl:justify-start gap-4">
+            <a href="/projects" class="btn-primary text-base hero-cta-normal"
+              data-component="ButtonPrimary"
+              data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
+              Ver proyectos
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
         </div>
 
-        <!-- Main heading -->
-        <h1 data-reveal data-delay="100" class="heading-xl mb-6 md:mb-10"
-          data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2.5rem / 40px">
-          Diseño experiencias<br />
-          <span class="sm:whitespace-nowrap">digitales que
-          <span class="text-primary-500"><WordsCarousel words={rotatingWords} interval={3000} /></span></span>
-        </h1>
+        <!-- ═══ CODE MODE: System Initialization ═══ -->
+        <div class="hero-code-view" aria-hidden="true">
+          <!-- Terminal window container -->
+          <div class="hero-window">
+            <!-- Titlebar -->
+            <div class="hero-window__titlebar">
+              <div class="hero-window__dots">
+                <span class="pmd-dot" style="background:#ff5f57"></span>
+                <span class="pmd-dot" style="background:#febc2e"></span>
+                <span class="pmd-dot" style="background:#28c840"></span>
+              </div>
+              <span class="hero-window__filename">
+                <svg class="hero-window__file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#3178c6">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
+                </svg>
+                main.ts
+              </span>
+              <span class="hero-window__tab">main.ts</span>
+            </div>
 
-        <!-- Subtitle -->
-        <p data-reveal data-delay="200" class="text-body text-base md:text-xl max-w-2xl mx-auto xl:mx-0 mb-8 md:mb-14 leading-relaxed"
-          data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$spacing-bottom: 3.5rem / 56px">
-          UX Lead con experiencia en estrategia de producto, investigación de usuario y diseño de interfaces. Trabajo ayudando a equipos a crear productos digitales que realmente resuelven problemas.
-        </p>
+            <!-- Boot log sequence -->
+            <div class="hero-boot-log" id="hero-boot-log">
+              <div class="hero-log-line" data-delay="200">
+                <span class="hero-log-ok">[OK]</span> Core modules loaded
+              </div>
+              <div class="hero-log-line" data-delay="600">
+                <span class="hero-log-ok">[OK]</span> Strategy engine online
+              </div>
+              <div class="hero-log-line" data-delay="1000">
+                <span class="hero-log-ok">[OK]</span> Design system ready
+              </div>
+            </div>
 
-        <!-- CTA buttons -->
-        <div data-reveal data-delay="300" class="flex flex-wrap items-center justify-center xl:justify-start gap-4">
-          <!-- Normal mode button -->
-          <a href="/projects" class="btn-primary text-base hero-cta-normal"
-            data-component="ButtonPrimary"
-            data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
-            Ver proyectos
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-          <!-- Code mode: terminal command button -->
-          <a href="/projects" class="hero-cta-code" data-component="ButtonRunCmd">
-            <span class="hero-cta-prompt">&gt;</span> run <span class="hero-cta-cmd">open_projects.sh</span><span class="hero-cta-cursor">_</span>
-          </a>
+            <!-- Import statement -->
+            <div class="hero-code-block">
+            <div class="hero-code-line">
+              <span class="hero-ln">1</span>
+              <span class="hero-tok-keyword">import</span>
+              <span class="hero-tok-punct"> { </span>
+              <span class="hero-tok-constant">Strategy</span>
+              <span class="hero-tok-punct">, </span>
+              <span class="hero-tok-constant">UX</span>
+              <span class="hero-tok-punct">, </span>
+              <span class="hero-tok-constant">DesignOps</span>
+              <span class="hero-tok-punct"> } </span>
+              <span class="hero-tok-keyword">from</span>
+              <span class="hero-tok-string"> 'ramon-riera'</span>
+              <span class="hero-tok-punct">;</span>
+            </div>
+
+            <div class="hero-code-line">
+              <span class="hero-ln">2</span>
+              <span class="hero-tok-comment">// Initializing high-impact digital experiences...</span>
+            </div>
+
+            <div class="hero-code-line hero-code-line-empty">
+              <span class="hero-ln">3</span>
+            </div>
+
+            <div class="hero-code-line">
+              <span class="hero-ln">4</span>
+              <span class="hero-tok-keyword">const</span>
+              <span class="hero-tok-plain"> </span>
+              <span class="hero-tok-constant">profile</span>
+              <span class="hero-tok-plain"> </span>
+              <span class="hero-tok-punct">=</span>
+              <span class="hero-tok-plain"> </span>
+              <span class="hero-tok-keyword">new</span>
+              <span class="hero-tok-plain"> </span>
+              <span class="hero-tok-fn">Designer</span>
+              <span class="hero-tok-punct">({</span>
+            </div>
+
+            <div class="hero-code-line">
+              <span class="hero-ln">5</span>
+              <span class="hero-tok-key">  name</span>
+              <span class="hero-tok-punct">: </span>
+              <span class="hero-tok-string">'Ramon Riera'</span>
+              <span class="hero-tok-punct">,</span>
+            </div>
+
+            <div class="hero-code-line">
+              <span class="hero-ln">6</span>
+              <span class="hero-tok-key">  role</span>
+              <span class="hero-tok-punct">: </span>
+              <span class="hero-tok-string hero-role-typewriter" data-roles={JSON.stringify(codeRoles)}>'<span class="hero-role-text">UX Lead</span>'</span>
+              <span class="hero-tok-punct">,</span>
+            </div>
+
+            <div class="hero-code-line">
+              <span class="hero-ln">7</span>
+              <span class="hero-tok-key">  location</span>
+              <span class="hero-tok-punct">: </span>
+              <span class="hero-tok-string">'Barcelona, ES'</span>
+              <span class="hero-tok-punct">,</span>
+            </div>
+
+            <div class="hero-code-line">
+              <span class="hero-ln">8</span>
+              <span class="hero-tok-key">  experience</span>
+              <span class="hero-tok-punct">: </span>
+              <span class="hero-tok-number">6</span>
+              <span class="hero-tok-punct">,</span>
+            </div>
+
+            <div class="hero-code-line">
+              <span class="hero-ln">9</span>
+              <span class="hero-tok-key">  projects</span>
+              <span class="hero-tok-punct">: </span>
+              <span class="hero-tok-number">35</span>
+              <span class="hero-tok-punct">,</span>
+            </div>
+
+            <div class="hero-code-line">
+              <span class="hero-ln">10</span>
+              <span class="hero-tok-key">  status</span>
+              <span class="hero-tok-punct">: </span>
+              <span class="hero-tok-string">'Ready to build'</span>
+              <span class="hero-tok-punct">,</span>
+            </div>
+
+            <div class="hero-code-line">
+              <span class="hero-ln">11</span>
+              <span class="hero-tok-punct">});</span>
+            </div>
+
+            <div class="hero-code-line hero-code-line-empty">
+              <span class="hero-ln">12</span>
+            </div>
+
+            <div class="hero-code-line">
+              <span class="hero-ln">13</span>
+              <span class="hero-tok-constant">profile</span>
+              <span class="hero-tok-punct">.</span>
+              <span class="hero-tok-fn">init</span>
+              <span class="hero-tok-punct">();</span>
+              <span class="hero-cursor-blink"></span>
+            </div>
+          </div>
+
+            <!-- Command line (terminal style, inside window) -->
+            <div class="hero-cmds">
+              <a href="/projects" class="hero-cmd-line" data-component="ButtonRunCmd">
+                <span class="hero-ln">14</span>
+                <span class="hero-cmd-code">
+                  <span class="hero-cmd-prompt">&gt;</span> <span class="hero-cmd-text">run</span> <span class="hero-cmd-file">open_projects.sh</span><span class="hero-cmd-cursor">_</span>
+                </span>
+              </a>
+            </div>
+          </div><!-- /hero-window -->
         </div>
       </div>
 
@@ -84,37 +235,463 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
       <div data-reveal data-delay="400" class="hero-stats-col"
         data-component="StatsBar"
         data-token="$spacing-gap: 2rem / 32px|$spacing-margin-top: 4rem / 64px">
-        <div class="hero-stats-inner">
+
+        <!-- ═══ Design mode: large numbers ═══ -->
+        <div class="hero-stats-inner hero-stats-design">
           <div class="hero-stat-item text-center">
-            <div class="text-3xl font-semibold text-dark-900"
+            <div class="text-3xl font-semibold text-neutral-900"
               data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
               <span class="count-up" data-target="6">0</span>+
             </div>
-            <div class="text-xs text-dark-400 tracking-wide mt-1 whitespace-nowrap">Años exp.</div>
+            <div class="text-xs text-neutral-400 tracking-wide mt-1 whitespace-nowrap">Años exp.</div>
           </div>
           <div class="hero-stats-divider-h"></div>
           <div class="hero-stats-divider-v"></div>
           <div class="hero-stat-item text-center">
-            <div class="text-3xl font-semibold text-dark-900"
+            <div class="text-3xl font-semibold text-neutral-900"
               data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
               <span class="count-up" data-target="35">0</span>+
             </div>
-            <div class="text-xs text-dark-400 tracking-wide mt-1">Proyectos completados</div>
+            <div class="text-xs text-neutral-400 tracking-wide mt-1">Proyectos completados</div>
           </div>
           <div class="hero-stats-divider-h"></div>
           <div class="hero-stats-divider-v"></div>
           <div class="hero-stat-item text-center">
-            <div class="text-3xl font-semibold text-dark-900"
+            <div class="text-3xl font-semibold text-neutral-900"
               data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
               <span class="count-up" data-target="12">0</span>+
             </div>
-            <div class="text-xs text-dark-400 tracking-wide mt-1">Clientes corporativos</div>
+            <div class="text-xs text-neutral-400 tracking-wide mt-1">Clientes corporativos</div>
+          </div>
+        </div>
+
+        <!-- ═══ Code mode: Terminal Dashboard ═══ -->
+        <div class="hero-stats-terminal">
+          <div class="stats-terminal-header">
+            <span class="stats-terminal-dot stats-terminal-dot--red"></span>
+            <span class="stats-terminal-dot stats-terminal-dot--yellow"></span>
+            <span class="stats-terminal-dot stats-terminal-dot--green"></span>
+            <span class="stats-terminal-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px">
+                <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+              </svg>
+              system_analytics.sh
+            </span>
+          </div>
+          <div class="stats-terminal-body">
+            <div class="stats-terminal-comment">// System performance report</div>
+
+            <div class="stats-terminal-row">
+              <span class="stats-label">[EXP]</span>
+              <span class="stats-dots"></span>
+              <span class="stats-value"><span class="stats-ticker" data-target="6">00</span>Y</span>
+            </div>
+
+            <div class="stats-terminal-row">
+              <span class="stats-label">[PRJ]</span>
+              <span class="stats-dots"></span>
+              <span class="stats-value"><span class="stats-ticker" data-target="35">00</span>+</span>
+            </div>
+
+            <div class="stats-terminal-row">
+              <span class="stats-label">[CLI]</span>
+              <span class="stats-dots"></span>
+              <span class="stats-value"><span class="stats-ticker" data-target="12">00</span>+</span>
+            </div>
+
+            <div class="stats-terminal-divider"></div>
+
+            <div class="stats-terminal-row stats-terminal-row--status">
+              <span class="stats-label stats-label--status">[SYS]</span>
+              <span class="stats-dots"></span>
+              <span class="stats-status">Active</span>
+              <span class="stats-status-dot"></span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* ═══════════════════════════════════════
+     CODE MODE — Hero as System Init
+     ═══════════════════════════════════════ */
+
+  /* PERF: Isolate blur circles to their own compositing layer */
+  .contain-strict {
+    contain: layout style paint;
+  }
+  .hero-blur-circle {
+    will-change: transform;
+    contain: strict;
+  }
+
+  /* Default: code view is hidden */
+  .hero-code-view,
+  .hero-bg-grid {
+    display: none;
+  }
+
+  /* Blueprint grid background */
+  :global(.code-mode) .hero-bg-design {
+    display: none;
+  }
+
+  :global(.code-mode) .hero-bg-grid {
+    display: block;
+    background-image:
+      linear-gradient(rgba(139, 233, 253, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139, 233, 253, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* Swap views */
+  :global(.code-mode) .hero-design-view {
+    display: none;
+  }
+
+  :global(.code-mode) .hero-code-view {
+    display: block;
+    text-align: left;
+  }
+
+  /* ── Hero window container ── */
+  .hero-window {
+    background: #1e1e2e;
+    border-radius: 8px;
+    border: 1px solid var(--cm-border);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  .hero-window__titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    background: #181825;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .hero-window__dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .hero-window__filename {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #7d8590;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .hero-window__file-icon {
+    color: #7d8590;
+    flex-shrink: 0;
+  }
+
+  .hero-window__tab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #e6edf3;
+    background: #1e1e2e;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px 4px 0 0;
+    margin-left: auto;
+    border: 1px solid var(--cm-border, #30363d);
+    border-bottom: 1px solid #1e1e2e;
+  }
+
+  /* ── Boot log sequence ── */
+  .hero-boot-log {
+    padding: 0.75rem 0.875rem 0;
+    margin-bottom: 0;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.75rem;
+    line-height: 1.8;
+  }
+
+  .hero-log-line {
+    color: var(--cm-text-muted);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .hero-log-line.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-log-ok {
+    color: var(--cm-string);
+    font-weight: 600;
+  }
+
+  /* ── Code block (inside window) ── */
+  .hero-code-block {
+    padding: 0.5rem 0;
+    overflow-x: auto;
+  }
+
+  .hero-code-line {
+    display: flex;
+    align-items: baseline;
+    padding: 1px 16px 1px 0;
+    font-family: theme('fontFamily.mono');
+    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+    line-height: 1.75;
+    position: relative;
+  }
+
+  .hero-code-line-empty {
+    height: 1.75em;
+  }
+
+  /* ── Line numbers (gutter) ── */
+  .hero-ln {
+    display: inline-block;
+    min-width: 40px;
+    text-align: right;
+    padding-right: 16px;
+    color: var(--cm-text-muted);
+    opacity: 0.3;
+    user-select: none;
+    flex-shrink: 0;
+    font-size: inherit;
+    line-height: inherit;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  /* ── Syntax tokens ── */
+  .hero-tok-keyword  { color: var(--cm-keyword); }
+  .hero-tok-constant { color: var(--cm-constant, #f1fa8c); }
+  .hero-tok-string   { color: var(--cm-string); }
+  .hero-tok-number   { color: var(--cm-attr); }
+  .hero-tok-fn       { color: var(--cm-function); }
+  .hero-tok-key      { color: var(--cm-function); }
+  .hero-tok-punct    { color: var(--cm-text-muted); }
+  .hero-tok-comment  { color: var(--cm-comment); font-style: italic; }
+  .hero-tok-plain    { color: var(--cm-text-secondary); }
+
+  /* ── Typewriter role — container ── */
+  .hero-role-typewriter {
+    position: relative;
+  }
+
+  .hero-role-typewriter::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--cm-string);
+    margin-left: 1px;
+    vertical-align: text-bottom;
+    animation: hero-cursor-blink 1s step-end infinite;
+  }
+
+  /* ── Blinking cursor ── */
+  .hero-cursor-blink {
+    display: inline-block;
+    width: 7px;
+    height: 1.1em;
+    background: var(--cm-string);
+    margin-left: 3px;
+    vertical-align: text-bottom;
+    animation: hero-cursor-blink 1s step-end infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes hero-cursor-blink {
+    0%, 100% { opacity: 0.8; }
+    50%      { opacity: 0; }
+  }
+
+  /* ── Command line (terminal style, inside window) ── */
+  .hero-cmds {
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.35rem 0 0.75rem;
+  }
+
+  .hero-cmd-code {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* ── Stats: swap design ↔ terminal dashboard ── */
+  .hero-stats-terminal {
+    display: none;
+  }
+
+  :global(.code-mode) .hero-stats-design {
+    display: none !important;
+  }
+
+  :global(.code-mode) .hero-stats-terminal {
+    display: block;
+  }
+
+  /* ── Terminal Dashboard ── */
+  .stats-terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 0.875rem;
+    background: var(--cm-bg, #0d1117);
+    border: 1px solid var(--cm-border);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    font-family: theme('fontFamily.mono');
+  }
+
+  .stats-terminal-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .stats-terminal-dot--red    { background: #ff5f57; }
+  .stats-terminal-dot--yellow { background: #febc2e; }
+  .stats-terminal-dot--green  { background: #28c840; }
+
+  .stats-terminal-title {
+    margin-left: 8px;
+    font-size: 0.62rem;
+    color: var(--cm-text-muted);
+  }
+
+  .stats-terminal-body {
+    background: var(--cm-bg-card);
+    border: 1px solid var(--cm-border);
+    border-radius: 0 0 8px 8px;
+    padding: 0.75rem 0.875rem;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.75rem;
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+
+  .stats-terminal-comment {
+    color: var(--cm-comment);
+    font-style: italic;
+    font-size: 0.68rem;
+    margin-bottom: 8px;
+  }
+
+  .stats-terminal-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    white-space: nowrap;
+  }
+
+  .stats-label {
+    color: var(--cm-function);
+    font-weight: 600;
+    flex-shrink: 0;
+    min-width: 42px;
+  }
+
+  .stats-label--status {
+    color: var(--cm-string);
+  }
+
+  .stats-dots {
+    flex: 1;
+    overflow: hidden;
+    color: var(--cm-text-muted);
+    opacity: 0.25;
+    margin: 0 6px;
+  }
+
+  .stats-dots::before {
+    content: '························';
+    letter-spacing: 0.1em;
+  }
+
+  .stats-value {
+    color: var(--cm-attr);
+    font-weight: 600;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stats-ticker {
+    display: inline-block;
+    min-width: 1.6em;
+    text-align: right;
+  }
+
+  .stats-terminal-divider {
+    height: 1px;
+    background: var(--cm-border);
+    margin: 6px 0;
+    opacity: 0.5;
+  }
+
+  .stats-status {
+    color: var(--cm-string);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .stats-status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cm-string);
+    margin-left: 6px;
+    flex-shrink: 0;
+    animation: stats-pulse 2s ease-in-out infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes stats-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(80, 250, 123, 0.4); }
+    50%      { opacity: 0.6; box-shadow: 0 0 6px 2px rgba(80, 250, 123, 0.2); }
+  }
+
+  /* ── Responsive: smaller code on mobile ── */
+  @media (max-width: 639px) {
+    .hero-code-block {
+      padding: 0.35rem 0;
+    }
+
+    .hero-code-line {
+      font-size: 0.65rem;
+    }
+
+    .hero-ln {
+      min-width: 28px;
+      padding-right: 10px;
+    }
+
+    .hero-boot-log {
+      font-size: 0.65rem;
+    }
+
+    .hero-window__tab {
+      display: none;
+    }
+
+    .stats-terminal-body {
+      font-size: 0.65rem;
+      padding: 10px 12px;
+    }
+
+    .stats-terminal-title {
+      font-size: 0.55rem;
+    }
+  }
+</style>
 
 <script>
   function initCountUp() {
@@ -135,7 +712,6 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
         function update(now: number) {
           const elapsed = now - start;
           const progress = Math.min(elapsed / duration, 1);
-          // ease-out cubic
           const eased = 1 - Math.pow(1 - progress, 3);
           el.textContent = String(Math.round(target * eased));
           if (progress < 1) requestAnimationFrame(update);
@@ -151,4 +727,116 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
 
   initCountUp();
   document.addEventListener('astro:page-load', initCountUp);
+</script>
+
+<script>
+  // ── Boot log staggered reveal ──
+  function initBootLog() {
+    const lines = document.querySelectorAll('.hero-log-line');
+    lines.forEach((line) => {
+      const el = line as HTMLElement;
+      const delay = parseInt(el.dataset.delay || '0', 10);
+      setTimeout(() => el.classList.add('visible'), delay);
+    });
+  }
+
+  // ── Typewriter effect for role field (humanized random delays) ──
+  function initTypewriter() {
+    const el = document.querySelector('.hero-role-typewriter') as HTMLElement | null;
+    if (!el || el.dataset.twInit) return;
+    el.dataset.twInit = '1';
+
+    const roles: string[] = JSON.parse(el.dataset.roles || '[]');
+    if (roles.length < 2) return;
+
+    const textEl = el.querySelector('.hero-role-text') as HTMLElement;
+    if (!textEl) return;
+
+    let roleIdx = 0;
+    const PAUSE = 3000;
+
+    // Random delay to mimic human typing rhythm
+    function randType() { return 50 + Math.random() * 100; }   // 50–150ms
+    function randDel()  { return 25 + Math.random() * 45; }    // 25–70ms
+
+    function deleteThenType() {
+      const current = textEl.textContent || '';
+      let i = current.length;
+
+      // Delete phase — recursive setTimeout for random cadence
+      function deleteChar() {
+        if (i <= 0) {
+          // Switch to next role, start typing
+          roleIdx = (roleIdx + 1) % roles.length;
+          const next = roles[roleIdx];
+          let j = 0;
+          function typeChar() {
+            j++;
+            textEl.textContent = next.slice(0, j);
+            if (j < next.length) {
+              setTimeout(typeChar, randType());
+            } else {
+              setTimeout(deleteThenType, PAUSE);
+            }
+          }
+          // Slight pause before typing starts (like a human thinking)
+          setTimeout(typeChar, 200 + Math.random() * 300);
+          return;
+        }
+        i--;
+        textEl.textContent = current.slice(0, i);
+        setTimeout(deleteChar, randDel());
+      }
+
+      deleteChar();
+    }
+
+    // Start after initial pause
+    setTimeout(deleteThenType, PAUSE + 1200);
+  }
+
+  // ── Stats ticker: count up when code-mode is active ──
+  function initStatsTicker() {
+    const tickers = document.querySelectorAll<HTMLElement>('.stats-ticker');
+    if (!tickers.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        if (el.dataset.tickerDone) return;
+        el.dataset.tickerDone = '1';
+
+        const target = parseInt(el.dataset.target || '0', 10);
+        const duration = 1200;
+        const start = performance.now();
+
+        function tick(now: number) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // ease-out quart for satisfying deceleration
+          const eased = 1 - Math.pow(1 - progress, 4);
+          const current = Math.round(target * eased);
+          el.textContent = String(current).padStart(2, '0');
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        // Delay start slightly to sync with boot log
+        setTimeout(() => requestAnimationFrame(tick), 800);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.3 });
+
+    tickers.forEach((t) => observer.observe(t));
+  }
+
+  // Init on load & Astro page transitions
+  function initHeroCode() {
+    initBootLog();
+    initTypewriter();
+    initStatsTicker();
+  }
+
+  initHeroCode();
+  document.addEventListener('astro:page-load', initHeroCode);
 </script>

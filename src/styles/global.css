@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* PERF: Respect user motion preferences — disable all animations & transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Self-hosted fonts via @fontsource — no render-blocking Google Fonts request */
 
 @layer base {
@@ -13,7 +25,7 @@
   }
 
   body {
-    @apply bg-dark-50 text-dark-900 font-sans transition-colors duration-300;
+    @apply bg-neutral-50 text-neutral-900 font-sans transition-colors duration-300;
   }
 
   ::selection {
@@ -102,11 +114,11 @@
   }
 
   .text-body {
-    @apply text-base sm:text-lg text-dark-500 leading-relaxed;
+    @apply text-base sm:text-lg text-neutral-500 leading-relaxed;
   }
 
   .text-body-sm {
-    @apply text-sm sm:text-base text-dark-500 leading-relaxed;
+    @apply text-sm sm:text-base text-neutral-500 leading-relaxed;
   }
 
   .card-hover {
@@ -132,11 +144,11 @@
   }
 
   .dashed-border {
-    @apply border border-dark-200
+    @apply border border-neutral-200
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 bg-dark-900 text-white font-medium rounded-full transition-all duration-300 hover:bg-dark-800 active:scale-[0.98];
+    @apply inline-flex items-center gap-2 px-7 py-3.5 bg-neutral-900 text-white font-medium rounded-full transition-all duration-300 hover:bg-neutral-800 active:scale-[0.98];
     border: 1px solid transparent;
     box-sizing: border-box;
   }
@@ -152,7 +164,7 @@
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-dark-300 text-dark-700 font-medium rounded-full transition-all duration-300 hover:bg-dark-100 hover:border-primary-400 hover:text-primary-600 active:scale-[0.97];
+    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-neutral-300 text-neutral-700 font-medium rounded-full transition-all duration-300 hover:bg-neutral-100 hover:border-primary-400 hover:text-primary-600 active:scale-[0.97];
   }
 
 }
@@ -200,10 +212,10 @@
   @apply bg-transparent;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark-300 rounded-full;
+  @apply bg-neutral-300 rounded-full;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-dark-400
+  @apply bg-neutral-400
 }
 
 /* Wave animation for hand emoji */
@@ -246,7 +258,7 @@ main {
 
 .section-icon-svg .icon-stroke {
   fill: none;
-  stroke: var(--color-dark-600, #6b6a68);
+  stroke: var(--color-neutral-600, #6b6a68);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -534,7 +546,7 @@ main {
 .hero-stats-divider-v {
   width: 1px;
   height: 2rem;
-  background: var(--color-dark-200, #d4cfc5);
+  background: var(--color-neutral-200, #d4cfc5);
 }
 
 /* XL: two-column layout — intro left, stats right */
@@ -567,7 +579,7 @@ main {
     display: block;
     width: 1.5rem;
     height: 1px;
-    background: var(--color-dark-200, #d4cfc5);
+    background: var(--color-neutral-200, #d4cfc5);
     margin: 0 auto;
   }
 
@@ -637,11 +649,11 @@ body.code-mode [data-token] {
 }
 
 /* Neon highlight on hover — selection highlighter */
-body.code-mode [data-component]:hover,
-body.code-mode [data-token]:hover {
-  outline: 1px solid var(--cm-inspector-glow) !important;
+body.code-mode [data-component]:not([class*="cmd-line"]):not([class*="code-line"]):hover,
+body.code-mode [data-token]:not([class*="cmd-line"]):not([class*="code-line"]):hover {
+  outline: 1px solid var(--cm-inspector-glow);
   outline-offset: 2px;
-  background-color: rgba(80, 250, 123, 0.03) !important;
+  background-color: rgba(80, 250, 123, 0.03);
   box-shadow: 0 0 12px rgba(80, 250, 123, 0.08), inset 0 0 20px rgba(80, 250, 123, 0.02);
   transition: outline-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 }
@@ -719,14 +731,115 @@ body.code-mode aside:hover {
   letter-spacing: 0.01em !important;
 }
 
-.code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo) {
+.code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo):not([class*="cmd-line"]) {
   color: var(--cm-function) !important;        /* cyan — functions/links */
   text-decoration-color: rgba(139, 233, 253, 0.3);
 }
 
-.code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo):hover {
-  color: var(--cm-string) !important;          /* green — hover state */
-  text-shadow: 0 0 8px rgba(80, 250, 123, 0.3);
+.code-mode a:not(.btn-primary):not(.btn-outline):not(.tag):not(#logo):not(.logo):not([class*="cmd-line"]):hover {
+  color: var(--cm-function, #8be9fd) !important;  /* cyan — unified hover */
+  text-shadow: 0 0 8px rgba(139, 233, 253, 0.3);
+}
+
+/* ── Unified Gutter-Hover System ── */
+/* ── Unified line hover system ──
+   Single source of truth for all code/cmd lines.
+   No !important needed — component duplicates were removed. */
+
+.code-mode [class*="code-line"],
+.code-mode [class*="cmd-line"],
+.code-mode .jsdoc-line,
+.code-mode .cta-console__line,
+.code-mode .proj-line,
+.code-mode .readme-line {
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.code-mode [class*="code-line"]:hover,
+.code-mode [class*="cmd-line"]:hover,
+.code-mode .jsdoc-line:hover,
+.code-mode .cta-console__line:hover,
+.code-mode .proj-line:hover,
+.code-mode .readme-line:hover {
+  background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
+}
+
+/* Cyan left bar */
+.code-mode [class*="code-line"]::before,
+.code-mode [class*="cmd-line"]::before,
+.code-mode .jsdoc-line::before,
+.code-mode .cta-console__line::before,
+.code-mode .proj-line::before,
+.code-mode .readme-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 2px;
+  width: 2px;
+  background: transparent;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.code-mode [class*="code-line"]:hover::before,
+.code-mode [class*="cmd-line"]:hover::before,
+.code-mode .jsdoc-line:hover::before,
+.code-mode .cta-console__line:hover::before,
+.code-mode .proj-line:hover::before,
+.code-mode .readme-line:hover::before {
+  background: var(--cm-function, #8be9fd);
+  box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
+}
+
+/* Cyan gutter numbers */
+.code-mode [class*="code-line"]:hover [class*="-ln"],
+.code-mode [class*="code-line"]:hover [class*="-gutter"],
+.code-mode [class*="cmd-line"]:hover [class*="-ln"],
+.code-mode [class*="cmd-line"]:hover [class*="-gutter"],
+.code-mode .jsdoc-line:hover .jsdoc-gutter,
+.code-mode .cta-console__line:hover .cta-gutter,
+.code-mode .proj-line:hover .proj-gutter,
+.code-mode .readme-line:hover .readme-gutter {
+  color: var(--cm-function, #8be9fd);
+  opacity: 0.9;
+}
+
+/* ── Command line base styles ── */
+/* body.code-mode matches inspector cursor specificity */
+body.code-mode [class*="cmd-line"],
+body.code-mode [data-component][class*="cmd-line"] {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  box-shadow: none;
+}
+
+body.code-mode [data-component][class*="cmd-line"]:hover {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Unified cmd-line syntax tokens */
+.code-mode [class*="cmd-prompt"] { color: var(--cm-text-muted, #7d8590); }
+.code-mode [class*="cmd-text"]   { color: var(--cm-keyword, #bd93f9); }
+.code-mode [class*="cmd-file"]   { color: var(--cm-string, #50fa7b); }
+.code-mode [class*="cmd-cursor"] {
+  color: var(--cm-string, #50fa7b);
+  font-weight: 700;
+  margin-left: 1px;
+  animation: cmdCursorBlink 1s step-end infinite;
+}
+
+@keyframes cmdCursorBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
 }
 
 /* Primary accent overrides */
@@ -798,6 +911,12 @@ body.code-mode aside:hover {
 .code-mode section[data-component="CallToAction"] > .container-custom::after { content: '</CallToAction>'; }
 .code-mode section[data-component="AboutHero"] > .container-custom::before { content: '<AboutHero>'; }
 .code-mode section[data-component="AboutHero"] > .container-custom::after { content: '</AboutHero>'; }
+
+.code-mode section[data-component="AboutHeroCode"] > .container-custom::before { content: '<AboutHeroCode>'; }
+.code-mode section[data-component="AboutHeroCode"] > .container-custom::after { content: '</AboutHeroCode>'; }
+
+.code-mode section[data-component="MethodologyStack"] > .container-custom::before { content: '<MethodologyStack>'; }
+.code-mode section[data-component="MethodologyStack"] > .container-custom::after { content: '</MethodologyStack>'; }
 .code-mode section[data-component="BiographySection"] > .container-custom::before { content: '<BiographySection>'; }
 .code-mode section[data-component="BiographySection"] > .container-custom::after { content: '</BiographySection>'; }
 .code-mode section[data-component="SpecialtiesSection"] > .container-custom::before { content: '<SpecialtiesSection>'; }
@@ -817,6 +936,130 @@ body.code-mode aside:hover {
 .code-mode section[data-component="ParallaxCover"] > .container-custom::before { content: '<ParallaxCover>'; }
 .code-mode section[data-component="ParallaxCover"] > .container-custom::after { content: '</ParallaxCover>'; }
 
+.code-mode section[data-component="ProjectMetaWindow"] > .container-custom::before { content: '<ProjectMetaWindow>'; }
+.code-mode section[data-component="ProjectMetaWindow"] > .container-custom::after { content: '</ProjectMetaWindow>'; }
+
+.code-mode section[data-component="AssetPreview"] > .container-custom::before { content: '<AssetPreview>'; }
+.code-mode section[data-component="AssetPreview"] > .container-custom::after { content: '</AssetPreview>'; }
+
+.code-mode section[data-component="ProjectFileBlocks"] > .container-custom::before { content: '<ProjectFileBlocks>'; }
+.code-mode section[data-component="ProjectFileBlocks"] > .container-custom::after { content: '</ProjectFileBlocks>'; }
+
+.code-mode section[data-component="ResultsFile"] > .container-custom::before { content: '<ResultsFile>'; }
+.code-mode section[data-component="ResultsFile"] > .container-custom::after { content: '</ResultsFile>'; }
+
+.code-mode section[data-component="ProjectTerminalNav"] > .container-custom::before { content: '<ProjectTerminalNav>'; }
+.code-mode section[data-component="ProjectTerminalNav"] > .container-custom::after { content: '</ProjectTerminalNav>'; }
+
+.code-mode section[data-component="ProjectsHeroCode"] > .container-custom::before { content: '<ProjectsHeroCode>'; }
+.code-mode section[data-component="ProjectsHeroCode"] > .container-custom::after { content: '</ProjectsHeroCode>'; }
+
+/* ── 5b. Code-mode compact spacing ── */
+/* Reduce vertical rhythm ~35% to feel like a single code file */
+.code-mode .section-padding {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .code-mode .section-padding {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .code-mode .section-padding {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+}
+
+/* Tighter gap between section header and project cards */
+.code-mode [data-component="FeaturedProjects"] .flex.flex-col {
+  margin-bottom: 1.5rem !important;
+}
+
+.code-mode [data-component="FeaturedProjects"] .mb-12 {
+  margin-bottom: 1.5rem !important;
+}
+
+.code-mode [data-component="FeaturedProjects"] .md\:mb-16 {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Reduce project grid vertical gaps */
+.code-mode [data-component="FeaturedProjects"] .gap-y-10 {
+  row-gap: 1.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .code-mode [data-component="FeaturedProjects"] .md\:gap-y-14 {
+    row-gap: 2rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .code-mode [data-component="FeaturedProjects"] .lg\:gap-y-16 {
+    row-gap: 2rem !important;
+  }
+}
+
+/* CTA section tighter spacing */
+.code-mode [data-component="CallToAction"] .mb-6 {
+  margin-bottom: 0.75rem !important;
+}
+
+.code-mode [data-component="CallToAction"] .mb-10 {
+  margin-bottom: 1.5rem !important;
+}
+
+/* CTA section: constrain design-mode content width */
+[data-component="CallToAction"] .cta-design-view {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* About section grid gap reduction */
+.code-mode [data-component="AboutSection"] .about-grid {
+  gap: 2.5rem !important;
+}
+
+@media (min-width: 1024px) {
+  .code-mode [data-component="AboutSection"] .about-grid {
+    gap: 3rem !important;
+  }
+}
+
+/* Projects listing page: tighter grid */
+.code-mode [data-component="ProjectsListing"] .gap-8 {
+  gap: 1.25rem !important;
+}
+
+/* Hero: match section-padding spacing instead of min-height centering */
+.code-mode [data-component="HeroSection"] {
+  min-height: auto !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .code-mode [data-component="HeroSection"] {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .code-mode [data-component="HeroSection"] {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+}
+
 /* ── 6. Container borders (box-model) ── */
 /* Use outline instead of border so padding/margin stays identical to normal mode */
 .code-mode .container-custom {
@@ -825,6 +1068,8 @@ body.code-mode aside:hover {
   border-radius: 4px;
   box-shadow: var(--cm-glow);
   transition: outline-color 0.3s ease, box-shadow 0.3s ease;
+  padding-top: var(--main-margin);
+  padding-bottom: var(--main-margin);
 }
 
 .code-mode .container-custom:hover {
@@ -889,7 +1134,7 @@ body.code-mode aside:hover {
 }
 
 /* ── Hero "Soy" greeting — adopt heading color in Code Mode ── */
-.code-mode [data-component="HeroSection"] .hero-main-content > div:first-child .text-dark-900 {
+.code-mode [data-component="HeroSection"] .hero-main-content > div:first-child .text-neutral-900 {
   color: var(--cm-function) !important;  /* cyan — match h2 headings */
   text-shadow: none !important;          /* flat, no glow residuals */
 }
@@ -930,11 +1175,11 @@ body.code-mode aside:hover {
 }
 
 /* Stats text colors */
-.code-mode .hero-stats-col .text-dark-900 {
+.code-mode .hero-stats-col .text-neutral-900 {
   color: var(--cm-attr) !important;
 }
 
-.code-mode .hero-stats-col .text-dark-400 {
+.code-mode .hero-stats-col .text-neutral-400 {
   color: var(--cm-comment) !important;
 }
 
@@ -1003,23 +1248,6 @@ body.code-mode .hero-cta-code {
   }
 }
 
-/* Navbar code CTA: hidden on mobile, smaller size */
-body.code-mode .navbar-cta-code {
-  min-width: auto;
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-}
-
-.navbar-cta-code {
-  display: none !important;
-}
-
-@media (min-width: 640px) {
-  body.code-mode .navbar-cta-code {
-    display: inline-flex !important;
-  }
-}
-
 body.code-mode .hero-cta-code:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: var(--cm-string, #50fa7b);
@@ -1029,8 +1257,14 @@ body.code-mode .hero-cta-code:hover {
 }
 
 .hero-cta-prompt {
-  color: var(--cm-string, #50fa7b);
+  color: var(--cm-text-muted, #7d8590);
   font-weight: 700;
+  transition: color 0.25s ease;
+}
+
+body.code-mode .hero-cta-code:hover .hero-cta-prompt {
+  color: var(--cm-function, #8be9fd);
+  text-shadow: 0 0 8px rgba(139, 233, 253, 0.3);
 }
 
 .hero-cta-cmd {
@@ -1119,64 +1353,25 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   border-bottom: 1px solid var(--cm-border) !important;
   backdrop-filter: blur(12px) saturate(1.2) !important;
   -webkit-backdrop-filter: blur(12px) saturate(1.2) !important;
-  /* Override structural outline — navbar is fixed, not a content section */
   outline: none !important;
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 .code-mode #navbar .container-custom {
-  /* Navbar container: no section outline, no extra padding */
   outline: none !important;
   box-shadow: none !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
-/* Scrolled state: darker surface + subtle depth shadow */
-.code-mode #navbar.backdrop-blur-xl {
-  background: rgba(13, 17, 23, 0.95) !important;
-  backdrop-filter: blur(16px) saturate(1.3) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(1.3) !important;
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.4), 0 0 1px rgba(80, 250, 123, 0.06) !important;
+.code-mode footer .container-custom {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .code-mode .nav-scrolled {
   background: rgba(13, 17, 23, 0.95) !important;
   border-bottom-color: var(--cm-border-hover) !important;
-}
-
-/* Nav links as IDE tabs */
-.code-mode #navbar nav a:not(#logo):not(.logo):not(.btn-primary):not([href^="mailto"]) {
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.75rem !important;
-  letter-spacing: 0.04em;
-  border-radius: 0 !important;
-  border-bottom: 2px solid transparent;
-  padding: 0.5rem 1rem !important;
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-}
-
-/* Active tab */
-.code-mode #navbar nav a.text-primary-500 {
-  color: var(--cm-function) !important;
-  background: var(--cm-bg-surface) !important;
-  border-bottom-color: var(--cm-function) !important;
-}
-
-/* Inactive tab hover */
-.code-mode #navbar nav a:not(.text-primary-500):hover {
-  background: var(--cm-bg-card) !important;
-  border-bottom-color: var(--cm-comment) !important;
-}
-
-.code-mode .logo-name {
-  color: var(--cm-tag) !important;       /* pink — like an HTML tag */
-}
-
-.code-mode .logo-role {
-  color: var(--cm-comment) !important;
-}
-
-.code-mode .logo-divider {
-  background: var(--cm-comment) !important;
 }
 
 /* ── 13. Footer — polymorphic, transitions handled in component ── */
@@ -1186,21 +1381,7 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 
 /* ── 14. Section icons ── */
 .code-mode .section-icon {
-  background: rgba(139, 233, 253, 0.08) !important;
-  border: 1px solid rgba(139, 233, 253, 0.15);
-  border-radius: 4px;
-}
-
-.code-mode .section-icon-svg .icon-stroke {
-  stroke: var(--cm-text-muted) !important;
-}
-
-.code-mode .section-icon-svg .icon-accent {
-  stroke: var(--cm-function) !important;
-}
-
-.code-mode .section-icon-svg .icon-accent-fill {
-  fill: var(--cm-function) !important;
+  display: none !important;
 }
 
 /* ── 15. Mobile menu ── */
@@ -1218,24 +1399,6 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 
 .code-mode #mobile-menu-btn:hover {
   background: var(--cm-bg-card) !important;
-}
-
-/* Code mode: always show desktop nav tabs (even on small screens) */
-.code-mode #navbar .hidden.lg\:flex {
-  display: flex !important;
-}
-
-/* Code mode: hide hamburger button since tabs are always visible */
-.code-mode #mobile-menu-btn {
-  display: none !important;
-}
-
-/* Code mode on small screens: compact tabs to fit */
-@media (max-width: 1023px) {
-  .code-mode #navbar .hidden.lg\:flex a {
-    padding: 0.35rem 0.6rem !important;
-    font-size: 0.65rem !important;
-  }
 }
 
 
@@ -1284,14 +1447,14 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 }
 
 /* ── 19. Token Inspector — hover tooltips for design tokens ── */
-.code-mode [data-token],
-.code-mode [data-component] {
+.code-mode [data-token]:not([class*="cmd-line"]),
+.code-mode [data-component]:not([class*="cmd-line"]) {
   position: relative;
   cursor: crosshair;
 }
 
-.code-mode [data-token]::after,
-.code-mode [data-component]::after {
+.code-mode [data-token]:not([class*="cmd-line"])::after,
+.code-mode [data-component]:not([class*="cmd-line"])::after {
   content: '';
   position: absolute;
   inset: -2px;
@@ -1302,8 +1465,8 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   z-index: 40;
 }
 
-.code-mode [data-token]:hover::after,
-.code-mode [data-component]:hover::after {
+.code-mode [data-token]:not([class*="cmd-line"]):hover::after,
+.code-mode [data-component]:not([class*="cmd-line"]):hover::after {
   border-color: var(--cm-inspector-glow);
   box-shadow: 0 0 8px rgba(80, 250, 123, 0.2), inset 0 0 8px rgba(80, 250, 123, 0.05);
 }
@@ -1316,8 +1479,8 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   100% { top: calc(100% + 2px); opacity: 0; }
 }
 
-.code-mode [data-token]:hover::before,
-.code-mode [data-component]:hover::before {
+.code-mode [data-token]:not([class*="cmd-line"]):hover::before,
+.code-mode [data-component]:not([class*="cmd-line"]):hover::before {
   content: '';
   position: absolute;
   left: -2px;
@@ -1531,8 +1694,8 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.625rem;
   font-weight: 600;
-  color: var(--color-dark-300, #a8a29e);
-  background: var(--color-dark-50, #f5f0eb);
+  color: var(--color-neutral-300, #a8a29e);
+  background: var(--color-neutral-50, #f5f0eb);
   padding: 0.125rem 0.5rem;
   border-radius: 4px;
   letter-spacing: 0.05em;
@@ -1566,20 +1729,20 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
 .eco-card-title {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-dark-900, #1a1918);
+  color: var(--color-neutral-900, #1a1918);
   margin-bottom: 0.5rem;
 }
 
 .eco-card-desc {
   font-size: 0.75rem;
   line-height: 1.6;
-  color: var(--color-dark-400, #7c766c);
+  color: var(--color-neutral-400, #7c766c);
   flex: 1;
 }
 
 .eco-card-divider {
   height: 1px;
-  background: var(--color-dark-100, #e5e0d8);
+  background: var(--color-neutral-100, #e5e0d8);
   margin: 1rem 0;
 }
 
@@ -1595,7 +1758,7 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--color-dark-300, #a8a29e);
+  color: var(--color-neutral-300, #a8a29e);
 }
 
 .eco-dep-icons {
@@ -1619,7 +1782,7 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   height: 1.75rem;
   padding: 0.375rem;
   border-radius: 6px;
-  background: var(--color-dark-50, #f5f0eb);
+  background: var(--color-neutral-50, #f5f0eb);
   transition: background 0.25s ease, box-shadow 0.2s ease;
 }
 
@@ -1628,7 +1791,7 @@ body.code-mode .hero-cta-code:hover .hero-cta-flag {
   font-size: 0.5rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: var(--color-dark-300, #a8a29e);
+  color: var(--color-neutral-300, #a8a29e);
   text-align: center;
   white-space: nowrap;
   transition: color 0.25s ease;
@@ -1698,46 +1861,148 @@ body.code-mode .eco-dep:hover svg {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* ── JSON Window (VS Code aesthetic) ── */
-.json-window {
+/* ═══ Shared code-window base (applied to all IDE-style windows) ═══ */
+.json-window,
+.pmd-window,
+.readme-window,
+.file-block,
+.process-pipeline-window,
+.principles-config-window,
+.kpi-monitor-window {
   background: #1e1e2e;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid var(--cm-border, #30363d);
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-.json-titlebar {
+.json-titlebar,
+.pmd-titlebar,
+.readme-titlebar,
+.file-block__titlebar,
+.process-pipeline-titlebar,
+.principles-config-titlebar,
+.kpi-monitor-titlebar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.875rem;
   background: #181825;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.json-dots {
+.json-dots,
+.pmd-dots,
+.readme-dots {
   display: flex;
   gap: 6px;
 }
 
-.json-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.json-dot--red { background: #ff5f57; }
-.json-dot--yellow { background: #febc2e; }
-.json-dot--green { background: #28c840; }
-
-.json-filename {
+.json-filename,
+.pmd-filename,
+.readme-filename,
+.file-block__filename,
+.process-pipeline-filename,
+.principles-config-filename,
+.kpi-monitor-filename {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
   color: #7d8590;
   letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
+.readme-file-icon,
+.file-block__file-icon {
+  color: #7d8590;
+  flex-shrink: 0;
+}
+
+.pmd-tab,
+.readme-tab-active,
+.file-block__tab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #e6edf3;
+  background: #1e1e2e;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px 4px 0 0;
+  margin-left: auto;
+  border: 1px solid var(--cm-border, #30363d);
+  border-bottom: 1px solid #1e1e2e;
+}
+
+.pmd-body,
+.readme-body,
+.file-block__body {
+  padding: 0.75rem 0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: #cdd6f4;
+  overflow-x: auto;
+}
+
+.pmd-line,
+.readme-line,
+.file-block__line {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+  padding: 0 0.875rem 0 0;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.pmd-line:hover,
+.readme-line:hover,
+.file-block__line:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pmd-gutter,
+.readme-gutter,
+.file-block__gutter {
+  display: inline-block;
+  min-width: 40px;
+  text-align: right;
+  padding-right: 12px;
+  color: #7d8590;
+  opacity: 0.3;
+  user-select: none;
+  flex-shrink: 0;
+  font-size: inherit;
+  line-height: inherit;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.pmd-line:hover .pmd-gutter,
+.readme-line:hover .readme-gutter,
+.file-block__line:hover .file-block__gutter {
+  color: var(--cm-function, #8be9fd);
+  opacity: 0.9;
+}
+
+.pmd-code,
+.readme-code,
+.file-block__code {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── JSON Window overrides ── */
+.json-window {
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.json-titlebar {
+  padding: 0.75rem 1rem;
+}
+
+/* json-body has unique larger sizing */
 .json-body {
   padding: 1.5rem 2rem;
   margin: 0;
@@ -1935,12 +2200,12 @@ body.code-mode .timeline-gitlog {
 .gitlog-pre {
   background: #1e1e2e;
   border: 1px solid var(--cm-border, #30363d);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1.5rem 2rem;
   margin: 0;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.85rem;
-  line-height: 1.7;
+  font-size: 0.78rem;
+  line-height: 1.6;
   overflow-x: auto;
   color: #cdd6f4;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
@@ -1952,7 +2217,7 @@ body.code-mode .timeline-gitlog {
   margin-bottom: 1.25rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(108, 112, 134, 0.2);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .gitlog-entry {
@@ -1969,8 +2234,8 @@ body.code-mode .timeline-gitlog {
 }
 
 .gitlog-hash {
-  color: #f9e2af;
-  font-weight: 600;
+  color: var(--accent-color, #D97757);
+  font-weight: 700;
 }
 
 .gitlog-date {
@@ -1999,7 +2264,7 @@ body.code-mode .timeline-gitlog {
 
 /* ── Methodology & Stack section ── */
 .methodology-stack-section {
-  background: var(--color-dark-50, #f7f5f2);
+  background: var(--color-neutral-50, #f7f5f2);
 }
 
 body.code-mode .methodology-stack-section {
@@ -2024,7 +2289,7 @@ body.code-mode .methodology-stack-section {
 .methodology-separator-line {
   flex: 1;
   height: 1px;
-  background: var(--color-dark-200, #d4cfc5);
+  background: var(--color-neutral-200, #d4cfc5);
 }
 
 body.code-mode .methodology-separator-line {
@@ -2033,7 +2298,7 @@ body.code-mode .methodology-separator-line {
 
 .methodology-separator-label {
   font-size: 0.75rem;
-  color: var(--color-dark-300, #a8a29e);
+  color: var(--color-neutral-300, #a8a29e);
   letter-spacing: 0.15em;
 }
 
@@ -2044,6 +2309,30 @@ body.code-mode .methodology-separator-line {
 
 body.code-mode .methodology-sep-normal {
   display: none;
+}
+
+body.code-mode .methodology-header,
+body.code-mode .methodology-heading {
+  display: none;
+}
+
+/* Remove max-w constraint in code mode so methodology matches other sections */
+body.code-mode .methodology-inner {
+  max-width: none;
+}
+
+/* Code-mode: reduce padding on BiographySection */
+body.code-mode [data-component="BiographySection"] {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+body.code-mode [data-component="BiographySection"] > .container-custom > .grid {
+  gap: 1.5rem !important;
+}
+
+body.code-mode [data-component="BiographySection"] .space-y-12 > * + * {
+  margin-top: 1.5rem !important;
 }
 
 body.code-mode .methodology-sep-code {
@@ -2075,6 +2364,89 @@ body.code-mode [data-component="ProjectsHero"] .heading-xl .text-primary-500 {
   color: var(--cm-tag) !important;
 }
 
+/* ── Projects Hero: design/code toggle ── */
+.projects-hero-code { display: none; }
+body.code-mode .projects-hero-design { display: none !important; }
+body.code-mode .projects-hero-code { display: block; }
+
+/* ── Projects code-mode filter buttons ── */
+.pf-filter-options {
+  display: inline;
+}
+
+.pf-filter-sep {
+  color: #475569;
+}
+
+.pf-filter-btn {
+  all: unset;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: inherit;
+  color: #64748b;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  position: relative;
+}
+
+.pf-filter-btn .pf-filter-quote {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.pf-filter-btn:hover {
+  color: #e2e8f0;
+  text-shadow: 0 0 6px rgba(139, 233, 253, 0.15);
+}
+
+.pf-filter-btn--active {
+  color: #22d3ee;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(34, 211, 238, 0.4);
+}
+
+/* Dynamic filter value in run command */
+.pmd-constant {
+  color: var(--cm-constant, #f1fa8c);
+}
+
+/* ── Projects code-mode run command line ── */
+.pf-run-line {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0 0.875rem 0 0;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.pf-run-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: transparent;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pf-run-line:hover {
+  background: var(--cm-bg-hover, rgba(255, 255, 255, 0.04));
+}
+
+.pf-run-line:hover::before {
+  background: var(--cm-function, #8be9fd);
+  box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
+}
+
+.pf-run-line:hover .file-block__gutter {
+  color: var(--cm-function, #8be9fd) !important;
+  opacity: 0.9 !important;
+}
+
 body.code-mode [data-component="BiographySection"] .heading-md,
 body.code-mode [data-component="CareerTimeline"] .heading-md,
 body.code-mode [data-component="ValuesGrid"] .heading-md,
@@ -2093,9 +2465,9 @@ body.code-mode [data-component="CallToAction"] .heading-lg .text-primary-500 {
 }
 
 /* "Soy" text on hero and about sections */
-body.code-mode [data-component="HeroSection"] .text-dark-900,
-body.code-mode [data-component="AboutHero"] .text-dark-900,
-body.code-mode .hero-main-content .text-dark-900 {
+body.code-mode [data-component="HeroSection"] .text-neutral-900,
+body.code-mode [data-component="AboutHero"] .text-neutral-900,
+body.code-mode .hero-main-content .text-neutral-900 {
   color: #e6edf3 !important;
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
 }
@@ -2128,6 +2500,46 @@ body.code-mode .about-bio-prose {
 body.code-mode .bio-readme,
 body.code-mode .about-bio-readme {
   display: block;
+  margin-bottom: 0;
+}
+
+/* ── About page: 3 file-block windows (bio.md / experience.ts / stack.json) ── */
+.about-code-block {
+  display: none;
+}
+
+body.code-mode .about-code-block {
+  display: block;
+}
+
+/* Hide design-mode headings above the code-mode file-blocks */
+body.code-mode [data-component="BiographySection"] .heading-md,
+body.code-mode [data-component="CareerTimeline"] .heading-md,
+body.code-mode [data-component="KPIDashboard"] .heading-md {
+  display: none;
+}
+
+/* Hide normal-mode KPI cards, timeline, and bio prose in code mode */
+body.code-mode .kpi-grid-normal {
+  display: none !important;
+}
+
+body.code-mode .timeline-flow {
+  display: none;
+}
+
+body.code-mode .bio-prose {
+  display: none;
+}
+
+/* Spacing between the file-block windows */
+body.code-mode .about-code-block + .about-code-block {
+  margin-top: 1.5rem;
+}
+
+/* ── AboutSection (Home): reduce bottom padding in code mode ── */
+body.code-mode [data-component="AboutSection"] {
+  padding-bottom: 1rem !important;
 }
 
 /* ── AboutSection (Home): heading code-mode colors ── */
@@ -2141,68 +2553,23 @@ body.code-mode [data-component="AboutSection"] .heading-lg .text-primary-500 {
   color: var(--cm-tag) !important;
 }
 
-.readme-window {
-  background: #1e1e2e;
-  border-radius: 12px;
-  border: 1px solid var(--cm-border, #30363d);
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
-.readme-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: #181825;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.readme-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.readme-filename {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  color: #7d8590;
-  letter-spacing: 0.02em;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.readme-file-icon {
-  color: #7d8590;
-  flex-shrink: 0;
-}
-
-.readme-tab-active {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  color: #e6edf3;
-  background: #1e1e2e;
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px 4px 0 0;
-  margin-left: auto;
-  border: 1px solid var(--cm-border, #30363d);
-  border-bottom: 1px solid #1e1e2e;
-}
-
+/* readme-body unique: margin: 0 */
 .readme-body {
-  padding: 1.5rem 2rem;
   margin: 0;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.82rem;
-  line-height: 1.7;
-  overflow-x: auto;
-  color: #cdd6f4;
-  white-space: pre-wrap;
 }
 
-.readme-comment {
-  color: #6272a4;
+.readme-delim {
+  color: var(--cm-comment, #6272a4);
+  opacity: 0.5;
+}
+
+.readme-star {
+  color: var(--cm-comment, #6272a4);
+  opacity: 0.5;
+}
+
+.readme-text {
+  color: var(--cm-text-muted, #7d8590);
 }
 
 .readme-tag {
@@ -2335,55 +2702,22 @@ body.code-mode .btn-cv-code:hover .code-string {
   color: var(--cm-function, #8be9fd);
 }
 
-/* ── "Ver todos" → projects.listAll() ── */
-.btn-viewall-code {
-  display: none;
-}
-
+/* ── "Ver todos" button — hidden in code mode (replaced by proj-window__action) ── */
 body.code-mode .btn-viewall-normal {
   display: none !important;
 }
 
-body.code-mode .btn-viewall-code {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  color: var(--cm-text-secondary, #c9d1d9);
-  background: transparent;
-  border: 1px solid var(--cm-border, #30363d);
-  border-radius: 2px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
+/* ── Section heading hover → first card glow connection ── */
+/* When hovering the projects window, the first project card glows */
+body.code-mode [data-component="FeaturedProjects"] .container-custom:has(.proj-window:hover) > [data-component="ProjectGrid"] > :first-child {
+  outline-color: rgba(139, 233, 253, 0.4);
+  box-shadow: 0 0 16px rgba(139, 233, 253, 0.08);
+  transition: outline-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-body.code-mode .btn-viewall-code .btn-code-icon {
-  color: var(--cm-text-muted, #7d8590);
-  transition: all 0.3s ease;
-}
-
-body.code-mode .btn-viewall-code:hover {
-  border-color: var(--cm-constant, #f1fa8c);
-  background: rgba(241, 250, 140, 0.05);
-  box-shadow: 0 0 12px rgba(241, 250, 140, 0.1);
-}
-
-body.code-mode .btn-viewall-code:hover .btn-code-icon {
-  color: #fff;
-  transform: translateX(2px);
-}
-
-body.code-mode .btn-viewall-code:hover .code-fn,
-body.code-mode .btn-viewall-code:hover .code-dot,
-body.code-mode .btn-viewall-code:hover .code-parens {
-  color: #fff;
-}
-
-body.code-mode .btn-viewall-code:hover .code-method::after {
-  content: none;
+body.code-mode [data-component="FeaturedProjects"] .container-custom:has(.proj-window:hover) > [data-component="ProjectGrid"] > :first-child .project-card {
+  border-color: rgba(139, 233, 253, 0.35);
+  box-shadow: 0 0 20px rgba(139, 233, 253, 0.06);
 }
 
 /* ── Social links: Code mode (import syntax with icons) ── */
@@ -2396,98 +2730,7 @@ body.code-mode .social-normal {
 }
 
 body.code-mode .social-code {
-  display: flex !important;
-}
-
-.social-import {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 0.875rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  color: var(--cm-text-muted, #7d8590);
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.social-import-icon {
-  flex-shrink: 0;
-  opacity: 0.5;
-  transition: all 0.3s ease;
-}
-
-.social-import:hover {
-  border-color: var(--cm-border, #30363d);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.social-import:hover .social-import-icon {
-  opacity: 1;
-}
-
-/* LinkedIn: icon lights up in brand blue */
-.social-import--linkedin .social-import-icon {
-  color: var(--cm-text-muted, #7d8590);
-}
-
-.social-import--linkedin:hover .social-import-icon {
-  color: #0a66c2;
-  filter: drop-shadow(0 0 4px rgba(10, 102, 194, 0.4));
-}
-
-.social-import--linkedin:hover .code-import-name {
-  color: #0a66c2;
-  text-shadow: 0 0 10px rgba(10, 102, 194, 0.4);
-}
-
-.social-import--linkedin:hover .code-keyword,
-.social-import--linkedin:hover .code-string {
-  color: var(--cm-text-secondary, #c9d1d9);
-}
-
-/* Medium: icon lights up in white */
-.social-import--medium .social-import-icon {
-  color: var(--cm-text-muted, #7d8590);
-}
-
-.social-import--medium:hover .social-import-icon {
-  color: #fff;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
-}
-
-.social-import--medium:hover .code-import-name {
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-.social-import--medium:hover .code-keyword,
-.social-import--medium:hover .code-string {
-  color: var(--cm-text-secondary, #c9d1d9);
-}
-
-/* CV (fetch): icon lights up in green */
-.social-import--cv .social-import-icon {
-  color: var(--cm-text-muted, #7d8590);
-}
-
-.social-import--cv:hover .social-import-icon {
-  color: var(--cm-string, #50fa7b);
-  filter: drop-shadow(0 0 4px rgba(80, 250, 123, 0.3));
-}
-
-.social-import--cv:hover .code-fn {
-  color: #fff;
-}
-
-.social-import--cv:hover .code-string {
-  color: var(--cm-string, #50fa7b);
-  text-shadow: 0 0 8px rgba(80, 250, 123, 0.3);
+  display: block !important;
 }
 
 /* ── Code mode: flatten border-radius on secondary buttons ── */
@@ -2893,38 +3136,16 @@ body.code-mode [data-component="AboutHero"] .text-body {
 body.code-mode .process-grid-normal { display: none; }
 body.code-mode .process-grid-code { display: block; }
 
-/* Process pipeline: code-mode window */
-.process-pipeline-window {
-  border: 1px solid var(--cm-border, #30363d);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--cm-bg-surface, #161b22);
-}
-
+/* Process pipeline: unique overrides */
 .process-pipeline-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.625rem 1rem;
-  background: var(--cm-bg-card, #1c2128);
-  border-bottom: 1px solid var(--cm-border, #30363d);
-  font-size: 0.75rem;
-}
-
-.process-pipeline-filename {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  color: var(--cm-text-muted, #7d8590);
-  font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
 }
 
 .process-pipeline-body {
-  padding: 1.25rem 1.5rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  line-height: 1.8;
+  padding: 1rem 1.5rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
   color: var(--cm-text, #e6edf3);
   overflow-x: auto;
 }
@@ -2992,7 +3213,7 @@ body.code-mode .principles-code { display: block; }
 .lint-rule-name {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-dark-900, #1a1918);
+  color: var(--color-neutral-900, #1a1918);
   flex: 1;
   min-width: 0;
 }
@@ -3012,7 +3233,7 @@ body.code-mode .principles-code { display: block; }
 .lint-badge--engineering,
 .lint-badge--culture,
 .lint-badge--product {
-  color: var(--color-dark-300, #a8a29e);
+  color: var(--color-neutral-300, #a8a29e);
   background: rgba(168, 162, 150, 0.1);
   transition: color 0.3s ease, background 0.3s ease;
 }
@@ -3028,7 +3249,7 @@ body.code-mode .principles-code { display: block; }
 .lint-rule-desc {
   font-size: 0.8125rem;
   line-height: 1.6;
-  color: var(--color-dark-400, #7c766c);
+  color: var(--color-neutral-400, #7c766c);
   padding-left: 2.125rem;
 }
 
@@ -3067,38 +3288,16 @@ body.code-mode [data-component="DesignPrinciples"] p {
   color: var(--cm-text-muted) !important;
 }
 
-/* Principles config window (code mode) */
-.principles-config-window {
-  border: 1px solid var(--cm-border, #30363d);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--cm-bg-surface, #161b22);
-}
-
+/* Principles config: unique overrides */
 .principles-config-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.625rem 1rem;
-  background: var(--cm-bg-card, #1c2128);
-  border-bottom: 1px solid var(--cm-border, #30363d);
-  font-size: 0.75rem;
-}
-
-.principles-config-filename {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  color: var(--cm-text-muted, #7d8590);
-  font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
 }
 
 .principles-config-body {
-  padding: 1.25rem 1.5rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  line-height: 1.8;
+  padding: 1rem 1.5rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
   color: var(--cm-text, #e6edf3);
   overflow-x: auto;
 }
@@ -3127,30 +3326,8 @@ body.code-mode [data-component="KPIDashboard"] .kpi-card {
   border-color: var(--cm-border) !important;
 }
 
-/* KPI Monitor window (code mode) */
-.kpi-monitor-window {
-  border: 1px solid var(--cm-border, #30363d);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--cm-bg-surface, #161b22);
-}
-
+/* KPI Monitor: unique overrides */
 .kpi-monitor-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.625rem 1rem;
-  background: var(--cm-bg-card, #1c2128);
-  border-bottom: 1px solid var(--cm-border, #30363d);
-  font-size: 0.75rem;
-}
-
-.kpi-monitor-filename {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  color: var(--cm-text-muted, #7d8590);
-  font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
 }
 
@@ -3165,8 +3342,8 @@ body.code-mode [data-component="KPIDashboard"] .kpi-card {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
 }
 
 .kpi-monitor-status {
@@ -3231,11 +3408,7 @@ body.code-mode [data-component="KPIDashboard"] .kpi-card {
   }
 }
 
-/* ── Git Log: accent-colored hashes ── */
-.gitlog-hash {
-  color: #D97757 !important;
-  font-weight: 700;
-}
+/* gitlog-hash color unified in main definition above */
 
 /* ═══════════════════════════════════════════════════════════
    EDITORIAL GRID — 60/40 Alternating Rhythm (3 Rows)
@@ -3292,4 +3465,602 @@ body.code-mode [data-component="KPIDashboard"] .kpi-card {
   }
 }
 
+/* ═══════════════════════════════════════════════════
+   PROJECT DETAIL — CODE MODE
+   ═══════════════════════════════════════════════════ */
+
+/* ── Visibility toggles ── */
+.cm-project-hero,
+.cm-project-cover-code,
+.cm-project-content-code,
+.cm-project-results-code,
+.cm-project-nav-code {
+  display: none;
+}
+
+body.code-mode .cm-project-hero { display: block; }
+body.code-mode .cm-project-cover-code { display: block; }
+body.code-mode .cm-project-content-code { display: block; }
+body.code-mode .cm-project-results-code { display: block; }
+body.code-mode .cm-project-nav-code { display: block; }
+
+body.code-mode .cm-project-cover-design { display: none !important; }
+body.code-mode .cm-project-sidebar-design { display: none !important; }
+body.code-mode .cm-project-results-design { display: none !important; }
+body.code-mode .cm-project-related-design { display: none !important; }
+
+/* Also hide the design-mode hero in code mode */
+body.code-mode [data-component="ProjectHero"] { display: none !important; }
+
+/* ── Project Metadata Window (pmd-*): unique overrides ── */
+.pmd-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* pmd-tab: border-bottom: none (vs 1px solid in shared base) */
+.pmd-tab {
+  border-bottom: none;
+}
+
+/* Syntax tokens */
+/* Syntax tokens — IDE color mapping */
+.pmd-keyword { color: var(--cm-keyword, #bd93f9); }           /* export, const → purple */
+.pmd-fn { color: var(--cm-function, #8be9fd); }               /* function names → cyan */
+.pmd-punct { color: var(--cm-text-muted, #7d8590); }          /* : , ; → muted */
+.pmd-bracket { color: var(--cm-tag, #ff79c6); }               /* { } [ ] → pink */
+.pmd-key { color: var(--cm-function, #8be9fd); }              /* object keys → cyan */
+.pmd-string { color: var(--cm-constant, #f1fa8c); }           /* string values → yellow */
+.pmd-number { color: var(--cm-attr, #ffb86c); }               /* numbers → orange */
+.pmd-comment { color: var(--cm-comment, #6272a4); font-style: italic; }
+.pmd-impact {
+  color: var(--cm-string, #50fa7b);
+}
+.pmd-metric {
+  color: #ffb86c;
+}
+
+/* ── File Block Windows: unique overrides ── */
+.file-block__body--terminal {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.file-block__code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.file-block__text {
+  color: var(--cm-text-secondary, #c9d1d9);
+}
+
+.file-block__text strong {
+  color: var(--cm-constant, #f1fa8c);
+  font-weight: 600;
+}
+
+/* ── Code Mode: Project Sidebar Grid ── */
+.cm-project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .cm-project-grid {
+    grid-template-columns: 260px 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.cm-sidebar__sticky {
+  position: sticky;
+  top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cm-sidebar__panel {
+  background: #1e1e2e;
+  border: 1px solid var(--cm-border, #30363d);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.cm-sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #181825;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #7d8590;
+  text-transform: uppercase;
+}
+
+.cm-sidebar__body {
+  padding: 0.5rem 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  line-height: 1.7;
+  color: #cdd6f4;
+}
+
+.cm-sidebar__row {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cm-sidebar__link {
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.cm-sidebar__link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+  text-decoration-color: var(--cm-constant, #f1fa8c);
+  text-underline-offset: 2px;
+}
+
+.cm-content {
+  min-width: 0;
+}
+
+/* ── Asset Preview (design file viewer) ── */
+.asset-preview {
+  border-radius: 8px;
+  border: 1px solid rgba(139, 233, 253, 0.08);
+  overflow: hidden;
+}
+
+/* Toolbar: path left, meta right */
+.asset-preview__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background: #181825;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+}
+
+.asset-preview__path {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.asset-preview__path-icon {
+  flex-shrink: 0;
+  color: #7d8590;
+}
+
+.asset-preview__path-dir {
+  color: #7d8590;
+  white-space: nowrap;
+}
+
+.asset-preview__path-sep {
+  color: #7d8590;
+  opacity: 0.35;
+}
+
+.asset-preview__path-file {
+  color: var(--cm-function, #8be9fd);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.asset-preview__dims {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #7d8590;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+}
+
+.asset-preview__dims-sep {
+  opacity: 0.3;
+}
+
+/* Canvas: darkest bg + grid + cyan glow */
+.asset-preview__canvas {
+  position: relative;
+  background-color: #0d1117;
+  background-image:
+    linear-gradient(rgba(139, 233, 253, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 233, 253, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding: 1.5rem;
+}
+
+.asset-preview__img-wrap {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.asset-preview__img-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 10%;
+  right: 10%;
+  height: 16px;
+  background: radial-gradient(ellipse at center, rgba(139, 233, 253, 0.12) 0%, transparent 70%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.asset-preview__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+/* Status bar at bottom */
+.asset-preview__status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 1rem;
+  background: #181825;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: #7d8590;
+}
+
+.asset-preview__status-sep {
+  opacity: 0.3;
+}
+
+.asset-preview__status-item {
+  white-space: nowrap;
+}
+
+/* Legacy compat: keep old classes as aliases */
+.asset-preview__titlebar { display: none; }
+.asset-preview__meta { display: none; }
+
+/* ── Terminal Navigation Commands ── */
+.proj-nav-cmd {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  text-decoration: none;
+  padding: 0.25rem 0;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  border-radius: 4px;
+}
+
+.proj-nav-cmd:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.proj-nav-prompt {
+  color: var(--cm-string, #50fa7b);
+  user-select: none;
+}
+
+.proj-nav-text {
+  color: var(--cm-keyword, #bd93f9);
+}
+
+.proj-nav-path {
+  color: var(--cm-function, #8be9fd);
+}
+
+.proj-nav-comment {
+  color: var(--cm-comment, #6272a4);
+  font-style: italic;
+  margin-left: 0.5rem;
+}
+
+.proj-nav-cmd:hover .proj-nav-path {
+  text-shadow: 0 0 8px rgba(139, 233, 253, 0.3);
+}
+
+/* ── Cyan left-bar on hover for pmd-line and file-block__line ── */
+.pmd-line::before,
+.file-block__line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: transparent;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pmd-line:hover::before,
+.file-block__line:hover::before {
+  background: var(--cm-function, #8be9fd);
+  box-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
+}
+
+/* ── About page: Hero toggle (design ↔ code) ── */
+.about-hero-code {
+  display: none;
+}
+
+body.code-mode .about-hero-design {
+  display: none !important;
+}
+
+body.code-mode .about-hero-code {
+  display: block;
+}
+
+/* Hero code window: subtle cyan glow on hover */
+.about-hero-window {
+  transition: box-shadow 0.2s ease;
+}
+
+.about-hero-window:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 30px rgba(139, 233, 253, 0.06);
+}
+
+/* Git branch tab variant */
+.file-block__tab-branch {
+  color: #7d8590;
+  font-size: 0.65rem;
+}
+
+.file-block__tab-branch::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  border-radius: 50%;
+  border: 1.5px solid #50fa7b;
+  vertical-align: -1px;
+}
+
+/* ── About page: profile photo asset viewer toggle ── */
+.about-pg-photo-code {
+  display: none;
+}
+
+body.code-mode .about-pg-photo-design {
+  display: none !important;
+}
+
+body.code-mode .about-pg-photo-code {
+  display: block;
+}
+
+/* ── Case study sections: code-mode figure → asset viewer ── */
+body.code-mode .case-section figure,
+body.code-mode .case-section-new-group figure {
+  border-radius: 8px;
+  border: 1px solid rgba(139, 233, 253, 0.08);
+  overflow: hidden;
+  position: relative;
+  background: #0d1117;
+  box-shadow: none;
+}
+
+body.code-mode .case-section figure img,
+body.code-mode .case-section-new-group figure img {
+  border-radius: 0;
+  padding: 1rem;
+  background-color: #0d1117;
+  background-image:
+    linear-gradient(rgba(139, 233, 253, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 233, 253, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+body.code-mode .case-section figcaption,
+body.code-mode .case-section-new-group figcaption {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: #7d8590;
+  font-style: normal;
+  text-align: left;
+  padding: 0.4rem 1rem;
+  background: #181825;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 0;
+}
+
+/* cm-image-path shown as toolbar above image in code mode */
+body.code-mode .case-section .cm-image-path,
+body.code-mode .case-section-new-group .cm-image-path {
+  display: block;
+  background: #181825;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0;
+  border: none;
+  padding: 0.4rem 1rem;
+  font-size: 0.65rem;
+  color: var(--cm-function, #8be9fd);
+}
+
+/* ── cs-fig-* : Case Study Figure Asset Viewer (toolbar + status) ── */
+/* Hidden in design mode, shown in code mode */
+.cs-fig-toolbar,
+.cs-fig-status {
+  display: none;
+}
+
+body.code-mode .cs-fig-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.45rem 0.75rem;
+  background: #181825;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+}
+
+body.code-mode .cs-fig-toolbar--compact {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.55rem;
+}
+
+.cs-fig-path {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cs-fig-icon {
+  flex-shrink: 0;
+  color: #7d8590;
+}
+
+.cs-fig-dir {
+  color: #7d8590;
+  white-space: nowrap;
+}
+
+.cs-fig-sep {
+  color: #7d8590;
+  opacity: 0.35;
+}
+
+.cs-fig-file {
+  color: var(--cm-function, #8be9fd);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cs-fig-dims {
+  color: #7d8590;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 0.6rem;
+}
+
+body.code-mode .cs-fig-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  background: #181825;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: #7d8590;
+}
+
+body.code-mode .cs-fig-status--compact {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.5rem;
+}
+
+.cs-fig-status-sep {
+  opacity: 0.3;
+}
+
+/* Hide old cm-image-path spans in code mode (replaced by cs-fig-toolbar) */
+body.code-mode .case-section .cm-image-path,
+body.code-mode .case-section-new-group .cm-image-path {
+  display: none !important;
+}
+
+/* Case study section headings in code mode */
+body.code-mode .case-section .heading-md,
+body.code-mode .case-section-new-group .heading-md {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Case study section highlight blockquotes in code mode */
+body.code-mode .case-section blockquote,
+body.code-mode .case-section-new-group blockquote {
+  background: rgba(139, 233, 253, 0.04);
+  border-left-color: var(--cm-function, #8be9fd);
+}
+
+/* Stepper in code mode */
+body.code-mode .case-section [data-component="MethodologyStepper"] .rounded-full {
+  background: var(--cm-bg-surface) !important;
+  border-color: var(--cm-border, #30363d) !important;
+}
+
+/* Mermaid diagrams in code mode */
+body.code-mode .case-section .mermaid {
+  background: #1e1e2e;
+  border-color: var(--cm-border, #30363d);
+}
+
+body.code-mode .case-section .mermaid svg {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* ── Responsive: compact on mobile ── */
+@media (max-width: 639px) {
+  .pmd-gutter,
+  .file-block__gutter {
+    min-width: 28px;
+    padding-right: 8px;
+  }
+
+  .pmd-body,
+  .file-block__body {
+    font-size: 0.7rem;
+  }
+
+  .asset-preview__toolbar {
+    font-size: 0.6rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .asset-preview__dims {
+    font-size: 0.55rem;
+  }
+
+  .asset-preview__canvas {
+    padding: 0.75rem;
+  }
+
+  .asset-preview__status {
+    font-size: 0.55rem;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  body.code-mode .case-section figure img,
+  body.code-mode .case-section-new-group figure img {
+    padding: 0.5rem;
+    background-size: 16px 16px;
+  }
+
+  .pmd-dot {
+    width: 10px;
+    height: 10px;
+  }
+}
 
