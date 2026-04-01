@@ -4,7 +4,6 @@ import HeroSection from '@/components/HeroSection.astro';
 import AboutSection from '@/components/AboutSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import ContactConsole from '@/components/ContactConsole.astro';
-import InteractiveTerminal from '@/components/InteractiveTerminal.astro';
 import { projects } from '@/utils/data';
 
 // 3-row editorial grid: 60/40, 40/60, 60/40
@@ -22,9 +21,6 @@ const featuredProjects = projectOrder
 ---
 
 <BaseLayout title="Home ⚡ Ramon Riera">
-  <!-- Interactive Terminal (Code Mode) — fullscreen overlay -->
-  <InteractiveTerminal />
-
   <!-- Hero -->
   <HeroSection />
 
@@ -34,8 +30,7 @@ const featuredProjects = projectOrder
   <!-- Featured Projects - Vertical Grid -->
   <section class="section-padding" data-component="FeaturedProjects">
     <div class="container-custom">
-      <!-- Design mode header -->
-      <div class="projects-header-design flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-12 md:mb-16">
+      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-12 md:mb-16">
         <div>
           <div data-reveal class="mb-6 flex items-center gap-3">
             <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
@@ -65,7 +60,7 @@ const featuredProjects = projectOrder
         </div>
         <a
           href="/projects"
-          class="btn-outline text-sm btn-viewall-normal"
+          class="btn-outline text-sm"
           data-reveal
           data-component="ButtonOutline"
           data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px"
@@ -75,36 +70,6 @@ const featuredProjects = projectOrder
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
-      </div>
-
-      <!-- Code mode header — terminal window -->
-      <div class="projects-header-code mb-4" data-reveal>
-        <div class="proj-window">
-          <div class="proj-window__titlebar">
-            <div class="proj-window__dots">
-              <span class="pmd-dot" style="background:#ff5f57"></span>
-              <span class="pmd-dot" style="background:#febc2e"></span>
-              <span class="pmd-dot" style="background:#28c840"></span>
-            </div>
-            <span class="proj-window__filename">
-              <svg class="proj-window__file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#3178c6">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
-              </svg>
-              projects_index.tsx
-            </span>
-            <span class="proj-window__tab">projects_index.tsx</span>
-          </div>
-          <div class="proj-window__body">
-            <div class="proj-line"><span class="proj-gutter">1</span><span class="proj-code"><span class="proj-tok--comment">// &lt;FeaturedProjects /&gt;</span></span></div>
-            <div class="proj-line"><span class="proj-gutter">2</span><span class="proj-code"><span class="proj-tok--keyword">export</span> <span class="proj-tok--keyword">const</span> <span class="proj-tok--fn">featured</span> <span class="proj-tok--punct">=</span> <span class="proj-tok--fn">projects</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">filter</span><span class="proj-tok--punct">(</span><span class="proj-tok--fn">p</span> <span class="proj-tok--punct">=&gt;</span> <span class="proj-tok--fn">p</span><span class="proj-tok--punct">.</span><span class="proj-tok--method">featured</span><span class="proj-tok--punct">)</span></span></div>
-            <a href="/projects" class="proj-cmd-line" data-component="ButtonViewAllCode">
-              <span class="proj-gutter">3</span>
-              <span class="proj-code">
-                <span class="proj-cmd-prompt">&gt;</span> <span class="proj-cmd-text">run</span> <span class="proj-cmd-file">projects.listAll()</span><span class="proj-cmd-cursor">_</span>
-              </span>
-            </a>
-          </div>
-        </div>
       </div>
 
       <!-- Projects Grid — 3 rows, alternating 60/40 rhythm -->
@@ -141,127 +106,6 @@ const featuredProjects = projectOrder
   @media (min-width: 1024px) {
     .project-grid-item :global(.card-image-wrap) {
       height: 340px;
-    }
-  }
-
-  /* ═══ Projects header: design / code mode swap ═══ */
-  .projects-header-code {
-    display: none;
-  }
-
-  :global(.code-mode) .projects-header-design {
-    display: none !important;
-  }
-
-  :global(.code-mode) .projects-header-code {
-    display: block;
-  }
-
-  /* Hide the old btn-viewall-code floating button (now inside window) */
-  :global(.code-mode) .btn-viewall-code {
-    display: none !important;
-  }
-
-  /* ── Projects window — matches jsdoc/readme/cta containers ── */
-  .proj-window {
-    background: #1e1e2e;
-    border-radius: 8px;
-    border: 1px solid var(--cm-border, #30363d);
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-  }
-
-  .proj-window__titlebar {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0.875rem;
-    background: #181825;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .proj-window__dots {
-    display: flex;
-    gap: 6px;
-  }
-
-  .proj-window__filename {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: #7d8590;
-    letter-spacing: 0.02em;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .proj-window__file-icon {
-    color: #7d8590;
-    flex-shrink: 0;
-  }
-
-  .proj-window__tab {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: #e6edf3;
-    background: #1e1e2e;
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px 4px 0 0;
-    margin-left: auto;
-    border: 1px solid var(--cm-border, #30363d);
-    border-bottom: 1px solid #1e1e2e;
-  }
-
-  .proj-window__body {
-    padding: 0.5rem 0;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 0.78rem;
-    line-height: 1.6;
-    overflow-x: auto;
-  }
-
-  /* ── Line + Gutter for projects window ── */
-  .proj-line {
-    display: flex;
-    align-items: baseline;
-    white-space: nowrap;
-    padding: 0 0.875rem 0 0;
-    position: relative;
-  }
-
-  .proj-gutter {
-    display: inline-block;
-    min-width: 36px;
-    text-align: right;
-    padding-right: 12px;
-    color: var(--cm-text-muted, #7d8590);
-    opacity: 0.3;
-    user-select: none;
-    flex-shrink: 0;
-    font-size: inherit;
-    line-height: inherit;
-    transition: color 0.2s ease, opacity 0.2s ease;
-  }
-
-  .proj-code {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .proj-tok--comment { color: var(--cm-comment, #6272a4); font-style: italic; opacity: 0.5; }
-  .proj-tok--keyword { color: var(--cm-keyword, #bd93f9); }
-  .proj-tok--fn { color: var(--cm-function, #8be9fd); }
-  .proj-tok--method { color: var(--cm-constant, #f1fa8c); }
-  .proj-tok--punct { color: var(--cm-text-muted, #7d8590); }
-
-  /* ── Project command line (terminal style) ── */
-  .proj-cmd-line {
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-  }
-
-  @media (max-width: 640px) {
-    .proj-window__body {
-      font-size: 0.7rem;
     }
   }
 </style>

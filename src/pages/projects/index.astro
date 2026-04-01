@@ -96,72 +96,6 @@ function getProjectFilters(tags: string[]): string[] {
     </div>
   </section>
 
-  <!-- Hero: Code mode — projects.config.ts console -->
-  <section class="section-padding pb-12 projects-hero-code" data-component="ProjectsHeroCode">
-    <div class="container-custom">
-      <div class="file-block">
-        <div class="file-block__titlebar">
-          <div class="pmd-dots">
-            <span class="pmd-dot" style="background:#ff5f57"></span>
-            <span class="pmd-dot" style="background:#febc2e"></span>
-            <span class="pmd-dot" style="background:#28c840"></span>
-          </div>
-          <span class="file-block__filename">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
-            </svg>
-            projects.config.ts
-          </span>
-          <span class="file-block__tab">projects.config.ts</span>
-        </div>
-        <div class="file-block__body">
-          <!-- JSDoc header -->
-          <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">/**</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@module</span> Projects</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@description</span></span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"><span class="pmd-comment"> *   Selección de proyectos que representan mi enfoque en</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-comment"> *   diseño de experiencia, sistemas de diseño y producto digital.</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code"><span class="pmd-comment"> *</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@stack</span> UX Research · Product Design · Design Systems · DesignOps</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@author</span> Ramon Riera</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-comment"> */</span></span></div>
-          <!-- Empty -->
-          <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code"></span></div>
-          <!-- Interface -->
-          <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code"><span class="pmd-keyword">interface</span> <span class="pmd-fn">ProjectFilter</span> <span class="pmd-bracket">{`{`}</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code">  <span class="pmd-key">type</span><span class="pmd-punct">:</span> {filterCategories.map((cat, i) => (
-            <><span class="pmd-string">"{cat}"</span>{i < filterCategories.length - 1 && <span class="pf-filter-sep"> | </span>}</>
-          ))}<span class="pmd-punct">;</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
-          <!-- Empty -->
-          <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code"></span></div>
-          <!-- Interaction hint -->
-          <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code"><span class="pmd-comment">// Click on a type to filter the project gallery</span></span></div>
-          <!-- Empty -->
-          <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code"></span></div>
-          <!-- Export const with interactive filters -->
-          <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">currentFilter</span><span class="pmd-punct">:</span> <span class="pmd-fn">ProjectFilter</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{`{`}</span></span></div>
-          <div class="file-block__line pf-filter-line"><span class="file-block__gutter">18</span><span class="file-block__code">  <span class="pmd-key">type</span><span class="pmd-punct">:</span> <span class="pf-filter-options">{filterCategories.map((cat, i) => (
-            <><button class:list={['pf-filter-btn filter-btn', cat === 'Todas' && 'pf-filter-btn--active']} data-filter={cat}><span class="pf-filter-quote">"</span>{cat}<span class="pf-filter-quote">"</span></button>{i < filterCategories.length - 1 && <span class="pf-filter-sep"> | </span>}</>
-          ))}</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">19</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span><span class="pmd-punct">;</span></span></div>
-          <!-- Empty -->
-          <div class="file-block__line"><span class="file-block__gutter">20</span><span class="file-block__code"></span></div>
-          <!-- Execute section -->
-          <div class="file-block__line"><span class="file-block__gutter">21</span><span class="file-block__code"><span class="pmd-comment">// -- Execute query --</span></span></div>
-          <div class="file-block__line"><span class="file-block__gutter">22</span><span class="file-block__code"></span></div>
-          <!-- Run command (dynamic) -->
-          <a class="pf-run-line file-block__line" id="pf-run-cmd" href="#projects-grid">
-            <span class="file-block__gutter">23</span>
-            <span class="file-block__code">
-              <span class="pmd-fn">&gt;</span> <span class="pmd-bracket">run</span> <span class="pmd-fn">projects</span><span class="pmd-punct">.</span><span class="pmd-string">applyFilter</span><span class="pmd-punct">(</span><span class="pmd-constant" id="pf-active-filter">"Todas"</span><span class="pmd-punct">)</span>
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Projects grid -->
   <section class="pb-32" data-component="ProjectsListing">
     <div class="container-custom">
@@ -194,39 +128,15 @@ function getProjectFilters(tags: string[]): string[] {
   function applyFilter(filter: string | null) {
     if (!filter) return;
 
-    // Update design-mode buttons
+    // Update filter buttons
     filterBtns.forEach((b) => {
-      if (!b.classList.contains('pf-filter-btn')) {
-        b.classList.remove('bg-primary-500/10', 'text-primary-500');
-        b.classList.add('bg-neutral-100', 'text-neutral-600');
-      }
+      b.classList.remove('bg-primary-500/10', 'text-primary-500');
+      b.classList.add('bg-neutral-100', 'text-neutral-600');
     });
-    document.querySelectorAll(`.filter-btn:not(.pf-filter-btn)[data-filter="${filter}"]`).forEach((b) => {
+    document.querySelectorAll(`.filter-btn[data-filter="${filter}"]`).forEach((b) => {
       b.classList.remove('bg-neutral-100', 'text-neutral-600');
       b.classList.add('bg-primary-500/10', 'text-primary-500');
     });
-
-    // Update code-mode buttons
-    document.querySelectorAll('.pf-filter-btn').forEach((b) => {
-      b.classList.remove('pf-filter-btn--active');
-    });
-    document.querySelectorAll(`.pf-filter-btn[data-filter="${filter}"]`).forEach((b) => {
-      b.classList.add('pf-filter-btn--active');
-    });
-
-    // Update dynamic run line: applyFilter("activeCategory")
-    const activeFilterEl = document.getElementById('pf-active-filter');
-    if (activeFilterEl) {
-      activeFilterEl.textContent = `"${filter}"`;
-    }
-
-    // Flash grid opacity to simulate console processing
-    grid.style.transition = 'opacity 0.15s ease';
-    grid.style.opacity = '0.4';
-    setTimeout(() => {
-      grid.style.transition = 'opacity 0.3s ease';
-      grid.style.opacity = '1';
-    }, 150);
 
     // Classify items into hiding / showing
     const hiding: HTMLElement[] = [];

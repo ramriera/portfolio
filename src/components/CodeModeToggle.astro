@@ -2,35 +2,23 @@
 
 ---
 
-<!-- Screen sweep overlay for transitions -->
-<div id="code-mode-sweep" class="code-sweep" aria-hidden="true">
-  <div class="code-sweep__scanline"></div>
-</div>
-
-<div class="cmt-wrapper" id="code-mode-wrapper">
+<div class="cmt-wrapper">
   <!-- Left label -->
-  <span class="cmt-label cmt-label--visual" id="cmt-label-visual">VISUAL</span>
+  <span class="cmt-label cmt-label--visual">VISUAL</span>
 
-  <!-- Switch track -->
-  <button
-    id="code-mode-toggle"
-    class="cmt-track"
-    aria-label="Toggle Code Mode"
-    role="switch"
-    aria-checked="false"
-  >
-    <!-- Thumb with icon -->
-    <span class="cmt-thumb" id="cmt-thumb">
-      <span class="cmt-thumb__icon" id="cmt-thumb-icon" aria-hidden="true">_</span>
+  <!-- Switch track (decorative, no action) -->
+  <div class="cmt-track" aria-hidden="true">
+    <span class="cmt-thumb">
+      <span class="cmt-thumb__icon" aria-hidden="true">_</span>
     </span>
-  </button>
+  </div>
 
   <!-- Right label -->
-  <span class="cmt-label cmt-label--code" id="cmt-label-code">CODE</span>
+  <span class="cmt-label cmt-label--code">CODE</span>
 </div>
 
 <style>
-  /* ── Accent-Themed Code Mode Toggle ── */
+  /* ── Accent-Themed Code Mode Toggle (decorative) ── */
 
   .cmt-wrapper {
     display: inline-flex;
@@ -47,35 +35,16 @@
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
   }
 
   .cmt-label--visual {
     color: var(--accent-color, #D97757);
+    text-shadow: 0 0 8px rgba(217, 119, 87, 0.4);
   }
 
   .cmt-label--code {
     color: #5C574F;
-  }
-
-  /* Active state swaps — driven by JS via data attribute on wrapper */
-  .cmt-wrapper[data-active="true"] .cmt-label--visual {
-    color: #5C574F;
-  }
-
-  .cmt-wrapper[data-active="true"] .cmt-label--code {
-    color: var(--accent-color, #D97757);
-    text-shadow: 0 0 8px rgba(217, 119, 87, 0.4);
-  }
-
-  /* Subtle glow on VISUAL label when off */
-  .cmt-label--visual {
-    text-shadow: 0 0 8px rgba(217, 119, 87, 0.4);
-  }
-
-  .cmt-wrapper[data-active="true"] .cmt-label--visual {
-    text-shadow: none;
   }
 
   /* ── Switch Track ── */
@@ -86,36 +55,8 @@
     border-radius: 11px;
     background: #2A2825;
     border: 1.5px solid #403D38;
-    cursor: pointer;
     padding: 0;
-    outline: none;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
-  }
-
-  .cmt-track:hover {
-    border-color: #5C574F;
-  }
-
-  .cmt-track:focus-visible {
-    outline: 2px solid var(--accent-color, #D97757);
-    outline-offset: 2px;
-  }
-
-  /* Active track: accent background + glow */
-  .cmt-track[aria-checked="true"] {
-    background: var(--accent-color, #D97757);
-    border-color: #EC9372;
-    box-shadow:
-      0 0 8px rgba(217, 119, 87, 0.4),
-      0 0 20px rgba(217, 119, 87, 0.15);
-  }
-
-  .cmt-track[aria-checked="true"]:hover {
-    border-color: #F4B89D;
-    box-shadow:
-      0 0 10px rgba(217, 119, 87, 0.5),
-      0 0 24px rgba(217, 119, 87, 0.2);
   }
 
   /* ── Thumb ── */
@@ -130,21 +71,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Active thumb: dark background, slides right with elastic bounce */
-  .cmt-track[aria-checked="true"] .cmt-thumb {
-    left: calc(100% - 18px);
-    background: #0d1117;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Elastic bounce on deactivation too */
-  .cmt-track[aria-checked="false"] .cmt-thumb {
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   /* ── Thumb Icon ── */
@@ -154,144 +81,5 @@
     font-weight: 700;
     line-height: 1;
     color: transparent;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Show cursor icon when active */
-  .cmt-track[aria-checked="true"] .cmt-thumb__icon {
-    color: var(--accent-color, #D97757);
-  }
-
-  /* ── Screen sweep overlay ── */
-  .code-sweep {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(217, 119, 87, 0.03) 0%,
-      rgba(217, 119, 87, 0.05) 50%,
-      transparent 100%
-    );
-  }
-
-  .code-sweep--active {
-    animation: sweep-flash 0.6s ease-out forwards;
-  }
-
-  .code-sweep__scanline {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(217, 119, 87, 0.5), transparent);
-    box-shadow: 0 0 20px rgba(217, 119, 87, 0.3);
-    opacity: 0;
-    top: -2px;
-  }
-
-  .code-sweep--active .code-sweep__scanline {
-    animation: scanline-sweep 0.6s ease-out forwards;
-  }
-
-  .code-sweep--deactivate {
-    animation: sweep-flash-off 0.5s ease-out forwards;
-  }
-
-  .code-sweep--deactivate .code-sweep__scanline {
-    background: linear-gradient(90deg, transparent, rgba(168, 161, 150, 0.4), transparent);
-    box-shadow: 0 0 12px rgba(168, 161, 150, 0.2);
-    animation: scanline-sweep 0.5s ease-out forwards;
-  }
-
-  @keyframes sweep-flash {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-
-  @keyframes sweep-flash-off {
-    0% { opacity: 0.8; }
-    100% { opacity: 0; }
-  }
-
-  @keyframes scanline-sweep {
-    0% { top: -2px; opacity: 1; }
-    100% { top: 100vh; opacity: 0.2; }
   }
 </style>
-
-<script>
-  const codeToggle = document.getElementById('code-mode-toggle');
-  const wrapper = document.getElementById('code-mode-wrapper');
-  const thumbIcon = document.getElementById('cmt-thumb-icon');
-  const sweepOverlay = document.getElementById('code-mode-sweep');
-
-  function updateToggleVisuals(active: boolean) {
-    if (!codeToggle || !wrapper) return;
-    codeToggle.setAttribute('aria-checked', String(active));
-    codeToggle.setAttribute('aria-label', active ? 'Switch to Visual Mode' : 'Switch to Code Mode');
-    wrapper.setAttribute('data-active', String(active));
-
-    if (thumbIcon) {
-      thumbIcon.textContent = active ? '>' : '_';
-    }
-  }
-
-  function triggerSweep(activating: boolean) {
-    if (!sweepOverlay) return;
-    sweepOverlay.classList.remove('code-sweep--active', 'code-sweep--deactivate');
-    void sweepOverlay.offsetHeight;
-    sweepOverlay.classList.add(activating ? 'code-sweep--active' : 'code-sweep--deactivate');
-    setTimeout(() => {
-      sweepOverlay.classList.remove('code-sweep--active', 'code-sweep--deactivate');
-    }, 700);
-  }
-
-  function applyCodeMode(active: boolean, instant = false) {
-    if (active) {
-      document.documentElement.classList.add('code-mode');
-      document.body.classList.add('code-mode');
-
-      if (!instant) {
-        document.body.classList.add('code-mode--booting');
-        setTimeout(() => {
-          document.body.classList.remove('code-mode--booting');
-        }, 1800);
-      }
-    } else {
-      document.documentElement.classList.remove('code-mode');
-      document.body.classList.remove('code-mode');
-      document.body.classList.remove('code-mode--booting');
-    }
-
-    updateToggleVisuals(active);
-  }
-
-  // Initialize from localStorage (instant = true to skip animations on page load)
-  const savedCodeMode = localStorage.getItem('code-mode') === 'on';
-  applyCodeMode(savedCodeMode, true);
-
-  codeToggle?.addEventListener('click', () => {
-    const isActive = document.documentElement.classList.contains('code-mode');
-    const newState = !isActive;
-
-    // Freeze scroll position
-    const scrollY = window.scrollY;
-
-    // Save to localStorage for persistence across pages
-    localStorage.setItem('code-mode', newState ? 'on' : 'off');
-
-    // Trigger sweep effect
-    triggerSweep(newState);
-
-    // Apply the mode
-    applyCodeMode(newState);
-
-    // Restore scroll position after style recalc
-    requestAnimationFrame(() => {
-      window.scrollTo(0, scrollY);
-    });
-  });
-</script>
