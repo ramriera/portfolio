@@ -9,7 +9,8 @@ const projectList = projects.map((p, i) => ({
 }));
 ---
 
-<div id="terminal" class="fixed inset-0 z-50 bg-black overflow-hidden">
+<!-- Terminal overlay — hidden by default -->
+<div id="terminal" class="fixed inset-0 z-[9999] bg-black overflow-hidden opacity-0 pointer-events-none transition-opacity duration-500 ease-out">
   <!-- CRT Scanlines overlay -->
   <div class="pointer-events-none absolute inset-0 z-10 scanlines" aria-hidden="true"></div>
 
@@ -32,7 +33,6 @@ const projectList = projects.map((p, i) => ({
           spellcheck="false"
           autocomplete="off"
           autocapitalize="off"
-          autofocus
         />
         <!-- Visual cursor -->
         <span id="terminal-cursor" class="terminal-cursor" aria-hidden="true"></span>
@@ -124,14 +124,56 @@ const projectList = projects.map((p, i) => ({
 </style>
 
 <script define:vars={{ projectList, siteConfig }}>
+  const terminal = document.getElementById('terminal');
   const output = document.getElementById('terminal-output');
   const input = document.getElementById('terminal-input');
   const cursor = document.getElementById('terminal-cursor');
   const scroll = document.getElementById('terminal-scroll');
 
-  // ── Command history ──
-  const history = [];
+  // ── State ──
+  const commandHistory = [];
   let historyIndex = -1;
+  let isProcessing = false;
+  let hasBooted = false;
+
+  // ── Open / Close ──
+
+  function openTerminal() {
+    terminal.classList.remove('opacity-0', 'pointer-events-none');
+    terminal.classList.add('opacity-100');
+    document.body.style.overflow = 'hidden';
+
+    // Boot sequence on first open, or reset on subsequent opens
+    if (!hasBooted) {
+      hasBooted = true;
+      isProcessing = true;
+      typeLines(motd, () => {
+        isProcessing = false;
+        input.focus();
+        updateCursor();
+      });
+    } else {
+      // Re-opening: clear and re-show MOTD
+      output.innerHTML = '';
+      input.value = '';
+      isProcessing = true;
+      typeLines(motd, () => {
+        isProcessing = false;
+        input.focus();
+        updateCursor();
+      });
+    }
+  }
+
+  function closeTerminal() {
+    terminal.classList.add('opacity-0', 'pointer-events-none');
+    terminal.classList.remove('opacity-100');
+    document.body.style.overflow = '';
+  }
+
+  // Expose globally so the toggle button can call it
+  window.openTerminal = openTerminal;
+  window.closeTerminal = closeTerminal;
 
   // ── Cursor position tracking ──
   function updateCursor() {
@@ -197,11 +239,6 @@ const projectList = projects.map((p, i) => ({
     scrollToBottom();
   }
 
-  function printBlank() {
-    output.appendChild(document.createElement('div'));
-    output.lastChild.innerHTML = '&nbsp;';
-  }
-
   function scrollToBottom() {
     requestAnimationFrame(() => {
       scroll.scrollTop = scroll.scrollHeight;
@@ -218,6 +255,7 @@ const projectList = projects.map((p, i) => ({
     { html: '<span class="t-green t-bold">╚══════════════════════════════════════════════════╝</span>' },
     { html: '&nbsp;' },
     { html: '<span class="t-muted">Welcome to my interactive portfolio. Type</span> <span class="t-yellow">help</span> <span class="t-muted">to get started.</span>' },
+    { html: '<span class="t-muted">Type</span> <span class="t-yellow">exit</span> <span class="t-muted">to return to the visual portfolio.</span>' },
     { html: '&nbsp;' },
   ];
 
@@ -234,6 +272,7 @@ const projectList = projects.map((p, i) => ({
       { html: '  <span class="t-cyan">open [id]</span>   <span class="t-muted">—</span>  Open a project by its ID' },
       { html: '  <span class="t-cyan">contact</span>     <span class="t-muted">—</span>  Get in touch' },
       { html: '  <span class="t-cyan">clear</span>       <span class="t-muted">—</span>  Clear the terminal' },
+      { html: '  <span class="t-cyan">exit</span>        <span class="t-muted">—</span>  Return to visual portfolio' },
       { html: '&nbsp;' },
     ];
   }
@@ -299,7 +338,6 @@ const projectList = projects.map((p, i) => ({
       ];
     }
 
-    // Navigate after a brief delay
     setTimeout(() => {
       window.location.href = `/projects/${project.slug}`;
     }, 600);
@@ -327,6 +365,14 @@ const projectList = projects.map((p, i) => ({
     ];
   }
 
+  function cmdExit() {
+    printInstant('<span class="t-muted">Closing terminal session...</span>');
+    setTimeout(() => {
+      closeTerminal();
+    }, 400);
+    return null;
+  }
+
   function processCommand(raw) {
     const trimmed = raw.trim();
     if (!trimmed) return null;
@@ -339,11 +385,12 @@ const projectList = projects.map((p, i) => ({
     const args = parts.slice(1);
 
     switch (cmd) {
-      case 'help':    return cmdHelp();
-      case 'about':   return cmdAbout();
+      case 'help':     return cmdHelp();
+      case 'about':    return cmdAbout();
       case 'projects': return cmdProjects();
-      case 'open':    return cmdOpen(args);
-      case 'contact': return cmdContact();
+      case 'open':     return cmdOpen(args);
+      case 'contact':  return cmdContact();
+      case 'exit':     return cmdExit();
       case 'clear':
         output.innerHTML = '';
         return null;
@@ -359,7 +406,6 @@ const projectList = projects.map((p, i) => ({
   }
 
   // ── Input handling ──
-  let isProcessing = false;
 
   input.addEventListener('keydown', (e) => {
     if (isProcessing) {
@@ -372,9 +418,9 @@ const projectList = projects.map((p, i) => ({
       const value = input.value;
 
       if (value.trim()) {
-        history.push(value);
+        commandHistory.push(value);
       }
-      historyIndex = history.length;
+      historyIndex = commandHistory.length;
 
       const lines = processCommand(value);
       input.value = '';
@@ -397,7 +443,7 @@ const projectList = projects.map((p, i) => ({
       e.preventDefault();
       if (historyIndex > 0) {
         historyIndex--;
-        input.value = history[historyIndex];
+        input.value = commandHistory[historyIndex];
         updateCursor();
       }
       return;
@@ -405,11 +451,11 @@ const projectList = projects.map((p, i) => ({
 
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      if (historyIndex < history.length - 1) {
+      if (historyIndex < commandHistory.length - 1) {
         historyIndex++;
-        input.value = history[historyIndex];
+        input.value = commandHistory[historyIndex];
       } else {
-        historyIndex = history.length;
+        historyIndex = commandHistory.length;
         input.value = '';
       }
       updateCursor();
@@ -418,15 +464,7 @@ const projectList = projects.map((p, i) => ({
   });
 
   // ── Global click → focus input ──
-  document.getElementById('terminal').addEventListener('click', () => {
+  terminal.addEventListener('click', () => {
     input.focus();
-  });
-
-  // ── Boot sequence ──
-  isProcessing = true;
-  typeLines(motd, () => {
-    isProcessing = false;
-    input.focus();
-    updateCursor();
   });
 </script>
