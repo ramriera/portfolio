@@ -166,6 +166,9 @@ const navSections: Record<string, { desc: string; path: string }> = {
 
   .term-output::-webkit-scrollbar { display: none; }
 
+  .dashboard *::-webkit-scrollbar { display: none; }
+  .dashboard * { scrollbar-width: none; }
+
   .term-line {
     white-space: pre;
     overflow: hidden;
@@ -395,6 +398,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         ['neofetch', 'Info del sistema'],
         ['cv', 'Descarga el CV'],
         ['clear', 'Limpia la consola'],
+        ['restart', 'Reinicia la terminal'],
         ['history', 'Historial de comandos'],
         ['date', 'Fecha y hora actual'],
         ['exit', 'Cierra la terminal'],
@@ -448,10 +452,10 @@ const navSections: Record<string, { desc: string; path: string }> = {
       var sep = c('muted', ' │ ');
       var line50 = c('comment', '─'.repeat(14) + '┼' + '─'.repeat(42));
       var items = [
-        ['2021', 'UX Research & Strategy — Google (Coursera)'],
-        ['2020', 'Advanced Product Design — Interaction Design Foundation'],
-        ['2019', 'Design Systems with React — Frontend Masters'],
-        ['2017', 'Grado en Diseño Digital — ESDI (Barcelona)'],
+        ['2017', 'Grado en Diseño — ESDI, Escola Superior de Disseny (Barcelona)'],
+        ['2019', 'UX/UI Design Specialization — Domestika'],
+        ['2020', 'Design Thinking — IDEO U'],
+        ['2022', 'Advanced Product Design — Interaction Design Foundation'],
       ];
       var out = [
         '&nbsp;',
@@ -469,58 +473,63 @@ const navSections: Record<string, { desc: string; path: string }> = {
 
     function cmdExperience() {
       var sep = c('muted', ' │ ');
+      var divider = '  ' + c('comment', '─'.repeat(18) + '┼' + '─'.repeat(22) + '┼' + '─'.repeat(30));
       var out = [
         '&nbsp;',
         '  ' + c('accent', ' TRAYECTORIA PROFESIONAL'),
         '&nbsp;',
-        '  ' + c('muted', 'PERIODO'.padEnd(18)) + sep + c('muted', 'EMPRESA'.padEnd(20)) + sep + c('muted', 'ROL'),
-        '  ' + c('comment', '─'.repeat(18) + '┼' + '─'.repeat(22) + '┼' + '─'.repeat(24)),
-      ];
-      var jobs = [
-        ['2021 — Presente', 'Doctori.com', 'Sr. Product Designer & Design Ops'],
-        ['2023 — 2024', 'Leemons (via Lead-it)', 'Product & UI Consultant'],
-        ['2022 — 2023', 'Iberia (via Lead-it)', 'Design Systems Consultant'],
-        ['2021 — 2022', 'Banco Sabadell (via Lead-it)', 'Design Systems Consultant'],
-        ['2017 — 2021', 'JBM', 'Junior Designer'],
-      ];
-      jobs.forEach(function(j) {
-        out.push('  ' + c('constant', j[0].padEnd(18)) + sep + c('string', j[1].padEnd(20)) + sep + c('keyword', j[2]));
-      });
-      out.push(
-        '  ' + c('comment', '─'.repeat(18) + '┼' + '─'.repeat(22) + '┼' + '─'.repeat(24)),
-        '  ' + c('comment', jobs.length + ' posiciones') + ' ' + c('muted', '|') + ' ' + c('comment', (new Date().getFullYear() - 2017) + '+ años de experiencia'),
+        '  ' + c('muted', 'PERIODO'.padEnd(18)) + sep + c('muted', 'EMPRESA'.padEnd(22)) + sep + c('muted', 'ROL'),
+        divider,
+        '  ' + c('constant', '2021 — Presente   ') + sep + c('string', 'Doctori.com           ') + sep + c('keyword', 'Sr. Product Designer & Design Ops'),
+        '  ' + c('constant', '2017 — 2021       ') + sep + c('string', 'JBM                   ') + sep + c('keyword', 'Junior Designer'),
+        divider,
+        '  ' + c('accent', ' CONSULTORIA SENIOR'),
+        divider,
+        '  ' + c('constant', '2023 — 2024       ') + sep + c('comment', '  Leemons             ') + sep + c('muted', 'Consultor · Product & UI'),
+        '  ' + c('constant', '2022 — 2023       ') + sep + c('comment', '  Iberia              ') + sep + c('muted', 'Consultor · Design Systems'),
+        '  ' + c('constant', '2021 — 2022       ') + sep + c('comment', '  Banco Sabadell      ') + sep + c('muted', 'Consultor · Design Systems'),
+        divider,
+        '  ' + c('comment', '5 posiciones') + ' ' + c('muted', '|') + ' ' + c('comment', (new Date().getFullYear() - 2017) + '+ años de experiencia'),
         '&nbsp;',
-      );
+      ];
       out._fast = true;
       return out;
     }
 
     function cmdProjects() {
+      // Fixed column widths: ID=6, NAME=32, CATEGORY=18, YEAR=6
+      var W = [6, 32, 18, 6];
       var b = c('muted', '│');
-      var hline = '  ' + c('comment', '┼──────┼────────────────────────────────┼──────────────────┼──────┤');
-      var top   = '  ' + c('comment', '┌──────┬────────────────────────────────┬──────────────────┬──────┐');
-      var bot   = '  ' + c('comment', '└──────┴────────────────────────────────┴──────────────────┴──────┘');
+
+      function hr(l, m, r) {
+        return '  ' + c('comment', l + '─'.repeat(W[0]) + m + '─'.repeat(W[1]) + m + '─'.repeat(W[2]) + m + '─'.repeat(W[3]) + r);
+      }
+
+      function row(cols, styles) {
+        var cells = '';
+        for (var i = 0; i < cols.length; i++) {
+          var padded = (' ' + cols[i]).padEnd(W[i]);
+          cells += b + '<span class="t-' + styles[i] + '">' + padded + '</span>';
+        }
+        return '  ' + cells + b;
+      }
 
       var out = [
         '&nbsp;',
-        top,
-        '  ' + b + c('muted', '  ID  ') + b + c('muted', '  NAME'.padEnd(34)) + b + c('muted', '  CATEGORY'.padEnd(18)) + b + c('muted', ' YEAR') + ' ' + b,
-        hline,
+        hr('┌', '┬', '┐'),
+        row([' ID', ' NAME', ' CATEGORY', ' YEAR'], ['muted', 'muted', 'muted', 'muted']),
+        hr('├', '┼', '┤'),
       ];
       projectList.forEach(function(p) {
-        var id = '  ' + String(p.id).padStart(2, '0') + '  ';
-        var nm = '  ' + p.name.padEnd(32);
-        var ct = '  ' + (p.cat || '').padEnd(16);
-        var yr = ' ' + p.year + ' ';
-        out.push('  ' + b + c('accent', id) + b + c('string', nm) + b + c('keyword', ct) + b + c('constant', yr) + b);
+        var id = ' ' + String(p.id).padStart(2, '0');
+        out.push(row([id, ' ' + p.name, ' ' + (p.cat || ''), ' ' + p.year], ['accent', 'string', 'keyword', 'constant']));
       });
       out.push(
-        bot,
+        hr('└', '┴', '┘'),
         '&nbsp;',
         '  ' + c('comment', projectList.length + ' registros.') + ' ' + c('muted', 'Escribe') + ' ' + c('function', 'open <ID>') + ' ' + c('muted', 'para abrir un proyecto.'),
         '&nbsp;',
       );
-      // Mark as fast table
       out._fast = true;
       return out;
     }
@@ -548,9 +557,20 @@ const navSections: Record<string, { desc: string; path: string }> = {
     function cmdSkills() {
       return [
         '&nbsp;',
-        c('keyword', 'Design') + '    ' + c('function', 'Figma') + ' ' + c('muted', '|') + ' ' + c('function', 'Design Systems') + ' ' + c('muted', '|') + ' ' + c('function', 'Prototyping') + ' ' + c('muted', '|') + ' ' + c('function', 'User Research'),
-        c('keyword', 'Frontend') + '  ' + c('string', 'HTML/CSS') + ' ' + c('muted', '|') + ' ' + c('string', 'Tailwind') + ' ' + c('muted', '|') + ' ' + c('string', 'Astro') + ' ' + c('muted', '|') + ' ' + c('string', 'React') + ' ' + c('muted', '|') + ' ' + c('string', 'TypeScript'),
-        c('keyword', 'Ops') + '       ' + c('constant', 'DesignOps') + ' ' + c('muted', '|') + ' ' + c('constant', 'Design Tokens') + ' ' + c('muted', '|') + ' ' + c('constant', 'CI/CD') + ' ' + c('muted', '|') + ' ' + c('constant', 'Storybook'),
+        '  ' + c('accent', 'UX'),
+        '  ' + c('function', 'User Research') + ' ' + c('muted', '·') + ' ' + c('function', 'Usability Testing') + ' ' + c('muted', '·') + ' ' + c('function', 'Information Architecture'),
+        '  ' + c('function', 'Wireframing') + ' ' + c('muted', '·') + ' ' + c('function', 'Prototyping') + ' ' + c('muted', '·') + ' ' + c('function', 'Design Thinking') + ' ' + c('muted', '·') + ' ' + c('function', 'Heuristic Analysis'),
+        '&nbsp;',
+        '  ' + c('accent', 'DESIGN'),
+        '  ' + c('keyword', 'Figma') + ' ' + c('muted', '·') + ' ' + c('keyword', 'Adobe CC') + ' ' + c('muted', '·') + ' ' + c('keyword', 'Design Systems') + ' ' + c('muted', '·') + ' ' + c('keyword', 'Design Tokens'),
+        '  ' + c('keyword', 'Visual Design') + ' ' + c('muted', '·') + ' ' + c('keyword', 'Interaction Design') + ' ' + c('muted', '·') + ' ' + c('keyword', 'Motion Design'),
+        '&nbsp;',
+        '  ' + c('accent', 'CODE'),
+        '  ' + c('string', 'HTML/CSS') + ' ' + c('muted', '·') + ' ' + c('string', 'Tailwind') + ' ' + c('muted', '·') + ' ' + c('string', 'Astro') + ' ' + c('muted', '·') + ' ' + c('string', 'React') + ' ' + c('muted', '·') + ' ' + c('string', 'TypeScript'),
+        '  ' + c('string', 'Framer Motion') + ' ' + c('muted', '·') + ' ' + c('string', 'Node.js') + ' ' + c('muted', '·') + ' ' + c('string', 'Git'),
+        '&nbsp;',
+        '  ' + c('accent', 'OPS'),
+        '  ' + c('constant', 'DesignOps') + ' ' + c('muted', '·') + ' ' + c('constant', 'Storybook') + ' ' + c('muted', '·') + ' ' + c('constant', 'CI/CD') + ' ' + c('muted', '·') + ' ' + c('constant', 'Jira') + ' ' + c('muted', '·') + ' ' + c('constant', 'Notion'),
         '&nbsp;',
       ];
     }
@@ -664,7 +684,19 @@ const navSections: Record<string, { desc: string; path: string }> = {
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
       ls: cmdLs, exit: cmdExit,
       clear: function() {
+        var marker = document.getElementById('motd-end');
+        if (marker) {
+          while (marker.nextSibling) { output.removeChild(marker.nextSibling); }
+        } else {
+          output.innerHTML = '';
+        }
+        return null;
+      },
+      restart: function() {
         output.innerHTML = '';
+        history.length = 0;
+        histIdx = -1;
+        showMotd(function() { input.focus(); });
         return null;
       },
     };
