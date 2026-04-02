@@ -167,6 +167,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
     line-height: 1.7;
     color: #e6edf3;
     scrollbar-width: none;
+    contain: layout style;
+    will-change: scroll-position;
   }
 
   .term-output::-webkit-scrollbar { display: none; }
@@ -179,6 +181,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     overflow: hidden;
     text-overflow: ellipsis;
     min-height: 1.4em;
+    contain: content;
   }
 
   /* ── Input row ── */
@@ -190,6 +193,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     background: rgba(0, 0, 0, 0.2);
     flex-shrink: 0;
+    contain: layout style;
   }
 
   .term-prompt {
@@ -234,6 +238,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     -webkit-user-select: none;
     pointer-events: none;
     margin-left: -2px;
+    will-change: opacity;
   }
 
   .term-input:focus ~ .term-cursor {
@@ -269,6 +274,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
       rgba(0, 0, 0, 0.04) 4px
     );
     mix-blend-mode: multiply;
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .crt-overlay::after {
@@ -339,7 +346,17 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     function blank() { line('&nbsp;'); }
-    function scroll() { requestAnimationFrame(function() { output.scrollTop = output.scrollHeight; }); }
+
+    // Throttled scroll — max once per frame
+    var scrollPending = false;
+    function scroll() {
+      if (scrollPending) return;
+      scrollPending = true;
+      requestAnimationFrame(function() {
+        output.scrollTop = output.scrollHeight;
+        scrollPending = false;
+      });
+    }
 
     // ── Typewriter effect ──
     var typewriterBusy = false;
@@ -348,12 +365,23 @@ const navSections: Record<string, { desc: string; path: string }> = {
       var d = delay || 40;
       typewriterBusy = true;
       var i = 0;
+      // Batch: flush multiple lines in one rAF for fast (≤20ms) delays
+      var batchSize = d <= 20 ? 3 : 1;
+
       function next() {
-        if (i >= lines.length) { typewriterBusy = false; if (cb) cb(); return; }
-        line(lines[i]);
+        if (i >= lines.length) { typewriterBusy = false; scroll(); if (cb) cb(); return; }
+        var frag = document.createDocumentFragment();
+        var count = Math.min(batchSize, lines.length - i);
+        for (var j = 0; j < count; j++) {
+          var el = document.createElement('div');
+          el.className = 'term-line';
+          el.innerHTML = lines[i + j];
+          frag.appendChild(el);
+        }
+        output.appendChild(frag);
+        i += count;
         scroll();
-        i++;
-        setTimeout(next, d + Math.random() * (d * 0.6));
+        setTimeout(next, d + Math.random() * (d * 0.4));
       }
       next();
     }
