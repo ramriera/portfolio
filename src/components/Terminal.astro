@@ -184,6 +184,14 @@ const navSections: Record<string, { desc: string; path: string }> = {
     contain: content;
   }
 
+  .term-line.term-row-active {
+    background: rgba(80, 250, 123, 0.1);
+    border-left: 2px solid #50fa7b;
+    padding-left: 0.35rem;
+    margin-left: -0.55rem;
+    border-radius: 2px;
+  }
+
   /* ── Input row ── */
   .term-input-row {
     display: flex;
@@ -533,6 +541,31 @@ const navSections: Record<string, { desc: string; path: string }> = {
       return out;
     }
 
+    // ── Interactive project selector (TUI) ──
+    var selectMode = null; // { rows: [dom elements], idx: number }
+
+    function exitSelectMode() {
+      if (!selectMode) return;
+      selectMode.rows.forEach(function(r) { r.classList.remove('term-row-active'); });
+      selectMode = null;
+    }
+
+    function updateSelectHighlight() {
+      if (!selectMode) return;
+      selectMode.rows.forEach(function(r, i) {
+        if (i === selectMode.idx) {
+          r.classList.add('term-row-active');
+          // Ensure visible
+          var rect = r.getBoundingClientRect();
+          var outRect = output.getBoundingClientRect();
+          if (rect.bottom > outRect.bottom) r.scrollIntoView({ block: 'nearest' });
+          if (rect.top < outRect.top) r.scrollIntoView({ block: 'nearest' });
+        } else {
+          r.classList.remove('term-row-active');
+        }
+      });
+    }
+
     function cmdProjects() {
       // Fixed column widths: ID=6, NAME=32, CATEGORY=18, YEAR=6
       var W = [6, 32, 18, 6];
@@ -551,24 +584,43 @@ const navSections: Record<string, { desc: string; path: string }> = {
         return '  ' + cells + b;
       }
 
-      var out = [
+      // Build table lines
+      var headerLines = [
         '&nbsp;',
         hr('┌', '┬', '┐'),
         row([' ID', ' NAME', ' CATEGORY', ' YEAR'], ['muted', 'muted', 'muted', 'muted']),
         hr('├', '┼', '┤'),
       ];
+      headerLines.forEach(function(h) { line(h); });
+
+      // Render project rows with data attributes for selection
+      var rowEls = [];
       projectList.forEach(function(p) {
         var id = ' ' + String(p.id).padStart(2, '0');
-        out.push(row([id, ' ' + p.name, ' ' + (p.cat || ''), ' ' + p.year], ['accent', 'string', 'keyword', 'constant']));
+        var html = row([id, ' ' + p.name, ' ' + (p.cat || ''), ' ' + p.year], ['accent', 'string', 'keyword', 'constant']);
+        var el = document.createElement('div');
+        el.className = 'term-line';
+        el.innerHTML = html;
+        el.setAttribute('data-project-id', p.id);
+        output.appendChild(el);
+        rowEls.push(el);
       });
-      out.push(
+
+      // Footer
+      var footerLines = [
         hr('└', '┴', '┘'),
         '&nbsp;',
-        '  ' + c('comment', projectList.length + ' registros.') + ' ' + c('muted', 'Escribe') + ' ' + c('function', 'src <ID>') + ' ' + c('muted', 'para ver detalle ·') + ' ' + c('function', 'open <ID>') + ' ' + c('muted', 'para abrir en navegador.'),
+        '  ' + c('muted', '[↑/↓]') + ' seleccionar  ' + c('muted', '[Enter]') + ' ver detalle  ' + c('muted', '[ESC]') + ' cancelar',
         '&nbsp;',
-      );
-      out._fast = true;
-      return out;
+      ];
+      footerLines.forEach(function(f) { line(f); });
+      scroll();
+
+      // Activate selection mode
+      selectMode = { rows: rowEls, idx: 0 };
+      updateSelectHighlight();
+
+      return null; // We already rendered everything manually
     }
 
     // src <ID> — view project details inside terminal
@@ -903,6 +955,37 @@ const navSections: Record<string, { desc: string; path: string }> = {
 
     input.addEventListener('keydown', function(e) {
       if (typewriterBusy) { e.preventDefault(); return; }
+
+      // ── Selection mode (projects TUI) ──
+      if (selectMode) {
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (selectMode.idx > 0) { selectMode.idx--; updateSelectHighlight(); }
+          return;
+        }
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (selectMode.idx < selectMode.rows.length - 1) { selectMode.idx++; updateSelectHighlight(); }
+          return;
+        }
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          var pid = selectMode.rows[selectMode.idx].getAttribute('data-project-id');
+          exitSelectMode();
+          processCmd('src ' + pid);
+          input.value = '';
+          return;
+        }
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          exitSelectMode();
+          line(c('muted', '  Selección cancelada.'));
+          scroll();
+          return;
+        }
+        // Any other key exits selection mode and falls through to normal input
+        exitSelectMode();
+      }
 
       if (e.key === 'Enter') {
         processCmd(input.value);
