@@ -401,10 +401,9 @@ const navSections: Record<string, { desc: string; path: string }> = {
         ['social', 'Links de redes sociales'],
         ['neofetch', 'Info del sistema'],
         ['cv', 'Descarga el CV'],
-        ['cd <dir>', 'Navega a una seccion'],
         ['ls', 'Lista archivos del portfolio'],
         ['clear', 'Limpia la consola'],
-        ['restart', 'Reinicia la terminal'],
+        ['reset', 'Reinicia la terminal'],
         ['history', 'Historial de comandos'],
         ['date', 'Fecha y hora actual'],
         ['exit', 'Cierra la terminal'],
@@ -692,32 +691,11 @@ const navSections: Record<string, { desc: string; path: string }> = {
       'social.yaml': 'social', 'cv.pdf': 'cv', 'neofetch.sh': 'neofetch',
     };
 
-    function cmdCd(args) {
-      var target = (args || []).join(' ').trim().toLowerCase();
-      if (!target || target === '~' || target === '/' || target === '..') {
-        return [c('muted', '  ~/ramonriera.design')];
-      }
-      // Map cd targets to commands
-      var cdMap = {
-        projects: 'projects', about: 'about', 'about.md': 'about',
-        experience: 'experience', 'experience.log': 'experience',
-        education: 'education', 'education.dat': 'education',
-        skills: 'skills', 'skills.json': 'skills',
-        social: 'social', 'social.yaml': 'social', 'contact.link': 'social',
-        'projects.exe': 'projects', 'cv.pdf': 'cv', 'neofetch.sh': 'neofetch',
-      };
-      var mapped = cdMap[target];
-      if (mapped && commandMap[mapped]) {
-        return commandMap[mapped]([]);
-      }
-      return [c('error', 'cd: no such directory: ' + esc(target))];
-    }
-
     var commandMap = {
       help: cmdHelp, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
       open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial,
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
-      ls: cmdLs, cd: cmdCd, exit: cmdExit,
+      ls: cmdLs, exit: cmdExit,
       clear: function() {
         var marker = document.getElementById('motd-end');
         if (marker) {
@@ -728,7 +706,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         output.scrollTop = 0;
         return null;
       },
-      restart: function() {
+      reset: function() {
         output.innerHTML = '';
         history.length = 0;
         histIdx = -1;
