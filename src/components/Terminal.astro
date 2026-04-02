@@ -392,7 +392,6 @@ const navSections: Record<string, { desc: string; path: string }> = {
       var out = ['&nbsp;', c('keyword', 'Comandos disponibles:'), '&nbsp;'];
       [
         ['help', 'Muestra esta ayuda'],
-        ['whoami', 'Quien soy (one-liner)'],
         ['about', 'Dossier profesional completo'],
         ['experience', 'Trayectoria profesional'],
         ['education', 'Formacion y certificaciones'],
@@ -455,22 +454,27 @@ const navSections: Record<string, { desc: string; path: string }> = {
 
     function cmdEducation() {
       var sep = c('muted', ' │ ');
-      var line50 = c('comment', '─'.repeat(14) + '┼' + '─'.repeat(42));
-      var items = [
-        ['2020', 'UX/UI Design Bootcamp — Neoland (Barcelona)'],
-        ['2017', 'Grado en Publicidad y Relaciones Publicas — Universitat de Girona'],
-      ];
+      var line70 = c('comment', '─'.repeat(16) + '┼' + '─'.repeat(62));
       var out = [
         '&nbsp;',
-        '  ' + c('accent', ' FORMACION & CERTIFICACIONES'),
+        '  ' + c('accent', ' FORMACION ACADEMICA'),
         '&nbsp;',
-        '  ' + c('muted', 'AÑO'.padEnd(14)) + sep + c('muted', 'TITULO / CERTIFICACION'),
-        '  ' + line50,
+        '  ' + c('muted', 'PERIODO'.padEnd(16)) + sep + c('muted', 'TITULO / INSTITUCION'),
+        '  ' + line70,
+        '  ' + c('constant', '2014 — 2016     ') + sep + ' ' + c('keyword', 'Master de Comunicacion y Estudios Culturales — Universitat de Girona'),
+        '  ' + c('constant', '2009 — 2013     ') + sep + ' ' + c('keyword', 'Grado de Comunicacion Cultural — Universitat de Girona'),
+        '  ' + c('constant', '2007 — 2009     ') + sep + ' ' + c('keyword', 'Licenciatura de Comunicacion Audiovisual — Universidad de Navarra'),
+        '  ' + line70,
+        '&nbsp;',
+        '  ' + c('accent', ' CERTIFICACIONES'),
+        '&nbsp;',
+        '  ' + c('muted', 'AÑO'.padEnd(16)) + sep + c('muted', 'CERTIFICACION'),
+        '  ' + line70,
+        '  ' + c('constant', '2023            ') + sep + ' ' + c('function', 'Design System Specialist — Figma Camp (Figma.Camp)'),
+        '  ' + c('constant', '2021            ') + sep + ' ' + c('function', 'UX/UI Design Bootcamp — NEOLAND (Barcelona)'),
+        '  ' + line70,
+        '&nbsp;',
       ];
-      items.forEach(function(item) {
-        out.push('  ' + c('constant', item[0].padEnd(14)) + sep + ' ' + c('keyword', item[1]));
-      });
-      out.push('  ' + line50, '&nbsp;');
       return out;
     }
 
@@ -680,9 +684,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     var commandMap = {
-      help: cmdHelp, whoami: function() {
-        return ['&nbsp;', c('accent', 'Ramon Riera') + c('muted', ':') + ' Bridging the gap between ' + c('string', 'code') + ' and ' + c('keyword', 'high-end product design') + '.', '&nbsp;'];
-      }, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
+      help: cmdHelp, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
       open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial,
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
       ls: cmdLs, exit: cmdExit,
