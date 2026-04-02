@@ -384,7 +384,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
       var out = ['&nbsp;', c('keyword', 'Comandos disponibles:'), '&nbsp;'];
       [
         ['help', 'Muestra esta ayuda'],
-        ['whoami', 'Dossier profesional completo'],
+        ['whoami', 'Quien soy (one-liner)'],
+        ['about', 'Dossier profesional completo'],
         ['experience', 'Trayectoria profesional'],
         ['education', 'Formacion y certificaciones'],
         ['projects', 'Lista proyectos (tabla)'],
@@ -490,26 +491,37 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + c('comment', jobs.length + ' posiciones') + ' ' + c('muted', '|') + ' ' + c('comment', (new Date().getFullYear() - 2017) + '+ años de experiencia'),
         '&nbsp;',
       );
+      out._fast = true;
       return out;
     }
 
     function cmdProjects() {
-      var sep = c('muted', ' │ ');
+      var b = c('muted', '│');
+      var hline = '  ' + c('comment', '┼──────┼────────────────────────────────┼──────────────────┼──────┤');
+      var top   = '  ' + c('comment', '┌──────┬────────────────────────────────┬──────────────────┬──────┐');
+      var bot   = '  ' + c('comment', '└──────┴────────────────────────────────┴──────────────────┴──────┘');
+
       var out = [
         '&nbsp;',
-        '  ' + c('muted', 'ID'.padEnd(4)) + sep + c('muted', 'PROYECTO'.padEnd(16)) + sep + c('muted', 'CATEGORIA'.padEnd(14)) + sep + c('muted', 'ANO'.padEnd(5)) + sep + c('muted', 'STATUS'),
-        '  ' + c('comment', '─'.repeat(4) + '┼' + '─'.repeat(18) + '┼' + '─'.repeat(16) + '┼' + '─'.repeat(7) + '┼' + '─'.repeat(8)),
+        top,
+        '  ' + b + c('muted', '  ID  ') + b + c('muted', '  NAME'.padEnd(34)) + b + c('muted', '  CATEGORY'.padEnd(18)) + b + c('muted', ' YEAR') + ' ' + b,
+        hline,
       ];
       projectList.forEach(function(p) {
-        var id = String(p.id).padStart(2, '0').padEnd(4);
-        var statusCls = p.status === 'Active' ? 'string' : 'muted';
-        out.push('  ' + c('constant', id) + sep + c('string', p.name.padEnd(16)) + sep + c('keyword', p.cat.padEnd(14)) + sep + c('accent', p.year.padEnd(5)) + sep + c(statusCls, p.status));
+        var id = '  ' + String(p.id).padStart(2, '0') + '  ';
+        var nm = '  ' + p.name.padEnd(32);
+        var ct = '  ' + (p.cat || '').padEnd(16);
+        var yr = ' ' + p.year + ' ';
+        out.push('  ' + b + c('accent', id) + b + c('string', nm) + b + c('keyword', ct) + b + c('constant', yr) + b);
       });
       out.push(
-        '  ' + c('comment', '─'.repeat(4) + '┼' + '─'.repeat(18) + '┼' + '─'.repeat(16) + '┼' + '─'.repeat(7) + '┼' + '─'.repeat(8)),
-        '  ' + c('comment', projectList.length + ' proyectos') + ' ' + c('muted', '|') + ' ' + c('comment', 'Usa') + ' ' + c('keyword', 'open <ID>') + ' ' + c('comment', 'para abrir'),
-        '&nbsp;'
+        bot,
+        '&nbsp;',
+        '  ' + c('comment', projectList.length + ' registros.') + ' ' + c('muted', 'Escribe') + ' ' + c('function', 'open <ID>') + ' ' + c('muted', 'para abrir un proyecto.'),
+        '&nbsp;',
       );
+      // Mark as fast table
+      out._fast = true;
       return out;
     }
 
@@ -591,14 +603,41 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     function cmdLs(args) {
-      var a = args[0] ? args[0].toLowerCase() : '';
+      var a = (args || []).join(' ').trim().toLowerCase();
       if (a === 'projects' || a === 'proyectos') return cmdProjects();
-      var out = ['&nbsp;', '  ' + c('muted', 'Seccion'.padEnd(14)) + ' ' + c('muted', 'Descripcion'), '  ' + c('comment', '─'.repeat(36))];
-      Object.keys(navSections).forEach(function(k) {
-        out.push('  ' + c('function', k.padEnd(14)) + ' ' + c('muted', navSections[k].desc));
+
+      var files = [
+        { perm: '-rw-r--r--', size: '4.2K', name: 'about.md',       color: 'keyword' },
+        { perm: '-rwxr-xr-x', size: '12K',  name: 'projects.exe',   color: 'string' },
+        { perm: '-rw-r--r--', size: '890B', name: 'experience.log',  color: 'keyword' },
+        { perm: '-rw-r--r--', size: '512B', name: 'education.dat',   color: 'keyword' },
+        { perm: '-rw-r--r--', size: '1.8K', name: 'skills.json',     color: 'constant' },
+        { perm: '-rw-r--r--', size: '256B', name: 'contact.link',    color: 'function' },
+        { perm: '-rw-r--r--', size: '320B', name: 'social.yaml',     color: 'function' },
+        { perm: '-rw-r--r--', size: '2.4M', name: 'cv.pdf',          color: 'accent' },
+        { perm: '-rwxr-xr-x', size: '64B',  name: 'neofetch.sh',    color: 'string' },
+      ];
+
+      if (a === '-la' || a === '-al' || a === '-l') {
+        var out = [
+          '&nbsp;',
+          '  ' + c('muted', 'total ' + files.length),
+        ];
+        files.forEach(function(f) {
+          out.push('  ' + c('muted', f.perm) + '  ' + c('muted', 'ramon staff') + '  ' + c('constant', f.size.padStart(5)) + '  ' + c('accent', '2026') + '  ' + c(f.color, f.name));
+        });
+        out.push('&nbsp;');
+        out._fast = true;
+        return out;
+      }
+
+      // Simple ls
+      var row = '  ';
+      files.forEach(function(f, i) {
+        row += c(f.color, f.name.padEnd(18));
+        if ((i + 1) % 3 === 0 && i < files.length - 1) { row += '\n  '; }
       });
-      out.push('&nbsp;');
-      return out;
+      return ['&nbsp;', row, '&nbsp;'];
     }
 
     function cmdCv() {
@@ -618,17 +657,14 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     var commandMap = {
-      help: cmdHelp, whoami: cmdWhoami, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
+      help: cmdHelp, whoami: function() {
+        return ['&nbsp;', c('accent', 'Ramon Riera') + c('muted', ':') + ' Bridging the gap between ' + c('string', 'code') + ' and ' + c('keyword', 'high-end product design') + '.', '&nbsp;'];
+      }, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
       open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial,
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
       ls: cmdLs, exit: cmdExit,
       clear: function() {
-        var marker = document.getElementById('motd-end');
-        if (marker) {
-          while (marker.nextSibling) { output.removeChild(marker.nextSibling); }
-        } else {
-          output.innerHTML = '';
-        }
+        output.innerHTML = '';
         return null;
       },
     };
@@ -652,7 +688,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
       if (fn) {
         var result = fn(args);
         if (result && result.length) {
-          typeLines(result);
+          var speed = result._fast ? 20 : undefined;
+          typeLines(result, null, speed);
         }
       } else {
         typeLines([
