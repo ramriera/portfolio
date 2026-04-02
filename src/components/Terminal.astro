@@ -769,6 +769,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         { perm: '-rw-r--r--', size: '2.4M', name: 'cv.pdf',          color: 'accent' },
         { perm: '-rwxr-xr-x', size: '64B',  name: 'neofetch.sh',    color: 'string' },
         { perm: '-rw-r--r--', size: '3.6K', name: 'massimo.md',     color: 'accent' },
+        { perm: '-rwxr-xr-x', size: '2.8K', name: 'movefast.sh',    color: 'string' },
       ];
 
       if (a === '-la' || a === '-al' || a === '-l') {
@@ -846,6 +847,70 @@ const navSections: Record<string, { desc: string; path: string }> = {
       return out;
     }
 
+    function cmdMovefast() {
+      var line62 = c('comment', '─'.repeat(62));
+      var out = [
+        '&nbsp;',
+        '  ' + c('accent', '▓▓ PROJECT FILE: MOVEFAST'),
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'TITLE'),
+        '  MoveFast — Digital Product Accelerator',
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('function', 'YEAR') + '       ' + c('constant', '2021'),
+        '  ' + c('function', 'ROLE') + '       ' + c('muted', 'Senior Product Designer'),
+        '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Mobility & CleanTech'),
+        '  ' + c('function', 'DURATION') + '   ' + c('muted', '2 semanas — research to prototype'),
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'THE CHALLENGE'),
+        '  Diseñar una app de movilidad eléctrica que elimina la barrera',
+        '  más determinante para la adopción del EV en España:',
+        '  la ' + c('keyword', 'range anxiety') + '. Un modelo de servicio ' + c('accent', 'inexistente') + ' en el mercado.',
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'THE SOLUTION'),
+        '  ' + c('muted', '·') + ' ' + c('keyword', 'Cambio de batería a domicilio') + ' — técnico con batería cargada en minutos',
+        '  ' + c('muted', '·') + ' ' + c('keyword', 'Puntos de intercambio dinámicos') + ' — reserva anticipada + stock real',
+        '  ' + c('muted', '·') + ' Mapa interactivo unificado con ' + c('keyword', 'stock en tiempo real'),
+        '  ' + c('muted', '·') + ' Flujo de reserva en ' + c('accent', '3 taps') + ' — cero fricción',
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'KEY FEATURES'),
+        '  ' + c('accent', '>') + ' Dashboard de métricas en tiempo real',
+        '  ' + c('accent', '>') + ' Sistema de prototipado rápido integrado',
+        '  ' + c('accent', '>') + ' Arquitectura escalable para crecimiento post-MVP',
+        '  ' + c('accent', '>') + ' Design system modular de alta velocidad',
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'RESULTS'),
+        '  ' + c('accent', '2 semanas') + ' de research a prototipo interactivo con design system',
+        '  ' + c('accent', '3 pasos') + ' en el flujo de reserva sin registro obligatorio',
+        '  ' + c('accent', '0 competidores') + ' — categoría inexistente en el mercado',
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'TECH STACK'),
+        '  ' + c('function', 'Figma') + ' ' + c('muted', '·') + ' ' + c('function', 'Whimsical') + ' ' + c('muted', '·') + ' ' + c('function', 'Adobe CC') + ' ' + c('muted', '·') + ' ' + c('function', 'Miro'),
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('function', 'URL') + '        ' + c('string', '/projects/movefast-startup-platform'),
+        '&nbsp;',
+        '  ' + c('comment', 'Tip:') + ' ' + c('function', 'open movefast') + ' ' + c('comment', '→ abrir proyecto en el navegador'),
+        '&nbsp;',
+      ];
+      // Easter egg: 20% faster typewriter — honoring the name
+      out._fast = true;
+      return out;
+    }
+
     function cmdCv() {
       setTimeout(function() { window.open('/docs/CV-Ramon-Riera-Depares.pdf', '_blank'); }, 800);
       return [
@@ -868,11 +933,12 @@ const navSections: Record<string, { desc: string; path: string }> = {
       'education.dat': 'education', 'skills.json': 'skills', 'contact.link': 'social',
       'social.yaml': 'social', 'cv.pdf': 'cv', 'neofetch.sh': 'neofetch',
       'massimo.md': 'massimo',
+      'movefast.sh': 'movefast',
     };
 
     var commandMap = {
       help: cmdHelp, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
-      src: cmdSrc, open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial, massimo: cmdMassimo,
+      src: cmdSrc, open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial, massimo: cmdMassimo, movefast: cmdMovefast,
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
       ls: cmdLs, exit: cmdExit,
       clear: function() {
