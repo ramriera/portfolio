@@ -182,14 +182,21 @@ const dateStr = today.toLocaleDateString('es-ES', { day: '2-digit', month: 'shor
     flex-direction: column;
     flex: 1;
     min-height: 0;
+    width: 100%;
     overflow-y: auto;
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     scroll-padding-bottom: 1.5rem;
   }
 
   @media (min-width: 768px) {
     .terminal-body {
-      padding: 2.5rem;
+      padding: 2rem 3rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .terminal-body {
+      padding: 2.5rem 4rem;
     }
   }
 
@@ -199,17 +206,18 @@ const dateStr = today.toLocaleDateString('es-ES', { day: '2-digit', month: 'shor
 
   /* ── Output ── */
   .terminal-output {
-    color: #c4c7d4;
+    width: 100%;
+    color: #b0b3c1;
     font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
     font-size: 0.8rem;
-    line-height: 1.75;
+    line-height: 1.8;
     white-space: pre-wrap;
     word-break: break-word;
     -webkit-font-smoothing: antialiased;
   }
 
   @media (min-width: 768px) {
-    .terminal-output { font-size: 0.85rem; }
+    .terminal-output { font-size: 0.875rem; }
   }
 
   /* Spacer pushes prompt to bottom when content is short */
@@ -237,7 +245,7 @@ const dateStr = today.toLocaleDateString('es-ES', { day: '2-digit', month: 'shor
   }
 
   @media (min-width: 768px) {
-    .terminal-prompt { font-size: 0.85rem; }
+    .terminal-prompt { font-size: 0.875rem; }
   }
 
   .tp-user  { color: #50fa7b; }
@@ -268,7 +276,7 @@ const dateStr = today.toLocaleDateString('es-ES', { day: '2-digit', month: 'shor
   }
 
   @media (min-width: 768px) {
-    .terminal-input { font-size: 0.85rem; }
+    .terminal-input { font-size: 0.875rem; }
   }
 
   /* ── Block cursor ── */
@@ -276,7 +284,7 @@ const dateStr = today.toLocaleDateString('es-ES', { day: '2-digit', month: 'shor
     display: inline-block;
     width: 0.55em;
     height: 1.15em;
-    background: #c4c7d4;
+    background: #50fa7b;
     position: absolute;
     top: 0.15em;
     left: 0;
@@ -318,11 +326,12 @@ const dateStr = today.toLocaleDateString('es-ES', { day: '2-digit', month: 'shor
   .t-green  { color: #50fa7b; }
   .t-cyan   { color: #8be9fd; }
   .t-yellow { color: #f1fa8c; }
+  .t-amber  { color: #ffcb6b; }
   .t-pink   { color: #ff79c6; }
   .t-orange { color: #ffb86c; }
   .t-purple { color: #bd93f9; }
-  .t-muted  { color: #565973; }
-  .t-white  { color: #c4c7d4; }
+  .t-muted  { color: #4e5166; }
+  .t-white  { color: #e2e4ed; }
   .t-red    { color: #ff5555; }
   .t-bold   { font-weight: 700; }
 </style>
@@ -473,7 +482,7 @@ const dateStr = today.toLocaleDateString('es-ES', { day: '2-digit', month: 'shor
     var pad = function(s, n) { return s.length >= n ? s.slice(0, n) : s + ' '.repeat(n - s.length); };
     var rows = projectList.map(function(p) {
       var id = String(p.id).padStart(2, ' ');
-      return { html: '   <span class="t-cyan">' + id + '</span>  <span class="t-muted">│</span>  <span class="t-white">' + pad(p.title, 30) + '</span>  <span class="t-muted">│</span>  <span class="t-orange">' + p.year + '</span>' };
+      return { html: '   <span class="t-amber t-bold">' + id + '</span>  <span class="t-muted">│</span>  <span class="t-white">' + pad(p.title, 30) + '</span>  <span class="t-muted">│</span>  <span class="t-orange">' + p.year + '</span>' };
     });
 
     return [
@@ -528,7 +537,7 @@ const dateStr = today.toLocaleDateString('es-ES', { day: '2-digit', month: 'shor
     var t = raw.trim();
     if (!t) return null;
 
-    print('<span class="tp-user">ramon</span><span class="tp-at">@</span><span class="tp-host">riera</span><span class="tp-colon">:</span><span class="tp-path">~</span><span class="tp-dollar">$</span> <span class="t-white">' + esc(t) + '</span>');
+    print('<span class="tp-user">ramon</span><span class="tp-at">@</span><span class="tp-host">riera</span><span class="tp-colon">:</span><span class="tp-path">~</span><span class="tp-dollar">$</span> <span style="color:#f8f8f2;font-weight:500">' + esc(t) + '</span>');
 
     var parts = t.split(/\s+/);
     var cmd = parts[0].toLowerCase();
