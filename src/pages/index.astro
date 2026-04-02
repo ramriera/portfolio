@@ -4,7 +4,6 @@ import HeroSection from '@/components/HeroSection.astro';
 import AboutSection from '@/components/AboutSection.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import ContactConsole from '@/components/ContactConsole.astro';
-import Terminal from '@/components/Terminal.astro';
 import { projects } from '@/utils/data';
 
 // 3-row editorial grid: 60/40, 40/60, 60/40
@@ -87,9 +86,6 @@ const featuredProjects = projectOrder
 
   <!-- CTA -->
   <ContactConsole />
-
-  <!-- Terminal overlay (hidden by default, activated via Code Mode button) -->
-  <Terminal />
 
 <style>
   .project-grid-item :global(.card-image-wrap) {

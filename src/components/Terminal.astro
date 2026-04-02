@@ -336,7 +336,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
     // ── Typewriter effect ──
     var typewriterBusy = false;
 
-    function typeLines(lines, cb) {
+    function typeLines(lines, cb, delay) {
+      var d = delay || 40;
       typewriterBusy = true;
       var i = 0;
       function next() {
@@ -344,7 +345,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         line(lines[i]);
         scroll();
         i++;
-        setTimeout(next, 40 + Math.random() * 30);
+        setTimeout(next, d + Math.random() * (d * 0.6));
       }
       next();
     }
@@ -362,6 +363,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         c('muted', 'UX Lead & Product Designer') + ' ' + c('comment', '// ramonriera.design'),
         '&nbsp;',
         c('string', 'Bienvenido.'),
+        '&nbsp;',
         'Escribe ' + c('keyword', 'help') + ' para ver los comandos disponibles.',
         c('comment', '─'.repeat(60)),
       ];
@@ -371,7 +373,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         marker.id = 'motd-end';
         output.appendChild(marker);
         if (cb) cb();
-      });
+      }, 70);
     }
 
     // ── Commands ──
@@ -441,11 +443,11 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + c('comment', '─'.repeat(18) + '┼' + '─'.repeat(22) + '┼' + '─'.repeat(24)),
       ];
       var jobs = [
-        ['2021 — Presente', 'Doctori.com', 'UX Lead'],
-        ['2020 — 2021', 'Freelance', 'Product Designer'],
-        ['2019 — 2020', 'Banco Sabadell', 'UX Designer (DS)'],
-        ['2018 — 2019', 'Iberia (via Globant)', 'UX Designer'],
-        ['2017 — 2018', 'CaixaBank', 'UX/UI Designer'],
+        ['2021 — Presente', 'Doctori.com', 'Sr. Product Designer & Design Ops'],
+        ['2023 — 2024', 'Leemons (via Lead-it)', 'Product & UI Consultant'],
+        ['2022 — 2023', 'Iberia (via Lead-it)', 'Design Systems Consultant'],
+        ['2021 — 2022', 'Banco Sabadell (via Lead-it)', 'Design Systems Consultant'],
+        ['2017 — 2021', 'JBM', 'Junior Designer'],
       ];
       jobs.forEach(function(j) {
         out.push('  ' + c('constant', j[0].padEnd(18)) + sep + c('string', j[1].padEnd(20)) + sep + c('keyword', j[2]));

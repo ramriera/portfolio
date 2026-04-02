@@ -1,6 +1,7 @@
 ---
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
+import Terminal from '@/components/Terminal.astro';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
@@ -71,6 +72,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
       <slot />
     </main>
     <Footer />
+    <Terminal />
 
     <script>
       // Scroll reveal with Intersection Observer
