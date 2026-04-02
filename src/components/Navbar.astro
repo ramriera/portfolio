@@ -1,26 +1,7 @@
 ---
 import { navLinks, siteConfig } from '@/utils/data';
-import CodeModeToggle from '@/components/CodeModeToggle.astro';
 
 const currentPath = Astro.url.pathname;
-
-// Code mode: map nav links to filenames and icon types
-const fileMap: Record<string, { file: string; icon: 'ts' | 'md' | 'sh' }> = {
-  '/': { file: 'index.ts', icon: 'ts' },
-  '/about': { file: 'about.tsx', icon: 'ts' },
-  '/projects': { file: 'projects.config.ts', icon: 'ts' },
-};
-
-// Breadcrumb section name from current path
-const pathSegments = currentPath.replace(/\/$/, '').split('/').filter(Boolean);
-const isProjectDetail = pathSegments[0] === 'projects' && pathSegments.length >= 2;
-const isProjectsListing = pathSegments[0] === 'projects' && pathSegments.length === 1;
-const projectSlug = isProjectDetail ? pathSegments[1] : '';
-const projectFileName = isProjectDetail
-  ? projectSlug.replace(/-/g, '_') + '.config.ts'
-  : '';
-const rawSection = pathSegments.length === 0 ? '/' : '/' + pathSegments[0];
-const sectionName = fileMap[rawSection]?.file || (pathSegments.length === 0 ? 'index' : pathSegments[0]);
 ---
 
 <header
@@ -31,42 +12,15 @@ const sectionName = fileMap[rawSection]?.file || (pathSegments.length === 0 ? 'i
   <div class="container-custom">
     <nav class="flex items-center justify-between h-20">
 
-      <!-- ═══ DESIGN MODE: Logo ═══ -->
-      <a href="/" id="logo" class="logo relative z-10 flex items-center gap-3 nav-design-logo" data-component="Logo">
+      <!-- Logo -->
+      <a href="/" id="logo" class="logo relative z-10 flex items-center gap-3" data-component="Logo">
         <span class="logo-name">Ramon Riera</span>
         <span class="logo-divider"></span>
         <span class="logo-role">UX Lead</span>
       </a>
 
-      <!-- ═══ CODE MODE: Breadcrumb path ═══ -->
-      <div class="nav-code-breadcrumb" aria-hidden="true">
-        <span class="ncb-segment">ramonriera</span>
-        <span class="ncb-sep">/</span>
-        <span class="ncb-segment">src</span>
-        <span class="ncb-sep">/</span>
-        {isProjectDetail ? (
-          <>
-            <span class="ncb-segment">projects</span>
-            <span class="ncb-sep">/</span>
-            <span class="ncb-active" id="ncb-section">{projectFileName}</span>
-          </>
-        ) : isProjectsListing ? (
-          <>
-            <span class="ncb-segment">projects</span>
-            <span class="ncb-sep">/</span>
-            <span class="ncb-active" id="ncb-section">{sectionName}</span>
-          </>
-        ) : (
-          <>
-            <span class="ncb-segment">pages</span>
-            <span class="ncb-sep">/</span>
-            <span class="ncb-active" id="ncb-section">{sectionName}</span>
-          </>
-        )}
-      </div>
-
-      <!-- ═══ DESIGN MODE: Desktop Navigation ═══ -->
-      <div class="hidden lg:flex items-center gap-1 nav-design-links">
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-1">
         {navLinks.map((link) => (
           <a
             href={link.href}
@@ -82,54 +36,17 @@ const sectionName = fileMap[rawSection]?.file || (pathSegments.length === 0 ? 'i
         ))}
       </div>
 
-      <!-- ═══ CODE MODE: File tabs ═══ -->
-      <div class="nav-code-tabs" aria-hidden="true">
-        {navLinks.map((link) => {
-          const info = fileMap[link.href] || { file: link.label, icon: 'ts' };
-          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
-          return (
-            <a
-              href={link.href}
-              class:list={['nct-tab', isActive && 'nct-tab--active']}
-            >
-              {info.icon === 'ts' && (
-                <svg class="nct-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#3178c6">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
-                </svg>
-              )}
-              {info.icon === 'md' && (
-                <svg class="nct-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                </svg>
-              )}
-              <span class="nct-filename">{info.file}</span>
-              <span class="nct-modified"></span>
-            </a>
-          );
-        })}
-      </div>
-
-      <!-- ═══ Actions area ═══ -->
+      <!-- Actions area -->
       <div class="flex items-center gap-5">
-        <!-- Design mode: toggle + CTA -->
-        <div class="hidden lg:block nav-design-toggle">
-          <CodeModeToggle />
-        </div>
         <a
           href={`mailto:${siteConfig.email}`}
-          class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 text-white text-sm font-medium rounded-full transition-all duration-300 hover:bg-neutral-800 hover:shadow-md hover:shadow-neutral-900/10 group/btn hero-cta-normal"
+          class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 text-white text-sm font-medium rounded-full transition-all duration-300 hover:bg-neutral-800 hover:shadow-md hover:shadow-neutral-900/10 group/btn"
         >
           Hablemos
           <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
-
-        <!-- Code mode: Visual Mode button (triggers toggle) -->
-        <button class="nav-code-run-btn" id="nav-visual-mode-btn" aria-label="Switch to Visual Mode">
-          <span class="nav-run-icon">&#9655;</span>
-          <span class="nav-run-label">Visual Mode</span>
-        </button>
 
         <!-- Mobile menu button -->
         <button
@@ -148,7 +65,7 @@ const sectionName = fileMap[rawSection]?.file || (pathSegments.length === 0 ? 'i
   </div>
 </header>
 
-<!-- Mobile Navigation — OUTSIDE header so transform: translateY(-100%) on navbar doesn't break fixed positioning -->
+<!-- Mobile Navigation -->
 <div
   id="mobile-menu"
   class="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out-expo overscroll-none mobile-menu-overlay"
@@ -181,12 +98,9 @@ const sectionName = fileMap[rawSection]?.file || (pathSegments.length === 0 ? 'i
   </nav>
   <a
     href={`mailto:${siteConfig.email}`}
-    class="mt-6 btn-primary text-lg hero-cta-normal"
+    class="mt-6 btn-primary text-lg"
   >
     Hablemos
-  </a>
-  <a href={`mailto:${siteConfig.email}`} class="mt-6 hero-cta-code" data-component="ButtonRunCmd">
-    <span class="hero-cta-prompt">&gt;</span> run <span class="hero-cta-cmd">send_email.sh</span><span class="hero-cta-cursor">_</span>
   </a>
 </div>
 
@@ -217,19 +131,6 @@ const sectionName = fileMap[rawSection]?.file || (pathSegments.length === 0 ? 'i
     transform: translateY(-100%);
   }
 
-  :global(.code-mode) .navbar-base {
-    background: rgba(20, 20, 19, 0.85);
-  }
-
-  :global(.code-mode) .nav-scrolled {
-    background: rgba(20, 20, 19, 0.9);
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  :global(.code-mode .mobile-menu-overlay) {
-    background: #141413;
-  }
-
   .logo-name {
     font-family: 'Space Grotesk', system-ui, sans-serif;
     font-weight: 600;
@@ -254,186 +155,6 @@ const sectionName = fileMap[rawSection]?.file || (pathSegments.length === 0 ? 'i
     letter-spacing: 0.05em;
     color: rgba(0, 0, 0, 0.45);
     white-space: nowrap;
-  }
-
-  /* ═══ CODE MODE — IDE Header Transformation ═══ */
-
-  /* Hide design elements in code mode */
-  .nav-code-breadcrumb,
-  .nav-code-tabs,
-  .nav-code-run-btn {
-    display: none;
-  }
-
-  :global(.code-mode) .nav-design-logo,
-  :global(.code-mode) .nav-design-links,
-  :global(.code-mode) .nav-design-toggle,
-  :global(.code-mode) .hero-cta-normal {
-    display: none !important;
-  }
-
-  :global(.code-mode) .nav-code-breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  .ncb-segment {
-    color: var(--cm-text-muted, #7d8590);
-  }
-
-  .ncb-sep {
-    color: var(--cm-text-muted, #7d8590);
-    opacity: 0.4;
-  }
-
-  .ncb-active {
-    color: var(--cm-text-secondary, #c9d1d9);
-    font-weight: 500;
-  }
-
-  /* ── File tabs ── */
-  :global(.code-mode) .nav-code-tabs {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    height: 100%;
-  }
-
-  .nct-tab {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0.5rem 1rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--cm-text-muted, #7d8590);
-    text-decoration: none;
-    border-top: 2px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-    white-space: nowrap;
-    position: relative;
-  }
-
-  .nct-tab:hover {
-    color: var(--cm-function, #8be9fd);
-    background: var(--cm-bg-card, rgba(255, 255, 255, 0.03));
-    border-top-color: rgba(139, 233, 253, 0.4);
-  }
-
-  .nct-tab--active {
-    color: var(--cm-text, #e6edf3);
-    border-top-color: var(--cm-function, #8be9fd);
-    background: var(--cm-bg-surface, rgba(255, 255, 255, 0.04));
-  }
-
-  .nct-tab--active .nct-icon {
-    color: var(--cm-function, #8be9fd);
-  }
-
-  .nct-icon {
-    width: 13px;
-    height: 13px;
-    color: var(--cm-text-muted, #7d8590);
-    flex-shrink: 0;
-    transition: color 0.2s ease;
-  }
-
-  .nct-tab:hover .nct-icon {
-    color: var(--cm-function, #8be9fd);
-  }
-
-  .nct-filename {
-    line-height: 1;
-  }
-
-  .nct-modified {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: transparent;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .nct-tab--active .nct-modified {
-    background: var(--cm-string, #50fa7b);
-    box-shadow: 0 0 4px rgba(80, 250, 123, 0.4);
-  }
-
-  /* ── Visual Mode run button ── */
-  :global(.code-mode) .nav-code-run-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0.4rem 0.85rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.03em;
-    color: var(--cm-text-muted, #7d8590);
-    background: transparent;
-    border: 1px solid var(--cm-border, #30363d);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-  }
-
-  :global(.code-mode) .nav-code-run-btn:hover {
-    color: var(--cm-function, #8be9fd);
-    border-color: var(--cm-function, #8be9fd);
-    background: rgba(139, 233, 253, 0.06);
-    box-shadow: 0 0 15px rgba(139, 233, 253, 0.15);
-  }
-
-  .nav-run-icon {
-    font-size: 0.6rem;
-    line-height: 1;
-    transition: color 0.2s ease;
-  }
-
-  :global(.code-mode) .nav-code-run-btn:hover .nav-run-icon {
-    color: var(--cm-function, #8be9fd);
-    text-shadow: 0 0 6px rgba(139, 233, 253, 0.4);
-  }
-
-  /* ── Code mode: hide hamburger, always show tabs ── */
-  :global(.code-mode) #mobile-menu-btn {
-    display: none !important;
-  }
-
-  /* ── Responsive: compact tabs on smaller screens ── */
-  @media (max-width: 768px) {
-    .nct-tab {
-      padding: 0.35rem 0.6rem;
-      font-size: 0.62rem;
-      gap: 4px;
-    }
-
-    .nct-icon {
-      width: 11px;
-      height: 11px;
-    }
-
-    .nct-modified {
-      display: none;
-    }
-
-    :global(.code-mode) .nav-code-breadcrumb {
-      font-size: 0.62rem;
-    }
-
-    :global(.code-mode) .nav-code-run-btn {
-      font-size: 0.6rem;
-      padding: 0.3rem 0.6rem;
-    }
-
-    .nav-run-label {
-      display: none;
-    }
   }
 </style>
 
@@ -581,12 +302,5 @@ const sectionName = fileMap[rawSection]?.file || (pathSegments.length === 0 ? 'i
 
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMenu);
-  });
-
-  // ── Visual Mode button triggers the existing CodeModeToggle ──
-  const visualModeBtn = document.getElementById('nav-visual-mode-btn');
-  visualModeBtn?.addEventListener('click', () => {
-    const toggle = document.getElementById('code-mode-toggle');
-    if (toggle) toggle.click();
   });
 </script>
