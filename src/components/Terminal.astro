@@ -602,8 +602,14 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     function cmdCv() {
-      setTimeout(function() { window.open('/docs/CV-Ramon-Riera-Depares.pdf', '_blank'); }, 500);
-      return [c('string', 'Descargando CV...')];
+      setTimeout(function() { window.open('/docs/CV-Ramon-Riera-Depares.pdf', '_blank'); }, 800);
+      return [
+        '&nbsp;',
+        c('string', '  Loading dossier...'),
+        c('muted', '  Fetching /docs/CV-Ramon-Riera-Depares.pdf'),
+        c('string', '  ✓ Opening in new tab.'),
+        '&nbsp;',
+      ];
     }
 
     function cmdExit() {
@@ -658,20 +664,93 @@ const navSections: Record<string, { desc: string; path: string }> = {
 
     // ── Input ──
 
+    // Move cursor to end of input text
+    function cursorToEnd() {
+      setTimeout(function() {
+        input.selectionStart = input.selectionEnd = input.value.length;
+        input.focus();
+      }, 0);
+    }
+
+    // Find longest common prefix among strings
+    function commonPrefix(strs) {
+      if (!strs.length) return '';
+      var prefix = strs[0];
+      for (var i = 1; i < strs.length; i++) {
+        while (strs[i].indexOf(prefix) !== 0) {
+          prefix = prefix.slice(0, -1);
+          if (!prefix) return '';
+        }
+      }
+      return prefix;
+    }
+
     input.addEventListener('keydown', function(e) {
       if (typewriterBusy) { e.preventDefault(); return; }
 
-      if (e.key === 'Enter') { processCmd(input.value); input.value = ''; }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); if (histIdx > 0) { histIdx--; input.value = history[histIdx]; } }
-      else if (e.key === 'ArrowDown') { e.preventDefault(); if (histIdx < history.length - 1) { histIdx++; input.value = history[histIdx]; } else { histIdx = history.length; input.value = ''; } }
-      else if (e.key === 'Tab') {
+      if (e.key === 'Enter') {
+        processCmd(input.value);
+        input.value = '';
+        return;
+      }
+
+      // ── History: ↑ ──
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (histIdx > 0) {
+          histIdx--;
+          input.value = history[histIdx];
+          cursorToEnd();
+        }
+        return;
+      }
+
+      // ── History: ↓ ──
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (histIdx < history.length - 1) {
+          histIdx++;
+          input.value = history[histIdx];
+        } else {
+          histIdx = history.length;
+          input.value = '';
+        }
+        cursorToEnd();
+        return;
+      }
+
+      // ── Tab autocomplete ──
+      if (e.key === 'Tab') {
         e.preventDefault();
         var q = input.value.trim().toLowerCase();
-        var matches = Object.keys(commandMap).filter(function(k) { return k.startsWith(q); });
-        if (matches.length === 1) input.value = matches[0] + ' ';
-        else if (matches.length > 1) { line(c('muted', matches.join('  '))); scroll(); }
+        if (!q) return;
+
+        var cmdNames = Object.keys(commandMap);
+        var matches = cmdNames.filter(function(k) { return k.startsWith(q); });
+
+        if (matches.length === 1) {
+          // Single match → complete + space
+          input.value = matches[0] + ' ';
+          cursorToEnd();
+        } else if (matches.length > 1) {
+          // Multiple matches → complete common prefix + show options
+          var cp = commonPrefix(matches);
+          if (cp.length > q.length) {
+            input.value = cp;
+            cursorToEnd();
+          }
+          line(c('muted', '  ' + matches.join('  ')));
+          scroll();
+        }
+        return;
       }
-      else if (e.key === 'l' && e.ctrlKey) { e.preventDefault(); commandMap.clear(); }
+
+      // ── Ctrl+L → clear ──
+      if (e.key === 'l' && e.ctrlKey) {
+        e.preventDefault();
+        commandMap.clear();
+        return;
+      }
     });
 
     // ── Global focus (only when terminal is open) ──
