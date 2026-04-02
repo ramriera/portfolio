@@ -424,12 +424,12 @@ const navSections: Record<string, { desc: string; path: string }> = {
         ['experience', 'Trayectoria profesional'],
         ['education', 'Formacion y certificaciones'],
         ['projects', 'Lista proyectos (tabla)'],
-        ['open <ID>', 'Abre proyecto por ID o nombre'],
+        ['src <ID>', 'Ver detalle de proyecto en consola'],
+        ['open <ID>', 'Abre proyecto en el navegador'],
         ['skills', 'Habilidades tecnicas'],
         ['social', 'Links de redes sociales'],
         ['neofetch', 'Info del sistema'],
         ['cv', 'Descarga el CV'],
-        ['massimo', 'Case study: Massimo Dutti'],
         ['ls', 'Lista archivos del portfolio'],
         ['clear', 'Limpia la consola'],
         ['reset', 'Reinicia la terminal'],
@@ -564,11 +564,54 @@ const navSections: Record<string, { desc: string; path: string }> = {
       out.push(
         hr('└', '┴', '┘'),
         '&nbsp;',
-        '  ' + c('comment', projectList.length + ' registros.') + ' ' + c('muted', 'Escribe') + ' ' + c('function', 'open <ID>') + ' ' + c('muted', 'para abrir un proyecto.'),
+        '  ' + c('comment', projectList.length + ' registros.') + ' ' + c('muted', 'Escribe') + ' ' + c('function', 'src <ID>') + ' ' + c('muted', 'para ver detalle ·') + ' ' + c('function', 'open <ID>') + ' ' + c('muted', 'para abrir en navegador.'),
         '&nbsp;',
       );
       out._fast = true;
       return out;
+    }
+
+    // src <ID> — view project details inside terminal
+    function cmdSrc(args) {
+      var query = args.join(' ').toLowerCase();
+      if (!query) return [c('error', 'Uso:') + ' src &lt;ID | nombre&gt;'];
+
+      var id = parseInt(query, 10);
+      var project = isNaN(id)
+        ? projectList.find(function(p) { return p.name.toLowerCase().includes(query) || p.slug.includes(query); })
+        : projectList.find(function(p) { return p.id === id; });
+
+      if (!project) {
+        var out = [c('error', 'No se encontro: "' + esc(query) + '"')];
+        projectList.forEach(function(p) {
+          out.push('  ' + c('constant', '[' + String(p.id).padStart(2, '0') + ']') + ' ' + c('string', p.name));
+        });
+        return out;
+      }
+
+      // Check for dedicated command (e.g. massimo)
+      var slug = project.slug.split('-')[0].toLowerCase();
+      if (commandMap[slug]) return commandMap[slug]([]);
+      var nameKey = project.name.toLowerCase().replace(/\s+/g, '');
+      if (commandMap[nameKey]) return commandMap[nameKey]([]);
+
+      // Generic project card
+      var line62 = c('comment', '─'.repeat(62));
+      return [
+        '&nbsp;',
+        '  ' + c('accent', '▓▓ PROJECT FILE: ' + project.name.toUpperCase()),
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('function', 'ID') + '         ' + c('accent', '[' + String(project.id).padStart(2, '0') + ']'),
+        '  ' + c('function', 'CATEGORY') + '   ' + c('muted', project.cat || ''),
+        '  ' + c('function', 'YEAR') + '       ' + c('constant', project.year),
+        '  ' + c('function', 'URL') + '        ' + c('string', '/projects/' + project.slug),
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('comment', 'Tip:') + ' ' + c('function', 'open ' + project.id) + ' ' + c('comment', '→ abrir en navegador'),
+        '&nbsp;',
+      ];
     }
 
     function cmdOpen(args) {
@@ -777,7 +820,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
 
     var commandMap = {
       help: cmdHelp, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
-      open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial, massimo: cmdMassimo,
+      src: cmdSrc, open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial, massimo: cmdMassimo,
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
       ls: cmdLs, exit: cmdExit,
       clear: function() {
@@ -794,6 +837,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         output.innerHTML = '';
         history.length = 0;
         histIdx = -1;
+        try { sessionStorage.removeItem(sessionKey); } catch(e) {}
         showMotd(function() { input.focus(); });
         return null;
       },
@@ -939,19 +983,56 @@ const navSections: Record<string, { desc: string; path: string }> = {
       if (link) link.href = href;
     }
 
+    // ── Session persistence ──
+    var sessionKey = '__term_session';
+
+    function saveSession() {
+      try {
+        sessionStorage.setItem(sessionKey, JSON.stringify({
+          html: output.innerHTML,
+          history: history,
+          scrollTop: output.scrollTop,
+        }));
+      } catch(e) {}
+    }
+
+    function restoreSession() {
+      try {
+        var data = JSON.parse(sessionStorage.getItem(sessionKey));
+        if (data && data.html) {
+          output.innerHTML = data.html;
+          history = data.history || [];
+          histIdx = history.length;
+          requestAnimationFrame(function() {
+            output.scrollTop = data.scrollTop || output.scrollHeight;
+          });
+          return true;
+        }
+      } catch(e) {}
+      return false;
+    }
+
     // ── Open / Close API ──
     window.openTerminal = function() {
-      output.innerHTML = '';
-      input.value = '';
       terminal.classList.add('is-open');
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
       setFavicon(faviconCode);
       document.title = 'ramon@portfolio:~';
-      showMotd(function() { input.focus(); });
+
+      // Restore previous session or show fresh MOTD
+      if (!restoreSession()) {
+        output.innerHTML = '';
+        input.value = '';
+        showMotd(function() { input.focus(); });
+      } else {
+        input.value = '';
+        input.focus();
+      }
     };
 
     window.closeTerminal = function() {
+      saveSession();
       terminal.classList.remove('is-open');
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
