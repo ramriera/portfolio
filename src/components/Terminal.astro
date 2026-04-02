@@ -384,8 +384,9 @@ const navSections: Record<string, { desc: string; path: string }> = {
       var out = ['&nbsp;', c('keyword', 'Comandos disponibles:'), '&nbsp;'];
       [
         ['help', 'Muestra esta ayuda'],
-        ['whoami', 'Ficha tecnica del perfil'],
+        ['whoami', 'Dossier profesional completo'],
         ['experience', 'Trayectoria profesional'],
+        ['education', 'Formacion y certificaciones'],
         ['projects', 'Lista proyectos (tabla)'],
         ['open <ID>', 'Abre proyecto por ID o nombre'],
         ['skills', 'Habilidades tecnicas'],
@@ -404,33 +405,65 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     function cmdWhoami() {
-      var border = c('muted', '─'.repeat(56));
-      var sep = c('muted', '│');
-      function row(key, val) {
-        return '  ' + sep + '  ' + c('string', key.padEnd(12)) + c('muted', ':') + '  ' + c('keyword', val).padEnd(60) + sep;
-      }
+      var line60 = c('comment', '─'.repeat(62));
       return [
         '&nbsp;',
-        '  ' + c('muted', '┌') + border + c('muted', '┐'),
-        '  ' + sep + '  ' + c('accent', '  SYSTEM PROFILE') + ' '.repeat(35) + sep,
-        '  ' + c('muted', '├') + border + c('muted', '┤'),
-        row('USER', 'Ramon Riera'),
-        row('ROLE', 'Product Designer & UX Lead'),
-        row('LOCATION', 'Barcelona, ES / Remote'),
-        row('COMPANY', 'Doctori.com (2021-presente)'),
-        '  ' + c('muted', '├') + border + c('muted', '┤'),
-        row('STACK', 'Figma, React, Astro, Tailwind'),
-        row('FOCUS', 'Design Systems, UX Strategy'),
-        row('METHODS', 'DesignOps, Product Strategy'),
-        '  ' + c('muted', '├') + border + c('muted', '┤'),
-        row('EMAIL', 'hello@ramonriera.design'),
-        row('WEB', 'ramonriera.design'),
-        row('LINKEDIN', 'linkedin.com/in/ramonrieradepares'),
-        '  ' + c('muted', '└') + border + c('muted', '┘'),
+        '  ' + c('accent', '▓▓ DOSSIER: RAMON RIERA'),
+        '  ' + line60,
         '&nbsp;',
-        '  ' + c('comment', 'Tip: Usa') + ' ' + c('function', 'experience') + ' ' + c('comment', 'para ver trayectoria profesional.'),
+        '  ' + c('string', 'IDENTIDAD'),
+        '&nbsp;',
+        '  Diseñador de Producto enfocado en la intersección entre',
+        '  la ' + c('keyword', 'estética funcional') + ' y el ' + c('keyword', 'código creativo') + '.',
+        '  Especializado en ' + c('string', 'sistemas de diseño escalables') + ' y',
+        '  ' + c('string', 'experiencias interactivas') + ' que conectan negocio y usuario.',
+        '&nbsp;',
+        '  ' + line60,
+        '&nbsp;',
+        '  ' + c('string', 'TECH STACK'),
+        '&nbsp;',
+        '  ' + c('function', 'DESIGN') + '     ' + c('muted', 'Figma · Adobe CC · Design Systems · UX Research'),
+        '  ' + c('function', 'CODE') + '       ' + c('muted', 'React · Astro · Tailwind · TypeScript · Framer Motion'),
+        '  ' + c('function', 'OPS') + '        ' + c('muted', 'DesignOps · Design Tokens · CI/CD · Storybook'),
+        '&nbsp;',
+        '  ' + line60,
+        '&nbsp;',
+        '  ' + c('string', 'ESTATUS & CONTACTO'),
+        '&nbsp;',
+        '  ' + c('function', 'STATUS') + '     ' + c('string', '● Available for projects'),
+        '  ' + c('function', 'ROLE') + '       ' + c('muted', 'Sr. Product Designer & Design Ops @ Doctori.com'),
+        '  ' + c('function', 'LOC') + '        ' + c('muted', 'Barcelona, ES / Remote'),
+        '  ' + c('function', 'EMAIL') + '      ' + c('muted', 'hello@ramonriera.design'),
+        '  ' + c('function', 'WEB') + '        ' + c('muted', 'ramonriera.design'),
+        '&nbsp;',
+        '  ' + line60,
+        '&nbsp;',
+        '  ' + c('comment', 'Tip:') + ' ' + c('function', 'experience') + ' ' + c('comment', '→ trayectoria') + '  ' + c('function', 'education') + ' ' + c('comment', '→ formación') + '  ' + c('function', 'contact') + ' ' + c('comment', '→ redes') + '  ' + c('function', 'cv') + ' ' + c('comment', '→ descargar CV'),
         '&nbsp;',
       ];
+    }
+
+    function cmdEducation() {
+      var sep = c('muted', ' │ ');
+      var line50 = c('comment', '─'.repeat(14) + '┼' + '─'.repeat(42));
+      var items = [
+        ['2021', 'UX Research & Strategy — Google (Coursera)'],
+        ['2020', 'Advanced Product Design — Interaction Design Foundation'],
+        ['2019', 'Design Systems with React — Frontend Masters'],
+        ['2017', 'Grado en Diseño Digital — ESDI (Barcelona)'],
+      ];
+      var out = [
+        '&nbsp;',
+        '  ' + c('accent', ' FORMACION & CERTIFICACIONES'),
+        '&nbsp;',
+        '  ' + c('muted', 'AÑO'.padEnd(14)) + sep + c('muted', 'TITULO / CERTIFICACION'),
+        '  ' + line50,
+      ];
+      items.forEach(function(item) {
+        out.push('  ' + c('constant', item[0].padEnd(14)) + sep + ' ' + c('keyword', item[1]));
+      });
+      out.push('  ' + line50, '&nbsp;');
+      return out;
     }
 
     function cmdExperience() {
@@ -579,7 +612,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     var commandMap = {
-      help: cmdHelp, whoami: cmdWhoami, about: cmdWhoami, experience: cmdExperience, projects: cmdProjects,
+      help: cmdHelp, whoami: cmdWhoami, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
       open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial,
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
       ls: cmdLs, exit: cmdExit,
