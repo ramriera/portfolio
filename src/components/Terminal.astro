@@ -566,12 +566,23 @@ const navSections: Record<string, { desc: string; path: string }> = {
     // ── Global focus ──
     document.addEventListener('click', function() { input.focus(); });
 
+    // ── Favicon switching ──
+    var faviconNormal = '/favicon.svg';
+    var faviconCode = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1a5c1a"/><rect x="27" y="12" width="10" height="40" rx="3" fill="#D97757"/></svg>');
+
+    function setFavicon(href) {
+      var link = document.querySelector("link[rel='icon'][type='image/svg+xml']");
+      if (link) link.href = href;
+    }
+
     // ── Open / Close API ──
     window.openTerminal = function() {
       output.innerHTML = '';
       input.value = '';
       terminal.classList.add('is-open');
       document.body.style.overflow = 'hidden';
+      setFavicon(faviconCode);
+      document.title = 'ramon@portfolio:~';
       showMotd();
       setTimeout(function() { input.focus(); }, 100);
     };
@@ -579,6 +590,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
     window.closeTerminal = function() {
       terminal.classList.remove('is-open');
       document.body.style.overflow = '';
+      setFavicon(faviconNormal);
+      document.title = 'Home \u26A1 Ramon Riera';
     };
 
     // ── Boot (show MOTD but stay hidden until openTerminal is called) ──
