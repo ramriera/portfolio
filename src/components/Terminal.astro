@@ -382,7 +382,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
       var out = ['&nbsp;', c('keyword', 'Comandos disponibles:'), '&nbsp;'];
       [
         ['help', 'Muestra esta ayuda'],
-        ['whoami', 'Sobre Ramon Riera'],
+        ['whoami', 'Ficha tecnica del perfil'],
+        ['experience', 'Trayectoria profesional'],
         ['projects', 'Lista proyectos (tabla)'],
         ['open <ID>', 'Abre proyecto por ID o nombre'],
         ['skills', 'Habilidades tecnicas'],
@@ -401,17 +402,60 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     function cmdWhoami() {
+      var border = c('muted', '─'.repeat(56));
+      var sep = c('muted', '│');
+      function row(key, val) {
+        return '  ' + sep + '  ' + c('string', key.padEnd(12)) + c('muted', ':') + '  ' + c('keyword', val).padEnd(60) + sep;
+      }
       return [
         '&nbsp;',
-        c('keyword', 'Ramon Riera') + ' ' + c('muted', '— UX Lead & Senior Product Designer'),
+        '  ' + c('muted', '┌') + border + c('muted', '┐'),
+        '  ' + sep + '  ' + c('accent', '  SYSTEM PROFILE') + ' '.repeat(35) + sep,
+        '  ' + c('muted', '├') + border + c('muted', '┤'),
+        row('USER', 'Ramon Riera'),
+        row('ROLE', 'Product Designer & UX Lead'),
+        row('LOCATION', 'Barcelona, ES / Remote'),
+        row('COMPANY', 'Doctori.com (2021-presente)'),
+        '  ' + c('muted', '├') + border + c('muted', '┤'),
+        row('STACK', 'Figma, React, Astro, Tailwind'),
+        row('FOCUS', 'Design Systems, UX Strategy'),
+        row('METHODS', 'DesignOps, Product Strategy'),
+        '  ' + c('muted', '├') + border + c('muted', '┤'),
+        row('EMAIL', 'hello@ramonriera.design'),
+        row('WEB', 'ramonriera.design'),
+        row('LINKEDIN', 'linkedin.com/in/ramonrieradepares'),
+        '  ' + c('muted', '└') + border + c('muted', '┘'),
         '&nbsp;',
-        '  ' + c('muted', 'Ubicacion:') + '     Barcelona, ES',
-        '  ' + c('muted', 'Empresa:') + '       Doctori.com (2021-presente)',
-        '  ' + c('muted', 'Especialidad:') + '  Design Systems, DesignOps, Product Strategy',
-        '  ' + c('muted', 'Email:') + '         hello@ramonriera.design',
-        '  ' + c('muted', 'Web:') + '           ramonriera.design',
+        '  ' + c('comment', 'Tip: Usa') + ' ' + c('function', 'experience') + ' ' + c('comment', 'para ver trayectoria profesional.'),
         '&nbsp;',
       ];
+    }
+
+    function cmdExperience() {
+      var sep = c('muted', ' │ ');
+      var out = [
+        '&nbsp;',
+        '  ' + c('accent', ' TRAYECTORIA PROFESIONAL'),
+        '&nbsp;',
+        '  ' + c('muted', 'PERIODO'.padEnd(18)) + sep + c('muted', 'EMPRESA'.padEnd(20)) + sep + c('muted', 'ROL'),
+        '  ' + c('comment', '─'.repeat(18) + '┼' + '─'.repeat(22) + '┼' + '─'.repeat(24)),
+      ];
+      var jobs = [
+        ['2021 — Presente', 'Doctori.com', 'UX Lead'],
+        ['2020 — 2021', 'Freelance', 'Product Designer'],
+        ['2019 — 2020', 'Banco Sabadell', 'UX Designer (DS)'],
+        ['2018 — 2019', 'Iberia (via Globant)', 'UX Designer'],
+        ['2017 — 2018', 'CaixaBank', 'UX/UI Designer'],
+      ];
+      jobs.forEach(function(j) {
+        out.push('  ' + c('constant', j[0].padEnd(18)) + sep + c('string', j[1].padEnd(20)) + sep + c('keyword', j[2]));
+      });
+      out.push(
+        '  ' + c('comment', '─'.repeat(18) + '┼' + '─'.repeat(22) + '┼' + '─'.repeat(24)),
+        '  ' + c('comment', jobs.length + ' posiciones') + ' ' + c('muted', '|') + ' ' + c('comment', (new Date().getFullYear() - 2017) + '+ años de experiencia'),
+        '&nbsp;',
+      );
+      return out;
     }
 
     function cmdProjects() {
@@ -533,7 +577,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     var commandMap = {
-      help: cmdHelp, whoami: cmdWhoami, about: cmdWhoami, projects: cmdProjects,
+      help: cmdHelp, whoami: cmdWhoami, about: cmdWhoami, experience: cmdExperience, projects: cmdProjects,
       open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial,
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
       ls: cmdLs, exit: cmdExit,
