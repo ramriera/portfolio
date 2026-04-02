@@ -93,6 +93,11 @@ const navSections: Record<string, { desc: string; path: string }> = {
     pointer-events: auto;
   }
 
+  /* Lock html scroll when terminal is open */
+  html:has(.dashboard.is-open) {
+    overflow: hidden !important;
+  }
+
   .term-window {
     width: 100%;
     max-width: 1200px;
@@ -334,7 +339,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     function blank() { line('&nbsp;'); }
-    function scroll() { output.scrollTop = output.scrollHeight; }
+    function scroll() { requestAnimationFrame(function() { output.scrollTop = output.scrollHeight; }); }
 
     // ── Typewriter effect ──
     var typewriterBusy = false;
@@ -452,10 +457,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
       var sep = c('muted', ' │ ');
       var line50 = c('comment', '─'.repeat(14) + '┼' + '─'.repeat(42));
       var items = [
-        ['2017', 'Grado en Diseño — ESDI, Escola Superior de Disseny (Barcelona)'],
-        ['2019', 'UX/UI Design Specialization — Domestika'],
-        ['2020', 'Design Thinking — IDEO U'],
-        ['2022', 'Advanced Product Design — Interaction Design Foundation'],
+        ['2020', 'UX/UI Design Bootcamp — Neoland (Barcelona)'],
+        ['2017', 'Grado en Publicidad y Relaciones Publicas — Universitat de Girona'],
       ];
       var out = [
         '&nbsp;',
@@ -842,6 +845,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
       input.value = '';
       terminal.classList.add('is-open');
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
       setFavicon(faviconCode);
       document.title = 'ramon@portfolio:~';
       showMotd(function() { input.focus(); });
@@ -850,6 +854,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     window.closeTerminal = function() {
       terminal.classList.remove('is-open');
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
       setFavicon(faviconNormal);
       document.title = 'Home \u26A1 Ramon Riera';
     };
