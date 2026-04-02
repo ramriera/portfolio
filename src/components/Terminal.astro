@@ -83,7 +83,10 @@ const navSections: Record<string, { desc: string; path: string }> = {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease;
+    scrollbar-width: none;
   }
+
+  .dashboard::-webkit-scrollbar { display: none; }
 
   .dashboard.is-open {
     opacity: 1;
@@ -98,6 +101,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    scrollbar-width: none;
     border-radius: 12px;
     border: 1px solid #30363d;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.03);
@@ -340,7 +344,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         line(lines[i]);
         scroll();
         i++;
-        setTimeout(next, 18 + Math.random() * 14);
+        setTimeout(next, 40 + Math.random() * 30);
       }
       next();
     }
@@ -357,10 +361,17 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         c('muted', 'UX Lead & Product Designer') + ' ' + c('comment', '// ramonriera.design'),
         '&nbsp;',
-        c('string', 'Bienvenido.') + ' Escribe ' + c('keyword', 'help') + ' para ver los comandos disponibles.',
+        c('string', 'Bienvenido.'),
+        'Escribe ' + c('keyword', 'help') + ' para ver los comandos disponibles.',
         c('comment', '─'.repeat(60)),
       ];
-      typeLines(motdLines, cb);
+      typeLines(motdLines, function() {
+        // Mark where MOTD ends so clear can preserve it
+        var marker = document.createElement('div');
+        marker.id = 'motd-end';
+        output.appendChild(marker);
+        if (cb) cb();
+      });
     }
 
     // ── Commands ──
@@ -526,7 +537,15 @@ const navSections: Record<string, { desc: string; path: string }> = {
       open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial,
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
       ls: cmdLs, exit: cmdExit,
-      clear: function() { output.innerHTML = ''; return null; },
+      clear: function() {
+        var marker = document.getElementById('motd-end');
+        if (marker) {
+          while (marker.nextSibling) { output.removeChild(marker.nextSibling); }
+        } else {
+          output.innerHTML = '';
+        }
+        return null;
+      },
     };
 
     // ── Process command ──
@@ -573,7 +592,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         if (matches.length === 1) input.value = matches[0] + ' ';
         else if (matches.length > 1) { line(c('muted', matches.join('  '))); scroll(); }
       }
-      else if (e.key === 'l' && e.ctrlKey) { e.preventDefault(); commandMap.clear([]); }
+      else if (e.key === 'l' && e.ctrlKey) { e.preventDefault(); commandMap.clear(); }
     });
 
     // ── Global focus (only when terminal is open) ──
