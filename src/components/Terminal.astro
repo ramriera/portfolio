@@ -7,120 +7,324 @@ const projectList = projects.map((p, i) => ({
   title: p.title,
   year: p.year,
 }));
+
+const today = new Date();
+const dateStr = today.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
 ---
 
 <!-- Terminal overlay — hidden by default -->
-<div id="terminal" class="fixed inset-0 z-[9999] bg-black overflow-hidden opacity-0 pointer-events-none transition-opacity duration-500 ease-out">
-  <!-- CRT Scanlines overlay -->
-  <div class="pointer-events-none absolute inset-0 z-10 scanlines" aria-hidden="true"></div>
+<div id="terminal" class="terminal-overlay">
 
-  <!-- Terminal content -->
-  <div
-    id="terminal-scroll"
-    class="relative z-0 w-full h-full overflow-y-auto p-8 md:p-12 font-mono text-sm md:text-base leading-relaxed"
-  >
-    <!-- Output history -->
-    <div id="terminal-output"></div>
+  <!-- ── Title bar ── -->
+  <div class="terminal-titlebar">
+    <div class="terminal-titlebar-left">
+      <span class="terminal-dot terminal-dot--red"></span>
+      <span class="terminal-dot terminal-dot--yellow"></span>
+      <span class="terminal-dot terminal-dot--green"></span>
+      <span class="terminal-titlebar-sep"></span>
+      <span class="terminal-titlebar-name">Ramon Riera</span>
+      <span class="terminal-titlebar-divider">|</span>
+      <span class="terminal-titlebar-role">UX Lead & Product Designer</span>
+    </div>
+    <div class="terminal-titlebar-right">
+      <span class="terminal-titlebar-meta">Astro 5.17</span>
+      <span class="terminal-titlebar-divider">|</span>
+      <span class="terminal-titlebar-meta">{dateStr}</span>
+      <span class="terminal-titlebar-divider">|</span>
+      <span class="terminal-titlebar-status">
+        <span class="terminal-status-dot"></span>
+        Active
+      </span>
+    </div>
+  </div>
 
-    <!-- Input line -->
-    <div class="flex items-baseline gap-0" id="terminal-input-line">
-      <span class="terminal-prompt shrink-0">visitor@ramonriera:~$&nbsp;</span>
-      <div class="relative flex-1 min-w-0">
+  <!-- ── Body: output top, prompt anchored bottom ── -->
+  <div id="terminal-scroll" class="terminal-body">
+    <!-- Output area — grows from top -->
+    <div id="terminal-output" class="terminal-output"></div>
+
+    <!-- Spacer pushes prompt to bottom when output is short -->
+    <div class="terminal-spacer"></div>
+
+    <!-- Input line — always at bottom -->
+    <div class="terminal-input-row" id="terminal-input-line">
+      <span class="terminal-prompt"><span class="tp-user">ramon</span><span class="tp-at">@</span><span class="tp-host">riera</span><span class="tp-colon">:</span><span class="tp-path">~</span><span class="tp-dollar">$</span></span>
+      <div class="terminal-input-wrap">
         <input
           id="terminal-input"
           type="text"
-          class="w-full bg-transparent border-none outline-none terminal-text caret-transparent"
+          class="terminal-input"
           spellcheck="false"
           autocomplete="off"
           autocapitalize="off"
         />
-        <!-- Visual cursor -->
         <span id="terminal-cursor" class="terminal-cursor" aria-hidden="true"></span>
       </div>
     </div>
   </div>
+
+  <!-- CRT Scanlines — subtle overlay -->
+  <div class="terminal-scanlines" aria-hidden="true"></div>
 </div>
 
 <style>
-  /* ── Terminal base colors ── */
-  .terminal-prompt {
+  /* ═══════════════════════════════════════
+     TERMINAL — System-Native Design
+     ═══════════════════════════════════════ */
+
+  .terminal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #1a1b2e;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .terminal-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── Title Bar ── */
+  .terminal-titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1.25rem;
+    background: #161726;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .terminal-titlebar-left,
+  .terminal-titlebar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+  }
+
+  .terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .terminal-dot--red    { background: #ff5f57; }
+  .terminal-dot--yellow { background: #febc2e; }
+  .terminal-dot--green  { background: #28c840; }
+
+  .terminal-titlebar-sep {
+    width: 1px;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 0.35rem;
+  }
+
+  .terminal-titlebar-name {
+    color: #e0e0e0;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .terminal-titlebar-divider {
+    color: rgba(255, 255, 255, 0.15);
+    font-weight: 300;
+  }
+
+  .terminal-titlebar-role {
+    color: #7a7d8e;
+    font-weight: 400;
+  }
+
+  .terminal-titlebar-meta {
+    color: #7a7d8e;
+    font-weight: 500;
+  }
+
+  .terminal-titlebar-status {
     color: #50fa7b;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
   }
 
-  .terminal-text {
-    color: #f8f8f2;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  .terminal-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #50fa7b;
+    animation: status-pulse 2s ease-in-out infinite;
   }
 
-  #terminal-output {
-    color: #f8f8f2;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Hide right side of titlebar on small screens */
+  @media (max-width: 640px) {
+    .terminal-titlebar-right { display: none; }
+    .terminal-titlebar-role  { display: none; }
+  }
+
+  /* ── Body ── */
+  .terminal-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 1.5rem;
+    scroll-padding-bottom: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .terminal-body {
+      padding: 2.5rem;
+    }
+  }
+
+  .terminal-body::-webkit-scrollbar       { width: 4px; }
+  .terminal-body::-webkit-scrollbar-track  { background: transparent; }
+  .terminal-body::-webkit-scrollbar-thumb  { background: #2a2b3d; border-radius: 2px; }
+
+  /* ── Output ── */
+  .terminal-output {
+    color: #c4c7d4;
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 0.8rem;
+    line-height: 1.75;
     white-space: pre-wrap;
     word-break: break-word;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* ── Blinking cursor ── */
+  @media (min-width: 768px) {
+    .terminal-output { font-size: 0.85rem; }
+  }
+
+  /* Spacer pushes prompt to bottom when content is short */
+  .terminal-spacer {
+    flex: 1;
+  }
+
+  /* ── Input row ── */
+  .terminal-input-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    width: 100%;
+    flex-shrink: 0;
+    padding-top: 0.25rem;
+  }
+
+  .terminal-prompt {
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .terminal-prompt { font-size: 0.85rem; }
+  }
+
+  .tp-user  { color: #50fa7b; }
+  .tp-at    { color: #c4c7d4; }
+  .tp-host  { color: #8be9fd; }
+  .tp-colon { color: #c4c7d4; }
+  .tp-path  { color: #bd93f9; }
+  .tp-dollar { color: #c4c7d4; }
+
+  .terminal-input-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .terminal-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #e0e0e0;
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 0.8rem;
+    line-height: 1.75;
+    caret-color: transparent;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (min-width: 768px) {
+    .terminal-input { font-size: 0.85rem; }
+  }
+
+  /* ── Block cursor ── */
   .terminal-cursor {
     display: inline-block;
-    width: 8px;
-    height: 1.2em;
-    background: #50fa7b;
+    width: 0.55em;
+    height: 1.15em;
+    background: #c4c7d4;
     position: absolute;
-    top: 0.1em;
-    animation: blink 1s step-end infinite;
+    top: 0.15em;
+    left: 0;
+    animation: cursor-blink 1s step-end infinite;
     pointer-events: none;
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 0.9; }
     50% { opacity: 0; }
   }
 
   /* ── CRT Scanlines ── */
-  .scanlines {
+  .terminal-scanlines {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
     background: repeating-linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.15) 0px,
-      rgba(0, 0, 0, 0.15) 1px,
+      rgba(0, 0, 0, 0.06) 0px,
+      rgba(0, 0, 0, 0.06) 1px,
       transparent 1px,
       transparent 3px
     );
   }
 
-  /* ── Scrollbar ── */
-  #terminal-scroll::-webkit-scrollbar {
-    width: 6px;
-  }
-  #terminal-scroll::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  #terminal-scroll::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 3px;
-  }
-
-  /* ── Typewriter lines appear with subtle fade ── */
+  /* ── Typewriter line animation ── */
   .tw-line {
     opacity: 0;
-    animation: tw-appear 0.05s ease forwards;
+    animation: tw-in 0.04s ease forwards;
   }
 
-  @keyframes tw-appear {
+  @keyframes tw-in {
     to { opacity: 1; }
   }
 
-  /* ── Color classes for output ── */
-  .t-green { color: #50fa7b; }
-  .t-cyan { color: #8be9fd; }
+  /* ── Semantic colors ── */
+  .t-green  { color: #50fa7b; }
+  .t-cyan   { color: #8be9fd; }
   .t-yellow { color: #f1fa8c; }
-  .t-pink { color: #ff79c6; }
+  .t-pink   { color: #ff79c6; }
   .t-orange { color: #ffb86c; }
-  .t-muted { color: #6272a4; }
-  .t-white { color: #f8f8f2; }
-  .t-red { color: #ff5555; }
-  .t-bold { font-weight: 700; }
-  .t-dim { opacity: 0.5; }
+  .t-purple { color: #bd93f9; }
+  .t-muted  { color: #565973; }
+  .t-white  { color: #c4c7d4; }
+  .t-red    { color: #ff5555; }
+  .t-bold   { font-weight: 700; }
 </style>
 
 <script define:vars={{ projectList, siteConfig }}>
@@ -128,261 +332,207 @@ const projectList = projects.map((p, i) => ({
   const output = document.getElementById('terminal-output');
   const input = document.getElementById('terminal-input');
   const cursor = document.getElementById('terminal-cursor');
-  const scroll = document.getElementById('terminal-scroll');
+  const scrollEl = document.getElementById('terminal-scroll');
 
-  // ── State ──
-  const commandHistory = [];
-  let historyIndex = -1;
-  let isProcessing = false;
-  let hasBooted = false;
+  const cmdHistory = [];
+  let histIdx = -1;
+  let busy = false;
 
-  // ── Open / Close ──
+  // ═══ Open / Close ═══
 
   function openTerminal() {
-    terminal.classList.remove('opacity-0', 'pointer-events-none');
-    terminal.classList.add('opacity-100');
+    output.innerHTML = '';
+    input.value = '';
+    terminal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
 
-    // Boot sequence on first open, or reset on subsequent opens
-    if (!hasBooted) {
-      hasBooted = true;
-      isProcessing = true;
-      typeLines(motd, () => {
-        isProcessing = false;
-        input.focus();
-        updateCursor();
-      });
-    } else {
-      // Re-opening: clear and re-show MOTD
-      output.innerHTML = '';
-      input.value = '';
-      isProcessing = true;
-      typeLines(motd, () => {
-        isProcessing = false;
-        input.focus();
-        updateCursor();
-      });
-    }
-  }
-
-  function closeTerminal() {
-    terminal.classList.add('opacity-0', 'pointer-events-none');
-    terminal.classList.remove('opacity-100');
-    document.body.style.overflow = '';
-  }
-
-  // Expose globally so the toggle button can call it
-  window.openTerminal = openTerminal;
-  window.closeTerminal = closeTerminal;
-
-  // ── Cursor position tracking ──
-  function updateCursor() {
-    if (!input || !cursor) return;
-    const charWidth = getCharWidth();
-    cursor.style.left = `${input.selectionStart * charWidth}px`;
-  }
-
-  let _charWidth = null;
-  function getCharWidth() {
-    if (_charWidth) return _charWidth;
-    const span = document.createElement('span');
-    span.style.fontFamily = "'JetBrains Mono', ui-monospace, monospace";
-    span.style.fontSize = getComputedStyle(input).fontSize;
-    span.style.position = 'absolute';
-    span.style.visibility = 'hidden';
-    span.textContent = 'M';
-    document.body.appendChild(span);
-    _charWidth = span.getBoundingClientRect().width;
-    document.body.removeChild(span);
-    return _charWidth;
-  }
-
-  input.addEventListener('input', updateCursor);
-  input.addEventListener('click', updateCursor);
-  input.addEventListener('keyup', updateCursor);
-
-  // ── Typewriter effect ──
-  function typeLines(lines, callback) {
-    let i = 0;
-    const baseDelay = 18;
-
-    function next() {
-      if (i >= lines.length) {
-        if (callback) callback();
-        return;
-      }
-
-      const line = lines[i];
-      const div = document.createElement('div');
-      div.className = 'tw-line';
-      div.style.animationDelay = '0ms';
-
-      if (typeof line === 'string') {
-        div.textContent = line;
-      } else {
-        div.innerHTML = line.html;
-      }
-
-      output.appendChild(div);
-      scrollToBottom();
-      i++;
-      setTimeout(next, baseDelay + Math.random() * 12);
-    }
-
-    next();
-  }
-
-  function printInstant(html) {
-    const div = document.createElement('div');
-    div.innerHTML = html;
-    output.appendChild(div);
-    scrollToBottom();
-  }
-
-  function scrollToBottom() {
-    requestAnimationFrame(() => {
-      scroll.scrollTop = scroll.scrollHeight;
+    busy = true;
+    typeLines(motd, () => {
+      busy = false;
+      input.focus();
+      syncCursor();
     });
   }
 
-  // ── MOTD (Message of the Day) ──
+  function closeTerminal() {
+    terminal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  window.openTerminal = openTerminal;
+  window.closeTerminal = closeTerminal;
+
+  // ═══ Cursor ═══
+
+  let _cw = null;
+  function charWidth() {
+    if (_cw) return _cw;
+    const m = document.createElement('span');
+    m.style.cssText = "font-family:'JetBrains Mono',ui-monospace,monospace;font-size:" + getComputedStyle(input).fontSize + ";position:absolute;visibility:hidden";
+    m.textContent = 'M';
+    document.body.appendChild(m);
+    _cw = m.getBoundingClientRect().width;
+    document.body.removeChild(m);
+    return _cw;
+  }
+
+  function syncCursor() {
+    if (!input || !cursor) return;
+    cursor.style.left = (input.selectionStart * charWidth()) + 'px';
+  }
+
+  input.addEventListener('input', syncCursor);
+  input.addEventListener('click', syncCursor);
+  input.addEventListener('keyup', syncCursor);
+
+  // ═══ Output helpers ═══
+
+  function typeLines(lines, cb) {
+    let i = 0;
+    function next() {
+      if (i >= lines.length) { if (cb) cb(); return; }
+      const d = document.createElement('div');
+      d.className = 'tw-line';
+      const l = lines[i];
+      if (typeof l === 'string') d.textContent = l;
+      else d.innerHTML = l.html;
+      output.appendChild(d);
+      toBottom();
+      i++;
+      setTimeout(next, 16 + Math.random() * 14);
+    }
+    next();
+  }
+
+  function print(html) {
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    output.appendChild(d);
+    toBottom();
+  }
+
+  function toBottom() {
+    requestAnimationFrame(function() { scrollEl.scrollTop = scrollEl.scrollHeight; });
+  }
+
+  // ═══ ASCII Art MOTD ═══
+
   const motd = [
-    { html: '<span class="t-green t-bold">╔══════════════════════════════════════════════════╗</span>' },
-    { html: '<span class="t-green t-bold">║</span>                                                  <span class="t-green t-bold">║</span>' },
-    { html: '<span class="t-green t-bold">║</span>   <span class="t-cyan t-bold">Ramon Riera</span> — UX Lead & Product Designer     <span class="t-green t-bold">║</span>' },
-    { html: '<span class="t-green t-bold">║</span>   <span class="t-muted">ramonriera.design</span>                           <span class="t-green t-bold">║</span>' },
-    { html: '<span class="t-green t-bold">║</span>                                                  <span class="t-green t-bold">║</span>' },
-    { html: '<span class="t-green t-bold">╚══════════════════════════════════════════════════╝</span>' },
-    { html: '&nbsp;' },
-    { html: '<span class="t-muted">Welcome to my interactive portfolio. Type</span> <span class="t-yellow">help</span> <span class="t-muted">to get started.</span>' },
-    { html: '<span class="t-muted">Type</span> <span class="t-yellow">exit</span> <span class="t-muted">to return to the visual portfolio.</span>' },
-    { html: '&nbsp;' },
+    { html: '<span class="t-orange">  ____ ____ _  </span>' },
+    { html: '<span class="t-orange"> | _ \\  _ _ _  ___ ___ _  _ | \\(_) ___ _ __ _ </span>' },
+    { html: '<span class="t-orange"> | |_) / _` | \'_ ` _ \\ / _ \\| \'_ \\|  _ \\| \'__/ _` |</span>' },
+    { html: '<span class="t-orange"> |  _ < (_| | | | | | | (_) | | | | |_) | | | (_| |</span>' },
+    { html: '<span class="t-orange"> |_| \\_\\__,_|_| |_| |_|\\___/|_| |_| .__/|_|  \\__,_|</span>' },
+    { html: '<span class="t-orange">                                   |_|</span>' },
+    { html: '' },
+    { html: ' <span class="t-white">UX Lead & Product Designer</span> <span class="t-muted">//</span> <span class="t-muted">ramonriera.design</span>' },
+    { html: '' },
+    { html: ' <span class="t-green t-bold">Bienvenido.</span> <span class="t-white">Escribe</span> <span class="t-cyan t-bold">help</span> <span class="t-white">para ver los comandos disponibles.</span>' },
+    { html: ' <span class="t-muted">─────────────────────────────────────────────────</span>' },
+    { html: '' },
   ];
 
-  // ── Commands ──
+  // ═══ Commands ═══
 
   function cmdHelp() {
     return [
-      { html: '&nbsp;' },
-      { html: '<span class="t-yellow t-bold">Available commands:</span>' },
-      { html: '&nbsp;' },
-      { html: '  <span class="t-cyan">help</span>        <span class="t-muted">—</span>  Show this help message' },
-      { html: '  <span class="t-cyan">about</span>       <span class="t-muted">—</span>  Who am I?' },
-      { html: '  <span class="t-cyan">projects</span>    <span class="t-muted">—</span>  List my portfolio projects' },
-      { html: '  <span class="t-cyan">open [id]</span>   <span class="t-muted">—</span>  Open a project by its ID' },
-      { html: '  <span class="t-cyan">contact</span>     <span class="t-muted">—</span>  Get in touch' },
-      { html: '  <span class="t-cyan">clear</span>       <span class="t-muted">—</span>  Clear the terminal' },
-      { html: '  <span class="t-cyan">exit</span>        <span class="t-muted">—</span>  Return to visual portfolio' },
-      { html: '&nbsp;' },
+      { html: '' },
+      { html: ' <span class="t-yellow t-bold">COMANDOS DISPONIBLES</span>' },
+      { html: '' },
+      { html: '   <span class="t-green">help</span>          <span class="t-muted">Muestra este mensaje</span>' },
+      { html: '   <span class="t-green">about</span>         <span class="t-muted">Sobre mí</span>' },
+      { html: '   <span class="t-green">projects</span>      <span class="t-muted">Lista de proyectos del portfolio</span>' },
+      { html: '   <span class="t-green">open</span> <span class="t-cyan">[id]</span>     <span class="t-muted">Abre un proyecto por su ID</span>' },
+      { html: '   <span class="t-green">contact</span>       <span class="t-muted">Contacto y redes</span>' },
+      { html: '   <span class="t-green">clear</span>         <span class="t-muted">Limpia la pantalla</span>' },
+      { html: '   <span class="t-green">exit</span>          <span class="t-muted">Cierra la terminal</span>' },
+      { html: '' },
     ];
   }
 
   function cmdAbout() {
     return [
-      { html: '&nbsp;' },
-      { html: '<span class="t-pink t-bold">┌─ about.md ─────────────────────────────────────┐</span>' },
-      { html: '<span class="t-pink">│</span>' },
-      { html: '<span class="t-pink">│</span>  <span class="t-cyan t-bold">Ramon Riera</span>' },
-      { html: '<span class="t-pink">│</span>  <span class="t-muted">UX Lead · Product Designer · Design Systems</span>' },
-      { html: '<span class="t-pink">│</span>' },
-      { html: '<span class="t-pink">│</span>  <span class="t-white">+8 años diseñando productos digitales para</span>' },
-      { html: '<span class="t-pink">│</span>  <span class="t-white">empresas como</span> <span class="t-yellow">Iberia</span><span class="t-white">,</span> <span class="t-yellow">Banco Sabadell</span><span class="t-white">,</span>' },
-      { html: '<span class="t-pink">│</span>  <span class="t-yellow">ImaginBank</span> <span class="t-white">y</span> <span class="t-yellow">Massimo Dutti</span><span class="t-white">.</span>' },
-      { html: '<span class="t-pink">│</span>' },
-      { html: '<span class="t-pink">│</span>  <span class="t-white">Especializado en</span> <span class="t-green">estrategia de UX</span><span class="t-white">,</span>' },
-      { html: '<span class="t-pink">│</span>  <span class="t-green">Design Systems</span> <span class="t-white">y</span> <span class="t-green">DesignOps</span><span class="t-white">.</span>' },
-      { html: '<span class="t-pink">│</span>' },
-      { html: '<span class="t-pink">│</span>  <span class="t-muted">Currently:</span> <span class="t-orange">UX Lead @ Doctori.com</span>' },
-      { html: '<span class="t-pink">│</span>  <span class="t-muted">Location:</span>  <span class="t-white">Barcelona, ES</span>' },
-      { html: '<span class="t-pink">│</span>' },
-      { html: '<span class="t-pink t-bold">└────────────────────────────────────────────────┘</span>' },
-      { html: '&nbsp;' },
+      { html: '' },
+      { html: ' <span class="t-cyan t-bold">Ramon Riera</span>' },
+      { html: ' <span class="t-muted">UX Lead · Product Designer · Design Systems</span>' },
+      { html: '' },
+      { html: ' <span class="t-white">+8 años diseñando productos digitales para</span>' },
+      { html: ' <span class="t-white">empresas como</span> <span class="t-yellow">Iberia</span><span class="t-white">,</span> <span class="t-yellow">Banco Sabadell</span><span class="t-white">,</span>' },
+      { html: ' <span class="t-yellow">ImaginBank</span> <span class="t-white">y</span> <span class="t-yellow">Massimo Dutti</span><span class="t-white">.</span>' },
+      { html: '' },
+      { html: ' <span class="t-white">Especializado en</span> <span class="t-green">estrategia de UX</span><span class="t-white">,</span>' },
+      { html: ' <span class="t-green">Design Systems</span> <span class="t-white">y</span> <span class="t-green">DesignOps</span><span class="t-white">.</span>' },
+      { html: '' },
+      { html: ' <span class="t-muted">Actualmente:</span>  <span class="t-orange">UX Lead @ Doctori.com</span>' },
+      { html: ' <span class="t-muted">Ubicación:</span>    <span class="t-white">Barcelona, ES</span>' },
+      { html: '' },
     ];
   }
 
   function cmdProjects() {
-    const header = [
-      { html: '&nbsp;' },
-      { html: '<span class="t-yellow t-bold">  ID  │  Project                         │  Year</span>' },
-      { html: '<span class="t-muted">  ────┼──────────────────────────────────┼──────</span>' },
-    ];
-
-    const rows = projectList.map((p) => {
-      const id = String(p.id).padStart(2, ' ');
-      const name = p.title.padEnd(32, ' ');
-      return { html: `  <span class="t-cyan">${id}</span>  <span class="t-muted">│</span>  <span class="t-white">${name}</span><span class="t-muted">│</span>  <span class="t-orange">${p.year}</span>` };
+    var pad = function(s, n) { return s.length >= n ? s.slice(0, n) : s + ' '.repeat(n - s.length); };
+    var rows = projectList.map(function(p) {
+      var id = String(p.id).padStart(2, ' ');
+      return { html: '   <span class="t-cyan">' + id + '</span>  <span class="t-muted">│</span>  <span class="t-white">' + pad(p.title, 30) + '</span>  <span class="t-muted">│</span>  <span class="t-orange">' + p.year + '</span>' };
     });
 
     return [
-      ...header,
-      ...rows,
-      { html: '&nbsp;' },
-      { html: '<span class="t-muted">  Type</span> <span class="t-cyan">open [id]</span> <span class="t-muted">to view a project. Example:</span> <span class="t-green">open 1</span>' },
-      { html: '&nbsp;' },
-    ];
+      { html: '' },
+      { html: '  <span class="t-yellow t-bold"> ID  │  Proyecto                          │  Año</span>' },
+      { html: '  <span class="t-muted">─────┼──────────────────────────────────┼───────</span>' },
+    ].concat(rows).concat([
+      { html: '' },
+      { html: ' <span class="t-muted">Escribe</span> <span class="t-green">open [id]</span> <span class="t-muted">para abrir un proyecto.</span>' },
+      { html: '' },
+    ]);
   }
 
   function cmdOpen(args) {
-    const id = parseInt(args[0], 10);
-    const project = projectList.find((p) => p.id === id);
-
     if (!args[0]) {
-      return [
-        { html: '<span class="t-red">Error:</span> <span class="t-white">Missing project ID.</span> <span class="t-muted">Usage:</span> <span class="t-cyan">open [id]</span>' },
-      ];
+      return [{ html: ' <span class="t-red">Error:</span> <span class="t-white">Falta el ID.</span> <span class="t-muted">Uso:</span> <span class="t-green">open [id]</span>' }];
     }
-
+    var project = projectList.find(function(p) { return p.id === parseInt(args[0], 10); });
     if (!project) {
-      return [
-        { html: `<span class="t-red">Error:</span> <span class="t-white">Project ID "${args[0]}" not found.</span> <span class="t-muted">Type</span> <span class="t-cyan">projects</span> <span class="t-muted">to see available IDs.</span>` },
-      ];
+      return [{ html: ' <span class="t-red">Error:</span> <span class="t-white">ID "' + esc(args[0]) + '" no encontrado.</span> <span class="t-muted">Escribe</span> <span class="t-green">projects</span> <span class="t-muted">para ver los IDs.</span>' }];
     }
-
-    setTimeout(() => {
-      window.location.href = `/projects/${project.slug}`;
-    }, 600);
-
-    return [
-      { html: `<span class="t-green">→</span> <span class="t-white">Opening</span> <span class="t-yellow">${project.title}</span><span class="t-white">...</span>` },
-    ];
+    setTimeout(function() { window.location.href = '/projects/' + project.slug; }, 500);
+    return [{ html: ' <span class="t-green">→</span> <span class="t-white">Abriendo</span> <span class="t-yellow">' + project.title + '</span><span class="t-muted">...</span>' }];
   }
 
   function cmdContact() {
-    const email = siteConfig.email;
-    const linkedin = siteConfig.social.linkedin;
-    const medium = siteConfig.social.medium;
-
+    var e = siteConfig.email;
+    var li = siteConfig.social.linkedin;
+    var md = siteConfig.social.medium;
     return [
-      { html: '&nbsp;' },
-      { html: '<span class="t-yellow t-bold">┌─ contact.sh ────────────────────────────────────┐</span>' },
-      { html: '<span class="t-yellow">│</span>' },
-      { html: `<span class="t-yellow">│</span>  <span class="t-muted">Email:</span>     <a href="mailto:${email}" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">${email}</a>` },
-      { html: `<span class="t-yellow">│</span>  <span class="t-muted">LinkedIn:</span>  <a href="${linkedin}" target="_blank" rel="noopener" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">${linkedin.replace('https://', '')}</a>` },
-      { html: `<span class="t-yellow">│</span>  <span class="t-muted">Medium:</span>    <a href="${medium}" target="_blank" rel="noopener" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">${medium.replace('https://', '')}</a>` },
-      { html: '<span class="t-yellow">│</span>' },
-      { html: '<span class="t-yellow t-bold">└────────────────────────────────────────────────┘</span>' },
-      { html: '&nbsp;' },
+      { html: '' },
+      { html: ' <span class="t-yellow t-bold">CONTACTO</span>' },
+      { html: '' },
+      { html: '   <span class="t-muted">Email</span>      <a href="mailto:' + e + '" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">' + e + '</a>' },
+      { html: '   <span class="t-muted">LinkedIn</span>   <a href="' + li + '" target="_blank" rel="noopener" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">' + li.replace('https://', '') + '</a>' },
+      { html: '   <span class="t-muted">Medium</span>     <a href="' + md + '" target="_blank" rel="noopener" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">' + md.replace('https://', '') + '</a>' },
+      { html: '' },
     ];
   }
 
   function cmdExit() {
-    printInstant('<span class="t-muted">Closing terminal session...</span>');
-    setTimeout(() => {
-      closeTerminal();
-    }, 400);
+    print(' <span class="t-muted">logout</span>');
+    setTimeout(closeTerminal, 300);
     return null;
   }
 
-  function processCommand(raw) {
-    const trimmed = raw.trim();
-    if (!trimmed) return null;
+  // ═══ Processor ═══
 
-    // Echo the command
-    printInstant(`<span class="t-green" style="font-weight:600">visitor@ramonriera:~$</span> <span class="t-white">${escapeHtml(trimmed)}</span>`);
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
-    const parts = trimmed.split(/\s+/);
-    const cmd = parts[0].toLowerCase();
-    const args = parts.slice(1);
+  function processCmd(raw) {
+    var t = raw.trim();
+    if (!t) return null;
+
+    print('<span class="tp-user">ramon</span><span class="tp-at">@</span><span class="tp-host">riera</span><span class="tp-colon">:</span><span class="tp-path">~</span><span class="tp-dollar">$</span> <span class="t-white">' + esc(t) + '</span>');
+
+    var parts = t.split(/\s+/);
+    var cmd = parts[0].toLowerCase();
+    var args = parts.slice(1);
 
     switch (cmd) {
       case 'help':     return cmdHelp();
@@ -391,80 +541,45 @@ const projectList = projects.map((p, i) => ({
       case 'open':     return cmdOpen(args);
       case 'contact':  return cmdContact();
       case 'exit':     return cmdExit();
-      case 'clear':
-        output.innerHTML = '';
-        return null;
+      case 'clear':    output.innerHTML = ''; return null;
       default:
-        return [
-          { html: `<span class="t-red">Command not found:</span> <span class="t-white">${escapeHtml(cmd)}</span>. <span class="t-muted">Type</span> <span class="t-yellow">help</span> <span class="t-muted">for available commands.</span>` },
-        ];
+        return [{ html: ' <span class="t-red">comando no encontrado:</span> <span class="t-white">' + esc(cmd) + '</span>' }];
     }
   }
 
-  function escapeHtml(str) {
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
+  // ═══ Input ═══
 
-  // ── Input handling ──
-
-  input.addEventListener('keydown', (e) => {
-    if (isProcessing) {
-      e.preventDefault();
-      return;
-    }
+  input.addEventListener('keydown', function(e) {
+    if (busy) { e.preventDefault(); return; }
 
     if (e.key === 'Enter') {
       e.preventDefault();
-      const value = input.value;
-
-      if (value.trim()) {
-        commandHistory.push(value);
-      }
-      historyIndex = commandHistory.length;
-
-      const lines = processCommand(value);
+      var v = input.value;
+      if (v.trim()) cmdHistory.push(v);
+      histIdx = cmdHistory.length;
+      var lines = processCmd(v);
       input.value = '';
-      updateCursor();
-
+      syncCursor();
       if (lines) {
-        isProcessing = true;
-        typeLines(lines, () => {
-          isProcessing = false;
-          input.focus();
-          scrollToBottom();
-        });
+        busy = true;
+        typeLines(lines, function() { busy = false; input.focus(); toBottom(); });
       }
-
       return;
     }
 
-    // History navigation
     if (e.key === 'ArrowUp') {
       e.preventDefault();
-      if (historyIndex > 0) {
-        historyIndex--;
-        input.value = commandHistory[historyIndex];
-        updateCursor();
-      }
+      if (histIdx > 0) { histIdx--; input.value = cmdHistory[histIdx]; syncCursor(); }
       return;
     }
-
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      if (historyIndex < commandHistory.length - 1) {
-        historyIndex++;
-        input.value = commandHistory[historyIndex];
-      } else {
-        historyIndex = commandHistory.length;
-        input.value = '';
-      }
-      updateCursor();
-      return;
+      if (histIdx < cmdHistory.length - 1) { histIdx++; input.value = cmdHistory[histIdx]; }
+      else { histIdx = cmdHistory.length; input.value = ''; }
+      syncCursor();
     }
   });
 
-  // ── Global click → focus input ──
-  terminal.addEventListener('click', () => {
-    input.focus();
-  });
+  // ═══ Global focus ═══
+  terminal.addEventListener('click', function() { input.focus(); });
 </script>
