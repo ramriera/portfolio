@@ -429,6 +429,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         ['social', 'Links de redes sociales'],
         ['neofetch', 'Info del sistema'],
         ['cv', 'Descarga el CV'],
+        ['massimo', 'Case study: Massimo Dutti'],
         ['ls', 'Lista archivos del portfolio'],
         ['clear', 'Limpia la consola'],
         ['reset', 'Reinicia la terminal'],
@@ -672,6 +673,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         { perm: '-rw-r--r--', size: '320B', name: 'social.yaml',     color: 'function' },
         { perm: '-rw-r--r--', size: '2.4M', name: 'cv.pdf',          color: 'accent' },
         { perm: '-rwxr-xr-x', size: '64B',  name: 'neofetch.sh',    color: 'string' },
+        { perm: '-rw-r--r--', size: '3.6K', name: 'massimo.md',     color: 'accent' },
       ];
 
       if (a === '-la' || a === '-al' || a === '-l') {
@@ -696,6 +698,59 @@ const navSections: Record<string, { desc: string; path: string }> = {
       return ['&nbsp;', row, '&nbsp;'];
     }
 
+    function cmdMassimo() {
+      var line62 = c('comment', '─'.repeat(62));
+      var out = [
+        '&nbsp;',
+        '  ' + c('accent', '▓▓ PROJECT FILE: MASSIMO DUTTI'),
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'TITLE'),
+        '  Massimo Dutti — Premium E-commerce Experience',
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'ROLE'),
+        '  ' + c('muted', 'Lead Product Designer · UX Strategist & Service Designer'),
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'CHALLENGE'),
+        '  Rediseñar la experiencia de ' + c('keyword', '"Reserva en Tienda"') + ' de Massimo Dutti:',
+        '  de ' + c('accent', '8 pasos a 4') + ', eliminando las fricciones que provocaban',
+        '  abandono en un canal omnicanal con alto potencial de conversión.',
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'SOLUTION'),
+        '  ' + c('muted', '·') + ' Sistema de diseño ' + c('keyword', 'minimalista') + ' alineado con la marca',
+        '  ' + c('muted', '·') + ' CTA dual visible sin scroll en ficha de producto',
+        '  ' + c('muted', '·') + ' Checkout en ' + c('keyword', 'un solo paso') + ' sin registro obligatorio',
+        '  ' + c('muted', '·') + ' Tracking in-app con estados progresivos + ' + c('keyword', 'Apple/Google Wallet'),
+        '  ' + c('muted', '·') + ' Service Design: poste QR para recogida autónoma',
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'RESULTS'),
+        '  ' + c('accent', '+25%') + ' tasa de conversión',
+        '  ' + c('accent', '−50%') + ' pasos en el flujo de reserva (8 → 4)',
+        '  ' + c('accent', '+40%') + ' mejora en tiempos de carga',
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('string', 'TECH STACK'),
+        '  ' + c('function', 'UX Strategy') + ' ' + c('muted', '·') + ' ' + c('function', 'Service Design') + ' ' + c('muted', '·') + ' ' + c('function', 'Research') + ' ' + c('muted', '·') + ' ' + c('function', 'Prototyping'),
+        '&nbsp;',
+        '  ' + line62,
+        '&nbsp;',
+        '  ' + c('function', 'URL') + '        ' + c('string', '/projects/massimo-dutti-conversion'),
+        '&nbsp;',
+        '  ' + c('comment', 'Tip:') + ' ' + c('function', 'open massimo') + ' ' + c('comment', '→ abrir proyecto en el navegador'),
+        '&nbsp;',
+      ];
+      return out;
+    }
+
     function cmdCv() {
       setTimeout(function() { window.open('/docs/CV-Ramon-Riera-Depares.pdf', '_blank'); }, 800);
       return [
@@ -717,11 +772,12 @@ const navSections: Record<string, { desc: string; path: string }> = {
       'about.md': 'about', 'projects.exe': 'projects', 'experience.log': 'experience',
       'education.dat': 'education', 'skills.json': 'skills', 'contact.link': 'social',
       'social.yaml': 'social', 'cv.pdf': 'cv', 'neofetch.sh': 'neofetch',
+      'massimo.md': 'massimo',
     };
 
     var commandMap = {
       help: cmdHelp, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
-      open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial,
+      open: cmdOpen, view: cmdOpen, skills: cmdSkills, social: cmdSocial, massimo: cmdMassimo,
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
       ls: cmdLs, exit: cmdExit,
       clear: function() {
