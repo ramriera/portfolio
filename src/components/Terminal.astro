@@ -9,28 +9,32 @@ const projectList = projects.map((p, i) => ({
 }));
 ---
 
-<!-- Terminal overlay — hidden by default, pure black fullscreen -->
-<div id="terminal" class="terminal-overlay">
-  <!-- CRT Scanlines — topmost visual layer, no interaction -->
-  <div class="terminal-scanlines" aria-hidden="true"></div>
+<!-- Terminal overlay — hidden by default -->
+<div id="terminal" class="fixed inset-0 z-[9999] bg-black overflow-hidden opacity-0 pointer-events-none transition-opacity duration-500 ease-out">
+  <!-- CRT Scanlines overlay -->
+  <div class="pointer-events-none absolute inset-0 z-10 scanlines" aria-hidden="true"></div>
 
-  <!-- Scrollable content area — flex-col, starts top-left -->
-  <div id="terminal-scroll" class="terminal-body">
+  <!-- Terminal content -->
+  <div
+    id="terminal-scroll"
+    class="relative z-0 w-full h-full overflow-y-auto p-8 md:p-12 font-mono text-sm md:text-base leading-relaxed"
+  >
     <!-- Output history -->
     <div id="terminal-output"></div>
 
     <!-- Input line -->
-    <div class="terminal-input-row" id="terminal-input-line">
-      <span class="terminal-prompt">ramon@riera:~$</span>
-      <div class="terminal-input-wrap">
+    <div class="flex items-baseline gap-0" id="terminal-input-line">
+      <span class="terminal-prompt shrink-0">visitor@ramonriera:~$&nbsp;</span>
+      <div class="relative flex-1 min-w-0">
         <input
           id="terminal-input"
           type="text"
-          class="terminal-input"
+          class="w-full bg-transparent border-none outline-none terminal-text caret-transparent"
           spellcheck="false"
           autocomplete="off"
           autocapitalize="off"
         />
+        <!-- Visual cursor -->
         <span id="terminal-cursor" class="terminal-cursor" aria-hidden="true"></span>
       </div>
     </div>
@@ -38,178 +42,85 @@ const projectList = projects.map((p, i) => ({
 </div>
 
 <style>
-  /* ═══════════════════════════════════════
-     PURE TERMINAL — Clean & Minimal
-     ═══════════════════════════════════════ */
-
-  .terminal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: #000000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-  }
-
-  .terminal-overlay.is-open {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* ── Scrollable body — content flows top-left ── */
-  .terminal-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    padding: 2rem;
-    scroll-padding-bottom: 2rem;
-  }
-
-  @media (min-width: 768px) {
-    .terminal-body {
-      padding: 3rem;
-    }
-  }
-
-  .terminal-body::-webkit-scrollbar {
-    width: 4px;
-  }
-  .terminal-body::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .terminal-body::-webkit-scrollbar-thumb {
-    background: #1a1a1a;
-    border-radius: 2px;
-  }
-
-  /* ── Output ── */
-  #terminal-output {
-    width: 100%;
-    color: #e0e0e0;
-    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace;
-    font-size: 0.8125rem;
-    line-height: 1.7;
-    white-space: pre-wrap;
-    word-break: break-word;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  @media (min-width: 768px) {
-    #terminal-output {
-      font-size: 0.875rem;
-    }
-  }
-
-  /* ── Input row ── */
-  .terminal-input-row {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    width: 100%;
-    margin-top: 0.125rem;
-  }
-
+  /* ── Terminal base colors ── */
   .terminal-prompt {
     color: #50fa7b;
-    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-    font-size: 0.8125rem;
     font-weight: 600;
-    white-space: nowrap;
-    flex-shrink: 0;
-    user-select: none;
   }
 
-  @media (min-width: 768px) {
-    .terminal-prompt {
-      font-size: 0.875rem;
-    }
+  .terminal-text {
+    color: #f8f8f2;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
   }
 
-  .terminal-input-wrap {
-    position: relative;
-    flex: 1;
-    min-width: 0;
+  #terminal-output {
+    color: #f8f8f2;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
-  .terminal-input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #e0e0e0;
-    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-    font-size: 0.8125rem;
-    line-height: 1.7;
-    caret-color: transparent;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  @media (min-width: 768px) {
-    .terminal-input {
-      font-size: 0.875rem;
-    }
-  }
-
-  /* ── Block cursor ── */
+  /* ── Blinking cursor ── */
   .terminal-cursor {
     display: inline-block;
-    width: 0.55em;
-    height: 1.15em;
+    width: 8px;
+    height: 1.2em;
     background: #50fa7b;
     position: absolute;
-    top: 0.15em;
-    left: 0;
-    animation: cursor-blink 1s step-end infinite;
+    top: 0.1em;
+    animation: blink 1s step-end infinite;
     pointer-events: none;
   }
 
-  @keyframes cursor-blink {
+  @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
 
   /* ── CRT Scanlines ── */
-  .terminal-scanlines {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    pointer-events: none;
+  .scanlines {
     background: repeating-linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.12) 0px,
-      rgba(0, 0, 0, 0.12) 1px,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 1px,
       transparent 1px,
       transparent 3px
     );
-    mix-blend-mode: multiply;
   }
 
-  /* ── Typewriter line fade-in ── */
+  /* ── Scrollbar ── */
+  #terminal-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  #terminal-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  #terminal-scroll::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+  }
+
+  /* ── Typewriter lines appear with subtle fade ── */
   .tw-line {
     opacity: 0;
-    animation: tw-in 0.04s ease forwards;
+    animation: tw-appear 0.05s ease forwards;
   }
 
-  @keyframes tw-in {
+  @keyframes tw-appear {
     to { opacity: 1; }
   }
 
-  /* ── Semantic colors ── */
-  .t-green  { color: #50fa7b; }
-  .t-cyan   { color: #8be9fd; }
+  /* ── Color classes for output ── */
+  .t-green { color: #50fa7b; }
+  .t-cyan { color: #8be9fd; }
   .t-yellow { color: #f1fa8c; }
-  .t-pink   { color: #ff79c6; }
+  .t-pink { color: #ff79c6; }
   .t-orange { color: #ffb86c; }
-  .t-muted  { color: #555e6b; }
-  .t-white  { color: #e0e0e0; }
-  .t-red    { color: #ff5555; }
-  .t-bold   { font-weight: 700; }
+  .t-muted { color: #6272a4; }
+  .t-white { color: #f8f8f2; }
+  .t-red { color: #ff5555; }
+  .t-bold { font-weight: 700; }
+  .t-dim { opacity: 0.5; }
 </style>
 
 <script define:vars={{ projectList, siteConfig }}>
@@ -217,248 +128,343 @@ const projectList = projects.map((p, i) => ({
   const output = document.getElementById('terminal-output');
   const input = document.getElementById('terminal-input');
   const cursor = document.getElementById('terminal-cursor');
-  const scrollEl = document.getElementById('terminal-scroll');
+  const scroll = document.getElementById('terminal-scroll');
 
   // ── State ──
-  const cmdHistory = [];
-  let histIdx = -1;
-  let busy = false;
+  const commandHistory = [];
+  let historyIndex = -1;
+  let isProcessing = false;
+  let hasBooted = false;
 
-  // ═══ Open / Close ═══
+  // ── Open / Close ──
 
   function openTerminal() {
-    output.innerHTML = '';
-    input.value = '';
-    terminal.classList.add('is-open');
+    terminal.classList.remove('opacity-0', 'pointer-events-none');
+    terminal.classList.add('opacity-100');
     document.body.style.overflow = 'hidden';
 
-    busy = true;
-    typeLines(motd, () => {
-      busy = false;
-      input.focus();
-      syncCursor();
-    });
+    // Boot sequence on first open, or reset on subsequent opens
+    if (!hasBooted) {
+      hasBooted = true;
+      isProcessing = true;
+      typeLines(motd, () => {
+        isProcessing = false;
+        input.focus();
+        updateCursor();
+      });
+    } else {
+      // Re-opening: clear and re-show MOTD
+      output.innerHTML = '';
+      input.value = '';
+      isProcessing = true;
+      typeLines(motd, () => {
+        isProcessing = false;
+        input.focus();
+        updateCursor();
+      });
+    }
   }
 
   function closeTerminal() {
-    terminal.classList.remove('is-open');
+    terminal.classList.add('opacity-0', 'pointer-events-none');
+    terminal.classList.remove('opacity-100');
     document.body.style.overflow = '';
   }
 
+  // Expose globally so the toggle button can call it
   window.openTerminal = openTerminal;
   window.closeTerminal = closeTerminal;
 
-  // ═══ Cursor ═══
-
-  let _cw = null;
-
-  function charWidth() {
-    if (_cw) return _cw;
-    const m = document.createElement('span');
-    m.style.cssText = `font-family:'JetBrains Mono',ui-monospace,monospace;font-size:${getComputedStyle(input).fontSize};position:absolute;visibility:hidden`;
-    m.textContent = 'M';
-    document.body.appendChild(m);
-    _cw = m.getBoundingClientRect().width;
-    document.body.removeChild(m);
-    return _cw;
-  }
-
-  function syncCursor() {
+  // ── Cursor position tracking ──
+  function updateCursor() {
     if (!input || !cursor) return;
-    cursor.style.left = `${input.selectionStart * charWidth()}px`;
+    const charWidth = getCharWidth();
+    cursor.style.left = `${input.selectionStart * charWidth}px`;
   }
 
-  input.addEventListener('input', syncCursor);
-  input.addEventListener('click', syncCursor);
-  input.addEventListener('keyup', syncCursor);
+  let _charWidth = null;
+  function getCharWidth() {
+    if (_charWidth) return _charWidth;
+    const span = document.createElement('span');
+    span.style.fontFamily = "'JetBrains Mono', ui-monospace, monospace";
+    span.style.fontSize = getComputedStyle(input).fontSize;
+    span.style.position = 'absolute';
+    span.style.visibility = 'hidden';
+    span.textContent = 'M';
+    document.body.appendChild(span);
+    _charWidth = span.getBoundingClientRect().width;
+    document.body.removeChild(span);
+    return _charWidth;
+  }
 
-  // ═══ Output helpers ═══
+  input.addEventListener('input', updateCursor);
+  input.addEventListener('click', updateCursor);
+  input.addEventListener('keyup', updateCursor);
 
-  function typeLines(lines, cb) {
+  // ── Typewriter effect ──
+  function typeLines(lines, callback) {
     let i = 0;
+    const baseDelay = 18;
+
     function next() {
-      if (i >= lines.length) { cb?.(); return; }
+      if (i >= lines.length) {
+        if (callback) callback();
+        return;
+      }
+
+      const line = lines[i];
       const div = document.createElement('div');
       div.className = 'tw-line';
-      const l = lines[i];
-      if (typeof l === 'string') div.textContent = l;
-      else div.innerHTML = l.html;
+      div.style.animationDelay = '0ms';
+
+      if (typeof line === 'string') {
+        div.textContent = line;
+      } else {
+        div.innerHTML = line.html;
+      }
+
       output.appendChild(div);
-      toBottom();
+      scrollToBottom();
       i++;
-      setTimeout(next, 16 + Math.random() * 14);
+      setTimeout(next, baseDelay + Math.random() * 12);
     }
+
     next();
   }
 
-  function print(html) {
-    const d = document.createElement('div');
-    d.innerHTML = html;
-    output.appendChild(d);
-    toBottom();
+  function printInstant(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    output.appendChild(div);
+    scrollToBottom();
   }
 
-  function toBottom() {
-    requestAnimationFrame(() => { scrollEl.scrollTop = scrollEl.scrollHeight; });
+  function scrollToBottom() {
+    requestAnimationFrame(() => {
+      scroll.scrollTop = scroll.scrollHeight;
+    });
   }
 
-  // ═══ MOTD ═══
-
+  // ── MOTD (Message of the Day) ──
   const motd = [
-    { html: '' },
-    { html: '<span class="t-green t-bold"> ramon@riera — portfolio v1.0</span>' },
-    { html: '<span class="t-muted"> ────────────────────────────────────────</span>' },
-    { html: '' },
-    { html: '<span class="t-white"> Welcome. Type</span> <span class="t-yellow t-bold">help</span> <span class="t-white">to see available commands.</span>' },
-    { html: '<span class="t-white"> Type</span> <span class="t-yellow t-bold">exit</span> <span class="t-white">to return to the visual portfolio.</span>' },
-    { html: '' },
+    { html: '<span class="t-green t-bold">╔══════════════════════════════════════════════════╗</span>' },
+    { html: '<span class="t-green t-bold">║</span>                                                  <span class="t-green t-bold">║</span>' },
+    { html: '<span class="t-green t-bold">║</span>   <span class="t-cyan t-bold">Ramon Riera</span> — UX Lead & Product Designer     <span class="t-green t-bold">║</span>' },
+    { html: '<span class="t-green t-bold">║</span>   <span class="t-muted">ramonriera.design</span>                           <span class="t-green t-bold">║</span>' },
+    { html: '<span class="t-green t-bold">║</span>                                                  <span class="t-green t-bold">║</span>' },
+    { html: '<span class="t-green t-bold">╚══════════════════════════════════════════════════╝</span>' },
+    { html: '&nbsp;' },
+    { html: '<span class="t-muted">Welcome to my interactive portfolio. Type</span> <span class="t-yellow">help</span> <span class="t-muted">to get started.</span>' },
+    { html: '<span class="t-muted">Type</span> <span class="t-yellow">exit</span> <span class="t-muted">to return to the visual portfolio.</span>' },
+    { html: '&nbsp;' },
   ];
 
-  // ═══ Commands ═══
+  // ── Commands ──
 
   function cmdHelp() {
     return [
-      { html: '' },
-      { html: '<span class="t-yellow t-bold"> COMMANDS</span>' },
-      { html: '' },
-      { html: '   <span class="t-green">help</span>          <span class="t-muted">Show this message</span>' },
-      { html: '   <span class="t-green">about</span>         <span class="t-muted">About me</span>' },
-      { html: '   <span class="t-green">projects</span>      <span class="t-muted">List portfolio projects</span>' },
-      { html: '   <span class="t-green">open</span> <span class="t-cyan">[id]</span>     <span class="t-muted">Open a project</span>' },
-      { html: '   <span class="t-green">contact</span>       <span class="t-muted">Get in touch</span>' },
-      { html: '   <span class="t-green">clear</span>         <span class="t-muted">Clear screen</span>' },
-      { html: '   <span class="t-green">exit</span>          <span class="t-muted">Close terminal</span>' },
-      { html: '' },
+      { html: '&nbsp;' },
+      { html: '<span class="t-yellow t-bold">Available commands:</span>' },
+      { html: '&nbsp;' },
+      { html: '  <span class="t-cyan">help</span>        <span class="t-muted">—</span>  Show this help message' },
+      { html: '  <span class="t-cyan">about</span>       <span class="t-muted">—</span>  Who am I?' },
+      { html: '  <span class="t-cyan">projects</span>    <span class="t-muted">—</span>  List my portfolio projects' },
+      { html: '  <span class="t-cyan">open [id]</span>   <span class="t-muted">—</span>  Open a project by its ID' },
+      { html: '  <span class="t-cyan">contact</span>     <span class="t-muted">—</span>  Get in touch' },
+      { html: '  <span class="t-cyan">clear</span>       <span class="t-muted">—</span>  Clear the terminal' },
+      { html: '  <span class="t-cyan">exit</span>        <span class="t-muted">—</span>  Return to visual portfolio' },
+      { html: '&nbsp;' },
     ];
   }
 
   function cmdAbout() {
     return [
-      { html: '' },
-      { html: ' <span class="t-cyan t-bold">Ramon Riera</span>' },
-      { html: ' <span class="t-muted">UX Lead · Product Designer · Design Systems</span>' },
-      { html: '' },
-      { html: ' <span class="t-white">+8 años diseñando productos digitales para</span>' },
-      { html: ' <span class="t-white">empresas como</span> <span class="t-yellow">Iberia</span><span class="t-white">,</span> <span class="t-yellow">Banco Sabadell</span><span class="t-white">,</span>' },
-      { html: ' <span class="t-yellow">ImaginBank</span> <span class="t-white">y</span> <span class="t-yellow">Massimo Dutti</span><span class="t-white">.</span>' },
-      { html: '' },
-      { html: ' <span class="t-white">Especializado en</span> <span class="t-green">estrategia de UX</span><span class="t-white">,</span>' },
-      { html: ' <span class="t-green">Design Systems</span> <span class="t-white">y</span> <span class="t-green">DesignOps</span><span class="t-white">.</span>' },
-      { html: '' },
-      { html: ' <span class="t-muted">Currently:</span>  <span class="t-orange">UX Lead @ Doctori.com</span>' },
-      { html: ' <span class="t-muted">Location:</span>   <span class="t-white">Barcelona, ES</span>' },
-      { html: '' },
+      { html: '&nbsp;' },
+      { html: '<span class="t-pink t-bold">┌─ about.md ─────────────────────────────────────┐</span>' },
+      { html: '<span class="t-pink">│</span>' },
+      { html: '<span class="t-pink">│</span>  <span class="t-cyan t-bold">Ramon Riera</span>' },
+      { html: '<span class="t-pink">│</span>  <span class="t-muted">UX Lead · Product Designer · Design Systems</span>' },
+      { html: '<span class="t-pink">│</span>' },
+      { html: '<span class="t-pink">│</span>  <span class="t-white">+8 años diseñando productos digitales para</span>' },
+      { html: '<span class="t-pink">│</span>  <span class="t-white">empresas como</span> <span class="t-yellow">Iberia</span><span class="t-white">,</span> <span class="t-yellow">Banco Sabadell</span><span class="t-white">,</span>' },
+      { html: '<span class="t-pink">│</span>  <span class="t-yellow">ImaginBank</span> <span class="t-white">y</span> <span class="t-yellow">Massimo Dutti</span><span class="t-white">.</span>' },
+      { html: '<span class="t-pink">│</span>' },
+      { html: '<span class="t-pink">│</span>  <span class="t-white">Especializado en</span> <span class="t-green">estrategia de UX</span><span class="t-white">,</span>' },
+      { html: '<span class="t-pink">│</span>  <span class="t-green">Design Systems</span> <span class="t-white">y</span> <span class="t-green">DesignOps</span><span class="t-white">.</span>' },
+      { html: '<span class="t-pink">│</span>' },
+      { html: '<span class="t-pink">│</span>  <span class="t-muted">Currently:</span> <span class="t-orange">UX Lead @ Doctori.com</span>' },
+      { html: '<span class="t-pink">│</span>  <span class="t-muted">Location:</span>  <span class="t-white">Barcelona, ES</span>' },
+      { html: '<span class="t-pink">│</span>' },
+      { html: '<span class="t-pink t-bold">└────────────────────────────────────────────────┘</span>' },
+      { html: '&nbsp;' },
     ];
   }
 
   function cmdProjects() {
-    const pad = (s, n) => s.length >= n ? s.slice(0, n) : s + ' '.repeat(n - s.length);
+    const header = [
+      { html: '&nbsp;' },
+      { html: '<span class="t-yellow t-bold">  ID  │  Project                         │  Year</span>' },
+      { html: '<span class="t-muted">  ────┼──────────────────────────────────┼──────</span>' },
+    ];
+
     const rows = projectList.map((p) => {
       const id = String(p.id).padStart(2, ' ');
-      return { html: `   <span class="t-cyan">${id}</span>  <span class="t-muted">│</span>  <span class="t-white">${pad(p.title, 30)}</span>  <span class="t-muted">│</span>  <span class="t-orange">${p.year}</span>` };
+      const name = p.title.padEnd(32, ' ');
+      return { html: `  <span class="t-cyan">${id}</span>  <span class="t-muted">│</span>  <span class="t-white">${name}</span><span class="t-muted">│</span>  <span class="t-orange">${p.year}</span>` };
     });
 
     return [
-      { html: '' },
-      { html: '  <span class="t-yellow t-bold"> ID  │  Project                          │  Year</span>' },
-      { html: '  <span class="t-muted">─────┼──────────────────────────────────┼───────</span>' },
+      ...header,
       ...rows,
-      { html: '' },
-      { html: ' <span class="t-muted">Type</span> <span class="t-green">open [id]</span> <span class="t-muted">to view a project.</span>' },
-      { html: '' },
+      { html: '&nbsp;' },
+      { html: '<span class="t-muted">  Type</span> <span class="t-cyan">open [id]</span> <span class="t-muted">to view a project. Example:</span> <span class="t-green">open 1</span>' },
+      { html: '&nbsp;' },
     ];
   }
 
   function cmdOpen(args) {
+    const id = parseInt(args[0], 10);
+    const project = projectList.find((p) => p.id === id);
+
     if (!args[0]) {
-      return [{ html: ' <span class="t-red">Error:</span> <span class="t-white">Missing ID.</span> <span class="t-muted">Usage:</span> <span class="t-green">open [id]</span>' }];
+      return [
+        { html: '<span class="t-red">Error:</span> <span class="t-white">Missing project ID.</span> <span class="t-muted">Usage:</span> <span class="t-cyan">open [id]</span>' },
+      ];
     }
-    const project = projectList.find((p) => p.id === parseInt(args[0], 10));
+
     if (!project) {
-      return [{ html: ` <span class="t-red">Error:</span> <span class="t-white">ID "${esc(args[0])}" not found.</span> <span class="t-muted">Type</span> <span class="t-green">projects</span> <span class="t-muted">to list IDs.</span>` }];
+      return [
+        { html: `<span class="t-red">Error:</span> <span class="t-white">Project ID "${args[0]}" not found.</span> <span class="t-muted">Type</span> <span class="t-cyan">projects</span> <span class="t-muted">to see available IDs.</span>` },
+      ];
     }
-    setTimeout(() => { window.location.href = `/projects/${project.slug}`; }, 500);
-    return [{ html: ` <span class="t-green">→</span> <span class="t-white">Opening</span> <span class="t-yellow">${project.title}</span><span class="t-muted">...</span>` }];
+
+    setTimeout(() => {
+      window.location.href = `/projects/${project.slug}`;
+    }, 600);
+
+    return [
+      { html: `<span class="t-green">→</span> <span class="t-white">Opening</span> <span class="t-yellow">${project.title}</span><span class="t-white">...</span>` },
+    ];
   }
 
   function cmdContact() {
-    const e = siteConfig.email;
-    const li = siteConfig.social.linkedin;
-    const md = siteConfig.social.medium;
+    const email = siteConfig.email;
+    const linkedin = siteConfig.social.linkedin;
+    const medium = siteConfig.social.medium;
+
     return [
-      { html: '' },
-      { html: ' <span class="t-yellow t-bold">CONTACT</span>' },
-      { html: '' },
-      { html: `   <span class="t-muted">Email</span>      <a href="mailto:${e}" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">${e}</a>` },
-      { html: `   <span class="t-muted">LinkedIn</span>   <a href="${li}" target="_blank" rel="noopener" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">${li.replace('https://', '')}</a>` },
-      { html: `   <span class="t-muted">Medium</span>     <a href="${md}" target="_blank" rel="noopener" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">${md.replace('https://', '')}</a>` },
-      { html: '' },
+      { html: '&nbsp;' },
+      { html: '<span class="t-yellow t-bold">┌─ contact.sh ────────────────────────────────────┐</span>' },
+      { html: '<span class="t-yellow">│</span>' },
+      { html: `<span class="t-yellow">│</span>  <span class="t-muted">Email:</span>     <a href="mailto:${email}" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">${email}</a>` },
+      { html: `<span class="t-yellow">│</span>  <span class="t-muted">LinkedIn:</span>  <a href="${linkedin}" target="_blank" rel="noopener" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">${linkedin.replace('https://', '')}</a>` },
+      { html: `<span class="t-yellow">│</span>  <span class="t-muted">Medium:</span>    <a href="${medium}" target="_blank" rel="noopener" class="t-cyan" style="text-decoration:underline;text-underline-offset:3px">${medium.replace('https://', '')}</a>` },
+      { html: '<span class="t-yellow">│</span>' },
+      { html: '<span class="t-yellow t-bold">└────────────────────────────────────────────────┘</span>' },
+      { html: '&nbsp;' },
     ];
   }
 
   function cmdExit() {
-    print(' <span class="t-muted">logout</span>');
-    setTimeout(closeTerminal, 300);
+    printInstant('<span class="t-muted">Closing terminal session...</span>');
+    setTimeout(() => {
+      closeTerminal();
+    }, 400);
     return null;
   }
 
-  // ═══ Processor ═══
+  function processCommand(raw) {
+    const trimmed = raw.trim();
+    if (!trimmed) return null;
 
-  function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    // Echo the command
+    printInstant(`<span class="t-green" style="font-weight:600">visitor@ramonriera:~$</span> <span class="t-white">${escapeHtml(trimmed)}</span>`);
 
-  function processCmd(raw) {
-    const t = raw.trim();
-    if (!t) return null;
+    const parts = trimmed.split(/\s+/);
+    const cmd = parts[0].toLowerCase();
+    const args = parts.slice(1);
 
-    print(`<span class="t-green" style="font-weight:600">ramon@riera:~$</span> <span class="t-white">${esc(t)}</span>`);
-
-    const [cmd, ...args] = t.split(/\s+/);
-    switch (cmd.toLowerCase()) {
+    switch (cmd) {
       case 'help':     return cmdHelp();
       case 'about':    return cmdAbout();
       case 'projects': return cmdProjects();
       case 'open':     return cmdOpen(args);
       case 'contact':  return cmdContact();
       case 'exit':     return cmdExit();
-      case 'clear':    output.innerHTML = ''; return null;
+      case 'clear':
+        output.innerHTML = '';
+        return null;
       default:
-        return [{ html: ` <span class="t-red">command not found:</span> <span class="t-white">${esc(cmd)}</span>` }];
+        return [
+          { html: `<span class="t-red">Command not found:</span> <span class="t-white">${escapeHtml(cmd)}</span>. <span class="t-muted">Type</span> <span class="t-yellow">help</span> <span class="t-muted">for available commands.</span>` },
+        ];
     }
   }
 
-  // ═══ Input ═══
+  function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // ── Input handling ──
 
   input.addEventListener('keydown', (e) => {
-    if (busy) { e.preventDefault(); return; }
+    if (isProcessing) {
+      e.preventDefault();
+      return;
+    }
 
     if (e.key === 'Enter') {
       e.preventDefault();
-      const v = input.value;
-      if (v.trim()) cmdHistory.push(v);
-      histIdx = cmdHistory.length;
-      const lines = processCmd(v);
+      const value = input.value;
+
+      if (value.trim()) {
+        commandHistory.push(value);
+      }
+      historyIndex = commandHistory.length;
+
+      const lines = processCommand(value);
       input.value = '';
-      syncCursor();
+      updateCursor();
+
       if (lines) {
-        busy = true;
-        typeLines(lines, () => { busy = false; input.focus(); toBottom(); });
+        isProcessing = true;
+        typeLines(lines, () => {
+          isProcessing = false;
+          input.focus();
+          scrollToBottom();
+        });
+      }
+
+      return;
+    }
+
+    // History navigation
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        historyIndex--;
+        input.value = commandHistory[historyIndex];
+        updateCursor();
       }
       return;
     }
 
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (histIdx > 0) { histIdx--; input.value = cmdHistory[histIdx]; syncCursor(); }
-      return;
-    }
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      if (histIdx < cmdHistory.length - 1) { histIdx++; input.value = cmdHistory[histIdx]; }
-      else { histIdx = cmdHistory.length; input.value = ''; }
-      syncCursor();
+      if (historyIndex < commandHistory.length - 1) {
+        historyIndex++;
+        input.value = commandHistory[historyIndex];
+      } else {
+        historyIndex = commandHistory.length;
+        input.value = '';
+      }
+      updateCursor();
+      return;
     }
   });
 
-  // ═══ Global focus ═══
-  terminal.addEventListener('click', () => input.focus());
+  // ── Global click → focus input ──
+  terminal.addEventListener('click', () => {
+    input.focus();
+  });
 </script>
