@@ -664,7 +664,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
       line('&nbsp;');
       line(c('comment', '  ' + '─'.repeat(50)));
       line('&nbsp;');
-      line('  Escribe ' + c('function', 'm') + c('muted', ' → menu') + '  ' + c('muted', '[ESC]') + ' cerrar terminal');
+      line('  ' + c('muted', '[M]') + ' → ' + '<span style="color:#e6edf3">menu</span>' + '    ' + c('muted', '[ESC]') + ' → ' + '<span style="color:#e6edf3">cerrar terminal</span>');
       line('&nbsp;');
       scroll();
     }
@@ -839,22 +839,22 @@ const navSections: Record<string, { desc: string; path: string }> = {
       if (a === 'projects' || a === 'proyectos') return cmdProjects();
 
       var files = [
-        { perm: '-rw-r--r--', size: '4.2K', name: 'about.md',       color: 'keyword' },
-        { perm: '-rwxr-xr-x', size: '12K',  name: 'projects.exe',   color: 'string' },
-        { perm: '-rw-r--r--', size: '890B', name: 'experience.log',  color: 'keyword' },
-        { perm: '-rw-r--r--', size: '512B', name: 'education.dat',   color: 'keyword' },
-        { perm: '-rw-r--r--', size: '1.8K', name: 'skills.json',     color: 'constant' },
-        { perm: '-rw-r--r--', size: '256B', name: 'contact.link',    color: 'function' },
-        { perm: '-rw-r--r--', size: '320B', name: 'social.yaml',     color: 'function' },
-        { perm: '-rw-r--r--', size: '2.4M', name: 'cv.pdf',          color: 'accent' },
-        { perm: '-rwxr-xr-x', size: '64B',  name: 'neofetch.sh',    color: 'string' },
-        { perm: '-rw-r--r--', size: '3.6K', name: 'massimo.md',     color: 'accent' },
-        { perm: '-rwxr-xr-x', size: '2.8K', name: 'movefast.sh',    color: 'string' },
-        { perm: '-rw-r--r--', size: '2.1K', name: 'globalhelping.md', color: 'keyword' },
-        { perm: '-rw-r--r--', size: '4.8K', name: 'sabadell.dat',   color: 'function' },
-        { perm: '-rw-r--r--', size: '3.2K', name: 'imaginbank.log', color: 'accent' },
-        { perm: '-rw-r--r--', size: '4.1K', name: 'iberia.md',      color: 'keyword' },
-        { perm: '-rwxr-xr-x', size: '5.6K', name: 'solotemazos.sh', color: 'string' },
+        { perm: '-rw-r--r--', size: '4.2K', name: 'about.md',          color: 'keyword' },
+        { perm: '-rwxr-xr-x', size: '12K',  name: 'projects.exe',      color: 'string' },
+        { perm: '-rw-r--r--', size: '890B', name: 'experience.log',     color: 'constant' },
+        { perm: '-rw-r--r--', size: '512B', name: 'education.dat',      color: 'constant' },
+        { perm: '-rw-r--r--', size: '1.8K', name: 'skills.json',        color: 'constant' },
+        { perm: '-rw-r--r--', size: '256B', name: 'contact.link',       color: 'function' },
+        { perm: '-rw-r--r--', size: '320B', name: 'social.yaml',        color: 'function' },
+        { perm: '-rw-r--r--', size: '2.4M', name: 'cv.pdf',             color: 'accent' },
+        { perm: '-rwxr-xr-x', size: '64B',  name: 'neofetch.sh',       color: 'string' },
+        { perm: '-rw-r--r--', size: '3.6K', name: 'massimo.md',         color: 'keyword' },
+        { perm: '-rw-r--r--', size: '2.8K', name: 'movefast.md',        color: 'keyword' },
+        { perm: '-rw-r--r--', size: '2.1K', name: 'globalhelping.md',   color: 'keyword' },
+        { perm: '-rw-r--r--', size: '4.8K', name: 'sabadell.md',        color: 'keyword' },
+        { perm: '-rw-r--r--', size: '3.2K', name: 'imaginbank.md',      color: 'keyword' },
+        { perm: '-rw-r--r--', size: '4.1K', name: 'iberia.md',          color: 'keyword' },
+        { perm: '-rw-r--r--', size: '5.6K', name: 'solotemazos.md',     color: 'keyword' },
       ];
 
       if (a === '-la' || a === '-al' || a === '-l') {
@@ -1208,12 +1208,12 @@ const navSections: Record<string, { desc: string; path: string }> = {
       'education.dat': 'education', 'skills.json': 'skills', 'contact.link': 'social',
       'social.yaml': 'social', 'cv.pdf': 'cv', 'neofetch.sh': 'neofetch',
       'massimo.md': 'massimo',
-      'movefast.sh': 'movefast',
+      'movefast.md': 'movefast',
       'globalhelping.md': 'globalhelping',
-      'sabadell.dat': 'sabadell',
-      'imaginbank.log': 'imaginbank',
+      'sabadell.md': 'sabadell',
+      'imaginbank.md': 'imaginbank',
       'iberia.md': 'iberia',
-      'solotemazos.sh': 'solotemazos',
+      'solotemazos.md': 'solotemazos',
     };
 
     var commandMap = {
