@@ -93,6 +93,11 @@ const navSections: Record<string, { desc: string; path: string }> = {
     pointer-events: auto;
   }
 
+  .dashboard.is-open.is-closing {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   /* Lock html scroll when terminal is open */
   html:has(.dashboard.is-open) {
     overflow: hidden !important;
@@ -1114,8 +1119,16 @@ const navSections: Record<string, { desc: string; path: string }> = {
     }
 
     function cmdExit() {
-      setTimeout(function() { window.closeTerminal(); }, 400);
-      return [c('muted', 'logout')];
+      // Show logout message, then fade out after a beat
+      setTimeout(function() {
+        terminal.classList.add('is-closing');
+        // Wait for CSS transition (0.4s) to complete before full cleanup
+        setTimeout(function() {
+          terminal.classList.remove('is-closing');
+          window.closeTerminal();
+        }, 450);
+      }, 300);
+      return [c('muted', 'logout'), c('comment', 'Connection to ramon@riera closed.')];
     }
 
     // File-to-command mapping for bare filename execution
@@ -1240,6 +1253,9 @@ const navSections: Record<string, { desc: string; path: string }> = {
           var cmd = rowObj.el.getAttribute('data-cmd');
           flashAndExecute(function() {
             exitSelectMode();
+            // Clear screen before showing result for a clean read
+            output.innerHTML = '';
+            output.scrollTop = 0;
             if (pid) {
               processCmd('src ' + pid);
             } else if (cmd) {
