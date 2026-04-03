@@ -185,11 +185,20 @@ const navSections: Record<string, { desc: string; path: string }> = {
   }
 
   .term-line.term-row-active {
-    background: rgba(80, 250, 123, 0.1);
-    border-left: 2px solid #50fa7b;
-    padding-left: 0.35rem;
-    margin-left: -0.55rem;
-    border-radius: 2px;
+    color: #50fa7b;
+  }
+
+  .term-line .term-pointer {
+    color: #50fa7b;
+    font-weight: 700;
+  }
+
+  .term-line.term-row-flash {
+    color: #d97757;
+  }
+
+  .term-line.term-row-flash .term-pointer {
+    color: #d97757;
   }
 
   /* ── Input row ── */
@@ -481,19 +490,18 @@ const navSections: Record<string, { desc: string; path: string }> = {
       line(c('comment', '  ' + '─'.repeat(50)));
 
       var rowEls = [];
-      var cmdMap = [];
 
       categories.forEach(function(cat) {
         line('&nbsp;');
         line('  ' + c('accent', cat.label));
         cat.items.forEach(function(item) {
+          var baseHtml = '  ' + c('function', item[0].padEnd(14)) + ' ' + c('muted', item[1]);
           var el = document.createElement('div');
           el.className = 'term-line';
-          el.innerHTML = '  ' + c('function', item[0].padEnd(14)) + ' ' + c('muted', item[1]);
+          el.innerHTML = baseHtml;
           el.setAttribute('data-cmd', item[0]);
           output.appendChild(el);
-          rowEls.push(el);
-          cmdMap.push(item[0]);
+          rowEls.push({ el: el, base: baseHtml });
         });
       });
 
@@ -502,7 +510,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
       line('&nbsp;');
       scroll();
 
-      // Activate selection mode
+      // Activate selection mode (help)
       selectMode = { rows: rowEls, idx: 0 };
       updateSelectHighlight();
 
@@ -599,12 +607,15 @@ const navSections: Record<string, { desc: string; path: string }> = {
       return out;
     }
 
-    // ── Interactive project selector (TUI) ──
-    var selectMode = null; // { rows: [dom elements], idx: number }
+    // ── Interactive TUI selector (pointer-based) ──
+    var selectMode = null; // { rows: [{ el, base }], idx: number }
 
     function exitSelectMode() {
       if (!selectMode) return;
-      selectMode.rows.forEach(function(r) { r.classList.remove('term-row-active'); });
+      selectMode.rows.forEach(function(r) {
+        r.el.classList.remove('term-row-active');
+        r.el.innerHTML = r.base;
+      });
       selectMode = null;
     }
 
@@ -612,16 +623,24 @@ const navSections: Record<string, { desc: string; path: string }> = {
       if (!selectMode) return;
       selectMode.rows.forEach(function(r, i) {
         if (i === selectMode.idx) {
-          r.classList.add('term-row-active');
-          // Ensure visible
-          var rect = r.getBoundingClientRect();
-          var outRect = output.getBoundingClientRect();
-          if (rect.bottom > outRect.bottom) r.scrollIntoView({ block: 'nearest' });
-          if (rect.top < outRect.top) r.scrollIntoView({ block: 'nearest' });
+          r.el.classList.add('term-row-active');
+          r.el.innerHTML = '<span class="term-pointer">❯</span>' + r.base.slice(1);
+          r.el.scrollIntoView({ block: 'nearest' });
         } else {
-          r.classList.remove('term-row-active');
+          r.el.classList.remove('term-row-active');
+          r.el.innerHTML = r.base;
         }
       });
+    }
+
+    function flashAndExecute(cb) {
+      if (!selectMode) { cb(); return; }
+      var row = selectMode.rows[selectMode.idx];
+      row.el.classList.add('term-row-flash');
+      setTimeout(function() {
+        row.el.classList.remove('term-row-flash');
+        cb();
+      }, 120);
     }
 
     function cmdProjects() {
@@ -655,13 +674,13 @@ const navSections: Record<string, { desc: string; path: string }> = {
       var rowEls = [];
       projectList.forEach(function(p) {
         var id = ' ' + String(p.id).padStart(2, '0');
-        var html = row([id, ' ' + p.name, ' ' + (p.cat || ''), ' ' + p.year], ['accent', 'string', 'keyword', 'constant']);
+        var baseHtml = ' ' + row([id, ' ' + p.name, ' ' + (p.cat || ''), ' ' + p.year], ['accent', 'string', 'keyword', 'constant']);
         var el = document.createElement('div');
         el.className = 'term-line';
-        el.innerHTML = html;
+        el.innerHTML = baseHtml;
         el.setAttribute('data-project-id', p.id);
         output.appendChild(el);
-        rowEls.push(el);
+        rowEls.push({ el: el, base: baseHtml });
       });
 
       // Footer
@@ -674,11 +693,11 @@ const navSections: Record<string, { desc: string; path: string }> = {
       footerLines.forEach(function(f) { line(f); });
       scroll();
 
-      // Activate selection mode
+      // Activate selection mode (projects)
       selectMode = { rows: rowEls, idx: 0 };
       updateSelectHighlight();
 
-      return null; // We already rendered everything manually
+      return null;
     }
 
     // src <ID> — view project details inside terminal
@@ -1216,16 +1235,18 @@ const navSections: Record<string, { desc: string; path: string }> = {
         }
         if (e.key === 'Enter') {
           e.preventDefault();
-          var el = selectMode.rows[selectMode.idx];
-          var pid = el.getAttribute('data-project-id');
-          var cmd = el.getAttribute('data-cmd');
-          exitSelectMode();
-          if (pid) {
-            processCmd('src ' + pid);
-          } else if (cmd) {
-            processCmd(cmd);
-          }
-          input.value = '';
+          var rowObj = selectMode.rows[selectMode.idx];
+          var pid = rowObj.el.getAttribute('data-project-id');
+          var cmd = rowObj.el.getAttribute('data-cmd');
+          flashAndExecute(function() {
+            exitSelectMode();
+            if (pid) {
+              processCmd('src ' + pid);
+            } else if (cmd) {
+              processCmd(cmd);
+            }
+            input.value = '';
+          });
           return;
         }
         if (e.key === 'Escape') {
