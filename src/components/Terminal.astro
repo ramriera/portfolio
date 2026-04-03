@@ -57,6 +57,15 @@ const projectList = projects.map((p, i) => ({
       />
       <span class="term-cursor" id="term-cursor">&#9608;</span>
     </div>
+
+    <!-- ═══ MOBILE: Virtual navigation controls ═══ -->
+    <div class="term-mobile-controls" id="term-mobile-controls">
+      <button id="term-btn-up" aria-label="Up">↑</button>
+      <button id="term-btn-down" aria-label="Down">↓</button>
+      <button id="term-btn-enter" class="btn-enter" aria-label="Enter">Enter</button>
+      <button id="term-btn-menu" aria-label="Menu">Menu</button>
+      <button id="term-btn-esc" aria-label="Close">ESC</button>
+    </div>
   </div>
 </div>
 
@@ -318,7 +327,9 @@ const projectList = projects.map((p, i) => ({
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
-    .dashboard { padding: 0.5rem; }
+    .dashboard { padding: 0; }
+
+    .term-window { border-radius: 0; border: none; }
 
     .term-header {
       flex-direction: column;
@@ -330,17 +341,78 @@ const projectList = projects.map((p, i) => ({
     .term-header-right { font-size: 0.7rem; }
 
     .term-output {
-      padding: 1rem 1.25rem;
-      font-size: 0.68rem;
+      padding: 1rem;
+      font-size: 0.82rem;
+      line-height: 1.8;
+      -webkit-text-size-adjust: 100%;
     }
 
     .term-input-row {
-      padding: 0.625rem 1.25rem 0.75rem;
+      padding: 0.625rem 1rem 0.75rem;
     }
 
     .term-prompt,
     .term-input {
-      font-size: 0.75rem;
+      font-size: 0.82rem;
+    }
+
+    .term-line {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Tappable rows on mobile */
+    .term-line.term-row-selectable {
+      padding: 0.5rem 0.25rem;
+      border-radius: 4px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+
+  /* ── Mobile virtual controls ── */
+  .term-mobile-controls {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .term-mobile-controls {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem 0.75rem;
+      background: #181825;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      flex-shrink: 0;
+    }
+
+    .term-mobile-controls button {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #7d8590;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 0.5rem 1.25rem;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .term-mobile-controls button:active {
+      background: rgba(255, 255, 255, 0.12);
+      color: #e6edf3;
+    }
+
+    .term-mobile-controls .btn-enter {
+      flex: 1;
+      max-width: 10rem;
+      color: #4ade80;
+      border-color: rgba(74, 222, 128, 0.2);
+    }
+
+    .term-mobile-controls .btn-enter:active {
+      background: rgba(74, 222, 128, 0.15);
     }
   }
 </style>
@@ -1477,10 +1549,66 @@ const projectList = projects.map((p, i) => ({
       }
     });
 
-    // ── Global focus (only when terminal is open) ──
-    document.addEventListener('click', function() {
-      if (terminal.classList.contains('is-open')) input.focus();
+    // ── Mobile detection ──
+    var isMobile = window.innerWidth <= 768;
+
+    // ── Global focus (desktop only — mobile: no auto keyboard) ──
+    document.addEventListener('click', function(e) {
+      if (!terminal.classList.contains('is-open')) return;
+      if (isMobile) return;
+      input.focus();
     });
+
+    // ── Tap on selectable rows (mobile + desktop) ──
+    output.addEventListener('click', function(e) {
+      if (!selectMode) return;
+      var target = e.target.closest('.term-row-selectable');
+      if (!target) return;
+      e.stopPropagation();
+      // Find which row was tapped
+      for (var i = 0; i < selectMode.rows.length; i++) {
+        if (selectMode.rows[i].el === target) {
+          selectMode.idx = i;
+          updateSelectHighlight();
+          // Execute after a brief highlight
+          var rowObj = selectMode.rows[i];
+          var pid = rowObj.el.getAttribute('data-project-id');
+          var cmd = rowObj.el.getAttribute('data-cmd');
+          flashAndExecute(function() {
+            exitSelectMode();
+            if (pid) { processCmd('src ' + pid); }
+            else if (cmd) { processCmd(cmd); }
+            input.value = '';
+          });
+          return;
+        }
+      }
+    });
+
+    // ── Mobile virtual controls ──
+    var btnUp = document.getElementById('term-btn-up');
+    var btnDown = document.getElementById('term-btn-down');
+    var btnEnter = document.getElementById('term-btn-enter');
+    var btnMenu = document.getElementById('term-btn-menu');
+    var btnEsc = document.getElementById('term-btn-esc');
+
+    function simulateKey(key) {
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: key, bubbles: true }));
+    }
+
+    if (btnUp) btnUp.addEventListener('click', function(e) { e.stopPropagation(); simulateKey('ArrowUp'); });
+    if (btnDown) btnDown.addEventListener('click', function(e) { e.stopPropagation(); simulateKey('ArrowDown'); });
+    if (btnEnter) btnEnter.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (selectMode) {
+        simulateKey('Enter');
+      } else if (input.value.trim()) {
+        processCmd(input.value);
+        input.value = '';
+      }
+    });
+    if (btnMenu) btnMenu.addEventListener('click', function(e) { e.stopPropagation(); processCmd('menu'); input.value = ''; });
+    if (btnEsc) btnEsc.addEventListener('click', function(e) { e.stopPropagation(); doExit(); });
 
     // ── Favicon switching ──
     var faviconNormal = '/favicon.svg';
@@ -1532,10 +1660,10 @@ const projectList = projects.map((p, i) => ({
       if (!restoreSession()) {
         output.innerHTML = '';
         input.value = '';
-        showMotd(function() { input.focus(); });
+        showMotd(function() { if (!isMobile) input.focus(); });
       } else {
         input.value = '';
-        input.focus();
+        if (!isMobile) input.focus();
       }
     };
 
