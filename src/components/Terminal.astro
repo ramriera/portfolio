@@ -445,29 +445,68 @@ const navSections: Record<string, { desc: string; path: string }> = {
     // ── Commands (return arrays of lines) ──
 
     function cmdHelp() {
-      var out = ['&nbsp;', c('keyword', 'Comandos disponibles:'), '&nbsp;'];
-      [
-        ['help', 'Muestra esta ayuda'],
-        ['about', 'Dossier profesional completo'],
-        ['experience', 'Trayectoria profesional'],
-        ['education', 'Formacion y certificaciones'],
-        ['projects', 'Lista proyectos (tabla)'],
-        ['src <ID>', 'Ver detalle de proyecto en consola'],
-        ['skills', 'Habilidades tecnicas'],
-        ['social', 'Links de redes sociales'],
-        ['neofetch', 'Info del sistema'],
-        ['cv', 'Descarga el CV'],
-        ['ls', 'Lista archivos del portfolio'],
-        ['clear', 'Limpia la consola'],
-        ['reset', 'Reinicia la terminal'],
-        ['history', 'Historial de comandos'],
-        ['date', 'Fecha y hora actual'],
-        ['exit', 'Cierra la terminal'],
-      ].forEach(function(pair) {
-        out.push('  ' + c('function', pair[0].padEnd(14)) + ' ' + c('muted', pair[1]));
+      var categories = [
+        { label: 'PROFILE', items: [
+          ['about', 'Dossier profesional completo'],
+          ['experience', 'Trayectoria profesional'],
+          ['education', 'Formacion y certificaciones'],
+          ['skills', 'Habilidades tecnicas'],
+          ['social', 'Links de redes sociales'],
+          ['cv', 'Descarga el CV'],
+        ]},
+        { label: 'PORTFOLIO', items: [
+          ['projects', 'Lista proyectos interactiva'],
+          ['src 1', 'Massimo Dutti'],
+          ['src 2', 'MoveFast'],
+          ['src 3', 'Global Helping'],
+          ['src 4', 'Banco Sabadell'],
+          ['src 5', 'Imaginbank'],
+          ['src 6', 'Iberia'],
+          ['src 7', 'SoloTemazos'],
+        ]},
+        { label: 'SYSTEM', items: [
+          ['neofetch', 'Info del sistema'],
+          ['ls', 'Lista archivos del portfolio'],
+          ['history', 'Historial de comandos'],
+          ['date', 'Fecha y hora actual'],
+          ['clear', 'Limpia la consola'],
+          ['reset', 'Reinicia la terminal'],
+          ['exit', 'Cierra la terminal'],
+        ]},
+      ];
+
+      // Render header
+      line('&nbsp;');
+      line(c('keyword', '  COMANDOS DISPONIBLES'));
+      line(c('comment', '  ' + '─'.repeat(50)));
+
+      var rowEls = [];
+      var cmdMap = [];
+
+      categories.forEach(function(cat) {
+        line('&nbsp;');
+        line('  ' + c('accent', cat.label));
+        cat.items.forEach(function(item) {
+          var el = document.createElement('div');
+          el.className = 'term-line';
+          el.innerHTML = '  ' + c('function', item[0].padEnd(14)) + ' ' + c('muted', item[1]);
+          el.setAttribute('data-cmd', item[0]);
+          output.appendChild(el);
+          rowEls.push(el);
+          cmdMap.push(item[0]);
+        });
       });
-      out.push('&nbsp;', c('comment', 'Tip: Usa ↑↓ para navegar el historial.'));
-      return out;
+
+      line('&nbsp;');
+      line('  ' + c('muted', '[↑/↓]') + ' navegar  ' + c('muted', '[Enter]') + ' ejecutar  ' + c('muted', '[ESC]') + ' cerrar');
+      line('&nbsp;');
+      scroll();
+
+      // Activate selection mode
+      selectMode = { rows: rowEls, idx: 0 };
+      updateSelectHighlight();
+
+      return null;
     }
 
     function cmdWhoami() {
@@ -1177,9 +1216,15 @@ const navSections: Record<string, { desc: string; path: string }> = {
         }
         if (e.key === 'Enter') {
           e.preventDefault();
-          var pid = selectMode.rows[selectMode.idx].getAttribute('data-project-id');
+          var el = selectMode.rows[selectMode.idx];
+          var pid = el.getAttribute('data-project-id');
+          var cmd = el.getAttribute('data-cmd');
           exitSelectMode();
-          processCmd('src ' + pid);
+          if (pid) {
+            processCmd('src ' + pid);
+          } else if (cmd) {
+            processCmd(cmd);
+          }
           input.value = '';
           return;
         }
