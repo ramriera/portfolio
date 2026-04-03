@@ -1328,7 +1328,7 @@ const projectList = projects.map((p, i) => ({
           var isProfile = profileCmds[cmd] || false;
           typeLines(result, function() {
             if (!noFooter[cmd]) showCommandFooter(pid, isProfile);
-          }, speed);
+          });
         }
       } else {
         typeLines([
