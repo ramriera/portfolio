@@ -189,8 +189,16 @@ const navSections: Record<string, { desc: string; path: string }> = {
     contain: content;
   }
 
+  .term-line.term-row-selectable {
+    opacity: 0.45;
+    transition: opacity 0.15s ease, color 0.15s ease, text-shadow 0.15s ease;
+  }
+
   .term-line.term-row-active {
     color: #50fa7b;
+    opacity: 1;
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
   }
 
   .term-line .term-pointer {
@@ -200,6 +208,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
 
   .term-line.term-row-flash {
     color: #d97757;
+    text-shadow: 0 0 8px rgba(217, 119, 87, 0.5);
   }
 
   .term-line.term-row-flash .term-pointer {
@@ -502,7 +511,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         cat.items.forEach(function(item) {
           var baseHtml = '  ' + c('function', item[0].padEnd(14)) + ' ' + c('muted', item[1]);
           var el = document.createElement('div');
-          el.className = 'term-line';
+          el.className = 'term-line term-row-selectable';
           el.innerHTML = baseHtml;
           el.setAttribute('data-cmd', item[0]);
           output.appendChild(el);
@@ -618,7 +627,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     function exitSelectMode() {
       if (!selectMode) return;
       selectMode.rows.forEach(function(r) {
-        r.el.classList.remove('term-row-active');
+        r.el.classList.remove('term-row-active', 'term-row-selectable');
         r.el.innerHTML = r.base;
       });
       selectMode = null;
@@ -681,7 +690,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         var id = ' ' + String(p.id).padStart(2, '0');
         var baseHtml = ' ' + row([id, ' ' + p.name, ' ' + (p.cat || ''), ' ' + p.year], ['accent', 'string', 'keyword', 'constant']);
         var el = document.createElement('div');
-        el.className = 'term-line';
+        el.className = 'term-line term-row-selectable';
         el.innerHTML = baseHtml;
         el.setAttribute('data-project-id', p.id);
         output.appendChild(el);
