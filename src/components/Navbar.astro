@@ -38,23 +38,6 @@ const currentPath = Astro.url.pathname;
 
       <!-- Actions area -->
       <div class="flex items-center gap-5">
-        <!-- Code Mode toggle (desktop) -->
-        <div class="relative hidden lg:block group/code">
-          <button
-            id="code-mode-btn"
-            class="code-mode-btn inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-semibold border border-neutral-300 text-neutral-500 bg-neutral-50 shadow-[0_2px_0_0_rgba(0,0,0,0.08)] rounded-md hover:border-[#4ade80] hover:text-[#4ade80] hover:shadow-[0_2px_0_0_rgba(74,222,128,0.3)] active:translate-y-[1px] active:shadow-none transition-colors duration-0"
-            aria-label="Open terminal"
-          >
-            <span class="code-mode-cursor w-3.5 h-3.5 font-mono text-[11px] leading-none">
-              &gt;_
-            </span>
-            Code Mode
-          </button>
-          <!-- Tooltip -->
-          <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] font-mono text-neutral-400 bg-neutral-900 rounded whitespace-nowrap opacity-0 pointer-events-none group-hover/code:opacity-100 transition-opacity duration-150">
-            Enter the developer console
-          </div>
-        </div>
 
         <a
           href={`mailto:${siteConfig.email}`}
@@ -188,28 +171,10 @@ const currentPath = Astro.url.pathname;
     white-space: nowrap;
   }
 
-  /* ── Code Mode button ── */
-  .code-mode-cursor {
-    animation: cursor-blink-nav 1.2s ease-in-out infinite;
-  }
-
-  .code-mode-btn:hover .code-mode-cursor {
-    animation: cursor-blink-nav-hard 0.5s step-end infinite;
-  }
-
-  @keyframes cursor-blink-nav {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
+  /* ── Code Mode ── */
   @keyframes cursor-blink-nav-hard {
     0%, 49% { opacity: 1; }
     50%, 100% { opacity: 0; }
-  }
-
-  .code-mode-btn.is-launching {
-    border-color: #4ade80 !important;
-    color: #4ade80 !important;
   }
 
   /* ── Mobile FAB ── */
@@ -425,21 +390,7 @@ const currentPath = Astro.url.pathname;
     }, 400);
   }
 
-  // Desktop button
-  const codeBtn = document.getElementById('code-mode-btn');
-  codeBtn?.addEventListener('click', () => {
-    codeBtn.classList.add('is-launching');
-    const label = codeBtn.querySelector('.code-mode-cursor');
-    const original = label?.innerHTML;
-    if (label) label.innerHTML = '...';
-    launchTerminal();
-    setTimeout(() => {
-      codeBtn.classList.remove('is-launching');
-      if (label) label.innerHTML = original;
-    }, 500);
-  });
-
-  // Mobile FAB
+  // FAB button
   const codeFab = document.getElementById('code-mode-fab');
   codeFab?.addEventListener('click', () => {
     launchTerminal();

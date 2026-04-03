@@ -22,7 +22,7 @@ const projectList = projects.map((p, i) => ({
     <div class="term-header">
       <div class="term-header-left">
         <div class="term-dots">
-          <span style="background:#ff5f57"></span>
+          <span id="term-dot-close" style="background:#ff5f57; cursor:pointer" title="Cerrar terminal"></span>
           <span style="background:#febc2e"></span>
           <span style="background:#28c840"></span>
         </div>
@@ -86,7 +86,6 @@ const projectList = projects.map((p, i) => ({
     background: #11111b;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease;
     scrollbar-width: none;
   }
 
@@ -100,6 +99,7 @@ const projectList = projects.map((p, i) => ({
   .dashboard.is-open.is-closing {
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.4s ease;
   }
 
   /* Lock html scroll when terminal is open */
@@ -1627,6 +1627,10 @@ const projectList = projects.map((p, i) => ({
     });
     if (btnMenu) btnMenu.addEventListener('click', function(e) { e.stopPropagation(); processCmd('menu'); input.value = ''; });
     if (btnEsc) btnEsc.addEventListener('click', function(e) { e.stopPropagation(); doExit(); });
+
+    // ── Red dot close button (macOS style) ──
+    var dotClose = document.getElementById('term-dot-close');
+    if (dotClose) dotClose.addEventListener('click', function(e) { e.stopPropagation(); doExit(); });
 
     // ── Favicon switching ──
     var faviconNormal = '/favicon.svg';
