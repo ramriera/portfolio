@@ -518,7 +518,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
       });
 
       line('&nbsp;');
-      line('  ' + c('muted', '[↑/↓]') + ' navegar  ' + c('muted', '[Enter]') + ' ejecutar  ' + c('muted', '[ESC]') + ' cerrar');
+      line('  ' + c('muted', '[↑/↓]') + ' navegar  ' + c('muted', '[Enter]') + ' ejecutar  ' + c('muted', '[ESC]') + ' cerrar terminal');
       line('&nbsp;');
       scroll();
 
@@ -664,7 +664,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
       line('&nbsp;');
       line(c('comment', '  ' + '─'.repeat(50)));
       line('&nbsp;');
-      line('  ' + c('muted', '[M]') + ' → ' + '<span style="color:#e6edf3">menu</span>' + '    ' + c('muted', '[ESC]') + ' → ' + '<span style="color:#e6edf3">cerrar terminal</span>');
+      line('  ' + c('muted', '[MENU]') + ' menu  ' + c('muted', '[ESC]') + ' cerrar terminal');
       line('&nbsp;');
       scroll();
     }
@@ -713,7 +713,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
       var footerLines = [
         hr('└', '┴', '┘'),
         '&nbsp;',
-        '  ' + c('muted', '[↑/↓]') + ' seleccionar  ' + c('muted', '[Enter]') + ' ver detalle  ' + c('muted', '[M]') + ' menu  ' + c('muted', '[ESC]') + ' cancelar',
+        '  ' + c('muted', '[↑/↓]') + ' seleccionar  ' + c('muted', '[Enter]') + ' ver detalle  ' + c('muted', '[MENU]') + ' menu  ' + c('muted', '[ESC]') + ' cancelar',
         '&nbsp;',
       ];
       footerLines.forEach(function(f) { line(f); });
@@ -1217,7 +1217,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     };
 
     var commandMap = {
-      menu: cmdHelp, m: cmdHelp, help: cmdHelp, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
+      menu: cmdHelp, help: cmdHelp, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
       src: cmdSrc, skills: cmdSkills, social: cmdSocial,
       massimo: cmdMassimo, movefast: cmdMovefast, globalhelping: cmdGlobalhelping,
       sabadell: cmdSabadell, banco: cmdSabadell, imaginbank: cmdImaginbank,
@@ -1357,13 +1357,6 @@ const navSections: Record<string, { desc: string; path: string }> = {
           exitSelectMode();
           line(c('muted', '  Selección cancelada.'));
           scroll();
-          return;
-        }
-        if (e.key === 'm' || e.key === 'M') {
-          e.preventDefault();
-          exitSelectMode();
-          processCmd('menu');
-          input.value = '';
           return;
         }
         // Any other key exits selection mode and falls through to normal input
