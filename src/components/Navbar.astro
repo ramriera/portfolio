@@ -176,11 +176,20 @@ const currentPath = Astro.url.pathname;
   }
 
   /* ── Code Mode button ── */
+  .code-mode-cursor {
+    animation: cursor-blink-nav 1.2s ease-in-out infinite;
+  }
+
   .code-mode-btn:hover .code-mode-cursor {
-    animation: cursor-blink-nav 0.6s step-end infinite;
+    animation: cursor-blink-nav-hard 0.5s step-end infinite;
   }
 
   @keyframes cursor-blink-nav {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  @keyframes cursor-blink-nav-hard {
     0%, 49% { opacity: 1; }
     50%, 100% { opacity: 0; }
   }

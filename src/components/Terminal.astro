@@ -36,6 +36,7 @@ const projectList = projects.map((p, i) => ({
         <span class="term-header-date" id="term-header-date"></span>
         <span class="term-header-sep">|</span>
         <span class="term-header-status">● Active</span>
+        <button id="term-exit-btn" class="term-exit-btn" aria-label="Close terminal">✕</button>
       </div>
     </div>
 
@@ -145,6 +146,26 @@ const projectList = projects.map((p, i) => ({
     align-items: center;
     gap: 0.75rem;
     white-space: nowrap;
+  }
+
+  .term-exit-btn {
+    display: none;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #7d8590;
+    font-size: 0.75rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    margin-left: 0.5rem;
+  }
+
+  .term-exit-btn:active { background: rgba(255, 255, 255, 0.08); color: #e6edf3; }
+
+  @media (max-width: 768px) {
+    .term-exit-btn { display: inline-flex; align-items: center; justify-content: center; }
   }
 
   .term-header-name { color: #e6edf3; font-weight: 600; }
@@ -746,53 +767,70 @@ const projectList = projects.map((p, i) => ({
     }
 
     function cmdProjects() {
-      // Fixed column widths: ID=6, NAME=32, CATEGORY=18, YEAR=6
-      var W = [6, 32, 18, 6];
-      var b = c('muted', '│');
+      line('&nbsp;');
 
-      function hr(l, m, r) {
-        return '  ' + c('comment', l + '─'.repeat(W[0]) + m + '─'.repeat(W[1]) + m + '─'.repeat(W[2]) + m + '─'.repeat(W[3]) + r);
-      }
-
-      function row(cols, styles) {
-        var cells = '';
-        for (var i = 0; i < cols.length; i++) {
-          var padded = (' ' + cols[i]).padEnd(W[i]);
-          cells += b + '<span class="t-' + styles[i] + '">' + padded + '</span>';
-        }
-        return '  ' + cells + b;
-      }
-
-      // Build table lines
-      var headerLines = [
-        '&nbsp;',
-        hr('┌', '┬', '┐'),
-        row([' ID', ' NAME', ' CATEGORY', ' YEAR'], ['muted', 'muted', 'muted', 'muted']),
-        hr('├', '┼', '┤'),
-      ];
-      headerLines.forEach(function(h) { line(h); });
-
-      // Render project rows with data attributes for selection
       var rowEls = [];
-      projectList.forEach(function(p) {
-        var id = ' ' + String(p.id).padStart(2, '0');
-        var baseHtml = ' ' + row([id, ' ' + p.name, ' ' + (p.cat || ''), ' ' + p.year], ['accent', 'string', 'keyword', 'constant']);
-        var el = document.createElement('div');
-        el.className = 'term-line term-row-selectable';
-        el.innerHTML = baseHtml;
-        el.setAttribute('data-project-id', p.id);
-        output.appendChild(el);
-        rowEls.push({ el: el, base: baseHtml });
-      });
+
+      if (isMobile) {
+        // ── Mobile: vertical card list ──
+        projectList.forEach(function(p) {
+          var id = String(p.id).padStart(2, '0');
+          var shortName = p.name.split(' - ')[0];
+          var baseHtml = '  ' + c('accent', '[' + id + ']') + ' ' + c('string', shortName) + ' ' + c('muted', '· ' + p.year);
+          var el = document.createElement('div');
+          el.className = 'term-line term-row-selectable';
+          el.innerHTML = baseHtml;
+          el.setAttribute('data-project-id', p.id);
+          output.appendChild(el);
+          rowEls.push({ el: el, base: baseHtml });
+        });
+      } else {
+        // ── Desktop: full ASCII table ──
+        var W = [6, 32, 18, 6];
+        var b = c('muted', '│');
+
+        function hr(l, m, r) {
+          return '  ' + c('comment', l + '─'.repeat(W[0]) + m + '─'.repeat(W[1]) + m + '─'.repeat(W[2]) + m + '─'.repeat(W[3]) + r);
+        }
+
+        function row(cols, styles) {
+          var cells = '';
+          for (var i = 0; i < cols.length; i++) {
+            var padded = (' ' + cols[i]).padEnd(W[i]);
+            cells += b + '<span class="t-' + styles[i] + '">' + padded + '</span>';
+          }
+          return '  ' + cells + b;
+        }
+
+        var headerLines = [
+          hr('┌', '┬', '┐'),
+          row([' ID', ' NAME', ' CATEGORY', ' YEAR'], ['muted', 'muted', 'muted', 'muted']),
+          hr('├', '┼', '┤'),
+        ];
+        headerLines.forEach(function(h) { line(h); });
+
+        projectList.forEach(function(p) {
+          var id = ' ' + String(p.id).padStart(2, '0');
+          var baseHtml = ' ' + row([id, ' ' + p.name, ' ' + (p.cat || ''), ' ' + p.year], ['accent', 'string', 'keyword', 'constant']);
+          var el = document.createElement('div');
+          el.className = 'term-line term-row-selectable';
+          el.innerHTML = baseHtml;
+          el.setAttribute('data-project-id', p.id);
+          output.appendChild(el);
+          rowEls.push({ el: el, base: baseHtml });
+        });
+
+        line(hr('└', '┴', '┘'));
+      }
 
       // Footer
-      var footerLines = [
-        hr('└', '┴', '┘'),
-        '&nbsp;',
-        '  ' + c('muted', '[↑/↓]') + ' seleccionar  ' + c('muted', '[Enter]') + ' ver detalle  ' + c('muted', '[MENU]') + ' menu  ' + c('muted', '[ESC]') + ' cancelar',
-        '&nbsp;',
-      ];
-      footerLines.forEach(function(f) { line(f); });
+      line('&nbsp;');
+      if (isMobile) {
+        line('  ' + c('muted', 'Toca un proyecto para ver detalle'));
+      } else {
+        line('  ' + c('muted', '[↑/↓]') + ' seleccionar  ' + c('muted', '[Enter]') + ' ver detalle  ' + c('muted', '[MENU]') + ' menu  ' + c('muted', '[ESC]') + ' cancelar');
+      }
+      line('&nbsp;');
       scroll();
 
       // Activate selection mode (projects)
@@ -1609,6 +1647,10 @@ const projectList = projects.map((p, i) => ({
     });
     if (btnMenu) btnMenu.addEventListener('click', function(e) { e.stopPropagation(); processCmd('menu'); input.value = ''; });
     if (btnEsc) btnEsc.addEventListener('click', function(e) { e.stopPropagation(); doExit(); });
+
+    // ── Header exit button ──
+    var exitBtn = document.getElementById('term-exit-btn');
+    if (exitBtn) exitBtn.addEventListener('click', function(e) { e.stopPropagation(); doExit(); });
 
     // ── Favicon switching ──
     var faviconNormal = '/favicon.svg';
