@@ -190,18 +190,21 @@ const navSections: Record<string, { desc: string; path: string }> = {
   }
 
   .term-line.term-row-selectable {
-    color: rgba(80, 250, 123, 0.6);
-    transition: color 0.15s ease, text-shadow 0.15s ease, font-weight 0.15s ease;
+    color: #3fb950;
   }
 
   .term-line.term-row-active {
-    color: #4ade80;
+    background: #3fb950;
+    color: #000;
     font-weight: 700;
-    text-shadow: 0 0 8px rgba(74, 222, 128, 0.45);
+  }
+
+  .term-line.term-row-active .term-pointer {
+    color: #000;
   }
 
   .term-line .term-pointer {
-    color: #4ade80;
+    color: #3fb950;
     font-weight: 700;
     animation: pointer-blink 1s step-end infinite;
   }
@@ -212,12 +215,12 @@ const navSections: Record<string, { desc: string; path: string }> = {
   }
 
   .term-line.term-row-flash {
-    color: #d97757;
-    text-shadow: 0 0 10px rgba(217, 119, 87, 0.5);
+    background: #e6edf3;
+    color: #000;
   }
 
   .term-line.term-row-flash .term-pointer {
-    color: #d97757;
+    color: #000;
     animation: none;
     opacity: 1;
   }
@@ -486,13 +489,6 @@ const navSections: Record<string, { desc: string; path: string }> = {
         ]},
         { label: 'PORTFOLIO', items: [
           ['projects', 'Lista proyectos interactiva'],
-          ['src 1', 'Massimo Dutti'],
-          ['src 2', 'MoveFast'],
-          ['src 3', 'Global Helping'],
-          ['src 4', 'Banco Sabadell'],
-          ['src 5', 'Imaginbank'],
-          ['src 6', 'Iberia'],
-          ['src 7', 'SoloTemazos'],
         ]},
         { label: 'SYSTEM', items: [
           ['neofetch', 'Info del sistema'],
@@ -748,7 +744,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
       var footerLines = [
         hr('└', '┴', '┘'),
         '&nbsp;',
-        '  ' + c('muted', '[↑/↓]') + ' seleccionar  ' + c('muted', '[Enter]') + ' ver detalle  ' + c('muted', '[ESC]') + ' cancelar',
+        '  ' + c('muted', '[↑/↓]') + ' seleccionar  ' + c('muted', '[Enter]') + ' ver detalle  ' + c('muted', '[M]') + ' menu  ' + c('muted', '[ESC]') + ' cancelar',
         '&nbsp;',
       ];
       footerLines.forEach(function(f) { line(f); });
@@ -1389,6 +1385,13 @@ const navSections: Record<string, { desc: string; path: string }> = {
           exitSelectMode();
           line(c('muted', '  Selección cancelada.'));
           scroll();
+          return;
+        }
+        if (e.key === 'm' || e.key === 'M') {
+          e.preventDefault();
+          exitSelectMode();
+          processCmd('menu');
+          input.value = '';
           return;
         }
         // Any other key exits selection mode and falls through to normal input
