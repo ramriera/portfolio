@@ -563,8 +563,6 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + line60,
         '&nbsp;',
-        '  ' + c('comment', 'Tip:') + ' ' + c('function', 'experience') + ' ' + c('comment', '→ trayectoria') + '  ' + c('function', 'education') + ' ' + c('comment', '→ formación') + '  ' + c('function', 'social') + ' ' + c('comment', '→ redes') + '  ' + c('function', 'cv') + ' ' + c('comment', '→ descargar CV'),
-        '&nbsp;',
       ];
     }
 
@@ -660,11 +658,25 @@ const navSections: Record<string, { desc: string; path: string }> = {
     // ── Post-project navigation ──
     var totalProjects = projectList.length;
 
-    function showCommandFooter() {
+    function showCommandFooter(pid, isProfile) {
       line('&nbsp;');
       line(c('comment', '  ' + '─'.repeat(50)));
       line('&nbsp;');
-      line('  ' + c('muted', '[MENU]') + ' menu  ' + c('muted', '[ESC]') + ' cerrar terminal');
+      if (isProfile) {
+        line('  ' + c('muted', '[') + c('function', 'experience') + c('muted', ']') + '  ' + c('muted', '[') + c('function', 'education') + c('muted', ']') + '  ' + c('muted', '[') + c('function', 'skills') + c('muted', ']') + '  ' + c('muted', '[') + c('function', 'social') + c('muted', ']'));
+      }
+      var parts = [];
+      if (pid) {
+        var others = projectList.filter(function(p) { return p.id !== pid; });
+        var rand = others[Math.floor(Math.random() * others.length)];
+        if (rand) {
+          var slug = rand.slug.split('-')[0].toLowerCase();
+          parts.push(c('muted', '[') + c('function', rand.name) + c('muted', ']') + ' src ' + slug);
+        }
+      }
+      parts.push(c('muted', '[MENU]') + ' menu');
+      parts.push(c('muted', '[ESC]') + ' cerrar terminal');
+      line('  ' + parts.join('  '));
       line('&nbsp;');
       scroll();
     }
@@ -893,6 +905,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Redefinir la navegación y el checkout para una marca de lujo global.',
         '  Equilibrar una estética ' + c('keyword', 'minimalista high-end') + ' con una arquitectura',
         '  técnica capaz de soportar ' + c('keyword', 'picos de tráfico masivos') + ' sin perder',
@@ -901,6 +914,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  Implementación de ' + c('keyword', 'Micro-frontends') + ' para el catálogo y un flujo',
         '  de compra ' + c('keyword', 'One-page checkout') + ' que redujo la fricción:',
         '&nbsp;',
@@ -912,6 +926,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'KEY FEATURES'),
+        '&nbsp;',
         '  ' + c('accent', '>') + ' Interfaz adaptativa con tipografía dinámica',
         '  ' + c('accent', '>') + ' Transiciones de página instantáneas (' + c('keyword', 'Zero-layout shift') + ')',
         '  ' + c('accent', '>') + ' Búsqueda inteligente con filtros dinámicos',
@@ -919,8 +934,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
-        '  ' + c('accent', '+18%') + ' conversión en móvil  ' + c('accent', '−50%') + ' pasos (8→4)  ' + c('accent', '+40%') + ' carga',
         '&nbsp;',
+        '  ' + c('accent', '+18%') + ' conversión en móvil  ' + c('accent', '−50%') + ' pasos (8→4)  ' + c('accent', '+40%') + ' carga',
         '  ' + s,
       ];
       out._projectId = 1;
@@ -941,12 +956,14 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Diseñar una app de movilidad eléctrica que elimina la barrera',
         '  más determinante para la adopción del EV en España:',
         '  la ' + c('keyword', 'range anxiety') + '. Un modelo de servicio ' + c('accent', 'inexistente') + ' en el mercado.',
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Cambio de batería a domicilio') + ' — técnico con batería cargada en minutos',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Puntos de intercambio dinámicos') + ' — reserva anticipada + stock real',
         '  ' + c('muted', '·') + ' Mapa interactivo unificado con ' + c('keyword', 'stock en tiempo real'),
@@ -954,6 +971,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'KEY FEATURES'),
+        '&nbsp;',
         '  ' + c('accent', '>') + ' Dashboard de métricas en tiempo real',
         '  ' + c('accent', '>') + ' Sistema de prototipado rápido integrado',
         '  ' + c('accent', '>') + ' Arquitectura escalable para crecimiento post-MVP',
@@ -961,6 +979,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
+        '&nbsp;',
         '  ' + c('accent', '2 semanas') + ' research → prototipo  ' + c('accent', '3 taps') + ' reserva  ' + c('accent', '0') + ' competidores',
         '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Whimsical · Adobe CC · Miro'),
         '&nbsp;',
@@ -986,6 +1005,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Las ' + c('keyword', 'ONGs locales') + ' hacen trabajo crítico pero son invisibles',
         '  frente a grandes organizaciones con equipos de marketing.',
         '  Donaciones, voluntariado y crowdfunding viven en ' + c('accent', 'plataformas'),
@@ -993,6 +1013,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' Plataforma que unifica ' + c('keyword', 'donaciones + voluntariado + crowdfunding'),
         '  ' + c('muted', '·') + ' Storytelling visual que convierte datos de ONGs en narrativas',
         '  ' + c('muted', '·') + ' Design Tokens para escalabilidad del sistema visual',
@@ -1000,8 +1021,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
-        '  ' + c('accent', '48 encuestas') + ' pivot global→local  ' + c('accent', '3 flujos') + ' principales  ' + c('accent', 'DS') + ' completo',
         '&nbsp;',
+        '  ' + c('accent', '48 encuestas') + ' pivot global→local  ' + c('accent', '3 flujos') + ' principales  ' + c('accent', 'DS') + ' completo',
         '  ' + s,
       ];
       out._projectId = 3;
@@ -1023,6 +1044,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Ecosistema digital bancario con ' + c('keyword', 'fragmentación severa') + ':',
         '  web, banca online, app y canales internos con estilos inconsistentes.',
         '  Sin ' + c('accent', 'fuente única de verdad') + ' para componentes ni tokens.',
@@ -1030,6 +1052,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Design Tokens') + ' como single source of truth (Color, Spacing 4px, Typo)',
         '  ' + c('muted', '·') + ' Biblioteca de componentes basada en ' + c('keyword', 'Átomos y Moléculas'),
         '  ' + c('muted', '·') + ' Documentación centralizada en ' + c('keyword', 'Zeroheight') + ' + sync a Storybook',
@@ -1037,8 +1060,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
-        '  ' + c('accent', '−40%') + ' tiempo diseño  ' + c('accent', '95%') + ' coherencia  ' + c('accent', '+200') + ' componentes  ' + c('accent', '15') + ' equipos',
         '&nbsp;',
+        '  ' + c('accent', '−40%') + ' tiempo diseño  ' + c('accent', '95%') + ' coherencia  ' + c('accent', '+200') + ' componentes  ' + c('accent', '15') + ' equipos',
         '  ' + s,
       ];
       out._projectId = 4;
@@ -1059,6 +1082,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Rediseño de sistema de banca móvil donde cada fallo de diseño',
         '  ' + c('keyword', 'cuesta dinero real') + '. Tres fallos estructurales:',
         '&nbsp;',
@@ -1068,6 +1092,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Máquina de 5 estados') + ' explícita por operación',
         '     (idle → loading → pending → success → failure)',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Prevención estructural') + ' — validación IBAN en tiempo real,',
@@ -1076,9 +1101,9 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
+        '&nbsp;',
         '  ' + c('accent', '−50%') + ' pasos (8→4)  ' + c('accent', '−60%') + ' errores  ' + c('accent', '−35%') + ' llamadas soporte',
         '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Heuristic Analysis · State Machine Design'),
-        '&nbsp;',
         '  ' + s,
       ];
       out._projectId = 5;
@@ -1100,6 +1125,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Ecosistema digital de una aerolínea con ' + c('keyword', 'fragmentación severa'),
         '  entre Web y App. Sin ' + c('accent', 'Design Tokens') + ' unificados: cada plataforma',
         '  mantenía sus propios valores. Un botón primario tenía',
@@ -1107,6 +1133,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Design Tokens') + ' como fuente única de verdad',
         '     (Rojo Iberia ' + c('function', '#E62232') + ', Neutros, Spacing 4px)',
         '  ' + c('muted', '·') + ' Librería de componentes: ' + c('keyword', 'Átomos y Moléculas'),
@@ -1115,8 +1142,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
-        '  ' + c('accent', '−60%') + ' inconsistencias  ' + c('accent', '+40') + ' componentes  ' + c('accent', '−35%') + ' dev time  ' + c('accent', '100%') + ' tokens',
         '&nbsp;',
+        '  ' + c('accent', '−60%') + ' inconsistencias  ' + c('accent', '+40') + ' componentes  ' + c('accent', '−35%') + ' dev time  ' + c('accent', '100%') + ' tokens',
         '  ' + s,
       ];
       out._projectId = 6;
@@ -1137,6 +1164,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  El streaming tiene ' + c('keyword', '100M+ de tracks') + ' y los usuarios pasan más',
         '  tiempo buscando qué escuchar que escuchando. Los algoritmos',
         '  optimizan ' + c('accent', 'retención') + ', no ' + c('accent', 'descubrimiento') + '. Resultado:',
@@ -1144,6 +1172,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Curación humana') + ' vs. algoritmos — menos contenido, mejor criterio',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Zero-friction playback') + ' — del browse al play en un solo tap',
         '  ' + c('muted', '·') + ' Sin barra de búsqueda en home — hay música esperándote',
@@ -1152,6 +1181,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'KEY FEATURES'),
+        '&nbsp;',
         '  ' + c('accent', '>') + ' Descubrimiento que elimina la parálisis de elección',
         '  ' + c('accent', '>') + ' Reproductor embebido sin cambio de contexto',
         '  ' + c('accent', '>') + ' Mobile-first: 12 pantallas para operación con una mano',
@@ -1160,7 +1190,6 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + s,
         '&nbsp;',
         '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · React · Tailwind CSS · Whimsical · Miro'),
-        '&nbsp;',
         '  ' + s,
       ];
       out._projectId = 7;
@@ -1276,6 +1305,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
 
       // Commands that handle their own UI (no footer)
       var noFooter = { menu: 1, help: 1, projects: 1, clear: 1, reset: 1, exit: 1 };
+      var profileCmds = { about: 1, experience: 1, education: 1, skills: 1, social: 1, cv: 1 };
 
       var fn = commandMap[cmd];
       if (fn) {
@@ -1283,8 +1313,9 @@ const navSections: Record<string, { desc: string; path: string }> = {
         if (result && result.length) {
           var speed = result._fast ? 20 : undefined;
           var pid = result._projectId;
+          var isProfile = profileCmds[cmd] || false;
           typeLines(result, function() {
-            if (!noFooter[cmd]) showCommandFooter();
+            if (!noFooter[cmd]) showCommandFooter(pid, isProfile);
           }, speed);
         }
       } else {
