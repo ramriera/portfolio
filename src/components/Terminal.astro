@@ -195,13 +195,13 @@ const navSections: Record<string, { desc: string; path: string }> = {
   }
 
   .term-line.term-row-active {
-    color: #e6edf3;
+    color: #4ade80;
     font-weight: 700;
-    text-shadow: 0 0 6px rgba(230, 237, 243, 0.3);
+    text-shadow: 0 0 8px rgba(74, 222, 128, 0.45);
   }
 
   .term-line .term-pointer {
-    color: #e6edf3;
+    color: #4ade80;
     font-weight: 700;
     animation: pointer-blink 1s step-end infinite;
   }
@@ -419,18 +419,25 @@ const navSections: Record<string, { desc: string; path: string }> = {
     // ── Typewriter effect ──
     var typewriterBusy = false;
 
-    function typeLines(lines, cb) {
-      var d = 40;
+    function typeLines(lines, cb, delay) {
+      var d = delay || 40;
       typewriterBusy = true;
       var i = 0;
+      // Batch: flush multiple lines in one rAF for fast (≤20ms) delays
+      var batchSize = d <= 20 ? 3 : 1;
 
       function next() {
         if (i >= lines.length) { typewriterBusy = false; scroll(); if (cb) cb(); return; }
-        var el = document.createElement('div');
-        el.className = 'term-line';
-        el.innerHTML = lines[i];
-        output.appendChild(el);
-        i++;
+        var frag = document.createDocumentFragment();
+        var count = Math.min(batchSize, lines.length - i);
+        for (var j = 0; j < count; j++) {
+          var el = document.createElement('div');
+          el.className = 'term-line';
+          el.innerHTML = lines[i + j];
+          frag.appendChild(el);
+        }
+        output.appendChild(frag);
+        i += count;
         scroll();
         setTimeout(next, d + Math.random() * (d * 0.4));
       }
@@ -479,13 +486,13 @@ const navSections: Record<string, { desc: string; path: string }> = {
         ]},
         { label: 'PORTFOLIO', items: [
           ['projects', 'Lista proyectos interactiva'],
-          ['src massimo', 'Massimo Dutti'],
-          ['src movefast', 'MoveFast'],
-          ['src globalhelping', 'Global Helping'],
-          ['src sabadell', 'Banco Sabadell'],
-          ['src imaginbank', 'Imaginbank'],
-          ['src iberia', 'Iberia'],
-          ['src solotemazos', 'SoloTemazos'],
+          ['src 1', 'Massimo Dutti'],
+          ['src 2', 'MoveFast'],
+          ['src 3', 'Global Helping'],
+          ['src 4', 'Banco Sabadell'],
+          ['src 5', 'Imaginbank'],
+          ['src 6', 'Iberia'],
+          ['src 7', 'SoloTemazos'],
         ]},
         { label: 'SYSTEM', items: [
           ['neofetch', 'Info del sistema'],
@@ -619,6 +626,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + c('comment', '5 posiciones') + ' ' + c('muted', '|') + ' ' + c('comment', (new Date().getFullYear() - 2017) + '+ años de experiencia'),
         '&nbsp;',
       ];
+      out._fast = true;
       return out;
     }
 
@@ -875,13 +883,13 @@ const navSections: Record<string, { desc: string; path: string }> = {
         { perm: '-rw-r--r--', size: '320B', name: 'social.yaml',     color: 'function' },
         { perm: '-rw-r--r--', size: '2.4M', name: 'cv.pdf',          color: 'accent' },
         { perm: '-rwxr-xr-x', size: '64B',  name: 'neofetch.sh',    color: 'string' },
-        { perm: '-rw-r--r--', size: '3.6K', name: 'massimo.md',      color: 'accent' },
-        { perm: '-rw-r--r--', size: '2.8K', name: 'movefast.md',     color: 'accent' },
-        { perm: '-rw-r--r--', size: '2.1K', name: 'globalhelping.md', color: 'accent' },
-        { perm: '-rw-r--r--', size: '4.8K', name: 'sabadell.md',     color: 'accent' },
-        { perm: '-rw-r--r--', size: '3.2K', name: 'imaginbank.md',   color: 'accent' },
-        { perm: '-rw-r--r--', size: '4.1K', name: 'iberia.md',       color: 'accent' },
-        { perm: '-rw-r--r--', size: '5.6K', name: 'solotemazos.md',  color: 'accent' },
+        { perm: '-rw-r--r--', size: '3.6K', name: 'massimo.md',     color: 'accent' },
+        { perm: '-rwxr-xr-x', size: '2.8K', name: 'movefast.sh',    color: 'string' },
+        { perm: '-rw-r--r--', size: '2.1K', name: 'globalhelping.md', color: 'keyword' },
+        { perm: '-rw-r--r--', size: '4.8K', name: 'sabadell.dat',   color: 'function' },
+        { perm: '-rw-r--r--', size: '3.2K', name: 'imaginbank.log', color: 'accent' },
+        { perm: '-rw-r--r--', size: '4.1K', name: 'iberia.md',      color: 'keyword' },
+        { perm: '-rwxr-xr-x', size: '5.6K', name: 'solotemazos.sh', color: 'string' },
       ];
 
       if (a === '-la' || a === '-al' || a === '-l') {
@@ -893,6 +901,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
           out.push('  ' + c('muted', f.perm) + '  ' + c('muted', 'ramon staff') + '  ' + c('constant', f.size.padStart(5)) + '  ' + c('accent', '2026') + '  ' + c(f.color, f.name));
         });
         out.push('&nbsp;');
+        out._fast = true;
         return out;
       }
 
@@ -946,6 +955,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
         '  ' + c('accent', '+18%') + ' conversión en móvil  ' + c('accent', '−50%') + ' pasos (8→4)  ' + c('accent', '+40%') + ' carga',
+        '&nbsp;',
         '  ' + s,
       ];
       out._projectId = 1;
@@ -963,7 +973,6 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'Senior Product Designer'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Mobility & CleanTech'),
         '  ' + c('function', 'DURATION') + '   ' + c('muted', '2 semanas — research to prototype'),
-        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Whimsical · Adobe CC · Miro'),
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
@@ -988,8 +997,11 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
         '  ' + c('accent', '2 semanas') + ' research → prototipo  ' + c('accent', '3 taps') + ' reserva  ' + c('accent', '0') + ' competidores',
+        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Whimsical · Adobe CC · Miro'),
+        '&nbsp;',
         '  ' + s,
       ];
+      out._fast = true;
       out._projectId = 2;
       return out;
     }
@@ -1005,7 +1017,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'UX/UI Designer'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Non-Profit · Social Impact'),
         '  ' + c('function', 'DURATION') + '   ' + c('muted', '2 semanas (45 horas)'),
-        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Whimsical · Adobe CC · Miro'),
+        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Whimsical · Adobe CC · Miro · Google Forms'),
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
@@ -1024,6 +1036,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
         '  ' + c('accent', '48 encuestas') + ' pivot global→local  ' + c('accent', '3 flujos') + ' principales  ' + c('accent', 'DS') + ' completo',
+        '&nbsp;',
         '  ' + s,
       ];
       out._projectId = 3;
@@ -1060,6 +1073,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
         '  ' + c('accent', '−40%') + ' tiempo diseño  ' + c('accent', '95%') + ' coherencia  ' + c('accent', '+200') + ' componentes  ' + c('accent', '15') + ' equipos',
+        '&nbsp;',
         '  ' + s,
       ];
       out._projectId = 4;
@@ -1077,7 +1091,6 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'UX Lead / Product Designer'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Fintech · Mobile Banking'),
         '  ' + c('function', 'DURATION') + '   ' + c('muted', '3 semanas'),
-        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Heuristic Analysis · State Machine Design'),
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
@@ -1099,6 +1112,8 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
         '  ' + c('accent', '−50%') + ' pasos (8→4)  ' + c('accent', '−60%') + ' errores  ' + c('accent', '−35%') + ' llamadas soporte',
+        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Heuristic Analysis · State Machine Design'),
+        '&nbsp;',
         '  ' + s,
       ];
       out._projectId = 5;
@@ -1136,6 +1151,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + s,
         '  ' + c('string', 'RESULTS'),
         '  ' + c('accent', '−60%') + ' inconsistencias  ' + c('accent', '+40') + ' componentes  ' + c('accent', '−35%') + ' dev time  ' + c('accent', '100%') + ' tokens',
+        '&nbsp;',
         '  ' + s,
       ];
       out._projectId = 6;
@@ -1153,7 +1169,6 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'Senior Product Designer & UX Lead'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Music & Entertainment'),
         '  ' + c('function', 'DURATION') + '   ' + c('muted', '8 semanas'),
-        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · React · Tailwind CSS · Whimsical · Miro'),
         '&nbsp;',
         '  ' + s,
         '  ' + c('string', 'THE CHALLENGE'),
@@ -1176,6 +1191,11 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + c('accent', '>') + ' Reproductor embebido sin cambio de contexto',
         '  ' + c('accent', '>') + ' Mobile-first: 12 pantallas para operación con una mano',
         '  ' + c('accent', '>') + ' Specs técnicas: SSG, lazy loading, Lighthouse 95+',
+        '&nbsp;',
+        '  ' + s,
+        '&nbsp;',
+        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · React · Tailwind CSS · Whimsical · Miro'),
+        '&nbsp;',
         '  ' + s,
       ];
       out._projectId = 7;
@@ -1223,12 +1243,12 @@ const navSections: Record<string, { desc: string; path: string }> = {
       'education.dat': 'education', 'skills.json': 'skills', 'contact.link': 'social',
       'social.yaml': 'social', 'cv.pdf': 'cv', 'neofetch.sh': 'neofetch',
       'massimo.md': 'massimo',
-      'movefast.md': 'movefast',
+      'movefast.sh': 'movefast',
       'globalhelping.md': 'globalhelping',
-      'sabadell.md': 'sabadell',
-      'imaginbank.md': 'imaginbank',
+      'sabadell.dat': 'sabadell',
+      'imaginbank.log': 'imaginbank',
       'iberia.md': 'iberia',
-      'solotemazos.md': 'solotemazos',
+      'solotemazos.sh': 'solotemazos',
     };
 
     var commandMap = {
@@ -1293,6 +1313,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
       if (fn) {
         var result = fn(args);
         if (result && result.length) {
+          var speed = result._fast ? 20 : undefined;
           var pid = result._projectId;
           typeLines(result, function() {
             if (pid) showProjectNav(pid);
