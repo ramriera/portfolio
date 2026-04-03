@@ -1118,17 +1118,28 @@ const navSections: Record<string, { desc: string; path: string }> = {
       ];
     }
 
-    function cmdExit() {
-      // Show logout message, then fade out after a beat
+    var isExiting = false;
+
+    function doExit() {
+      if (isExiting) return;
+      isExiting = true;
+      if (selectMode) exitSelectMode();
+      line(c('muted', 'logout'));
+      line(c('comment', '[process completed] Connection to ramon@riera closed.'));
+      scroll();
       setTimeout(function() {
         terminal.classList.add('is-closing');
-        // Wait for CSS transition (0.4s) to complete before full cleanup
         setTimeout(function() {
           terminal.classList.remove('is-closing');
           window.closeTerminal();
+          isExiting = false;
         }, 450);
       }, 300);
-      return [c('muted', 'logout'), c('comment', 'Connection to ramon@riera closed.')];
+    }
+
+    function cmdExit() {
+      doExit();
+      return null;
     }
 
     // File-to-command mapping for bare filename execution
@@ -1339,6 +1350,13 @@ const navSections: Record<string, { desc: string; path: string }> = {
         commandMap.clear();
         return;
       }
+
+      // ── ESC → exit terminal ──
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        doExit();
+        return;
+      }
     });
 
     // ── Global focus (only when terminal is open) ──
@@ -1406,8 +1424,9 @@ const navSections: Record<string, { desc: string; path: string }> = {
     window.closeTerminal = function() {
       saveSession();
       terminal.classList.remove('is-open');
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+      input.blur();
       setFavicon(faviconNormal);
       document.title = 'Home \u26A1 Ramon Riera';
     };
