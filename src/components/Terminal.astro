@@ -190,29 +190,36 @@ const navSections: Record<string, { desc: string; path: string }> = {
   }
 
   .term-line.term-row-selectable {
-    opacity: 0.45;
-    transition: opacity 0.15s ease, color 0.15s ease, text-shadow 0.15s ease;
+    color: rgba(80, 250, 123, 0.4);
+    transition: color 0.15s ease, text-shadow 0.15s ease, font-weight 0.15s ease;
   }
 
   .term-line.term-row-active {
-    color: #50fa7b;
-    opacity: 1;
-    font-weight: 600;
-    text-shadow: 0 0 6px rgba(80, 250, 123, 0.4);
+    color: #4ade80;
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(74, 222, 128, 0.45);
   }
 
   .term-line .term-pointer {
-    color: #50fa7b;
+    color: #4ade80;
     font-weight: 700;
+    animation: pointer-blink 1s step-end infinite;
+  }
+
+  @keyframes pointer-blink {
+    0%, 60% { opacity: 1; }
+    61%, 100% { opacity: 0; }
   }
 
   .term-line.term-row-flash {
     color: #d97757;
-    text-shadow: 0 0 8px rgba(217, 119, 87, 0.5);
+    text-shadow: 0 0 10px rgba(217, 119, 87, 0.5);
   }
 
   .term-line.term-row-flash .term-pointer {
     color: #d97757;
+    animation: none;
+    opacity: 1;
   }
 
   /* ── Input row ── */
