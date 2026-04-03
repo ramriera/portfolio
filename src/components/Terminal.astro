@@ -1391,6 +1391,9 @@ const navSections: Record<string, { desc: string; path: string }> = {
           var cmd = rowObj.el.getAttribute('data-cmd');
           flashAndExecute(function() {
             exitSelectMode();
+            // Clear screen before showing result for a clean read
+            output.innerHTML = '';
+            output.scrollTop = 0;
             if (pid) {
               processCmd('src ' + pid);
             } else if (cmd) {
