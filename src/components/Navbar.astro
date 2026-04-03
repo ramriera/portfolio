@@ -38,8 +38,8 @@ const currentPath = Astro.url.pathname;
 
       <!-- Actions area -->
       <div class="flex items-center gap-5">
-        <!-- Code Mode toggle -->
-        <div class="relative group/code">
+        <!-- Code Mode toggle (desktop) -->
+        <div class="relative hidden lg:block group/code">
           <button
             id="code-mode-btn"
             class="code-mode-btn inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-semibold border border-neutral-300 text-neutral-500 bg-neutral-50 shadow-[0_2px_0_0_rgba(0,0,0,0.08)] rounded-md hover:border-[#4ade80] hover:text-[#4ade80] hover:shadow-[0_2px_0_0_rgba(74,222,128,0.3)] active:translate-y-[1px] active:shadow-none transition-colors duration-0"
@@ -82,6 +82,19 @@ const currentPath = Astro.url.pathname;
     </nav>
   </div>
 </header>
+
+<!-- Mobile Code Mode FAB -->
+<button
+  id="code-mode-fab"
+  class="code-mode-fab lg:hidden"
+  aria-label="Open terminal"
+>
+  <span class="code-mode-fab-cursor">&gt;_</span>
+  <span class="code-mode-fab-label">CODE</span>
+</button>
+
+<!-- Fullscreen transition overlay -->
+<div id="code-mode-overlay" class="code-mode-overlay" aria-hidden="true"></div>
 
 <!-- Mobile Navigation -->
 <div
@@ -197,6 +210,57 @@ const currentPath = Astro.url.pathname;
   .code-mode-btn.is-launching {
     border-color: #4ade80 !important;
     color: #4ade80 !important;
+  }
+
+  /* ── Mobile FAB ── */
+  .code-mode-fab {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 50;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #4ade80;
+    background: #000;
+    border: 1.5px solid #4ade80;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(74, 222, 128, 0.1);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .code-mode-fab:active {
+    transform: scale(0.95);
+    background: #111;
+  }
+
+  .code-mode-fab-cursor {
+    animation: cursor-blink-nav-hard 0.8s step-end infinite;
+  }
+
+  .code-mode-fab-label {
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Fullscreen transition overlay ── */
+  .code-mode-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+
+  .code-mode-overlay.is-active {
+    opacity: 1;
+    pointer-events: auto;
   }
 </style>
 
@@ -346,18 +410,48 @@ const currentPath = Astro.url.pathname;
     link.addEventListener('click', closeMenu);
   });
 
-  // ── Code Mode button → open terminal ──
+  // ── Code Mode: shared launch logic ──
+  const overlay = document.getElementById('code-mode-overlay');
+
+  function launchTerminal() {
+    if (typeof window.openTerminal !== 'function') return;
+    // Fullscreen black transition
+    if (overlay) overlay.classList.add('is-active');
+    setTimeout(() => {
+      window.openTerminal();
+      if (overlay) overlay.classList.remove('is-active');
+    }, 400);
+  }
+
+  // Desktop button
   const codeBtn = document.getElementById('code-mode-btn');
   codeBtn?.addEventListener('click', () => {
-    if (typeof window.openTerminal !== 'function') return;
     codeBtn.classList.add('is-launching');
     const label = codeBtn.querySelector('.code-mode-cursor');
     const original = label?.innerHTML;
     if (label) label.innerHTML = '...';
+    launchTerminal();
     setTimeout(() => {
-      window.openTerminal();
       codeBtn.classList.remove('is-launching');
       if (label) label.innerHTML = original;
-    }, 300);
+    }, 500);
   });
+
+  // Mobile FAB
+  const codeFab = document.getElementById('code-mode-fab');
+  codeFab?.addEventListener('click', () => {
+    launchTerminal();
+  });
+
+  // Hide FAB when terminal is open
+  const termObserver = new MutationObserver(() => {
+    const termEl = document.getElementById('interactive-terminal');
+    if (termEl?.classList.contains('is-open')) {
+      if (codeFab) codeFab.style.display = 'none';
+    } else {
+      if (codeFab) codeFab.style.display = '';
+    }
+  });
+  const termTarget = document.getElementById('interactive-terminal');
+  if (termTarget) termObserver.observe(termTarget, { attributes: true, attributeFilter: ['class'] });
 </script>

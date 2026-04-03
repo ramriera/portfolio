@@ -1589,6 +1589,7 @@ const projectList = projects.map((p, i) => ({
 
     // ── Mobile detection ──
     var isMobile = window.innerWidth <= 768;
+    if (isMobile) input.setAttribute('inputmode', 'none');
 
     // ── Global focus (desktop only — mobile: no auto keyboard) ──
     document.addEventListener('click', function(e) {
