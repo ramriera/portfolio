@@ -665,43 +665,6 @@ const navSections: Record<string, { desc: string; path: string }> = {
     // ── Post-project navigation ──
     var totalProjects = projectList.length;
 
-    function showProjectNav(currentId) {
-      line('&nbsp;');
-      line(c('comment', '  ' + '─'.repeat(50)));
-      line('&nbsp;');
-
-      var rowEls = [];
-      var navItems = [];
-
-      if (currentId > 1) {
-        var prev = projectList.find(function(p) { return p.id === currentId - 1; });
-        navItems.push({ label: '← ' + (prev ? prev.name : 'Anterior'), cmd: 'src ' + (currentId - 1) });
-      }
-      navItems.push({ label: '■ Menu', cmd: 'menu' });
-      if (currentId < totalProjects) {
-        var next = projectList.find(function(p) { return p.id === currentId + 1; });
-        navItems.push({ label: '→ ' + (next ? next.name : 'Siguiente'), cmd: 'src ' + (currentId + 1) });
-      }
-
-      navItems.forEach(function(item) {
-        var baseHtml = '  ' + c('function', item.label);
-        var el = document.createElement('div');
-        el.className = 'term-line term-row-selectable';
-        el.innerHTML = baseHtml;
-        el.setAttribute('data-cmd', item.cmd);
-        output.appendChild(el);
-        rowEls.push({ el: el, base: baseHtml });
-      });
-
-      line('&nbsp;');
-      line('  ' + c('muted', '[↑/↓]') + ' seleccionar  ' + c('muted', '[Enter]') + ' ejecutar  ' + c('muted', '[M]') + ' menu  ' + c('muted', '[ESC]') + ' cerrar');
-      line('&nbsp;');
-      scroll();
-
-      selectMode = { rows: rowEls, idx: navItems.length > 2 ? 1 : 0 };
-      updateSelectHighlight();
-    }
-
     function showCommandFooter() {
       line('&nbsp;');
       line(c('comment', '  ' + '─'.repeat(50)));
@@ -1326,11 +1289,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
           var speed = result._fast ? 20 : undefined;
           var pid = result._projectId;
           typeLines(result, function() {
-            if (pid) {
-              showProjectNav(pid);
-            } else if (!noFooter[cmd]) {
-              showCommandFooter();
-            }
+            if (!noFooter[cmd]) showCommandFooter();
           }, speed);
         }
       } else {
