@@ -1266,16 +1266,7 @@ const projectList = projects.map((p, i) => ({
       iberia: cmdIberia, solotemazos: cmdSolotemazos,
       neofetch: cmdNeofetch, cv: cmdCv, history: cmdHistory, date: cmdDate,
       ls: cmdLs, exit: cmdExit,
-      clear: function() {
-        var marker = document.getElementById('motd-end');
-        if (marker) {
-          while (marker.nextSibling) { output.removeChild(marker.nextSibling); }
-        } else {
-          output.innerHTML = '';
-        }
-        output.scrollTop = 0;
-        return null;
-      },
+      clear: function() { return null; },
       reset: function() {
         output.innerHTML = '';
         history.length = 0;
@@ -1295,11 +1286,8 @@ const projectList = projects.map((p, i) => ({
       // Exit any active TUI menu
       if (selectMode) exitSelectMode();
 
-      // Reset: clear everything below MOTD before running any command
-      var marker = document.getElementById('motd-end');
-      if (marker) {
-        while (marker.nextSibling) { output.removeChild(marker.nextSibling); }
-      }
+      // Full clear: clean slate for every command
+      output.innerHTML = '';
       output.scrollTop = 0;
 
       line('<span class="term-prompt-echo"><span class="t-string">ramon</span><span class="t-muted">@</span><span class="t-string">riera</span><span class="t-muted">:~$</span></span>  ' + esc(t));
@@ -1383,9 +1371,6 @@ const projectList = projects.map((p, i) => ({
           var cmd = rowObj.el.getAttribute('data-cmd');
           flashAndExecute(function() {
             exitSelectMode();
-            // Clear screen before showing result for a clean read
-            output.innerHTML = '';
-            output.scrollTop = 0;
             if (pid) {
               processCmd('src ' + pid);
             } else if (cmd) {
@@ -1466,7 +1451,7 @@ const projectList = projects.map((p, i) => ({
       // ── Ctrl+L → clear ──
       if (e.key === 'l' && e.ctrlKey) {
         e.preventDefault();
-        commandMap.clear();
+        processCmd('clear');
         return;
       }
 
