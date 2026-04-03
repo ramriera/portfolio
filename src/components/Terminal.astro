@@ -414,10 +414,27 @@ const navSections: Record<string, { desc: string; path: string }> = {
       next();
     }
 
+    // ── Last Login ──
+
+    function formatLastLogin() {
+      var d = new Date();
+      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var h = String(d.getHours()).padStart(2, '0');
+      var m = String(d.getMinutes()).padStart(2, '0');
+      var s = String(d.getSeconds()).padStart(2, '0');
+      return 'Last login: ' + days[d.getDay()] + ' ' + months[d.getMonth()] + ' ' + d.getDate() + ' ' + h + ':' + m + ':' + s + ' on ttys001';
+    }
+
     // ── MOTD ──
 
     function showMotd(cb) {
-      var motdLines = [
+      // Show last login instantly (system log style)
+      line(c('comment', formatLastLogin()));
+
+      // Brief pause to simulate connection, then typewrite MOTD
+      setTimeout(function() {
+        var motdLines = [
         '<span class="t-accent">  ____                                  ____  _                </span>',
         '<span class="t-accent"> |  _ \\ __ _ _ __ ___   ___  _ __      |  _ \\(_) ___ _ __ __ _ </span>',
         "<span class=\"t-accent\"> | |_) / _` | '_ ` _ \\ / _ \\| '_ \\     | |_) | |/ _ \\ '__/ _` |</span>",
@@ -431,13 +448,14 @@ const navSections: Record<string, { desc: string; path: string }> = {
         'Escribe ' + c('keyword', 'help') + ' para ver los comandos disponibles.',
         c('comment', '─'.repeat(60)),
       ];
-      typeLines(motdLines, function() {
-        // Mark where MOTD ends so clear can preserve it
-        var marker = document.createElement('div');
-        marker.id = 'motd-end';
-        output.appendChild(marker);
-        if (cb) cb();
-      }, 70);
+        typeLines(motdLines, function() {
+          // Mark where MOTD ends so clear can preserve it
+          var marker = document.createElement('div');
+          marker.id = 'motd-end';
+          output.appendChild(marker);
+          if (cb) cb();
+        }, 70);
+      }, 100);
     }
 
     // ── Commands ──
