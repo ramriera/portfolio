@@ -415,6 +415,8 @@ const currentPath = Astro.url.pathname;
 
   function launchTerminal() {
     if (typeof window.openTerminal !== 'function') return;
+    // Hide FAB immediately
+    if (codeFab) codeFab.style.display = 'none';
     // Fullscreen black transition
     if (overlay) overlay.classList.add('is-active');
     setTimeout(() => {

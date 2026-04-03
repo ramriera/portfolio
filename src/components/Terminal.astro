@@ -36,7 +36,6 @@ const projectList = projects.map((p, i) => ({
         <span class="term-header-date" id="term-header-date"></span>
         <span class="term-header-sep">|</span>
         <span class="term-header-status">● Active</span>
-        <button id="term-exit-btn" class="term-exit-btn" aria-label="Close terminal">✕</button>
       </div>
     </div>
 
@@ -146,26 +145,6 @@ const projectList = projects.map((p, i) => ({
     align-items: center;
     gap: 0.75rem;
     white-space: nowrap;
-  }
-
-  .term-exit-btn {
-    display: none;
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #7d8590;
-    font-size: 0.75rem;
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    margin-left: 0.5rem;
-  }
-
-  .term-exit-btn:active { background: rgba(255, 255, 255, 0.08); color: #e6edf3; }
-
-  @media (max-width: 768px) {
-    .term-exit-btn { display: inline-flex; align-items: center; justify-content: center; }
   }
 
   .term-header-name { color: #e6edf3; font-weight: 600; }
@@ -1648,10 +1627,6 @@ const projectList = projects.map((p, i) => ({
     });
     if (btnMenu) btnMenu.addEventListener('click', function(e) { e.stopPropagation(); processCmd('menu'); input.value = ''; });
     if (btnEsc) btnEsc.addEventListener('click', function(e) { e.stopPropagation(); doExit(); });
-
-    // ── Header exit button ──
-    var exitBtn = document.getElementById('term-exit-btn');
-    if (exitBtn) exitBtn.addEventListener('click', function(e) { e.stopPropagation(); doExit(); });
 
     // ── Favicon switching ──
     var faviconNormal = '/favicon.svg';
