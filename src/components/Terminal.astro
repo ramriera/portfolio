@@ -190,7 +190,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
   }
 
   .term-line.term-row-selectable {
-    color: rgba(80, 250, 123, 0.4);
+    color: rgba(80, 250, 123, 0.6);
     transition: color 0.15s ease, text-shadow 0.15s ease, font-weight 0.15s ease;
   }
 
@@ -458,7 +458,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         c('string', 'Bienvenido.'),
         '&nbsp;',
-        'Escribe ' + c('keyword', 'help') + ' para ver los comandos disponibles.',
+        'Escribe ' + c('keyword', 'menu') + ' para ver los comandos disponibles.',
         c('comment', '─'.repeat(60)),
       ];
       typeLines(motdLines, function() {
@@ -475,6 +475,10 @@ const navSections: Record<string, { desc: string; path: string }> = {
     // ── Commands (return arrays of lines) ──
 
     function cmdHelp() {
+      // Clear screen for fresh menu
+      output.innerHTML = '';
+      output.scrollTop = 0;
+
       var categories = [
         { label: 'PROFILE', items: [
           ['about', 'Dossier profesional completo'],
@@ -615,7 +619,9 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '  ' + c('constant', '2021 — Presente   ') + sep + c('string', 'Doctori.com           ') + sep + c('keyword', 'Sr. Product Designer & Design Ops'),
         '  ' + c('constant', '2017 — 2021       ') + sep + c('string', 'JBM                   ') + sep + c('keyword', 'Junior Designer'),
         divider,
+        '&nbsp;',
         '  ' + c('accent', ' CONSULTORIA SENIOR'),
+        '&nbsp;',
         divider,
         '  ' + c('constant', '2023 — 2024       ') + sep + c('comment', '  Leemons             ') + sep + c('muted', 'Consultor · Product & UI'),
         '  ' + c('constant', '2022 — 2023       ') + sep + c('comment', '  Iberia              ') + sep + c('muted', 'Consultor · Design Systems'),
@@ -662,6 +668,44 @@ const navSections: Record<string, { desc: string; path: string }> = {
         row.el.classList.remove('term-row-flash');
         cb();
       }, 120);
+    }
+
+    // ── Post-project navigation ──
+    var totalProjects = projectList.length;
+
+    function showProjectNav(currentId) {
+      line('&nbsp;');
+      line(c('comment', '  ' + '─'.repeat(50)));
+      line('&nbsp;');
+
+      var rowEls = [];
+      var navItems = [];
+
+      if (currentId > 1) {
+        var prev = projectList.find(function(p) { return p.id === currentId - 1; });
+        navItems.push({ label: '← ' + (prev ? prev.name : 'Anterior'), cmd: 'src ' + (currentId - 1) });
+      }
+      navItems.push({ label: '■ Menu', cmd: 'menu' });
+      if (currentId < totalProjects) {
+        var next = projectList.find(function(p) { return p.id === currentId + 1; });
+        navItems.push({ label: '→ ' + (next ? next.name : 'Siguiente'), cmd: 'src ' + (currentId + 1) });
+      }
+
+      navItems.forEach(function(item) {
+        var baseHtml = '  ' + c('function', item.label);
+        var el = document.createElement('div');
+        el.className = 'term-line term-row-selectable';
+        el.innerHTML = baseHtml;
+        el.setAttribute('data-cmd', item.cmd);
+        output.appendChild(el);
+        rowEls.push({ el: el, base: baseHtml });
+      });
+
+      line('&nbsp;');
+      scroll();
+
+      selectMode = { rows: rowEls, idx: navItems.length > 2 ? 1 : 0 };
+      updateSelectHighlight();
     }
 
     function cmdProjects() {
@@ -880,39 +924,54 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + c('accent', '▓▓ PROJECT FILE: MASSIMO DUTTI'),
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'TITLE') + '      Massimo Dutti — Luxury E-commerce Experience',
         '  ' + c('function', 'YEAR') + '       ' + c('constant', '2025'),
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'Senior Product Designer'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Fashion Retail · Luxury E-commerce'),
         '  ' + c('function', 'STACK') + '      ' + c('muted', 'React · Next.js · GraphQL · Tailwind · Framer Motion'),
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Redefinir la navegación y el checkout para una marca de lujo global.',
         '  Equilibrar una estética ' + c('keyword', 'minimalista high-end') + ' con una arquitectura',
         '  técnica capaz de soportar ' + c('keyword', 'picos de tráfico masivos') + ' sin perder',
         '  fluidez. El flujo de ' + c('accent', '"Reserva en Tienda"') + ' tenía 8 pasos con',
         '  registro obligatorio — cada paso intermedio era un punto de fuga.',
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  Implementación de ' + c('keyword', 'Micro-frontends') + ' para el catálogo y un flujo',
         '  de compra ' + c('keyword', 'One-page checkout') + ' que redujo la fricción:',
+        '&nbsp;',
         '  ' + c('muted', '·') + ' CTA dual visible sin scroll en ficha de producto',
         '  ' + c('muted', '·') + ' Checkout en ' + c('keyword', 'un solo paso') + ' sin registro obligatorio',
         '  ' + c('muted', '·') + ' Selección de tienda con ' + c('keyword', 'stock en tiempo real'),
         '  ' + c('muted', '·') + ' Tracking in-app + integración ' + c('keyword', 'Apple/Google Wallet'),
         '  ' + c('muted', '·') + ' Service Design: poste QR para recogida autónoma',
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'KEY FEATURES'),
+        '&nbsp;',
         '  ' + c('accent', '>') + ' Interfaz adaptativa con tipografía dinámica',
         '  ' + c('accent', '>') + ' Transiciones de página instantáneas (' + c('keyword', 'Zero-layout shift') + ')',
         '  ' + c('accent', '>') + ' Búsqueda inteligente con filtros dinámicos',
         '  ' + c('accent', '>') + ' Sistema de recuperación de abandonos con push segmentadas',
-        '  ' + s,
-        '  ' + c('string', 'RESULTS'),
-        '  ' + c('accent', '+18%') + ' conversión en móvil  ' + c('accent', '−50%') + ' pasos (8→4)  ' + c('accent', '+40%') + ' carga',
+        '&nbsp;',
         '  ' + s,
         '&nbsp;',
+        '  ' + c('string', 'RESULTS'),
+        '&nbsp;',
+        '  ' + c('accent', '+18%') + ' conversión en móvil  ' + c('accent', '−50%') + ' pasos (8→4)  ' + c('accent', '+40%') + ' carga',
+        '&nbsp;',
+        '  ' + s,
       ];
+      out._projectId = 1;
       return out;
     }
 
@@ -922,205 +981,282 @@ const navSections: Record<string, { desc: string; path: string }> = {
         '&nbsp;',
         '  ' + c('accent', '▓▓ PROJECT FILE: MOVEFAST'),
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'TITLE') + '      MoveFast — Digital Product Accelerator',
         '  ' + c('function', 'YEAR') + '       ' + c('constant', '2021'),
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'Senior Product Designer'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Mobility & CleanTech'),
         '  ' + c('function', 'DURATION') + '   ' + c('muted', '2 semanas — research to prototype'),
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Diseñar una app de movilidad eléctrica que elimina la barrera',
         '  más determinante para la adopción del EV en España:',
         '  la ' + c('keyword', 'range anxiety') + '. Un modelo de servicio ' + c('accent', 'inexistente') + ' en el mercado.',
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Cambio de batería a domicilio') + ' — técnico con batería cargada en minutos',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Puntos de intercambio dinámicos') + ' — reserva anticipada + stock real',
         '  ' + c('muted', '·') + ' Mapa interactivo unificado con ' + c('keyword', 'stock en tiempo real'),
         '  ' + c('muted', '·') + ' Flujo de reserva en ' + c('accent', '3 taps') + ' — cero fricción',
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'KEY FEATURES'),
+        '&nbsp;',
         '  ' + c('accent', '>') + ' Dashboard de métricas en tiempo real',
         '  ' + c('accent', '>') + ' Sistema de prototipado rápido integrado',
         '  ' + c('accent', '>') + ' Arquitectura escalable para crecimiento post-MVP',
         '  ' + c('accent', '>') + ' Design system modular de alta velocidad',
-        '  ' + s,
-        '  ' + c('string', 'RESULTS'),
-        '  ' + c('accent', '2 semanas') + ' research → prototipo  ' + c('accent', '3 taps') + ' reserva  ' + c('accent', '0') + ' competidores',
-        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Whimsical · Adobe CC · Miro'),
+        '&nbsp;',
         '  ' + s,
         '&nbsp;',
+        '  ' + c('string', 'RESULTS'),
+        '&nbsp;',
+        '  ' + c('accent', '2 semanas') + ' research → prototipo  ' + c('accent', '3 taps') + ' reserva  ' + c('accent', '0') + ' competidores',
+        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Whimsical · Adobe CC · Miro'),
+        '&nbsp;',
+        '  ' + s,
       ];
       out._fast = true;
+      out._projectId = 2;
       return out;
     }
 
     function cmdGlobalhelping() {
       var s = c('comment', '─'.repeat(62));
-      return [
+      var out = [
         '&nbsp;',
         '  ' + c('accent', '▓▓ PROJECT FILE: GLOBAL HELPING'),
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'TITLE') + '      Global Helping — Solidarity Platform',
         '  ' + c('function', 'YEAR') + '       ' + c('constant', '2021'),
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'UX/UI Designer'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Non-Profit · Social Impact'),
         '  ' + c('function', 'DURATION') + '   ' + c('muted', '2 semanas (45 horas)'),
+        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Whimsical · Adobe CC · Miro · Google Forms'),
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Las ' + c('keyword', 'ONGs locales') + ' hacen trabajo crítico pero son invisibles',
         '  frente a grandes organizaciones con equipos de marketing.',
         '  Donaciones, voluntariado y crowdfunding viven en ' + c('accent', 'plataformas'),
         '  ' + c('accent', 'separadas') + ' — la fragmentación diluye la intención de ayudar.',
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' Plataforma que unifica ' + c('keyword', 'donaciones + voluntariado + crowdfunding'),
         '  ' + c('muted', '·') + ' Storytelling visual que convierte datos de ONGs en narrativas',
         '  ' + c('muted', '·') + ' Design Tokens para escalabilidad del sistema visual',
         '  ' + c('muted', '·') + ' Prioridad: ' + c('keyword', 'confianza') + ' + ' + c('keyword', 'conexión emocional'),
-        '  ' + s,
-        '  ' + c('string', 'RESULTS'),
-        '  ' + c('accent', '48 encuestas') + ' pivot global→local  ' + c('accent', '3 flujos') + ' principales  ' + c('accent', 'DS') + ' completo',
-        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Whimsical · Adobe CC · Miro · Google Forms'),
+        '&nbsp;',
         '  ' + s,
         '&nbsp;',
+        '  ' + c('string', 'RESULTS'),
+        '&nbsp;',
+        '  ' + c('accent', '48 encuestas') + ' pivot global→local  ' + c('accent', '3 flujos') + ' principales  ' + c('accent', 'DS') + ' completo',
+        '&nbsp;',
+        '  ' + s,
       ];
+      out._projectId = 3;
+      return out;
     }
 
     function cmdSabadell() {
       var s = c('comment', '─'.repeat(62));
-      return [
+      var out = [
         '&nbsp;',
         '  ' + c('accent', '▓▓ PROJECT FILE: BANCO SABADELL'),
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'TITLE') + '      Banco Sabadell — Design System',
         '  ' + c('function', 'YEAR') + '       ' + c('constant', '2022'),
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'Product Designer · Design Systems'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Fintech · Banking'),
         '  ' + c('function', 'DURATION') + '   ' + c('muted', '4 meses'),
         '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Zeroheight · Storybook · React'),
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Ecosistema digital bancario con ' + c('keyword', 'fragmentación severa') + ':',
         '  web, banca online, app y canales internos con estilos inconsistentes.',
         '  Sin ' + c('accent', 'fuente única de verdad') + ' para componentes ni tokens.',
         '  La documentación técnica era inexistente — implementaciones dispares.',
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Design Tokens') + ' como single source of truth (Color, Spacing 4px, Typo)',
         '  ' + c('muted', '·') + ' Biblioteca de componentes basada en ' + c('keyword', 'Átomos y Moléculas'),
         '  ' + c('muted', '·') + ' Documentación centralizada en ' + c('keyword', 'Zeroheight') + ' + sync a Storybook',
         '  ' + c('muted', '·') + ' Azul Sabadell ' + c('function', '#006DFF') + ' como token primario del sistema',
-        '  ' + s,
-        '  ' + c('string', 'RESULTS'),
-        '  ' + c('accent', '−40%') + ' tiempo diseño  ' + c('accent', '95%') + ' coherencia  ' + c('accent', '+200') + ' componentes  ' + c('accent', '15') + ' equipos',
+        '&nbsp;',
         '  ' + s,
         '&nbsp;',
+        '  ' + c('string', 'RESULTS'),
+        '&nbsp;',
+        '  ' + c('accent', '−40%') + ' tiempo diseño  ' + c('accent', '95%') + ' coherencia  ' + c('accent', '+200') + ' componentes  ' + c('accent', '15') + ' equipos',
+        '&nbsp;',
+        '  ' + s,
       ];
+      out._projectId = 4;
+      return out;
     }
 
     function cmdImaginbank() {
       var s = c('comment', '─'.repeat(62));
-      return [
+      var out = [
         '&nbsp;',
         '  ' + c('accent', '▓▓ PROJECT FILE: IMAGINBANK'),
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'TITLE') + '      Imaginbank — Trust Design for Mobile Banking',
         '  ' + c('function', 'YEAR') + '       ' + c('constant', '2021'),
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'UX Lead / Product Designer'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Fintech · Mobile Banking'),
         '  ' + c('function', 'DURATION') + '   ' + c('muted', '3 semanas'),
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Rediseño de sistema de banca móvil donde cada fallo de diseño',
         '  ' + c('keyword', 'cuesta dinero real') + '. Tres fallos estructurales:',
+        '&nbsp;',
         '  ' + c('accent', '1.') + ' Operaciones sin feedback — usuario sin saber si se procesó',
         '  ' + c('accent', '2.') + ' Nomenclatura inconsistente — 3 términos para "enviar dinero"',
         '  ' + c('accent', '3.') + ' Errores sin recuperación — mensajes genéricos sin causa',
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Máquina de 5 estados') + ' explícita por operación',
         '     (idle → loading → pending → success → failure)',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Prevención estructural') + ' — validación IBAN en tiempo real,',
         '     confirmación pre-ejecución, bloqueo de doble acción',
         '  ' + c('muted', '·') + ' Jerarquía de datos: saldo disponible ' + c('accent', 'primero'),
-        '  ' + s,
-        '  ' + c('string', 'RESULTS'),
-        '  ' + c('accent', '−50%') + ' pasos (8→4)  ' + c('accent', '−60%') + ' errores  ' + c('accent', '−35%') + ' llamadas soporte',
-        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Heuristic Analysis · State Machine Design'),
+        '&nbsp;',
         '  ' + s,
         '&nbsp;',
+        '  ' + c('string', 'RESULTS'),
+        '&nbsp;',
+        '  ' + c('accent', '−50%') + ' pasos (8→4)  ' + c('accent', '−60%') + ' errores  ' + c('accent', '−35%') + ' llamadas soporte',
+        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Heuristic Analysis · State Machine Design'),
+        '&nbsp;',
+        '  ' + s,
       ];
+      out._projectId = 5;
+      return out;
     }
 
     function cmdIberia() {
       var s = c('comment', '─'.repeat(62));
-      return [
+      var out = [
         '&nbsp;',
         '  ' + c('accent', '▓▓ PROJECT FILE: IBERIA'),
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'TITLE') + '      Iberia — Unified Design System',
         '  ' + c('function', 'YEAR') + '       ' + c('constant', '2023'),
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'Design System Lead'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Travel · Aviation'),
         '  ' + c('function', 'DURATION') + '   ' + c('muted', '12 semanas'),
         '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · Storybook · Zeroheight · Swift UI'),
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  Ecosistema digital de una aerolínea con ' + c('keyword', 'fragmentación severa'),
         '  entre Web y App. Sin ' + c('accent', 'Design Tokens') + ' unificados: cada plataforma',
         '  mantenía sus propios valores. Un botón primario tenía',
         '  ' + c('accent', '4 variantes') + ' distintas — ninguna era la "correcta".',
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Design Tokens') + ' como fuente única de verdad',
         '     (Rojo Iberia ' + c('function', '#E62232') + ', Neutros, Spacing 4px)',
         '  ' + c('muted', '·') + ' Librería de componentes: ' + c('keyword', 'Átomos y Moléculas'),
         '  ' + c('muted', '·') + ' Documentación para maximizar eficiencia en desarrollo',
         '  ' + c('muted', '·') + ' Trabajo transversal con múltiples squads',
-        '  ' + s,
-        '  ' + c('string', 'RESULTS'),
-        '  ' + c('accent', '−60%') + ' inconsistencias  ' + c('accent', '+40') + ' componentes  ' + c('accent', '−35%') + ' dev time  ' + c('accent', '100%') + ' tokens',
+        '&nbsp;',
         '  ' + s,
         '&nbsp;',
+        '  ' + c('string', 'RESULTS'),
+        '&nbsp;',
+        '  ' + c('accent', '−60%') + ' inconsistencias  ' + c('accent', '+40') + ' componentes  ' + c('accent', '−35%') + ' dev time  ' + c('accent', '100%') + ' tokens',
+        '&nbsp;',
+        '  ' + s,
       ];
+      out._projectId = 6;
+      return out;
     }
 
     function cmdSolotemazos() {
       var s = c('comment', '─'.repeat(62));
-      return [
+      var out = [
         '&nbsp;',
         '  ' + c('accent', '▓▓ PROJECT FILE: SOLOTEMAZOS'),
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'TITLE') + '      SoloTemazos — Music Discovery Platform',
         '  ' + c('function', 'YEAR') + '       ' + c('constant', '2024'),
         '  ' + c('function', 'ROLE') + '       ' + c('muted', 'Senior Product Designer & UX Lead'),
         '  ' + c('function', 'INDUSTRY') + '   ' + c('muted', 'Music & Entertainment'),
         '  ' + c('function', 'DURATION') + '   ' + c('muted', '8 semanas'),
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE CHALLENGE'),
+        '&nbsp;',
         '  El streaming tiene ' + c('keyword', '100M+ de tracks') + ' y los usuarios pasan más',
         '  tiempo buscando qué escuchar que escuchando. Los algoritmos',
         '  optimizan ' + c('accent', 'retención') + ', no ' + c('accent', 'descubrimiento') + '. Resultado:',
         '  consumo pasivo — playlists de fondo sin conexión emocional.',
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'THE SOLUTION'),
+        '&nbsp;',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Curación humana') + ' vs. algoritmos — menos contenido, mejor criterio',
         '  ' + c('muted', '·') + ' ' + c('keyword', 'Zero-friction playback') + ' — del browse al play en un solo tap',
         '  ' + c('muted', '·') + ' Sin barra de búsqueda en home — hay música esperándote',
         '  ' + c('muted', '·') + ' Categorización por ' + c('keyword', 'emoción y contexto') + ', no por género',
         '  ' + c('muted', '·') + ' Dark mode funcional: portadas como protagonistas',
+        '&nbsp;',
         '  ' + s,
+        '&nbsp;',
         '  ' + c('string', 'KEY FEATURES'),
+        '&nbsp;',
         '  ' + c('accent', '>') + ' Descubrimiento que elimina la parálisis de elección',
         '  ' + c('accent', '>') + ' Reproductor embebido sin cambio de contexto',
         '  ' + c('accent', '>') + ' Mobile-first: 12 pantallas para operación con una mano',
         '  ' + c('accent', '>') + ' Specs técnicas: SSG, lazy loading, Lighthouse 95+',
-        '  ' + s,
-        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · React · Tailwind CSS · Whimsical · Miro'),
+        '&nbsp;',
         '  ' + s,
         '&nbsp;',
+        '  ' + c('function', 'STACK') + '      ' + c('muted', 'Figma · React · Tailwind CSS · Whimsical · Miro'),
+        '&nbsp;',
+        '  ' + s,
       ];
+      out._projectId = 7;
+      return out;
     }
 
     function cmdCv() {
@@ -1173,7 +1309,7 @@ const navSections: Record<string, { desc: string; path: string }> = {
     };
 
     var commandMap = {
-      help: cmdHelp, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
+      menu: cmdHelp, help: cmdHelp, about: cmdWhoami, experience: cmdExperience, education: cmdEducation, projects: cmdProjects,
       src: cmdSrc, skills: cmdSkills, social: cmdSocial,
       massimo: cmdMassimo, movefast: cmdMovefast, globalhelping: cmdGlobalhelping,
       sabadell: cmdSabadell, banco: cmdSabadell, imaginbank: cmdImaginbank,
@@ -1225,12 +1361,15 @@ const navSections: Record<string, { desc: string; path: string }> = {
         var result = fn(args);
         if (result && result.length) {
           var speed = result._fast ? 20 : undefined;
-          typeLines(result, null, speed);
+          var pid = result._projectId;
+          typeLines(result, function() {
+            if (pid) showProjectNav(pid);
+          }, speed);
         }
       } else {
         typeLines([
           c('error', 'comando no encontrado: ' + esc(cmd)),
-          c('muted', 'Escribe') + ' ' + c('keyword', 'help') + ' ' + c('muted', 'para ver los comandos.'),
+          c('muted', 'Escribe') + ' ' + c('keyword', 'menu') + ' ' + c('muted', 'para ver los comandos.'),
         ]);
       }
     }
