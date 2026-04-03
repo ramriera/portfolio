@@ -38,6 +38,17 @@ const currentPath = Astro.url.pathname;
 
       <!-- Actions area -->
       <div class="flex items-center gap-5">
+        <!-- Code Mode toggle -->
+        <button
+          id="code-mode-btn"
+          class="hidden lg:inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-medium rounded-full border border-neutral-200 text-neutral-500 transition-all duration-300 hover:border-neutral-900 hover:text-neutral-900 hover:bg-neutral-50"
+          aria-label="Open terminal"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" />
+          </svg>
+          Code Mode
+        </button>
 
         <a
           href={`mailto:${siteConfig.email}`}
@@ -65,19 +76,6 @@ const currentPath = Astro.url.pathname;
     </nav>
   </div>
 </header>
-
-<!-- Mobile Code Mode FAB -->
-<button
-  id="code-mode-fab"
-  class="code-mode-fab lg:hidden"
-  aria-label="Open terminal"
->
-  <span class="code-mode-fab-cursor">&gt;_</span>
-  <span class="code-mode-fab-label">CODE</span>
-</button>
-
-<!-- Fullscreen transition overlay -->
-<div id="code-mode-overlay" class="code-mode-overlay" aria-hidden="true"></div>
 
 <!-- Mobile Navigation -->
 <div
@@ -171,62 +169,6 @@ const currentPath = Astro.url.pathname;
     white-space: nowrap;
   }
 
-  /* ── Code Mode ── */
-  @keyframes cursor-blink-nav-hard {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
-
-  /* ── Mobile FAB ── */
-  .code-mode-fab {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 50;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.65rem 1.1rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #4ade80;
-    background: #000;
-    border: 1.5px solid #4ade80;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(74, 222, 128, 0.1);
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-  }
-
-  .code-mode-fab:active {
-    transform: scale(0.95);
-    background: #111;
-  }
-
-  .code-mode-fab-cursor {
-    animation: cursor-blink-nav-hard 0.8s step-end infinite;
-  }
-
-  .code-mode-fab-label {
-    letter-spacing: 0.1em;
-  }
-
-  /* ── Fullscreen transition overlay ── */
-  .code-mode-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9998;
-    background: #000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-  }
-
-  .code-mode-overlay.is-active {
-    opacity: 1;
-    pointer-events: auto;
-  }
 </style>
 
 <script>
@@ -375,36 +317,10 @@ const currentPath = Astro.url.pathname;
     link.addEventListener('click', closeMenu);
   });
 
-  // ── Code Mode: shared launch logic ──
-  const overlay = document.getElementById('code-mode-overlay');
-
-  function launchTerminal() {
-    if (typeof window.openTerminal !== 'function') return;
-    // Hide FAB immediately
-    if (codeFab) codeFab.style.display = 'none';
-    // Fullscreen black transition
-    if (overlay) overlay.classList.add('is-active');
-    setTimeout(() => {
+  // ── Code Mode button → open terminal ──
+  document.getElementById('code-mode-btn')?.addEventListener('click', () => {
+    if (typeof window.openTerminal === 'function') {
       window.openTerminal();
-      if (overlay) overlay.classList.remove('is-active');
-    }, 400);
-  }
-
-  // FAB button
-  const codeFab = document.getElementById('code-mode-fab');
-  codeFab?.addEventListener('click', () => {
-    launchTerminal();
-  });
-
-  // Hide FAB when terminal is open
-  const termObserver = new MutationObserver(() => {
-    const termEl = document.getElementById('interactive-terminal');
-    if (termEl?.classList.contains('is-open')) {
-      if (codeFab) codeFab.style.display = 'none';
-    } else {
-      if (codeFab) codeFab.style.display = '';
     }
   });
-  const termTarget = document.getElementById('interactive-terminal');
-  if (termTarget) termObserver.observe(termTarget, { attributes: true, attributeFilter: ['class'] });
 </script>

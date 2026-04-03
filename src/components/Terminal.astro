@@ -22,7 +22,7 @@ const projectList = projects.map((p, i) => ({
     <div class="term-header">
       <div class="term-header-left">
         <div class="term-dots">
-          <span id="term-dot-close" style="background:#ff5f57; cursor:pointer" title="Cerrar terminal"></span>
+          <span style="background:#ff5f57"></span>
           <span style="background:#febc2e"></span>
           <span style="background:#28c840"></span>
         </div>
@@ -58,14 +58,6 @@ const projectList = projects.map((p, i) => ({
       <span class="term-cursor" id="term-cursor">&#9608;</span>
     </div>
 
-    <!-- ═══ MOBILE: Virtual navigation controls ═══ -->
-    <div class="term-mobile-controls" id="term-mobile-controls">
-      <button id="term-btn-up" aria-label="Up">↑</button>
-      <button id="term-btn-down" aria-label="Down">↓</button>
-      <button id="term-btn-enter" class="btn-enter" aria-label="Enter">Enter</button>
-      <button id="term-btn-menu" aria-label="Menu">Menu</button>
-      <button id="term-btn-esc" aria-label="Close">ESC</button>
-    </div>
   </div>
 </div>
 
@@ -86,6 +78,7 @@ const projectList = projects.map((p, i) => ({
     background: #11111b;
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.4s ease;
     scrollbar-width: none;
   }
 
@@ -99,7 +92,6 @@ const projectList = projects.map((p, i) => ({
   .dashboard.is-open.is-closing {
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease;
   }
 
   /* Lock html scroll when terminal is open */
@@ -327,111 +319,29 @@ const projectList = projects.map((p, i) => ({
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
-    .dashboard { padding: 0; }
-
-    .term-window { border-radius: 0; border: none; }
+    .dashboard { padding: 0.5rem; }
 
     .term-header {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.4rem 0.75rem;
-      gap: 0.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.625rem 1rem;
+      gap: 0.25rem;
     }
 
-    .term-header-right {
-      font-size: 0.65rem;
-      gap: 0.4rem;
-    }
-
-    .term-header-info,
-    .term-header-os,
-    .term-header-date { display: none; }
-    .term-header-right .term-header-sep { display: none; }
+    .term-header-right { font-size: 0.7rem; }
 
     .term-output {
-      padding: 0.5rem 0.65rem;
-      font-size: 0.76rem;
-      line-height: 1.35;
-      -webkit-text-size-adjust: 100%;
-      -webkit-overflow-scrolling: touch;
+      padding: 1rem 1.25rem;
+      font-size: 0.68rem;
     }
 
     .term-input-row {
-      padding: 0.35rem 0.65rem;
-      display: none;
+      padding: 0.625rem 1.25rem 0.75rem;
     }
 
-    .term-line {
-      white-space: pre-wrap;
-      word-break: break-word;
-      min-height: 1.1em;
-    }
-
-    /* Tappable rows */
-    .term-line.term-row-selectable {
-      padding: 0.35rem 0.2rem;
-      border-radius: 3px;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Touchable links in output */
-    .term-link {
-      -webkit-tap-highlight-color: transparent;
-      cursor: pointer;
-    }
-
-    .term-link:active {
-      opacity: 0.7;
-    }
-
-    .crt-overlay { display: none; }
-  }
-
-  /* ── Mobile virtual controls ── */
-  .term-mobile-controls {
-    display: none;
-  }
-
-  @media (max-width: 768px) {
-    .term-mobile-controls {
-      display: flex;
-      justify-content: center;
-      gap: 0.35rem;
-      padding: 0.4rem 0.5rem;
-      background: #181825;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      flex-shrink: 0;
-    }
-
-    .term-mobile-controls button {
-      font-family: 'JetBrains Mono', monospace;
+    .term-prompt,
+    .term-input {
       font-size: 0.75rem;
-      font-weight: 600;
-      color: #7d8590;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      padding: 0.4rem 0.75rem;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-
-    .term-mobile-controls button:active {
-      background: rgba(255, 255, 255, 0.12);
-      color: #e6edf3;
-    }
-
-    .term-mobile-controls .btn-enter {
-      flex: 1;
-      max-width: 8rem;
-      color: #4ade80;
-      border-color: rgba(74, 222, 128, 0.2);
-    }
-
-    .term-mobile-controls .btn-enter:active {
-      background: rgba(74, 222, 128, 0.15);
     }
   }
 </style>
@@ -531,37 +441,26 @@ const projectList = projects.map((p, i) => ({
     // ── MOTD ──
 
     function showMotd(cb) {
-      var motdLines;
-      if (isMobile) {
-        motdLines = [
-          c('accent', '  Ramon Riera'),
-          c('muted', '  UX Lead & Product Designer'),
-          '&nbsp;',
-          c('string', '  Bienvenido.') + ' ' + 'Escribe ' + c('keyword', 'menu') + ' o toca una opción.',
-          c('comment', '─'.repeat(40)),
-        ];
-      } else {
-        motdLines = [
-          '<span class="t-accent">  ____                                  ____  _                </span>',
-          '<span class="t-accent"> |  _ \\ __ _ _ __ ___   ___  _ __      |  _ \\(_) ___ _ __ __ _ </span>',
-          "<span class=\"t-accent\"> | |_) / _` | '_ ` _ \\ / _ \\| '_ \\     | |_) | |/ _ \\ '__/ _` |</span>",
-          '<span class="t-accent"> |  _ &lt; (_| | | | | | | (_) | | | |    |  _ &lt;| |  __/ | | (_| |</span>',
-          '<span class="t-accent"> |_| \\_\\__,_|_| |_| |_|\\___/|_| |_|    |_| \\_\\_|\\___|_|  \\__,_|</span>',
-          '&nbsp;',
-          c('muted', 'UX Lead & Product Designer') + ' ' + c('comment', '// ramonriera.design'),
-          '&nbsp;',
-          c('string', 'Bienvenido.'),
-          '&nbsp;',
-          'Escribe ' + c('keyword', 'menu') + ' para ver los comandos disponibles.',
-          c('comment', '─'.repeat(60)),
-        ];
-      }
+      var motdLines = [
+        '<span class="t-accent">  ____                                  ____  _                </span>',
+        '<span class="t-accent"> |  _ \\ __ _ _ __ ___   ___  _ __      |  _ \\(_) ___ _ __ __ _ </span>',
+        "<span class=\"t-accent\"> | |_) / _` | '_ ` _ \\ / _ \\| '_ \\     | |_) | |/ _ \\ '__/ _` |</span>",
+        '<span class="t-accent"> |  _ &lt; (_| | | | | | | (_) | | | |    |  _ &lt;| |  __/ | | (_| |</span>',
+        '<span class="t-accent"> |_| \\_\\__,_|_| |_| |_|\\___/|_| |_|    |_| \\_\\_|\\___|_|  \\__,_|</span>',
+        '&nbsp;',
+        c('muted', 'UX Lead & Product Designer') + ' ' + c('comment', '// ramonriera.design'),
+        '&nbsp;',
+        c('string', 'Bienvenido.'),
+        '&nbsp;',
+        'Escribe ' + c('keyword', 'menu') + ' para ver los comandos disponibles.',
+        c('comment', '─'.repeat(60)),
+      ];
       typeLines(motdLines, function() {
         var marker = document.createElement('div');
         marker.id = 'motd-end';
         output.appendChild(marker);
         if (cb) cb();
-      }, isMobile ? 50 : 70);
+      }, 70);
     }
 
     // ── Commands ──
@@ -593,21 +492,17 @@ const projectList = projects.map((p, i) => ({
       ];
 
       // Render header
-      if (!isMobile) {
-        line('&nbsp;');
-        line(c('keyword', '  COMANDOS DISPONIBLES'));
-        line(c('comment', '  ' + '─'.repeat(50)));
-      }
+      line('&nbsp;');
+      line(c('keyword', '  COMANDOS DISPONIBLES'));
+      line(c('comment', '  ' + '─'.repeat(50)));
 
       var rowEls = [];
 
       categories.forEach(function(cat) {
-        if (!isMobile) line('&nbsp;');
+        line('&nbsp;');
         line('  ' + c('accent', cat.label));
         cat.items.forEach(function(item) {
-          var baseHtml = isMobile
-            ? '  ' + c('function', item[0].padEnd(12)) + c('muted', item[1])
-            : '  ' + c('function', item[0].padEnd(14)) + ' ' + c('muted', item[1]);
+          var baseHtml = '  ' + c('function', item[0].padEnd(14)) + ' ' + c('muted', item[1]);
           var el = document.createElement('div');
           el.className = 'term-line term-row-selectable';
           el.innerHTML = baseHtml;
@@ -618,12 +513,8 @@ const projectList = projects.map((p, i) => ({
       });
 
       line('&nbsp;');
-      if (isMobile) {
-        line('  ' + c('muted', 'Toca una opción'));
-      } else {
-        line('  ' + c('muted', '[↑/↓]') + ' navegar  ' + c('muted', '[Enter]') + ' ejecutar  ' + c('muted', '[ESC]') + ' cerrar terminal');
-      }
-      if (!isMobile) line('&nbsp;');
+      line('  ' + c('muted', '[↑/↓]') + ' navegar  ' + c('muted', '[Enter]') + ' ejecutar  ' + c('muted', '[ESC]') + ' cerrar terminal');
+      line('&nbsp;');
       scroll();
 
       // Activate selection mode (help)
@@ -759,11 +650,10 @@ const projectList = projects.map((p, i) => ({
     }
 
     function showCommandFooter(pid, isProfile) {
-      var sepLen = isMobile ? 30 : 50;
       line('&nbsp;');
-      line(c('comment', '  ' + '─'.repeat(sepLen)));
+      line(c('comment', '  ' + '─'.repeat(50)));
       line('&nbsp;');
-      if (isProfile && !isMobile) {
+      if (isProfile) {
         line('  ' + c('muted', '[') + c('function', 'experience') + c('muted', ']') + '  ' + c('muted', '[') + c('function', 'education') + c('muted', ']') + '  ' + c('muted', '[') + c('function', 'skills') + c('muted', ']') + '  ' + c('muted', '[') + c('function', 'social') + c('muted', ']'));
       }
       var parts = [];
@@ -777,7 +667,7 @@ const projectList = projects.map((p, i) => ({
         }
       }
       parts.push(c('muted', '[MENU]') + ' menu');
-      if (!isMobile) parts.push(c('muted', '[ESC]') + ' cerrar terminal');
+      parts.push(c('muted', '[ESC]') + ' cerrar terminal');
       line('  ' + parts.join('  '));
       line('&nbsp;');
       scroll();
@@ -787,66 +677,45 @@ const projectList = projects.map((p, i) => ({
       line('&nbsp;');
 
       var rowEls = [];
+      var W = [6, 32, 18, 6];
+      var b = c('muted', '│');
 
-      if (isMobile) {
-        // ── Mobile: compact vertical list ──
-        projectList.forEach(function(p) {
-          var id = String(p.id).padStart(2, '0');
-          var shortName = p.name.split(' - ')[0];
-          var baseHtml = ' ' + c('accent', id) + ' ' + c('string', shortName);
-          var el = document.createElement('div');
-          el.className = 'term-line term-row-selectable';
-          el.innerHTML = baseHtml;
-          el.setAttribute('data-project-id', p.id);
-          output.appendChild(el);
-          rowEls.push({ el: el, base: baseHtml });
-        });
-      } else {
-        // ── Desktop: full ASCII table ──
-        var W = [6, 32, 18, 6];
-        var b = c('muted', '│');
-
-        function hr(l, m, r) {
-          return '  ' + c('comment', l + '─'.repeat(W[0]) + m + '─'.repeat(W[1]) + m + '─'.repeat(W[2]) + m + '─'.repeat(W[3]) + r);
-        }
-
-        function row(cols, styles) {
-          var cells = '';
-          for (var i = 0; i < cols.length; i++) {
-            var padded = (' ' + cols[i]).padEnd(W[i]);
-            cells += b + '<span class="t-' + styles[i] + '">' + padded + '</span>';
-          }
-          return '  ' + cells + b;
-        }
-
-        var headerLines = [
-          hr('┌', '┬', '┐'),
-          row([' ID', ' NAME', ' CATEGORY', ' YEAR'], ['muted', 'muted', 'muted', 'muted']),
-          hr('├', '┼', '┤'),
-        ];
-        headerLines.forEach(function(h) { line(h); });
-
-        projectList.forEach(function(p) {
-          var id = ' ' + String(p.id).padStart(2, '0');
-          var baseHtml = ' ' + row([id, ' ' + p.name, ' ' + (p.cat || ''), ' ' + p.year], ['accent', 'string', 'keyword', 'constant']);
-          var el = document.createElement('div');
-          el.className = 'term-line term-row-selectable';
-          el.innerHTML = baseHtml;
-          el.setAttribute('data-project-id', p.id);
-          output.appendChild(el);
-          rowEls.push({ el: el, base: baseHtml });
-        });
-
-        line(hr('└', '┴', '┘'));
+      function hr(l, m, r) {
+        return '  ' + c('comment', l + '─'.repeat(W[0]) + m + '─'.repeat(W[1]) + m + '─'.repeat(W[2]) + m + '─'.repeat(W[3]) + r);
       }
+
+      function row(cols, styles) {
+        var cells = '';
+        for (var i = 0; i < cols.length; i++) {
+          var padded = (' ' + cols[i]).padEnd(W[i]);
+          cells += b + '<span class="t-' + styles[i] + '">' + padded + '</span>';
+        }
+        return '  ' + cells + b;
+      }
+
+      var headerLines = [
+        hr('┌', '┬', '┐'),
+        row([' ID', ' NAME', ' CATEGORY', ' YEAR'], ['muted', 'muted', 'muted', 'muted']),
+        hr('├', '┼', '┤'),
+      ];
+      headerLines.forEach(function(h) { line(h); });
+
+      projectList.forEach(function(p) {
+        var id = ' ' + String(p.id).padStart(2, '0');
+        var baseHtml = ' ' + row([id, ' ' + p.name, ' ' + (p.cat || ''), ' ' + p.year], ['accent', 'string', 'keyword', 'constant']);
+        var el = document.createElement('div');
+        el.className = 'term-line term-row-selectable';
+        el.innerHTML = baseHtml;
+        el.setAttribute('data-project-id', p.id);
+        output.appendChild(el);
+        rowEls.push({ el: el, base: baseHtml });
+      });
+
+      line(hr('└', '┴', '┘'));
 
       // Footer
       line('&nbsp;');
-      if (isMobile) {
-        line('  ' + c('muted', 'Toca un proyecto para ver detalle'));
-      } else {
-        line('  ' + c('muted', '[↑/↓]') + ' seleccionar  ' + c('muted', '[Enter]') + ' ver detalle  ' + c('muted', '[MENU]') + ' menu  ' + c('muted', '[ESC]') + ' cancelar');
-      }
+      line('  ' + c('muted', '[↑/↓]') + ' seleccionar  ' + c('muted', '[Enter]') + ' ver detalle  ' + c('muted', '[MENU]') + ' menu  ' + c('muted', '[ESC]') + ' cancelar');
       line('&nbsp;');
       scroll();
 
@@ -919,35 +788,14 @@ const projectList = projects.map((p, i) => ({
     }
 
     function cmdSocial() {
-      var links = [
-        { label: 'LinkedIn', url: 'https://linkedin.com/in/ramonrieradepares', display: 'linkedin.com/in/ramonrieradepares' },
-        { label: 'Medium', url: 'https://medium.com/@ramriera', display: 'medium.com/@ramriera' },
-        { label: 'Email', url: 'mailto:hello@ramonriera.design', display: 'hello@ramonriera.design' },
-        { label: 'Web', url: 'https://ramonriera.design', display: 'ramonriera.design' },
+      return [
+        '&nbsp;',
+        '  ' + c('keyword', 'LinkedIn') + '   ' + c('string', 'linkedin.com/in/ramonrieradepares'),
+        '  ' + c('keyword', 'Medium') + '     ' + c('string', 'medium.com/@ramriera'),
+        '  ' + c('keyword', 'Email') + '      ' + c('string', 'hello@ramonriera.design'),
+        '  ' + c('keyword', 'Web') + '        ' + c('string', 'ramonriera.design'),
+        '&nbsp;',
       ];
-      // Render manually so links are tappable on mobile
-      line('&nbsp;');
-      links.forEach(function(lnk) {
-        var el = document.createElement('div');
-        el.className = 'term-line term-link';
-        el.innerHTML = '  ' + c('keyword', lnk.label.padEnd(11)) + c('string', lnk.display);
-        el.setAttribute('data-url', lnk.url);
-        el.style.cursor = 'pointer';
-        output.appendChild(el);
-      });
-      line('&nbsp;');
-
-      // Make links clickable
-      output.querySelectorAll('.term-link[data-url]').forEach(function(el) {
-        el.addEventListener('click', function(e) {
-          e.stopPropagation();
-          var url = el.getAttribute('data-url');
-          window.open(url, '_blank');
-        });
-      });
-
-      showCommandFooter(null, true);
-      return null;
     }
 
     function cmdNeofetch() {
@@ -1625,71 +1473,10 @@ const projectList = projects.map((p, i) => ({
       }
     });
 
-    // ── Mobile detection ──
-    var isMobile = window.innerWidth <= 768;
-    if (isMobile) input.setAttribute('inputmode', 'none');
-
-    // ── Global focus (desktop only — mobile: no auto keyboard) ──
-    document.addEventListener('click', function(e) {
-      if (!terminal.classList.contains('is-open')) return;
-      if (isMobile) return;
-      input.focus();
+    // ── Global focus (only when terminal is open) ──
+    document.addEventListener('click', function() {
+      if (terminal.classList.contains('is-open')) input.focus();
     });
-
-    // ── Tap on selectable rows (mobile + desktop) ──
-    output.addEventListener('click', function(e) {
-      if (!selectMode) return;
-      var target = e.target.closest('.term-row-selectable');
-      if (!target) return;
-      e.stopPropagation();
-      // Find which row was tapped
-      for (var i = 0; i < selectMode.rows.length; i++) {
-        if (selectMode.rows[i].el === target) {
-          selectMode.idx = i;
-          updateSelectHighlight();
-          // Execute after a brief highlight
-          var rowObj = selectMode.rows[i];
-          var pid = rowObj.el.getAttribute('data-project-id');
-          var cmd = rowObj.el.getAttribute('data-cmd');
-          flashAndExecute(function() {
-            exitSelectMode();
-            if (pid) { processCmd('src ' + pid); }
-            else if (cmd) { processCmd(cmd); }
-            input.value = '';
-          });
-          return;
-        }
-      }
-    });
-
-    // ── Mobile virtual controls ──
-    var btnUp = document.getElementById('term-btn-up');
-    var btnDown = document.getElementById('term-btn-down');
-    var btnEnter = document.getElementById('term-btn-enter');
-    var btnMenu = document.getElementById('term-btn-menu');
-    var btnEsc = document.getElementById('term-btn-esc');
-
-    function simulateKey(key) {
-      input.dispatchEvent(new KeyboardEvent('keydown', { key: key, bubbles: true }));
-    }
-
-    if (btnUp) btnUp.addEventListener('click', function(e) { e.stopPropagation(); simulateKey('ArrowUp'); });
-    if (btnDown) btnDown.addEventListener('click', function(e) { e.stopPropagation(); simulateKey('ArrowDown'); });
-    if (btnEnter) btnEnter.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (selectMode) {
-        simulateKey('Enter');
-      } else if (input.value.trim()) {
-        processCmd(input.value);
-        input.value = '';
-      }
-    });
-    if (btnMenu) btnMenu.addEventListener('click', function(e) { e.stopPropagation(); processCmd('menu'); input.value = ''; });
-    if (btnEsc) btnEsc.addEventListener('click', function(e) { e.stopPropagation(); doExit(); });
-
-    // ── Red dot close button (macOS style) ──
-    var dotClose = document.getElementById('term-dot-close');
-    if (dotClose) dotClose.addEventListener('click', function(e) { e.stopPropagation(); doExit(); });
 
     // ── Favicon switching ──
     var faviconNormal = '/favicon.svg';
@@ -1741,10 +1528,10 @@ const projectList = projects.map((p, i) => ({
       if (!restoreSession()) {
         output.innerHTML = '';
         input.value = '';
-        showMotd(function() { if (!isMobile) input.focus(); });
+        showMotd(function() { input.focus(); });
       } else {
         input.value = '';
-        if (!isMobile) input.focus();
+        input.focus();
       }
     };
 
