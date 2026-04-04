@@ -1,11 +1,11 @@
 ---
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
+import Terminal from '@/components/Terminal.astro';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
-// PERF: Removed Inter 800/900 — unused (404 decorative text falls back to 700)
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/500.css';
 import '@fontsource/space-grotesk/400.css';
@@ -72,28 +72,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
       <slot />
     </main>
     <Footer />
-    <script is:inline>
-      // Code Mode: restore from localStorage (desktop only — lg breakpoint 1024px)
-      (function() {
-        if (window.innerWidth >= 1024 && localStorage.getItem('code-mode') === 'on') {
-          document.documentElement.classList.add('code-mode');
-          document.body.classList.add('code-mode');
-          // Instant title switch to avoid flicker
-          var p = window.location.pathname.replace(/\/$/, '') || '/';
-          if (p === '/') document.title = 'root@ramonriera:~/portfolio';
-          else if (p === '/about') document.title = 'root@ramonriera:~/about.md';
-          else if (p.indexOf('/projects/') === 0) {
-            var slug = p.split('/projects/')[1];
-            var shortNames = {'imaginbank-digital-banking':'imaginbank','massimo-dutti-conversion':'massimo-dutti','solotemazos-music-platform':'solotemazos','banco-sabadell-design-system':'banco-sabadell','iberia-flight-experience':'iberia','movefast-startup-platform':'movefast','global-helping':'global-helping'};
-            document.title = 'root@ramonriera:~/projects/' + (shortNames[slug] || slug);
-          }
-          else if (p === '/projects') document.title = 'root@ramonriera:~/projects';
-          else document.title = 'root@ramonriera:~' + p;
-        }
-      })();
-    </script>
-
-    <!-- System Console removed — replaced by InteractiveTerminal on Home -->
+    <Terminal />
 
     <script>
       // Scroll reveal with Intersection Observer
@@ -115,234 +94,9 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
       revealElements.forEach((el) => observer.observe(el));
     </script>
 
-
-    <!-- Golden Polish: Performance, Micro-copy, Dynamic Favicon & Signature -->
+    <!-- ASCII Signature — Easter Egg in console -->
     <script>
       (function goldenPolish() {
-        // ═════════════════════���═════════════════════════════════
-        // 1. PERFORMANCE CHECK — Console diagnostics on load
-        // ═══════════════════════════════════════════════════════
-        function printPerformanceDiag() {
-          const style = 'color:#50fa7b;font-weight:bold';
-          const styleSystem = 'color:#8be9fd;font-weight:bold';
-          console.log('%c[PERF] Lighthouse Score: 100/100', style);
-          console.log('%c[PERF] Core Web Vitals: OPTIMIZED', style);
-          console.log('%c[PERF] First Contentful Paint: 0.8s', style);
-          console.log('%c[SYSTEM] Portfolio build: v2.4.0-stable', styleSystem);
-        }
-
-        // ═══════════════════════════════════════════════════════
-        // 2. MICRO-COPY — Intersection Observer contextual logs
-        // ═══════════════════════════════════════════════════════
-        const sectionMessages: Record<string, { logged: boolean; msg: string }> = {
-          HeroSection:       { logged: false, msg: '[CONTEXT] Loading Product Strategy & Experience data.' },
-          AboutSection:      { logged: false, msg: '[CONTEXT] Scanning skill matrix and career trajectory...' },
-          FeaturedProjects:  { logged: false, msg: '[CONTEXT] Analyzing Design System scalability...' },
-          ProjectsHero:      { logged: false, msg: '[CONTEXT] Analyzing Design System scalability...' },
-          CallToAction:      { logged: false, msg: '[CONTEXT] User intent detected. Preparing contact protocols...' },
-          Footer:            { logged: false, msg: '[SYSTEM] Ready for deployment. Waiting for command: /hire_ramon' },
-        };
-
-        const styleContext = 'color:#f1fa8c;font-style:italic';
-        const styleSystem2 = 'color:#8be9fd;font-weight:bold';
-
-        function initMicroCopy() {
-          const sections = document.querySelectorAll<HTMLElement>('[data-component]');
-          const microObserver = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                const name = (entry.target as HTMLElement).getAttribute('data-component') || '';
-                const section = sectionMessages[name];
-                if (section && !section.logged) {
-                  section.logged = true;
-                  const s = name === 'Footer' ? styleSystem2 : styleContext;
-                  console.log(`%c${section.msg}`, s);
-                }
-              });
-            },
-            { threshold: 0.2 }
-          );
-          sections.forEach((el) => microObserver.observe(el));
-        }
-
-        // Humorous periodic debug messages
-        const debugMessages = [
-          '[DEBUG] Pixel perfection verified. No artifacts found.',
-          '[MEMORY] User engagement levels increasing...',
-          '[DEBUG] Design tokens synchronized across 3 platforms.',
-          '[PERF] Render pipeline optimized. Zero layout shifts detected.',
-          '[DEBUG] Accessibility audit passed. WCAG 2.1 AA compliant.',
-          '[MEMORY] Component library integrity: 100%.',
-          '[DEBUG] Color contrast ratios within optimal range.',
-          '[PERF] Asset compression: maximum efficiency achieved.',
-          '[DEBUG] Grid system alignment verified. 0px deviation.',
-          '[MEMORY] UX heuristic evaluation score: exceptional.',
-        ];
-
-        function startPeriodicLogs() {
-          setInterval(() => {
-            const msg = debugMessages[Math.floor(Math.random() * debugMessages.length)];
-            console.log(`%c${msg}`, 'color:#bd93f9');
-          }, 30000);
-        }
-
-        // ═══════════════════════════════════════════════════════
-        // 3. DYNAMIC FAVICON — Changes based on Code Mode
-        // ═══════════════════════════════════════════════════════
-
-        // Unified SVG favicon generator — shared viewBox & base structure
-        // Accent color synced with --accent-color in :root (global.css)
-        const FAVICON_ACCENT = '#D97757';
-
-        const FAVICON_CODE_BG = '#1a5c1a';
-
-        function buildFavicon(mode: 'normal' | 'code-on' | 'code-off'): string {
-          let bg = '#1A1918';
-          let inner = '';
-          if (mode === 'normal') {
-            // Minimalist "R" in white
-            inner = `<text x="32" y="44" font-family="'Space Grotesk',sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" text-anchor="middle">R</text>`;
-          } else {
-            // Green console background with blinking cursor
-            bg = FAVICON_CODE_BG;
-            const opacity = mode === 'code-on' ? '1' : '0.15';
-            inner = `<rect x="27" y="12" width="10" height="40" rx="3" fill="${FAVICON_ACCENT}" opacity="${opacity}"/>`;
-          }
-          return `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="${bg}"/>${inner}</svg>`;
-        }
-
-        function svgToDataUri(svg: string): string {
-          return 'data:image/svg+xml,' + encodeURIComponent(svg);
-        }
-
-        const faviconNormal = svgToDataUri(buildFavicon('normal'));
-        const faviconCodeOn = svgToDataUri(buildFavicon('code-on'));
-        const faviconCodeOff = svgToDataUri(buildFavicon('code-off'));
-
-        let faviconBlinkInterval: ReturnType<typeof setInterval> | null = null;
-
-        function setFavicon(href: string) {
-          let link = document.querySelector<HTMLLinkElement>("link[rel='icon'][type='image/svg+xml']");
-          if (link) {
-            link.href = href;
-          }
-        }
-
-        function startFaviconBlink() {
-          stopFaviconBlink();
-          let visible = true;
-          faviconBlinkInterval = setInterval(() => {
-            visible = !visible;
-            setFavicon(visible ? faviconCodeOn : faviconCodeOff);
-          }, 1000);
-        }
-
-        function stopFaviconBlink() {
-          if (faviconBlinkInterval !== null) {
-            clearInterval(faviconBlinkInterval);
-            faviconBlinkInterval = null;
-          }
-        }
-
-        function syncFavicon() {
-          const isCode = document.documentElement.classList.contains('code-mode');
-          if (isCode) {
-            setFavicon(faviconCodeOn);
-            startFaviconBlink();
-          } else {
-            stopFaviconBlink();
-            setFavicon(faviconNormal);
-          }
-        }
-
-        // Normal favicon is now theme-independent (dark container + white R glyph)
-        // No need to adapt to system theme changes
-
-        // ═══════════════════════════════════════════════════════
-        // 3b. DYNAMIC TAB TITLE — Route mapping & dual-mode titles
-        // ═══════════════════════════════════════════════════════
-
-        // Route → friendly name mapping for Normal Mode
-        const routeNames: Record<string, string> = {
-          '/': 'Home',
-          '/about': 'About',
-          '/projects': 'Projects',
-          '/projects/imaginbank-digital-banking': 'Imaginbank',
-          '/projects/massimo-dutti-conversion': 'Massimo Dutti',
-          '/projects/solotemazos-music-platform': 'SoloTemazos',
-          '/projects/banco-sabadell-design-system': 'Banco Sabadell',
-          '/projects/iberia-flight-experience': 'Iberia',
-          '/projects/movefast-startup-platform': 'MoveFast',
-          '/projects/global-helping': 'Global Helping',
-        };
-
-        // Route → technical path mapping for Code Mode
-        const projectShortNames: Record<string, string> = {
-          'imaginbank-digital-banking': 'imaginbank',
-          'massimo-dutti-conversion': 'massimo-dutti',
-          'solotemazos-music-platform': 'solotemazos',
-          'banco-sabadell-design-system': 'banco-sabadell',
-          'iberia-flight-experience': 'iberia',
-          'movefast-startup-platform': 'movefast',
-          'global-helping': 'global-helping',
-        };
-
-        function getCodeModeTitle(): string {
-          const path = window.location.pathname.replace(/\/$/, '') || '/';
-          if (path === '/') return 'root@ramonriera:~/portfolio';
-          if (path === '/about') return 'root@ramonriera:~/about.md';
-          if (path.startsWith('/projects/')) {
-            const slug = path.split('/projects/')[1];
-            const shortName = projectShortNames[slug] || slug;
-            return `root@ramonriera:~/projects/${shortName}`;
-          }
-          if (path === '/projects') return 'root@ramonriera:~/projects';
-          return `root@ramonriera:~${path}`;
-        }
-
-        // Normal Mode title: [Page Name] ⚡ Ramon Riera
-        function getNormalTitle(): string {
-          const path = window.location.pathname.replace(/\/$/, '') || '/';
-          const name = routeNames[path];
-          if (name) return `${name} ⚡ Ramon Riera`;
-          // Fallback: extract project title from slug
-          if (path.startsWith('/projects/')) {
-            const slug = path.split('/projects/')[1] || '';
-            const pretty = slug.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-            return `${pretty} ⚡ Ramon Riera`;
-          }
-          return 'Ramon Riera';
-        }
-
-        function syncTitle() {
-          const isCode = document.documentElement.classList.contains('code-mode');
-          document.title = isCode ? getCodeModeTitle() : getNormalTitle();
-        }
-
-        // ═══════════════════════════════════════════════════════
-        // 3c. UNIFIED STATE SYNC — Single observer for all class mutations
-        // PERF: Consolidated from 2 separate MutationObservers into 1
-        // ═══════════════════════════════════════════════════════
-
-        function syncCodeModeTab() {
-          syncFavicon();
-          syncTitle();
-        }
-
-        // Initial sync
-        syncCodeModeTab();
-
-        // Welcome-back message when tab regains focus
-        document.addEventListener('visibilitychange', () => {
-          if (document.visibilityState === 'visible') {
-            console.log('%c[SYSTEM] Welcome back, user. Resuming session...', 'color:#8be9fd;font-weight:bold');
-          }
-        });
-
-        // ═══════════════════════════════════════════════════════
-        // 4. ASCII SIGNATURE — Easter Egg in console
-        // ═══════════════════════════════════════════════════════
         function printSignature() {
           const sig = [
             '',
@@ -367,115 +121,60 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
           );
         }
 
-        // ═══════════════════════════════════════════════════════
-        // 5. EASTER EGG — System log in DevTools on Code Mode activation
-        // ══════════════════════════════════��════════════════════
-        let easterEggPrinted = false;
-
-        function printCodeModeEasterEgg() {
-          if (easterEggPrinted) return;
-          easterEggPrinted = true;
-
-          const accentStyle = 'color:#D97757;font-weight:bold;font-size:12px;padding:2px 0';
-          const systemStyle = 'color:#8be9fd;font-weight:bold;font-size:12px;padding:2px 0';
-          const userStyle = 'color:#50fa7b;font-weight:bold;font-size:12px;padding:2px 0';
-
-          console.log('%c─────────────────────────────────────────────', accentStyle);
-          console.log('%c[SYSTEM] Environment: Production | Mode: Engineering', systemStyle);
-          console.log('%c[USER] Welcome, Recruiter. Accessing design system specs...', userStyle);
-          console.log('%c─────────────────────────────────────────────', accentStyle);
-        }
-
-        // PERF: Single consolidated MutationObserver for all code-mode reactions
-        const unifiedCodeModeObserver = new MutationObserver(() => {
-          const isCode = document.documentElement.classList.contains('code-mode');
-          // Sync favicon + title
-          syncCodeModeTab();
-          // Easter egg
-          if (isCode) {
-            printCodeModeEasterEgg();
-          } else {
-            easterEggPrinted = false;
-          }
-        });
-        unifiedCodeModeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-
-        // Print immediately if already in Code Mode
-        if (document.documentElement.classList.contains('code-mode')) {
-          printCodeModeEasterEgg();
-        }
-
-        // ── Boot Sequence ──
         window.addEventListener('load', () => {
-          printPerformanceDiag();
-          initMicroCopy();
-          startPeriodicLogs();
-          syncFavicon();
           printSignature();
-        });
-
-        // Re-sync title & favicon on client-side navigation (Astro page transitions)
-        document.addEventListener('astro:page-load', () => {
-          syncCodeModeTab();
-          initMicroCopy();
         });
       })();
     </script>
-  <script>
-    import { inject, track } from '@vercel/analytics';
-    import { injectSpeedInsights } from '@vercel/speed-insights';
 
-    // Flag yourself: visit any page with ?notrack to disable analytics
-    if (new URLSearchParams(window.location.search).has('notrack')) {
-      localStorage.setItem('notrack', '1');
-    }
+    <script>
+      import { inject, track } from '@vercel/analytics';
+      import { injectSpeedInsights } from '@vercel/speed-insights';
 
-    const isOwner = localStorage.getItem('notrack') === '1';
+      // Flag yourself: visit any page with ?notrack to disable analytics
+      if (new URLSearchParams(window.location.search).has('notrack')) {
+        localStorage.setItem('notrack', '1');
+      }
 
-    inject({ beforeSend: (event) => isOwner ? null : event });
-    // PERF: sampleRate 0.1 = 10% of traffic (valid metrics, less network overhead)
-    injectSpeedInsights({
-      sampleRate: 0.1,
-      beforeSend: (data) => isOwner ? null : data,
-    });
+      const isOwner = localStorage.getItem('notrack') === '1';
 
-    // ── Custom event tracking ──
-
-    // Code Mode toggle
-    document.getElementById('code-mode-toggle')?.addEventListener('click', () => {
-      const entering = !document.body.classList.contains('code-mode');
-      track('code_mode_toggle', { action: entering ? 'on' : 'off' });
-    });
-
-    // Contact CTA clicks (mailto links)
-    document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:"]').forEach((link) => {
-      link.addEventListener('click', () => {
-        track('contact_click', { location: link.closest('nav') ? 'navbar' : link.closest('footer') ? 'footer' : 'page' });
+      inject({ beforeSend: (event) => isOwner ? null : event });
+      injectSpeedInsights({
+        sampleRate: 0.1,
+        beforeSend: (data) => isOwner ? null : data,
       });
-    });
 
-    // Project card clicks
-    document.querySelectorAll<HTMLAnchorElement>('a[href^="/projects/"]').forEach((link) => {
-      link.addEventListener('click', () => {
-        const slug = link.getAttribute('href')?.replace('/projects/', '') || '';
-        track('project_click', { project: slug });
-      });
-    });
+      // ── Custom event tracking ──
 
-    // Project filter clicks
-    document.querySelectorAll('.filter-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const filter = btn.getAttribute('data-filter') || '';
-        track('filter_click', { category: filter });
+      // Contact CTA clicks (mailto links)
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:"]').forEach((link) => {
+        link.addEventListener('click', () => {
+          track('contact_click', { location: link.closest('nav') ? 'navbar' : link.closest('footer') ? 'footer' : 'page' });
+        });
       });
-    });
 
-    // External link clicks (LinkedIn, GitHub, etc.)
-    document.querySelectorAll<HTMLAnchorElement>('a[target="_blank"]').forEach((link) => {
-      link.addEventListener('click', () => {
-        track('external_link', { url: link.href });
+      // Project card clicks
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="/projects/"]').forEach((link) => {
+        link.addEventListener('click', () => {
+          const slug = link.getAttribute('href')?.replace('/projects/', '') || '';
+          track('project_click', { project: slug });
+        });
       });
-    });
-  </script>
+
+      // Project filter clicks
+      document.querySelectorAll('.filter-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter') || '';
+          track('filter_click', { category: filter });
+        });
+      });
+
+      // External link clicks (LinkedIn, GitHub, etc.)
+      document.querySelectorAll<HTMLAnchorElement>('a[target="_blank"]').forEach((link) => {
+        link.addEventListener('click', () => {
+          track('external_link', { url: link.href });
+        });
+      });
+    </script>
   </body>
 </html>

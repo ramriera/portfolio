@@ -13,8 +13,8 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
   title="About ⚡ Ramon Riera"
   description="Conoce a Ramon Riera, Design Systems & Strategy Lead especializado en UX Strategy, DesignOps y Product Design."
 >
-  <!-- Hero (design mode) -->
-  <section class="section-padding about-hero-design" data-component="AboutHero">
+  <!-- Hero -->
+  <section class="section-padding" data-component="AboutHero">
     <div class="container-custom">
       <div class="max-w-4xl">
         <div data-reveal class="mb-8">
@@ -39,63 +39,19 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
             </svg>
           </span>
         </div>
-        <!-- Title (same element for both modes, CSS handles skin) -->
+        <!-- Title -->
         <h1 data-reveal data-delay="100" class="heading-xl about-heading mb-8"
           data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2rem / 32px">
           <span class="sm:whitespace-nowrap">Diseñador, pensador,</span><br />
           <span class="text-primary-500"><WordsCarousel words={aboutWords} interval={3000} /></span>
         </h1>
 
-        <!-- Subtitle (same element for both modes) -->
+        <!-- Subtitle -->
         <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl"
           data-token="$font-family-sans: Inter|$color-text-muted: #7c766c">
-          Con más de 6 años de experiencia, he dedicado mi carrera a crear productos digitales que combinan estética, usabilidad y estrategia de negocio.
+          Con más de 9 años de experiencia, he dedicado mi carrera a crear productos digitales que combinan estética, usabilidad y estrategia de negocio.
         </p>
       </div>
-    </div>
-  </section>
-
-  <!-- Hero (code mode): about.tsx -->
-  <section class="section-padding about-hero-code" data-component="AboutHeroCode">
-    <div class="container-custom">
-        <div class="file-block about-hero-window">
-          <div class="file-block__titlebar">
-            <div class="pmd-dots">
-              <span class="pmd-dot" style="background:#ff5f57"></span>
-              <span class="pmd-dot" style="background:#febc2e"></span>
-              <span class="pmd-dot" style="background:#28c840"></span>
-            </div>
-            <span class="file-block__filename">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
-              </svg>
-              about.tsx
-            </span>
-            <span class="file-block__tab">about.tsx</span>
-          </div>
-          <div class="file-block__body">
-            <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-keyword">import type</span> <span class="pmd-bracket">{`{`}</span> <span class="pmd-fn">Profile</span> <span class="pmd-bracket">{`}`}</span> <span class="pmd-keyword">from</span> <span class="pmd-string">'@types'</span><span class="pmd-punct">;</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">personalProfile</span><span class="pmd-punct">:</span> <span class="pmd-fn">Profile</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{`{`}</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">  <span class="pmd-key">name</span><span class="pmd-punct">:</span> <span class="pmd-string">"Ramón Riera"</span><span class="pmd-punct">,</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">  <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"UX Lead & Product Designer"</span><span class="pmd-punct">,</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">  <span class="pmd-key">experience</span><span class="pmd-punct">:</span> <span class="pmd-string">"8+ years"</span><span class="pmd-punct">,</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code">  <span class="pmd-key">status</span><span class="pmd-punct">:</span> <span class="pmd-impact">"available_for_new_projects"</span><span class="pmd-punct">,</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code">  <span class="pmd-key">specialties</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code">    <span class="pmd-string">"Design Systems"</span><span class="pmd-punct">,</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code">    <span class="pmd-string">"Product Strategy"</span><span class="pmd-punct">,</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code">    <span class="pmd-string">"UX Operations"</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code">  <span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code"></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code">  <span class="pmd-key">vision</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code">    <span class="pmd-key">data_driven</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code">    <span class="pmd-key">user_centric</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">18</span><span class="file-block__code">    <span class="pmd-key">outcome_focused</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">19</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span></span></div>
-            <div class="file-block__line"><span class="file-block__gutter">20</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span><span class="pmd-punct">;</span></span></div>
-          </div>
-        </div>
     </div>
   </section>
 
@@ -106,8 +62,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
         <!-- Photo -->
         <div data-reveal="left" class="lg:col-span-2">
           <div class="lg:sticky lg:top-28">
-            <!-- Design mode photo -->
-            <div class="rounded-2xl overflow-hidden dashed-border mb-6 about-pg-photo-design">
+            <div class="rounded-2xl overflow-hidden dashed-border mb-6">
               <Image
                 src={profileImg}
                 alt="Ramon Riera"
@@ -118,49 +73,8 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                 sizes="(max-width: 1024px) 100vw, 40vw"
               />
             </div>
-            <!-- Code mode photo: Asset Viewer -->
-            <div class="mb-6 about-pg-photo-code">
-              <div class="asset-preview">
-                <div class="asset-preview__toolbar">
-                  <div class="asset-preview__path">
-                    <svg class="asset-preview__path-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-                    </svg>
-                    <span class="asset-preview__path-dir">assets</span>
-                    <span class="asset-preview__path-sep">&gt;</span>
-                    <span class="asset-preview__path-dir">shared</span>
-                    <span class="asset-preview__path-sep">&gt;</span>
-                    <span class="asset-preview__path-file">foto_perfil.png</span>
-                  </div>
-                  <div class="asset-preview__dims">
-                    <span>800 × 1000</span>
-                    <span class="asset-preview__dims-sep">|</span>
-                    <span>PNG</span>
-                  </div>
-                </div>
-                <div class="asset-preview__canvas">
-                  <div class="asset-preview__img-wrap">
-                    <Image
-                      src={profileImg}
-                      alt="Ramon Riera"
-                      class="asset-preview__img"
-                      loading="lazy"
-                      decoding="async"
-                      widths={[400, 800]}
-                      sizes="(max-width: 1024px) 100vw, 40vw"
-                    />
-                  </div>
-                </div>
-                <div class="asset-preview__status">
-                  <span class="asset-preview__status-item">Layer: Profile</span>
-                  <span class="asset-preview__status-sep">|</span>
-                  <span class="asset-preview__status-item">Format: PNG</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Social links: Normal mode -->
-            <div class="grid grid-cols-3 gap-3 social-normal" data-component="SocialLinks" data-token="$spacing-gap: 1rem / 16px">
+            <!-- Social links -->
+            <div class="grid grid-cols-3 gap-3" data-component="SocialLinks" data-token="$spacing-gap: 1rem / 16px">
               <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg dashed-border hover:bg-primary-50 hover:border-primary-500 transition-all duration-300">
                 <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 <span class="text-sm font-medium text-neutral-700">LinkedIn</span>
@@ -174,43 +88,6 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                 <span class="text-sm font-medium text-neutral-700">CV</span>
               </a>
             </div>
-            <!-- Social links: Code mode — social_links.sh console -->
-            <div class="social-code">
-              <div class="file-block">
-                <div class="file-block__titlebar">
-                  <div class="pmd-dots">
-                    <span class="pmd-dot" style="background:#ff5f57"></span>
-                    <span class="pmd-dot" style="background:#febc2e"></span>
-                    <span class="pmd-dot" style="background:#28c840"></span>
-                  </div>
-                  <span class="file-block__filename">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-                    social_links.sh
-                  </span>
-                  <span class="file-block__tab">social_links.sh</span>
-                </div>
-                <div class="file-block__body file-block__body--terminal">
-                  <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="social-cmd-line">
-                    <span class="cta-gutter">1</span>
-                    <span class="cta-code">
-                      <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">run</span> <span class="cta-cmd-file">open_linkedin.sh</span><span class="cta-cmd-cursor">_</span>
-                    </span>
-                  </a>
-                  <a href={siteConfig.social.medium} target="_blank" rel="noopener noreferrer" class="social-cmd-line">
-                    <span class="cta-gutter">2</span>
-                    <span class="cta-code">
-                      <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">read</span> <span class="cta-cmd-file">medium_articles.log</span><span class="cta-cmd-cursor">_</span>
-                    </span>
-                  </a>
-                  <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer" class="social-cmd-line">
-                    <span class="cta-gutter">3</span>
-                    <span class="cta-code">
-                      <span class="cta-cmd-prompt">&gt;</span> <span class="cta-cmd-text">get</span> <span class="cta-cmd-file">curriculum_vitae.pdf</span><span class="cta-cmd-cursor">_</span>
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -218,8 +95,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
         <div class="lg:col-span-3 space-y-12">
           <div data-reveal>
             <h2 class="heading-md mb-6">Mi historia</h2>
-            <!-- Normal mode: prose paragraphs -->
-            <div class="bio-prose space-y-4 text-body">
+            <div class="space-y-4 text-body">
               <p>
                 Empecé mi carrera como <strong>diseñador gráfico</strong>, pero rápidamente descubrí que mi verdadera pasión estaba en la <strong>intersección entre diseño y tecnología</strong>. El mundo digital me fascinó por su capacidad de crear experiencias que impactan a millones de personas.
               </p>
@@ -233,50 +109,13 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                 Cuando no estoy diseñando, probablemente estoy explorando nuevas herramientas, leyendo sobre <strong>psicología cognitiva</strong> o experimentando con <strong>código creativo</strong>.
               </p>
             </div>
-            <!-- Code mode: bio.md file-block -->
-            <div class="about-code-block about-bio-code">
-              <div class="file-block">
-                <div class="file-block__titlebar">
-                  <div class="pmd-dots">
-                    <span class="pmd-dot" style="background:#ff5f57"></span>
-                    <span class="pmd-dot" style="background:#febc2e"></span>
-                    <span class="pmd-dot" style="background:#28c840"></span>
-                  </div>
-                  <span class="file-block__filename">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                    bio.md
-                  </span>
-                  <span class="file-block__tab">bio.md</span>
-                </div>
-                <div class="file-block__body">
-                  <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">/**</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@module</span> ramon-riera</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@version</span> 8.0.0</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@description</span></span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-comment"> *</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code"><span class="pmd-comment"> * Uno <span class="pmd-impact">diseño</span> e <span class="pmd-impact">ingeniería</span> para crear productos digitales</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"><span class="pmd-comment"> * que convierten. De la investigación de usuario al token</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"><span class="pmd-comment"> * de diseño desplegado en producción.</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-comment"> *</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code"><span class="pmd-comment"> * He trabajado con <span class="pmd-impact">Banco Sabadell</span>, <span class="pmd-impact">Iberia</span> y <span class="pmd-impact">Doctori</span></span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code"><span class="pmd-comment"> * construyendo <span class="pmd-impact">Design Systems</span> y procesos de <span class="pmd-impact">DesignOps</span></span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code"><span class="pmd-comment"> * que escalan equipos y aceleran entregas.</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code"><span class="pmd-comment"> *</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@methodology</span> Design Thinking · Lean UX · Agile</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@philosophy</span> El diseño no es solo cómo se ve algo,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code"><span class="pmd-comment"> *   sino cómo funciona, cómo se siente y qué problema resuelve.</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code"><span class="pmd-comment"> * <span class="pmd-keyword">@license</span> MIT</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">18</span><span class="file-block__code"><span class="pmd-comment"> */</span></span></div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- Timeline -->
           <div data-reveal data-component="CareerTimeline">
             <h2 class="heading-md mb-8">Trayectoria</h2>
 
-            <!-- Normal mode: hybrid timeline -->
+            <!-- Timeline -->
             <div class="timeline-flow ml-4 sm:ml-0" data-timeline-reveal>
               {/* --- Hito Principal 1: Doctori (actual) --- */}
               {(() => {
@@ -343,71 +182,13 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               })()}
             </div>
 
-            <!-- Code mode: experience.ts file-block -->
-            <div class="about-code-block about-experience-code">
-              <div class="file-block">
-                <div class="file-block__titlebar">
-                  <div class="pmd-dots">
-                    <span class="pmd-dot" style="background:#ff5f57"></span>
-                    <span class="pmd-dot" style="background:#febc2e"></span>
-                    <span class="pmd-dot" style="background:#28c840"></span>
-                  </div>
-                  <span class="file-block__filename">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/></svg>
-                    experience.ts
-                  </span>
-                  <span class="file-block__tab">experience.ts</span>
-                </div>
-                <div class="file-block__body">
-                  <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-keyword">import type</span> <span class="pmd-bracket">{`{`}</span> <span class="pmd-fn">CareerEntry</span> <span class="pmd-bracket">{`}`}</span> <span class="pmd-keyword">from</span> <span class="pmd-string">'@types'</span><span class="pmd-punct">;</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">experience</span><span class="pmd-punct">:</span> <span class="pmd-fn">CareerEntry</span><span class="pmd-bracket">[]</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">[</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">  <span class="pmd-bracket">{`{`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">    <span class="pmd-key">company</span><span class="pmd-punct">:</span> <span class="pmd-string">"Doctori.com"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"Senior Product Designer & Design Ops"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code">    <span class="pmd-key">period</span><span class="pmd-punct">:</span> <span class="pmd-string">"2021 — Presente"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code">    <span class="pmd-key">current</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code">    <span class="pmd-keyword">@impact</span><span class="pmd-punct">:</span> <span class="pmd-string">"<span class="pmd-metric">+40%</span> velocidad de entrega con Design System"</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code"></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code">  <span class="pmd-comment">// Consultoría Senior (en paralelo)</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code">  <span class="pmd-bracket">{`{`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code">    <span class="pmd-key">company</span><span class="pmd-punct">:</span> <span class="pmd-string">"Leemons"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code">    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"Product & UI Consultant"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code">    <span class="pmd-key">period</span><span class="pmd-punct">:</span> <span class="pmd-string">"2023 — 2024"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code">    <span class="pmd-keyword">@impact</span><span class="pmd-punct">:</span> <span class="pmd-string">"UI estratégica para nuevos modelos de negocio"</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">18</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">19</span><span class="file-block__code">  <span class="pmd-bracket">{`{`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">20</span><span class="file-block__code">    <span class="pmd-key">company</span><span class="pmd-punct">:</span> <span class="pmd-string">"Iberia (IAG)"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">21</span><span class="file-block__code">    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"Design Systems Consultant"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">22</span><span class="file-block__code">    <span class="pmd-key">period</span><span class="pmd-punct">:</span> <span class="pmd-string">"2022 — 2023"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">23</span><span class="file-block__code">    <span class="pmd-keyword">@impact</span><span class="pmd-punct">:</span> <span class="pmd-string">"Tokens multi-plataforma Web + App"</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">24</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">25</span><span class="file-block__code">  <span class="pmd-bracket">{`{`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">26</span><span class="file-block__code">    <span class="pmd-key">company</span><span class="pmd-punct">:</span> <span class="pmd-string">"Banco Sabadell"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">27</span><span class="file-block__code">    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"Design Systems Consultant"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">28</span><span class="file-block__code">    <span class="pmd-key">period</span><span class="pmd-punct">:</span> <span class="pmd-string">"2021 — 2022"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">29</span><span class="file-block__code">    <span class="pmd-keyword">@impact</span><span class="pmd-punct">:</span> <span class="pmd-string">"<span class="pmd-metric">95%</span> adopción de componentes en banca digital"</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">30</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">31</span><span class="file-block__code"></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">32</span><span class="file-block__code">  <span class="pmd-comment">// Origen</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">33</span><span class="file-block__code">  <span class="pmd-bracket">{`{`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">34</span><span class="file-block__code">    <span class="pmd-key">company</span><span class="pmd-punct">:</span> <span class="pmd-string">"JBM"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">35</span><span class="file-block__code">    <span class="pmd-key">role</span><span class="pmd-punct">:</span> <span class="pmd-string">"Junior Designer"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">36</span><span class="file-block__code">    <span class="pmd-key">period</span><span class="pmd-punct">:</span> <span class="pmd-string">"2017 — 2021"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">37</span><span class="file-block__code">    <span class="pmd-keyword">@impact</span><span class="pmd-punct">:</span> <span class="pmd-string">"Branding &amp; web design projects"</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">38</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">39</span><span class="file-block__code"><span class="pmd-bracket">]</span><span class="pmd-punct">;</span></span></div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- KPI Stats Dashboard -->
           <div data-reveal data-component="KPIDashboard">
             <h2 class="heading-md mb-8">Impacto en números</h2>
 
-            <div class="kpi-grid-normal grid grid-cols-1 sm:grid-cols-2 gap-4 mb-0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-0">
               <div class="kpi-card group p-6 rounded-2xl dashed-border bg-white transition-all duration-300">
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
@@ -426,43 +207,6 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               </div>
             </div>
 
-            <!-- Code mode: stack.json file-block -->
-            <div class="about-code-block about-stack-code">
-              <div class="file-block">
-                <div class="file-block__titlebar">
-                  <div class="pmd-dots">
-                    <span class="pmd-dot" style="background:#ff5f57"></span>
-                    <span class="pmd-dot" style="background:#febc2e"></span>
-                    <span class="pmd-dot" style="background:#28c840"></span>
-                  </div>
-                  <span class="file-block__filename">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                    stack.json
-                  </span>
-                  <span class="file-block__tab">stack.json</span>
-                </div>
-                <div class="file-block__body">
-                  <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-bracket">{`{`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code">  <span class="pmd-key">"design_systems"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code">    <span class="pmd-key">"tokens"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Token Studio"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Style Dictionary"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Supernova"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">    <span class="pmd-key">"components"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Storybook"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Figma Libraries"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Atomic Design"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">    <span class="pmd-key">"governance"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Contribution Model"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Changelog"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Adoption Metrics"</span><span class="pmd-bracket">]</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code">  <span class="pmd-key">"frontend_stack"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code">    <span class="pmd-key">"design"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Figma"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Framer"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Cursor"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Lovable"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">10</span><span class="file-block__code">    <span class="pmd-key">"code"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"TypeScript"</span><span class="pmd-punct">,</span> <span class="pmd-string">"JavaScript"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Astro"</span><span class="pmd-punct">,</span> <span class="pmd-string">"TailwindCSS"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">11</span><span class="file-block__code">    <span class="pmd-key">"ops"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"GitHub"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Git"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Vercel"</span><span class="pmd-bracket">]</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">12</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">13</span><span class="file-block__code"></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">14</span><span class="file-block__code">  <span class="pmd-key">"product_strategy"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">{`{`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">15</span><span class="file-block__code">    <span class="pmd-key">"research"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Maze"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Hotjar"</span><span class="pmd-punct">,</span> <span class="pmd-string">"FigJam"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Typeform"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">16</span><span class="file-block__code">    <span class="pmd-key">"methodology"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Design Thinking"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Lean UX"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Data-Driven"</span><span class="pmd-bracket">]</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">17</span><span class="file-block__code">  <span class="pmd-bracket">{`}`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">18</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -503,7 +247,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
           <div data-reveal data-component="DesignPrinciples">
             <h2 class="heading-md mb-8 methodology-heading">Principios de Diseño</h2>
 
-            <div class="principles-normal">
+            <div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- 01 Sistemas sobre Pantallas -->
                 <div class="lint-rule group">
@@ -562,41 +306,13 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               </div>
             </div>
 
-            <!-- Code mode: design principles -->
-            <div class="principles-code">
-              <div class="file-block">
-                <div class="file-block__titlebar">
-                  <div class="pmd-dots">
-                    <span class="pmd-dot" style="background:#ff5f57"></span>
-                    <span class="pmd-dot" style="background:#febc2e"></span>
-                    <span class="pmd-dot" style="background:#28c840"></span>
-                  </div>
-                  <span class="file-block__filename">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px;color:#3178c6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/></svg>
-                    design_principles.ts
-                  </span>
-                  <span class="file-block__tab">design_principles.ts</span>
-                </div>
-                <div class="file-block__body">
-                  <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-keyword">export const</span> <span class="pmd-fn">designPrinciples</span> <span class="pmd-punct">=</span> <span class="pmd-bracket">{`{`}</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code">  <span class="pmd-key">userCentric</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code">  <span class="pmd-key">dataInformed</span><span class="pmd-punct">:</span> <span class="pmd-impact">true</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code">  <span class="pmd-key">scalability</span><span class="pmd-punct">:</span> <span class="pmd-string">"Design Systems first"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">  <span class="pmd-key">accessibility</span><span class="pmd-punct">:</span> <span class="pmd-string">"AA/AAA Standard"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">  <span class="pmd-key">collaboration</span><span class="pmd-punct">:</span> <span class="pmd-string">"Puentes, no muros"</span><span class="pmd-punct">,</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code">  <span class="pmd-key">validation</span><span class="pmd-punct">:</span> <span class="pmd-string">"Evidencia sobre opinión"</span></span></div>
-                  <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span><span class="pmd-punct">;</span></span></div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
         <!-- Separator -->
         <div class="methodology-separator" aria-hidden="true">
           <span class="methodology-separator-line"></span>
-          <span class="methodology-separator-label methodology-sep-normal">· · ·</span>
-          <span class="methodology-separator-label methodology-sep-code">// ---</span>
+          <span class="methodology-separator-label">· · ·</span>
           <span class="methodology-separator-line"></span>
         </div>
 
@@ -606,8 +322,8 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
             <h2 class="heading-md mb-3 methodology-heading">Ecosistema Técnico</h2>
             <p class="text-body mb-10 methodology-heading">Proceso de trabajo y herramientas organizados como módulos de un sistema. Cada fase tiene su stack dedicado.</p>
 
-            <!-- Normal mode: 4 Stack Cards -->
-            <div class="process-grid-normal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Stack Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
               <!-- Strategy & Research -->
               <div class="eco-card group" data-module="strategy">
@@ -742,66 +458,6 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               </div>
             </div>
 
-            <!-- Code mode: workflow.sh + package.json -->
-            <div class="process-grid-code">
-              <div class="space-y-6">
-
-                <!-- workflow.sh -->
-                <div class="file-block">
-                  <div class="file-block__titlebar">
-                    <div class="pmd-dots">
-                      <span class="pmd-dot" style="background:#ff5f57"></span>
-                      <span class="pmd-dot" style="background:#febc2e"></span>
-                      <span class="pmd-dot" style="background:#28c840"></span>
-                    </div>
-                    <span class="file-block__filename">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-                      workflow.sh
-                    </span>
-                    <span class="file-block__tab">workflow.sh</span>
-                  </div>
-                  <div class="file-block__body file-block__body--terminal">
-                    <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-comment">#!/bin/bash</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code"><span class="pmd-comment"># <span class="pmd-keyword">@title</span>: METODOLOGÍA Y BASE TEÓRICA</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code"><span class="pmd-comment"># <span class="pmd-keyword">@description</span>: Enfoque basado en DesignOps y optimización de conversión.</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">run</span> <span class="pmd-string">discovery_and_strategy.sh</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">execute</span> <span class="pmd-string">visual_architecture.bin</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">run</span> <span class="pmd-string">design_system_architecture.ts</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">deploy</span> <span class="pmd-string">usability_testing_v2.0</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-punct">&gt;</span> <span class="pmd-keyword">monitor</span> <span class="pmd-string">conversion_analytics.sh</span></span></div>
-                  </div>
-                </div>
-
-                <!-- package.json -->
-                <div class="file-block">
-                  <div class="file-block__titlebar">
-                    <div class="pmd-dots">
-                      <span class="pmd-dot" style="background:#ff5f57"></span>
-                      <span class="pmd-dot" style="background:#febc2e"></span>
-                      <span class="pmd-dot" style="background:#28c840"></span>
-                    </div>
-                    <span class="file-block__filename">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:-2px;margin-right:4px"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                      package.json
-                    </span>
-                    <span class="file-block__tab">package.json</span>
-                  </div>
-                  <div class="file-block__body">
-                    <div class="file-block__line"><span class="file-block__gutter">1</span><span class="file-block__code"><span class="pmd-bracket">{`{`}</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">2</span><span class="file-block__code">  <span class="pmd-key">"name"</span><span class="pmd-punct">:</span> <span class="pmd-string">"ramon-riera-ecosystem"</span><span class="pmd-punct">,</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">3</span><span class="file-block__code">  <span class="pmd-key">"version"</span><span class="pmd-punct">:</span> <span class="pmd-string">"2026.1.0"</span><span class="pmd-punct">,</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">4</span><span class="file-block__code"></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">5</span><span class="file-block__code">  <span class="pmd-key">"dependencies"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Figma"</span><span class="pmd-punct">,</span> <span class="pmd-string">"React"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Tailwind"</span><span class="pmd-punct">,</span> <span class="pmd-string">"TypeScript"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Framer"</span><span class="pmd-bracket">]</span><span class="pmd-punct">,</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">6</span><span class="file-block__code">  <span class="pmd-key">"devDependencies"</span><span class="pmd-punct">:</span> <span class="pmd-bracket">[</span><span class="pmd-string">"Notion"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Jira"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Hotjar"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Mixpanel"</span><span class="pmd-punct">,</span> <span class="pmd-string">"Slack"</span><span class="pmd-bracket">]</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">7</span><span class="file-block__code"><span class="pmd-bracket">{`}`}</span></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">8</span><span class="file-block__code"></span></div>
-                    <div class="file-block__line"><span class="file-block__gutter">9</span><span class="file-block__code"><span class="pmd-impact">// Build successful: All systems operational.</span></span></div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
           </div>
         </div>
       </div>

@@ -5,9 +5,9 @@ import profileImg from '@/assets/shared/foto-perfil.png';
 
 <section class="section-padding" data-component="AboutSection">
   <div class="container-custom">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center about-grid">
-      <!-- Image side (design mode) -->
-      <div data-reveal="left" class="relative about-image-col about-photo-design" data-component="ProfileImage">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+      <!-- Image side -->
+      <div data-reveal="left" class="relative" data-component="ProfileImage">
         <div class="relative rounded-2xl overflow-hidden dashed-border about-image-wrap">
           <Image
             src={profileImg}
@@ -21,50 +21,10 @@ import profileImg from '@/assets/shared/foto-perfil.png';
           />
         </div>
       </div>
-      <!-- Image side (code mode): Asset Viewer -->
-      <div data-reveal="left" class="relative about-image-col about-photo-code" data-component="ProfileImage">
-        <div class="asset-preview">
-          <div class="asset-preview__toolbar">
-            <div class="asset-preview__path">
-              <svg class="asset-preview__path-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-              </svg>
-              <span class="asset-preview__path-dir">assets</span>
-              <span class="asset-preview__path-sep">&gt;</span>
-              <span class="asset-preview__path-dir">shared</span>
-              <span class="asset-preview__path-sep">&gt;</span>
-              <span class="asset-preview__path-file">foto_perfil.png</span>
-            </div>
-            <div class="asset-preview__dims">
-              <span>800 × 1000</span>
-              <span class="asset-preview__dims-sep">|</span>
-              <span>PNG</span>
-            </div>
-          </div>
-          <div class="asset-preview__canvas">
-            <div class="asset-preview__img-wrap">
-              <Image
-                src={profileImg}
-                alt="Ramon Riera"
-                class="asset-preview__img"
-                loading="lazy"
-                decoding="async"
-                widths={[400, 800]}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-          </div>
-          <div class="asset-preview__status">
-            <span class="asset-preview__status-item">Layer: Profile</span>
-            <span class="asset-preview__status-sep">|</span>
-            <span class="asset-preview__status-item">Format: PNG</span>
-          </div>
-        </div>
-      </div>
 
       <!-- Content side -->
       <div>
-        <div data-reveal data-delay="0" class="mb-6 flex items-center gap-3 about-icon-badge">
+        <div data-reveal data-delay="0" class="mb-6 flex items-center gap-3">
           <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
               <g class="icon-eye-blink">
@@ -83,45 +43,14 @@ import profileImg from '@/assets/shared/foto-perfil.png';
           </span>
         </div>
 
-        <h2 data-reveal data-delay="100" class="heading-lg mb-6 about-heading-design"
+        <h2 data-reveal data-delay="100" class="heading-lg mb-6"
           data-token="$font-size-heading-lg: clamp(1.875rem, 4vw, 3rem)|$font-weight: 600 (semibold)|$spacing-bottom: 1.5rem / 24px">
           Diseñador con visión
           <span class="text-primary-500"
             data-token="$color-primary-500: #D97757">estratégica</span>
         </h2>
 
-        <!-- Code mode: JSDoc block in window container -->
-        <div data-reveal data-delay="100" class="about-jsdoc mb-8" aria-hidden="true">
-          <div class="jsdoc-window">
-            <div class="jsdoc-titlebar">
-              <div class="jsdoc-dots">
-                <span class="pmd-dot" style="background:#ff5f57"></span>
-                <span class="pmd-dot" style="background:#febc2e"></span>
-                <span class="pmd-dot" style="background:#28c840"></span>
-              </div>
-              <span class="jsdoc-filename">
-                <svg class="jsdoc-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#3178c6">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h3a3 3 0 010 6H9m6-6v10"/>
-                </svg>
-                core.config.ts
-              </span>
-              <span class="jsdoc-tab-active">core.config.ts</span>
-            </div>
-            <div class="jsdoc-body">
-              <div class="jsdoc-line"><span class="jsdoc-gutter">1</span><span class="jsdoc-code"><span class="jsdoc-delim">/**</span></span></div>
-              <div class="jsdoc-line"><span class="jsdoc-gutter">2</span><span class="jsdoc-code"><span class="jsdoc-star"> *</span> <span class="jsdoc-desc">Diseñador con visión estratégica</span></span></div>
-              <div class="jsdoc-line"><span class="jsdoc-gutter">3</span><span class="jsdoc-code"><span class="jsdoc-star"> *</span></span></div>
-              <div class="jsdoc-line"><span class="jsdoc-gutter">4</span><span class="jsdoc-code"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@role</span> <span class="jsdoc-value">UX Lead · Product Designer</span></span></div>
-              <div class="jsdoc-line"><span class="jsdoc-gutter">5</span><span class="jsdoc-code"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@vision</span> <span class="jsdoc-value">Strategic Product Design</span></span></div>
-              <div class="jsdoc-line"><span class="jsdoc-gutter">6</span><span class="jsdoc-code"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@method</span> <span class="jsdoc-value">Data-driven & User-centric</span></span></div>
-              <div class="jsdoc-line"><span class="jsdoc-gutter">7</span><span class="jsdoc-code"><span class="jsdoc-star"> *</span> <span class="jsdoc-tag">@stack</span> <span class="jsdoc-value">Design Systems · DesignOps · UX Research</span></span></div>
-              <div class="jsdoc-line"><span class="jsdoc-gutter">8</span><span class="jsdoc-code"><span class="jsdoc-delim"> */</span></span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Normal mode: prose paragraphs -->
-        <div data-reveal data-delay="200" class="about-bio-prose space-y-5 text-body mb-10"
+        <div data-reveal data-delay="200" class="space-y-5 text-body mb-10"
           data-token="$font-family-sans: Inter|$color-text-body: #7c766c|$spacing-gap: 1.25rem / 20px">
           <p>
             Soy Ramon Riera, <strong class="text-neutral-900 font-semibold">UX y Product Designer</strong> especializado en <strong class="text-neutral-900 font-semibold">estrategia de experiencia de usuario</strong> y <strong class="text-neutral-900 font-semibold">Design Operations</strong>, con más de 8 años diseñando productos digitales para empresas como <strong class="text-neutral-900 font-semibold">Iberia</strong> y <strong class="text-neutral-900 font-semibold">Banco Sabadell</strong> o mejorando el flujo de <strong class="text-neutral-900 font-semibold">ImaginBank</strong> y <strong class="text-neutral-900 font-semibold">Massimo Dutti</strong>.
@@ -133,66 +62,9 @@ import profileImg from '@/assets/shared/foto-perfil.png';
             Creo firmemente en un diseño que <strong class="text-neutral-900 font-semibold">simplifica lo complejo</strong>, alineando las decisiones de negocio con las necesidades del usuario para crear experiencias que, simplemente, funcionan.
           </p>
         </div>
-        <!-- Code mode: console/terminal window -->
-        <div data-reveal data-delay="200" class="about-bio-readme mb-6">
-          <div class="readme-window">
-            <div class="readme-titlebar">
-              <div class="readme-dots">
-                <span class="pmd-dot" style="background:#ff5f57"></span>
-                <span class="pmd-dot" style="background:#febc2e"></span>
-                <span class="pmd-dot" style="background:#28c840"></span>
-              </div>
-              <span class="readme-filename">
-                <svg class="readme-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                about.md
-              </span>
-              <span class="readme-tab-active">about.md</span>
-            </div>
-            <div class="readme-body">
-              <div class="readme-line"><span class="readme-gutter">1</span><span class="readme-code"><span class="readme-delim">/**</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">2</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-tag">@module</span> <span class="readme-text">about-designer</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">3</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-tag">@role</span> <span class="readme-text">UX &amp; Product Designer</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">4</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-tag">@experience</span> <span class="readme-text">8+ years</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">5</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-tag">@description</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">6</span><span class="readme-code"><span class="readme-star"> *</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">7</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-text">Especializado en <span class="readme-highlight">estrategia de experiencia</span></span></span></div>
-              <div class="readme-line"><span class="readme-gutter">8</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-text"><span class="readme-highlight">de usuario</span> y <span class="readme-highlight">Design Operations</span>, diseñando</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">9</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-text">productos digitales para empresas como</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">10</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-text"><span class="readme-highlight">Iberia</span>, <span class="readme-highlight">Banco Sabadell</span>, <span class="readme-highlight">ImaginBank</span></span></span></div>
-              <div class="readme-line"><span class="readme-gutter">11</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-text">y <span class="readme-highlight">Massimo Dutti</span>.</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">12</span><span class="readme-code"><span class="readme-star"> *</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">13</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-text">Trabajo en la intersección entre <span class="readme-highlight">UX</span>,</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">14</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-text"><span class="readme-highlight">estrategia</span> y <span class="readme-highlight">sistemas de diseño</span>.</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">15</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-text">Actualmente <span class="readme-highlight">UX Lead en Doctori.com</span>.</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">16</span><span class="readme-code"><span class="readme-star"> *</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">17</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-tag">@philosophy</span> <span class="readme-text">Simplificar lo complejo, alineando</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">18</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-text">  negocio con necesidades del usuario.</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">19</span><span class="readme-code"><span class="readme-star"> *</span></span></div>
-              <div class="readme-line"><span class="readme-gutter">20</span><span class="readme-code"><span class="readme-star"> *</span> <span class="readme-tag">@stack</span> <span class="readme-text"><span class="readme-highlight">Design Systems</span> | <span class="readme-highlight">Product Design</span> | <span class="readme-highlight">DesignOps</span></span></span></div>
-              <div class="readme-line"><span class="readme-gutter">21</span><span class="readme-code"><span class="readme-delim"> */</span></span></div>
-            </div>
 
-            <!-- Command lines (terminal style, inside window) -->
-            <div class="readme-cmds">
-              <a href="/about" class="readme-cmd-line" data-component="ButtonRunCmd">
-                <span class="readme-gutter">22</span>
-                <span class="readme-code">
-                  <span class="readme-cmd-prompt">&gt;</span> <span class="readme-cmd-text">cat</span> <span class="readme-cmd-file">about.md</span><span class="readme-cmd-cursor">_</span>
-                </span>
-              </a>
-              <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener noreferrer"
-                class="readme-cmd-line" data-component="ButtonCVCode">
-                <span class="readme-gutter">23</span>
-                <span class="readme-code">
-                  <span class="readme-cmd-prompt">&gt;</span> <span class="readme-cmd-text">get</span> <span class="readme-cmd-file">cv.pdf</span><span class="readme-cmd-cursor">_</span>
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div data-reveal data-delay="300" class="flex flex-wrap gap-4 about-buttons-normal">
-          <a href="/about" class="btn-primary hero-cta-normal"
+        <div data-reveal data-delay="300" class="flex flex-wrap gap-4">
+          <a href="/about" class="btn-primary"
             data-component="ButtonPrimary"
             data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
             Conocer más
@@ -204,7 +76,7 @@ import profileImg from '@/assets/shared/foto-perfil.png';
             href="/docs/CV-Ramon-Riera-Depares.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-outline btn-cv-normal"
+            class="btn-outline"
             data-component="ButtonOutline"
             data-token="$color-border-btn-outline: #d4cfc5|$color-text-btn-outline: #403d38|$radius-full: 9999px"
           >
@@ -219,162 +91,3 @@ import profileImg from '@/assets/shared/foto-perfil.png';
     </div>
   </div>
 </section>
-
-<style>
-  /* ═══ JSDoc heading — code mode only ═══ */
-  .about-jsdoc {
-    display: none;
-  }
-
-  :global(.code-mode) .about-heading-design {
-    display: none !important;
-  }
-
-  :global(.code-mode) .about-jsdoc {
-    display: block;
-  }
-
-  /* Hide icon badge + remove top space in code mode */
-  :global(.code-mode) .about-icon-badge {
-    display: none !important;
-  }
-
-  /* Photo container: stretch column, center image vertically */
-  :global(.code-mode) .about-grid {
-    align-items: stretch !important;
-  }
-
-  /* Hide code-mode photo in design mode */
-  .about-photo-code {
-    display: none;
-  }
-
-  :global(.code-mode) .about-photo-design {
-    display: none !important;
-  }
-
-  :global(.code-mode) .about-photo-code {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  /* ── Window container (matches readme-window) ── */
-  .jsdoc-window {
-    background: #1e1e2e;
-    border-radius: 8px;
-    border: 1px solid var(--cm-border, #30363d);
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-  }
-
-  .jsdoc-titlebar {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0.875rem;
-    background: #181825;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .jsdoc-dots {
-    display: flex;
-    gap: 6px;
-  }
-
-  .jsdoc-filename {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: #7d8590;
-    letter-spacing: 0.02em;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .jsdoc-file-icon {
-    color: #7d8590;
-    flex-shrink: 0;
-  }
-
-  .jsdoc-tab-active {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: #e6edf3;
-    background: #1e1e2e;
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px 4px 0 0;
-    margin-left: auto;
-    border: 1px solid var(--cm-border, #30363d);
-    border-bottom: 1px solid #1e1e2e;
-  }
-
-  .jsdoc-body {
-    padding: 0.5rem 0;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 0.78rem;
-    line-height: 1.6;
-    overflow-x: auto;
-  }
-
-  .jsdoc-line {
-    display: flex;
-    align-items: baseline;
-    white-space: nowrap;
-    position: relative;
-  }
-
-  .jsdoc-gutter {
-    display: inline-block;
-    min-width: 36px;
-    text-align: right;
-    padding-right: 12px;
-    color: var(--cm-text-muted, #7d8590);
-    opacity: 0.3;
-    user-select: none;
-    flex-shrink: 0;
-    font-size: inherit;
-    line-height: inherit;
-    transition: color 0.2s ease, opacity 0.2s ease;
-  }
-
-  .jsdoc-code {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .jsdoc-delim {
-    color: var(--cm-comment);
-    opacity: 0.5;
-  }
-
-  .jsdoc-star {
-    color: var(--cm-comment);
-    opacity: 0.5;
-  }
-
-  .jsdoc-desc {
-    color: var(--cm-text-secondary);
-    font-weight: 500;
-    font-size: 1.15em;
-  }
-
-  .jsdoc-tag {
-    color: var(--cm-keyword);
-  }
-
-  .jsdoc-value {
-    color: var(--cm-text-muted);
-  }
-
-  /* ── Hide design-mode buttons in code mode ── */
-  :global(.code-mode) .about-buttons-normal {
-    display: none !important;
-  }
-
-  /* ── Readme command lines (inside window) ── */
-  .readme-cmds {
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-    padding: 0.5rem 0 0.75rem;
-  }
-</style>

@@ -1,6 +1,6 @@
 # Ramon Riera — Portfolio
 
-Portfolio profesional de **Ramon Riera**, UX Lead. Construido con **Astro** y **TailwindCSS**. Diseño minimalista con modo dual (diseño / código), case studies detallados y optimizado para performance.
+Portfolio profesional de **Ramon Riera**, UX Lead. Construido con **Astro** y **TailwindCSS**. Diseño minimalista, case studies detallados y optimizado para performance.
 
 ## Tech Stack
 
@@ -27,14 +27,12 @@ npm run preview   # Preview del build
 │       └── shared/              # Imágenes de proyectos (por carpeta)
 ├── src/
 │   ├── components/
-│   │   ├── Navbar.astro         # Navegación con toggle Code Mode
+│   │   ├── Navbar.astro         # Navegación
 │   │   ├── Footer.astro         # Footer del sitio
 │   │   ├── HeroSection.astro    # Hero con carrusel de palabras
 │   │   ├── AboutSection.astro   # Sección "Sobre mí" en Home
 │   │   ├── ProjectCard.astro    # Tarjeta de proyecto en grid
 │   │   ├── WordsCarousel.astro  # Carrusel rotativo de palabras
-│   │   ├── CodeModeToggle.astro # Toggle diseño ↔ código
-│   │   ├── SystemConsole.astro  # Consola de sistema (code mode)
 │   │   ├── OptImage.astro       # Imagen optimizada con srcset
 │   │   └── Tag.astro            # Tag/chip reutilizable
 │   ├── layouts/
@@ -47,7 +45,7 @@ npm run preview   # Preview del build
 │   │       ├── index.astro      # Listado con filtros por categoría
 │   │       └── [slug].astro     # Case study individual
 │   ├── styles/
-│   │   └── global.css           # Estilos globales, code mode, animaciones
+│   │   └── global.css           # Estilos globales y animaciones
 │   └── utils/
 │       └── data.ts              # Datos centralizados (proyectos, config, etc.)
 ├── astro.config.mjs
@@ -57,15 +55,6 @@ npm run preview   # Preview del build
 ```
 
 ## Características principales
-
-### Code Mode
-
-El portfolio tiene un modo dual activable desde el Navbar:
-
-- **Modo diseño** (default) — Interfaz limpia, tipografía Inter/Space Grotesk, colores cálidos
-- **Modo código** — Estética terminal: fondo oscuro, tipografía monospace (JetBrains Mono), CTAs con estilo `$ comando`, iconos con border-radius reducido, colores verdes/ámbar
-
-El toggle añade/quita la clase `code-mode` en el `<body>`, y todos los estilos se aplican vía `.code-mode` en CSS.
 
 ### Case Studies
 
