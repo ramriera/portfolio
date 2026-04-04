@@ -260,6 +260,13 @@ const projectList = projects.map((p, i) => ({
   }
 
   /* ── Cursor ── */
+  .term-type-cursor {
+    color: #d97757;
+    animation: cursor-blink 0.6s step-end infinite;
+    user-select: none;
+    pointer-events: none;
+  }
+
   .term-cursor {
     color: #d97757;
     font-family: 'JetBrains Mono', monospace;
@@ -412,31 +419,108 @@ const projectList = projects.map((p, i) => ({
 
     // ── Typewriter effect ──
     var typewriterBusy = false;
+    var typewriterSkip = false;
 
-    function typeLines(lines, cb, delay) {
-      var d = delay || 40;
+    // Typing cursor element
+    var typeCursor = document.createElement('span');
+    typeCursor.className = 'term-type-cursor';
+    typeCursor.textContent = '█';
+
+    function typeLines(lines, cb) {
+      var CHAR_DELAY = 18;
+      var LINE_PAUSE = 30;
       typewriterBusy = true;
-      var i = 0;
-      // Batch: flush multiple lines in one rAF for fast (≤20ms) delays
-      var batchSize = d <= 20 ? 3 : 1;
+      typewriterSkip = false;
+      var lineIdx = 0;
 
-      function next() {
-        if (i >= lines.length) { typewriterBusy = false; scroll(); if (cb) cb(); return; }
-        var frag = document.createDocumentFragment();
-        var count = Math.min(batchSize, lines.length - i);
-        for (var j = 0; j < count; j++) {
+      function skipAll() {
+        // Render all remaining lines instantly
+        typeCursor.remove();
+        for (var k = lineIdx; k < lines.length; k++) {
           var el = document.createElement('div');
           el.className = 'term-line';
-          el.innerHTML = lines[i + j];
-          frag.appendChild(el);
+          el.innerHTML = lines[k];
+          output.appendChild(el);
         }
-        output.appendChild(frag);
-        i += count;
         scroll();
-        setTimeout(next, d + Math.random() * (d * 0.4));
+        typewriterBusy = false;
+        typewriterSkip = false;
+        if (cb) cb();
       }
-      next();
+
+      function nextLine() {
+        if (typewriterSkip) { skipAll(); return; }
+        if (lineIdx >= lines.length) {
+          typeCursor.remove();
+          typewriterBusy = false;
+          scroll();
+          if (cb) cb();
+          return;
+        }
+
+        var html = lines[lineIdx];
+        lineIdx++;
+
+        // Blank lines render instantly
+        if (html === '&nbsp;' || html === '') {
+          line(html);
+          scroll();
+          setTimeout(nextLine, 5);
+          return;
+        }
+
+        // Create a temp div to extract plain text for char-by-char
+        var temp = document.createElement('div');
+        temp.innerHTML = html;
+        var fullText = temp.textContent || '';
+
+        // Create the line element
+        var lineEl = document.createElement('div');
+        lineEl.className = 'term-line';
+        lineEl.textContent = '';
+        output.appendChild(lineEl);
+        lineEl.appendChild(typeCursor);
+        scroll();
+
+        var charIdx = 0;
+
+        function nextChar() {
+          if (typewriterSkip) {
+            lineEl.innerHTML = html;
+            skipAll();
+            return;
+          }
+          if (charIdx >= fullText.length) {
+            // Replace with full HTML (with colors)
+            lineEl.innerHTML = html;
+            scroll();
+            setTimeout(nextLine, LINE_PAUSE);
+            return;
+          }
+          lineEl.textContent = fullText.slice(0, charIdx + 1);
+          lineEl.appendChild(typeCursor);
+          charIdx++;
+          scroll();
+          setTimeout(nextChar, CHAR_DELAY + Math.random() * 8);
+        }
+
+        nextChar();
+      }
+
+      nextLine();
     }
+
+    // Skip typewriter on any keypress or click
+    function triggerSkip() {
+      if (typewriterBusy) typewriterSkip = true;
+    }
+    document.addEventListener('keydown', function(e) {
+      if (typewriterBusy && !typewriterSkip) {
+        typewriterSkip = true;
+        e.preventDefault();
+      }
+    }, true);
+    document.addEventListener('click', triggerSkip, true);
 
     // ── MOTD ──
 
@@ -1360,7 +1444,7 @@ const projectList = projects.map((p, i) => ({
     }
 
     input.addEventListener('keydown', function(e) {
-      if (typewriterBusy) { e.preventDefault(); return; }
+      if (typewriterBusy) return; // skip handler above catches it
 
       // ── Selection mode (projects TUI) ──
       if (selectMode) {
