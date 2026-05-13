@@ -491,35 +491,45 @@ const projectList = projects.map((p, i) => ({
         ]},
       ];
 
-      // Render header
-      line('&nbsp;');
-      line(c('keyword', '  COMANDOS DISPONIBLES'));
-      line(c('comment', '  ' + '─'.repeat(50)));
+      var allLines = [
+        '&nbsp;',
+        c('keyword', '  COMANDOS DISPONIBLES'),
+        c('comment', '  ' + '─'.repeat(50)),
+      ];
 
-      var rowEls = [];
+      // Track which lines will become selectable rows
+      var selectableInfo = [];
 
       categories.forEach(function(cat) {
-        line('&nbsp;');
-        line('  ' + c('accent', cat.label));
+        allLines.push('&nbsp;');
+        allLines.push('  ' + c('accent', cat.label));
         cat.items.forEach(function(item) {
           var baseHtml = '  ' + c('function', item[0].padEnd(14)) + ' ' + c('muted', item[1]);
-          var el = document.createElement('div');
-          el.className = 'term-line term-row-selectable';
-          el.innerHTML = baseHtml;
-          el.setAttribute('data-cmd', item[0]);
-          output.appendChild(el);
-          rowEls.push({ el: el, base: baseHtml });
+          selectableInfo.push({ lineIndex: allLines.length, baseHtml: baseHtml, cmd: item[0] });
+          allLines.push(baseHtml);
         });
       });
 
-      line('&nbsp;');
-      line('  ' + c('muted', '[↑/↓]') + ' navegar  ' + c('muted', '[Enter]') + ' ejecutar  ' + c('muted', '[ESC]') + ' cerrar terminal');
-      line('&nbsp;');
-      scroll();
+      allLines.push('&nbsp;');
+      allLines.push('  ' + c('muted', '[↑/↓]') + ' navegar  ' + c('muted', '[Enter]') + ' ejecutar  ' + c('muted', '[ESC]') + ' cerrar terminal');
+      allLines.push('&nbsp;');
 
-      // Activate selection mode (help)
-      selectMode = { rows: rowEls, idx: 0 };
-      updateSelectHighlight();
+      var startIdx = output.children.length;
+
+      typeLines(allLines, function() {
+        // After typewriter finishes, mark the rendered elements as selectable
+        var rowEls = [];
+        selectableInfo.forEach(function(info) {
+          var el = output.children[startIdx + info.lineIndex];
+          if (el) {
+            el.classList.add('term-row-selectable');
+            el.setAttribute('data-cmd', info.cmd);
+            rowEls.push({ el: el, base: info.baseHtml });
+          }
+        });
+        selectMode = { rows: rowEls, idx: 0 };
+        updateSelectHighlight();
+      }, 18);
 
       return null;
     }
