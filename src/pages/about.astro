@@ -67,8 +67,9 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
                 src={profileImg}
                 alt="Ramon Riera"
                 class="w-full h-auto grayscale hover:grayscale-0 transition-[filter] duration-700"
-                loading="lazy"
-                decoding="async"
+                loading="eager"
+                decoding="sync"
+                fetchpriority="high"
                 widths={[400, 800]}
                 sizes="(max-width: 1024px) 100vw, 40vw"
               />
