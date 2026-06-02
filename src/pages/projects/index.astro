@@ -109,7 +109,11 @@ function getProjectFilters(tags: string[]): string[] {
             data-filters={JSON.stringify(getProjectFilters(project.tags))}
             class="project-item"
           >
-            <ProjectCard {...project} />
+            <ProjectCard
+              {...project}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={i === 0 ? 'high' : 'auto'}
+            />
           </div>
         ))}
       </div>
