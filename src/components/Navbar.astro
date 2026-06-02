@@ -168,8 +168,9 @@ const currentPath = Astro.url.pathname;
     white-space: nowrap;
   }
 
-  /* ── Code Mode FAB ── */
+  /* ── Code Mode FAB — desktop only ── */
   .code-mode-fab {
+    display: none;
     position: fixed;
     bottom: 1.5rem;
     right: 1.5rem;
@@ -188,6 +189,12 @@ const currentPath = Astro.url.pathname;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(74, 222, 128, 0.1);
     cursor: pointer;
     transition: transform 0.1s ease;
+  }
+
+  @media (min-width: 1024px) {
+    .code-mode-fab {
+      display: inline-flex;
+    }
   }
 
   .code-mode-fab:hover {

@@ -76,7 +76,11 @@ const featuredProjects = projectOrder
           const colClass = span === 3 ? 'md:col-span-3' : 'md:col-span-2';
           return (
             <div data-reveal data-delay={String(i * 100)} class:list={[colClass, 'project-grid-item']}>
-              <ProjectCard {...project} />
+              <ProjectCard
+                {...project}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : 'auto'}
+              />
             </div>
           );
         })}
