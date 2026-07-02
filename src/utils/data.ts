@@ -52,17 +52,17 @@ export interface ConsultingBlock {
 export const mainTimeline: TimelineEntry[] = [
   {
     year: '2021 — Presente',
-    role: 'Senior Product Designer & Design Ops',
+    role: 'UX Lead & Strategic Product Designer',
     company: 'Doctori.com',
     description: 'Liderando la evolución del producto y la eficiencia operativa mediante la implementación de un Design System robusto. Enfoque en Design Ops para escalar procesos de diseño y sincronización con ingeniería.',
     gitMsg: 'feat(design-ops): implement token architecture & system analytics',
     current: true,
   },
   {
-    year: '2017 — 2021',
-    role: 'Junior Designer',
+    year: 'ago. 2017 — feb. 2021',
+    role: 'Junior → Mid UX/UI Designer',
     company: 'JBM',
-    description: 'Inicio de carrera profesional con proyectos de branding y web design.',
+    description: 'Inicio de carrera profesional con proyectos de branding y web design, con progresión de Junior a Mid UX/UI Designer en 3 años y 7 meses.',
     gitMsg: 'init: first_commit — branding & web_design projects',
   },
 ];
