@@ -948,6 +948,12 @@ main {
   box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
+.lint-rule-top {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.75rem;
+}
+
 .lint-rule-header {
   display: flex;
   align-items: center;
