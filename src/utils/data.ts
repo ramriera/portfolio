@@ -1783,6 +1783,127 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    slug: 'doctori-insurance-platform',
+    title: 'Doctori.com',
+    client: 'Doctori.com (iSalud Health)',
+    year: '2021 — Presente',
+    category: 'Design Systems & Product Strategy',
+    tags: ['Design Systems', 'Product Design', 'UX Research'],
+    description: 'Design System y estrategia de producto para el comparador de seguros nº1 de Doctori.com: cinco verticales (Salud, Coche, Moto, Decesos, Vida) unificadas bajo una misma fuente de verdad de diseño, liderado como UX Lead & Strategic Product Designer.',
+    longDescription: 'Doctori.com es un comparador de seguros que conecta a usuarios con las mejores tarifas de **más de 14 aseguradoras partner** (Adeslas, Sanitas, Mapfre, Allianz, DKV, Axa, entre otras) en cinco verticales: **Salud, Coche, Moto, Decesos y Vida**. El negocio no vive de una sola pantalla — vive de que cada vertical convierta, y de que escalar a una vertical nueva no implique reconstruir el producto desde cero.\n\nComo **UX Lead & Strategic Product Designer**, lidero la evolución de este ecosistema desde 2021: la arquitectura de Design Tokens que unifica el sistema visual, la librería de componentes que usan todos los equipos de producto, y la estrategia de las landings de conversión de cada vertical. No es un rol de "diseñar pantallas" — es un rol de **decidir qué se construye una vez y se reutiliza cinco veces**, y qué se adapta por vertical porque el usuario de seguros de moto no tiene las mismas dudas que el de seguros de vida.',
+    challenge: 'El crecimiento por verticales es bueno para el negocio y un riesgo para el diseño. Cada nueva vertical (Coche, Moto, Decesos, Vida, además de Salud) llegaba con presión de time-to-market, y sin una fuente única de verdad, el patrón natural era **duplicar componentes y reinventar decisiones ya tomadas**: un botón con radios distintos en cada landing, una tabla comparativa maquetada de cero cada vez, un formulario de captación de lead con validaciones distintas según quién lo construyera. Cada duplicado no es solo deuda visual — es **deuda de conversión**: un patrón que ya funciona en Salud tarda más en llegar a Moto si nadie lo sistematiza.',
+    solution: 'Construí y mantengo un sistema de **Design Tokens semánticos** (Primary, Neutral, CTA, Welcome + escalas de Error/Success/Alert/Info) como única fuente de verdad de color, y una **librería de componentes** — botones, inputs, badges, chips, checkboxes, paginación — con todos sus estados documentados. Sobre esa base, definí el **patrón de landing por vertical** que se repite en Salud, Coche y Moto: hero con CTA de cálculo inmediato, tabla comparativa de coberturas, bloques de valor, "estudio de mercado" con datos propios, FAQ y logos de aseguradoras partner como prueba social. Cada vertical nueva parte de ese patrón — y lo que se prueba en una vertical (por ejemplo, dónde poner el CTA de cálculo) se propaga a las demás sin rediseñar nada.',
+    results: [
+      'Sistema de Design Tokens con 8 escalas semánticas (Primary, Neutral, CTA, Welcome, Error, Success, Alert, Info) documentado como fuente única de verdad',
+      'Librería de componentes con variantes y estados completos (default, hover, disabled, loading) reutilizada en las 5 verticales del comparador',
+      'Patrón de landing de conversión replicado en Salud, Coche y Moto — misma estructura de hero, tabla comparativa, coberturas, estudio de mercado y FAQ',
+      'Home unificado que da acceso a 5 negocios (Salud, Coche, Moto, Decesos, Vida) y a más de 14 aseguradoras partner sin fragmentar la experiencia',
+      'Gobernanza de sistema activa: cada componente nuevo se evalúa contra "¿esto ya existe en otra vertical?" antes de construirse',
+    ],
+    stack: ['Figma', 'Design Tokens', 'Design System Governance', 'Conversion Design'],
+    cover: '/assets/projects/doctori/doctori-header.png',
+    brandColor: '#001A80',
+    gridSpan: 3,
+    projectMeta: {
+      role: 'UX Lead & Strategic Product Designer',
+      industry: 'Insurtech / Seguros',
+      output: 'Design System & Multi-Vertical Product Platform',
+      duration: '2021 — Presente',
+      skills: ['Design Systems', 'Design Tokens', 'Component Library', 'Product Strategy', 'Design Ops', 'Conversion-Focused Design', 'Cross-Vertical Design', 'Governance', 'Documentation', 'Accessibility (WCAG)'],
+    },
+    checks: [
+      'Cinco verticales de seguro (Salud, Coche, Moto, Decesos, Vida) creciendo cada una con presión de time-to-market propia',
+      'Sin una fuente única de verdad, cada landing nueva duplicaba componentes ya resueltos en otra vertical — deuda de diseño y de conversión',
+      'Un patrón que funcionaba en una vertical (ej. posición del CTA) no llegaba a las demás porque nadie lo sistematizaba',
+    ],
+    caseSections: [
+      // ── 01. Contexto de Negocio ──
+      {
+        label: '01. Contexto de Negocio',
+        title: 'Un comparador que crece por verticales, no por pantallas',
+        layout: 'center',
+        content: 'Doctori.com conecta a personas con la mejor tarifa de seguro entre más de 14 aseguradoras partner, en cinco verticales que compiten por el mismo usuario y por el mismo equipo de diseño: **Salud, Coche, Moto, Decesos y Vida**. El home unifica el acceso a las cinco, cada una con su propio comparador, su propia tabla de coberturas y su propio flujo de captación de lead.\n\nEsto cambia qué significa "diseñar" en este contexto. No se trata de optimizar una pantalla — se trata de **decidir qué patrón se construye una vez y se reutiliza cinco veces**, y dónde sí merece la pena diferenciar porque el usuario de cada vertical tiene dudas distintas. Ese es el criterio que aplico como UX Lead & Strategic Product Designer en cada decisión del sistema.',
+        images: ['/assets/projects/doctori/doctori-header.png'],
+        captions: ['Home — acceso unificado a las 5 verticales, con las aseguradoras partner como prueba social'],
+        highlight: 'El negocio no factura por pantalla bonita. Factura por lead cualificado en cada vertical. Cada decisión de diseño se evalúa contra esa métrica.',
+      },
+      // ── 02. El Reto ──
+      {
+        label: '02. El Reto',
+        title: 'Cada vertical nueva, un riesgo de duplicar lo ya resuelto',
+        layout: 'image-grid',
+        content: 'El flujo de captación de lead (el "Calcular" de cada tarjeta del home) abre un formulario corto — capital a asegurar, fecha de nacimiento, teléfono, email — diseñado para minimizar fricción en el momento de mayor intención del usuario. Este patrón se probó primero en Vida y Salud.\n\n**El riesgo no era diseñar este formulario una vez — era que se rediseñara cinco veces.** Sin una fuente única de verdad, cada equipo que construía una vertical nueva partía de cero: nuevos componentes, nuevas validaciones, nuevo criterio sobre qué campos pedir primero. Cada duplicado no solo cuesta tiempo de diseño y desarrollo — **retrasa que un patrón que ya convierte en una vertical llegue a las demás**.',
+        images: ['/assets/projects/doctori/doctori-home-quote-flow.png'],
+        captions: ['Flujo de captación de lead — mismo patrón de formulario corto, pensado para reutilizarse en cualquier vertical'],
+      },
+      // ── 03. Design Tokens ──
+      {
+        label: '03. Design Tokens',
+        title: 'Una paleta semántica como única fuente de verdad',
+        layout: 'full-image',
+        content: 'La base de todo el sistema es una arquitectura de **Design Tokens semánticos**: escalas Primary y Neutral para la identidad de marca, CTA para las acciones de conversión, Welcome para momentos de bienvenida/onboarding, y cuatro escalas semánticas — Error, Success, Alert, Info — para estados del sistema. Cada token tiene nombre semántico (`$di-color-cta-500`, `$di-color-semantic-error-400`) y valor hexadecimal versionado.\n\n**Por qué importa a nivel de negocio**: cuando el equipo de marketing pide un ajuste de color para una campaña, o cuando una vertical nueva necesita su propio acento de marca, el cambio se hace en un token, no pantalla por pantalla. Eso convierte una tarea de días en una tarea de minutos.',
+        images: ['/assets/projects/doctori/doctori-ds-colors.png'],
+        captions: ['Documentación de la paleta de tokens — 8 escalas semánticas versionadas como fuente única de verdad'],
+        highlight: 'Un token de color no es un capricho de sistema de diseño. Es lo que permite que un cambio de marca no se convierta en un proyecto de tres semanas.',
+      },
+      // ── 04. Librería de Componentes ──
+      {
+        label: '04. Librería de Componentes',
+        title: 'De botones aislados a un sistema con estados completos',
+        layout: 'full-image',
+        content: 'Sobre los tokens se construye la librería de componentes: botones (primario, secundario, ghost, con icono, WhatsApp, error) con todos sus estados — default, hover, disabled, loading —, además de badges, chips, checkboxes, radios, paginación y controles de formulario. Cada componente consume los tokens directamente, así que un ajuste en la paleta se propaga automáticamente a toda la librería.\n\nEsta librería es lo que hace posible que el patrón de landing (sección 06) se replique en cada vertical sin que cada equipo reconstruya el mismo botón "Calcular" con ligeras variaciones que, sumadas, generan inconsistencia y deuda de mantenimiento.',
+        images: ['/assets/projects/doctori/doctori-components-buttons.png'],
+        captions: ['Librería de componentes — botones, badges, chips y controles de formulario con todos sus estados documentados'],
+      },
+      // ── 05. Landings por Vertical ──
+      {
+        label: '05. Landings por Vertical',
+        title: 'Un mismo patrón de conversión, adaptado a cada seguro',
+        layout: 'image-grid',
+        content: 'Salud, Coche y Moto comparten la misma estructura de landing: hero con CTA de cálculo inmediato y prueba social (rating de clientes), tabla comparativa de coberturas (ej. "Terceros" vs. "Todo riesgo" en Coche, "Cuadro médico con copago" vs. "Reembolso libre" en Salud), bloques de coberturas imprescindibles, un bloque de **"Estudio de [vertical] de Doctori.com"** con datos de mercado propios, y FAQ.\n\n**Lo que cambia por vertical no es la estructura — es el contenido de decisión**: en Coche y Moto, el usuario necesita comparar marcas de vehículo; en Salud, necesita entender coberturas médicas. El sistema separa lo que es patrón (reutilizable) de lo que es contenido (específico de cada negocio), y esa separación es una decisión de arquitectura de producto, no solo de UI.',
+        images: [
+          '/assets/projects/doctori/doctori-salud-landing.png',
+          '/assets/projects/doctori/doctori-auto-landing.png',
+          '/assets/projects/doctori/doctori-moto-landing.png',
+        ],
+        captions: [
+          'Landing de Seguros de Salud — tabla comparativa de cuadros médicos y coberturas',
+          'Landing de Seguros de Coche — comparativa de Terceros vs. Todo riesgo, selector de marca',
+          'Landing de Seguros de Moto — mismo patrón adaptado a marcas y coberturas de motocicleta',
+        ],
+        highlight: 'El patrón se diseña una vez. El contenido de decisión se adapta por vertical. Esa separación es lo que permite lanzar una vertical nueva en semanas, no en meses.',
+      },
+      // ── 06. Decisiones de Producto ──
+      {
+        label: '06. Decisiones de Producto',
+        title: 'Por qué cada bloque de la landing está donde está',
+        layout: 'stepper',
+        content: 'Cada bloque del patrón de landing responde a una razón de conversión o de confianza, no a una preferencia estética:',
+        steps: [
+          { title: 'Hero con CTA + prueba social', description: 'El precio orientativo ("Desde 9€/mes") y el rating de clientes (9.8/10) aparecen antes que cualquier explicación. El usuario decide si sigue leyendo en los primeros 3 segundos — el CTA no puede esperar a que termine de leer.' },
+          { title: 'Tabla comparativa temprana', description: 'Antes de explicar coberturas en detalle, se muestra la tabla comparativa de modalidades (ej. con copago / sin copago). El usuario de seguros llega comparando — el diseño responde a esa intención antes de pedirle que lea contenido educativo.' },
+          { title: 'Logos de aseguradoras como prueba social', description: 'Adeslas, Sanitas, Mapfre, Allianz — mostrar con quién se compara genera confianza inmediata en un producto financiero donde el usuario no conoce a "Doctori" de entrada, pero sí conoce a las aseguradoras.' },
+          { title: '"Estudio de [vertical]" con datos propios', description: 'Cada landing incluye un bloque de datos de mercado (gráficos de distribución de precios, edades, tipos de cobertura más contratados). No es contenido decorativo — es una señal de autoridad que reduce la fricción de "¿puedo confiar en este comparador?".' },
+          { title: 'FAQ al final, no al principio', description: 'Las preguntas frecuentes resuelven objeciones de último momento (¿es obligatorio?, ¿puedo cambiar de aseguradora?) justo antes de que el usuario decida si calcula su precio o abandona — su posición en el flujo es deliberada, no un cajón de sastre.' },
+        ],
+      },
+      // ── 07. Reflexión ──
+      {
+        label: '07. Reflexión',
+        title: 'Qué significa liderar un Design System que no para de crecer',
+        layout: 'center',
+        content: 'Un Design System en una empresa real no es un proyecto que se termina — es una infraestructura que se gobierna. Estas son las tensiones activas de liderar el de Doctori.com:',
+        bullets: [
+          '**Velocidad vs. consistencia** — cada vertical nueva llega con presión de lanzamiento. La tentación de "total, es solo esta vez" es constante, y cada excepción que se acepta es una excepción que alguien más copiará en la siguiente vertical',
+          '**Cuándo diferenciar y cuándo unificar** — no todo debe ser igual entre Salud y Moto. Parte del rol de Strategic Product Designer es decidir dónde la diferenciación aporta valor real al usuario y dónde es solo preferencia de un equipo',
+          '**Gobernanza sin fricción** — un sistema que frena a los equipos de producto para "pedir permiso" en cada componente deja de usarse. El reto permanente es que seguir el sistema sea el camino más rápido, no una capa burocrática extra',
+          '**Siguiente frente** — extender el mismo patrón de landing a Decesos, la vertical con menor inversión de diseño hasta ahora, y auditar accesibilidad (WCAG) en toda la librería de componentes como base para el siguiente ciclo de madurez del sistema',
+        ],
+        highlight: 'El valor de este trabajo no se mide en pantallas diseñadas — se mide en cuánto más rápido y con menos deuda se puede lanzar la próxima vertical gracias al sistema que ya existe.',
+      },
+    ],
+  },
 ];
 
 

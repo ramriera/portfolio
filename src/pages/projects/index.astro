@@ -8,7 +8,7 @@ import ContactConsole from '@/components/ContactConsole.astro';
 const projectWords = ['seleccionados', 'estratégicos', 'construidos', 'desplegados', 'destacados'];
 import { projects, siteConfig } from '@/utils/data';
 
-const projectOrder = ['massimo-dutti-conversion', 'banco-sabadell-design-system', 'imaginbank-digital-banking', 'movefast-startup-platform', 'solotemazos-music-platform', 'iberia-flight-experience'];
+const projectOrder = ['doctori-insurance-platform', 'massimo-dutti-conversion', 'banco-sabadell-design-system', 'imaginbank-digital-banking', 'movefast-startup-platform', 'solotemazos-music-platform', 'iberia-flight-experience'];
 const sortedProjects = [...projects].sort((a, b) => {
   const aIdx = projectOrder.indexOf(a.slug);
   const bIdx = projectOrder.indexOf(b.slug);
