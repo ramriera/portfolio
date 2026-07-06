@@ -1957,6 +1957,232 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    slug: 'doctori-tarificador-coche',
+    title: 'Tarificador de Coche',
+    client: 'Doctori.com (iSalud Health)',
+    year: '2022 — Presente',
+    category: 'Strategic Product Design',
+    tags: ['Product Design', 'UX Research'],
+    description: 'Rediseño estratégico del flujo de cotización de seguro de coche de Doctori.com: de un formulario complejo a un asistente de 35 pasos con divulgación progresiva, pensado para maximizar la conversión sin sacrificar ni un dato necesario para cotizar con precisión.',
+    longDescription: 'Cotizar un seguro de coche requiere entre 20 y 30 datos: marca, modelo, versión, uso del vehículo, historial del conductor, siniestros, compañía anterior... Cualquier comparador que pida todo eso en un solo formulario se enfrenta a una tasa de abandono altísima. El **Tarificador de Coche** de Doctori.com resuelve esto con una estrategia deliberada: **35 pantallas, una pregunta cada vez**, con una barra de progreso que nunca desaparece y un contexto (marca, modelo, aseguradora en curso) siempre visible.\n\nEste proyecto documenta el trabajo de **Strategic Product Design** detrás de ese flujo: no es una decisión de UI — es una apuesta de producto sobre cómo se comporta la carga cognitiva percibida frente a la real, y sobre qué hacer en los momentos donde el sistema no tiene una respuesta limpia (una aseguradora que no cotiza, un usuario que duda a mitad del flujo).',
+    challenge: 'Un formulario de cotización de coche necesita capturar datos de tres dominios distintos — el **vehículo** (marca, modelo, versión, uso, matrícula), el **conductor** (edad, carné, siniestros, compañía anterior) y la **póliza deseada** (coberturas, franquicia, fecha de efecto) — antes de poder devolver un precio real. Pedir todo eso en un formulario tradicional de una sola página es la receta perfecta para el abandono: el usuario ve la longitud del formulario antes de invertir ningún esfuerzo, y decide que no merece la pena. El reto no era reducir los datos necesarios — eran imprescindibles para cotizar con precisión — era **rediseñar cómo se perciben**.',
+    solution: 'Diseñé el flujo como una conversación de **35 pasos**, cada uno con una sola pregunta, un único campo de decisión, y una barra de progreso fina que nunca desaparece. El contexto de la cotización (marca, modelo, aseguradora en curso) queda anclado en la parte inferior con acceso directo a "Ver resumen" en cualquier momento, así que el usuario nunca siente que ha perdido el hilo. Cuando la comparativa final no puede devolver precio para alguna aseguradora, el sistema no la oculta — la muestra con una llamada a la acción alternativa. Y en el momento de mayor compromiso (contratar), la marca de Doctori.com cede el protagonismo a la aseguradora elegida, reforzando la confianza justo cuando más importa.',
+    results: [
+      'Flujo de cotización estructurado en 35 pantallas de un solo dato, con barra de progreso persistente — divulgación progresiva aplicada a un formulario de alta complejidad',
+      'Contexto de la cotización (marca, modelo, aseguradora) siempre visible y accesible vía "Ver resumen", incluso a mitad de un flujo largo',
+      'Decisión de producto explícita: las aseguradoras sin precio online se muestran igual, con CTA de llamada, en vez de ocultarse de la comparativa',
+      'Verificación por SMS con mensaje de confianza explícito en vez del formulario frío de verificación estándar del sector',
+      'Hand-off de marca a la aseguradora elegida en el resumen final — la confianza se transfiere justo en el momento de mayor compromiso económico',
+    ],
+    stack: ['Figma', 'Progressive Disclosure', 'Conversion Design', 'Design Tokens'],
+    cover: '/assets/projects/doctori-tarificador/tarificador-header.png',
+    brandColor: '#001A80',
+    gridSpan: 2,
+    projectMeta: {
+      role: 'UX Lead & Strategic Product Designer',
+      industry: 'Insurtech / Seguros',
+      output: 'Multi-Step Quote Flow — Strategic Product Design',
+      duration: '2022 — Presente',
+      skills: ['Product Strategy', 'Progressive Disclosure', 'Conversion-Focused Design', 'Form Design', 'Trust Design', 'Error Prevention', 'Design Systems', 'Heuristic Analysis'],
+    },
+    checks: [
+      'Cotizar un seguro de coche requiere cerca de 30 datos de tres dominios distintos (vehículo, conductor, póliza) antes de devolver un precio real',
+      'Un formulario tradicional de una sola página muestra toda esa longitud de golpe — el usuario abandona antes de invertir el primer esfuerzo',
+      'Algunas aseguradoras no devuelven precio online para ciertos perfiles de riesgo, dejando huecos sin resolver en la comparativa final',
+    ],
+    caseSections: [
+      // ── 01. Contexto ──
+      {
+        label: '01. Contexto',
+        title: 'Por qué un tarificador propio y no un simple formulario',
+        layout: 'center',
+        content: 'El negocio de Doctori.com no cobra por mostrar un formulario — cobra por cada cotización que termina en una llamada o una contratación con una aseguradora partner. Eso significa que el tarificador de coche no es una pantalla más del comparador: es **el flujo que más presión de conversión soporta de todo el producto**, porque es el más largo y el que más datos sensibles pide.\n\nComo Strategic Product Designer, mi punto de partida no fue "¿cómo hago este formulario más bonito?" sino **"¿qué estructura de flujo maximiza la probabilidad de que un usuario con intención real de compra llegue a ver un precio?"**. La respuesta no fue reducir preguntas — todas eran necesarias para cotizar con precisión — fue cambiar su forma.',
+        highlight: 'En un flujo de conversión largo, la pregunta correcta no es "¿qué podemos quitar?" — es "¿cómo hacemos que lo necesario se sienta ligero?".',
+      },
+      // ── 02. El Patrón ──
+      {
+        label: '02. El Patrón',
+        title: 'Una pregunta, una pantalla',
+        layout: 'image-grid',
+        content: 'El flujo empieza con la selección de marca del vehículo — buscador y grid de logotipos, sin ningún otro elemento en pantalla que compita por la atención — y continúa con preguntas de sí/no y de selección simple, como la compañía aseguradora anterior. Cada pantalla tiene **una única decisión posible**, con una barra de progreso fina en la parte superior que avanza pero nunca desaparece.\n\n**Por qué esto convierte mejor que un formulario largo**: la carga cognitiva percibida de "35 pasos de una pregunta" es menor que la de "un formulario con 35 campos", aunque el dato solicitado sea idéntico. El usuario nunca ve el formulario completo — solo ve la siguiente pregunta, y eso cambia por completo su disposición a continuar.',
+        images: [
+          '/assets/projects/doctori-tarificador/tarificador-step-marca.png',
+          '/assets/projects/doctori-tarificador/tarificador-step-companias.png',
+        ],
+        captions: [
+          'Paso 1 de 35 — selección de marca con buscador, la primera de muchas preguntas de un solo dato',
+          'Paso 19 — pregunta binaria sobre la compañía aseguradora anterior',
+        ],
+        highlight: 'Un formulario de 35 campos se abandona. 35 pantallas de una pregunta cada una, con progreso visible, se completan. El dato pedido es el mismo — la carga percibida no.',
+      },
+      // ── 03. El Contexto Nunca Desaparece ──
+      {
+        label: '03. El Contexto Nunca Desaparece',
+        title: 'Anclar lo importante mientras todo lo demás cambia de pantalla',
+        layout: 'left-right',
+        content: 'En un flujo de 35 pasos, el riesgo de que el usuario sienta que "ha perdido el hilo" es real. Por eso, a partir de la mitad del flujo, una barra inferior fija muestra la aseguradora seleccionada hasta el momento (ej. "Asisa Completa ++") y un acceso directo a **"Ver resumen"** — el usuario puede comprobar en cualquier momento qué ha contestado y qué está a punto de contratar, sin tener que retroceder pantalla por pantalla.\n\nEste patrón resuelve una tensión real de los flujos largos: cuantas más pantallas, mayor la ansiedad de "¿esto sigue teniendo sentido?". Anclar el contexto es más barato que reducir el número de pasos, y tiene un efecto directo sobre la confianza para completar el flujo.',
+        images: ['/assets/projects/doctori-tarificador/tarificador-step-conductor.png'],
+        highlight: 'Cuantos más pasos tiene un flujo, más vale la pena anclar el contexto. Es más barato que rediseñar el flujo entero, y resuelve la misma ansiedad.',
+      },
+      // ── 04. La Comparativa ──
+      {
+        label: '04. La Comparativa',
+        title: 'El momento de la verdad — y qué hacer cuando falla',
+        layout: 'full-image',
+        content: 'Después de 27 pasos de preguntas, el usuario llega al momento que justifica todo el esfuerzo: una comparativa real de precios entre aseguradoras, organizada por modalidad (Terceros básico, Terceros ampliado, Todo riesgo con/sin franquicia) y con filtro por compañía.\n\n**Pero no siempre hay una respuesta limpia.** Algunas aseguradoras no devuelven precio online para ciertos perfiles de riesgo — su API de tarificación falla o no cotiza ese caso. La decisión de producto no fue ocultar esas aseguradoras de la lista: se muestran igual, con su logo, y con un mensaje claro invitando a llamar para obtener precio por teléfono. Un fallo técnico de un tercero se convierte en una llamada entrante cualificada — el usuario ya completó 28 pasos de intención de compra, y ese es un motivo legítimo para ofrecer un canal alternativo, no para esconder la opción.',
+        images: ['/assets/projects/doctori-tarificador/tarificador-step-comparativa.png'],
+        captions: ['Comparativa real de precios — con aseguradoras sin cotización online mostradas igual, con CTA de llamada'],
+        highlight: 'Ocultar un fallo técnico parece más limpio. Convertirlo en una llamada entrante es mejor negocio. La opción de diseño "menos elegante" fue la correcta.',
+      },
+      // ── 05. Confianza antes de Contratar ──
+      {
+        label: '05. Confianza antes de Contratar',
+        title: 'Verificación por SMS como momento de tranquilidad, no de fricción',
+        layout: 'left-right',
+        content: 'Antes de contratar, el flujo verifica el teléfono con un código SMS de 6 dígitos, temporizador de caducidad visible y opción de reenvío — una barrera antifraude estándar en el sector. La diferencia está en cómo se comunica: en vez del formulario frío de verificación habitual, el mensaje es explícito sobre por qué se pide ese dato y qué pasa con él ("Tus datos están protegidos y nunca se compartirán sin tu permiso").\n\nEn un flujo donde el usuario ya ha invertido varios minutos y ha compartido datos personales sensibles, este es exactamente el momento donde la ansiedad es más alta — y exactamente donde más rentable es invertir en un mensaje de confianza explícito en lugar de un trámite genérico.',
+        images: ['/assets/projects/doctori-tarificador/tarificador-step-otp.png'],
+      },
+      // ── 06. El Cierre ──
+      {
+        label: '06. El Cierre',
+        title: 'La marca cede el protagonismo justo cuando más importa',
+        layout: 'left-right',
+        content: 'En el resumen final, antes de firmar, la marca de Doctori.com **cede el protagonismo visual a la aseguradora elegida** (en la captura, Reale Seguros): su logo pasa a encabezar la tarjeta de resumen, junto a los datos de la póliza, el precio final y las casillas legales de contratación.\n\nEs una decisión deliberada, no un descuido de marca: en el momento de mayor compromiso económico, el usuario necesita ver con quién está contratando realmente — la aseguradora — no seguir viendo la marca del comparador que le trajo hasta aquí. Confundir esos dos roles en el momento de pagar es exactamente donde la confianza se rompe si se hace mal.',
+        images: ['/assets/projects/doctori-tarificador/tarificador-step-resumen.png'],
+      },
+      // ── 07. Reflexión ──
+      {
+        label: '07. Reflexión',
+        title: 'Qué validaría primero como Strategic Product Designer',
+        layout: 'center',
+        content: 'Un flujo de 35 pasos es una apuesta fuerte de producto. Documentar sus riesgos es tan importante como documentar sus decisiones:',
+        bullets: [
+          '**Instrumentar cada paso** — la validación real de este diseño no es la intuición de que "35 pasos cortos convierten mejor que un formulario largo" — es el dato de en qué paso concreto se produce el mayor drop-off. Sin esa instrumentación, el diseño es una hipótesis razonada, no un hecho probado',
+          '**Riesgo de fatiga en usuarios recurrentes** — un usuario que ya cotizó una vez y vuelve a hacerlo (ej. en la renovación) no necesita la misma divulgación progresiva que alguien que cotiza por primera vez. Un flujo abreviado para usuarios conocidos es la siguiente iteración lógica',
+          '**Cuándo 35 pasos es demasiado** — el principio de divulgación progresiva no es ilimitado: si el drop-off acumulado por pantalla es mayor que el beneficio de percepción de ligereza, el flujo largo deja de ganar frente a un formulario más corto. Ese punto de equilibrio solo se conoce con datos reales de producción',
+          '**Siguiente frente** — replicar el mismo patrón de "contexto anclado + fallback de llamada ante fallos" en los tarificadores de Moto y Salud, que hoy tienen flujos más cortos pero menos maduros en estas dos decisiones concretas',
+        ],
+        highlight: 'Este diseño parte de una hipótesis de comportamiento bien fundamentada, no de un dato de producción validado. La siguiente fase imprescindible es instrumentar el flujo real y medir el drop-off paso a paso antes de dar por buena la apuesta.',
+      },
+    ],
+  },
+  {
+    slug: 'doctori-app-telemedicina',
+    title: 'App Doctori',
+    client: 'Doctori.com (iSalud Health)',
+    year: '2022 — Presente',
+    category: 'Strategic Product Design',
+    tags: ['Product Design', 'UX Research'],
+    description: 'Estrategia de producto para la app de Doctori.com: de comparador transaccional de un solo uso a plataforma de consulta médica, legal y veterinaria con recomendación asistida por IA — pensada para generar una razón de volver, no solo de comprar una vez.',
+    longDescription: 'Un comparador de seguros tiene un problema de negocio estructural: el usuario lo usa una vez, compra, y no vuelve hasta la renovación un año después. La **App de Doctori.com** ataca ese problema desde el producto, no desde el marketing: convierte la relación en algo que el usuario quiere abrir cada semana — consulta médica, legal o veterinaria por chat en minutos, recomendaciones de cobertura asistidas por IA, y un marketplace de descuentos con las aseguradoras partner.\n\nComo **Strategic Product Designer**, mi trabajo aquí no fue diseñar una app bonita — fue decidir **qué convierte un producto de compra única en un producto de uso recurrente**, y cómo ese producto sigue hablando el mismo lenguaje visual y de confianza que la web de seguros de la que nace.',
+    challenge: 'El modelo de negocio de un comparador de seguros termina en el momento de la compra: el usuario cotiza, contrata, y desaparece hasta la renovación. Eso es un problema de **retención y de lifetime value** — cada usuario adquirido genera valor una sola vez al año, y no hay ninguna razón de producto para que abra la app entre medias. Construir "otra app de seguros" no resolvía esto. El reto era encontrar un valor que el usuario quisiera usar de forma recurrente, y que además reforzara la razón de ser de Doctori.com: la confianza en momentos de necesidad.',
+    solution: 'Definí la app alrededor de un valor que no compite con el negocio de seguros — lo complementa: **consulta directa con un médico, abogado o veterinario por chat, en menos de 2 minutos**. La estructura de navegación (Médicos, Abogados, Veterinarios, Ofertas, Mi perfil) pone ese valor en primer plano, con estado en tiempo real de cada profesional. Sobre esa base añadí dos capas más de retención: un asistente de **recomendación de coberturas asistido por IA** ("nuestra IA te explica cada cobertura, sin letra pequeña") y un **marketplace de descuentos** con las aseguradoras partner (DKV, Adeslas...). La app comparte tokens, tipografía y componentes con la web, así que la confianza que genera el comparador se transfiere sin fricción al nuevo canal.',
+    results: [
+      'Estructura de navegación por especialidad (Médicos, Abogados, Veterinarios, Ofertas, Mi perfil) que convierte un comparador transaccional en un producto de consulta recurrente',
+      'Estado en tiempo real de cada profesional (disponible / ocupado) visible en el listado, reduciendo la incertidumbre de "¿me van a responder ahora?"',
+      'Asistente de recomendación de coberturas asistido por IA integrado en la pestaña de Ofertas, sin letra pequeña',
+      'Marketplace de descuentos con aseguradoras partner (DKV, Adeslas...) como segunda capa de retención más allá de la consulta profesional',
+      'Onboarding y componentes de verificación (SMS, formularios) que reutilizan los mismos tokens y patrones que la web — cero curva de aprendizaje para un usuario que ya conoce Doctori.com',
+    ],
+    stack: ['Figma', 'Design Tokens', 'Product Strategy', 'Retention Design'],
+    cover: '/assets/projects/doctori-app/app-header.png',
+    brandColor: '#001A80',
+    gridSpan: 2,
+    projectMeta: {
+      role: 'UX Lead & Strategic Product Designer',
+      industry: 'Insurtech / Seguros',
+      output: 'Mobile App — Retention & Engagement Strategy',
+      duration: '2022 — Presente',
+      skills: ['Product Strategy', 'Retention Design', 'Mobile-First Design', 'Design Systems', 'AI-Assisted UX', 'Trust Design', 'Onboarding Design', 'Cross-Channel Consistency'],
+    },
+    checks: [
+      'El negocio de comparación de seguros termina en la compra — el usuario no tiene ninguna razón de producto para volver antes de la renovación anual',
+      'Construir "otra app de seguros" no resolvía el problema de fondo: faltaba un valor de uso recurrente, no una funcionalidad más',
+      'Cualquier app nueva competía por confianza desde cero si no heredaba la identidad visual y los patrones ya validados en la web',
+    ],
+    caseSections: [
+      // ── 01. Contexto de Negocio ──
+      {
+        label: '01. Contexto de Negocio',
+        title: 'El problema no era de producto — era de frecuencia',
+        layout: 'left-right',
+        content: 'Doctori.com genera ingresos cuando un usuario contrata un seguro a través de una aseguradora partner. Ese evento ocurre, en el mejor de los casos, **una vez al año** por usuario. Entre medias, no hay ninguna razón de producto para que ese usuario vuelva a abrir la web o piense en la marca — hasta que necesita renovar, momento en el que compite de nuevo con cualquier otro comparador del mercado.\n\nComo Strategic Product Designer, mi punto de partida fue una pregunta de negocio, no de interfaz: **¿qué valor podemos dar que el usuario quiera usar entre compra y compra, y que además refuerce por qué debería seguir confiando en Doctori.com?** La respuesta no estaba en mejorar el comparador — estaba en construir un canal nuevo con un motivo de uso distinto.',
+        images: ['/assets/projects/doctori-app/app-onboarding-1.png'],
+        highlight: 'Un comparador de seguros compite por confianza una vez al año. Una app de consulta recurrente compite por confianza cada semana. Esa diferencia de frecuencia es la que justifica el canal nuevo.',
+      },
+      // ── 02. El Reto ──
+      {
+        label: '02. El Reto',
+        title: 'No construir "otra app de seguros"',
+        layout: 'center',
+        content: 'La tentación obvia era construir una versión móvil del comparador: cotizar desde el móvil, gestionar pólizas, consultar el historial de contrataciones. Todo eso es útil, pero **no resuelve el problema de frecuencia** — sigue siendo un producto que se abre solo cuando hay una gestión de seguros pendiente.\n\nEl reto real era encontrar algo que el usuario quisiera usar sin necesitar gestionar nada: una razón de valor inmediato, recurrente, y coherente con la marca "Doctor i" — alguien en quien confiar cuando surge una duda, no solo cuando hay que comparar un precio.',
+        highlight: 'La pregunta equivocada era "¿cómo llevamos el comparador al móvil?". La pregunta correcta era "¿qué haría que alguien abriera esta app sin tener nada que gestionar?".',
+      },
+      // ── 03. Onboarding ──
+      {
+        label: '03. Onboarding',
+        title: 'Vender el valor antes de pedir ningún dato',
+        layout: 'image-grid',
+        content: 'El onboarding no explica "cómo funciona la app" — comunica directamente el valor central: **"Resuelve tus dudas directamente con un médico, abogado o veterinario"**, seguido de la promesa de tiempo de respuesta ("menos de 2 minutos") antes de pedir ningún dato personal. Solo después de comunicar ese valor, la app solicita nombre, fecha de nacimiento y email, y verifica el teléfono por SMS — el mismo patrón de verificación que el tarificador web, reconocible para cualquier usuario que ya haya cotizado en Doctori.com.',
+        images: [
+          '/assets/projects/doctori-app/app-onboarding-datos.png',
+          '/assets/projects/doctori-app/app-onboarding-sms.png',
+        ],
+        captions: [
+          'Captura de datos — solo después de comunicar el valor central de la app',
+          'Verificación por SMS — mismo patrón que el tarificador web, ya conocido por el usuario',
+        ],
+      },
+      // ── 04. El Hub Central ──
+      {
+        label: '04. El Hub Central',
+        title: 'Cinco especialidades, un estado siempre visible',
+        layout: 'full-image',
+        content: 'La pantalla principal organiza el producto en cinco pestañas — **Médicos, Abogados, Veterinarios, Ofertas y Mi perfil** — con un CTA de videoconsulta inmediata siempre en primer plano y un listado de profesionales con su especialidad, historial de consultas y un **indicador de estado en tiempo real** (verde = disponible, rojo = ocupado).\n\nEse indicador de estado no es un detalle decorativo: es lo que responde a la pregunta implícita de cualquier usuario que abre un chat de consulta — **"¿me van a responder ahora, o esto es un buzón sin fondo?"**. Sin esa señal, la app se percibe como un formulario de contacto más. Con ella, se percibe como acceso a una persona real y disponible.',
+        images: ['/assets/projects/doctori-app/app-chat-medico.png'],
+        captions: ['Hub principal — navegación por especialidad, videoconsulta inmediata y estado en tiempo real de cada profesional'],
+        highlight: 'Un chat sin señal de disponibilidad es indistinguible de un buzón sin fondo. El punto verde es la diferencia entre "esto funciona" y "esto es una promesa vacía".',
+      },
+      // ── 05. Recomendación y Marketplace ──
+      {
+        label: '05. Recomendación y Marketplace',
+        title: 'IA para explicar coberturas, descuentos para retener',
+        layout: 'full-image',
+        content: 'La pestaña de Ofertas añade dos capas de valor adicionales. La primera es un asistente que promete **"sin sorpresas ni letra pequeña: nuestra IA te explica cada cobertura"** — una respuesta directa a la desconfianza estructural que genera cualquier producto de seguros, donde el usuario históricamente no entiende qué cubre realmente su póliza.\n\nLa segunda es un **marketplace de descuentos** con aseguradoras partner (DKV con un 35% de descuento, Adeslas...) — una razón adicional, puramente económica, para seguir abriendo la app aunque no haya ninguna duda médica, legal o veterinaria pendiente. Cada una de estas capas amplía el motivo de uso recurrente sin depender de que el usuario tenga una urgencia.',
+        images: ['/assets/projects/doctori-app/app-ofertas.png'],
+        captions: ['Pestaña de Ofertas — recomendación de coberturas asistida por IA y marketplace de descuentos con partners'],
+      },
+      // ── 06. Decisiones de Producto ──
+      {
+        label: '06. Decisiones de Producto',
+        title: 'Por qué la app se organiza así',
+        layout: 'stepper',
+        content: 'Cada decisión estructural de la app responde a la estrategia de retención, no a una preferencia de diseño:',
+        steps: [
+          { title: 'Navegación por especialidad, no por función', description: 'Médicos, Abogados, Veterinarios son las tres primeras pestañas — antes que Ofertas o Perfil. La app comunica desde el primer vistazo cuál es su valor principal, no sus funciones secundarias.' },
+          { title: 'Estado en tiempo real como elemento de confianza', description: 'El punto verde/rojo junto a cada profesional convierte una lista estática en una señal de disponibilidad real, reduciendo la incertidumbre del primer contacto.' },
+          { title: 'Onboarding que vende valor antes de pedir datos', description: 'Comunicar "menos de 2 minutos de respuesta" antes de solicitar nombre o teléfono reduce la fricción psicológica de compartir datos personales con una marca que el usuario asocia principalmente con seguros, no con salud.' },
+          { title: 'IA como reductor de desconfianza, no como gadget', description: 'El asistente de coberturas no se presenta como una función de IA — se presenta como la solución a un problema de confianza específico del sector ("sin letra pequeña"). El encuadre importa más que la tecnología subyacente.' },
+          { title: 'Consistencia visual con la web como atajo de confianza', description: 'Reutilizar tokens, tipografía y patrones de verificación de la web del comparador significa que un usuario que ya confió en Doctori.com para cotizar no tiene que volver a generar esa confianza desde cero en la app.' },
+        ],
+      },
+      // ── 07. Reflexión ──
+      {
+        label: '07. Reflexión',
+        title: 'Las tensiones sin resolver de una estrategia de retención',
+        layout: 'center',
+        content: 'Convertir un comparador transaccional en un producto recurrente no es una decisión que termine con el lanzamiento. Estas son las preguntas abiertas:',
+        bullets: [
+          '**Canibalización vs. complemento** — ¿el chat médico gratuito reduce la percepción de valor del seguro de salud que Doctori.com vende? Es una tensión real: la app tiene que generar confianza en el ecosistema sin sustituir la necesidad de contratar una póliza',
+          '**Sostenibilidad del servicio profesional** — la promesa de "menos de 2 minutos" con profesionales reales tiene un coste operativo que crece con la base de usuarios. Validar el modelo a escala es un riesgo de negocio, no solo de producto',
+          '**Medir retención real, no descargas** — el indicador de éxito de este proyecto no es cuánta gente se descarga la app, es cuánta gente la abre en el mes 3, 6 y 12 sin tener una cotización pendiente. Esa instrumentación es el siguiente paso imprescindible',
+          '**Siguiente frente** — expandir el marketplace de descuentos a más categorías (no solo seguros de salud) y testear si la recomendación asistida por IA mueve la aguja en la tasa de renovación, que es la métrica que de verdad justifica la inversión en este canal',
+        ],
+        highlight: 'El éxito de esta app no se mide en descargas — se mide en si consigue que un usuario piense en Doctori.com como algo más que "la web donde comparé un seguro una vez".',
+      },
+    ],
+  },
 ];
 
 
