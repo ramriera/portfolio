@@ -1834,14 +1834,12 @@ export const projects: Project[] = [
         label: '02. El Reto',
         title: 'Cada vertical nueva, un riesgo de duplicar lo ya resuelto',
         layout: 'image-grid',
-        content: 'El flujo de captación de lead (el "Calcular" de cada tarjeta del home) abre un formulario corto — capital a asegurar, fecha de nacimiento, teléfono, email — diseñado para minimizar fricción en el momento de mayor intención del usuario. Ese mismo patrón se materializa también como un **modal de cálculo inmediato** que aparece sobre el home ("Desde 2,5€/mes — Tu seguro de vida al mejor precio"), capturando la intención sin sacar al usuario de la página. Este patrón se probó primero en Vida y Salud.\n\n**El riesgo no era diseñar este formulario una vez — era que se rediseñara cinco veces.** Sin una fuente única de verdad, cada equipo que construía una vertical nueva partía de cero: nuevos componentes, nuevas validaciones, nuevo criterio sobre qué campos pedir primero. Cada duplicado no solo cuesta tiempo de diseño y desarrollo — **retrasa que un patrón que ya convierte en una vertical llegue a las demás**.',
+        content: 'El flujo de captación de lead (el "Calcular" de cada tarjeta del home) abre un **modal de cálculo inmediato** sobre la propia página — capital a asegurar, fecha de nacimiento, teléfono, email — diseñado para minimizar fricción en el momento de mayor intención del usuario y capturar el lead sin sacarlo del contexto en el que estaba navegando. Este patrón se probó primero en Vida y Salud.\n\n**El riesgo no era diseñar este formulario una vez — era que se rediseñara cinco veces.** Sin una fuente única de verdad, cada equipo que construía una vertical nueva partía de cero: nuevos componentes, nuevas validaciones, nuevo criterio sobre qué campos pedir primero. Cada duplicado no solo cuesta tiempo de diseño y desarrollo — **retrasa que un patrón que ya convierte en una vertical llegue a las demás**.',
         images: [
           '/assets/projects/doctori/doctori-home-quote-flow.png',
-          '/assets/projects/doctori/doctori-quote-modal.png',
         ],
         captions: [
-          'Flujo de captación de lead — mismo patrón de formulario corto, pensado para reutilizarse en cualquier vertical',
-          'Modal de cálculo inmediato sobre el home — captura la intención sin romper el contexto de la página',
+          'Modal de captación de lead sobre el home — mismo patrón de formulario corto, pensado para reutilizarse en cualquier vertical',
         ],
       },
       // ── 03. Sistema Tipográfico ──
@@ -1927,16 +1925,14 @@ export const projects: Project[] = [
         label: '08. Confianza y Contenido Modular',
         title: 'Módulos CMS y transparencia legal como piezas reutilizables',
         layout: 'image-grid',
-        content: 'Cada landing se monta a partir de una librería de **módulos CMS** — Cómo Funciona, Expertos Visibles, Opiniones, Coberturas frecuentes, Explicación del Modelo de Negocio — que el equipo de contenido puede combinar sin depender de diseño o desarrollo para cada variación. El módulo "Cómo Funciona" resume la propuesta de valor en cuatro pasos (Completas el formulario → Comparamos al instante → Eliges tu mejor opción → Te asesoramos gratis), reduciendo la desconfianza inicial de un comparador que el usuario no conoce.\n\nEsa misma lógica de confianza se extiende a los modales legales: cada aseguradora tiene su propio modal de **"Información legal del producto"** con enlaces a Resumen de coberturas, Condiciones generales y Nota informativa — un requisito regulatorio en mediación de seguros que el sistema resuelve como un componente reutilizable por aseguradora, no como una excepción por página.\n\nEl mismo patrón de landing soporta además versiones **co-marca con la aseguradora partner** (ej. una landing de Seguros de salud "desde 9€/mes" con la identidad visual de DKV): el sistema mantiene la estructura de conversión — hero, comparativa, coberturas, prueba social — mientras cede el color y el logo al partner, sin duplicar ni un componente. Reutilización que también es una palanca comercial: lanzar una campaña con un partner deja de ser un proyecto de diseño para convertirse en una configuración.',
+        content: 'Cada landing se monta a partir de una librería de **módulos CMS** — Cómo Funciona, Expertos Visibles, Opiniones, Coberturas frecuentes, Explicación del Modelo de Negocio — que el equipo de contenido puede combinar sin depender de diseño o desarrollo para cada variación. El módulo "Cómo Funciona" resume la propuesta de valor en cuatro pasos (Completas el formulario → Comparamos al instante → Eliges tu mejor opción → Te asesoramos gratis), reduciendo la desconfianza inicial de un comparador que el usuario no conoce.\n\nEsa misma lógica de confianza se extiende a los modales legales: cada aseguradora tiene su propio modal de **"Información legal del producto"** con enlaces a Resumen de coberturas, Condiciones generales y Nota informativa — un requisito regulatorio en mediación de seguros que el sistema resuelve como un componente reutilizable por aseguradora, no como una excepción por página.',
         images: [
           '/assets/projects/doctori/doctori-cms-como-funciona.png',
           '/assets/projects/doctori/doctori-modal-legal.png',
-          '/assets/projects/doctori/doctori-partner-dkv.png',
         ],
         captions: [
           'Módulo CMS "Cómo Funciona" — reutilizable en cualquier landing sin intervención de diseño o desarrollo',
           'Modal de información legal por aseguradora — mismo componente, distinta compañía',
-          'Landing co-marca con partner (DKV) — misma estructura de conversión, identidad visual del partner, cero componentes duplicados',
         ],
         highlight: 'Un módulo de contenido bien diseñado no es una plantilla bonita — es la diferencia entre que el equipo de marketing necesite a un diseñador para cada variación, o no.',
       },
@@ -1954,9 +1950,17 @@ export const projects: Project[] = [
           { title: 'FAQ al final, no al principio', description: 'Las preguntas frecuentes resuelven objeciones de último momento (¿es obligatorio?, ¿puedo cambiar de aseguradora?) justo antes de que el usuario decida si calcula su precio o abandona — su posición en el flujo es deliberada, no un cajón de sastre.' },
         ],
       },
-      // ── 10. Reflexión ──
+      // ── 10. Arquitectura de Audiencia y SEO ──
       {
-        label: '10. Reflexión',
+        label: '10. Arquitectura de Audiencia',
+        title: 'Una puerta de entrada distinta para cada necesidad',
+        layout: 'center',
+        content: 'El mega-menú de cada vertical no es solo navegación: es **arquitectura de información al servicio del SEO y la conversión**. Bajo "Seguros de salud" no hay un único enlace — hay puertas segmentadas por audiencia: *Baratos, Para autónomos, Para bebés, Para embarazadas, Para mayores de 70 años, Con cobertura dental, Sin copago…* Cada una es una landing propia, indexable, que responde a una búsqueda concreta con un lenguaje y unas coberturas concretas.\n\nEsto es una decisión de producto con impacto directo en negocio. Un usuario que busca "seguro de salud para embarazadas" no quiere una landing genérica de salud — quiere ver, en los primeros segundos, que este comparador entiende *su* necesidad. El sistema hace esto posible sin multiplicar el trabajo de diseño: cada landing segmentada parte del **mismo patrón** (hero, comparativa, coberturas, estudio de mercado, FAQ) y solo cambia el contenido de decisión. Una audiencia nueva es una configuración de contenido, no un proyecto de diseño.\n\n**El resultado a nivel de sistema**: decenas de puntos de entrada orgánicos, cada uno optimizado para una intención de búsqueda específica, todos coherentes entre sí y todos alimentando el mismo motor de captación de lead. La arquitectura de audiencia es lo que convierte un comparador en una red de puertas, no en una sola.',
+        highlight: 'Segmentar por audiencia no multiplica el coste de diseño cuando el patrón ya está sistematizado — multiplica los puntos de entrada al negocio con el mismo esfuerzo. Esa es la diferencia entre un sistema y una colección de páginas.',
+      },
+      // ── 11. Reflexión ──
+      {
+        label: '11. Reflexión',
         title: 'Qué significa liderar un Design System que no para de crecer',
         layout: 'center',
         content: 'Un Design System en una empresa real no es un proyecto que se termina — es una infraestructura que se gobierna. Estas son las tensiones activas de liderar el de Doctori.com:',
@@ -2019,7 +2023,7 @@ export const projects: Project[] = [
         label: '02. El Patrón',
         title: 'Una pregunta, una pantalla',
         layout: 'image-grid',
-        content: 'El flujo empieza con la selección de marca del vehículo — buscador y grid de logotipos, sin ningún otro elemento en pantalla que compita por la atención — y continúa con preguntas de opción simple: **el uso que se le va a dar al vehículo** (particular ocasional, particular a diario, profesional ocasional, profesional a diario), la compañía aseguradora anterior, y así sucesivamente. Cada pantalla tiene **una única decisión posible**, con una barra de progreso fina en la parte superior que avanza pero nunca desaparece.\n\n**Por qué esto convierte mejor que un formulario largo**: la carga cognitiva percibida de "35 pasos de una pregunta" es menor que la de "un formulario con 35 campos", aunque el dato solicitado sea idéntico. El usuario nunca ve el formulario completo — solo ve la siguiente pregunta, y eso cambia por completo su disposición a continuar. Cada opción se presenta como una tarjeta grande y tocable, no como un desplegable: en móvil, la diferencia entre elegir de un grid y elegir de un `<select>` es directamente una diferencia de abandono.',
+        content: 'El flujo empieza con la selección de marca del vehículo — buscador y grid de logotipos, sin ningún otro elemento en pantalla que compita por la atención — y continúa con preguntas de opción simple: **el uso que se le va a dar al vehículo** (particular ocasional, particular a diario, profesional ocasional, profesional a diario), la compañía aseguradora anterior, y así sucesivamente. Cada pantalla tiene **una única decisión posible**, con una barra de progreso fina en la parte superior que avanza pero nunca desaparece.\n\n**Por qué esto convierte mejor que un formulario largo**: la carga cognitiva percibida de "35 pasos de una pregunta" es menor que la de "un formulario con 35 campos", aunque el dato solicitado sea idéntico. El usuario nunca ve el formulario completo — solo ve la siguiente pregunta, y eso cambia por completo su disposición a continuar. Cada opción se presenta como una tarjeta grande y tocable, no como un desplegable: en móvil, la diferencia entre elegir de un grid táctil y elegir de un menú desplegable nativo es directamente una diferencia de abandono.',
         images: [
           '/assets/projects/doctori-tarificador/tarificador-step-marca.png',
           '/assets/projects/doctori-tarificador/tarificador-step-uso.png',
@@ -2153,12 +2157,16 @@ export const projects: Project[] = [
         label: '03. Onboarding',
         title: 'Vender el valor antes de pedir ningún dato',
         layout: 'image-grid',
-        content: 'El onboarding no explica "cómo funciona la app" — comunica directamente el valor central: **"Resuelve tus dudas directamente con un médico, abogado o veterinario"**, seguido de la promesa de tiempo de respuesta ("menos de 2 minutos") antes de pedir ningún dato personal. Solo después de comunicar ese valor, la app solicita nombre, fecha de nacimiento y email, y verifica el teléfono por SMS — el mismo patrón de verificación que el tarificador web, reconocible para cualquier usuario que ya haya cotizado en Doctori.com.',
+        content: 'El onboarding no explica "cómo funciona la app" — comunica directamente el valor central en un carrusel de tres pantallas: **"Resuelve tus dudas directamente con un médico, abogado o veterinario"**, seguido de la promesa de tiempo de respuesta (**"Te responderemos en menos de 2 minutos"**) y de la promesa de trato (**"Atención totalmente personalizada"**). Son tres mensajes de valor consecutivos, cada uno con una sola idea, antes de pedir absolutamente ningún dato.\n\nSolo después de comunicar ese valor, la app solicita nombre, fecha de nacimiento y email, y verifica el teléfono por SMS — el mismo patrón de verificación que el tarificador web, reconocible para cualquier usuario que ya haya cotizado en Doctori.com. El orden importa: pedir datos antes de haber comunicado el valor es la causa número uno de abandono en el primer arranque de una app.',
         images: [
+          '/assets/projects/doctori-app/app-onboarding-slide2.png',
+          '/assets/projects/doctori-app/app-onboarding-slide3.png',
           '/assets/projects/doctori-app/app-onboarding-datos.png',
           '/assets/projects/doctori-app/app-onboarding-sms.png',
         ],
         captions: [
+          'Slide de valor 2 — la promesa de tiempo: "Te responderemos en menos de 2 minutos"',
+          'Slide de valor 3 — la promesa de trato: "Atención totalmente personalizada"',
           'Captura de datos — solo después de comunicar el valor central de la app',
           'Verificación por SMS — mismo patrón que el tarificador web, ya conocido por el usuario',
         ],
@@ -2171,10 +2179,12 @@ export const projects: Project[] = [
         content: 'La pantalla principal organiza el producto en cinco pestañas — **Médicos, Abogados, Veterinarios, Ofertas y Mi perfil** — con un CTA de videoconsulta inmediata siempre en primer plano y un listado de profesionales con su especialidad, historial de consultas y un **indicador de estado en tiempo real** (verde = disponible, rojo = ocupado).\n\nEl home no esconde la otra alma del producto: en la parte superior conviven los accesos rápidos a las cinco verticales de seguro (Salud, Coche, Moto, Vida, Decesos) con un banner de continuidad ("Sigue disfrutando de la App de Doctor i") y un acceso directo a Atención al cliente. Es una decisión de arquitectura deliberada: la consulta profesional es el gancho de frecuencia, pero el negocio de seguros nunca desaparece de la vista — coexisten en la misma pantalla sin competir.\n\nEse indicador de estado no es un detalle decorativo: es lo que responde a la pregunta implícita de cualquier usuario que abre un chat de consulta — **"¿me van a responder ahora, o esto es un buzón sin fondo?"**. Sin esa señal, la app se percibe como un formulario de contacto más. Con ella, se percibe como acceso a una persona real y disponible.',
         images: [
           '/assets/projects/doctori-app/app-home.png',
+          '/assets/projects/doctori-app/app-verticals.png',
           '/assets/projects/doctori-app/app-chat-medico.png',
         ],
         captions: [
           'Home de la app — accesos a las 5 verticales de seguro conviviendo con la videoconsulta y el listado de profesionales',
+          'Los tres verticales de consulta explícitos — Chat médico, Chat Legal y Chat Veterinario — junto a la venta cruzada de seguros',
           'Pestaña Médicos — listado de profesionales con especialidad, historial y estado en tiempo real (verde/rojo)',
         ],
         highlight: 'Un chat sin señal de disponibilidad es indistinguible de un buzón sin fondo. El punto verde es la diferencia entre "esto funciona" y "esto es una promesa vacía".',
@@ -2208,9 +2218,18 @@ export const projects: Project[] = [
           { title: 'Consistencia visual con la web como atajo de confianza', description: 'Reutilizar tokens, tipografía y patrones de verificación de la web del comparador significa que un usuario que ya confió en Doctori.com para cotizar no tiene que volver a generar esa confianza desde cero en la app.' },
         ],
       },
-      // ── 07. Reflexión ──
+      // ── 07. El Perfil como Nexo entre Canales ──
       {
-        label: '07. Reflexión',
+        label: '07. El Perfil como Nexo',
+        title: 'Un perfil que conecta la app con el resto del ecosistema',
+        layout: 'left-right',
+        content: 'La pestaña de **Mi perfil** ("Datos personales": documento de identidad, fecha de nacimiento, nombre, apellidos, email y teléfono) parece una pantalla menor, pero cumple una función estratégica: es el punto donde la identidad del usuario en la app se conecta con la del comparador web. El mismo Juan Pérez que cotizó un seguro en la web es el que consulta con un médico en la app — y el sistema lo trata como una sola persona, no como dos usuarios distintos en dos productos distintos.\n\nEsto habilita el verdadero valor a largo plazo: **datos de perfil compartidos entre web y app** significan que una recomendación de cobertura en la app puede partir de lo que el usuario ya cotizó en la web, y que una renovación puede anticiparse en el canal donde el usuario está más activo. El perfil no es un formulario de ajustes — es la costura que convierte dos productos en un ecosistema. Los campos, además, reutilizan exactamente los mismos componentes de input y validación que el onboarding y el tarificador web: cero curva de aprendizaje, cero inconsistencia.',
+        images: ['/assets/projects/doctori-app/app-perfil.png'],
+        highlight: 'Un perfil compartido entre web y app no es una comodidad de usuario — es lo que permite que el negocio trate a la persona como una sola relación, no como dos clientes que casualmente se llaman igual.',
+      },
+      // ── 08. Reflexión ──
+      {
+        label: '08. Reflexión',
         title: 'Las tensiones sin resolver de una estrategia de retención',
         layout: 'center',
         content: 'Convertir un comparador transaccional en un producto recurrente no es una decisión que termine con el lanzamiento. Estas son las preguntas abiertas:',
