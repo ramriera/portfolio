@@ -1834,9 +1834,15 @@ export const projects: Project[] = [
         label: '02. El Reto',
         title: 'Cada vertical nueva, un riesgo de duplicar lo ya resuelto',
         layout: 'image-grid',
-        content: 'El flujo de captación de lead (el "Calcular" de cada tarjeta del home) abre un formulario corto — capital a asegurar, fecha de nacimiento, teléfono, email — diseñado para minimizar fricción en el momento de mayor intención del usuario. Este patrón se probó primero en Vida y Salud.\n\n**El riesgo no era diseñar este formulario una vez — era que se rediseñara cinco veces.** Sin una fuente única de verdad, cada equipo que construía una vertical nueva partía de cero: nuevos componentes, nuevas validaciones, nuevo criterio sobre qué campos pedir primero. Cada duplicado no solo cuesta tiempo de diseño y desarrollo — **retrasa que un patrón que ya convierte en una vertical llegue a las demás**.',
-        images: ['/assets/projects/doctori/doctori-home-quote-flow.png'],
-        captions: ['Flujo de captación de lead — mismo patrón de formulario corto, pensado para reutilizarse en cualquier vertical'],
+        content: 'El flujo de captación de lead (el "Calcular" de cada tarjeta del home) abre un formulario corto — capital a asegurar, fecha de nacimiento, teléfono, email — diseñado para minimizar fricción en el momento de mayor intención del usuario. Ese mismo patrón se materializa también como un **modal de cálculo inmediato** que aparece sobre el home ("Desde 2,5€/mes — Tu seguro de vida al mejor precio"), capturando la intención sin sacar al usuario de la página. Este patrón se probó primero en Vida y Salud.\n\n**El riesgo no era diseñar este formulario una vez — era que se rediseñara cinco veces.** Sin una fuente única de verdad, cada equipo que construía una vertical nueva partía de cero: nuevos componentes, nuevas validaciones, nuevo criterio sobre qué campos pedir primero. Cada duplicado no solo cuesta tiempo de diseño y desarrollo — **retrasa que un patrón que ya convierte en una vertical llegue a las demás**.',
+        images: [
+          '/assets/projects/doctori/doctori-home-quote-flow.png',
+          '/assets/projects/doctori/doctori-quote-modal.png',
+        ],
+        captions: [
+          'Flujo de captación de lead — mismo patrón de formulario corto, pensado para reutilizarse en cualquier vertical',
+          'Modal de cálculo inmediato sobre el home — captura la intención sin romper el contexto de la página',
+        ],
       },
       // ── 03. Sistema Tipográfico ──
       {
@@ -1851,12 +1857,18 @@ export const projects: Project[] = [
       // ── 04. Design Tokens ──
       {
         label: '04. Design Tokens',
-        title: 'Una paleta semántica como única fuente de verdad',
-        layout: 'full-image',
-        content: 'La base de todo el sistema es una arquitectura de **Design Tokens semánticos**: escalas Primary y Neutral para la identidad de marca, CTA para las acciones de conversión, Welcome para momentos de bienvenida/onboarding, y cuatro escalas semánticas — Error, Success, Alert, Info — para estados del sistema. Cada token tiene nombre semántico (`$di-color-cta-500`, `$di-color-semantic-error-400`) y valor hexadecimal versionado.\n\n**Por qué importa a nivel de negocio**: cuando el equipo de marketing pide un ajuste de color para una campaña, o cuando una vertical nueva necesita su propio acento de marca, el cambio se hace en un token, no pantalla por pantalla. Eso convierte una tarea de días en una tarea de minutos.',
-        images: ['/assets/projects/doctori/doctori-ds-colors.png'],
-        captions: ['Documentación de la paleta de tokens — 8 escalas semánticas versionadas como fuente única de verdad'],
-        highlight: 'Un token de color no es un capricho de sistema de diseño. Es lo que permite que un cambio de marca no se convierta en un proyecto de tres semanas.',
+        title: 'Una paleta semántica y una escala de espaciado como única fuente de verdad',
+        layout: 'image-grid',
+        content: 'La base de todo el sistema es una arquitectura de **Design Tokens semánticos**: escalas Primary y Neutral para la identidad de marca, CTA para las acciones de conversión, Welcome para momentos de bienvenida/onboarding, y cuatro escalas semánticas — Error, Success, Alert, Info — para estados del sistema. Cada token tiene nombre semántico (`$di-color-cta-500`, `$di-color-semantic-error-400`) y valor hexadecimal versionado.\n\nEsa misma disciplina se aplica al **espaciado**: una escala de tokens de spacing (`$di-spacing-01`, `$di-spacing-02`...) documentada con su valor en píxeles y un ejemplo visual, para que los ritmos verticales y los márgenes entre componentes sean una decisión de sistema, no un ajuste manual pantalla por pantalla. Un espaciado consistente es lo que hace que cinco verticales construidas por equipos distintos se perciban como un mismo producto.\n\n**Por qué importa a nivel de negocio**: cuando el equipo de marketing pide un ajuste de color para una campaña, o cuando una vertical nueva necesita su propio acento de marca, el cambio se hace en un token, no pantalla por pantalla. Eso convierte una tarea de días en una tarea de minutos.',
+        images: [
+          '/assets/projects/doctori/doctori-ds-colors.png',
+          '/assets/projects/doctori/doctori-spacing.png',
+        ],
+        captions: [
+          'Documentación de la paleta de tokens — 8 escalas semánticas versionadas como fuente única de verdad',
+          'Escala de espaciado documentada — cada token de spacing con su valor y ejemplo visual, para un ritmo consistente entre verticales',
+        ],
+        highlight: 'Un token de color o de espaciado no es un capricho de sistema de diseño. Es lo que permite que un cambio de marca no se convierta en un proyecto de tres semanas.',
       },
       // ── 05. Librería de Componentes ──
       {
@@ -1915,14 +1927,16 @@ export const projects: Project[] = [
         label: '08. Confianza y Contenido Modular',
         title: 'Módulos CMS y transparencia legal como piezas reutilizables',
         layout: 'image-grid',
-        content: 'Cada landing se monta a partir de una librería de **módulos CMS** — Cómo Funciona, Expertos Visibles, Opiniones, Coberturas frecuentes, Explicación del Modelo de Negocio — que el equipo de contenido puede combinar sin depender de diseño o desarrollo para cada variación. El módulo "Cómo Funciona" resume la propuesta de valor en cuatro pasos (Completas el formulario → Comparamos al instante → Eliges tu mejor opción → Te asesoramos gratis), reduciendo la desconfianza inicial de un comparador que el usuario no conoce.\n\nEsa misma lógica de confianza se extiende a los modales legales: cada aseguradora tiene su propio modal de **"Información legal del producto"** con enlaces a Resumen de coberturas, Condiciones generales y Nota informativa — un requisito regulatorio en mediación de seguros que el sistema resuelve como un componente reutilizable por aseguradora, no como una excepción por página.',
+        content: 'Cada landing se monta a partir de una librería de **módulos CMS** — Cómo Funciona, Expertos Visibles, Opiniones, Coberturas frecuentes, Explicación del Modelo de Negocio — que el equipo de contenido puede combinar sin depender de diseño o desarrollo para cada variación. El módulo "Cómo Funciona" resume la propuesta de valor en cuatro pasos (Completas el formulario → Comparamos al instante → Eliges tu mejor opción → Te asesoramos gratis), reduciendo la desconfianza inicial de un comparador que el usuario no conoce.\n\nEsa misma lógica de confianza se extiende a los modales legales: cada aseguradora tiene su propio modal de **"Información legal del producto"** con enlaces a Resumen de coberturas, Condiciones generales y Nota informativa — un requisito regulatorio en mediación de seguros que el sistema resuelve como un componente reutilizable por aseguradora, no como una excepción por página.\n\nEl mismo patrón de landing soporta además versiones **co-marca con la aseguradora partner** (ej. una landing de Seguros de salud "desde 9€/mes" con la identidad visual de DKV): el sistema mantiene la estructura de conversión — hero, comparativa, coberturas, prueba social — mientras cede el color y el logo al partner, sin duplicar ni un componente. Reutilización que también es una palanca comercial: lanzar una campaña con un partner deja de ser un proyecto de diseño para convertirse en una configuración.',
         images: [
           '/assets/projects/doctori/doctori-cms-como-funciona.png',
           '/assets/projects/doctori/doctori-modal-legal.png',
+          '/assets/projects/doctori/doctori-partner-dkv.png',
         ],
         captions: [
           'Módulo CMS "Cómo Funciona" — reutilizable en cualquier landing sin intervención de diseño o desarrollo',
           'Modal de información legal por aseguradora — mismo componente, distinta compañía',
+          'Landing co-marca con partner (DKV) — misma estructura de conversión, identidad visual del partner, cero componentes duplicados',
         ],
         highlight: 'Un módulo de contenido bien diseñado no es una plantilla bonita — es la diferencia entre que el equipo de marketing necesite a un diseñador para cada variación, o no.',
       },
@@ -2005,29 +2019,44 @@ export const projects: Project[] = [
         label: '02. El Patrón',
         title: 'Una pregunta, una pantalla',
         layout: 'image-grid',
-        content: 'El flujo empieza con la selección de marca del vehículo — buscador y grid de logotipos, sin ningún otro elemento en pantalla que compita por la atención — y continúa con preguntas de sí/no y de selección simple, como la compañía aseguradora anterior. Cada pantalla tiene **una única decisión posible**, con una barra de progreso fina en la parte superior que avanza pero nunca desaparece.\n\n**Por qué esto convierte mejor que un formulario largo**: la carga cognitiva percibida de "35 pasos de una pregunta" es menor que la de "un formulario con 35 campos", aunque el dato solicitado sea idéntico. El usuario nunca ve el formulario completo — solo ve la siguiente pregunta, y eso cambia por completo su disposición a continuar.',
+        content: 'El flujo empieza con la selección de marca del vehículo — buscador y grid de logotipos, sin ningún otro elemento en pantalla que compita por la atención — y continúa con preguntas de opción simple: **el uso que se le va a dar al vehículo** (particular ocasional, particular a diario, profesional ocasional, profesional a diario), la compañía aseguradora anterior, y así sucesivamente. Cada pantalla tiene **una única decisión posible**, con una barra de progreso fina en la parte superior que avanza pero nunca desaparece.\n\n**Por qué esto convierte mejor que un formulario largo**: la carga cognitiva percibida de "35 pasos de una pregunta" es menor que la de "un formulario con 35 campos", aunque el dato solicitado sea idéntico. El usuario nunca ve el formulario completo — solo ve la siguiente pregunta, y eso cambia por completo su disposición a continuar. Cada opción se presenta como una tarjeta grande y tocable, no como un desplegable: en móvil, la diferencia entre elegir de un grid y elegir de un `<select>` es directamente una diferencia de abandono.',
         images: [
           '/assets/projects/doctori-tarificador/tarificador-step-marca.png',
+          '/assets/projects/doctori-tarificador/tarificador-step-uso.png',
           '/assets/projects/doctori-tarificador/tarificador-step-companias.png',
         ],
         captions: [
           'Paso 1 de 35 — selección de marca con buscador, la primera de muchas preguntas de un solo dato',
+          'Paso 8 — "¿Qué uso le vas a dar?" resuelto con tarjetas grandes tocables, no con un desplegable',
           'Paso 19 — pregunta binaria sobre la compañía aseguradora anterior',
         ],
         highlight: 'Un formulario de 35 campos se abandona. 35 pantallas de una pregunta cada una, con progreso visible, se completan. El dato pedido es el mismo — la carga percibida no.',
       },
-      // ── 03. El Contexto Nunca Desaparece ──
+      // ── 03. Los Tres Dominios de Datos ──
       {
-        label: '03. El Contexto Nunca Desaparece',
+        label: '03. Los Tres Dominios de Datos',
+        title: 'Por qué hacen falta 35 pasos: tres dominios que hay que capturar enteros',
+        layout: 'stepper',
+        content: 'La longitud del flujo no es arbitraria. Cotizar un seguro de coche con precisión obliga a capturar datos de tres dominios distintos, y ninguno se puede recortar sin perder exactitud en el precio final. El diseño del flujo agrupa las 35 preguntas en estos tres bloques, en un orden pensado para empezar por lo fácil y dejar lo sensible para cuando el usuario ya tiene inercia:',
+        steps: [
+          { title: 'El vehículo — lo fácil primero', description: 'Marca, modelo, versión, matrícula, uso (particular/profesional) y fecha de efecto. Son datos objetivos, sin carga emocional, y sirven de "calentamiento": el usuario responde varias preguntas triviales antes de que se le pida nada personal, generando el compromiso que sostiene el resto del flujo.' },
+          { title: 'El conductor — lo sensible en el medio', description: 'Edad, antigüedad del carné, historial de siniestros y compañía aseguradora anterior. Aquí está el dato que más incomoda (los siniestros), y se pide cuando el usuario ya ha invertido esfuerzo — el coste psicológico de abandonar ya es mayor que el de contestar una pregunta más.' },
+          { title: 'La póliza — la decisión al final', description: 'Modalidad (Terceros / Todo riesgo), franquicia y coberturas. Se deja para el final, junto a la comparativa de precios, porque es la única parte que el usuario percibe como "elegir" en lugar de "rellenar" — y conviene que llegue a ella con toda la información delante.' },
+        ],
+        highlight: 'Los 35 pasos no son un formulario troceado al azar: son tres dominios de datos ordenados por carga emocional creciente, para que lo incómodo llegue cuando abandonar ya cuesta más que continuar.',
+      },
+      // ── 04. El Contexto Nunca Desaparece ──
+      {
+        label: '04. El Contexto Nunca Desaparece',
         title: 'Anclar lo importante mientras todo lo demás cambia de pantalla',
         layout: 'left-right',
         content: 'En un flujo de 35 pasos, el riesgo de que el usuario sienta que "ha perdido el hilo" es real. Por eso, a partir de la mitad del flujo, una barra inferior fija muestra la aseguradora seleccionada hasta el momento (ej. "Asisa Completa ++") y un acceso directo a **"Ver resumen"** — el usuario puede comprobar en cualquier momento qué ha contestado y qué está a punto de contratar, sin tener que retroceder pantalla por pantalla.\n\nEste patrón resuelve una tensión real de los flujos largos: cuantas más pantallas, mayor la ansiedad de "¿esto sigue teniendo sentido?". Anclar el contexto es más barato que reducir el número de pasos, y tiene un efecto directo sobre la confianza para completar el flujo.',
         images: ['/assets/projects/doctori-tarificador/tarificador-step-conductor.png'],
         highlight: 'Cuantos más pasos tiene un flujo, más vale la pena anclar el contexto. Es más barato que rediseñar el flujo entero, y resuelve la misma ansiedad.',
       },
-      // ── 04. La Comparativa ──
+      // ── 05. La Comparativa ──
       {
-        label: '04. La Comparativa',
+        label: '05. La Comparativa',
         title: 'El momento de la verdad — y qué hacer cuando falla',
         layout: 'full-image',
         content: 'Después de 27 pasos de preguntas, el usuario llega al momento que justifica todo el esfuerzo: una comparativa real de precios entre aseguradoras, organizada por modalidad (Terceros básico, Terceros ampliado, Todo riesgo con/sin franquicia) y con filtro por compañía.\n\n**Pero no siempre hay una respuesta limpia.** Algunas aseguradoras no devuelven precio online para ciertos perfiles de riesgo — su API de tarificación falla o no cotiza ese caso. La decisión de producto no fue ocultar esas aseguradoras de la lista: se muestran igual, con su logo, y con un mensaje claro invitando a llamar para obtener precio por teléfono. Un fallo técnico de un tercero se convierte en una llamada entrante cualificada — el usuario ya completó 28 pasos de intención de compra, y ese es un motivo legítimo para ofrecer un canal alternativo, no para esconder la opción.',
@@ -2035,25 +2064,25 @@ export const projects: Project[] = [
         captions: ['Comparativa real de precios — con aseguradoras sin cotización online mostradas igual, con CTA de llamada'],
         highlight: 'Ocultar un fallo técnico parece más limpio. Convertirlo en una llamada entrante es mejor negocio. La opción de diseño "menos elegante" fue la correcta.',
       },
-      // ── 05. Confianza antes de Contratar ──
+      // ── 06. Confianza antes de Contratar ──
       {
-        label: '05. Confianza antes de Contratar',
+        label: '06. Confianza antes de Contratar',
         title: 'Verificación por SMS como momento de tranquilidad, no de fricción',
         layout: 'left-right',
         content: 'Antes de contratar, el flujo verifica el teléfono con un código SMS de 6 dígitos, temporizador de caducidad visible y opción de reenvío — una barrera antifraude estándar en el sector. La diferencia está en cómo se comunica: en vez del formulario frío de verificación habitual, el mensaje es explícito sobre por qué se pide ese dato y qué pasa con él ("Tus datos están protegidos y nunca se compartirán sin tu permiso").\n\nEn un flujo donde el usuario ya ha invertido varios minutos y ha compartido datos personales sensibles, este es exactamente el momento donde la ansiedad es más alta — y exactamente donde más rentable es invertir en un mensaje de confianza explícito en lugar de un trámite genérico.',
         images: ['/assets/projects/doctori-tarificador/tarificador-step-otp.png'],
       },
-      // ── 06. El Cierre ──
+      // ── 07. El Cierre ──
       {
-        label: '06. El Cierre',
+        label: '07. El Cierre',
         title: 'La marca cede el protagonismo justo cuando más importa',
         layout: 'left-right',
         content: 'En el resumen final, antes de firmar, la marca de Doctori.com **cede el protagonismo visual a la aseguradora elegida** (en la captura, Reale Seguros): su logo pasa a encabezar la tarjeta de resumen, junto a los datos de la póliza, el precio final y las casillas legales de contratación.\n\nEs una decisión deliberada, no un descuido de marca: en el momento de mayor compromiso económico, el usuario necesita ver con quién está contratando realmente — la aseguradora — no seguir viendo la marca del comparador que le trajo hasta aquí. Confundir esos dos roles en el momento de pagar es exactamente donde la confianza se rompe si se hace mal.',
         images: ['/assets/projects/doctori-tarificador/tarificador-step-resumen.png'],
       },
-      // ── 07. Reflexión ──
+      // ── 08. Reflexión ──
       {
-        label: '07. Reflexión',
+        label: '08. Reflexión',
         title: 'Qué validaría primero como Strategic Product Designer',
         layout: 'center',
         content: 'Un flujo de 35 pasos es una apuesta fuerte de producto. Documentar sus riesgos es tan importante como documentar sus decisiones:',
@@ -2138,20 +2167,32 @@ export const projects: Project[] = [
       {
         label: '04. El Hub Central',
         title: 'Cinco especialidades, un estado siempre visible',
-        layout: 'full-image',
-        content: 'La pantalla principal organiza el producto en cinco pestañas — **Médicos, Abogados, Veterinarios, Ofertas y Mi perfil** — con un CTA de videoconsulta inmediata siempre en primer plano y un listado de profesionales con su especialidad, historial de consultas y un **indicador de estado en tiempo real** (verde = disponible, rojo = ocupado).\n\nEse indicador de estado no es un detalle decorativo: es lo que responde a la pregunta implícita de cualquier usuario que abre un chat de consulta — **"¿me van a responder ahora, o esto es un buzón sin fondo?"**. Sin esa señal, la app se percibe como un formulario de contacto más. Con ella, se percibe como acceso a una persona real y disponible.',
-        images: ['/assets/projects/doctori-app/app-chat-medico.png'],
-        captions: ['Hub principal — navegación por especialidad, videoconsulta inmediata y estado en tiempo real de cada profesional'],
+        layout: 'image-grid',
+        content: 'La pantalla principal organiza el producto en cinco pestañas — **Médicos, Abogados, Veterinarios, Ofertas y Mi perfil** — con un CTA de videoconsulta inmediata siempre en primer plano y un listado de profesionales con su especialidad, historial de consultas y un **indicador de estado en tiempo real** (verde = disponible, rojo = ocupado).\n\nEl home no esconde la otra alma del producto: en la parte superior conviven los accesos rápidos a las cinco verticales de seguro (Salud, Coche, Moto, Vida, Decesos) con un banner de continuidad ("Sigue disfrutando de la App de Doctor i") y un acceso directo a Atención al cliente. Es una decisión de arquitectura deliberada: la consulta profesional es el gancho de frecuencia, pero el negocio de seguros nunca desaparece de la vista — coexisten en la misma pantalla sin competir.\n\nEse indicador de estado no es un detalle decorativo: es lo que responde a la pregunta implícita de cualquier usuario que abre un chat de consulta — **"¿me van a responder ahora, o esto es un buzón sin fondo?"**. Sin esa señal, la app se percibe como un formulario de contacto más. Con ella, se percibe como acceso a una persona real y disponible.',
+        images: [
+          '/assets/projects/doctori-app/app-home.png',
+          '/assets/projects/doctori-app/app-chat-medico.png',
+        ],
+        captions: [
+          'Home de la app — accesos a las 5 verticales de seguro conviviendo con la videoconsulta y el listado de profesionales',
+          'Pestaña Médicos — listado de profesionales con especialidad, historial y estado en tiempo real (verde/rojo)',
+        ],
         highlight: 'Un chat sin señal de disponibilidad es indistinguible de un buzón sin fondo. El punto verde es la diferencia entre "esto funciona" y "esto es una promesa vacía".',
       },
       // ── 05. Recomendación y Marketplace ──
       {
         label: '05. Recomendación y Marketplace',
         title: 'IA para explicar coberturas, descuentos para retener',
-        layout: 'full-image',
-        content: 'La pestaña de Ofertas añade dos capas de valor adicionales. La primera es un asistente que promete **"sin sorpresas ni letra pequeña: nuestra IA te explica cada cobertura"** — una respuesta directa a la desconfianza estructural que genera cualquier producto de seguros, donde el usuario históricamente no entiende qué cubre realmente su póliza.\n\nLa segunda es un **marketplace de descuentos** con aseguradoras partner (DKV con un 35% de descuento, Adeslas...) — una razón adicional, puramente económica, para seguir abriendo la app aunque no haya ninguna duda médica, legal o veterinaria pendiente. Cada una de estas capas amplía el motivo de uso recurrente sin depender de que el usuario tenga una urgencia.',
-        images: ['/assets/projects/doctori-app/app-ofertas.png'],
-        captions: ['Pestaña de Ofertas — recomendación de coberturas asistida por IA y marketplace de descuentos con partners'],
+        layout: 'image-grid',
+        content: 'La pestaña de Ofertas añade dos capas de valor adicionales. La primera es un asistente que promete **"sin sorpresas ni letra pequeña: nuestra IA te explica cada cobertura"** — una respuesta directa a la desconfianza estructural que genera cualquier producto de seguros, donde el usuario históricamente no entiende qué cubre realmente su póliza. Se presenta con un CTA de "Recomendar" que arranca la conversación, no como una función técnica escondida en un menú.\n\nLa segunda es un **marketplace de descuentos** con aseguradoras partner (DKV con un 35% de descuento, Adeslas, Sanitas, Caser...) — una razón adicional, puramente económica, para seguir abriendo la app aunque no haya ninguna duda médica, legal o veterinaria pendiente. Cada tarjeta de partner es un módulo reutilizable, así que ampliar el marketplace a una aseguradora nueva es añadir una tarjeta, no rediseñar la pestaña. Cada una de estas capas amplía el motivo de uso recurrente sin depender de que el usuario tenga una urgencia.',
+        images: [
+          '/assets/projects/doctori-app/app-marketplace.png',
+          '/assets/projects/doctori-app/app-ofertas.png',
+        ],
+        captions: [
+          'Recomendación asistida por IA + primeras tarjetas del marketplace (DKV −35%, Adeslas) con CTA "Recomendar"',
+          'Marketplace de descuentos — cada aseguradora partner es un módulo reutilizable, no un rediseño de la pestaña',
+        ],
       },
       // ── 06. Decisiones de Producto ──
       {
