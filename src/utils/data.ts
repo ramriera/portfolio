@@ -2195,9 +2195,25 @@ export const projects: Project[] = [
         ],
         highlight: 'Un chat sin señal de disponibilidad es indistinguible de un buzón sin fondo. El punto verde es la diferencia entre "esto funciona" y "esto es una promesa vacía".',
       },
-      // ── 05. Recomendación y Marketplace ──
+      // ── 05. Un producto, tres profesionales ──
       {
-        label: '05. Recomendación y Marketplace',
+        label: '05. Tres Verticales, un Patrón',
+        title: 'Médicos, Abogados y Veterinarios — el mismo patrón, tres necesidades',
+        layout: 'image-grid',
+        content: 'La promesa de la app no es "un médico" — es **"un profesional de confianza cuando surge una duda"**, y esa duda puede ser médica, legal o veterinaria. Las tres pestañas principales (Médicos, Abogados, Veterinarios) comparten exactamente el mismo patrón de listado: profesional, especialidad, historial de la última consulta y el indicador de estado en tiempo real. Lo único que cambia es el dominio de especialidades.\n\nEn **Abogados**, el listado se organiza por área — Fiscal, Familia, Consumo, Asesor legal, Trabajo — con el mismo lenguaje visual que Médicos. En **Veterinarios**, por tipo de animal y especialidad veterinaria. **Que las tres verticales compartan patrón no es pereza de diseño — es estrategia de sistema**: un patrón validado en Médicos se propaga a Abogados y Veterinarios sin rediseñar nada, y añadir una vertical nueva (psicólogos, coaches...) es rellenar una lista, no construir un producto. La consistencia es lo que permite que el usuario aprenda la app una vez y la sepa usar entera.',
+        images: [
+          '/assets/projects/doctori-app/app-abogados.png',
+          '/assets/projects/doctori-app/app-veterinarios.png',
+        ],
+        captions: [
+          'Pestaña Abogados — mismo patrón de listado que Médicos, con áreas legales (Fiscal, Familia, Consumo, Trabajo)',
+          'Pestaña Veterinarios — idéntico patrón, adaptado a especialidades veterinarias',
+        ],
+        highlight: 'Tres verticales que comparten patrón se construyen una vez y se mantienen una vez. Añadir la cuarta es rellenar una lista, no diseñar un producto nuevo.',
+      },
+      // ── 06. Recomendación y Marketplace ──
+      {
+        label: '06. Recomendación y Marketplace',
         title: 'IA para explicar coberturas, descuentos para retener',
         layout: 'image-grid',
         content: 'La pestaña de Ofertas añade dos capas de valor adicionales. La primera es un asistente que promete **"sin sorpresas ni letra pequeña: nuestra IA te explica cada cobertura"** — una respuesta directa a la desconfianza estructural que genera cualquier producto de seguros, donde el usuario históricamente no entiende qué cubre realmente su póliza. Se presenta con un CTA de "Recomendar" que arranca la conversación, no como una función técnica escondida en un menú.\n\nLa segunda es un **marketplace de descuentos** con aseguradoras partner (DKV con un 35% de descuento, Adeslas, Sanitas, Caser...) — una razón adicional, puramente económica, para seguir abriendo la app aunque no haya ninguna duda médica, legal o veterinaria pendiente. Cada tarjeta de partner es un módulo reutilizable, así que ampliar el marketplace a una aseguradora nueva es añadir una tarjeta, no rediseñar la pestaña. Cada una de estas capas amplía el motivo de uso recurrente sin depender de que el usuario tenga una urgencia.',
@@ -2208,9 +2224,9 @@ export const projects: Project[] = [
           'Pestaña de Ofertas — recomendación de coberturas asistida por IA ("Recomendar") y marketplace de descuentos con partners (DKV −35%, Adeslas...), cada uno un módulo reutilizable',
         ],
       },
-      // ── 06. Decisiones de Producto ──
+      // ── 07. Decisiones de Producto ──
       {
-        label: '06. Decisiones de Producto',
+        label: '07. Decisiones de Producto',
         title: 'Por qué la app se organiza así',
         layout: 'stepper',
         content: 'Cada decisión estructural de la app responde a la estrategia de retención, no a una preferencia de diseño:',
@@ -2222,18 +2238,25 @@ export const projects: Project[] = [
           { title: 'Consistencia visual con la web como atajo de confianza', description: 'Reutilizar tokens, tipografía y patrones de verificación de la web del comparador significa que un usuario que ya confió en Doctori.com para cotizar no tiene que volver a generar esa confianza desde cero en la app.' },
         ],
       },
-      // ── 07. El Perfil como Nexo entre Canales ──
+      // ── 08. El Perfil como Nexo entre Canales ──
       {
-        label: '07. El Perfil como Nexo',
-        title: 'Un perfil que conecta la app con el resto del ecosistema',
-        layout: 'left-right',
-        content: 'La pestaña de **Mi perfil** ("Datos personales": documento de identidad, fecha de nacimiento, nombre, apellidos, email y teléfono) parece una pantalla menor, pero cumple una función estratégica: es el punto donde la identidad del usuario en la app se conecta con la del comparador web. El mismo Juan Pérez que cotizó un seguro en la web es el que consulta con un médico en la app — y el sistema lo trata como una sola persona, no como dos usuarios distintos en dos productos distintos.\n\nEsto habilita el verdadero valor a largo plazo: **datos de perfil compartidos entre web y app** significan que una recomendación de cobertura en la app puede partir de lo que el usuario ya cotizó en la web, y que una renovación puede anticiparse en el canal donde el usuario está más activo. El perfil no es un formulario de ajustes — es la costura que convierte dos productos en un ecosistema. Los campos, además, reutilizan exactamente los mismos componentes de input y validación que el onboarding y el tarificador web: cero curva de aprendizaje, cero inconsistencia.',
-        images: ['/assets/projects/doctori-app/app-perfil.png'],
+        label: '08. Perfil y Autoservicio',
+        title: 'Un perfil que conecta la app con el ecosistema — y un autoservicio que descarga soporte',
+        layout: 'image-grid',
+        content: 'La pestaña de **Mi perfil** ("Datos personales": documento de identidad, fecha de nacimiento, nombre, apellidos, email y teléfono) parece una pantalla menor, pero cumple una función estratégica: es el punto donde la identidad del usuario en la app se conecta con la del comparador web. El mismo Juan Pérez que cotizó un seguro en la web es el que consulta con un médico en la app — y el sistema lo trata como una sola persona, no como dos usuarios distintos en dos productos distintos.\n\nEsto habilita el verdadero valor a largo plazo: **datos de perfil compartidos entre web y app** significan que una recomendación de cobertura en la app puede partir de lo que el usuario ya cotizó en la web, y que una renovación puede anticiparse en el canal donde el usuario está más activo. El perfil no es un formulario de ajustes — es la costura que convierte dos productos en un ecosistema. Los campos, además, reutilizan exactamente los mismos componentes de input y validación que el onboarding y el tarificador web: cero curva de aprendizaje, cero inconsistencia.\n\nJunto al perfil, un módulo de **Preguntas frecuentes** resuelve las dudas más comunes ("¿Qué ventajas tiene un comparador online?", "¿Contratar un seguro es voluntario?", "¿Puedo modificar mi seguro?") en un acordeón autoservicio. En un producto que promete respuesta profesional en menos de 2 minutos, cada duda que el usuario resuelve solo es una consulta que **no** satura al equipo de profesionales — un detalle de producto con impacto directo en el coste operativo que hace sostenible la promesa central de la app.',
+        images: [
+          '/assets/projects/doctori-app/app-perfil.png',
+          '/assets/projects/doctori-app/app-faq.png',
+        ],
+        captions: [
+          'Mi perfil — la identidad compartida entre web y app, con los mismos componentes de input y validación',
+          'Preguntas frecuentes — autoservicio que resuelve dudas comunes sin consumir tiempo de los profesionales',
+        ],
         highlight: 'Un perfil compartido entre web y app no es una comodidad de usuario — es lo que permite que el negocio trate a la persona como una sola relación, no como dos clientes que casualmente se llaman igual.',
       },
-      // ── 08. Reflexión ──
+      // ── 09. Reflexión ──
       {
-        label: '08. Reflexión',
+        label: '09. Reflexión',
         title: 'Las tensiones sin resolver de una estrategia de retención',
         layout: 'center',
         content: 'Convertir un comparador transaccional en un producto recurrente no es una decisión que termine con el lanzamiento. Estas son las preguntas abiertas:',
