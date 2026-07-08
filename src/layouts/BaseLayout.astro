@@ -18,6 +18,7 @@ interface Props {
   description?: string;
   image?: string;
   canonicalUrl?: string;
+  bodyClass?: string;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   description = 'Ramon Riera — UX Lead & Product Designer. Conecto decisiones de diseño con resultados de negocio: Design Systems, UX strategy y operaciones de producto.',
   image = '/assets/shared/og-image.png',
   canonicalUrl,
+  bodyClass = '',
 } = Astro.props;
 
 const siteUrl = 'https://ramonriera.design';
@@ -65,7 +67,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
   </head>
-  <body class="min-h-screen flex flex-col bg-neutral-50 text-neutral-900 transition-colors duration-300">
+  <body class:list={["min-h-screen flex flex-col bg-neutral-50 text-neutral-900 transition-colors duration-300", bodyClass]}>
     <Navbar />
     <main class="flex-1">
       <slot />

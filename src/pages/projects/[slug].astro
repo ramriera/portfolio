@@ -35,6 +35,13 @@ const otherProjects = getRelatedProjects(project, projects, 2);
 const hasCaseStudy = !!project.caseSections?.length;
 const meta = project.projectMeta;
 
+// The Doctori projects use squared (non-rounded) photos
+const squareFigures = [
+  'doctori-insurance-platform',
+  'doctori-tarificador-coche',
+  'doctori-app-telemedicina',
+].includes(project.slug);
+
 function md(text: string): string {
   return text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 }
@@ -44,6 +51,7 @@ function md(text: string): string {
   title={`${project.title} ⚡ Ramon Riera`}
   description={project.description}
   image={project.cover}
+  bodyClass={squareFigures ? 'figures-square' : ''}
 >
   <!-- Hero -->
   <section class="section-padding pb-12" data-component="ProjectHero">
@@ -800,6 +808,15 @@ function md(text: string): string {
   initMermaid();
   document.addEventListener('astro:page-load', initMermaid);
 </script>
+
+<style is:global>
+  /* Doctori projects: squared (non-rounded) photos — cover and case figures */
+  body.figures-square [data-component="ParallaxCover"] .rounded-2xl,
+  body.figures-square .cs-figure,
+  body.figures-square .cs-figure img {
+    border-radius: 0 !important;
+  }
+</style>
 
 <style>
   /* Related projects — match Home card language */
