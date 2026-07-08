@@ -14,9 +14,33 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 2);
+
+// Pick the most related projects first (same client, category and shared tags),
+// with a per-project rotation so ties vary between projects instead of always
+// surfacing the same two.
+function getRelatedProjects(current: typeof project, all: typeof projects, n = 2) {
+  const others = all.filter((p) => p.slug !== current.slug);
+  const seed = current.slug.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const scored = others.map((p, idx) => {
+    let score = 0;
+    if (p.client === current.client) score += 6;          // same client (e.g. the Doctori trio)
+    if (p.category === current.category) score += 2;       // same discipline
+    score += p.tags.filter((t) => current.tags.includes(t)).length; // shared tags
+    return { p, score, rot: (idx + seed) % others.length };
+  });
+  scored.sort((a, b) => (b.score - a.score) || (a.rot - b.rot));
+  return scored.slice(0, n).map((s) => s.p);
+}
+const otherProjects = getRelatedProjects(project, projects, 2);
 const hasCaseStudy = !!project.caseSections?.length;
 const meta = project.projectMeta;
+
+// The Doctori projects use squared (non-rounded) photos
+const squareFigures = [
+  'doctori-insurance-platform',
+  'doctori-tarificador-coche',
+  'doctori-app-telemedicina',
+].includes(project.slug);
 
 function md(text: string): string {
   return text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
@@ -27,6 +51,7 @@ function md(text: string): string {
   title={`${project.title} ⚡ Ramon Riera`}
   description={project.description}
   image={project.cover}
+  bodyClass={squareFigures ? 'figures-square' : ''}
 >
   <!-- Hero -->
   <section class="section-padding pb-12" data-component="ProjectHero">
@@ -783,6 +808,15 @@ function md(text: string): string {
   initMermaid();
   document.addEventListener('astro:page-load', initMermaid);
 </script>
+
+<style is:global>
+  /* Doctori projects: squared (non-rounded) photos — cover and case figures */
+  body.figures-square [data-component="ParallaxCover"] .rounded-2xl,
+  body.figures-square .cs-figure,
+  body.figures-square .cs-figure img {
+    border-radius: 0 !important;
+  }
+</style>
 
 <style>
   /* Related projects — match Home card language */

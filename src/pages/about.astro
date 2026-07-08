@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import profileImg from '@/assets/shared/foto-perfil.png';
+import profileImg from '@/assets/shared/foto-sobre-mi.png';
 import { siteConfig, mainTimeline, consultingBlock } from '@/utils/data';
 import ContactConsole from '@/components/ContactConsole.astro';
 import WordsCarousel from '@/components/WordsCarousel.astro';
@@ -66,7 +66,7 @@ const aboutWords = ['creador', 'arquitecto', 'constructor'];
               <Image
                 src={profileImg}
                 alt="Ramon Riera"
-                class="w-full h-auto grayscale hover:grayscale-0 transition-[filter] duration-700"
+                class="w-full h-auto grayscale hover:grayscale-0 transition-[filter] duration-700 -scale-x-100"
                 loading="eager"
                 decoding="sync"
                 fetchpriority="high"

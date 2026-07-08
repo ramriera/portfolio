@@ -8,12 +8,12 @@ import { projects } from '@/utils/data';
 
 // 3-row editorial grid: 60/40, 40/60, 60/40
 const projectOrder = [
-  'massimo-dutti-conversion',   // Row 1: 60% (col-span-3)
-  'iberia-flight-experience',   // Row 1: 40% (col-span-2)
-  'banco-sabadell-design-system', // Row 2: 40% (col-span-2)
-  'imaginbank-digital-banking', // Row 2: 60% (col-span-3)
-  'solotemazos-music-platform', // Row 3: 60% (col-span-3)
-  'movefast-startup-platform',  // Row 3: 40% (col-span-2)
+  'doctori-insurance-platform', // Row 1: 60% (col-span-3)
+  'massimo-dutti-conversion',   // Row 1: 40% (col-span-2)
+  'iberia-flight-experience',   // Row 2: 40% (col-span-2)
+  'banco-sabadell-design-system', // Row 2: 60% (col-span-3)
+  'imaginbank-digital-banking', // Row 3: 60% (col-span-3)
+  'solotemazos-music-platform', // Row 3: 40% (col-span-2)
 ];
 const featuredProjects = projectOrder
   .map((slug) => projects.find((p) => p.slug === slug))

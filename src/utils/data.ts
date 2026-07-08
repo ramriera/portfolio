@@ -8,7 +8,6 @@ export const siteConfig = {
     dark: '/assets/shared/logo-negro.svg',
     light: '/assets/shared/logo-blanco.svg',
   },
-  profilePhoto: '/assets/shared/foto-perfil.png',
   social: {
     linkedin: 'https://linkedin.com/in/ramonrieradepares',
     medium: 'https://medium.com/@ramriera',
@@ -164,7 +163,7 @@ export const projects: Project[] = [
     cover: '/assets/projects/massimo-dutti/massimo-dutti-header-new.png',
     featured: true,
     brandColor: '#ffffff',
-    gridSpan: 3,
+    gridSpan: 2,
     projectMeta: {
       role: 'UX Strategist & Service Designer',
       industry: 'Fashion Retail',
@@ -904,7 +903,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'banco-sabadell-design-system',
-    title: 'Banco Sabadell - Design System',
+    title: 'Banco Sabadell',
     client: 'Banco Sabadell',
     year: '2022',
     category: 'Design Systems & UX Engineering',
@@ -922,7 +921,7 @@ export const projects: Project[] = [
     stack: ['Figma', 'Zeroheight', 'Storybook', 'React'],
     cover: '/assets/projects/sabadell/banc-sabadell-header.png',
     brandColor: '#006DFF',
-    gridSpan: 2,
+    gridSpan: 3,
     gallery: [
       '/assets/projects/sabadell/banc-sabadell-header.png',
       '/assets/projects/sabadell/sabadell-components-16.png',
@@ -1279,7 +1278,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'iberia-flight-experience',
-    title: 'Iberia - Flight Experience',
+    title: 'Iberia',
     client: 'Iberia',
     year: '2023',
     category: 'Digital Product Design & Design Systems',
@@ -1540,7 +1539,7 @@ export const projects: Project[] = [
     cover: '/assets/projects/solotemazos/solotemazos-header.png',
     featured: true,
     brandColor: '#1DB954',
-    gridSpan: 3,
+    gridSpan: 2,
     projectMeta: {
       role: 'Senior Product Designer & UX Lead',
       industry: 'Music & Entertainment',
@@ -1780,6 +1779,493 @@ export const projects: Project[] = [
           '12 pantallas mobile diseñadas como first-class citizen (no adaptación de desktop)',
           'Especificaciones técnicas para implementación: lazy loading, optimización de imágenes, SEO',
         ],
+      },
+    ],
+  },
+  {
+    slug: 'doctori-insurance-platform',
+    title: 'Doctori.com',
+    client: 'Doctori.com (iSalud Health)',
+    year: '2021 — Presente',
+    category: 'Design Systems & Product Strategy',
+    tags: ['Design Systems', 'Product Design', 'UX Research'],
+    description: 'Design System y estrategia de producto para la web de Doctori.com: cinco verticales de seguro (Salud, Coche, Moto, Decesos, Vida) unificadas bajo un mismo sistema de diseño, con más de 14 aseguradoras partner, liderado como UX Lead & Strategic Product Designer.',
+    longDescription: 'Doctori.com es un **comparador de seguros** en cinco verticales — Salud, Coche, Moto, Decesos y Vida — que conecta a los usuarios con la mejor tarifa entre más de **14 aseguradoras partner** (Adeslas, Sanitas, Mapfre, Allianz, DKV, Reale, Verti, entre otras). El negocio no vive de una sola pantalla — vive de que cada vertical convierta, y de que lanzar una vertical nueva no implique reconstruir el producto desde cero.\n\nComo **UX Lead & Strategic Product Designer**, lidero la evolución de este producto desde 2021: la arquitectura de Design Tokens y tipografía que unifica el sistema visual, la librería de componentes que usan todos los equipos de producto, y la estrategia de las landings de conversión de cada vertical. No es un rol de "diseñar pantallas" — es un rol de **decidir qué se construye una vez y se reutiliza cinco veces**, y qué se adapta por vertical porque el usuario de seguros de moto no tiene las mismas dudas que el de seguros de vida.',
+    challenge: 'El crecimiento por verticales es bueno para el negocio y un riesgo para el diseño. Cada nueva vertical (Coche, Moto, Decesos, Vida, además de Salud) llegaba con presión de time-to-market, y sin una fuente única de verdad, el patrón natural era **duplicar componentes y reinventar decisiones ya tomadas**: un botón con radios distintos en cada landing, una tabla comparativa maquetada de cero cada vez, un formulario de captación de lead con validaciones distintas según quién lo construyera. Cada duplicado no es solo deuda visual — es **deuda de conversión**: un patrón que ya funciona en Salud tarda más en llegar a Moto si nadie lo sistematiza.',
+    solution: 'Construí y mantengo un sistema de **Design Tokens semánticos** (color, tipografía, espaciado) como única fuente de verdad, y una **librería de componentes** — botones, inputs, badges, chips, checkboxes, tags, paginación — con todos sus estados documentados. Sobre esa base, definí el **patrón de landing por vertical** que se repite en Salud, Coche, Moto, Decesos y Vida: hero con CTA de cálculo inmediato, tabla comparativa de coberturas, bloques de valor, "estudio de mercado" con datos propios, FAQ y logos de aseguradoras partner como prueba social. También definí la **estructura global** (header con mega-menú de navegación y footer legal) y el **sistema de módulos CMS** que permite montar variaciones de landing sin depender de diseño o desarrollo. Cada vertical nueva parte de esos patrones — y lo que se prueba en una vertical se propaga a las demás sin rediseñar nada.',
+    results: [
+      'Sistema de Design Tokens con 8 escalas semánticas (Primary, Neutral, CTA, Welcome, Error, Success, Alert, Info) documentado como fuente única de verdad',
+      'Escala tipográfica completa (Display, Heading H1-H7, Subtitle, Body, Insurance, Table) documentada para web y mobile',
+      'Librería de componentes con variantes y estados completos (default, hover, disabled, loading) reutilizada en las 5 verticales del comparador',
+      'Patrón de landing de conversión replicado en las 5 verticales — misma estructura de hero, tabla comparativa, coberturas, estudio de mercado y FAQ',
+      'Sistema de módulos CMS (Cómo Funciona, Expertos Visibles, Opiniones, Coberturas frecuentes...) que permite montar nuevas variaciones de contenido sin depender de diseño o desarrollo',
+      'Home unificado que da acceso a 5 negocios y a más de 14 aseguradoras partner sin fragmentar la experiencia',
+    ],
+    stack: ['Figma', 'Design Tokens', 'Design System Governance', 'Conversion Design'],
+    cover: '/assets/projects/doctori/doctori-header.png',
+    brandColor: '#001A80',
+    gridSpan: 3,
+    projectMeta: {
+      role: 'UX Lead & Strategic Product Designer',
+      industry: 'Insurtech / Seguros',
+      output: 'Design System & Multi-Vertical Web Platform',
+      duration: '2021 — Presente',
+      skills: ['Design Systems', 'Design Tokens', 'Component Library', 'Product Strategy', 'Design Ops', 'Conversion-Focused Design', 'Cross-Vertical Design', 'Governance', 'Documentation', 'Accessibility (WCAG)'],
+    },
+    checks: [
+      'Cinco verticales de seguro (Salud, Coche, Moto, Decesos, Vida) creciendo cada una con presión de time-to-market propia',
+      'Sin una fuente única de verdad, cada landing nueva duplicaba componentes ya resueltos en otra vertical — deuda de diseño y de conversión',
+      'Un patrón que funcionaba en una vertical (ej. posición del CTA) no llegaba a las demás porque nadie lo sistematizaba',
+    ],
+    caseSections: [
+      // ── 01. Contexto de Negocio ──
+      {
+        label: '01. Contexto de Negocio',
+        title: 'Un comparador que crece por verticales, no por pantallas',
+        layout: 'center',
+        content: 'Doctori.com conecta a personas con la mejor tarifa de seguro entre más de 14 aseguradoras partner, en cinco verticales que compiten por el mismo usuario y por el mismo equipo de diseño: **Salud, Coche, Moto, Decesos y Vida**. El home unifica el acceso a las cinco, cada una con su propio comparador, su propia tabla de coberturas y su propio flujo de captación de lead.\n\nEsto cambia qué significa "diseñar" en este contexto. No se trata de optimizar una pantalla — se trata de **decidir qué patrón se construye una vez y se reutiliza cinco veces**, y dónde sí merece la pena diferenciar porque el usuario de cada vertical tiene dudas distintas. Ese es el criterio que aplico como UX Lead & Strategic Product Designer en cada decisión del sistema.',
+        images: ['/assets/projects/doctori/doctori-header.png'],
+        captions: ['Home — acceso unificado a las 5 verticales, con las aseguradoras partner como prueba social'],
+        highlight: 'El negocio no factura por pantalla bonita. Factura por lead cualificado en cada vertical. Cada decisión de diseño se evalúa contra esa métrica.',
+      },
+      // ── 02. El Reto ──
+      {
+        label: '02. El Reto',
+        title: 'Cada vertical nueva, un riesgo de duplicar lo ya resuelto',
+        layout: 'image-grid',
+        content: 'El flujo de captación de lead (el "Calcular" de cada tarjeta del home) abre un **modal de cálculo inmediato** sobre la propia página — capital a asegurar, fecha de nacimiento, teléfono, email — diseñado para minimizar fricción en el momento de mayor intención del usuario y capturar el lead sin sacarlo del contexto en el que estaba navegando. Este patrón se probó primero en Vida y Salud.\n\n**El riesgo no era diseñar este formulario una vez — era que se rediseñara cinco veces.** Sin una fuente única de verdad, cada equipo que construía una vertical nueva partía de cero: nuevos componentes, nuevas validaciones, nuevo criterio sobre qué campos pedir primero. Cada duplicado no solo cuesta tiempo de diseño y desarrollo — **retrasa que un patrón que ya convierte en una vertical llegue a las demás**.',
+        images: [
+          '/assets/projects/doctori/doctori-home-quote-flow.png',
+        ],
+        captions: [
+          'Modal de captación de lead sobre el home — mismo patrón de formulario corto, pensado para reutilizarse en cualquier vertical',
+        ],
+      },
+      // ── 03. Sistema Tipográfico ──
+      {
+        label: '03. Sistema Tipográfico',
+        title: 'Una escala tipográfica pensada para vender confianza, no solo para leerse bien',
+        layout: 'full-image',
+        content: 'Junto a los tokens de color, documenté una escala tipográfica completa: Display y Heading (H1-H7) en Raleway ExtraBold para titulares con peso editorial, y Subtitle/Body/Table en Noto Sans para el contenido funcional — coberturas, condiciones, precios. Cada token tiene tamaño, line-height, letter-spacing y color de referencia documentados, con una categoría específica llamada **"Insurance"** para textos legales y de condiciones de seguro.\n\nQue exista un token de tipografía dedicado a contenido de seguros no es casualidad: en un producto financiero, la legibilidad de las condiciones no es un detalle estético — es lo que evita reclamaciones por "no lo vi claro". La escala se documenta en dos variantes, web y mobile, para que el mismo criterio se aplique en ambos canales.',
+        images: ['/assets/projects/doctori/doctori-typography.png'],
+        captions: ['Documentación de la escala tipográfica — Display, Heading, Subtitle, Body, Insurance y Table, con tokens versionados'],
+        highlight: 'Un H3 mal definido no es un problema de estética — es un usuario que no distingue el titular de la cobertura del texto legal que la limita.',
+      },
+      // ── 04. Design Tokens ──
+      {
+        label: '04. Design Tokens',
+        title: 'Una paleta semántica y una escala de espaciado como única fuente de verdad',
+        layout: 'image-grid',
+        content: 'La base de todo el sistema es una arquitectura de **Design Tokens semánticos**: escalas Primary y Neutral para la identidad de marca, CTA para las acciones de conversión, Welcome para momentos de bienvenida/onboarding, y cuatro escalas semánticas — Error, Success, Alert, Info — para estados del sistema. Cada token tiene nombre semántico (`$di-color-cta-500`, `$di-color-semantic-error-400`) y valor hexadecimal versionado.\n\nEsa misma disciplina se aplica al **espaciado**: una escala de tokens de spacing (`$di-spacing-01`, `$di-spacing-02`...) documentada con su valor en píxeles y un ejemplo visual, para que los ritmos verticales y los márgenes entre componentes sean una decisión de sistema, no un ajuste manual pantalla por pantalla. Un espaciado consistente es lo que hace que cinco verticales construidas por equipos distintos se perciban como un mismo producto.\n\n**Por qué importa a nivel de negocio**: cuando el equipo de marketing pide un ajuste de color para una campaña, o cuando una vertical nueva necesita su propio acento de marca, el cambio se hace en un token, no pantalla por pantalla. Eso convierte una tarea de días en una tarea de minutos.',
+        images: [
+          '/assets/projects/doctori/doctori-ds-colors.png',
+          '/assets/projects/doctori/doctori-spacing.png',
+        ],
+        captions: [
+          'Documentación de la paleta de tokens — 8 escalas semánticas versionadas como fuente única de verdad',
+          'Escala de espaciado documentada — cada token de spacing con su valor y ejemplo visual, para un ritmo consistente entre verticales',
+        ],
+        highlight: 'Un token de color o de espaciado no es un capricho de sistema de diseño. Es lo que permite que un cambio de marca no se convierta en un proyecto de tres semanas.',
+      },
+      // ── 05. Librería de Componentes ──
+      {
+        label: '05. Librería de Componentes',
+        title: 'De botones aislados a un sistema con estados completos',
+        layout: 'image-grid',
+        content: 'Sobre los tokens se construye la librería de componentes: botones (primario, secundario, ghost, con icono, WhatsApp, error) con todos sus estados — default, hover, disabled, loading —, además de badges, chips, checkboxes, tags, bullets de carrusel y paginación. A eso se suma una capa de componentes de formulario más compleja: inputs con validación en tiempo real, autocompletado, selectores, y tarjetas de precio ("Product Title — 00,00€") reutilizadas en las landings.\n\nCada componente consume los tokens directamente, así que un ajuste en la paleta se propaga automáticamente a toda la librería. Esta librería es lo que hace posible que el mismo patrón de landing se replique en cada vertical sin que cada equipo reconstruya el mismo input con ligeras variaciones que, sumadas, generan inconsistencia y deuda de mantenimiento.',
+        images: [
+          '/assets/projects/doctori/doctori-components-buttons.png',
+          '/assets/projects/doctori/doctori-components-forms.png',
+        ],
+        captions: [
+          'Librería de componentes — botones, badges, chips y controles de formulario con todos sus estados documentados',
+          'Componentes de formulario avanzados — inputs con validación, autocompletado, selectores y tarjetas de precio',
+        ],
+      },
+      // ── 06. Estructura Global ──
+      {
+        label: '06. Estructura Global',
+        title: 'Header y footer — la navegación como parte del sistema, no como excepción',
+        layout: 'image-grid',
+        content: 'El header no es solo un logo y cuatro enlaces: cada entrada de navegación ("Seguros de salud", "Seguros de coche"...) despliega un mega-menú con dos columnas — **productos** segmentados por audiencia (Baratos, Autónomos, Bebés, Embarazadas, Mayores de 70 años...) y **aseguradoras partner** de esa vertical, cada una con su logo. Es arquitectura de información aplicada a SEO y a conversión: cada segmento de audiencia con una necesidad distinta tiene su propia puerta de entrada.\n\nEl footer, por su parte, es donde vive el peso regulatorio del negocio: enlaces a Aviso legal, Datos del mediador, Entidades aseguradoras e Info legal de producto, junto al sello de valoración (9.8/10) y la identidad legal de la empresa ("iSalud Health Services SL, Sociedad de Agencia de Seguros Vinculada"). En un negocio de mediación de seguros, ese pie de página no es un trámite — es parte de lo que permite operar legalmente.',
+        images: [
+          '/assets/projects/doctori/doctori-nav-header.png',
+          '/assets/projects/doctori/doctori-footer.png',
+        ],
+        captions: [
+          'Mega-menú de navegación — segmentación por audiencia y aseguradoras partner de la vertical',
+          'Footer — secciones, términos legales, empresa y políticas, con la identidad legal del mediador',
+        ],
+      },
+      // ── 07. Landings por Vertical ──
+      {
+        label: '07. Landings por Vertical',
+        title: 'Un mismo patrón de conversión, adaptado a cada seguro',
+        layout: 'image-grid',
+        content: 'Las cinco verticales comparten la misma estructura de landing: hero con CTA de cálculo inmediato y prueba social (rating de clientes), tabla comparativa de modalidades (ej. "Terceros" vs. "Todo riesgo" en Coche, "Cuadro médico con copago" vs. "Reembolso libre" en Salud, "Prima única" vs. "Prima renovable" en Decesos), bloques de coberturas imprescindibles, un bloque de **"Estudio de [vertical] de Doctori.com"** con datos de mercado propios, y FAQ.\n\n**Lo que cambia por vertical no es la estructura — es el contenido de decisión**: en Coche y Moto, el usuario necesita comparar marcas de vehículo; en Salud, coberturas médicas; en Decesos y Vida, modalidades de prima y capital asegurado. El sistema separa lo que es patrón (reutilizable) de lo que es contenido (específico de cada negocio), y esa separación es una decisión de arquitectura de producto, no solo de UI.',
+        images: [
+          '/assets/projects/doctori/doctori-salud-landing.png',
+          '/assets/projects/doctori/doctori-auto-landing.png',
+          '/assets/projects/doctori/doctori-moto-landing.png',
+          '/assets/projects/doctori/doctori-vertical-decesos.png',
+          '/assets/projects/doctori/doctori-vertical-vida.png',
+        ],
+        captions: [
+          'Landing de Seguros de Salud — tabla comparativa de cuadros médicos y coberturas',
+          'Landing de Seguros de Coche — comparativa de Terceros vs. Todo riesgo, selector de marca',
+          'Landing de Seguros de Moto — mismo patrón adaptado a marcas y coberturas de motocicleta',
+          'Landing de Seguros de Decesos — comparativa de prima nivelada, mixta y única',
+          'Landing de Seguros de Vida — mismo patrón adaptado a capital asegurado y beneficiarios',
+        ],
+        highlight: 'El patrón se diseña una vez. El contenido de decisión se adapta por vertical. Esa separación es lo que permite lanzar una vertical nueva en semanas, no en meses.',
+      },
+      // ── 08. Confianza y Contenido Modular ──
+      {
+        label: '08. Confianza y Contenido Modular',
+        title: 'Una librería de módulos CMS que el negocio monta sin diseño ni desarrollo',
+        layout: 'image-grid',
+        content: 'El corazón de la escalabilidad de contenido es una **librería de módulos CMS**: bloques autocontenidos, con su diseño y sus reglas ya definidos, que el equipo de contenido combina como piezas de Lego para montar cualquier landing sin pedir una sola pantalla nueva a diseño o desarrollo. Estos son los módulos que componen el sistema:\n\n**• Cómo Funciona** — resume la propuesta de valor en cuatro pasos (Completas el formulario → Comparamos al instante → Eliges tu mejor opción → Te asesoramos gratis), atacando la desconfianza inicial de un comparador que el usuario no conoce.\n\n**• Opiniones y valoración** — testimonios reales de clientes junto al sello de puntuación global (9.8/10), como prueba social que se reutiliza en todas las verticales.\n\n**• Expertos Visibles** — pone cara y nombre al equipo de asesoramiento, convirtiendo un comparador anónimo en personas con las que se puede hablar.\n\n**• Estudio de mercado** — bloques de datos propios (distribución de precios, edades, coberturas más contratadas por vertical) que funcionan como señal de autoridad, no como relleno.\n\n**• Coberturas frecuentes y FAQ** — resuelven las dudas y objeciones típicas de cada seguro sin saturar el hero.\n\n**• Explicación del modelo de negocio** — transparencia sobre cómo gana dinero el comparador, un módulo de confianza específico del sector.\n\nCada módulo consume los mismos tokens y componentes del sistema, así que combinarlos nunca rompe la coherencia visual. Añadir una variación de landing deja de ser un proyecto y pasa a ser una **composición de bloques ya existentes**.\n\nEsa misma lógica de confianza se extiende a los **modales legales**: cada aseguradora tiene su propio modal de "Información legal del producto" con enlaces a Resumen de coberturas, Condiciones generales y Nota informativa — un requisito regulatorio en mediación de seguros resuelto como un componente reutilizable por aseguradora, no como una excepción por página.',
+        images: [
+          '/assets/projects/doctori/doctori-cms-como-funciona.png',
+          '/assets/projects/doctori/doctori-modal-legal.png',
+        ],
+        captions: [
+          'Módulo CMS "Cómo Funciona" — reutilizable en cualquier landing sin intervención de diseño o desarrollo',
+          'Modal de información legal por aseguradora — mismo componente, distinta compañía',
+        ],
+        highlight: 'Un módulo de contenido bien diseñado no es una plantilla bonita — es la diferencia entre que el equipo de marketing necesite a un diseñador para cada variación, o no.',
+      },
+      // ── 09. Decisiones de Producto ──
+      {
+        label: '09. Decisiones de Producto',
+        title: 'Por qué cada bloque de la landing está donde está',
+        layout: 'stepper',
+        content: 'Cada bloque del patrón de landing responde a una razón de conversión o de confianza, no a una preferencia estética:',
+        steps: [
+          { title: 'Hero con CTA + prueba social', description: 'El precio orientativo ("Desde 9€/mes") y el rating de clientes (9.8/10) aparecen antes que cualquier explicación. El usuario decide si sigue leyendo en los primeros 3 segundos — el CTA no puede esperar a que termine de leer.' },
+          { title: 'Tabla comparativa temprana', description: 'Antes de explicar coberturas en detalle, se muestra la tabla comparativa de modalidades (ej. con copago / sin copago). El usuario de seguros llega comparando — el diseño responde a esa intención antes de pedirle que lea contenido educativo.' },
+          { title: 'Logos de aseguradoras como prueba social', description: 'Adeslas, Sanitas, Mapfre, Allianz — mostrar con quién se compara genera confianza inmediata en un producto financiero donde el usuario no conoce a "Doctori" de entrada, pero sí conoce a las aseguradoras.' },
+          { title: '"Estudio de [vertical]" con datos propios', description: 'Cada landing incluye un bloque de datos de mercado (gráficos de distribución de precios, edades, tipos de cobertura más contratados). No es contenido decorativo — es una señal de autoridad que reduce la fricción de "¿puedo confiar en este comparador?".' },
+          { title: 'FAQ al final, no al principio', description: 'Las preguntas frecuentes resuelven objeciones de último momento (¿es obligatorio?, ¿puedo cambiar de aseguradora?) justo antes de que el usuario decida si calcula su precio o abandona — su posición en el flujo es deliberada, no un cajón de sastre.' },
+        ],
+      },
+      // ── 10. Arquitectura de Audiencia y SEO ──
+      {
+        label: '10. Arquitectura de Audiencia',
+        title: 'Una puerta de entrada distinta para cada necesidad',
+        layout: 'center',
+        content: 'El mega-menú de cada vertical no es solo navegación: es **arquitectura de información al servicio del SEO y la conversión**. Bajo "Seguros de salud" no hay un único enlace — hay puertas segmentadas por audiencia: *Baratos, Para autónomos, Para bebés, Para embarazadas, Para mayores de 70 años, Con cobertura dental, Sin copago…* Cada una es una landing propia, indexable, que responde a una búsqueda concreta con un lenguaje y unas coberturas concretas.\n\nEsto es una decisión de producto con impacto directo en negocio. Un usuario que busca "seguro de salud para embarazadas" no quiere una landing genérica de salud — quiere ver, en los primeros segundos, que este comparador entiende *su* necesidad. El sistema hace esto posible sin multiplicar el trabajo de diseño: cada landing segmentada parte del **mismo patrón** (hero, comparativa, coberturas, estudio de mercado, FAQ) y solo cambia el contenido de decisión. Una audiencia nueva es una configuración de contenido, no un proyecto de diseño.\n\n**El resultado a nivel de sistema**: decenas de puntos de entrada orgánicos, cada uno optimizado para una intención de búsqueda específica, todos coherentes entre sí y todos alimentando el mismo motor de captación de lead. La arquitectura de audiencia es lo que convierte un comparador en una red de puertas, no en una sola.',
+        highlight: 'Segmentar por audiencia no multiplica el coste de diseño cuando el patrón ya está sistematizado — multiplica los puntos de entrada al negocio con el mismo esfuerzo. Esa es la diferencia entre un sistema y una colección de páginas.',
+      },
+      // ── 11. Reflexión ──
+      {
+        label: '11. Reflexión',
+        title: 'Qué significa liderar un Design System que no para de crecer',
+        layout: 'center',
+        content: 'Un Design System en una empresa real no es un proyecto que se termina — es una infraestructura que se gobierna. Estas son las tensiones activas de liderar el de Doctori.com:',
+        bullets: [
+          '**Velocidad vs. consistencia** — cada vertical nueva llega con presión de lanzamiento. La tentación de "total, es solo esta vez" es constante, y cada excepción que se acepta es una excepción que alguien más copiará en la siguiente vertical',
+          '**Cuándo diferenciar y cuándo unificar** — no todo debe ser igual entre Salud y Moto. Parte del rol de Strategic Product Designer es decidir dónde la diferenciación aporta valor real al usuario y dónde es solo preferencia de un equipo',
+          '**Gobernanza sin fricción** — un sistema que frena a los equipos de producto para "pedir permiso" en cada componente deja de usarse. El reto permanente es que seguir el sistema sea el camino más rápido, no una capa burocrática extra',
+          '**Contenido reutilizable, no solo componentes visuales** — el sistema de módulos CMS extiende la misma disciplina de "construir una vez, usar muchas veces" al contenido, no solo al UI. Mantener esa coherencia según crece la librería de módulos es un frente permanente',
+          '**Siguiente frente** — profundizar el patrón de landing en Decesos y Vida, las verticales más recientes, y auditar accesibilidad (WCAG) en toda la librería de componentes como base para el siguiente ciclo de madurez del sistema',
+        ],
+        highlight: 'El valor de este trabajo no se mide en pantallas diseñadas — se mide en cuánto más rápido y con menos deuda se puede lanzar la próxima vertical gracias al sistema que ya existe.',
+      },
+    ],
+  },
+  {
+    slug: 'doctori-tarificador-coche',
+    title: 'Tarificador de Coche',
+    client: 'Doctori.com (iSalud Health)',
+    year: '2022 — Presente',
+    category: 'Strategic Product Design',
+    tags: ['Product Design', 'UX Research', 'Service Design'],
+    description: 'Rediseño estratégico del flujo de cotización de seguro de coche de Doctori.com: de un formulario complejo a un asistente de 35 pasos con divulgación progresiva, pensado para maximizar la conversión sin sacrificar ni un dato necesario para cotizar con precisión.',
+    longDescription: 'Cotizar un seguro de coche requiere entre 20 y 30 datos: marca, modelo, versión, uso del vehículo, historial del conductor, siniestros, compañía anterior... Cualquier comparador que pida todo eso en un solo formulario se enfrenta a una tasa de abandono altísima. El **Tarificador de Coche** de Doctori.com resuelve esto con una estrategia deliberada: **35 pantallas, una pregunta cada vez**, con una barra de progreso que nunca desaparece y un contexto (marca, modelo, aseguradora en curso) siempre visible.\n\nEste proyecto documenta el trabajo de **Strategic Product Design** detrás de ese flujo: no es una decisión de UI — es una apuesta de producto sobre cómo se comporta la carga cognitiva percibida frente a la real, y sobre qué hacer en los momentos donde el sistema no tiene una respuesta limpia (una aseguradora que no cotiza, un usuario que duda a mitad del flujo).',
+    challenge: 'Un formulario de cotización de coche necesita capturar datos de tres dominios distintos — el **vehículo** (marca, modelo, versión, uso, matrícula), el **conductor** (edad, carné, siniestros, compañía anterior) y la **póliza deseada** (coberturas, franquicia, fecha de efecto) — antes de poder devolver un precio real. Pedir todo eso en un formulario tradicional de una sola página es la receta perfecta para el abandono: el usuario ve la longitud del formulario antes de invertir ningún esfuerzo, y decide que no merece la pena. El reto no era reducir los datos necesarios — eran imprescindibles para cotizar con precisión — era **rediseñar cómo se perciben**.',
+    solution: 'Diseñé el flujo como una conversación de **35 pasos**, cada uno con una sola pregunta, un único campo de decisión, y una barra de progreso fina que nunca desaparece. El contexto de la cotización (marca, modelo, aseguradora en curso) queda anclado en la parte inferior con acceso directo a "Ver resumen" en cualquier momento, así que el usuario nunca siente que ha perdido el hilo. Cuando la comparativa final no puede devolver precio para alguna aseguradora, el sistema no la oculta — la muestra con una llamada a la acción alternativa. Y en el momento de mayor compromiso (contratar), la marca de Doctori.com cede el protagonismo a la aseguradora elegida, reforzando la confianza justo cuando más importa.',
+    results: [
+      'Flujo de cotización estructurado en 35 pantallas de un solo dato, con barra de progreso persistente — divulgación progresiva aplicada a un formulario de alta complejidad',
+      'Contexto de la cotización (marca, modelo, aseguradora) siempre visible y accesible vía "Ver resumen", incluso a mitad de un flujo largo',
+      'Decisión de producto explícita: las aseguradoras sin precio online se muestran igual, con CTA de llamada, en vez de ocultarse de la comparativa',
+      'Verificación por SMS con mensaje de confianza explícito en vez del formulario frío de verificación estándar del sector',
+      'Hand-off de marca a la aseguradora elegida en el resumen final — la confianza se transfiere justo en el momento de mayor compromiso económico',
+    ],
+    stack: ['Figma', 'Progressive Disclosure', 'Conversion Design', 'Design Tokens'],
+    cover: '/assets/projects/doctori-tarificador/tarificador-header.png',
+    brandColor: '#001A80',
+    gridSpan: 2,
+    projectMeta: {
+      role: 'UX Lead & Strategic Product Designer',
+      industry: 'Insurtech / Seguros',
+      output: 'Multi-Step Quote Flow — Strategic Product Design',
+      duration: '2022 — Presente',
+      skills: ['Product Strategy', 'Progressive Disclosure', 'Conversion-Focused Design', 'Form Design', 'Trust Design', 'Error Prevention', 'Design Systems', 'Heuristic Analysis'],
+    },
+    checks: [
+      'Cotizar un seguro de coche requiere cerca de 30 datos de tres dominios distintos (vehículo, conductor, póliza) antes de devolver un precio real',
+      'Un formulario tradicional de una sola página muestra toda esa longitud de golpe — el usuario abandona antes de invertir el primer esfuerzo',
+      'Algunas aseguradoras no devuelven precio online para ciertos perfiles de riesgo, dejando huecos sin resolver en la comparativa final',
+    ],
+    caseSections: [
+      // ── 01. Contexto ──
+      {
+        label: '01. Contexto',
+        title: 'Por qué un tarificador propio y no un simple formulario',
+        layout: 'center',
+        content: 'El negocio de Doctori.com no cobra por mostrar un formulario — cobra por cada cotización que termina en una llamada o una contratación con una aseguradora partner. Eso significa que el tarificador de coche no es una pantalla más del comparador: es **el flujo que más presión de conversión soporta de todo el producto**, porque es el más largo y el que más datos sensibles pide.\n\nComo Strategic Product Designer, mi punto de partida no fue "¿cómo hago este formulario más bonito?" sino **"¿qué estructura de flujo maximiza la probabilidad de que un usuario con intención real de compra llegue a ver un precio?"**. La respuesta no fue reducir preguntas — todas eran necesarias para cotizar con precisión — fue cambiar su forma.',
+        highlight: 'En un flujo de conversión largo, la pregunta correcta no es "¿qué podemos quitar?" — es "¿cómo hacemos que lo necesario se sienta ligero?".',
+      },
+      // ── 02. El Patrón ──
+      {
+        label: '02. El Patrón',
+        title: 'Una pregunta, una pantalla',
+        layout: 'image-grid',
+        content: 'El flujo empieza con la selección de marca del vehículo — buscador y grid de logotipos, sin ningún otro elemento en pantalla que compita por la atención — y continúa con preguntas de opción simple, cada una en su propia pantalla: **modelo**, **matrícula**, **el uso que se le va a dar al vehículo** (particular ocasional, particular a diario, profesional ocasional, profesional a diario), **historial de siniestros**, **compañía aseguradora anterior**, **coberturas adicionales**… y así hasta 35. Cada pantalla tiene **una única decisión posible**, con una barra de progreso fina en la parte superior que avanza pero nunca desaparece.\n\n**Por qué esto convierte mejor que un formulario largo**: la carga cognitiva percibida de "35 pasos de una pregunta" es menor que la de "un formulario con 35 campos", aunque el dato solicitado sea idéntico. El usuario nunca ve el formulario completo — solo ve la siguiente pregunta, y eso cambia por completo su disposición a continuar. Cada opción se presenta como una tarjeta grande y tocable, no como un desplegable: en móvil, la diferencia entre elegir de un grid táctil y elegir de un menú desplegable nativo es directamente una diferencia de abandono.',
+        images: [
+          '/assets/projects/doctori-tarificador/tarificador-step-marca.png',
+          '/assets/projects/doctori-tarificador/tarificador-step-modelo.png',
+          '/assets/projects/doctori-tarificador/tarificador-step-matricula.png',
+          '/assets/projects/doctori-tarificador/tarificador-step-uso.png',
+          '/assets/projects/doctori-tarificador/tarificador-step-companias.png',
+          '/assets/projects/doctori-tarificador/tarificador-step-siniestros.png',
+          '/assets/projects/doctori-tarificador/tarificador-step-coberturas.png',
+        ],
+        captions: [
+          'Paso 1 — selección de marca con buscador, la primera de muchas preguntas de un solo dato',
+          'Paso 2 — modelo del vehículo, también resuelto con un grid buscable',
+          'Paso 5 — matrícula: un único campo, nada más en pantalla',
+          'Paso 8 — "¿Qué uso le vas a dar?" con tarjetas grandes tocables, no un desplegable',
+          'Paso 19 — pregunta sobre la compañía aseguradora anterior',
+          'Paso 24 — historial de siniestros, el dato sensible, pedido cuando ya hay inercia',
+          'Paso 32 — coberturas adicionales, con el contexto de la cotización anclado abajo',
+        ],
+        highlight: 'Un formulario de 35 campos se abandona. 35 pantallas de una pregunta cada una, con progreso visible, se completan. El dato pedido es el mismo — la carga percibida no.',
+      },
+      // ── 03. Los Tres Dominios de Datos ──
+      {
+        label: '03. Los Tres Dominios de Datos',
+        title: 'Por qué hacen falta 35 pasos: tres dominios que hay que capturar enteros',
+        layout: 'stepper',
+        content: 'La longitud del flujo no es arbitraria. Cotizar un seguro de coche con precisión obliga a capturar datos de tres dominios distintos, y ninguno se puede recortar sin perder exactitud en el precio final. El diseño del flujo agrupa las 35 preguntas en estos tres bloques, en un orden pensado para empezar por lo fácil y dejar lo sensible para cuando el usuario ya tiene inercia:',
+        steps: [
+          { title: 'El vehículo — lo fácil primero', description: 'Marca, modelo, versión, matrícula, uso (particular/profesional) y fecha de efecto. Son datos objetivos, sin carga emocional, y sirven de "calentamiento": el usuario responde varias preguntas triviales antes de que se le pida nada personal, generando el compromiso que sostiene el resto del flujo.' },
+          { title: 'El conductor — lo sensible en el medio', description: 'Edad, antigüedad del carné, historial de siniestros y compañía aseguradora anterior. Aquí está el dato que más incomoda (los siniestros), y se pide cuando el usuario ya ha invertido esfuerzo — el coste psicológico de abandonar ya es mayor que el de contestar una pregunta más.' },
+          { title: 'La póliza — la decisión al final', description: 'Modalidad (Terceros / Todo riesgo), franquicia y coberturas. Se deja para el final, junto a la comparativa de precios, porque es la única parte que el usuario percibe como "elegir" en lugar de "rellenar" — y conviene que llegue a ella con toda la información delante.' },
+        ],
+        highlight: 'Los 35 pasos no son un formulario troceado al azar: son tres dominios de datos ordenados por carga emocional creciente, para que lo incómodo llegue cuando abandonar ya cuesta más que continuar.',
+      },
+      // ── 04. El Contexto Nunca Desaparece ──
+      {
+        label: '04. El Contexto Nunca Desaparece',
+        title: 'Anclar lo importante mientras todo lo demás cambia de pantalla',
+        layout: 'left-right',
+        content: 'En un flujo de 35 pasos, el riesgo de que el usuario sienta que "ha perdido el hilo" es real. Por eso, a partir de la mitad del flujo, una barra inferior fija muestra la aseguradora seleccionada hasta el momento (ej. "Asisa Completa ++") y un acceso directo a **"Ver resumen"** — el usuario puede comprobar en cualquier momento qué ha contestado y qué está a punto de contratar, sin tener que retroceder pantalla por pantalla.\n\nEste patrón resuelve una tensión real de los flujos largos: cuantas más pantallas, mayor la ansiedad de "¿esto sigue teniendo sentido?". Anclar el contexto es más barato que reducir el número de pasos, y tiene un efecto directo sobre la confianza para completar el flujo.',
+        images: ['/assets/projects/doctori-tarificador/tarificador-step-conductor.png'],
+        highlight: 'Cuantos más pasos tiene un flujo, más vale la pena anclar el contexto. Es más barato que rediseñar el flujo entero, y resuelve la misma ansiedad.',
+      },
+      // ── 05. La Comparativa ──
+      {
+        label: '05. La Comparativa',
+        title: 'El momento de la verdad — y qué hacer cuando falla',
+        layout: 'full-image',
+        content: 'Después de 27 pasos de preguntas, el usuario llega al momento que justifica todo el esfuerzo: una comparativa real de precios entre aseguradoras, organizada por modalidad (Terceros básico, Terceros ampliado, Todo riesgo con/sin franquicia) y con filtro por compañía.\n\n**Pero no siempre hay una respuesta limpia.** Algunas aseguradoras no devuelven precio online para ciertos perfiles de riesgo — su API de tarificación falla o no cotiza ese caso. La decisión de producto no fue ocultar esas aseguradoras de la lista: se muestran igual, con su logo, y con un mensaje claro invitando a llamar para obtener precio por teléfono. Un fallo técnico de un tercero se convierte en una llamada entrante cualificada — el usuario ya completó 28 pasos de intención de compra, y ese es un motivo legítimo para ofrecer un canal alternativo, no para esconder la opción.',
+        images: ['/assets/projects/doctori-tarificador/tarificador-step-comparativa.png'],
+        captions: ['Comparativa real de precios — con aseguradoras sin cotización online mostradas igual, con CTA de llamada'],
+        highlight: 'Ocultar un fallo técnico parece más limpio. Convertirlo en una llamada entrante es mejor negocio. La opción de diseño "menos elegante" fue la correcta.',
+      },
+      // ── 06. Confianza antes de Contratar ──
+      {
+        label: '06. Confianza antes de Contratar',
+        title: 'Verificación por SMS como momento de tranquilidad, no de fricción',
+        layout: 'left-right',
+        content: 'Antes de contratar, el flujo verifica el teléfono con un código SMS de 6 dígitos, temporizador de caducidad visible y opción de reenvío — una barrera antifraude estándar en el sector. La diferencia está en cómo se comunica: en vez del formulario frío de verificación habitual, el mensaje es explícito sobre por qué se pide ese dato y qué pasa con él ("Tus datos están protegidos y nunca se compartirán sin tu permiso").\n\nEn un flujo donde el usuario ya ha invertido varios minutos y ha compartido datos personales sensibles, este es exactamente el momento donde la ansiedad es más alta — y exactamente donde más rentable es invertir en un mensaje de confianza explícito en lugar de un trámite genérico.',
+        images: ['/assets/projects/doctori-tarificador/tarificador-step-otp.png'],
+      },
+      // ── 07. El Cierre ──
+      {
+        label: '07. El Cierre',
+        title: 'La marca cede el protagonismo justo cuando más importa',
+        layout: 'left-right',
+        content: 'En el resumen final, antes de firmar, la marca de Doctori.com **cede el protagonismo visual a la aseguradora elegida** (en la captura, Reale Seguros): su logo pasa a encabezar la tarjeta de resumen, junto a los datos de la póliza, el precio final y las casillas legales de contratación.\n\nEs una decisión deliberada, no un descuido de marca: en el momento de mayor compromiso económico, el usuario necesita ver con quién está contratando realmente — la aseguradora — no seguir viendo la marca del comparador que le trajo hasta aquí. Confundir esos dos roles en el momento de pagar es exactamente donde la confianza se rompe si se hace mal.',
+        images: ['/assets/projects/doctori-tarificador/tarificador-step-resumen.png'],
+      },
+      // ── 08. Reflexión ──
+      {
+        label: '08. Reflexión',
+        title: 'Qué validaría primero como Strategic Product Designer',
+        layout: 'center',
+        content: 'Un flujo de 35 pasos es una apuesta fuerte de producto. Documentar sus riesgos es tan importante como documentar sus decisiones:',
+        bullets: [
+          '**Instrumentar cada paso** — la validación real de este diseño no es la intuición de que "35 pasos cortos convierten mejor que un formulario largo" — es el dato de en qué paso concreto se produce el mayor drop-off. Sin esa instrumentación, el diseño es una hipótesis razonada, no un hecho probado',
+          '**Riesgo de fatiga en usuarios recurrentes** — un usuario que ya cotizó una vez y vuelve a hacerlo (ej. en la renovación) no necesita la misma divulgación progresiva que alguien que cotiza por primera vez. Un flujo abreviado para usuarios conocidos es la siguiente iteración lógica',
+          '**Cuándo 35 pasos es demasiado** — el principio de divulgación progresiva no es ilimitado: si el drop-off acumulado por pantalla es mayor que el beneficio de percepción de ligereza, el flujo largo deja de ganar frente a un formulario más corto. Ese punto de equilibrio solo se conoce con datos reales de producción',
+          '**Siguiente frente** — replicar el mismo patrón de "contexto anclado + fallback de llamada ante fallos" en los tarificadores de Moto y Salud, que hoy tienen flujos más cortos pero menos maduros en estas dos decisiones concretas',
+        ],
+        highlight: 'Este diseño parte de una hipótesis de comportamiento bien fundamentada, no de un dato de producción validado. La siguiente fase imprescindible es instrumentar el flujo real y medir el drop-off paso a paso antes de dar por buena la apuesta.',
+      },
+    ],
+  },
+  {
+    slug: 'doctori-app-telemedicina',
+    title: 'App Doctori',
+    client: 'Doctori.com (iSalud Health)',
+    year: '2022 — Presente',
+    category: 'Strategic Product Design',
+    tags: ['Product Design', 'UX Research', 'Mobile-First Design'],
+    description: 'Estrategia de producto para la app de Doctori.com: de comparador transaccional de un solo uso a plataforma de consulta médica, legal y veterinaria con recomendación asistida por IA — pensada para generar una razón de volver, no solo de comprar una vez.',
+    longDescription: 'Un comparador de seguros tiene un problema de negocio estructural: el usuario lo usa una vez, compra, y no vuelve hasta la renovación un año después. La **App de Doctori.com** ataca ese problema desde el producto, no desde el marketing: convierte la relación en algo que el usuario quiere abrir cada semana — consulta médica, legal o veterinaria por chat en minutos, recomendaciones de cobertura asistidas por IA, y un marketplace de descuentos con las aseguradoras partner.\n\nComo **Strategic Product Designer**, mi trabajo aquí no fue diseñar una app bonita — fue decidir **qué convierte un producto de compra única en un producto de uso recurrente**, y cómo ese producto sigue hablando el mismo lenguaje visual y de confianza que la web de seguros de la que nace.',
+    challenge: 'El modelo de negocio de un comparador de seguros termina en el momento de la compra: el usuario cotiza, contrata, y desaparece hasta la renovación. Eso es un problema de **retención y de lifetime value** — cada usuario adquirido genera valor una sola vez al año, y no hay ninguna razón de producto para que abra la app entre medias. Construir "otra app de seguros" no resolvía esto. El reto era encontrar un valor que el usuario quisiera usar de forma recurrente, y que además reforzara la razón de ser de Doctori.com: la confianza en momentos de necesidad.',
+    solution: 'Definí la app alrededor de un valor que no compite con el negocio de seguros — lo complementa: **consulta directa con un médico, abogado o veterinario por chat, en menos de 2 minutos**. La estructura de navegación (Médicos, Abogados, Veterinarios, Ofertas, Mi perfil) pone ese valor en primer plano, con estado en tiempo real de cada profesional. Sobre esa base añadí dos capas más de retención: un asistente de **recomendación de coberturas asistido por IA** ("nuestra IA te explica cada cobertura, sin letra pequeña") y un **marketplace de descuentos** con las aseguradoras partner (DKV, Adeslas...). La app comparte tokens, tipografía y componentes con la web, así que la confianza que genera el comparador se transfiere sin fricción al nuevo canal.',
+    results: [
+      'Estructura de navegación por especialidad (Médicos, Abogados, Veterinarios, Ofertas, Mi perfil) que convierte un comparador transaccional en un producto de consulta recurrente',
+      'Estado en tiempo real de cada profesional (disponible / ocupado) visible en el listado, reduciendo la incertidumbre de "¿me van a responder ahora?"',
+      'Asistente de recomendación de coberturas asistido por IA integrado en la pestaña de Ofertas, sin letra pequeña',
+      'Marketplace de descuentos con aseguradoras partner (DKV, Adeslas...) como segunda capa de retención más allá de la consulta profesional',
+      'Onboarding y componentes de verificación (SMS, formularios) que reutilizan los mismos tokens y patrones que la web — cero curva de aprendizaje para un usuario que ya conoce Doctori.com',
+    ],
+    stack: ['Figma', 'Design Tokens', 'Product Strategy', 'Retention Design'],
+    cover: '/assets/projects/doctori-app/app-header.png',
+    brandColor: '#001A80',
+    gridSpan: 2,
+    projectMeta: {
+      role: 'UX Lead & Strategic Product Designer',
+      industry: 'Insurtech / Seguros',
+      output: 'Mobile App — Retention & Engagement Strategy',
+      duration: '2022 — Presente',
+      skills: ['Product Strategy', 'Retention Design', 'Mobile-First Design', 'Design Systems', 'AI-Assisted UX', 'Trust Design', 'Onboarding Design', 'Cross-Channel Consistency'],
+    },
+    checks: [
+      'El negocio de comparación de seguros termina en la compra — el usuario no tiene ninguna razón de producto para volver antes de la renovación anual',
+      'Construir "otra app de seguros" no resolvía el problema de fondo: faltaba un valor de uso recurrente, no una funcionalidad más',
+      'Cualquier app nueva competía por confianza desde cero si no heredaba la identidad visual y los patrones ya validados en la web',
+    ],
+    caseSections: [
+      // ── 01. Contexto de Negocio ──
+      {
+        label: '01. Contexto de Negocio',
+        title: 'El problema no era de producto — era de frecuencia',
+        layout: 'left-right',
+        content: 'Doctori.com genera ingresos cuando un usuario contrata un seguro a través de una aseguradora partner. Ese evento ocurre, en el mejor de los casos, **una vez al año** por usuario. Entre medias, no hay ninguna razón de producto para que ese usuario vuelva a abrir la web o piense en la marca — hasta que necesita renovar, momento en el que compite de nuevo con cualquier otro comparador del mercado.\n\nComo Strategic Product Designer, mi punto de partida fue una pregunta de negocio, no de interfaz: **¿qué valor podemos dar que el usuario quiera usar entre compra y compra, y que además refuerce por qué debería seguir confiando en Doctori.com?** La respuesta no estaba en mejorar el comparador — estaba en construir un canal nuevo con un motivo de uso distinto.',
+        images: ['/assets/projects/doctori-app/app-onboarding-1.png'],
+        highlight: 'Un comparador de seguros compite por confianza una vez al año. Una app de consulta recurrente compite por confianza cada semana. Esa diferencia de frecuencia es la que justifica el canal nuevo.',
+      },
+      // ── 02. El Reto ──
+      {
+        label: '02. El Reto',
+        title: 'No construir "otra app de seguros"',
+        layout: 'center',
+        content: 'La tentación obvia era construir una versión móvil del comparador: cotizar desde el móvil, gestionar pólizas, consultar el historial de contrataciones. Todo eso es útil, pero **no resuelve el problema de frecuencia** — sigue siendo un producto que se abre solo cuando hay una gestión de seguros pendiente.\n\nEl reto real era encontrar algo que el usuario quisiera usar sin necesitar gestionar nada: una razón de valor inmediato, recurrente, y coherente con la marca "Doctor i" — alguien en quien confiar cuando surge una duda, no solo cuando hay que comparar un precio.',
+        highlight: 'La pregunta equivocada era "¿cómo llevamos el comparador al móvil?". La pregunta correcta era "¿qué haría que alguien abriera esta app sin tener nada que gestionar?".',
+      },
+      // ── 03. Onboarding ──
+      {
+        label: '03. Onboarding',
+        title: 'Vender el valor antes de pedir ningún dato',
+        layout: 'image-grid',
+        content: 'El onboarding no explica "cómo funciona la app" — comunica directamente el valor central en un carrusel de tres pantallas: **"Resuelve tus dudas directamente con un médico, abogado o veterinario"**, seguido de la promesa de tiempo de respuesta (**"Te responderemos en menos de 2 minutos"**) y de la promesa de trato (**"Atención totalmente personalizada"**). Son tres mensajes de valor consecutivos, cada uno con una sola idea, antes de pedir absolutamente ningún dato.\n\nSolo después de comunicar ese valor, la app solicita nombre, fecha de nacimiento y email, y verifica el teléfono por SMS — el mismo patrón de verificación que el tarificador web, reconocible para cualquier usuario que ya haya cotizado en Doctori.com. El orden importa: pedir datos antes de haber comunicado el valor es la causa número uno de abandono en el primer arranque de una app.',
+        images: [
+          '/assets/projects/doctori-app/app-onboarding-slide2.png',
+          '/assets/projects/doctori-app/app-onboarding-slide3.png',
+          '/assets/projects/doctori-app/app-onboarding-datos.png',
+          '/assets/projects/doctori-app/app-onboarding-sms.png',
+        ],
+        captions: [
+          'Slide de valor 2 — la promesa de tiempo: "Te responderemos en menos de 2 minutos"',
+          'Slide de valor 3 — la promesa de trato: "Atención totalmente personalizada"',
+          'Captura de datos — solo después de comunicar el valor central de la app',
+          'Verificación por SMS — mismo patrón que el tarificador web, ya conocido por el usuario',
+        ],
+      },
+      // ── 04. El Hub Central ──
+      {
+        label: '04. El Hub Central',
+        title: 'Cinco especialidades, un estado siempre visible',
+        layout: 'image-grid',
+        content: 'La pantalla principal organiza el producto en cinco pestañas — **Médicos, Abogados, Veterinarios, Ofertas y Mi perfil** — con un CTA de videoconsulta inmediata siempre en primer plano y un listado de profesionales con su especialidad, historial de consultas y un **indicador de estado en tiempo real** (verde = disponible, rojo = ocupado).\n\nEl home no esconde la otra alma del producto: en la parte superior conviven los accesos rápidos a las cinco verticales de seguro (Salud, Coche, Moto, Vida, Decesos) con un banner de continuidad ("Sigue disfrutando de la App de Doctor i") y un acceso directo a Atención al cliente. Es una decisión de arquitectura deliberada: la consulta profesional es el gancho de frecuencia, pero el negocio de seguros nunca desaparece de la vista — coexisten en la misma pantalla sin competir.\n\nEse indicador de estado no es un detalle decorativo: es lo que responde a la pregunta implícita de cualquier usuario que abre un chat de consulta — **"¿me van a responder ahora, o esto es un buzón sin fondo?"**. Sin esa señal, la app se percibe como un formulario de contacto más. Con ella, se percibe como acceso a una persona real y disponible.',
+        images: [
+          '/assets/projects/doctori-app/app-home.png',
+          '/assets/projects/doctori-app/app-verticals.png',
+        ],
+        captions: [
+          'Home de la app — accesos a las 5 verticales de seguro y listado de profesionales con estado en tiempo real (verde/rojo)',
+          'Los tres verticales de consulta explícitos — Chat médico, Chat Legal y Chat Veterinario — junto a la venta cruzada de seguros',
+        ],
+        highlight: 'Un chat sin señal de disponibilidad es indistinguible de un buzón sin fondo. El punto verde es la diferencia entre "esto funciona" y "esto es una promesa vacía".',
+      },
+      // ── 05. Un producto, tres profesionales ──
+      {
+        label: '05. Tres Verticales, un Patrón',
+        title: 'Médicos, Abogados y Veterinarios — el mismo patrón, tres necesidades',
+        layout: 'image-grid',
+        content: 'La promesa de la app no es "un médico" — es **"un profesional de confianza cuando surge una duda"**, y esa duda puede ser médica, legal o veterinaria. Las tres pestañas principales (Médicos, Abogados, Veterinarios) comparten exactamente el mismo patrón de listado: profesional, especialidad, historial de la última consulta y el indicador de estado en tiempo real. Lo único que cambia es el dominio de especialidades.\n\nEn **Abogados**, el listado se organiza por área — Fiscal, Familia, Consumo, Asesor legal, Trabajo — con el mismo lenguaje visual que Médicos. En **Veterinarios**, por tipo de animal y especialidad veterinaria. **Que las tres verticales compartan patrón no es pereza de diseño — es estrategia de sistema**: un patrón validado en Médicos se propaga a Abogados y Veterinarios sin rediseñar nada, y añadir una vertical nueva (psicólogos, coaches...) es rellenar una lista, no construir un producto. La consistencia es lo que permite que el usuario aprenda la app una vez y la sepa usar entera.',
+        images: [
+          '/assets/projects/doctori-app/app-abogados.png',
+          '/assets/projects/doctori-app/app-veterinarios.png',
+        ],
+        captions: [
+          'Pestaña Abogados — mismo patrón de listado que Médicos, con áreas legales (Fiscal, Familia, Consumo, Trabajo)',
+          'Pestaña Veterinarios — idéntico patrón, adaptado a especialidades veterinarias',
+        ],
+        highlight: 'Tres verticales que comparten patrón se construyen una vez y se mantienen una vez. Añadir la cuarta es rellenar una lista, no diseñar un producto nuevo.',
+      },
+      // ── 06. Recomendación y Marketplace ──
+      {
+        label: '06. Recomendación y Marketplace',
+        title: 'IA para explicar coberturas, descuentos para retener',
+        layout: 'image-grid',
+        content: 'La pestaña de Ofertas añade dos capas de valor adicionales. La primera es un asistente que promete **"sin sorpresas ni letra pequeña: nuestra IA te explica cada cobertura"** — una respuesta directa a la desconfianza estructural que genera cualquier producto de seguros, donde el usuario históricamente no entiende qué cubre realmente su póliza. Se presenta con un CTA de "Recomendar" que arranca la conversación, no como una función técnica escondida en un menú.\n\nLa segunda es un **marketplace de descuentos** con aseguradoras partner (DKV con un 35% de descuento, Adeslas, Sanitas, Caser...) — una razón adicional, puramente económica, para seguir abriendo la app aunque no haya ninguna duda médica, legal o veterinaria pendiente. Cada tarjeta de partner es un módulo reutilizable, así que ampliar el marketplace a una aseguradora nueva es añadir una tarjeta, no rediseñar la pestaña. Cada una de estas capas amplía el motivo de uso recurrente sin depender de que el usuario tenga una urgencia.',
+        images: [
+          '/assets/projects/doctori-app/app-ofertas.png',
+        ],
+        captions: [
+          'Pestaña de Ofertas — recomendación de coberturas asistida por IA ("Recomendar") y marketplace de descuentos con partners (DKV −35%, Adeslas...), cada uno un módulo reutilizable',
+        ],
+      },
+      // ── 07. Decisiones de Producto ──
+      {
+        label: '07. Decisiones de Producto',
+        title: 'Por qué la app se organiza así',
+        layout: 'stepper',
+        content: 'Cada decisión estructural de la app responde a la estrategia de retención, no a una preferencia de diseño:',
+        steps: [
+          { title: 'Navegación por especialidad, no por función', description: 'Médicos, Abogados, Veterinarios son las tres primeras pestañas — antes que Ofertas o Perfil. La app comunica desde el primer vistazo cuál es su valor principal, no sus funciones secundarias.' },
+          { title: 'Estado en tiempo real como elemento de confianza', description: 'El punto verde/rojo junto a cada profesional convierte una lista estática en una señal de disponibilidad real, reduciendo la incertidumbre del primer contacto.' },
+          { title: 'Onboarding que vende valor antes de pedir datos', description: 'Comunicar "menos de 2 minutos de respuesta" antes de solicitar nombre o teléfono reduce la fricción psicológica de compartir datos personales con una marca que el usuario asocia principalmente con seguros, no con salud.' },
+          { title: 'IA como reductor de desconfianza, no como gadget', description: 'El asistente de coberturas no se presenta como una función de IA — se presenta como la solución a un problema de confianza específico del sector ("sin letra pequeña"). El encuadre importa más que la tecnología subyacente.' },
+          { title: 'Consistencia visual con la web como atajo de confianza', description: 'Reutilizar tokens, tipografía y patrones de verificación de la web del comparador significa que un usuario que ya confió en Doctori.com para cotizar no tiene que volver a generar esa confianza desde cero en la app.' },
+        ],
+      },
+      // ── 08. El Perfil como Nexo entre Canales ──
+      {
+        label: '08. Perfil y Autoservicio',
+        title: 'Un perfil que conecta la app con el ecosistema — y un autoservicio que descarga soporte',
+        layout: 'image-grid',
+        content: 'La pestaña de **Mi perfil** ("Datos personales": documento de identidad, fecha de nacimiento, nombre, apellidos, email y teléfono) parece una pantalla menor, pero cumple una función estratégica: es el punto donde la identidad del usuario en la app se conecta con la del comparador web. El mismo Juan Pérez que cotizó un seguro en la web es el que consulta con un médico en la app — y el sistema lo trata como una sola persona, no como dos usuarios distintos en dos productos distintos.\n\nEsto habilita el verdadero valor a largo plazo: **datos de perfil compartidos entre web y app** significan que una recomendación de cobertura en la app puede partir de lo que el usuario ya cotizó en la web, y que una renovación puede anticiparse en el canal donde el usuario está más activo. El perfil no es un formulario de ajustes — es la costura que convierte dos productos en un ecosistema. Los campos, además, reutilizan exactamente los mismos componentes de input y validación que el onboarding y el tarificador web: cero curva de aprendizaje, cero inconsistencia.\n\nJunto al perfil, un módulo de **Preguntas frecuentes** resuelve las dudas más comunes ("¿Qué ventajas tiene un comparador online?", "¿Contratar un seguro es voluntario?", "¿Puedo modificar mi seguro?") en un acordeón autoservicio. En un producto que promete respuesta profesional en menos de 2 minutos, cada duda que el usuario resuelve solo es una consulta que **no** satura al equipo de profesionales — un detalle de producto con impacto directo en el coste operativo que hace sostenible la promesa central de la app.',
+        images: [
+          '/assets/projects/doctori-app/app-perfil.png',
+          '/assets/projects/doctori-app/app-faq.png',
+        ],
+        captions: [
+          'Mi perfil — la identidad compartida entre web y app, con los mismos componentes de input y validación',
+          'Preguntas frecuentes — autoservicio que resuelve dudas comunes sin consumir tiempo de los profesionales',
+        ],
+        highlight: 'Un perfil compartido entre web y app no es una comodidad de usuario — es lo que permite que el negocio trate a la persona como una sola relación, no como dos clientes que casualmente se llaman igual.',
+      },
+      // ── 09. Reflexión ──
+      {
+        label: '09. Reflexión',
+        title: 'Las tensiones sin resolver de una estrategia de retención',
+        layout: 'center',
+        content: 'Convertir un comparador transaccional en un producto recurrente no es una decisión que termine con el lanzamiento. Estas son las preguntas abiertas:',
+        bullets: [
+          '**Canibalización vs. complemento** — ¿el chat médico gratuito reduce la percepción de valor del seguro de salud que Doctori.com vende? Es una tensión real: la app tiene que generar confianza en el ecosistema sin sustituir la necesidad de contratar una póliza',
+          '**Sostenibilidad del servicio profesional** — la promesa de "menos de 2 minutos" con profesionales reales tiene un coste operativo que crece con la base de usuarios. Validar el modelo a escala es un riesgo de negocio, no solo de producto',
+          '**Medir retención real, no descargas** — el indicador de éxito de este proyecto no es cuánta gente se descarga la app, es cuánta gente la abre en el mes 3, 6 y 12 sin tener una cotización pendiente. Esa instrumentación es el siguiente paso imprescindible',
+          '**Siguiente frente** — expandir el marketplace de descuentos a más categorías (no solo seguros de salud) y testear si la recomendación asistida por IA mueve la aguja en la tasa de renovación, que es la métrica que de verdad justifica la inversión en este canal',
+        ],
+        highlight: 'El éxito de esta app no se mide en descargas — se mide en si consigue que un usuario piense en Doctori.com como algo más que "la web donde comparé un seguro una vez".',
       },
     ],
   },
