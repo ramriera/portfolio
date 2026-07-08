@@ -8,7 +8,6 @@ export const siteConfig = {
     dark: '/assets/shared/logo-negro.svg',
     light: '/assets/shared/logo-blanco.svg',
   },
-  profilePhoto: '/assets/shared/foto-perfil.png',
   social: {
     linkedin: 'https://linkedin.com/in/ramonrieradepares',
     medium: 'https://medium.com/@ramriera',
