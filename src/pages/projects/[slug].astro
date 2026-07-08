@@ -14,7 +14,24 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 2);
+
+// Pick the most related projects first (same client, category and shared tags),
+// with a per-project rotation so ties vary between projects instead of always
+// surfacing the same two.
+function getRelatedProjects(current: typeof project, all: typeof projects, n = 2) {
+  const others = all.filter((p) => p.slug !== current.slug);
+  const seed = current.slug.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const scored = others.map((p, idx) => {
+    let score = 0;
+    if (p.client === current.client) score += 6;          // same client (e.g. the Doctori trio)
+    if (p.category === current.category) score += 2;       // same discipline
+    score += p.tags.filter((t) => current.tags.includes(t)).length; // shared tags
+    return { p, score, rot: (idx + seed) % others.length };
+  });
+  scored.sort((a, b) => (b.score - a.score) || (a.rot - b.rot));
+  return scored.slice(0, n).map((s) => s.p);
+}
+const otherProjects = getRelatedProjects(project, projects, 2);
 const hasCaseStudy = !!project.caseSections?.length;
 const meta = project.projectMeta;
 
@@ -785,6 +802,14 @@ function md(text: string): string {
 </script>
 
 <style>
+  /* Case-study figures — thin contrast line so light screenshots don't
+     blend into the page background */
+  .cs-figure :global(img) {
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    border-radius: 0.75rem;
+    background-color: #ffffff;
+  }
+
   /* Related projects — match Home card language */
   .related-project-item :global(.related-card-image-wrap) {
     aspect-ratio: 4 / 3;
