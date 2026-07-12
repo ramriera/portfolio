@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f5f1" />
+  <title>Ramon Riera — Senior UX/UI & Product Designer</title>
+  <meta name="description" content="Ramon Riera, Senior UX/UI & Product Designer. Conecto cada decisión de diseño con un resultado de negocio: Design Systems, Product Design y Design Operations." />
+  <meta name="author" content="Ramon Riera" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ramon Riera — Senior UX/UI & Product Designer" />
+  <meta property="og:description" content="Diseño experiencias digitales que conectan decisiones de diseño con resultados de negocio." />
+  <meta property="og:image" content="/assets/shared/og-image.png" />
+  <meta property="og:url" content="https://ramonriera.design" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <a href="#works" class="skip-link">Saltar al contenido</a>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav" data-nav>
+    <div class="container nav__inner">
+      <a href="#hero" class="nav__brand" aria-label="Ramon Riera — inicio">
+        <span class="nav__brand-mark">RR</span>
+        <span class="nav__brand-name">Ramon Riera</span>
+      </a>
+
+      <nav class="nav__links" aria-label="Navegación principal">
+        <a href="#works" class="nav__link">Proyectos</a>
+        <a href="#about" class="nav__link">Sobre mí</a>
+        <a href="#services" class="nav__link">Servicios</a>
+        <a href="#contact" class="nav__link">Contacto</a>
+        <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener" class="nav__cv">CV ↓</a>
+      </nav>
+
+      <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="nav__drawer" data-drawer aria-hidden="true">
+      <a href="#works" class="nav__drawer-link" data-drawer-link>Proyectos</a>
+      <a href="#about" class="nav__drawer-link" data-drawer-link>Sobre mí</a>
+      <a href="#services" class="nav__drawer-link" data-drawer-link>Servicios</a>
+      <a href="#contact" class="nav__drawer-link" data-drawer-link>Contacto</a>
+      <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener" class="nav__drawer-link">Descargar CV ↓</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero__glow hero__glow--a" aria-hidden="true"></div>
+      <div class="hero__glow hero__glow--b" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <p class="hero__status reveal" data-reveal>
+          <span class="hero__status-dot" aria-hidden="true"></span>
+          Disponible para proyectos · Remoto
+        </p>
+
+        <h1 class="hero__title reveal" data-reveal data-reveal-delay="1">
+          Diseño experiencias digitales que
+          <span class="hero__rotator" data-rotator aria-live="polite">
+            <span class="hero__rotator-word">conectan</span>
+          </span>
+        </h1>
+
+        <p class="hero__lead reveal" data-reveal data-reveal-delay="2">
+          UX Lead &amp; Product Designer con más de 9 años diseñando productos digitales.
+          Conecto cada decisión de diseño con un resultado de negocio — conversión, eficiencia o
+          crecimiento — a través de <strong>Design Systems</strong>, <strong>Product Design</strong> y <strong>Design Operations</strong>.
+        </p>
+
+        <div class="hero__actions reveal" data-reveal data-reveal-delay="3">
+          <a href="#works" class="btn btn--primary">Ver proyectos <span aria-hidden="true">→</span></a>
+          <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener" class="btn btn--ghost">Descargar CV <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+
+      <a href="#works" class="hero__scroll" aria-label="Desplázate hacia abajo">
+        <span>Scroll</span>
+        <span class="hero__scroll-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" data-marquee>
+        <span class="marquee__group">
+          <span>UX/UI Design</span><span class="marquee__sep">✳</span>
+          <span>Design Systems</span><span class="marquee__sep">✳</span>
+          <span>Product Design</span><span class="marquee__sep">✳</span>
+          <span>Design Ops</span><span class="marquee__sep">✳</span>
+          <span>UX Strategy</span><span class="marquee__sep">✳</span>
+        </span>
+        <span class="marquee__group">
+          <span>UX/UI Design</span><span class="marquee__sep">✳</span>
+          <span>Design Systems</span><span class="marquee__sep">✳</span>
+          <span>Product Design</span><span class="marquee__sep">✳</span>
+          <span>Design Ops</span><span class="marquee__sep">✳</span>
+          <span>UX Strategy</span><span class="marquee__sep">✳</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ============ WORKS ============ -->
+    <section class="works section" id="works">
+      <div class="container">
+        <header class="section__head reveal" data-reveal>
+          <span class="section__eyebrow">01 — Proyectos</span>
+          <h2 class="section__title">Trabajos recientes</h2>
+          <p class="section__intro">
+            Una selección de casos donde el diseño movió una métrica real: conversión, consistencia o eficiencia
+            para marcas como Iberia, Banco Sabadell, Inditex y CaixaBank.
+          </p>
+        </header>
+
+        <div class="works__grid" data-works></div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about section" id="about">
+      <div class="container about__grid">
+        <div class="about__media reveal" data-reveal data-reveal-from="left">
+          <img src="/assets/img/shared/foto-home.png" alt="Ramon Riera" loading="lazy" decoding="async" />
+        </div>
+
+        <div class="about__body">
+          <span class="section__eyebrow reveal" data-reveal>02 — Sobre mí</span>
+          <h2 class="section__title reveal" data-reveal data-reveal-delay="1">
+            Diseñador con visión <span class="text-accent">estratégica</span>
+          </h2>
+          <div class="about__text reveal" data-reveal data-reveal-delay="2">
+            <p>
+              Soy <strong>Ramon Riera</strong>, UX y Product Designer especializado en estrategia de experiencia
+              de usuario y <strong>Design Operations</strong>, con más de 9 años diseñando productos digitales para
+              empresas como <strong>Iberia</strong> y <strong>Banco Sabadell</strong>, o mejorando el flujo de
+              <strong>ImaginBank</strong> y <strong>Massimo Dutti</strong>.
+            </p>
+            <p>
+              Trabajo en la intersección entre <strong>UX, estrategia y sistemas de diseño</strong>, ayudando a
+              equipos de producto e ingeniería a crear experiencias consistentes. Actualmente soy
+              <strong>UX Lead &amp; Strategic Product Designer en Doctori.com</strong>, donde lidero Design Operations
+              y el desarrollo del Design System.
+            </p>
+            <p>
+              Creo firmemente en un diseño que <strong>simplifica lo complejo</strong>, alineando las decisiones de
+              negocio con las necesidades del usuario para crear experiencias que, simplemente, funcionan.
+            </p>
+          </div>
+
+          <div class="about__stats reveal" data-reveal data-reveal-delay="3">
+            <div class="about__stat"><span class="about__stat-num">9+</span><span class="about__stat-label">Años de experiencia</span></div>
+            <div class="about__stat"><span class="about__stat-num">20+</span><span class="about__stat-label">Productos diseñados</span></div>
+            <div class="about__stat"><span class="about__stat-num">4</span><span class="about__stat-label">Design Systems</span></div>
+          </div>
+
+          <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener" class="btn btn--dark reveal" data-reveal data-reveal-delay="4">
+            Ver CV completo <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS & TOOLS ============ -->
+    <section class="skills section" id="skills">
+      <div class="container">
+        <header class="section__head reveal" data-reveal>
+          <span class="section__eyebrow">03 — Skills &amp; Tools</span>
+          <h2 class="section__title">Cómo trabajo</h2>
+        </header>
+
+        <div class="skills__grid">
+          <div class="skills__col reveal" data-reveal>
+            <h3 class="skills__col-title">Competencias</h3>
+            <ul class="skills__list" data-skills></ul>
+          </div>
+          <div class="skills__col reveal" data-reveal data-reveal-delay="1">
+            <h3 class="skills__col-title">Herramientas</h3>
+            <ul class="tools" data-tools></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TECHNOLOGY ============ -->
+    <section class="tech section" id="tech">
+      <div class="container">
+        <header class="section__head reveal" data-reveal>
+          <span class="section__eyebrow">04 — Enfoque</span>
+          <h2 class="section__title">Disciplinas clave</h2>
+          <p class="section__intro">Las tres áreas sobre las que construyo cada proyecto de principio a fin.</p>
+        </header>
+
+        <div class="tech__grid" data-tech></div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="process section" id="process">
+      <div class="container">
+        <header class="section__head reveal" data-reveal>
+          <span class="section__eyebrow">05 — Proceso</span>
+          <h2 class="section__title">De la investigación al producto</h2>
+        </header>
+        <ol class="process__steps" data-process></ol>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="services section" id="services">
+      <div class="container">
+        <header class="section__head reveal" data-reveal>
+          <span class="section__eyebrow">06 — Servicios</span>
+          <h2 class="section__title">En qué puedo ayudarte</h2>
+        </header>
+        <div class="services__grid" data-services></div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE / EDUCATION ============ -->
+    <section class="resume section" id="resume">
+      <div class="container resume__grid">
+        <div class="resume__col reveal" data-reveal>
+          <h3 class="resume__title"><span class="section__eyebrow">07 — Trayectoria</span></h3>
+          <ul class="resume__list" data-experience></ul>
+        </div>
+        <div class="resume__col reveal" data-reveal data-reveal-delay="1">
+          <h3 class="resume__title"><span class="section__eyebrow">Consultoría senior · vía Lead-it</span></h3>
+          <ul class="resume__list" data-consulting></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact section" id="contact">
+      <div class="container contact__inner">
+        <span class="section__eyebrow reveal" data-reveal>08 — Contacto</span>
+        <h2 class="contact__title reveal" data-reveal data-reveal-delay="1">
+          Construyamos algo <span class="text-accent">que importe</span>
+        </h2>
+        <p class="contact__lead reveal" data-reveal data-reveal-delay="2">
+          ¿Tienes un producto que necesita estrategia de diseño, un Design System que escalar o un flujo que no
+          convierte? Hablemos.
+        </p>
+        <a href="mailto:hello@ramonriera.design" class="contact__email reveal" data-reveal data-reveal-delay="3">hello@ramonriera.design</a>
+        <div class="contact__links reveal" data-reveal data-reveal-delay="4">
+          <a href="https://linkedin.com/in/ramonrieradepares" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://medium.com/@ramriera" target="_blank" rel="noopener">Medium ↗</a>
+          <a href="/docs/CV-Ramon-Riera-Depares.pdf" target="_blank" rel="noopener">CV ↓</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="marquee marquee--footer" aria-hidden="true">
+      <div class="marquee__track marquee__track--reverse" data-marquee>
+        <span class="marquee__group">
+          <span>Trabajemos juntos</span><span class="marquee__sep">→</span>
+          <span>Disponible para proyectos</span><span class="marquee__sep">→</span>
+          <span>UX &amp; Product Design</span><span class="marquee__sep">→</span>
+        </span>
+        <span class="marquee__group">
+          <span>Trabajemos juntos</span><span class="marquee__sep">→</span>
+          <span>Disponible para proyectos</span><span class="marquee__sep">→</span>
+          <span>UX &amp; Product Design</span><span class="marquee__sep">→</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <p class="footer__credit">© <span data-year>2026</span> Ramon Riera — Diseñado y desarrollado con Vite.</p>
+      <div class="footer__links">
+        <a href="mailto:hello@ramonriera.design">Email</a>
+        <a href="https://linkedin.com/in/ramonrieradepares" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#hero">Volver arriba ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

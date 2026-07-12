@@ -1,0 +1,67 @@
+@use 'variables' as *;
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 100;
+  transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+  border-bottom: 1px solid transparent;
+  &.is-scrolled {
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom-color: var(--line);
+  }
+  &__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 74px;
+  }
+  &__brand { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-display); font-weight: 600; }
+  &__brand-mark {
+    display: grid; place-items: center; width: 38px; height: 38px;
+    background: var(--ink); color: var(--bg); border-radius: 11px;
+    font-size: 0.9rem; letter-spacing: 0.02em;
+  }
+  &__brand-name { font-size: 1.05rem; letter-spacing: -0.01em; }
+
+  &__links { display: flex; align-items: center; gap: 2rem; }
+  &__link {
+    position: relative; font-size: 0.96rem; color: var(--ink-soft); font-weight: 500;
+    transition: color 0.2s;
+    &::after {
+      content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0;
+      background: var(--accent); transition: width 0.28s var(--ease);
+    }
+    &:hover, &.is-active { color: var(--ink); }
+    &.is-active::after { width: 100%; }
+  }
+  &__cv {
+    font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500;
+    padding: 0.5rem 0.95rem; border: 1px solid var(--line-strong); border-radius: 999px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    &:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  }
+
+  &__toggle {
+    display: none; flex-direction: column; gap: 5px; padding: 8px; z-index: 120;
+    span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.3s, opacity 0.2s; }
+  }
+  &__toggle[aria-expanded='true'] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  &__toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+  &__toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  &__drawer {
+    position: fixed; inset: 74px 0 0 0; z-index: 110;
+    background: var(--bg);
+    display: flex; flex-direction: column; gap: 0.5rem;
+    padding: 2rem var(--gutter);
+    transform: translateY(-12px); opacity: 0; pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    &.is-open { opacity: 1; transform: none; pointer-events: auto; }
+  }
+  &__drawer-link {
+    font-family: var(--font-display); font-size: 1.6rem; font-weight: 500;
+    padding: 0.6rem 0; border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: $bp-md) {
+  .nav__links { display: none; }
+  .nav__toggle { display: flex; }
+}
