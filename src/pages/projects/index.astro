@@ -99,19 +99,20 @@ function getProjectFilters(tags: string[]): string[] {
   <!-- Projects grid -->
   <section class="pb-32" data-component="ProjectsListing">
     <div class="container-custom">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid"
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" id="projects-grid"
         data-component="ProjectGrid" data-token="$grid-cols: 1 → 2 (md)|$spacing-gap: 2rem / 32px">
         {sortedProjects.map((project, i) => (
           <div
             data-reveal
-            data-delay={String(i * 100)}
+            data-delay={String((i % 2) * 100)}
             data-category={project.category}
             data-filters={JSON.stringify(getProjectFilters(project.tags))}
-            class="project-item"
+            class:list={['project-item', i === 0 ? 'md:col-span-2' : '']}
           >
             <ProjectCard
               {...project}
               index={i + 1}
+              variant={i === 0 ? 'hero' : 'default'}
               loading={i === 0 ? 'eager' : 'lazy'}
               fetchpriority={i === 0 ? 'high' : 'auto'}
             />

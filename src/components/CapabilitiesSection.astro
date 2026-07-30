@@ -1,0 +1,183 @@
+---
+// "Sobre mí" reimagined as a multidisciplinary capabilities band (anubi-style)
+const capabilities = [
+  { name: 'Product Design', desc: 'Estrategia, flujos y UI de alta fidelidad, del concepto al prototipo.' },
+  { name: 'Design Systems', desc: 'Arquitectura de tokens, componentes y gobernanza que escala entre equipos.' },
+  { name: 'Design Engineering', desc: 'Del token al componente en producción: TypeScript, Astro y Git flow.' },
+  { name: 'UX Research', desc: 'Investigación y testing para decidir con evidencia, no con opinión.' },
+  { name: 'Design Ops', desc: 'Procesos y herramientas que hacen al equipo más rápido y consistente.' },
+  { name: 'Frontend', desc: 'Interfaces accesibles y con rendimiento — 60fps, semántica y a11y.' },
+  { name: 'Prototyping', desc: 'Prototipos interactivos de alta fidelidad para validar antes de construir.' },
+  { name: 'Estrategia', desc: 'Conecto cada decisión de diseño con una métrica de negocio concreta.' },
+];
+---
+
+<section id="capacidades" class="cap-band" data-component="CapabilitiesSection">
+  <div class="container-custom cap-inner">
+
+    <!-- Eyebrow -->
+    <div data-reveal class="cap-eyebrow">
+      <span class="cap-eyebrow-line" aria-hidden="true"></span>
+      <span class="cap-eyebrow-label">Product Designer &amp; Design Engineer</span>
+    </div>
+
+    <!-- Heading + intro -->
+    <div class="cap-head">
+      <div class="cap-head-left">
+        <span class="cap-ghost" aria-hidden="true">SOBRE MÍ</span>
+        <h2 data-reveal class="cap-title">
+          Diseño de producto<br />de extremo a extremo.
+        </h2>
+      </div>
+      <div class="cap-head-right">
+        <p data-reveal data-delay="120" class="cap-intro">
+          Soy Ramon Riera, Senior Product Designer &amp; Design Engineer con más de 9 años
+          llevando productos digitales de la estrategia a producción para empresas como
+          Iberia, Banco Sabadell, ImaginBank y Massimo Dutti. Diseño con criterio de sistema
+          y lo llevo hasta el código, con un método basado en estrategia, arquitectura de UI,
+          Design Systems y ejecución en frontend — del concepto a la entrega.
+        </p>
+        <a href="/about" class="cap-intro-link">
+          Conoce mi trayectoria
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Capabilities list -->
+    <ul class="cap-list">
+      {capabilities.map((cap, i) => (
+        <li data-reveal data-delay={String((i % 2) * 80)} class="cap-item">
+          <h3 class="cap-item-name">{cap.name}</h3>
+          <p class="cap-item-desc">{cap.desc}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .cap-band {
+    background: var(--inverse-bg);
+    color: var(--inverse-text);
+    padding: clamp(4rem, 8vw, 7rem) 0;
+  }
+
+  .cap-inner { }
+
+  /* Eyebrow */
+  .cap-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--inverse-border);
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+  .cap-eyebrow-line {
+    width: clamp(2.5rem, 6vw, 5rem);
+    height: 1px;
+    background: var(--inverse-subtle);
+  }
+  .cap-eyebrow-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--inverse-muted);
+  }
+
+  /* Heading row */
+  .cap-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  @media (min-width: 900px) {
+    .cap-head { grid-template-columns: 1.15fr 1fr; gap: 3rem; }
+  }
+
+  .cap-head-left { position: relative; }
+  .cap-ghost {
+    position: absolute;
+    top: -0.5em;
+    left: -0.04em;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--inverse-text);
+    opacity: 0.05;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .cap-title {
+    position: relative;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--inverse-text);
+  }
+
+  .cap-head-right { padding-top: 0.5rem; }
+  .cap-intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--inverse-muted);
+  }
+  .cap-intro-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent);
+    transition: gap 0.2s ease;
+  }
+  .cap-intro-link:hover { gap: 0.85rem; }
+
+  /* List */
+  .cap-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--inverse-border);
+  }
+  @media (min-width: 768px) {
+    .cap-list { grid-template-columns: 1fr 1fr; column-gap: clamp(2rem, 5vw, 5rem); }
+  }
+
+  .cap-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.35rem 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--inverse-border);
+    transition: padding-left 0.3s var(--ease-out-expo);
+  }
+  @media (min-width: 480px) {
+    .cap-item { grid-template-columns: minmax(9rem, 0.85fr) 1.4fr; align-items: baseline; }
+  }
+  .cap-item:hover { padding-left: 0.5rem; }
+
+  .cap-item-name {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--inverse-text);
+    transition: color 0.2s ease;
+  }
+  .cap-item:hover .cap-item-name { color: var(--accent); }
+  .cap-item-desc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--inverse-muted);
+  }
+</style>

@@ -75,6 +75,14 @@
 
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 
+  /* Inverse band (always-dark section, e.g. capabilities) */
+  --inverse-bg: #141413;
+  --inverse-surface: #1f1e1c;
+  --inverse-text: #f5f3ef;
+  --inverse-muted: #b3ab9f;
+  --inverse-subtle: #8a847a;
+  --inverse-border: #33302c;
+
   color-scheme: light;
 }
 
@@ -101,6 +109,14 @@
   --btn-primary-bg: #f3f1ed;
   --btn-primary-bg-hover: #ffffff;
   --btn-primary-ink: #1a1918;
+
+  /* Inverse band — a touch deeper than the page so it still reads as a band */
+  --inverse-bg: #0f0f0e;
+  --inverse-surface: #1a1917;
+  --inverse-text: #f5f3ef;
+  --inverse-muted: #b3ab9f;
+  --inverse-subtle: #8a847a;
+  --inverse-border: #2a2825;
 
   color-scheme: dark;
 }

@@ -1,134 +1,309 @@
 ---
-import WordsCarousel from './WordsCarousel.astro';
+import { Image } from 'astro:assets';
 import { siteConfig } from '@/utils/data';
+import profileImg from '@/assets/shared/foto-home.png';
 
-const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brillan', 'impactan', 'perduran'];
+const stats = [
+  { target: 9, suffix: '+', label: 'años' },
+  { target: 35, suffix: '+', label: 'proyectos' },
+  { target: 12, suffix: '+', label: 'clientes' },
+];
 ---
 
-<section class="relative min-h-[85svh] md:min-h-[90vh] flex items-center justify-center overflow-hidden"
-  data-component="HeroSection">
-  <!-- Background decoration — PERF: contain + will-change isolates blur paint -->
-  <div class="absolute inset-0 -z-10 contain-strict">
-    <div class="hero-blur-circle absolute top-1/4 -right-16 md:-right-32 w-[min(500px,80vw)] h-[min(500px,80vw)] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
-    <div class="hero-blur-circle absolute bottom-1/4 -left-16 md:-left-32 w-[min(500px,80vw)] h-[min(500px,80vw)] rounded-full bg-primary-500/[0.04] blur-3xl"></div>
-  </div>
+<section class="hero-anubi" data-component="HeroSection">
+  <div class="hero-anubi-grid">
 
-  <div class="container-custom w-full">
-    <!-- Persistent grid: intro left, stats right on xl -->
-    <div class="hero-grid">
-      <!-- Left: intro content -->
-      <div class="hero-main-content max-w-4xl xl:max-w-none text-center xl:text-left">
-        <!-- Greeting line -->
-        <div data-reveal data-delay="0" class="mb-6 md:mb-10 flex flex-col items-center xl:items-start">
-          <div class="w-14 h-14 mb-4">
-            <span class="section-icon" data-component="IconBadge" data-token="$spacing-size: 56px|$radius-icon: 14px">
-              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon-svg">
-                <g class="icon-hand-wave">
-                  <path d="M18 38C12 36 9 30 9 25L9 22" class="icon-stroke icon-draw" />
-                  <path d="M15 22V10C15 8 16.5 6 19 6C21.5 6 22 8 22 10V21" class="icon-accent icon-draw-delay" />
-                  <path d="M22 21V7C22 5 23.5 3 26 3C28.5 3 29 5 29 7V21" class="icon-stroke icon-draw" />
-                  <path d="M29 21V10C29 8 30.5 6 33 6C35.5 6 36 8 36 10V24C36 32 30 38 24 38" class="icon-stroke icon-draw" />
-                  <path d="M15 22C13 21 10 19 9 17C8 15 9.5 13 12 13C14 13 15 15 15 17" class="icon-stroke icon-draw" />
-                </g>
-                <circle cx="18" cy="3" r="1.2" class="icon-accent icon-wave-line-1" />
-                <path d="M5 10L3 8M3 12L1 12M5 14L3 16" class="icon-accent icon-wave-line-2" />
-              </svg>
-            </span>
-          </div>
-          <span class="text-xl sm:text-2xl md:text-3xl font-medium text-neutral-900 tracking-wide"
-            data-token="$font-family-display: Space Grotesk|$font-size-2xl: 1.5rem / 24px">
-            Soy <span class="text-primary-500"
-              data-token="$color-primary-500: #D97757">Ramon Riera</span>
-            <span class="hero-role-mono">Senior Product Designer &amp; Design Engineer</span>
-          </span>
-        </div>
-
-        <!-- Main heading -->
-        <h1 data-reveal data-delay="100" class="heading-xl mb-6 md:mb-10"
-          data-token="$font-size-heading-xl: clamp(2.25rem, 5vw, 4.5rem)|$font-weight: 600 (semibold)|$spacing-bottom: 2.5rem / 40px">
-          Diseño experiencias<br />
-          <span class="sm:whitespace-nowrap">digitales que
-          <span class="text-primary-500"><WordsCarousel words={rotatingWords} interval={3000} /></span></span>
-        </h1>
-
-        <!-- Subtitle -->
-        <p data-reveal data-delay="200" class="text-body text-base md:text-xl max-w-2xl mx-auto xl:mx-0 mb-8 md:mb-14 leading-relaxed"
-          data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$spacing-bottom: 3.5rem / 56px">
-          Diseño y construyo sistemas de producto de principio a fin — de la estrategia y la arquitectura de UI al componente en producción. Trabajo en la frontera entre diseño e ingeniería: Design Systems que escalan, interfaces que rinden a 60fps y decisiones que se miden en negocio.
-        </p>
-
-        <!-- CTA buttons -->
-        <div data-reveal data-delay="300" class="flex flex-wrap items-center justify-center xl:justify-start gap-4">
-          <a href="/projects" class="btn-primary text-base"
-            data-component="ButtonPrimary"
-            data-token="$color-bg-btn-primary: #1a1918|$color-text-btn-primary: #ffffff|$spacing-padding: 0.875rem 1.75rem|$radius-full: 9999px">
-            Ver proyectos
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div>
+    <!-- LEFT: wordmark panel + statement -->
+    <div class="hero-left">
+      <div data-reveal class="hero-wordmark-panel">
+        <span class="hero-wordmark">RAMON&nbsp;RIERA</span>
       </div>
 
-      <!-- Right: Stats -->
-      <div data-reveal data-delay="400" class="hero-stats-col"
-        data-component="StatsBar"
-        data-token="$spacing-gap: 2rem / 32px|$spacing-margin-top: 4rem / 64px">
-        <div class="hero-stats-inner hero-stats-design">
-          <div class="hero-stat-item text-center">
-            <div class="text-3xl font-semibold text-neutral-900"
-              data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
-              <span class="count-up" data-target="9">0</span>+
-            </div>
-            <div class="text-xs text-neutral-400 tracking-wide mt-1 whitespace-nowrap">Años exp.</div>
-          </div>
-          <div class="hero-stats-divider-h"></div>
-          <div class="hero-stats-divider-v"></div>
-          <div class="hero-stat-item text-center">
-            <div class="text-3xl font-semibold text-neutral-900"
-              data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
-              <span class="count-up" data-target="35">0</span>+
-            </div>
-            <div class="text-xs text-neutral-400 tracking-wide mt-1">Proyectos completados</div>
-          </div>
-          <div class="hero-stats-divider-h"></div>
-          <div class="hero-stats-divider-v"></div>
-          <div class="hero-stat-item text-center">
-            <div class="text-3xl font-semibold text-neutral-900"
-              data-token="$font-size-3xl: 1.875rem / 30px|$font-weight: 600 (semibold)|$color-text-primary: #1a1918">
-              <span class="count-up" data-target="12">0</span>+
-            </div>
-            <div class="text-xs text-neutral-400 tracking-wide mt-1">Clientes corporativos</div>
-          </div>
+      <div class="hero-left-body">
+        <p data-reveal data-delay="80" class="hero-role-tag">
+          Senior Product Designer &amp; Design Engineer
+        </p>
+        <h1 data-reveal data-delay="140" class="hero-statement">
+          Diseño y construyo productos digitales de principio a fin.
+        </h1>
+        <p data-reveal data-delay="220" class="hero-desc">
+          Uno criterio de diseño y ejecución en código: estrategia, arquitectura
+          de UI y Design Systems que llegan a producción. Cada decisión se mide
+          en negocio.
+        </p>
+
+        <div data-reveal data-delay="300" class="hero-foot">
+          <a href="#capacidades" class="hero-scroll">
+            Desliza para explorar
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </a>
+          <ul class="hero-stats">
+            {stats.map((s) => (
+              <li>
+                <span class="hero-stat-num"><span class="count-up" data-target={String(s.target)}>0</span>{s.suffix}</span>
+                <span class="hero-stat-label">{s.label}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
+
+    <!-- RIGHT: image + two tiles -->
+    <div class="hero-right">
+      <div data-reveal data-delay="120" class="hero-visual">
+        <Image
+          src={profileImg}
+          alt="Ramon Riera"
+          class="hero-visual-img"
+          loading="eager"
+          decoding="sync"
+          fetchpriority="high"
+          widths={[600, 900, 1200]}
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
+      </div>
+
+      <div class="hero-tiles">
+        <a href="/projects" data-reveal data-delay="180" class="hero-tile hero-tile--light">
+          <span class="hero-tile-arrow" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+          </span>
+          <span class="hero-tile-body">
+            <span class="hero-tile-title">Proyectos</span>
+            <span class="hero-tile-sub">Explora el portfolio</span>
+          </span>
+        </a>
+        <a href={`mailto:${siteConfig.email}`} data-reveal data-delay="240" class="hero-tile hero-tile--dark">
+          <span class="hero-tile-arrow" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+          </span>
+          <span class="hero-tile-body">
+            <span class="hero-tile-title">Contacto</span>
+            <span class="hero-tile-sub">Empieza tu proyecto</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <style>
-  /* Mono role label — developer-tool signature under the name */
-  .hero-role-mono {
+  .hero-anubi {
+    padding: 1.5rem var(--main-margin) 3rem;
+    max-width: 96rem;
+    margin: 0 auto;
+  }
+
+  .hero-anubi-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 1024px) {
+    .hero-anubi-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: stretch;
+      min-height: calc(100svh - 6rem);
+    }
+  }
+
+  /* ── LEFT ── */
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-wordmark-panel {
+    position: relative;
+    padding: 2rem 0 2.25rem;
+    border-bottom: 1px solid var(--border);
+    background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+    background-size: 16px 16px;
+    background-position: -8px -8px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent);
+    mask-image: linear-gradient(to bottom, #000 40%, transparent);
+  }
+  .hero-wordmark {
     display: block;
-    margin-top: 0.6rem;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    text-align: center;
+    white-space: nowrap;
+  }
+  @media (min-width: 1024px) {
+    .hero-wordmark { text-align: left; }
+  }
+
+  .hero-left-body {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    padding-top: 2.5rem;
+  }
+
+  .hero-role-tag {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-neutral-400, #a8a196);
-  }
-  @media (min-width: 640px) {
-    .hero-role-mono { font-size: 0.75rem; }
+    color: var(--text-subtle);
+    margin-bottom: 1.25rem;
   }
 
-  /* PERF: Isolate blur circles to their own compositing layer */
-  .contain-strict {
-    contain: layout style paint;
+  .hero-statement {
+    font-size: clamp(2rem, 4.4vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    max-width: 16ch;
   }
-  .hero-blur-circle {
-    will-change: transform;
-    contain: strict;
+
+  .hero-desc {
+    margin-top: 1.5rem;
+    max-width: 46ch;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .hero-foot {
+    margin-top: 2.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem 2.5rem;
+    justify-content: space-between;
+  }
+
+  .hero-scroll {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+  }
+  .hero-scroll:hover { color: var(--accent); }
+  .hero-scroll svg { animation: heroBounce 2s ease-in-out infinite; }
+  @keyframes heroBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+  }
+
+  .hero-stats {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+  .hero-stats li { display: flex; align-items: baseline; gap: 0.4rem; }
+  .hero-stat-num {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .hero-stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--text-subtle);
+  }
+
+  /* ── RIGHT ── */
+  .hero-right {
+    display: grid;
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+  @media (min-width: 1024px) {
+    .hero-right {
+      grid-template-rows: 1fr auto;
+    }
+  }
+
+  .hero-visual {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    min-height: 320px;
+  }
+  .hero-visual-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    transition: transform 0.7s var(--ease-out-expo);
+  }
+  .hero-visual:hover .hero-visual-img { transform: scale(1.03); }
+
+  .hero-tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .hero-tile {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 130px;
+    padding: 1.25rem 1.35rem;
+    border-radius: 1.25rem;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease, border-color 0.2s ease;
+  }
+  .hero-tile:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
+
+  .hero-tile--light { background: var(--surface); color: var(--text); }
+  .hero-tile--dark {
+    background: var(--inverse-bg);
+    color: var(--inverse-text);
+    border-color: var(--inverse-border);
+  }
+
+  .hero-tile-arrow {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.2rem;
+    color: currentColor;
+    opacity: 0.55;
+    transition: transform 0.3s var(--ease-out-expo), opacity 0.2s ease;
+  }
+  .hero-tile:hover .hero-tile-arrow { opacity: 1; transform: translate(3px, -3px); }
+  .hero-tile--dark .hero-tile-arrow { color: var(--accent); opacity: 0.85; }
+
+  .hero-tile-body { display: flex; flex-direction: column; gap: 0.15rem; }
+  .hero-tile-title {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .hero-tile-sub {
+    font-size: 0.8rem;
+    color: var(--text-subtle);
+  }
+  .hero-tile--dark .hero-tile-sub { color: var(--inverse-subtle); }
+
+  @media (max-width: 520px) {
+    .hero-tiles { grid-template-columns: 1fr; }
   }
 </style>
 
@@ -136,34 +311,27 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
   function initCountUp() {
     const counters = document.querySelectorAll('.count-up');
     if (!counters.length) return;
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         const el = entry.target as HTMLElement;
         if (el.dataset.counted) return;
         el.dataset.counted = '1';
-
         const target = parseInt(el.dataset.target || '0', 10);
-        const duration = 3000;
+        const duration = 1600;
         const start = performance.now();
-
         function update(now: number) {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
+          const progress = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           el.textContent = String(Math.round(target * eased));
           if (progress < 1) requestAnimationFrame(update);
         }
-
         requestAnimationFrame(update);
         observer.unobserve(el);
       });
     }, { threshold: 0.2 });
-
     counters.forEach((c) => observer.observe(c));
   }
-
   initCountUp();
   document.addEventListener('astro:page-load', initCountUp);
 </script>

@@ -14,159 +14,156 @@ interface Props {
   featured?: boolean;
   brandColor?: string;
   gridSpan?: 3 | 2;
-  variant?: 'default' | 'featured' | 'tall';
+  variant?: 'default' | 'hero';
   loading?: 'lazy' | 'eager';
   fetchpriority?: 'auto' | 'high' | 'low';
   index?: number;
 }
 
-const { slug, title, client, year, category, tags, description, cover, featured, brandColor, gridSpan = 2, variant = 'default', loading = 'lazy', fetchpriority = 'auto', index } = Astro.props;
-const isWide = gridSpan === 3;
+const { slug, title, category, cover, brandColor, variant = 'default', loading = 'lazy', fetchpriority = 'auto', index } = Astro.props;
 const coverImage = resolveImage(cover);
 const indexLabel = typeof index === 'number' ? String(index).padStart(2, '0') : null;
 ---
 
 <a
   href={`/projects/${slug}`}
-  class="project-card group block cursor-pointer"
+  class:list={['proj-card', `proj-card--${variant}`, 'group']}
   data-component="ProjectCard"
   data-slug={slug}
-  data-token="$radius-2xl: 1rem / 16px|$spacing-gap: 1rem → 1.5rem"
 >
-  <!-- Image container -->
-  <div>
-    <div
-      class="card-image-wrap relative overflow-hidden rounded-2xl border border-neutral-200 aspect-video"
-      style={brandColor ? `background-color: ${brandColor}` : ''}
-    >
-      {coverImage ? (
-        <Image
-          src={coverImage}
-          alt={title}
-          class="card-mockup w-full h-full object-cover"
-          loading={loading}
-          decoding={loading === 'eager' ? 'sync' : 'async'}
-          fetchpriority={fetchpriority}
-          data-token="$object-fit: cover"
-          widths={[400, 800, 1200]}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-        />
-      ) : (
-        <img
-          src={cover}
-          alt={title}
-          class="card-mockup w-full h-full object-cover"
-          loading={loading}
-          decoding={loading === 'eager' ? 'sync' : 'async'}
-          fetchpriority={fetchpriority}
-          data-token="$object-fit: cover"
-        />
-      )}
-    </div>
-  </div>
+  <div class="proj-card-media" style={brandColor ? `background-color: ${brandColor}` : ''}>
+    {coverImage ? (
+      <Image
+        src={coverImage}
+        alt={title}
+        class="proj-card-img"
+        loading={loading}
+        decoding={loading === 'eager' ? 'sync' : 'async'}
+        fetchpriority={fetchpriority}
+        widths={[600, 1000, 1600]}
+        sizes={variant === 'hero' ? '100vw' : '(max-width: 768px) 100vw, 50vw'}
+      />
+    ) : (
+      <img src={cover} alt={title} class="proj-card-img" loading={loading} decoding="async" />
+    )}
 
-  <!-- Text content -->
-  <div class="mt-5 md:mt-6">
-    <!-- Discipline-first meta row: index + category + year -->
-    <div class="card-meta">
-      {indexLabel && <span class="card-index">{indexLabel}</span>}
-      <span class="card-cat">{category}</span>
-      <span class="card-meta-dot" aria-hidden="true">/</span>
-      <span class="card-year">{year}</span>
-    </div>
-    <h3 class:list={[
-        'font-bold tracking-tight text-neutral-900 group-hover:text-primary-600 transition-colors duration-300',
-        isWide ? 'text-xl md:text-2xl' : 'text-lg md:text-xl',
-      ]}
-      data-token="$font-weight: 700 (bold)|$color-text: neutral-900|$color-hover: primary-600">
-      {title}
-    </h3>
+    <div class="proj-card-scrim" aria-hidden="true"></div>
 
-    <p class="mt-2.5 text-sm md:text-base leading-relaxed text-neutral-400 line-clamp-2"
-      data-token="$font-size: 0.875rem → 1rem (md)|$color-text-muted: neutral-400|$line-height: relaxed">
-      {description}
-    </p>
-
-    <div class="flex flex-wrap items-center gap-2.5 mt-5" data-component="TagGroup" data-token="$spacing-gap: 0.625rem / 10px">
-      {tags.slice(0, 3).map((tag) => (
-        <span class="card-tag">
-          {tag}
+    <div class="proj-card-overlay">
+      <div class="proj-card-top">
+        {indexLabel && <span class="proj-card-index">{indexLabel}</span>}
+        <span class="proj-card-cat">{category}</span>
+      </div>
+      <div class="proj-card-foot">
+        <h3 class="proj-card-title">{title}</h3>
+        <span class="proj-card-cta">
+          Explora el proyecto
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
-      ))}
+      </div>
     </div>
   </div>
 </a>
 
 <style>
-  .project-card {
-    transition: opacity 0.3s ease;
+  .proj-card {
+    display: block;
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    isolation: isolate;
   }
 
-  .card-image-wrap {
-    transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  .proj-card-media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+  }
+  .proj-card--hero .proj-card-media {
+    aspect-ratio: 16 / 8;
+  }
+  @media (max-width: 640px) {
+    .proj-card--hero .proj-card-media { aspect-ratio: 4 / 3; }
   }
 
-  .project-card:hover .card-image-wrap {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  .proj-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out-expo);
   }
+  .proj-card:hover .proj-card-img { transform: scale(1.04); }
 
-  .card-mockup {
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                filter 0.5s ease;
+  /* Legibility scrims — subtle top + stronger bottom */
+  .proj-card-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 22%),
+      linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.12) 38%, rgba(0,0,0,0) 62%);
+    transition: opacity 0.4s ease;
+    opacity: 0.9;
   }
+  .proj-card:hover .proj-card-scrim { opacity: 1; }
 
-  .project-card:hover .card-mockup {
-    transform: scale(1.05);
-  }
-
-  .card-meta {
+  .proj-card-overlay {
+    position: absolute;
+    inset: 0;
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.6rem;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.25rem 1.4rem;
+    color: #fff;
+  }
+  .proj-card--hero .proj-card-overlay { padding: 1.75rem 2rem; }
+
+  .proj-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.66rem;
+    font-size: 0.7rem;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    line-height: 1;
   }
+  .proj-card-index { color: rgba(255,255,255,0.92); }
+  .proj-card-cat { color: rgba(255,255,255,0.78); }
 
-  .card-index {
-    color: var(--accent);
+  .proj-card-foot { display: flex; flex-direction: column; gap: 0.4rem; }
+  .proj-card-title {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
     font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #fff;
+    text-shadow: 0 1px 20px rgba(0,0,0,0.35);
   }
+  .proj-card--hero .proj-card-title { font-size: clamp(1.75rem, 3.5vw, 2.75rem); }
 
-  .card-cat {
-    color: var(--text-subtle);
-  }
-
-  .card-meta-dot {
-    color: var(--border-strong);
-  }
-
-  .card-year {
-    color: var(--text-subtle);
-    opacity: 0.7;
-  }
-
-  .card-tag {
+  .proj-card-cta {
     display: inline-flex;
     align-items: center;
-    padding: 0.3rem 0.75rem;
+    gap: 0.45rem;
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.66rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    border-radius: 9999px;
-    background: var(--surface-2);
-    color: var(--text-subtle);
-    white-space: nowrap;
-    transition: background 0.2s ease,
-                color 0.2s ease;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s var(--ease-out-expo), gap 0.2s ease;
   }
+  .proj-card:hover .proj-card-cta { opacity: 1; transform: translateY(0); }
+  .proj-card:hover .proj-card-cta { gap: 0.7rem; }
 
-  .project-card:hover .card-tag {
-    color: var(--accent);
+  /* Touch devices: keep the CTA visible (no hover) */
+  @media (hover: none) {
+    .proj-card-cta { opacity: 1; transform: none; }
   }
 </style>
