@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: 'Ramon Riera',
-  title: 'Ramon Riera - Senior UX/UI Designer',
-  description: 'Diseñador de experiencias de usuario especializado en conectar decisiones de diseño con resultados de negocio: Design Systems, Product Design y Design Operations.',
+  title: 'Ramon Riera — Senior Product Designer & Design Engineer',
+  description: 'Senior Product Designer & Design Engineer. Diseño y construyo sistemas de producto de principio a fin — del token de diseño al componente en producción. Design Systems, arquitectura de UI y decisiones de diseño medidas en negocio.',
   url: 'https://ramonriera.design',
   email: 'hello@ramonriera.design',
   logo: {
@@ -51,18 +51,18 @@ export interface ConsultingBlock {
 export const mainTimeline: TimelineEntry[] = [
   {
     year: '2021 — Presente',
-    role: 'UX Lead & Strategic Product Designer',
+    role: 'Product Design & Design Engineering Lead',
     company: 'Doctori.com',
-    description: 'Liderando la evolución del producto y la eficiencia operativa mediante la implementación de un Design System robusto. Enfoque en Design Ops para escalar procesos de diseño y sincronización con ingeniería.',
-    gitMsg: 'feat(design-ops): implement token architecture & system analytics',
+    description: 'Diseño y construyo el sistema de producto de extremo a extremo: arquitectura del Design System, tokens versionados y componentes que llegan a producción. Lidero Design Ops para escalar el proceso entre diseño e ingeniería y elimino deuda de diseño con criterio de sistema, no de pantalla.',
+    gitMsg: 'feat(design-system): token architecture, prod-ready components & ops pipeline',
     current: true,
   },
   {
     year: 'ago. 2017 — feb. 2021',
-    role: 'Junior → Mid UX/UI Designer',
+    role: 'UX/UI Designer — Product & Web',
     company: 'JBM',
-    description: 'Inicio de carrera profesional con proyectos de branding y web design, con progresión de Junior a Mid UX/UI Designer en 3 años y 7 meses.',
-    gitMsg: 'init: first_commit — branding & web_design projects',
+    description: 'Base de producto y craft de interfaz: de branding y web a diseño de producto digital. Progresión sostenida en 3 años y 7 meses hasta liderar entregables de UI end-to-end con foco en consistencia y ejecución.',
+    gitMsg: 'init: product & web foundations — brand, UI craft, first systems',
   },
 ];
 
@@ -74,19 +74,19 @@ export const consultingBlock: ConsultingBlock = {
       client: 'Leemons',
       period: '2023 — 2024',
       role: 'Product & UI Consultant',
-      description: 'Definición de producto y UI estratégica para nuevos modelos de negocio en plataforma educativa.',
+      description: 'Definición de producto y arquitectura de UI para nuevos modelos de negocio en una plataforma educativa. Del problema de negocio al sistema de interfaz que lo sostiene.',
     },
     {
       client: 'Iberia',
       period: '2022 — 2023',
-      role: 'Design Systems Consultant',
-      description: 'Arquitectura de Design Tokens y sistema de diseño global para Web y App. Escalabilidad multi-plataforma y gobernanza del sistema.',
+      role: 'Design Systems Architect',
+      description: 'Arquitectura de Design Tokens y sistema multi-plataforma (Web + App): jerarquía de tokens, gobernanza y contrato diseño-código que mantiene una sola fuente de verdad a escala.',
     },
     {
       client: 'Banco Sabadell',
       period: '2021 — 2022',
-      role: 'Design Systems Consultant',
-      description: 'Documentación técnica y componentes modulares para banca digital. Creación de librerías escalables y procesos de contribución.',
+      role: 'Design Systems Architect',
+      description: 'Librería de componentes modulares y documentación técnica para banca digital, con procesos de contribución que permiten al sistema crecer sin romperse entre equipos.',
     },
   ],
 };

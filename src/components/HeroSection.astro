@@ -39,6 +39,7 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
             data-token="$font-family-display: Space Grotesk|$font-size-2xl: 1.5rem / 24px">
             Soy <span class="text-primary-500"
               data-token="$color-primary-500: #D97757">Ramon Riera</span>
+            <span class="hero-role-mono">Senior Product Designer &amp; Design Engineer</span>
           </span>
         </div>
 
@@ -53,7 +54,7 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
         <!-- Subtitle -->
         <p data-reveal data-delay="200" class="text-body text-base md:text-xl max-w-2xl mx-auto xl:mx-0 mb-8 md:mb-14 leading-relaxed"
           data-token="$font-family-sans: Inter|$color-text-muted: #7c766c|$spacing-bottom: 3.5rem / 56px">
-          UX Lead con experiencia en estrategia de producto, investigación de usuario y diseño de interfaces. Conecto cada decisión de diseño con un resultado de negocio — conversión, eficiencia o crecimiento — y ayudo a equipos a construir productos digitales que resuelven problemas reales.
+          Diseño y construyo sistemas de producto de principio a fin — de la estrategia y la arquitectura de UI al componente en producción. Trabajo en la frontera entre diseño e ingeniería: Design Systems que escalan, interfaces que rinden a 60fps y decisiones que se miden en negocio.
         </p>
 
         <!-- CTA buttons -->
@@ -106,6 +107,21 @@ const rotatingWords = ['importan', 'conectan', 'inspiran', 'transforman', 'brill
 </section>
 
 <style>
+  /* Mono role label — developer-tool signature under the name */
+  .hero-role-mono {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-neutral-400, #a8a196);
+  }
+  @media (min-width: 640px) {
+    .hero-role-mono { font-size: 0.75rem; }
+  }
+
   /* PERF: Isolate blur circles to their own compositing layer */
   .contain-strict {
     contain: layout style paint;
