@@ -238,6 +238,28 @@
     color: var(--text-subtle);
   }
 
+  /* Eyebrow with hairline — anubi-style section/page label */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .eyebrow-line {
+    width: clamp(2rem, 5vw, 3rem);
+    height: 1px;
+    background: var(--border-strong);
+    flex-shrink: 0;
+  }
+  .eyebrow-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+  }
+
   .card-hover {
     @apply transition-all duration-500 ease-out-expo hover:-translate-y-1;
   }
