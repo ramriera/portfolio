@@ -22,14 +22,20 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv11', 'ss01';
   }
 
   body {
-    @apply bg-neutral-50 text-neutral-900 font-sans transition-colors duration-300;
+    background: var(--bg);
+    color: var(--text);
+    @apply font-sans;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   ::selection {
-    @apply bg-primary-200 text-primary-800;
+    background: var(--accent-select);
+    color: var(--accent-strong);
   }
 }
 
@@ -42,8 +48,91 @@
   --container-max: 72rem;     /* max-w-6xl */
   --grid-sidebar: 1fr;
   --grid-content: 1fr;
-  --accent-color: #D97757;    /* Unified accent — favicon, toggle, footer LED */
+
+  /* ── Semantic surface tokens (light) ── */
+  --bg: #faf9f7;              /* page background */
+  --surface: #ffffff;         /* cards, raised panels */
+  --surface-2: #f3f1ed;       /* subtle fills, code chips */
+  --text: #1a1918;            /* primary ink */
+  --text-muted: #57524a;      /* body-muted — higher contrast than before */
+  --text-subtle: #7c766c;     /* captions, labels */
+  --border: #e8e4dd;          /* hairlines */
+  --border-strong: #d4cfc5;   /* stronger dividers */
+
+  /* ── Accent (unified — favicon, toggle, footer LED) ── */
+  --accent-color: #D97757;
+  --accent: #D97757;
+  --accent-strong: #86412d;   /* accent text on light */
+  --accent-select: #f9d5c5;   /* selection bg */
+  --navbar-bg: rgba(255, 255, 255, 0.85);
+  --navbar-bg-scrolled: rgba(255, 255, 255, 0.88);
+  --navbar-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+
+  /* Inverted primary button (dark pill on light) */
+  --btn-primary-bg: #1a1918;
+  --btn-primary-bg-hover: #2a2825;
+  --btn-primary-ink: #ffffff;
+
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+  color-scheme: light;
 }
+
+/* ── IDE-style dark theme — warm charcoal to keep the terracotta identity ── */
+.dark {
+  --bg: #141413;
+  --surface: #1c1b19;
+  --surface-2: #232220;
+  --text: #f3f1ed;
+  --text-muted: #b3ab9f;
+  --text-subtle: #8f887c;
+  --border: #2c2a27;
+  --border-strong: #403d38;
+
+  --accent-color: #e5906f;
+  --accent: #e5906f;
+  --accent-strong: #f4b89d;
+  --accent-select: rgba(217, 119, 87, 0.28);
+  --navbar-bg: rgba(20, 20, 19, 0.82);
+  --navbar-bg-scrolled: rgba(20, 20, 19, 0.9);
+  --navbar-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+
+  /* Inverted primary button (light pill on dark) */
+  --btn-primary-bg: #f3f1ed;
+  --btn-primary-bg-hover: #ffffff;
+  --btn-primary-ink: #1a1918;
+
+  color-scheme: dark;
+}
+
+/* ── Dark remap for hardcoded neutral utilities ──
+   The palette is uniformly "dark ink on light surface", so remapping the
+   handful of neutral/gray utilities in use flips the whole site cleanly.
+   Buttons, the hamburger and the mobile overlay opt out and are themed
+   explicitly in their own component styles. */
+.dark .text-neutral-900,
+.dark .text-neutral-800 { color: var(--text); }
+.dark .text-neutral-700,
+.dark .text-neutral-600,
+.dark .text-neutral-500,
+.dark .text-gray-500 { color: var(--text-muted); }
+.dark .text-neutral-400,
+.dark .text-neutral-300,
+.dark .text-gray-400,
+.dark .text-gray-300 { color: var(--text-subtle); }
+
+.dark .bg-white:not(.no-dark-remap) { background-color: var(--surface); }
+.dark .bg-neutral-50 { background-color: var(--surface-2); }
+.dark .bg-neutral-100 { background-color: var(--surface-2); }
+.dark .bg-neutral-200 { background-color: var(--border-strong); }
+
+.dark .border-neutral-200 { border-color: var(--border); }
+.dark .border-neutral-300,
+.dark .border-gray-300 { border-color: var(--border-strong); }
+
+/* Strong (neutral-900) text/link hovers that reference darkest ink */
+.dark .hover\:text-neutral-900:hover { color: var(--text); }
+.dark .hover\:bg-neutral-100:hover { background-color: var(--surface-2); }
 
 @media (min-width: 640px) {
   :root { --main-margin: var(--main-margin-sm); }
@@ -113,11 +202,23 @@
   }
 
   .text-body {
-    @apply text-base sm:text-lg text-neutral-500 leading-relaxed;
+    @apply text-base sm:text-lg leading-relaxed;
+    color: var(--text-muted);
   }
 
   .text-body-sm {
-    @apply text-sm sm:text-base text-neutral-500 leading-relaxed;
+    @apply text-sm sm:text-base leading-relaxed;
+    color: var(--text-muted);
+  }
+
+  /* Mono eyebrow / kicker — developer-tool section label */
+  .kicker {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
   }
 
   .card-hover {
@@ -143,18 +244,25 @@
   }
 
   .dashed-border {
-    @apply border border-neutral-200
+    border: 1px solid var(--border);
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 bg-neutral-900 text-white font-medium rounded-full transition-all duration-300 hover:bg-neutral-800 active:scale-[0.98];
+    @apply inline-flex items-center gap-2 px-7 py-3.5 font-medium rounded-full active:scale-[0.98];
+    background: var(--btn-primary-bg, #1a1918);
+    color: var(--btn-primary-ink, #ffffff);
     border: 1px solid transparent;
     box-sizing: border-box;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background: var(--btn-primary-bg-hover, #2a2825);
   }
 
   .btn-primary svg,
   .btn-outline svg {
-    @apply transition-transform duration-300;
+    transition: transform 0.2s var(--ease-out-expo, cubic-bezier(0.19, 1, 0.22, 1));
   }
 
   .btn-primary:hover svg,
@@ -163,7 +271,16 @@
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-neutral-300 text-neutral-700 font-medium rounded-full transition-all duration-300 hover:bg-neutral-100 hover:border-primary-400 hover:text-primary-600 active:scale-[0.97];
+    @apply inline-flex items-center gap-2 px-7 py-3.5 font-medium rounded-full active:scale-[0.97];
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn-outline:hover {
+    background: var(--surface-2);
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
 }
@@ -255,7 +372,7 @@ main {
 
 .section-icon-svg .icon-stroke {
   fill: none;
-  stroke: var(--color-neutral-600, #6b6a68);
+  stroke: var(--text-muted);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -263,14 +380,14 @@ main {
 
 .section-icon-svg .icon-accent {
   fill: none;
-  stroke: var(--color-primary-500, #D97757);
+  stroke: var(--accent);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .section-icon-svg .icon-accent-fill {
-  fill: var(--color-primary-500, #D97757);
+  fill: var(--accent);
   stroke: none;
 }
 
@@ -543,7 +660,7 @@ main {
 .hero-stats-divider-v {
   width: 1px;
   height: 2rem;
-  background: var(--color-neutral-200, #d4cfc5);
+  background: var(--border-strong);
 }
 
 /* XL: two-column layout — intro left, stats right */
@@ -576,7 +693,7 @@ main {
     display: block;
     width: 1.5rem;
     height: 1px;
-    background: var(--color-neutral-200, #d4cfc5);
+    background: var(--border-strong);
     margin: 0 auto;
   }
 
@@ -594,8 +711,8 @@ main {
    ═══════════════════════════════════════════════════════════ */
 
 .eco-card {
-  background: #fff;
-  border: 1px solid #e8e4dd;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 1.25rem;
   display: flex;
@@ -608,8 +725,8 @@ main {
 }
 
 .eco-card:hover {
-  border-color: var(--color-primary-500, #D97757);
-  box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
 .eco-card-header {
@@ -623,8 +740,8 @@ main {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.625rem;
   font-weight: 600;
-  color: var(--color-neutral-300, #a8a29e);
-  background: var(--color-neutral-50, #f5f0eb);
+  color: var(--text-subtle);
+  background: var(--surface-2);
   padding: 0.125rem 0.5rem;
   border-radius: 4px;
   letter-spacing: 0.05em;
@@ -658,20 +775,20 @@ main {
 .eco-card-title {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-neutral-900, #1a1918);
+  color: var(--text);
   margin-bottom: 0.5rem;
 }
 
 .eco-card-desc {
   font-size: 0.75rem;
   line-height: 1.6;
-  color: var(--color-neutral-400, #7c766c);
+  color: var(--text-muted);
   flex: 1;
 }
 
 .eco-card-divider {
   height: 1px;
-  background: var(--color-neutral-100, #e5e0d8);
+  background: var(--border);
   margin: 1rem 0;
 }
 
@@ -687,7 +804,7 @@ main {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--color-neutral-300, #a8a29e);
+  color: var(--text-subtle);
 }
 
 .eco-dep-icons {
@@ -711,7 +828,7 @@ main {
   height: 1.75rem;
   padding: 0.375rem;
   border-radius: 6px;
-  background: var(--color-neutral-50, #f5f0eb);
+  background: var(--surface-2);
   transition: background 0.25s ease, box-shadow 0.2s ease;
 }
 
@@ -720,7 +837,7 @@ main {
   font-size: 0.5rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: var(--color-neutral-300, #a8a29e);
+  color: var(--text-subtle);
   text-align: center;
   white-space: nowrap;
   transition: color 0.25s ease;
@@ -732,7 +849,7 @@ main {
 }
 
 .eco-dep:hover svg {
-  background: #fff;
+  background: var(--surface);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
@@ -811,7 +928,7 @@ main {
 
 /* ── Methodology & Stack section ── */
 .methodology-stack-section {
-  background: var(--color-neutral-50, #f7f5f2);
+  background: var(--surface-2);
 }
 
 .methodology-block {
@@ -832,12 +949,12 @@ main {
 .methodology-separator-line {
   flex: 1;
   height: 1px;
-  background: var(--color-neutral-200, #d4cfc5);
+  background: var(--border-strong);
 }
 
 .methodology-separator-label {
   font-size: 0.75rem;
-  color: var(--color-neutral-300, #a8a29e);
+  color: var(--text-subtle);
   letter-spacing: 0.15em;
 }
 
@@ -937,15 +1054,15 @@ main {
 /* ── Lint Rule Cards (Design Principles) ── */
 .lint-rule {
   padding: 1rem 1.25rem;
-  border: 1px solid #e8e4dd;
+  border: 1px solid var(--border);
   border-radius: 0.75rem;
-  background: #fff;
+  background: var(--surface);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .lint-rule:hover {
-  border-color: var(--color-primary-500, #D97757);
-  box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
 .lint-rule-top {
@@ -965,7 +1082,7 @@ main {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.6875rem;
   font-weight: 700;
-  color: var(--color-primary-500, #D97757);
+  color: var(--accent);
   opacity: 0.6;
   flex-shrink: 0;
   width: 1.5rem;
@@ -974,7 +1091,7 @@ main {
 .lint-rule-name {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-neutral-900, #1a1918);
+  color: var(--text);
   flex: 1;
   min-width: 0;
 }
@@ -994,7 +1111,7 @@ main {
 .lint-badge--engineering,
 .lint-badge--culture,
 .lint-badge--product {
-  color: var(--color-neutral-300, #a8a29e);
+  color: var(--text-subtle);
   background: rgba(168, 162, 150, 0.1);
   transition: color 0.3s ease, background 0.3s ease;
 }
@@ -1010,7 +1127,7 @@ main {
 .lint-rule-desc {
   font-size: 0.8125rem;
   line-height: 1.6;
-  color: var(--color-neutral-400, #7c766c);
+  color: var(--text-muted);
   padding-left: 2.125rem;
 }
 
@@ -1021,8 +1138,8 @@ main {
 }
 
 .kpi-card:hover {
-  border-color: var(--color-primary-500, #D97757) !important;
-  box-shadow: 0 0 0 1px var(--color-primary-500, #D97757), 0 4px 20px rgba(217, 119, 87, 0.08);
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 1px var(--accent), 0 4px 20px rgba(217, 119, 87, 0.08);
 }
 
 /* ═══════════════════════════════════════════════════════════

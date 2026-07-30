@@ -40,6 +40,20 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Theme: set before paint to avoid FOUC (reads saved choice, else OS pref) -->
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var dark = saved ? saved === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', dark);
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="theme-color" content="#faf9f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)" />
+
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
@@ -67,7 +81,7 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
   </head>
-  <body class:list={["min-h-screen flex flex-col bg-neutral-50 text-neutral-900 transition-colors duration-300", bodyClass]}>
+  <body class:list={["min-h-screen flex flex-col", bodyClass]}>
     <Navbar />
     <main class="flex-1">
       <slot />
@@ -94,6 +108,36 @@ const currentUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString
         { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
       );
       revealElements.forEach((el) => observer.observe(el));
+    </script>
+
+    <!-- Theme toggle wiring -->
+    <script is:inline>
+      (function () {
+        function apply(dark) {
+          document.documentElement.classList.toggle('dark', dark);
+          try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+          document.querySelectorAll('[data-theme-toggle]').forEach(function (b) {
+            b.setAttribute('aria-pressed', String(dark));
+          });
+        }
+        function initToggles() {
+          var isDark = document.documentElement.classList.contains('dark');
+          document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
+            btn.setAttribute('aria-pressed', String(isDark));
+            if (btn.dataset.bound) return;
+            btn.dataset.bound = '1';
+            btn.addEventListener('click', function () {
+              apply(!document.documentElement.classList.contains('dark'));
+            });
+          });
+        }
+        initToggles();
+        document.addEventListener('astro:page-load', initToggles);
+        // Follow OS changes only when the user hasn't chosen explicitly
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+          if (!localStorage.getItem('theme')) apply(e.matches);
+        });
+      })();
     </script>
 
     <!-- ASCII Signature — Easter Egg in console -->

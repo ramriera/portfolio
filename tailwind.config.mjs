@@ -1,9 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
+        // Semantic surface tokens — resolve to CSS vars so utilities theme
+        // automatically in light/dark. Prefer these over raw neutral-* on
+        // structural elements.
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        'surface-2': 'var(--surface-2)',
+        ink: 'var(--text)',
+        'ink-muted': 'var(--text-muted)',
+        'ink-subtle': 'var(--text-subtle)',
+        hairline: 'var(--border)',
+        'hairline-strong': 'var(--border-strong)',
         primary: {
           50: '#fdf6f3',
           100: '#fceae2',
