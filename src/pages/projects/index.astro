@@ -47,7 +47,7 @@ function getProjectFilters(tags: string[]): string[] {
 
 <BaseLayout
   title="Projects ⚡ Ramon Riera"
-  description="Portfolio de proyectos de UX/UI Design, Design Systems y Product Design."
+  description="Casos de estudio de producto: arquitectura de UI, decisiones de diseño y problemas resueltos — de la estrategia al componente en producción."
 >
   <!-- Hero -->
   <section class="section-padding pb-12" data-component="ProjectsHero">
@@ -72,7 +72,7 @@ function getProjectFilters(tags: string[]): string[] {
           Proyectos <span class="text-primary-500"><WordsCarousel words={projectWords} interval={3000} /></span>
         </h1>
         <p data-reveal data-delay="200" class="text-body text-xl max-w-3xl">
-          Una selección de proyectos que representan mi enfoque en diseño de experiencia de usuario, sistemas de diseño y producto digital.
+          Casos de estudio, no galería. Cada proyecto muestra el problema de negocio, las decisiones de diseño y la arquitectura técnica que lo resuelve — de la estrategia al componente en producción.
         </p>
       </div>
 
@@ -111,6 +111,7 @@ function getProjectFilters(tags: string[]): string[] {
           >
             <ProjectCard
               {...project}
+              index={i + 1}
               loading={i === 0 ? 'eager' : 'lazy'}
               fetchpriority={i === 0 ? 'high' : 'auto'}
             />

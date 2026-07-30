@@ -78,6 +78,7 @@ const featuredProjects = projectOrder
             <div data-reveal data-delay={String(i * 100)} class:list={[colClass, 'project-grid-item']}>
               <ProjectCard
                 {...project}
+                index={i + 1}
                 loading={i === 0 ? 'eager' : 'lazy'}
                 fetchpriority={i === 0 ? 'high' : 'auto'}
               />
